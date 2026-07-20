@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: searched
+source: https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key.md
+docs: https://integrations.impact.com/rest-apis/api-quick-start.md
+summary:
+  types: [http]
+  http_scheme: basic
+  api_key_in: [header]
+  oauth2_flows: []
+  notes: >-
+    REST APIs use HTTP Basic authentication. The Account SID is the username (public
+    identifier, similar to a public key) and the Auth Token is the password (secret
+    credential). The pair is base64-encoded and sent in the Authorization header:
+    `Authorization: Basic base64(AccountSID:AuthToken)`. Access tokens support scoped
+    permissions ("Scoped Tokens") with per-category read/write toggles for least-privilege
+    integrations. The hosted MCP server (mcp.impact.com) uses OAuth 2.1 separately.
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: >-
+    Account SID as username, Auth Token as password, base64-encoded in the Authorization
+    header. Applies to Brand, Partner, and Agency REST APIs.
+  sources: [docs]
+- name: scopedTokens
+  type: apiKey
+  in: header
+  description: >-
+    Scoped API tokens with fine-grained per-category read/write permissions, created and
+    managed in the impact.com account UI. Presented via the same HTTP Basic Account SID +
+    Auth Token pair.
+  sources: [docs]
+base_urls:
+  brand: https://api.impact.com/Advertisers/{AccountSID}/
+  partner: https://api.impact.com/MediaPartners/{AccountSID}/
+  agency: https://api.impact.com/Agencies/{AccountSID}/
