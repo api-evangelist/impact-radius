@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: searched
+spec_type: Webhooks
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs.md
+docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs.md
+security_docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/webhook-security-for-advocate-programs.md
+description: >-
+  impact.com Advocate programs support webhooks. Brands register endpoint URLs that receive
+  HTTP POST callbacks carrying an event object whenever a subscribed event occurs. Subscriptions
+  are managed via API (create, list, delete, test). Multiple endpoints may subscribe; duplicate
+  URLs collapse to a single subscription. Failed deliveries are retried hourly for up to 72
+  attempts (~3 days); delivery order and timing are not guaranteed. A separate webhook-security
+  guide documents payload verification.
+transport: http-post
+events:
+- topic: user.created
+  description: New user registration.
+- topic: user.reward.balance.changed
+  description: Reward balance updates.
+- topic: coupon.created
+  description: New referral code created.
+- topic: reward.created
+  description: New reward issued.
+- topic: referral.started
+  description: Referral connection established.
+- topic: referral.converted
+  description: Referral conversion completed.
+- topic: export.created
+  description: Data export queued.
+- topic: export.completed
+  description: Export ready for download.
+- topic: test
+  description: Subscription testing event.
+retry_policy:
+  interval: hourly
+  max_attempts: 72
+  window: ~72 hours
+notes: >-
+  Provider documents webhooks but does not publish an AsyncAPI document; captured as a webhook
+  catalog (type Webhooks). Advocate also exposes a GraphQL API for custom experiences.

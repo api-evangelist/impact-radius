@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: searched
+source: https://integrations.impact.com/rest-apis/api-quick-start.md
+description: >-
+  Cross-cutting conventions for the impact.com REST APIs (Brand, Partner, Agency), captured
+  from the developer portal. Grounded in published docs only; where a convention was not
+  documented it is left null rather than assumed.
+authentication:
+  style: http-basic
+  detail: >-
+    Account SID (username) + Auth Token (password), base64-encoded in the Authorization
+    header. Scoped Tokens provide per-category read/write least-privilege access.
+  ref: authentication/impact-radius-authentication.yml
+base_url:
+  pattern: https://api.impact.com/{AccountType}/{AccountSID}/
+  account_types: [Advertisers, MediaPartners, Agencies]
+idempotency:
+  supported: null
+  notes: No documented idempotency-key mechanism was found in the developer portal.
+pagination:
+  style: null
+  notes: >-
+    Not explicitly captured from docs in this pass; impact.com report/list endpoints are
+    paginated but the parameter contract was not confirmed verbatim.
+versioning:
+  style: major-version-path
+  ref: lifecycle/impact-radius-lifecycle.yml
+rate_limiting:
+  documented: true
+  detail: >-
+    Per-endpoint daily caps announced (ReportExport 100/day, ClickExport 10/day). Signaling
+    headers not documented in this pass.
+  ref: lifecycle/impact-radius-lifecycle.yml
+error_envelope:
+  format: null
+  notes: Error response envelope shape not captured verbatim in this pass.
+webhooks:
+  supported: true
+  ref: asyncapi/impact-radius-advocate-webhooks.yml
+data_formats:
+  notes: REST APIs support JSON and XML representations.

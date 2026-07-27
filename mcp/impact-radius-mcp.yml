@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://integrations.impact.com/ai-solutions/mcp-quick-start.md
+server:
+  name: impact.com
+  transport: http
+  url: https://mcp.impact.com/mcp
+  hosted: true
+  enabled_by_default: true
+auth:
+  type: oauth2.1
+  notes: >-
+    OAuth 2.1 authorization. Separate MCP usage tokens are minted per LLM client with refresh
+    tokens for session persistence; user credentials are never shared with the AI assistant,
+    only a revocable token. Account administrators can disable MCP globally, which deletes
+    existing tokens.
+capabilities:
+- data_query: Search and summarize account information using natural language.
+- write_operations: Create and update campaigns, settings, and partners.
+- workflow_automation: Streamline repetitive tasks.
+clients:
+- name: Cursor
+  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-cursor.md
+- name: VS Code
+  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-vs-code.md
+- name: Claude Desktop & Claude Code
+  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-claude-desktop-and-claude-code.md
+notes: >-
+  Official first-party hosted/remote MCP server. Exact tool list is not publicly enumerated in
+  the quick-start docs; tools are exposed dynamically over the platform APIs.

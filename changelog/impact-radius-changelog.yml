@@ -1,0 +1,29 @@
+generated: '2026-07-19'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+scheme: major-version-path
+current_versions:
+  brand: v13
+  partner: v15
+  agency: v3
+changelogs:
+  brand: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+  partner: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  agency: https://integrations.impact.com/agency-v3/readme/changelog.md
+entries:
+- version: brand-v13
+  breaking: false
+  highlights:
+  - Application Processing API — Contracts endpoint gained POST (accept partner applications
+    with optional groupId) and DELETE (decline proposals with optional reason and groupId).
+  - New PromoCodeExceptionLists endpoint (create, update, retrieve, delete).
+  - Scoped Tokens — API credentials with fine-grained per-endpoint permissions.
+  - New Upload endpoint for batch catalog uploads.
+  - Contracts API responses now include a ScheduledTerms object when relevant.
+  - Rate-limit changes announced — ReportExport 100 requests/day, ClickExport 10 requests/day
+    (enforcement deferred to the new year).
+  - ReportExport recommended as the migration path off the legacy Reports API before 2025-09-01.
+notes: >-
+  Each of the Brand (v13/v12/v11), Partner (v15/v14) and Agency (v3/v2) reference sets keeps a
+  per-version dated changelog page. Only the recent Brand v13 window is structured here; the
+  live changelog pages are the source of truth.

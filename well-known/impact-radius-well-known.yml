@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+source: live probes of /.well-known/ on impact.com, api.impact.com, integrations.impact.com, mcp.impact.com
+notes: >-
+  security.txt is published at the corporate apex (impact.com / www.impact.com) and is PGP
+  signed. No OIDC/oauth-authorization-server discovery document is exposed on the API host
+  (api.impact.com) or the MCP host (mcp.impact.com), though the MCP server documents OAuth 2.1.
+hosts:
+- host: https://impact.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: impact-radius-security.txt
+  - path: /.well-known/pgp-key.txt
+    status: 200
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.impact.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://integrations.impact.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://mcp.impact.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404

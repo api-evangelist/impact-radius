@@ -1,8 +1,15 @@
 aid: impact-radius
 name: Impact Radius
-description: Impact Radius is a company surfaced as a portfolio company of redpoint-ventures and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Impact Radius, now operating as impact.com, is a partnership management platform for
+  managing affiliate programs, influencer and creator partnerships, and customer referral
+  (advocate) initiatives at scale. Brands, agencies, and publishers use it to discover and
+  recruit partners, contract and pay them against business outcomes, track partner-driven
+  traffic and conversions with privacy-first attribution across devices, protect programs
+  from fraud, and optimize performance with predictive analytics. The platform exposes REST
+  APIs for Brands, Partners (media partners), and Agencies, plus Advocate program APIs with
+  webhooks, GraphQL, mobile SDKs, an official hosted MCP server, and machine-readable docs
+  (llms.txt and OpenAPI) for agent and AI-assisted integration.
 url: https://raw.githubusercontent.com/api-evangelist/impact-radius/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,12 +17,78 @@ x-backed-by:
 - redpoint-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
+image: https://impact.com/wp-content/uploads/2022/04/impact-logo-square.jpg
 tags:
 - Company
-apis: []
+- Partnership Management
+- Affiliate Marketing
+- Influencer Marketing
+- Referral Marketing
+- Attribution
+- Martech
+- Advocate
+- Creator Economy
+- E-Commerce
+apis:
+- name: impact.com Brand API
+  description: >-
+    REST API for brands/advertisers to manage campaigns, partner recruitment and contracts,
+    catalogs, reporting, and payouts across affiliate and partnership programs. Current
+    version v13.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Brand
+  - Advertiser
+  - Partnerships
+  - Reporting
+  properties:
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13
+  - type: ChangeLog
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+- name: impact.com Partner API
+  description: >-
+    REST API for media partners/publishers to access content and tracking links, retrieve
+    actions and commissions, and report on performance. Current version v15.
+  humanURL: https://integrations.impact.com/partner-api-reference/partner-v15
+  baseURL: https://api.impact.com/MediaPartners/
+  tags:
+  - Partner
+  - Publisher
+  - Commissions
+  properties:
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+- name: impact.com Agency API
+  description: >-
+    REST API for agencies managing multiple client accounts, consolidated reporting, and
+    cross-client workflows. Current version v3.
+  humanURL: https://integrations.impact.com/agency-v3
+  baseURL: https://api.impact.com/Agencies/
+  tags:
+  - Agency
+  - Multi-client
+  properties:
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,4 +96,63 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://www.impactradius.com/
+  url: https://impact.com/
+- type: DeveloperPortal
+  url: https://integrations.impact.com/
+- type: Documentation
+  url: https://integrations.impact.com/
+- type: GettingStarted
+  url: https://integrations.impact.com/rest-apis/api-quick-start.md
+- type: Authentication
+  url: authentication/impact-radius-authentication.yml
+- type: HelpCenter
+  url: https://help.impact.com/en/support/home
+- type: Support
+  url: https://help.impact.com/en/support/home
+- type: Blog
+  url: https://impact.com/insights/
+- type: Pricing
+  url: https://impact.com/pricing/
+- type: SignUp
+  url: https://app.impact.com/signup
+- type: Login
+  url: https://app.impact.com/login.user
+- type: TermsOfService
+  url: https://impact.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://impact.com/privacy-policy/
+- type: StatusPage
+  url: https://status.impact.com/
+- type: MCPServer
+  url: mcp/impact-radius-mcp.yml
+- type: LLMsTxt
+  url: llms/impact-radius-llms.txt
+- type: WellKnown
+  url: well-known/impact-radius-well-known.yml
+- type: SecurityTxt
+  url: well-known/impact-radius-security.txt
+- type: VulnerabilityDisclosure
+  url: security/impact-radius-vulnerability-disclosure.yml
+- type: Security
+  url: https://impact.responsibledisclosure.com/hc/en-us
+- type: DomainSecurity
+  url: security/impact-radius-domain-security.yml
+- type: Webhooks
+  url: asyncapi/impact-radius-advocate-webhooks.yml
+- type: Packages
+  url: packages/impact-radius-packages.yml
+- type: SDKs
+  url: packages/impact-radius-packages.yml
+- type: ChangeLog
+  url: changelog/impact-radius-changelog.yml
+- type: Lifecycle
+  url: lifecycle/impact-radius-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/impact-radius-lifecycle.yml
+- type: Conventions
+  url: conventions/impact-radius-conventions.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

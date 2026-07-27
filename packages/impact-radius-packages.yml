@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/
+notes: >-
+  impact.com publishes first-party mobile SDKs for Advocate (referral) program tracking. No
+  first-party server-side REST client libraries (JavaScript/Python/etc.) were found published
+  on npm/PyPI/Maven/NuGet under an official impact.com namespace; the REST APIs are consumed
+  directly over HTTP Basic. Mobile SDK distribution artifacts (CocoaPods/Maven) are referenced
+  from the SDK overview pages rather than a public registry landing page.
+packages:
+- language: swift
+  platform: ios
+  name: impact.com iOS SDK (Advocate)
+  url: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/ios-sdk-overview.md
+  official: true
+  kind: mobile-sdk
+- language: kotlin
+  platform: android
+  name: impact.com Android SDK (Advocate)
+  url: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/android-sdk-overview.md
+  official: true
+  kind: mobile-sdk

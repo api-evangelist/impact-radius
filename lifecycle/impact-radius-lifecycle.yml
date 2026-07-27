@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+versioning:
+  scheme: major-version-path
+  current:
+    brand: v13
+    partner: v15
+    agency: v3
+  notes: >-
+    Each API is versioned as a distinct major reference set (Brand v11/v12/v13, Partner
+    v14/v15, Agency v2/v3). Older major versions remain documented alongside the current one.
+deprecation:
+  policy_url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+  examples:
+  - The legacy Reports API is being retired in favor of ReportExport; migration recommended
+    before 2025-09-01.
+  notes: >-
+    Deprecations are announced through the per-version changelog pages with migration guidance
+    and dates. No dedicated RFC 8594 Sunset/Deprecation header policy page was found.
+status_page: https://status.impact.com/
+sla:
+  url: null
+  notes: No public uptime SLA document located.
+rate_limits:
+  notes: >-
+    Announced in the Brand v13 changelog — ReportExport capped at 100 requests/day and
+    ClickExport at 10 requests/day.
