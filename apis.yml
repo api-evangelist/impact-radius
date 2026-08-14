@@ -1,37 +1,40 @@
 aid: impact-radius
 name: Impact Radius
-description: >-
-  Impact Radius, now operating as impact.com, is a partnership management platform for
-  managing affiliate programs, influencer and creator partnerships, and customer referral
-  (advocate) initiatives at scale. Brands, agencies, and publishers use it to discover and
-  recruit partners, contract and pay them against business outcomes, track partner-driven
-  traffic and conversions with privacy-first attribution across devices, protect programs
-  from fraud, and optimize performance with predictive analytics. The platform exposes REST
-  APIs for Brands, Partners (media partners), and Agencies, plus Advocate program APIs with
-  webhooks, GraphQL, mobile SDKs, an official hosted MCP server, and machine-readable docs
-  (llms.txt and OpenAPI) for agent and AI-assisted integration.
+description: Impact Radius, now operating as impact.com, is a partnership management platform for managing
+  affiliate programs, influencer and creator partnerships, and customer referral (Advocate) initiatives
+  at scale. Brands, agencies, and publishers use it to discover and recruit partners, contract and pay
+  them against business outcomes, track partner-driven traffic and conversions with privacy-first attribution
+  across devices, protect programs from fraud, and optimize performance with predictive analytics. The
+  platform publishes 67 machine-readable OpenAPI 3.1 documents covering 242 operations across Brand (v14),
+  Partner (v15), Agency (v3) and Advocate (v1) REST APIs, an openly introspectable Advocate GraphQL schema,
+  webhooks and event notifications, mobile and browser SDKs, an official hosted MCP server with a published
+  18-tool catalog and first-party MCP Skills, and llms.txt plus per-page markdown for agent and AI-assisted
+  integration.
 url: https://raw.githubusercontent.com/api-evangelist/impact-radius/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - redpoint-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: full contract set harvested (67 OpenAPI + GraphQL SDL) plus DX/runtime artifacts
 accessModel:
-  pricing: unknown
+  pricing: paid
   onboarding: self-serve
-  trial: false
+  trial: true
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Self-serve signup from $30/month; enterprise plans quoted by sales
+  confidence: high
   source:
   - authentication
-  generated: '2026-07-22'
-  method: derived
+  - plans
+  generated: '2026-08-13'
+  method: searched
+  note: impact.com publishes one entry price (starts at $30 USD/month, 30-day risk-free) on /products/pricing/;
+    everything else is demo-request only. API access is not separately priced or metered.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-13'
 image: https://impact.com/wp-content/uploads/2022/04/impact-logo-square.jpg
 tags:
 - Company
@@ -46,49 +49,221 @@ tags:
 - E-Commerce
 apis:
 - name: impact.com Brand API
-  description: >-
-    REST API for brands/advertisers to manage campaigns, partner recruitment and contracts,
-    catalogs, reporting, and payouts across affiliate and partnership programs. Current
-    version v13.
-  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13
+  description: REST API for brands/advertisers to manage programs, partner recruitment and contracts,
+    product catalogs, conversions and action reconciliation, promo codes, deals, reporting and payouts
+    across affiliate and partnership programs. Current version v14 (released 2026-06-01); v13, v12 and
+    v11 remain documented and callable.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   baseURL: https://api.impact.com/Advertisers/
   tags:
   - Brand
   - Advertiser
   - Partnerships
   - Reporting
+  - Conversions
+  - Catalogs
   properties:
   - type: APIReference
-    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   - type: ChangeLog
-    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: Overlay
+    url: overlays/impact-radius-brand-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-account-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-actioninquiries-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-actions-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-ads-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-calldata-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-catalogs-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-clicks-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-contacts-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-contracts-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-conversions-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-deals-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-deferreddeeplink-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-exceptionlists-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-invoices-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-jobs-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-notes-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-pageload-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-partnergroups-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-partners-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-phonenumbers-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-programs-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-promocodeexceptionlists-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-promocodes-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-reports-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-routingrules-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-submissions-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-tasks-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-trackinglinks-v14.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-trackingvaluerequests-v14.yml
 - name: impact.com Partner API
-  description: >-
-    REST API for media partners/publishers to access content and tracking links, retrieve
-    actions and commissions, and report on performance. Current version v15.
+  description: REST API for media partners/publishers to access programs and contracts, ads and tracking
+    links, product catalogs and stores, promo codes and promotions, actions and commissions, invoices,
+    tax documents and withdrawal settings, plus inbound Event Notifications. Current version v15.
   humanURL: https://integrations.impact.com/partner-api-reference/partner-v15
   baseURL: https://api.impact.com/MediaPartners/
   tags:
   - Partner
   - Publisher
   - Commissions
+  - Tracking Links
+  - Payouts
   properties:
   - type: APIReference
     url: https://integrations.impact.com/partner-api-reference/partner-v15
   - type: ChangeLog
     url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: Overlay
+    url: overlays/impact-radius-partner-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-account-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-actioninquiries-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-actions-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-ads-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-campaigns-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-catalogs-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-clicks-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-contracts-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-deals-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-eventnotifications-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-exceptionlists-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-identityverification-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-invoices-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-jobs-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-mediaproperties-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-promo-codes-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-promocodeexceptionlists-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-promotions-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-reports-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-stores-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-taxdocument-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-trackinglinks-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-users-v15.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-withdrawalsettings-v15.yml
 - name: impact.com Agency API
-  description: >-
-    REST API for agencies managing multiple client accounts, consolidated reporting, and
-    cross-client workflows. Current version v3.
+  description: REST API for agencies managing multiple client brand accounts — advertiser roster, company
+    information, compliance content submission and results, consolidated reporting, and job management.
+    Current version v3.
   humanURL: https://integrations.impact.com/agency-v3
   baseURL: https://api.impact.com/Agencies/
   tags:
   - Agency
   - Multi-client
+  - Compliance
+  - Reporting
   properties:
   - type: APIReference
     url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: Overlay
+    url: overlays/impact-radius-agency-overlay.yaml
+  - type: OpenAPI
+    url: openapi/impact-radius-agency-advertisers-v3.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-agency-companyinformation-v3.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-agency-compliance-v3.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-agency-jobs-v3.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-agency-reports-v3.yml
+- name: impact.com Advocate API
+  description: REST and GraphQL APIs for Advocate customer-referral programs — participants and accounts,
+    referral codes and share links, referrals, rewards and reward balances, data exports and webhook subscriptions.
+    Served from app.referralsaasquatch.com because Advocate is the productised Referral SaaSquatch acquisition;
+    impact.com publishes that host in its own Advocate REST and GraphQL guides.
+  humanURL: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  baseURL: https://app.referralsaasquatch.com/api/v1/
+  tags:
+  - Advocate
+  - Referral Marketing
+  - Rewards
+  - GraphQL
+  - Webhooks
+  properties:
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Overlay
+    url: overlays/impact-radius-advocate-overlay.yaml
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-account-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-export-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-referral-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-referralcode-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-reward-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-rewardbalance-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-sharelinks-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-user-v13.yml
+  - type: OpenAPI
+    url: openapi/impact-radius-brand-advocate-webhook-v13.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -151,8 +326,36 @@ common:
   url: lifecycle/impact-radius-lifecycle.yml
 - type: Conventions
   url: conventions/impact-radius-conventions.yml
+- type: GraphQL
+  url: graphql/impact-radius-advocate-schema.graphql
+- type: ToolCrosswalk
+  url: mcp/impact-radius-tool-crosswalk.yml
+- type: ErrorCatalog
+  url: errors/impact-radius-problem-types.yml
+- type: RateLimits
+  url: rate-limits/impact-radius-rate-limits.yml
+- type: Plans
+  url: plans/impact-radius-plans-pricing.yml
+- type: DataModel
+  url: data-model/impact-radius-data-model.yml
+- type: Sandbox
+  url: sandbox/impact-radius-sandbox.yml
+- type: Components
+  url: components/impact-radius-components.yml
+- type: Conformance
+  url: conformance/impact-radius-conformance.yml
+- type: TrustCenter
+  url: security/impact-radius-trust-center.yml
+- type: Compliance
+  url: security/impact-radius-trust-center.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: GitHubOrganization
+  url: https://github.com/saasquatch
+- type: SecurityAndPrivacy
+  url: https://impact.com/security-and-privacy/
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 156
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
