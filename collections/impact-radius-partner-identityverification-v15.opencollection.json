@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Identity Verification API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or Resume an Identity Verification Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/IdentityVerification/Session",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new identity verification session or resumes an existing one. Returns a URL that can be used to launch the hosted verification flow. If a session is already in progress for the specified user, the existing session details are returned so verification can resume from where it left off.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

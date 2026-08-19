@@ -1,0 +1,602 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Contracts
+  description: API for retrieving contracts, which define the business relationship and payout rules between you and a partner.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contracts:
+    get:
+      summary: List All Contracts
+      description: Returns a list of your contracts for a specific campaign, with options for filtering. If no status is specified, only ACTIVE contracts are returned.
+      operationId: listContracts
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1000
+      - name: DateLastUpdatedBefore
+        in: query
+        description: Return contracts updated before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdatedAfter
+        in: query
+        description: Return contracts updated after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateBefore
+        in: query
+        description: Return contracts that start before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateAfter
+        in: query
+        description: Return contracts that start after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateBefore
+        in: query
+        description: Return contracts that end before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateAfter
+        in: query
+        description: Return contracts that end after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: PartnerId
+        in: query
+        description: Return contracts for a specific partner.
+        schema:
+          type: integer
+      - name: Signatory
+        in: query
+        description: Return contracts with a particular brand or partner signatory.
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Return contracts with a specific status. Defaults to ACTIVE if not specified.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - DECLINED
+          - EXPIRED
+          - PENDING
+          - UPCOMING
+      - name: TemplateId
+        in: query
+        description: Return contracts sourced from a specific Template Terms ID.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A paginated list of contract objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Contracts:
+                    type: array
+                    description: The list of contract objects.
+                    items:
+                      $ref: '#/components/schemas/Contract'
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contracts/{ContractId}:
+    get:
+      summary: Get Contract Details
+      description: Retrieves the object of an existing contract, including details on any associated Creator, Performance, or Product Boost campaigns.
+      operationId: getContractById
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1000
+      - name: ContractId
+        in: path
+        required: true
+        description: The unique identifier for the contract.
+        schema:
+          type: string
+          example: S-7777777
+      responses:
+        '200':
+          description: A single contract object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/Contracts:
+    post:
+      summary: Accept a Pending Contract
+      description: 'Accepts a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently waiting to be actioned, filter your contract list with the `Status=PENDING` parameter.
+
+
+        ## Decision precedence and conflict handling
+
+
+        You can accept a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.
+
+
+        ### The "first-in" rule
+
+
+        - **Finality**: Once you accept a contract proposal through any channel, that decision is final.
+
+        - **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.
+
+        '
+      operationId: acceptContract
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your account SID.
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier of the program the contract belongs to.
+        schema:
+          type: integer
+          example: 8575
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptContractRequest'
+            example:
+              contractId: P-25070000
+              groupId: '1234'
+      responses:
+        '200':
+          description: The contract was successfully accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractDecisionResponse'
+              example:
+                Status: OK
+        '400':
+          description: Bad request. The `contractId` may be missing or malformed.
+        '404':
+          description: Contract or program not found.
+        '409':
+          description: A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.
+    delete:
+      summary: Decline a Pending Contract
+      description: 'Declines a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently awaiting action, filter your contract list with the `Status=PENDING` parameter.
+
+
+        ## Decision precedence and conflict handling
+
+
+        You can decline a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.
+
+
+        ### The "first-in" rule
+
+
+        - **Finality**: Once you decline a contract proposal through any channel, that decision is final.
+
+        - **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.
+
+        '
+      operationId: declineContract
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your account SID.
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier of the program the contract belongs to.
+        schema:
+          type: integer
+          example: 8575
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineContractRequest'
+            example:
+              contractId: P-25070000
+              reason: Incompatible Content
+              groupId: '1234'
+      responses:
+        '200':
+          description: The contract was successfully declined.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractDecisionResponse'
+              example:
+                Status: OK
+        '400':
+          description: Bad request. The `contractId` may be missing or malformed.
+        '404':
+          description: Contract or program not found.
+        '409':
+          description: A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.
+components:
+  schemas:
+    AcceptContractRequest:
+      type: object
+      required:
+      - contractId
+      properties:
+        contractId:
+          type: string
+          description: The unique identifier of the pending contract to accept.
+          example: P-25070000
+        groupId:
+          type: string
+          description: 'The unique identifier of the partner group to which the accepted partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    DeclineContractRequest:
+      type: object
+      required:
+      - contractId
+      properties:
+        contractId:
+          type: string
+          description: The unique identifier of the pending contract to decline.
+          example: P-25070000
+        reason:
+          type: string
+          description: A human-readable explanation for why the contract proposal was declined.
+          example: Incompatible Content
+        groupId:
+          type: string
+          description: 'The unique identifier of the partner group to which the declined partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    ContractDecisionResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the decision was successfully recorded.
+          enum:
+          - OK
+          example: OK
+    Contract:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the contract.
+          example: S-7777777
+        PartnerId:
+          type: integer
+          description: The unique identifier of the partner the contract is with.
+          example: 10000
+        PartnerValue1:
+          type: string
+          description: A custom value associated with the partner.
+          example: ''
+        Status:
+          type: string
+          description: The current status of the contract.
+          enum:
+          - ACTIVE
+          - EXPIRED
+          example: ACTIVE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the contract becomes active.
+          example: '2021-01-20T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the contract expires. Null for open-ended contracts.
+          example: ''
+        BrandSignatory:
+          type: string
+          description: The name of the brand representative who signed the contract.
+          example: Justin Case
+        BrandSignatoryDate:
+          type: string
+          format: date-time
+          description: The date and time the brand signed the contract.
+          example: '2021-01-19T23:51:01-08:00'
+        PartnerSignatory:
+          type: string
+          description: The name of the partner representative who signed the contract.
+          example: Partner Person
+        PartnerSignatoryDate:
+          type: string
+          format: date-time
+          description: The date and time the partner signed the contract.
+          example: '2021-01-19T23:51:01-08:00'
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time the contract was created.
+          example: '2021-01-19T23:51:01-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the contract was last updated.
+          example: '2021-01-19T23:51:01-08:00'
+        TemplateTerms:
+          $ref: '#/components/schemas/TemplateTerms'
+          description: The template terms underlying this contract.
+        ScheduledTerms:
+          type: array
+          description: Time-bounded scheduled term overrides for this contract.
+          items:
+            $ref: '#/components/schemas/ScheduledTerm'
+        CampaignTerms:
+          type: array
+          description: Additional terms specific to creator, performance, or product boost campaigns.
+          items:
+            $ref: '#/components/schemas/CampaignTerm'
+        HasCampaignTerms:
+          type: boolean
+          description: Indicates whether the contract has associated campaign terms.
+          example: true
+        PdfUri:
+          type: string
+          format: uri-reference
+          description: The URI to download the contract as a PDF.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contracts/S-7777777/Download
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this contract in the impact.com API.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contracts/S-7777777
+    TemplateTerms:
+      type: object
+      properties:
+        TemplateId:
+          type: integer
+          description: Unique identifier for the template terms.
+          example: 99999
+        VersionId:
+          type: integer
+          description: Version number of the template terms.
+          example: 6
+        Name:
+          type: string
+          description: Display name for the template terms.
+          example: ACME Public Terms
+        Labels:
+          type: array
+          description: Labels assigned to these template terms.
+          items:
+            type: string
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for payouts.
+          example: USD
+        EventPayouts:
+          type: array
+          description: Payout configurations per event type.
+          items:
+            $ref: '#/components/schemas/EventPayout'
+        PromotionalTerms:
+          type: array
+          description: Additional promotional terms attached to the contract.
+          items:
+            $ref: '#/components/schemas/PromotionalTerm'
+    PromotionalTerm:
+      type: object
+      properties:
+        TermsName:
+          type: string
+          description: The display name of the promotional term.
+          example: Custom Terms
+        TermsType:
+          type: string
+          description: Category of promotional term.
+          enum:
+          - CUSTOM
+          - EMAIL
+          - COPYWRITING
+          - PAID_SEARCH
+          - SEO
+          - TRADEMARK
+          - APPROVAL
+          example: CUSTOM
+        TermsContent:
+          type: string
+          description: The text content of the promotional term.
+          example: <p>Custom promotional terms content.</p>
+        TermsPdfUri:
+          type: string
+          format: uri-reference
+          nullable: true
+          description: The URI to a PDF version of the promotional terms, if available.
+    EventPayout:
+      type: object
+      properties:
+        EventTypeId:
+          type: integer
+          description: Unique identifier for the event type.
+          example: 18500
+        EventTypeName:
+          type: string
+          description: Display name of the event type.
+          example: Online Sale
+        EventCategory:
+          type: string
+          description: Category of the event (e.g., SALE, LEAD, CLICK).
+          example: SALE
+        DefaultPayout:
+          type: number
+          format: decimal
+          description: Default flat payout amount for the event.
+          example: 10.0
+        DefaultPayoutRate:
+          type: number
+          format: decimal
+          description: Default percentage payout rate for the event.
+          example: 15
+        PayoutLevel:
+          type: string
+          description: Whether payout is calculated per item, order, click, or call.
+          enum:
+          - ITEM
+          - ORDER
+          - CLICK
+          - CALL
+          example: ITEM
+        PayoutGroups:
+          type: array
+          description: Conditional payout groups for this event type.
+          items:
+            $ref: '#/components/schemas/PayoutGroup'
+    PayoutGroup:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78
+          description: Select the option that best describes how you use impact.com
+        Rank:
+          type: integer
+          example: 1
+        Rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+        Payout:
+          type: number
+          format: decimal
+          example: 1.0
+        PayoutRate:
+          type: integer
+          example: 15
+        Limits:
+          type: array
+          items:
+            type: object
+        Tiers:
+          type: array
+          items:
+            type: object
+    Rule:
+      type: object
+      properties:
+        Variable:
+          type: string
+          example: CUSTOMER_COUNTRY
+        Operator:
+          type: string
+          example: IS
+        Values:
+          type: array
+          items:
+            type: string
+    ScheduledTerm:
+      type: object
+      properties:
+        Status:
+          type: string
+          enum:
+          - ACTIVE
+          - PENDING
+          - UPCOMING
+          - DECLINED
+          - EXPIRED
+          example: ACTIVE
+        Name:
+          type: string
+          example: Black Friday Special Rates
+        StartDate:
+          type: string
+          format: date-time
+          example: '2026-11-27T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          example: '2026-11-30T23:59:59-08:00'
+        Repeat:
+          type: object
+          properties:
+            Days:
+              type: array
+              items:
+                type: string
+                format: date
+            StartTime:
+              type: string
+              format: time
+              example: 09:00:00
+            EndTime:
+              type: string
+              format: time
+              example: 17:00:00
+        EventPayouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventPayout'
+    CampaignTerm:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Product Boost Campaign 1
+        Id:
+          type: string
+          example: '1234'
+          description: Select the option that best describes how you use impact.com
+        StartDate:
+          type: string
+          format: date-time
+          example: '2025-03-28T00:00:00-07:00'
+        EndDate:
+          type: string
+          format: date-time
+          example: '2025-03-29T00:00:00-07:00'
+        EventPayouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventPayout'

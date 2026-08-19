@@ -1,0 +1,552 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/ (67 documents, 242 operations) + graphql/impact-radius-advocate-schema.graphql
+  (live introspection) + https://integrations.impact.com/ai-solutions/mcp-tools.md
+description: >-
+  Binds each published impact.com MCP tool to the REST operation(s) that back it, so an agent can
+  see which tool inherits which OpenAPI parameters and request body, and which platform surface
+  has no tool at all. The live MCP tools/list is OAuth-gated (401 on 2026-08-13), so bindings are
+  mapped by name and published tool semantics rather than from real inputSchemas — confidence is
+  set honestly per row and no schema has been invented.
+surfaces:
+  openapi:
+    path: openapi/
+    documents: 67
+    operations: 242
+    families: [brand-v14, partner-v15, agency-v3, advocate-v1]
+    gated: false
+  graphql:
+    endpoint: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql
+    sdl: graphql/impact-radius-advocate-schema.graphql
+    query_fields: 118
+    mutation_fields: 138
+    gated: false
+    note: Introspection answered anonymously; executing operations still requires a tenant + credentials.
+  mcp:
+    url: https://mcp.impact.com/mcp
+    tools: 18
+    gated: true
+    note: tools/list returns 401 Unauthorized; tool names and descriptions come from the docs.
+crosswalk:
+- tool: query_performance
+  category: reporting
+  audience: both
+  rest: [runReport, listAllReports, getReportMetadata, exportReport, listReports, retrieveMetadata, exportReports]
+  binding: composite
+  confidence: high
+  note: >-
+    The tool's clicks/actions/revenue-by-dimension output is the Reports surface. Brand uses
+    runReport/listAllReports/getReportMetadata/exportReport; Partner uses
+    listReports/runReport/retrieveMetadata/exportReports. The tool almost certainly wraps report
+    execution plus metadata discovery rather than a single operation.
+- tool: list_invoices
+  category: billing
+  audience: both
+  rest: [listInvoices]
+  binding: direct
+  confidence: high
+  note: >-
+    Documented behaviour (newest first, 25 per page, optional created-date filter) matches the
+    listInvoices list contract on both Brand and Partner. Page size 25 is a tool-side default,
+    not a REST default.
+- tool: get_invoice
+  category: billing
+  audience: both
+  rest: [getInvoiceById, retrieveInvoice]
+  binding: direct
+  confidence: high
+  note: Brand getInvoiceById / Partner retrieveInvoice; keyed on invoice number as the docs state.
+- tool: investigate_order_action
+  category: conversions
+  audience: brand
+  rest: [listActions, getActionById, listActionItems, getActionItemBySku, listActionUpdates, getActionUpdateById]
+  binding: composite
+  confidence: high
+  note: >-
+    "Why didn't order X convert" requires the action lookup plus the ActionUpdates changelog and
+    the line items — exactly the Actions spec. Filtering by order ID within a campaign maps to
+    listActions with CampaignId plus an order identifier.
+- tool: search_products
+  category: catalog
+  audience: partner
+  rest: [searchCatalogItems, listCatalogItems, retrieveCatalogItem]
+  binding: composite
+  confidence: high
+  note: Partner Catalogs spec; searchCatalogItems is the direct analogue.
+- tool: list_partner_promo_codes
+  category: promo-codes
+  audience: partner
+  rest: [listPromoCodes]
+  binding: direct
+  confidence: high
+- tool: get_partner_promo_code
+  category: promo-codes
+  audience: partner
+  rest: [retrievePromoCode]
+  binding: direct
+  confidence: high
+- tool: create_tracking_links
+  category: tracking
+  audience: partner
+  rest: [createTrackingLink]
+  binding: direct
+  confidence: high
+  note: The only documented write tool with an exact 1:1 REST counterpart.
+- tool: get_payout_status
+  category: payouts
+  audience: partner
+  rest: [retrieveWithdrawalSettings, retrieveRequiredBankingFields, listInvoices]
+  binding: composite
+  confidence: medium
+  note: >-
+    Payout state for a partner is spread across withdrawal settings and recipient-generated
+    invoices; no single "payout status" REST operation is published, so this is a semantic map.
+mcp_only:
+- tool: search_help_center
+  reason: >-
+    Searches help.impact.com content. No public REST or GraphQL operation exposes Help Center
+    articles.
+- tool: get_marketing_guidance
+  reason: >-
+    Generative advisory surface over impact.com marketing best practice and Partner Experience
+    Academy content. Not backed by any published API operation.
+- tool: get_website_metrics
+  reason: >-
+    Website traffic/engagement/audience enrichment for an arbitrary domain. No published REST
+    endpoint returns third-party site metrics; the closest public data is
+    listMediaProperties/retrieveMediaProperty, which describes a partner's own registered
+    properties, not measured traffic.
+- tool: get_social_metrics
+  reason: >-
+    Creator/influencer follower, engagement and reach metrics by platform and handle. No
+    published REST operation exposes social measurement.
+- tool: get_brand_overdue_amount
+  reason: >-
+    Aggregated overdue impact.com fees vs overdue partner fees. The Brand Invoices spec exposes
+    recipient-generated invoices only; no published operation returns an account-level overdue
+    balance, and the tool docs explicitly separate this from list_invoices.
+- tool: recommend_partners
+  reason: >-
+    Ranked partner discovery driven by category, country, promotional method and
+    audience-similarity signals. The Brand Partners spec covers partners already in the program
+    (listPartners/getPartnerById/createPartner) — recruitment ranking is not a published REST
+    operation.
+- tool: evaluate_partner_recommendation
+  reason: Scores a specific recommendation from recommend_partners; no REST counterpart.
+- tool: recommend_programs
+  reason: >-
+    Partner-side inverse of recommend_partners. Partner listPrograms/retrieveProgram returns
+    programs the partner is already contracted to, not ranked recruitment candidates.
+- tool: evaluate_program_recommendation
+  reason: Scores a specific recommendation from recommend_programs; no REST counterpart.
+graphql_only:
+  note: >-
+    The Advocate GraphQL schema exposes large areas with neither a REST operation nor an MCP
+    tool — program authoring and drafts, segments, forms, microsites and managed identity,
+    portal projects and roles, translation instances, reward exchange rules, integrations, and
+    webhook subscription management.
+  examples:
+    query: [programs, segments, forms, micrositePageConfigs, portalProject, translatableAssets, userLeaderboards, globalRewardConfigs, webhookSubscriptions]
+    mutation: [createProgram, publishProgramDraft, upsertSegment, submitForm, autoSetupMicrosite, setPortalUserRoles, upsertIntegration, createRewardExchangeRule, regenerateTenantApiKey]
+coverage:
+  mcp_tools_total: 18
+  mcp_tools_bound_to_rest: 9
+  mcp_tools_without_rest: 9
+  rest_operations_total: 242
+  rest_operations_reachable_via_mcp: 38
+  rest_operations_without_tool: 204
+  rest_coverage_pct: 15.7
+  interpretation: >-
+    The MCP server is not a wrapper over the REST API. Half its tools are advisory or
+    discovery/enrichment surfaces with no public REST equivalent, and 204 of 242 published REST
+    operations — including every write path except createTrackingLink — cannot be reached by an
+    agent through MCP at all. An agent that needs to create a partner, submit a conversion,
+    manage contracts, upload a catalog or run Advocate rewards must still call the REST API
+    directly.
+rest_only:
+  note: >-
+    Every published REST operation with no MCP tool, grouped by the OpenAPI document it lives
+    in. Derived mechanically from openapi/.
+  specs:
+  - spec: impact-radius-agency-advertisers-v3.yml
+    family: agency
+    operations:
+    - getAdvertiser
+    - listAdvertisers
+  - spec: impact-radius-agency-companyinformation-v3.yml
+    family: agency
+    operations:
+    - getCompanyInformation
+    - updateCompanyInformation
+  - spec: impact-radius-agency-compliance-v3.yml
+    family: agency
+    operations:
+    - createComplianceContent
+    - getComplianceSubmissionResults
+    - getComplianceSubmissionStatus
+  - spec: impact-radius-agency-jobs-v3.yml
+    family: agency
+    operations:
+    - downloadJobResult
+    - getJob
+    - listJobs
+    - replayJob
+  - spec: impact-radius-brand-account-v14.yml
+    family: brand
+    operations:
+    - getCompanyInformation
+    - getLegalEntity
+    - listLegalEntities
+    - updateCompanyInformation
+  - spec: impact-radius-brand-actioninquiries-v14.yml
+    family: brand
+    operations:
+    - getActionInquiryById
+    - listActionInquiries
+    - updateActionInquiry
+  - spec: impact-radius-brand-actions-v14.yml
+    family: brand
+    operations:
+    - reverseAction
+    - updateActionOrItems
+  - spec: impact-radius-brand-ads-v14.yml
+    family: brand
+    operations:
+    - createAd
+    - getAdById
+    - listAds
+    - updateAd
+  - spec: impact-radius-brand-advocate-account-v13.yml
+    family: advocate
+    operations:
+    - getAccount
+    - upsertAccount
+  - spec: impact-radius-brand-advocate-export-v13.yml
+    family: advocate
+    operations:
+    - createExport
+    - downloadExport
+    - getExport
+    - listExports
+  - spec: impact-radius-brand-advocate-referral-v13.yml
+    family: advocate
+    operations:
+    - getReferral
+    - listReferrals
+    - moderateReferrals
+    - openListReferrals
+  - spec: impact-radius-brand-advocate-referralcode-v13.yml
+    family: advocate
+    operations:
+    - getCode
+    - openApplyCode
+    - openValidateCode
+  - spec: impact-radius-brand-advocate-reward-v13.yml
+    family: advocate
+    operations:
+    - cancelReward
+    - createReward
+    - debitReward
+    - getRewards
+    - lookupReward
+  - spec: impact-radius-brand-advocate-rewardbalance-v13.yml
+    family: advocate
+    operations:
+    - debitRewardBalance
+    - listRewardBalances
+  - spec: impact-radius-brand-advocate-sharelinks-v13.yml
+    family: advocate
+    operations:
+    - getShareURLs
+    - getSharelinks
+    - openGetShareURLs
+  - spec: impact-radius-brand-advocate-user-v13.yml
+    family: advocate
+    operations:
+    - blockUser
+    - createUser
+    - findUserByReferralCode
+    - getUser
+    - getUserPII
+    - listUsers
+    - openCreateUser
+    - openDeleteUser
+    - openGetUser
+    - openGetUserByCode
+    - openUserUpsert
+    - unblockUser
+  - spec: impact-radius-brand-advocate-webhook-v13.yml
+    family: advocate
+    operations:
+    - createWebhook
+    - deleteWebhook
+    - listWebhooks
+    - testWebhook
+  - spec: impact-radius-brand-calldata-v14.yml
+    family: brand
+    operations:
+    - logCallDataGet
+    - logCallDataPost
+  - spec: impact-radius-brand-catalogs-v14.yml
+    family: brand
+    operations:
+    - bulkUpdateCatalogItems
+    - createCatalogItem
+    - deleteCatalogItem
+    - getCatalogById
+    - getCatalogItemById
+    - listCatalogs
+    - updateCatalogItem
+    - updateCatalogPullSettings
+    - uploadCatalogFile
+  - spec: impact-radius-brand-clicks-v14.yml
+    family: brand
+    operations:
+    - exportClicks
+    - getClickById
+  - spec: impact-radius-brand-contacts-v14.yml
+    family: brand
+    operations:
+    - createContact
+    - deleteContact
+    - getContactById
+    - listContacts
+    - updateContact
+  - spec: impact-radius-brand-contracts-v14.yml
+    family: brand
+    operations:
+    - acceptContract
+    - declineContract
+    - getContractById
+    - listContracts
+  - spec: impact-radius-brand-conversions-v14.yml
+    family: brand
+    operations:
+    - submitConversion
+  - spec: impact-radius-brand-deals-v14.yml
+    family: brand
+    operations:
+    - createDeal
+    - deleteDeal
+    - getDealById
+    - listDeals
+    - updateDeal
+  - spec: impact-radius-brand-deferreddeeplink-v14.yml
+    family: brand
+    operations:
+    - getDeferredDeepLink
+  - spec: impact-radius-brand-exceptionlists-v14.yml
+    family: brand
+    operations:
+    - createExceptionList
+    - createExceptionListItems
+    - deleteAllExceptionListItems
+    - deleteExceptionListItem
+    - getExceptionListById
+    - getExceptionListItemById
+    - listExceptionListItems
+    - listExceptionLists
+    - replaceExceptionListItems
+    - updateExceptionList
+  - spec: impact-radius-brand-jobs-v14.yml
+    family: brand
+    operations:
+    - downloadJobResult
+    - getJobById
+    - listJobs
+    - replayJob
+  - spec: impact-radius-brand-notes-v14.yml
+    family: brand
+    operations:
+    - createNote
+    - deleteNote
+    - getNoteById
+    - listNotes
+    - updateNote
+  - spec: impact-radius-brand-pageload-v14.yml
+    family: brand
+    operations:
+    - trackPageLoad
+  - spec: impact-radius-brand-partnergroups-v14.yml
+    family: brand
+    operations:
+    - createPartnerGroup
+    - deletePartnerGroup
+    - getPartnerGroupById
+    - listPartnerGroups
+    - updatePartnerGroup
+  - spec: impact-radius-brand-partners-v14.yml
+    family: brand
+    operations:
+    - createPartner
+    - getPartnerById
+    - listPartners
+    - updatePartner
+  - spec: impact-radius-brand-phonenumbers-v14.yml
+    family: brand
+    operations:
+    - getPhoneNumberById
+    - listPhoneNumbers
+  - spec: impact-radius-brand-programs-v14.yml
+    family: brand
+    operations:
+    - getProgramById
+    - listPrograms
+    - listUnsubscribedContacts
+    - unsubscribeContact
+  - spec: impact-radius-brand-promocodeexceptionlists-v14.yml
+    family: brand
+    operations:
+    - createPromoCodeExceptionList
+    - createPromoCodeExceptionListItem
+    - deleteAllPromoCodeExceptionListItems
+    - deletePromoCodeExceptionListItem
+    - getPromoCodeExceptionListById
+    - getPromoCodeExceptionListItemById
+    - listPromoCodeExceptionListItems
+    - updatePromoCodeExceptionList
+  - spec: impact-radius-brand-promocodes-v14.yml
+    family: brand
+    operations:
+    - createPromoCode
+    - expirePromoCode
+    - getPromoCodeById
+  - spec: impact-radius-brand-routingrules-v14.yml
+    family: brand
+    operations:
+    - getRoutingRuleById
+    - listRoutingRules
+  - spec: impact-radius-brand-submissions-v14.yml
+    family: brand
+    operations:
+    - getApiSubmissionById
+    - getFtpSubmissionById
+    - getFtpSubmissionErrorDetails
+    - listApiSubmissions
+    - listFtpSubmissions
+  - spec: impact-radius-brand-tasks-v14.yml
+    family: brand
+    operations:
+    - getTaskById
+    - listTasks
+  - spec: impact-radius-brand-trackingvaluerequests-v14.yml
+    family: brand
+    operations:
+    - approveTrackingValueRequest
+    - getTrackingValueRequestById
+    - listTrackingValueRequests
+    - rejectTrackingValueRequest
+  - spec: impact-radius-partner-account-v15.yml
+    family: partner
+    operations:
+    - retrieveCompanyInformation
+    - updateCompanyInformation
+  - spec: impact-radius-partner-actioninquiries-v15.yml
+    family: partner
+    operations:
+    - createActionInquiry
+    - listActionInquiries
+    - retrieveActionInquiry
+  - spec: impact-radius-partner-actions-v15.yml
+    family: partner
+    operations:
+    - retrieveAction
+    - retrieveActionItem
+    - retrieveActionUpdate
+  - spec: impact-radius-partner-ads-v15.yml
+    family: partner
+    operations:
+    - listAds
+    - retrieveAd
+    - retrieveAdCode
+    - retrieveAdIFrameCode
+    - retrieveAdTrackingLink
+  - spec: impact-radius-partner-campaigns-v15.yml
+    family: partner
+    operations:
+    - listPrograms
+    - retrieveProgram
+    - retrieveProgramLogo
+  - spec: impact-radius-partner-catalogs-v15.yml
+    family: partner
+    operations:
+    - listCatalogs
+    - retrieveCatalog
+  - spec: impact-radius-partner-clicks-v15.yml
+    family: partner
+    operations:
+    - exportClicks
+    - retrieveClick
+  - spec: impact-radius-partner-contracts-v15.yml
+    family: partner
+    operations:
+    - listContracts
+    - retrieveContract
+  - spec: impact-radius-partner-deals-v15.yml
+    family: partner
+    operations:
+    - listDeals
+    - retrieveDeal
+  - spec: impact-radius-partner-eventnotifications-v15.yml
+    family: partner
+    operations:
+    - receiveEventNotificationGet
+    - receiveEventNotificationPost
+  - spec: impact-radius-partner-exceptionlists-v15.yml
+    family: partner
+    operations:
+    - listExceptionListItems
+    - retrieveExceptionList
+  - spec: impact-radius-partner-identityverification-v15.yml
+    family: partner
+    operations:
+    - createIdentityVerificationSession
+  - spec: impact-radius-partner-jobs-v15.yml
+    family: partner
+    operations:
+    - downloadJobResults
+    - listJobs
+    - replayJob
+    - retrieveJobStatus
+  - spec: impact-radius-partner-mediaproperties-v15.yml
+    family: partner
+    operations:
+    - createMediaProperty
+    - deleteMediaProperty
+    - listMediaProperties
+    - retrieveMediaProperty
+    - updateMediaProperty
+  - spec: impact-radius-partner-promocodeexceptionlists-v15.yml
+    family: partner
+    operations:
+    - listPromoCodeExceptionListItems
+    - retrievePromoCodeExceptionList
+  - spec: impact-radius-partner-promotions-v15.yml
+    family: partner
+    operations:
+    - listPromotions
+    - retrievePromotion
+  - spec: impact-radius-partner-stores-v15.yml
+    family: partner
+    operations:
+    - listStoreItems
+    - listStores
+    - retrieveStore
+  - spec: impact-radius-partner-taxdocument-v15.yml
+    family: partner
+    operations:
+    - completeTaxDocumentSubmission
+    - createTaxDocument
+    - listAllTaxDocuments
+    - retrieveLatestTaxDocument
+    - retrieveTaxDocumentById
+  - spec: impact-radius-partner-users-v15.yml
+    family: partner
+    operations:
+    - listUsers
+    - retrieveUser
+  - spec: impact-radius-partner-withdrawalsettings-v15.yml
+    family: partner
+    operations:
+    - updateWithdrawalSettings

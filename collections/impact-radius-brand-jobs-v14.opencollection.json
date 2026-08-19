@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Jobs",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Jobs",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CreatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return jobs scheduled after this date (ISO 8601)."
+              },
+              {
+                "name": "CreatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return jobs scheduled before this date (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of jobs, which can be filtered by their creation date."
+        },
+        {
+          "info": {
+            "name": "Get Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Jobs/:JobId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the job."
+              }
+            ]
+          },
+          "docs": "Returns an object describing the status of the queried job."
+        },
+        {
+          "info": {
+            "name": "Download Job Result File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Jobs/:JobId/Download",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the job."
+              },
+              {
+                "name": "Mode",
+                "value": "",
+                "type": "query",
+                "description": "Set to 'Stream' to get the file directly in the response instead of a redirect."
+              }
+            ]
+          },
+          "docs": "Downloads the result file for a successfully completed job.\n- Returns 200 with the file if completed.\n- Returns 202 with the job status if still processing.\n- Returns 302 to redirect to a temporary signed URL for download (if `Mode` is not 'Stream')."
+        },
+        {
+          "info": {
+            "name": "Replay a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Jobs/:JobId/Replay",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the job to be replayed."
+              }
+            ]
+          },
+          "docs": "Re-queues a completed, failed, or cancelled job for processing. This is useful if you expect additional results to be present for your original export window."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

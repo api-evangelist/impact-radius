@@ -1,0 +1,921 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Product Catalogs
+  description: |-
+    API for managing Product Catalogs and their items. This allows for programmatic updates to catalog settings, file uploads, and CRUD operations on individual items.
+    Note: Creating and deleting the catalogs themselves must be done in the impact.com web app.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/Catalogs:
+    get:
+      summary: List All Catalogs
+      description: Returns a list of all your product catalogs, which can be filtered by CampaignId or Status.
+      operationId: listCatalogs
+      tags:
+      - Catalogs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CampaignId
+        in: query
+        description: Filter catalogs by the ID of the program (campaign) they belong to.
+        schema:
+          type: integer
+      - name: Status
+        in: query
+        description: Filter catalogs by their current state of use.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+          - PENDING
+      responses:
+        '200':
+          description: A paginated list of catalog objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Catalogs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Catalog'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Catalogs/{CatalogId}:
+    get:
+      summary: Get Catalog Details
+      description: Retrieves the details of an existing catalog using its unique ID.
+      operationId: getCatalogById
+      tags:
+      - Catalogs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      responses:
+        '200':
+          description: A single catalog object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    put:
+      summary: Update Catalog Pull Settings
+      description: Programmatically updates a catalog's "Pull from URL" settings to automate data synchronization from a remote file.
+      operationId: updateCatalogPullSettings
+      tags:
+      - Catalogs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogPullSettingsUpdate'
+      responses:
+        '200':
+          description: The full catalog object with the updated fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Catalogs/{CatalogId}/Upload:
+    post:
+      summary: Upload a Catalog File
+      description: "Uploads a full catalog file via API, overwriting the existing catalog. This avoids updating items record-by-record.\n\n**Prerequisites:**\n- The catalog must already exist.\n- The file must be provided as multipart/form-data (field name `data`), not raw data in the request body.\n- If the catalog uses the Google Merchant Center (GMC) format, the file must be a TXT (tab-delimited) or XML file.\n- If the catalog uses a custom format, the file must be a CSV (comma-delimited) or XML file.\n- The file must be less than 1GB in size."
+      operationId: uploadCatalogFile
+      tags:
+      - Catalogs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  format: binary
+                  description: The catalog file to upload.
+      responses:
+        '200':
+          description: The file was uploaded successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the upload was successful.
+                    example: OK
+              example:
+                Status: OK
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Upload' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items:
+    get:
+      summary: List Catalog Items
+      description: Returns a list of items for a specific catalog, with support for keyword search, filtering, and sorting. This endpoint has a paging limit of 20,000 total records.
+      operationId: listCatalogItems
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      - name: Keyword
+        in: query
+        schema:
+          type: string
+        description: Search for a word or phrase across all item attributes.
+      - name: PromotionIds
+        in: query
+        schema:
+          type: string
+        description: Use 'null' to find items with no promotions, or '!=null' for items with promotions.
+      - name: Query
+        in: query
+        schema:
+          type: string
+        description: "Advanced search query using operators like '>', '<', '=', '!=', '~', 'AND', 'OR', 'IN'. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+      - name: SortBy
+        in: query
+        schema:
+          type: string
+        description: "Sort results by a specific attribute (e.g., 'CurrentPrice'). Use SortOrder for direction. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+      responses:
+        '200':
+          description: A paginated list of catalog item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CatalogItem'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    post:
+      summary: Create a Catalog Item
+      description: Creates a new item within a specified catalog.
+      operationId: createCatalogItem
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogItemCreate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items/{CatalogItemId}:
+    get:
+      summary: Get Catalog Item Details
+      description: Retrieves the details of an existing catalog item by its unique ID.
+      operationId: getCatalogItemById
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      - name: CatalogItemId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the catalog item.
+      responses:
+        '200':
+          description: A single catalog item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogItem'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items/{CatalogItemId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    put:
+      summary: Update a Single Catalog Item
+      description: Updates a single specified catalog item by setting the values of the parameters passed.
+      operationId: updateCatalogItem
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      - name: CatalogItemId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the catalog item.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogItem'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CatalogItem'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items/{CatalogItemId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+    delete:
+      summary: Delete a Catalog Item
+      description: Permanently deletes a catalog item. This cannot be undone.
+      operationId: deleteCatalogItem
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      - name: CatalogItemId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the catalog item.
+      responses:
+        '200':
+          description: The item was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: DELETED
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request DELETE \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/Items/{CatalogItemId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Catalogs/{CatalogId}/BulkUpdate:
+    put:
+      summary: Bulk Update Catalog Items
+      description: Updates multiple catalog items in a single request. The request body must be a JSON array of item objects, with each object containing its CatalogItemId. A maximum of 500 products can be updated per call.
+      operationId: bulkUpdateCatalogItems
+      tags:
+      - Catalog Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Your unique account identifier.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Unique identifier for the catalog.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CatalogItem'
+            example:
+            - CatalogItemId: '12345'
+              Name: Anvil
+            - CatalogItemId: '67890'
+              CurrentPrice: '50.00'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Catalogs/{CatalogId}/BulkUpdate' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Catalog:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '99999'
+          description: Unique identifier for the catalog (the impact.com Catalog Id).
+        Name:
+          type: string
+          example: Acme Sports Catalog
+          description: Name of the catalog.
+        Filename:
+          type: string
+          example: acme_sports.csv
+          description: Name of the file that contains the catalog.
+        AdvertiserId:
+          type: integer
+          example: 1000
+          description: Id of the brand (formerly known as advertiser) that owns the catalog.
+        CampaignId:
+          type: integer
+          example: 1000
+          description: Id of the program (formerly known as campaign) to which the catalog belongs.
+        Status:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+          - PENDING
+          example: ACTIVE
+          description: State of use the catalog is in (e.g., `ACTIVE`, `CLOSED`, `DEACTIVATED`, `PENDING`).
+        NumberOfItems:
+          type: integer
+          example: 1000
+          description: Number of items in the catalog.
+        DateLastUpdated:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:00:00-08:00'
+          description: Date and time the catalog was last updated (ISO 8601).
+        Currency:
+          type: string
+          example: USD
+          description: Currency in which the items' prices are listed. See ISO 4217.
+        ServiceAreas:
+          type: array
+          items:
+            type: string
+          description: List of geographical areas targeted by the catalog.
+        UploadMethod:
+          type: string
+          enum:
+          - DIRECT_UPLOAD
+          - IMPACT_RADIUS_FTP_SERVER
+          - IR_SFTP
+          - PULL_FROM_URL
+          - SHOPPING_CART_PULL
+          example: IR_SFTP
+          description: How the catalog was uploaded (e.g., `DIRECT_UPLOAD`, `IR_SFTP`, `SHOPPING_CART_PULL`).
+        ShoppingCart:
+          type: object
+          properties:
+            ShoppingCartType:
+              type: string
+              enum:
+              - SHOPIFY
+              - MAGENTO
+              - BIGCOMMERCE
+              - WOOCOMMERCE
+              - SHOPLAZZA
+              example: SHOPIFY
+            BaseUrl:
+              type: string
+              format: uri
+              example: https://acme.example.com
+            CollectionIds:
+              type: array
+              items:
+                type: string
+            CollectionTitles:
+              type: array
+              items:
+                type: string
+          description: Shopping-cart connection details. Only returned when `UploadMethod` is `SHOPPING_CART_PULL`.
+        ItemsUri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Catalogs/99999/Items
+          description: URI to view this catalog's items.
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Actions/1000.4636.401482/Items/12345
+          description: Direct URI to this catalog.
+    CatalogItem:
+      type: object
+      properties:
+        CatalogItemId:
+          type: string
+          example: ABC123
+          description: Unique identifier for the catalog item.
+        Name:
+          type: string
+          example: Acme Tennis Balls (One Dozen)
+          description: Name of the item.
+        Description:
+          type: string
+          example: High-performance tennis balls.
+          description: Description of the item — information about what it is or what it does.
+        Multipack:
+          type: string
+          example: '1'
+          description: Whether the item represents a merchant-defined multi-pack (`YES`/`NO`).
+        Bullets:
+          type: array
+          items:
+            type: string
+          description: Short bullet descriptions of the product.
+        Labels:
+          type: array
+          items:
+            type: string
+          description: Key terms to help partners find the item.
+        Manufacturer:
+          type: string
+          example: Acme
+          description: The person or group that makes the item.
+        Url:
+          type: string
+          format: uri
+          example: https://acme.example.com/product/12345
+          description: URL that leads to the item's online store listing.
+        MobileUrl:
+          type: string
+          format: uri
+          example: https://m.acme.example.com/product/12345
+          description: URI that points directly to the item's mobile listing.
+        ImageUrl:
+          type: string
+          format: uri
+          example: https://acme.example.com/images/12345.jpg
+          description: URL that leads to the item's image.
+        AdditionalImageUrls:
+          type: array
+          items:
+            type: string
+          description: List of additional image URLs for the product.
+        PromotionIds:
+          type: array
+          items:
+            type: string
+          description: List of promotion Ids that identify the item as part of a promotion.
+        CurrentPrice:
+          type: number
+          format: decimal
+          example: 29.99
+          description: Current consumer price of the item.
+        OriginalPrice:
+          type: number
+          format: decimal
+          example: 39.99
+          description: Original consumer price of the item.
+        DiscountPercentage:
+          type: integer
+          example: 25
+          description: Percent discount a consumer can get when they purchase the product.
+        ManufacturingCost:
+          type: number
+          format: decimal
+          description: Cost to produce the item.
+        Currency:
+          type: string
+          description: Currency in which the item's price is listed (ISO 4217).
+        StockAvailability:
+          type: string
+          enum:
+          - InStock
+          - OutOfStock
+          - BackOrder
+          - PreOrder
+          - LimitedAvailability
+          description: Status of the product's backstock (`InStock`, `OutOfStock`, `BackOrder`, `PreOrder`, `LimitedAvailability`).
+        EstimatedShipDate:
+          type: string
+          format: date
+          description: Date the item will begin shipping (ISO 8601).
+        LaunchDate:
+          type: string
+          format: date-time
+          description: Date the item becomes (or became) available (ISO 8601).
+        ExpirationDate:
+          type: string
+          format: date-time
+          description: Date the item will be removed from the catalog (ISO 8601).
+        Gtin:
+          type: string
+          description: Global Trade Item Number.
+        GtinType:
+          type: string
+          enum:
+          - EAN
+          - UPC
+          - ISBN
+          - JAN
+          description: Type of GTIN number the item uses (`EAN`, `UPC`, `ISBN`, `JAN`).
+        Asin:
+          type: string
+          description: Item's Amazon Standard Identification Number.
+        Mpn:
+          type: string
+          description: Manufacturing Part Number.
+        ShippingRate:
+          type: number
+          format: decimal
+          description: Standard rate to ship the item.
+        ShippingWeight:
+          type: number
+          format: decimal
+          description: Weight of the shipping parcel.
+        ShippingWeightUnit:
+          type: string
+          enum:
+          - lb
+          - oz
+          - g
+          - kg
+          - mg
+          description: Unit for the shipping parcel's weight (`lb`, `oz`, `g`, `kg`, `mg`).
+        ShippingLength:
+          type: number
+          format: decimal
+          description: Length of the shipping parcel.
+        ShippingWidth:
+          type: number
+          format: decimal
+          description: Width of the shipping parcel.
+        ShippingHeight:
+          type: number
+          format: decimal
+          description: Height of the shipping parcel.
+        ShippingLengthUnit:
+          type: string
+          enum:
+          - in
+          - cm
+          description: Unit for the shipping parcel's dimensions (`in`, `cm`).
+        ShippingLabel:
+          type: string
+          description: Label of the shipping parcel.
+        Category:
+          type: string
+          description: Group or kind of products with which the item is associated.
+        OriginalFormatCategory:
+          type: string
+          description: Category breadcrumb used to locate the item.
+        OriginalFormatCategoryId:
+          type: string
+          description: Id of the category the item is in.
+        ParentName:
+          type: string
+          description: If the item has a parent item, the parent item's name.
+        ParentSku:
+          type: string
+          description: If the item has a parent item, the parent item's SKU.
+        IsParent:
+          type: boolean
+          description: Whether this item represents a bundle of items.
+        ItemGroupId:
+          type: string
+          description: Groups product variants that only differ by attributes like size, color, pattern, age group, or gender.
+        Colors:
+          type: array
+          items:
+            type: string
+          description: Primary colors of the item.
+        Material:
+          type: string
+          description: Primary material of the item.
+        Pattern:
+          type: string
+          description: Pattern of the item.
+        Size:
+          type: string
+          description: Numerical size of the item.
+        SizeUnit:
+          type: string
+          description: Item's size unit of measurement (e.g., `Inches`, `Centimeters`, `Pounds`, `Kilograms`).
+        Weight:
+          type: number
+          format: decimal
+          description: Weight of the item.
+        WeightUnit:
+          type: string
+          enum:
+          - lb
+          - oz
+          - g
+          - kg
+          - mg
+          description: Item's weight unit of measurement (`lb`, `oz`, `g`, `kg`, `mg`).
+        Condition:
+          type: string
+          enum:
+          - New
+          - Used
+          - Refurbished
+          - OEM
+          - OpenBox
+          description: Condition the item is in when sold (`New`, `Used`, `Refurbished`, `OEM`, `OpenBox`).
+        AgeGroup:
+          type: string
+          enum:
+          - Newborn
+          - Infant
+          - Toddler
+          - Kids
+          - Adult
+          description: Age group the item targets (`Newborn`, `Infant`, `Toddler`, `Kids`, `Adult`).
+        AgeRangeMin:
+          type: integer
+          description: Minimum age for whom the item is intended.
+        AgeRangeMax:
+          type: integer
+          description: Maximum age for whom the item is intended.
+        AgeRangeUnit:
+          type: string
+          enum:
+          - Months
+          - Years
+          description: Unit of the age range (`Months`, `Years`).
+        Gender:
+          type: string
+          enum:
+          - Male
+          - Female
+          - Unisex
+          description: Gender for whom the item is intended (`Male`, `Female`, `Unisex`).
+        Adult:
+          type: boolean
+          description: Whether the item is only intended for adults.
+        ProductBid:
+          type: string
+          description: How much the partner will be paid for driving a conversion on the product.
+        Inventory:
+          type: integer
+          description: Item's inventory count.
+        Text1:
+          type: string
+          description: General text field that accepts any text data you want to send. Appears in your reports.
+        Text2:
+          type: string
+          description: General text field that accepts any text data you want to send. Appears in your reports.
+        Text3:
+          type: string
+          description: General text field that accepts any text data you want to send. Appears in your reports.
+        Numeric1:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+        Numeric2:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+        Numeric3:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+        Money1:
+          type: string
+          description: General numeral field that accepts any money or financial data you want to send. Appears in your reports.
+        Money2:
+          type: string
+          description: General numeral field that accepts any money or financial data you want to send. Appears in your reports.
+        Money3:
+          type: string
+          description: General numeral field that accepts any money or financial data you want to send. Appears in your reports.
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Catalogs/<CatalogId>/Items/<CatalogItemId>
+          description: URI that points directly to this catalog item.
+    CatalogPullSettingsUpdate:
+      type: object
+      required:
+      - uploadType
+      - pullFromUrlSettings
+      properties:
+        uploadType:
+          type: string
+          enum:
+          - CLIENT_PULL
+          description: Method for retrieving the catalog (e.g., `PULL_FROM_URL`).
+        pullFromUrlSettings:
+          type: object
+          required:
+          - address
+          - fileName
+          - pullFrequency
+          properties:
+            address:
+              type: string
+              description: Full URL or FTP path to the remote file.
+            fileName:
+              type: string
+              description: Name of the file to process from the remote server.
+            pullFrequency:
+              type: string
+              enum:
+              - 2H
+              - 4H
+              - 8H
+              - 1W
+              - 1M
+              description: How often the feed should be pulled.
+            pullTime:
+              type: string
+              description: Scheduled time for the pull (e.g., '12:30').
+            timeZone:
+              type: string
+              description: Timezone for the scheduled pull (e.g., 'America/New_York').
+          description: Settings for pulling the catalog from a URL — endpoint, auth, schedule.
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: OK
+          description: Indicates whether the operation was successful (e.g., `OK`).
+        Uri:
+          type: string
+          format: uri-reference
+          description: URI of the affected resource.
+    CatalogItemCreate:
+      type: object
+      description: Request body for creating a new catalog item. CatalogItemId, Name, and Url are required.
+      required:
+      - CatalogItemId
+      - Name
+      - Url
+      allOf:
+      - $ref: '#/components/schemas/CatalogItem'
+x-default-client: cURL

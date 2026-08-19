@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Reports & Exports
+  description: |-
+    API for listing available reports and exporting report data.
+    - The `Reports` endpoints are for listing and discovering reports and their metadata.
+    - The `ReportExport` endpoint is the recommended method for asynchronously exporting large report datasets.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/ReportExport/{ReportId_or_Handle}:
+    get:
+      summary: Export a Report Asynchronously
+      description: Schedules a job to export a report. The response contains URIs to poll for job status and to download the result file.
+      operationId: exportReport
+      tags:
+      - Report Export
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ReportId_or_Handle
+        in: path
+        required: true
+        description: The unique ID or handle for the report (e.g., '4222' or 'adv_click_data_pm_only').
+        schema:
+          type: string
+      - name: SUBAID
+        in: query
+        description: Program ID to refine the report. Required for most reports.
+        schema:
+          type: integer
+      - name: StartDate
+        in: query
+        description: Start date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports.
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: End date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports.
+        schema:
+          type: string
+          format: date-time
+      - name: CONV_CURRENCY
+        in: query
+        description: Specify the report's currency (e.g., USD).
+        schema:
+          type: string
+      - name: ResultFormat
+        in: query
+        description: The file format for the exported report.
+        schema:
+          type: string
+          enum:
+          - CSV
+          - JSON
+          - XML
+          default: CSV
+      responses:
+        '200':
+          description: The job has been queued successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the job was queued successfully.
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    format: uri-reference
+                    description: The URI to poll for the job's status.
+                  ResultUri:
+                    type: string
+                    format: uri-reference
+                    description: The URI to download the result file once the job completes.
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ReportExport/{ReportId_or_Handle}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Reports:
+    get:
+      summary: List All Available Reports
+      description: Retrieves a list of all reports available to the account.
+      operationId: listAllReports
+      tags:
+      - Reports (Legacy)
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of report objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Reports:
+                    type: array
+                    description: The list of report objects.
+                    items:
+                      $ref: '#/components/schemas/Report'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Reports' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Reports/{ReportId}:
+    get:
+      summary: Run a Report (Legacy)
+      description: Runs a report and returns the records synchronously. This is a legacy endpoint with pagination limits. Use the `ReportExport` endpoint for more efficient exporting.
+      operationId: runReport
+      tags:
+      - Reports (Legacy)
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ReportId
+        in: path
+        required: true
+        description: The unique ID or handle for the report.
+        schema:
+          type: string
+      - name: SUBAID
+        in: query
+        description: Program ID. Required for most reports.
+        schema:
+          type: integer
+      - name: StartDate
+        in: query
+        description: Start date in YYYY-MM-DD format. Required for most reports.
+        schema:
+          type: string
+          format: date
+      - name: EndDate
+        in: query
+        description: End date in YYYY-MM-DD format. Required for most reports.
+        schema:
+          type: string
+          format: date
+      - name: RQueryIDx
+        in: query
+        description: For reports with multiple tables, specifies which table to return (0-indexed).
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of report records.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Records:
+                    type: array
+                    description: The records from the report.
+                    items:
+                      type: object
+                      additionalProperties: true
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Reports/{ReportId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Reports/{ReportId}/MetaData:
+    get:
+      summary: Retrieve Report Metadata
+      description: Retrieves the dynamically generated documentation (metadata) for a specific report, including available filters and attributes.
+      operationId: getReportMetadata
+      tags:
+      - Reports (Legacy)
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ReportId
+        in: path
+        required: true
+        description: The unique ID or handle of the report.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The metadata object for the requested report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportMetadata'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Reports/{ReportId}/MetaData' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Report:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The display name of the report.
+          example: DEFAULT_MODEL
+        Id:
+          type: string
+          description: The unique identifier or handle for the report.
+          example: adv_action_listing_pm
+        Category:
+          type: string
+          description: The category the report belongs to.
+          example: Performance
+        Description:
+          type: string
+          description: A description of what the report contains.
+          example: Lists all actions for a date range.
+        ApiAccessible:
+          type: boolean
+          description: Whether this report can be run via the API.
+          example: true
+        ApiRunUri:
+          type: string
+          format: uri-reference
+          description: The URI to run this report synchronously.
+          example: /Advertisers/<AccountSID>/Reports/adv_action_listing_pm
+        DeferredApiRunUri:
+          type: string
+          format: uri-reference
+          description: The URI to schedule this report as an asynchronous export job.
+          example: /Advertisers/<AccountSID>/ReportExport/adv_action_listing_pm
+        MetaDataUri:
+          type: string
+          format: uri-reference
+          description: The URI to retrieve this report's metadata.
+          example: /Advertisers/<AccountSID>/ReportsMetadata/adv_action_listing_pm
+        RunUri:
+          type: string
+          format: uri-reference
+          description: The URI to run this report in the impact.com platform.
+          example: https://app.impact.com/secure/reports/run/adv_action_listing_pm
+    ReportMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The display name of the report.
+          example: Action Listing
+        Id:
+          type: string
+          description: The unique identifier or handle for the report.
+          example: adv_action_listing_pm
+        Description:
+          type: string
+          description: A description of what the report contains.
+          example: Lists all actions for a date range.
+        Filters:
+          type: array
+          description: The filter parameters available when running the report.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                description: The filter parameter name.
+                example: START_DATE
+              DataType:
+                type: string
+                description: The data type of the filter (e.g., String, Integer, Date).
+                example: DATE
+              Format:
+                type: string
+                description: The expected format of the filter value, if applicable.
+                example: yyyy-MM-dd
+        Attributes:
+          type: array
+          description: The attributes (columns) returned by the report.
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+                description: The attribute name.
+                example: ActionDate
+              DataType:
+                type: string
+                description: The data type of the attribute.
+                example: DATETIME
+              Description:
+                type: string
+                description: A description of the attribute.
+                example: Date the action occurred.
+        RunUri:
+          type: string
+          format: uri-reference
+          description: The URI to run this report.
+          example: /Advertisers/<AccountSID>/Reports/adv_action_listing_pm
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this metadata object in the impact.com API.
+          example: /Advertisers/<AccountSID>/ReportsMetadata/adv_action_listing_pm
+x-default-client: cURL

@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Ads API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Ads",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filters ads by type."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filters ads by the campaign (brand program) they belong to."
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "query",
+                "description": "Filters ads by the deal associated with them."
+              },
+              {
+                "name": "MobileReady",
+                "value": "",
+                "type": "query",
+                "description": "Filters ads by whether they are optimized for mobile devices."
+              },
+              {
+                "name": "UpdatedDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters for ads updated on or after this date."
+              },
+              {
+                "name": "UpdatedDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters for ads updated on or before this date."
+              }
+            ]
+          },
+          "docs": "Returns a list of all ads available to you."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Ads/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the ad."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing ad using its unique ID."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Ad's Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Ads/:Id/Code",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the ad."
+              },
+              {
+                "name": "subId1",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId1= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "subId2",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId2= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "subId3",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId3= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "sharedId",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as sharedId= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "landingPage",
+                "value": "",
+                "type": "query",
+                "description": "Overrides the ad's landing page URL if the ad allows deep linking. Must be URL encoded."
+              }
+            ]
+          },
+          "docs": "Retrieves the HTML code of an existing ad, with optional tracking parameters appended to the tracking link."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Ad's IFrame Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Ads/:Id/IFrameCode",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the ad."
+              },
+              {
+                "name": "subId1",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId1= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "subId2",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId2= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "subId3",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId3= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "sharedId",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as sharedId= to the tracking link. Must be URL encoded."
+              },
+              {
+                "name": "landingPage",
+                "value": "",
+                "type": "query",
+                "description": "Overrides the ad's landing page URL if the ad allows deep linking. Must be URL encoded."
+              }
+            ]
+          },
+          "docs": "Retrieves the inline frame (iframe) code for an existing ad, with optional tracking parameters appended to the tracking link."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Ad's Tracking Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Ads/:Id/TrackingLink",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the ad."
+              },
+              {
+                "name": "subId1",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId1= to the tracking link."
+              },
+              {
+                "name": "subId2",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId2= to the tracking link."
+              },
+              {
+                "name": "subId3",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as subId3= to the tracking link."
+              },
+              {
+                "name": "sharedId",
+                "value": "",
+                "type": "query",
+                "description": "Appends the submitted value as sharedId= to the tracking link."
+              },
+              {
+                "name": "landingPage",
+                "value": "",
+                "type": "query",
+                "description": "Overrides the ad's landing page URL if the ad allows deep linking."
+              }
+            ]
+          },
+          "docs": "Retrieves the tracking link for an existing ad, with optional tracking parameters appended."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Jobs API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Jobs",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CreatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return jobs scheduled after this date (YYYY-MM-DD)."
+              },
+              {
+                "name": "CreatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return jobs scheduled before this date (YYYY-MM-DD)."
+              }
+            ]
+          },
+          "docs": "Returns a list of jobs based on creation date filters."
+        },
+        {
+          "info": {
+            "name": "Retrieve Job Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Jobs/:JobId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique job identifier."
+              }
+            ]
+          },
+          "docs": "Returns an object describing the status of the queried job."
+        },
+        {
+          "info": {
+            "name": "Download Job Results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Jobs/:JobId/Download",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique job identifier."
+              },
+              {
+                "name": "Mode",
+                "value": "",
+                "type": "query",
+                "description": "If set to Stream, the file is streamed directly instead of using a signed URL redirect."
+              }
+            ]
+          },
+          "docs": "Download the job result file if the job was completed successfully. \nIf the job isn't done, the job status will be returned. \nA job result is available for download for 90 days.\n"
+        },
+        {
+          "info": {
+            "name": "Replay Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Jobs/:JobId/Replay",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "JobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique job identifier."
+              }
+            ]
+          },
+          "docs": "Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status, \nor if additional results are expected for the chosen export window.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

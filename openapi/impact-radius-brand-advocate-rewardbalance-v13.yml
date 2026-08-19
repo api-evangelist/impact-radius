@@ -1,0 +1,256 @@
+openapi: 3.1.0
+info:
+  title: impact.com API - Reward Balance
+  description: API for listing and debiting reward balances.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+- UserJWT: []
+tags:
+- name: Reward Balance
+  description: Reward Balances summarizes the Rewards in someone's account.
+paths:
+  /{tenant_alias}/reward/balance:
+    get:
+      summary: List reward balances
+      description: Looks up the balance for all rewards of the same type and units.
+      operationId: listRewardBalances
+      tags:
+      - Reward Balance
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: The ID of the account to look up.
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: query
+        description: Filters rewards by `user.id`.
+        schema:
+          type: string
+      - name: rewardTypeFilter
+        in: query
+        description: Filters rewards by `type`.
+        schema:
+          type: string
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+      responses:
+        '200':
+          description: A list of reward balances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RewardBalance'
+              example:
+              - type: CREDIT
+                unit: CENTS
+                count: 4
+                totalPendingCredit: 0
+                totalAssignedCredit: 10000
+                totalRedeemedCredit: 0
+                totalExpiredCredit: 0
+                totalCancelledCredit: 0
+              - type: PCT_DISCOUNT
+                unit: '%'
+                totalDiscountPercent: 30
+                referredDiscountPercent: 10
+                referrerDiscountPercent: 20
+              - type: FUELTANK
+                totalFuelTankCodes: 1
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/reward/balance' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /{tenant_alias}/credit/bulkredeem:
+    post:
+      summary: Debit a reward balance
+      description: 'Used to redeem the credit earned from a referral program. Permanently debits an account balance. Works with: `CREDIT`.'
+      operationId: debitRewardBalance
+      tags:
+      - Reward Balance
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details of the debit
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardBalanceDebitRequest'
+      responses:
+        '200':
+          description: Balance debitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardDebitResponse'
+              example:
+                creditRedeemed: 200
+                creditAvailable: 0
+                unit: CENTS
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/credit/bulkredeem' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method of security only in server-to-server interactions.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: Authorize your requests using a JWT (JSON Web Token) for a given user. Useful for client-server authorization, such as the Mobile and Web SDKs. Used in Open Endpoints.
+      x-scopes:
+      - read
+      - write
+  parameters:
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      schema:
+        type: string
+      required: true
+  schemas:
+    RewardBalance:
+      description: Details of the balance of several individual rewards.
+      properties:
+        type:
+          type: string
+          example: CREDIT
+          description: The type of reward.
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+        unit:
+          type: string
+          example: CENTS
+          description: An identifier for the unit of the reward. E.g. `"CENTS"`, `"freemb"`, `"freemonth"`. For `PCT_DISCOUNT` this is `"%"`.`
+        count:
+          type: integer
+          description: '"The number of rewards earned. Usually is equal to the number of successful referrals made. E.g. An account has $80 of credit due to the referral program. $60 from making referrals, $20 from being referred. The count would be 4 rewards, each worth $20. Only works for `CREDIT`"'
+        totalAssignedCredit:
+          type: integer
+          example: 4000
+          description: 'The total assignedCredit for all reward credits of the same unit type. Only works with types: `CREDIT`'
+        totalRedeemedCredit:
+          type: integer
+          example: 1490
+          description: 'The total redeemedCredit for all reward credits of the same unit type. Only works with types: `CREDIT`'
+        totalPendingCredit:
+          type: integer
+          example: 0
+          description: 'The total credit that is pending and not yet available. Only works with types: `CREDIT`'
+        totalExpiredCredit:
+          type: integer
+          example: 0
+          description: 'The total credit that has expired. Only works with types: `CREDIT`'
+        totalCancelledCredit:
+          type: integer
+          example: 0
+          description: 'The total credit that has been cancelled. Only works with types: `CREDIT`'
+        totalDiscountPercent:
+          type: integer
+          description: 'The total discountPercent from all rewards. Only works with types: `PCT_DISCOUNT`'
+        referredDiscountPercent:
+          type: integer
+          description: 'The total discountPercent from rewards with `rewardSource = REFERRED` Only works with types: `PCT_DISCOUNT`'
+        referrerDiscountPercent:
+          type: integer
+          description: 'The total discountPercent from rewards with `rewardSource = FRIEND_SIGNUP` Only works with types: `PCT_DISCOUNT`'
+        totalFuelTankCodes:
+          type: integer
+          description: 'The number of earned fueltank rewards. Only works with type: `FUELTANK`'
+    RewardBalanceDebitRequest:
+      description: A request to debit a Reward Balance
+      required:
+      - accountId
+      - unit
+      - amount
+      properties:
+        accountId:
+          type: string
+          description: The ID of the account to be debitted.
+          example: abc123
+        unit:
+          type: string
+          description: The type of credit to be debitted. E.g. "free-months" or "cents"
+          example: cents
+        amount:
+          type: integer
+          description: The amount of credit to be debitted.
+          example: 200
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 0
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+x-default-client: cURL

@@ -1,0 +1,67 @@
+generated: '2026-08-13'
+method: probed
+source: https://app.referralsaasquatch.com/api/v1/graphql
+docs:
+- https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/graphql-api.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/build-a-custom-advocate-experience-with-graphql.md
+description: >-
+  impact.com Advocate publishes a GraphQL API for building custom participant experiences,
+  integrations and admin interfaces. Anonymous introspection is open: a full IntrospectionQuery
+  returned HTTP 200 with a complete 543-type schema on 2026-08-13, which was rendered to SDL and
+  saved verbatim to graphql/impact-radius-advocate-schema.graphql.
+ownership:
+  host: app.referralsaasquatch.com
+  justification: >-
+    impact.com's own GraphQL API guide publishes this host as the Advocate endpoint —
+    "https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql" — because Advocate is the
+    productised Referral SaaSquatch acquisition. Different domain, same company, stated by the
+    provider's documentation.
+endpoints:
+- name: tenant endpoint
+  url: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql
+  note: >-
+    Preferred for site integrations — the tenant is in the path so queries need not carry
+    tenant_alias.
+- name: introspection endpoint
+  url: https://app.referralsaasquatch.com/api/v1/graphql
+  note: The path used for the anonymous introspection probe recorded below.
+authentication:
+  same_as: Advocate REST API
+  schemes:
+  - HTTP Basic with Account SID / Auth Token (test-mode or live-mode key)
+  - Per-user JWT in X-SaaSquatch-User-Token for client-facing calls
+  ref: authentication/impact-radius-authentication.yml
+introspection:
+  enabled: true
+  authenticated: false
+  http_status: 200
+  checked: '2026-08-13'
+  query_type: Query
+  mutation_type: Mutation
+  subscription_type: null
+  types: 543
+  query_fields: 118
+  mutation_fields: 138
+  sdl: graphql/impact-radius-advocate-schema.graphql
+  sdl_bytes: 187363
+  note: >-
+    Introspection returning the full schema without credentials is unusual and worth stating
+    plainly: an agent can discover the entire Advocate object model before it holds a single
+    credential. Executing any operation still requires a tenant and a key.
+surface_areas:
+  participants: [user, users, activeUser, cookieUser, userMetrics, userEvents, segments, isBlockedEmail]
+  rewards: [reward, rewards, rewardBalances, globalRewardConfig, predefinedRewards, rewardExchangeRules, fuelTankPredefinedRewards]
+  referrals: [referral, referrals, referralCode, linkCode, validateLinkCode]
+  programs: [program, programs, programTemplates, activeProgram, activeProgramTrigger]
+  experiences: [form, forms, renderWidget, renderMicrositePage, micrositeTemplates, globalWidgetConfigs, globalEmailConfigs]
+  administration: [tenant, tenantSettings, organization, portalProject, integrations, webhooks, webhookSubscriptions, jobs, customFields, translatableAssets]
+  impact_bridge:
+    fields: [tenantByImpactBrandId, impactPayoutCountries, countryByImpactCountryCode, impactFinanceNetworkSettings, impactPartnerInviteUrl, impactPrograms, impactEventTypes]
+    mutations: [createImpactConnection, startImpactConnection, completeImpactConnection, createImpactPublisherTaxDocument, refreshMatchedImpactPartnerForUser, createRelationshipBetweenPartnerAndProgram, startImpactSession, endImpactSession]
+    note: >-
+      A distinct set of fields exists purely to bridge the Advocate tenant to the impact.com
+      partnership graph — this is where the two object graphs in
+      data-model/impact-radius-data-model.yml actually meet.
+notes: >-
+  method is probed: the schema was obtained by executing a real introspection query against the
+  live endpoint and recording its HTTP status. Nothing in the SDL was authored by API Evangelist.

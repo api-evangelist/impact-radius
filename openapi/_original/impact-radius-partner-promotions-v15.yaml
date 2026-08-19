@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: Partner Promotions API
+  version: '15'
+  description: |
+    Use the Promotions API to discover limited-time offers from the brands you partner with —
+    sales, coupon codes, seasonal campaigns — and surface them to your audience.
+
+    Each promotion includes a headline, an active date range, an optional redemption code, and a
+    direct link to the products it covers in the Catalogs API. Use this endpoint to power deal
+    pages, coupon directories, browser extensions, and newsletter content.
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Promotions
+  description: Endpoints for listing and retrieving brand promotions available to your partner account.
+paths:
+  /Mediapartners/{AccountSID}/Promotions:
+    get:
+      summary: List promotions
+      description: Returns a list of all brand promotions currently available to your account.
+      operationId: listPromotions
+      tags:
+      - Promotions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Unique identifier for the partner account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of promotion objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Promotions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Promotion'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Promotions' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Mediapartners/{AccountSID}/Promotions/{Id}:
+    get:
+      summary: Retrieve a promotion
+      description: |
+        Retrieves the details of a single promotion. Pass the value of `PromotionIds` (from a List Promotions response) as the path `Id`.
+      operationId: retrievePromotion
+      tags:
+      - Promotions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Unique identifier for the partner account.
+        schema:
+          type: string
+      - name: Id
+        in: path
+        required: true
+        description: The unique identifier of the promotion (matches `PromotionIds` from a List Promotions response).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A promotion object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Promotion'
+        '404':
+          description: No promotion exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Promotions/{Id}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Promotion:
+      type: object
+      properties:
+        AdvertiserId:
+          type: string
+          description: Unique identifier of the brand offering the promotion.
+          example: '12345'
+        AdvertiserName:
+          type: string
+          description: Name of the brand offering the promotion.
+          example: Hazel's Wellness Co
+        AdvertiserLocation:
+          type: string
+          description: Country in which the brand offering the promotion is based.
+          example: United States
+        PromotionFileId:
+          type: string
+          description: Unique identifier of the promotion file (the upload batch this promotion was loaded from). Use this for traceability when a brand bulk-uploads promotions.
+          example: '37'
+        PromotionIds:
+          type: string
+          description: Unique identifier for this promotion. Despite the plural name, this is a single ID for one promotion — use it as the path `Id` when calling Retrieve a promotion.
+          example: '123456789'
+        PromotionTitle:
+          type: string
+          description: The marketing headline for the promotion, suitable for displaying to your audience.
+          example: 20% Off Wellness Essentials — New Year Sale
+        NumberOfProducts:
+          type: integer
+          description: The number of products covered by this promotion.
+          example: 24
+        PromotionEffectiveDates:
+          type: string
+          description: 'The date range during which the promotion is active, in ISO 8601 interval format: `<start>/<end>`.'
+          example: 2026-01-01/2026-01-31
+        GenericRedemptionCode:
+          type: string
+          description: The promo code your audience can apply at checkout to redeem this promotion. Empty when the promotion is automatically applied or has no associated code.
+          example: WELLNESS20
+        PromotionItemsUri:
+          type: string
+          description: API resource path that returns the items covered by this promotion. This is a pre-filtered search against the Catalogs API.
+          example: /Mediapartners/<AccountSID>/Catalogs/ItemSearch?Query=PromotionIds='123456789'
+        Uri:
+          type: string
+          description: Unique reference to this promotion in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Promotions/123456789
+x-default-client: cURL

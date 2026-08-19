@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Page Load",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Page Load",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Track a Page Load or App Open",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://trkapi.impact.com/PageLoad",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Tracks a page load or app open event. This endpoint is used to attribute credit for a conversion that results from a partner driving traffic. It does not require authentication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

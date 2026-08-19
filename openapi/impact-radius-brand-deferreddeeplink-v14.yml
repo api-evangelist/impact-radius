@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Deferred Deep Linking
+  description: "This API provides a method to retrieve deferred deep linking information after a user installs and opens a mobile app for the first time. \nIt is designed to be called from within the app to get the original deep link URL and other attribution data, enabling you to direct the user to the correct content. \nThis endpoint only provides information and does not log a conversion event."
+  version: v14
+servers:
+- url: https://trkapi.impact.com
+security:
+- basicAuth: []
+paths:
+  /DeferredDeepLink:
+    post:
+      summary: Get Deferred Deep Link Information
+      description: Retrieves information about the deferred deep linking event after an app install has occurred. This call is performed when the user first opens the app.
+      operationId: getDeferredDeepLink
+      tags:
+      - Deferred Deep Linking
+      requestBody:
+        description: The necessary identifiers to match the app open event with the original click.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeferredDeepLinkRequest'
+      responses:
+        '200':
+          description: The request was processed successfully. The response will contain deep link information if a match was found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeferredDeepLinkResponse'
+        '400':
+          description: The request was invalid due to missing or malformed parameters. The response will contain an errors object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://trkapi.impact.com/DeferredDeepLink' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    DeferredDeepLinkRequest:
+      type: object
+      required:
+      - CampaignId
+      - ImpactAppId
+      - EventDate
+      properties:
+        CampaignId:
+          type: integer
+          description: Unique identifier for your program (campaign) in impact.com.
+          example: 1000
+        ImpactAppId:
+          type: integer
+          description: Unique ID assigned by impact.com to your app (System App ID).
+          example: 12345
+        EventDate:
+          type: string
+          format: date-time
+          description: The date and time the app install happened (ISO 8601).
+          example: '2026-09-10T22:55:32-08:00'
+        IpAddress:
+          type: string
+          description: Public IP Address of the device. Optional if the call is made from within the app.
+          example: 192.168.1.1
+        AppleIfa:
+          type: string
+          description: Apple's Identifier for Advertising (IDFA). Recommended for iOS.
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+        GoogAId:
+          type: string
+          description: Google Advertising Identifier. Recommended for Android.
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+        AppInstallRef:
+          type: string
+          description: Install Referrer from the Google Play Store. Recommended for Android.
+          example: utm_source=affiliate&utm_campaign=summer
+        AppPackage:
+          type: string
+          description: Bundle ID or package name of the app (e.g., 'com.android.chrome' or '535886823').
+          example: com.acme.app
+        CustomProfileId:
+          type: string
+          description: Third-party web tracking cookie or anonymous user ID.
+          example: a1b2c3d4e5f6
+    DeferredDeepLinkResponse:
+      type: object
+      description: Contains the deep link information if a match is found, along with connection details.
+      properties:
+        landingPage:
+          type: string
+          format: uri
+          description: URL of the web page the user was being redirected to before the app store.
+          example: https://www.acme.com/products/tennis-balls
+        clickId:
+          type: string
+          description: The unique impact.com click identifier.
+          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
+        clickIpAddress:
+          type: string
+          description: IP Address captured at the time of the click.
+          example: 192.168.1.1
+        connectionIpAddress:
+          type: string
+          description: IP Address captured when the connection to this endpoint is made.
+          example: 192.168.1.2
+    ErrorResponse:
+      type: object
+      description: Describes errors and warnings found in the request.
+      properties:
+        errors:
+          type: array
+          description: Errors that prevented the request from succeeding.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The parameter that caused the error.
+              level:
+                type: string
+                description: The severity level of the message.
+                enum:
+                - ERROR
+                - WARNING
+                example: ERROR
+              message:
+                type: string
+                description: A description of the error.
+        warnings:
+          type: array
+          description: Non-fatal warnings about the request.
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: The parameter that caused the warning.
+              level:
+                type: string
+                description: The severity level of the message.
+                enum:
+                - ERROR
+                - WARNING
+                example: WARNING
+              message:
+                type: string
+                description: A description of the warning.
+x-default-client: cURL

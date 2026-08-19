@@ -1,0 +1,1185 @@
+{
+  "item": [
+    {
+      "id": "950e8f64-e87c-41ab-9389-3c84c7546ddb",
+      "name": "Accounts",
+      "description": {
+        "content": "Endpoints for managing partner company account information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10084375-af81-4a59-bbb7-d9e9b3d2dd3a",
+          "name": "Retrieve Company Information",
+          "request": {
+            "name": "Retrieve Company Information",
+            "description": {
+              "content": "Retrieves the current profile and account metadata for your partner account. The account is determined by the Account SID and Auth Token used in the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6fbd994-30cc-47f9-91cc-7d98e20a7951",
+              "name": "A company information object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CompanyName\": \"Carrie Oakey Music\",\n  \"PrimaryPromotionalMethod\": \"COUPON\",\n  \"PromotionalMethods\": \"SOCIAL_MEDIA_INFLUENCER,CONTENT\",\n  \"Website\": \"https://www.carrieOakeymusic.com\",\n  \"Description\": \"Singer-songwriter and creator specializing in original music, brand jingles, and audio content.\",\n  \"LogoImage\": \"/display-content/profile-image.jpg\",\n  \"ContentAndInterests\": \"music,creator,songwriting,jingles,audiobranding\",\n  \"PrimaryPhoneNumber\": \"8051231234\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"SecondaryPhoneNumber\": \"\",\n  \"SecondaryPhoneNumberCountry\": \"\",\n  \"MinimumContactRating\": \"1\",\n  \"Timezone\": \"(GMT -07:00) Pacific Time (US & Canada); Tijuana\",\n  \"Currency\": \"USD\",\n  \"RegisteredForIndirectTax\": false,\n  \"IndirectTaxNumber\": \"\",\n  \"OrganizationType\": \"LLC\",\n  \"EinSsnForeignTaxId\": \"\",\n  \"DateOfBirth\": \"1994-04-01T00:00:00-08:00\",\n  \"Gender\": \"Non-binary\",\n  \"Ethnicity\": \"Native_Hawaiian\",\n  \"ParentalStatus\": \"None\",\n  \"RelationshipStatus\": \"Married\",\n  \"Education\": \"None\",\n  \"Pronouns\": \"None\",\n  \"HouseholdIncome\": \"None\",\n  \"ShippingAddress\": {\n    \"AddressLine1\": \"123 Harmony Lane\",\n    \"AddressLine2\": \"Unit 2B\",\n    \"City\": \"Los Angeles\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90027\",\n    \"Country\": \"US\"\n  },\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"123 Harmony Lane\",\n    \"AddressLine2\": \"Unit 2B\",\n    \"City\": \"Los Angeles\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90027\",\n    \"Country\": \"US\"\n  },\n  \"BillingAddress\": {\n    \"AddressLine1\": \"123 Harmony Lane\",\n    \"AddressLine2\": \"Unit 2B\",\n    \"City\": \"Los Angeles\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90027\",\n    \"Country\": \"US\"\n  },\n  \"FinancialContact\": {\n    \"UserId\": \"2320266\",\n    \"Name\": \"Hazel Nutt\",\n    \"Email\": \"hazel.nutt@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"TechnicalContact\": {\n    \"UserId\": \"2320266\",\n    \"Name\": \"Hazel Nutt\",\n    \"Email\": \"hazel.nutt@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"SecurityContact\": {\n    \"UserId\": \"2320266\",\n    \"Name\": \"Hazel Nutt\",\n    \"Email\": \"hazel.nutt@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"CommercialContact\": {\n    \"UserId\": \"2320266\",\n    \"Name\": \"Hazel Nutt\",\n    \"Email\": \"hazel.nutt@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"Uri\": \"/Mediapartners/<AccountSID>/CompanyInformation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3dc3405-7fa8-44f3-939a-90a27ef1873c",
+          "name": "Update Company Information",
+          "request": {
+            "name": "Update Company Information",
+            "description": {
+              "content": "Updates your partner account information. Only the parameters you provide will be updated — all others remain unchanged.\n\n**Note:** `FinancialContact`, `TechnicalContact`, and `CommercialContact` cannot be updated via API. These must be updated in the impact.com UI.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ContentInterests",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated tags describing your content categories and interests, with no spaces (e.g., travel,lifestyle,fitness)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>",
+                  "description": "(Required) A bio or description of your content and services, visible to brands on your profile."
+                },
+                {
+                  "disabled": false,
+                  "key": "LogoImage",
+                  "value": "<string>",
+                  "description": "(Required) Your profile logo or photo as a Base64-encoded image string."
+                },
+                {
+                  "disabled": false,
+                  "key": "CompanyName",
+                  "value": "<string>",
+                  "description": "The display name for your partner account."
+                },
+                {
+                  "disabled": false,
+                  "key": "Website",
+                  "value": "<string>",
+                  "description": "The URL of your website or primary online presence."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPhoneNumber",
+                  "value": "<string>",
+                  "description": "Your primary contact phone number."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for your primary phone number. Required if PrimaryPhoneNumber is provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrganizationType",
+                  "value": "<string>",
+                  "description": "The legal organization type for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateOfBirth",
+                  "value": "<dateTime>",
+                  "description": "Your date of birth in ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "Education",
+                  "value": "<string>",
+                  "description": "Your highest level of education."
+                },
+                {
+                  "disabled": false,
+                  "key": "Ethnicity",
+                  "value": "<string>",
+                  "description": "Your ethnicity."
+                },
+                {
+                  "disabled": false,
+                  "key": "Gender",
+                  "value": "<string>",
+                  "description": "Your gender identity."
+                },
+                {
+                  "disabled": false,
+                  "key": "HouseholdIncome",
+                  "value": "<string>",
+                  "description": "Your annual household income bracket."
+                },
+                {
+                  "disabled": false,
+                  "key": "ParentalStatus",
+                  "value": "<string>",
+                  "description": "Your parental status."
+                },
+                {
+                  "disabled": false,
+                  "key": "Pronouns",
+                  "value": "<string>",
+                  "description": "Your preferred pronouns."
+                },
+                {
+                  "disabled": false,
+                  "key": "RelationshipStatus",
+                  "value": "<string>",
+                  "description": "Your relationship status."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressLine1",
+                  "value": "<string>",
+                  "description": "The first line of your corporate address (street number and name)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressCity",
+                  "value": "<string>",
+                  "description": "The city for your corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressLine1",
+                  "value": "<string>",
+                  "description": "The first line of your billing address (street number and name)."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressCity",
+                  "value": "<string>",
+                  "description": "The city for your billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressLine2",
+                  "value": "<string>",
+                  "description": "The second line of your corporate address (suite, apartment, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressState",
+                  "value": "<string>",
+                  "description": "The state or province for your corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressPostalCode",
+                  "value": "<string>",
+                  "description": "The postal or ZIP code for your corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for your corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressLine2",
+                  "value": "<string>",
+                  "description": "The second line of your billing address (suite, apartment, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressState",
+                  "value": "<string>",
+                  "description": "The state or province for your billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressPostalCode",
+                  "value": "<string>",
+                  "description": "The postal or ZIP code for your billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for your billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressLine1",
+                  "value": "<string>",
+                  "description": "The first line of your shipping address. When updating shipping address fields, all five sub-fields (Line1, City, State, PostalCode, Country) must be supplied together."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressLine2",
+                  "value": "<string>",
+                  "description": "The second line of your shipping address (suite, apartment, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressCity",
+                  "value": "<string>",
+                  "description": "The city for your shipping address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressState",
+                  "value": "<string>",
+                  "description": "The state or province for your shipping address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressPostalCode",
+                  "value": "<string>",
+                  "description": "The postal or ZIP code for your shipping address."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingAddressCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for your shipping address."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecondaryPhoneNumber",
+                  "value": "<string>",
+                  "description": "Your secondary contact phone number. Must be supplied together with SecondaryPhoneNumberCountry."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecondaryPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for your secondary phone number. Required if SecondaryPhoneNumber is provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactName",
+                  "value": "<string>",
+                  "description": "Name of the financial contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactEmail",
+                  "value": "<string>",
+                  "description": "Email address of the financial contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactWorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "Work phone number of the financial contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactWorkPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the financial contact's work phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactCellPhoneNumber",
+                  "value": "<string>",
+                  "description": "Cell phone number of the financial contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "FinancialContactCellPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the financial contact's cell phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactName",
+                  "value": "<string>",
+                  "description": "Name of the technical contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactEmail",
+                  "value": "<string>",
+                  "description": "Email address of the technical contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactWorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "Work phone number of the technical contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactWorkPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the technical contact's work phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactCellPhoneNumber",
+                  "value": "<string>",
+                  "description": "Cell phone number of the technical contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "TechnicalContactCellPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the technical contact's cell phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactName",
+                  "value": "<string>",
+                  "description": "Name of the commercial contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactEmail",
+                  "value": "<string>",
+                  "description": "Email address of the commercial contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactWorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "Work phone number of the commercial contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactWorkPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's work phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactCellPhoneNumber",
+                  "value": "<string>",
+                  "description": "Cell phone number of the commercial contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "CommercialContactCellPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's cell phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactName",
+                  "value": "<string>",
+                  "description": "Name of the security contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactEmail",
+                  "value": "<string>",
+                  "description": "Email address of the security contact for your account."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactWorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "Work phone number of the security contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactWorkPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the security contact's work phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactCellPhoneNumber",
+                  "value": "<string>",
+                  "description": "Cell phone number of the security contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecurityContactCellPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code for the security contact's cell phone."
+                },
+                {
+                  "disabled": false,
+                  "key": "EinSsnForeignTaxId",
+                  "value": "<string>",
+                  "description": "Your Employer Identification Number (EIN), Social Security Number (SSN), or foreign tax ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "MinimumContactRating",
+                  "value": "<string>",
+                  "description": "The minimum acceptable rating used when contacting partners. Numeric string."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPromotionalMethod",
+                  "value": "<string>",
+                  "description": "Your primary method of promoting brand campaigns (e.g., SOCIAL_INFLUENCER, CONTENT, COUPON)."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromotionalMethods",
+                  "value": "<string>",
+                  "description": "Comma-separated list of promotional methods you use (e.g., SOCIAL_INFLUENCER, CONTENT)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9f54e052-3e88-402d-b807-7d41b8499400",
+              "name": "Company information updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Comma-separated tags describing your content categories and interests, with no spaces (e.g., travel,lifestyle,fitness).",
+                        "type": "text/plain"
+                      },
+                      "key": "ContentInterests",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A bio or description of your content and services, visible to brands on your profile.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your profile logo or photo as a Base64-encoded image string.",
+                        "type": "text/plain"
+                      },
+                      "key": "LogoImage",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The display name for your partner account.",
+                        "type": "text/plain"
+                      },
+                      "key": "CompanyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The URL of your website or primary online presence.",
+                        "type": "text/plain"
+                      },
+                      "key": "Website",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your primary contact phone number.",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for your primary phone number. Required if PrimaryPhoneNumber is provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The legal organization type for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrganizationType",
+                      "value": "GOVERNMENT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your date of birth in ISO 8601 format.",
+                        "type": "text/plain"
+                      },
+                      "key": "DateOfBirth",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your highest level of education.",
+                        "type": "text/plain"
+                      },
+                      "key": "Education",
+                      "value": "None"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your ethnicity.",
+                        "type": "text/plain"
+                      },
+                      "key": "Ethnicity",
+                      "value": "South_Asian"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your gender identity.",
+                        "type": "text/plain"
+                      },
+                      "key": "Gender",
+                      "value": "Genderqueer"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your annual household income bracket.",
+                        "type": "text/plain"
+                      },
+                      "key": "HouseholdIncome",
+                      "value": "None"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your parental status.",
+                        "type": "text/plain"
+                      },
+                      "key": "ParentalStatus",
+                      "value": "Mom"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your preferred pronouns.",
+                        "type": "text/plain"
+                      },
+                      "key": "Pronouns",
+                      "value": "None"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your relationship status.",
+                        "type": "text/plain"
+                      },
+                      "key": "RelationshipStatus",
+                      "value": "Married"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The first line of your corporate address (street number and name).",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressLine1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The city for your corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressCity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The first line of your billing address (street number and name).",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressLine1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The city for your billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressCity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The second line of your corporate address (suite, apartment, etc.).",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressLine2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The state or province for your corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressState",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The postal or ZIP code for your corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressPostalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for your corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The second line of your billing address (suite, apartment, etc.).",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressLine2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The state or province for your billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressState",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The postal or ZIP code for your billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressPostalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for your billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The first line of your shipping address. When updating shipping address fields, all five sub-fields (Line1, City, State, PostalCode, Country) must be supplied together.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressLine1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The second line of your shipping address (suite, apartment, etc.).",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressLine2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The city for your shipping address.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressCity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The state or province for your shipping address.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressState",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The postal or ZIP code for your shipping address.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressPostalCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for your shipping address.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingAddressCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your secondary contact phone number. Must be supplied together with SecondaryPhoneNumberCountry.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecondaryPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for your secondary phone number. Required if SecondaryPhoneNumber is provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecondaryPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the financial contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the financial contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Work phone number of the financial contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactWorkPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the financial contact's work phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactWorkPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cell phone number of the financial contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactCellPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the financial contact's cell phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "FinancialContactCellPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the technical contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the technical contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Work phone number of the technical contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactWorkPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the technical contact's work phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactWorkPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cell phone number of the technical contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactCellPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the technical contact's cell phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "TechnicalContactCellPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the commercial contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the commercial contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Work phone number of the commercial contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactWorkPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's work phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactWorkPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cell phone number of the commercial contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactCellPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's cell phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "CommercialContactCellPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the security contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the security contact for your account.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Work phone number of the security contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactWorkPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the security contact's work phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactWorkPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cell phone number of the security contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactCellPhoneNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code for the security contact's cell phone.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecurityContactCellPhoneNumberCountry",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your Employer Identification Number (EIN), Social Security Number (SSN), or foreign tax ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "EinSsnForeignTaxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The minimum acceptable rating used when contacting partners. Numeric string.",
+                        "type": "text/plain"
+                      },
+                      "key": "MinimumContactRating",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your primary method of promoting brand campaigns (e.g., SOCIAL_INFLUENCER, CONTENT, COUPON).",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPromotionalMethod",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of promotional methods you use (e.g., SOCIAL_INFLUENCER, CONTENT).",
+                        "type": "text/plain"
+                      },
+                      "key": "PromotionalMethods",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/CompanyInformation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "524ecb95-8f94-4af2-8d17-5a31fde21b38",
+    "name": "Company Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve or update metadata about your partner account, including your profile, contact details, addresses, and tax information.\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

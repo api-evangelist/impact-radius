@@ -1,0 +1,500 @@
+{
+  "item": [
+    {
+      "id": "f770e157-823e-4729-97d3-d355d7cbd9a4",
+      "name": "Programs",
+      "description": {
+        "content": "Endpoints for listing, retrieving, and fetching logos for the brand programs you've joined.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d81358f5-2ee1-43a2-90b2-2a26179125c4",
+          "name": "List all joined programs",
+          "request": {
+            "name": "List all joined programs",
+            "description": {
+              "content": "Returns the list of programs you have signed up for.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "InsertionOrderStatus",
+                  "value": "<string>",
+                  "description": "Filter the result to programs whose contract has the specified status."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5551f000-8602-4a9b-845b-d5f7b9eba190",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "InsertionOrderStatus",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Campaigns\": [\n    {\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"AdvertiserUrl\": \"https://www.acmecorporation.io\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CampaignUrl\": \"http://www.wayne.limited\",\n      \"CampaignDescription\": \"Wayne Enterprises delivers innovative automotive tech and premium sports equipment.\",\n      \"ShippingRegions\": [\n        \"SOUTHAFRICA\",\n        \"UK\",\n        \"US\"\n      ],\n      \"CampaignLogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Logo\",\n      \"PublicTermsUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms\",\n      \"ContractStatus\": \"Active\",\n      \"ContractUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active\",\n      \"TrackingLink\": \"https://example.sjv.io/c/1924609/650971/10306\",\n      \"HasStandDownPolicy\": \"true\",\n      \"AllowsDeeplinking\": \"true\",\n      \"DeeplinkDomains\": [\n        \"impact.com\",\n        \"*.impact.com\"\n      ],\n      \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306\"\n    },\n    {\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"AdvertiserUrl\": \"https://www.acmecorporation.io\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CampaignUrl\": \"http://www.wayne.limited\",\n      \"CampaignDescription\": \"Wayne Enterprises delivers innovative automotive tech and premium sports equipment.\",\n      \"ShippingRegions\": [\n        \"SOUTHAFRICA\",\n        \"UK\",\n        \"US\"\n      ],\n      \"CampaignLogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Logo\",\n      \"PublicTermsUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms\",\n      \"ContractStatus\": \"Active\",\n      \"ContractUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active\",\n      \"TrackingLink\": \"https://example.sjv.io/c/1924609/650971/10306\",\n      \"HasStandDownPolicy\": \"true\",\n      \"AllowsDeeplinking\": \"true\",\n      \"DeeplinkDomains\": [\n        \"impact.com\",\n        \"*.impact.com\"\n      ],\n      \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50c16903-851a-4bfe-bef2-21733d228e80",
+          "name": "Retrieve a program",
+          "request": {
+            "name": "Retrieve a program",
+            "description": {
+              "content": "Returns the details of a single program you've joined.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CampaignId",
+                  "description": "(Required) Unique identifier for the program."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67cb9965-e8fa-46ce-adec-855bdfb98c73",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AdvertiserId\": \"1804207\",\n  \"AdvertiserName\": \"Acme Corporation\",\n  \"AdvertiserUrl\": \"https://www.acmecorporation.io\",\n  \"CampaignId\": \"10306\",\n  \"CampaignName\": \"Wayne Enterprises\",\n  \"CampaignUrl\": \"http://www.wayne.limited\",\n  \"CampaignDescription\": \"Wayne Enterprises delivers innovative automotive tech and premium sports equipment.\",\n  \"ShippingRegions\": [\n    \"SOUTHAFRICA\",\n    \"UK\",\n    \"US\"\n  ],\n  \"CampaignLogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Logo\",\n  \"PublicTermsUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms\",\n  \"ContractStatus\": \"Active\",\n  \"ContractUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active\",\n  \"TrackingLink\": \"https://example.sjv.io/c/1924609/650971/10306\",\n  \"HasStandDownPolicy\": \"true\",\n  \"AllowsDeeplinking\": \"true\",\n  \"DeeplinkDomains\": [\n    \"impact.com\",\n    \"*.impact.com\"\n  ],\n  \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "288e6623-068f-4931-8819-733a4e862f58",
+              "name": "No program exists with the supplied CampaignId, or you haven't joined it.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a876f133-02ac-4b52-b96b-fc1c77530245",
+          "name": "Retrieve program logo",
+          "request": {
+            "name": "Retrieve program logo",
+            "description": {
+              "content": "Returns the program's logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Logo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CampaignId",
+                  "description": "(Required) Unique identifier for the program."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "image/gif"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "722f4f80-894c-4c3e-846c-cc16e006fce3",
+              "name": "Binary data of the requested logo.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/gif"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "image/gif"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "505501aa-979d-4396-a1af-3bd1705686ad",
+              "name": "No logo exists for this program.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6253f00e-8026-46b3-a023-5f2f2a102f07",
+    "name": "Partner Programs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Programs (formerly known as Campaigns) are the brand partnerships that drive your earnings on impact.com. When a brand approves your application, you get a Program — a configured relationship with payout terms, tracking links, ad creatives, and a catalog of products you can promote.\n\nNote that the URL path uses `/Campaigns` even though the concept is now called \"Programs\" — this is preserved for backwards compatibility.\n\nUse this API to:\n\n1. **List your programs** to discover which brands you partner with.\n2. **Retrieve a program** for full details including tracking links, deep-linking permissions, and contract status.\n3. **Retrieve the program logo** for display in your storefront or content.\n\nEach program references your **Contract** (see the Partner Contracts API) and provides the **TrackingLink** used to drive attributed traffic.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

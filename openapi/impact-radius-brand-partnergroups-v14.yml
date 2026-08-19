@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Partner Groups
+  description: API for managing Media Partner Groups, which are private, custom groups used to organize and label partners within your account.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/MediaPartnerGroups:
+    get:
+      summary: List All Partner Groups
+      description: Returns a list of all partner groups for a specific campaign.
+      operationId: listPartnerGroups
+      tags:
+      - Partner Groups
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign to retrieve partner groups from.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A paginated list of partner group objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Groups:
+                    type: array
+                    description: The list of partner group objects.
+                    items:
+                      $ref: '#/components/schemas/PartnerGroup'
+    post:
+      summary: Create a Partner Group
+      description: Creates a new partner group and optionally adds partners to it.
+      operationId: createPartnerGroup
+      tags:
+      - Partner Groups
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign where the group will be created.
+        schema:
+          type: integer
+      requestBody:
+        description: The details for the new partner group.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - Name
+              properties:
+                Name:
+                  type: string
+                  description: The name for the new partner group.
+                  example: Acme Top Partners
+                MediaPartners:
+                  type: string
+                  description: A comma-separated list of MediaPartnerId values to add to the group.
+                  example: 2552842,2552843
+      responses:
+        '200':
+          description: The group was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/MediaPartnerGroups/{PartnerGroupId}:
+    get:
+      summary: Get Partner Group Details
+      description: Retrieves the details of a single partner group, including a list of its member partners.
+      operationId: getPartnerGroupById
+      tags:
+      - Partner Groups
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign the group belongs to.
+        schema:
+          type: integer
+      - name: PartnerGroupId
+        in: path
+        required: true
+        description: The unique identifier for the partner group.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single partner group object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerGroup'
+    put:
+      summary: Update a Partner Group
+      description: Updates a partner group by renaming it, adding partners, or removing partners.
+      operationId: updatePartnerGroup
+      tags:
+      - Partner Groups
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign the group belongs to.
+        schema:
+          type: integer
+      - name: PartnerGroupId
+        in: path
+        required: true
+        description: The unique identifier for the partner group to update.
+        schema:
+          type: integer
+      requestBody:
+        description: The updates to apply to the partner group.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                Name:
+                  type: string
+                  description: The new name for the partner group.
+                  example: Acme Top Partners
+                MediaPartnersAdd:
+                  type: string
+                  description: A comma-separated list of MediaPartnerId values to add.
+                  example: '2552843'
+                MediaPartnersRemove:
+                  type: string
+                  description: A comma-separated list of MediaPartnerId values to remove.
+                  example: '2552842'
+      responses:
+        '200':
+          description: The group was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+    delete:
+      summary: Delete a Partner Group
+      description: Deletes a partner group. Partners will no longer be associated with the deleted group.
+      operationId: deletePartnerGroup
+      tags:
+      - Partner Groups
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign the group belongs to.
+        schema:
+          type: integer
+      - name: PartnerGroupId
+        in: path
+        required: true
+        description: The unique identifier for the partner group to delete.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The group was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the partner group was deleted.
+                    example: DELETED
+components:
+  schemas:
+    PartnerGroup:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the partner group.
+          example: '99999'
+        Name:
+          type: string
+          description: The partner group's name. Only visible to you and other account members, not visible to partners.
+          example: Acme Top Partners
+        MediaPartners:
+          type: array
+          description: The partners belonging to this group.
+          items:
+            type: object
+            properties:
+              PartnerId:
+                type: string
+                description: The unique identifier of the partner.
+                example: '2552842'
+              PartnerName:
+                type: string
+                description: The display name of the partner.
+                example: Wile E. Coyote Facebook
+              PartnerUri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the partner in the impact.com API.
+                example: /Advertisers/<AccountSID>/MediaPartners/2552842
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this partner group in the impact.com API.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/MediaPartnerGroups/99999
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected partner group.
+          example: /Advertisers/<AccountSID>/Campaigns/8882/MediaPartnerGroups/12345

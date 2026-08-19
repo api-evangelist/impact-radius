@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Promo Codes API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Promo Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/PromoCodes",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "SearchString",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search across all promo code fields."
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more program IDs."
+              },
+              {
+                "name": "AdvertiserId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more advertiser (brand) IDs."
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more deal IDs."
+              },
+              {
+                "name": "CreditRule",
+                "value": "",
+                "type": "query",
+                "description": "Filter by credit policy."
+              },
+              {
+                "name": "MatchMode",
+                "value": "",
+                "type": "query",
+                "description": "Filter by code matching type."
+              },
+              {
+                "name": "CreatedDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Return only codes created on or after this date/time (ISO 8601)."
+              },
+              {
+                "name": "CreatedDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return only codes created on or before this date/time (ISO 8601)."
+              },
+              {
+                "name": "StartDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Return only promo codes whose `StartDate` is on or after this date/time (ISO 8601)."
+              },
+              {
+                "name": "StartDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return only promo codes whose `StartDate` is on or before this date/time (ISO 8601)."
+              },
+              {
+                "name": "EndDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Return only promo codes whose `EndDate` is on or after this date/time (ISO 8601)."
+              },
+              {
+                "name": "EndDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return only promo codes whose `EndDate` is on or before this date/time (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns the promo codes available to your partner account. Supports filtering by program, advertiser, deal, credit rule, match mode, and creation date range."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Promo Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/PromoCodes/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier assigned to the promo code."
+              }
+            ]
+          },
+          "docs": "Returns the full details of a single promo code by its unique Id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

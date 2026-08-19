@@ -1,0 +1,373 @@
+openapi: 3.1.0
+info:
+  title: Partner Deals API
+  description: 'A deal represents a promotional offer created by a brand for their
+    program. Each deal has a type (such as a general sale, BOGO, free shipping, rebate,
+    or gift with purchase) and contains detailed discount rules, scope, and optional
+    product or category associations. Deals are accessed as a sub-resource of a campaign.
+
+    '
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+tags:
+- name: Deals
+  description: Endpoints for retrieving partner deal and promotional offer details.
+paths:
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Deals:
+    get:
+      operationId: listDeals
+      tags:
+      - Deals
+      summary: List Deals
+      description: Returns a list of all deals associated with a specific campaign.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the campaign whose deals are being retrieved.
+      - name: Scope
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+        description: Filters deals by the scope of products they apply to.
+      - name: State
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+        description: Filters deals by their current state.
+      - name: Type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BOGO
+          - FREE_SHIPPING
+          - GENERAL_SALE
+          - GIFT_WITH_PURCHASE
+          - REBATE
+        description: Filters deals by their promotional type.
+      responses:
+        '200':
+          description: A list of deal objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Deals:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deal'
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Deals/{Id}:
+    get:
+      operationId: retrieveDeal
+      tags:
+      - Deals
+      summary: Retrieve a Deal
+      description: Retrieves the full details of an existing deal using its unique
+        ID.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the campaign whose deals are being retrieved.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the deal.
+      responses:
+        '200':
+          description: The deal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deal'
+components:
+  schemas:
+    Deal:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the deal.
+          example: '92812'
+        Name:
+          type: string
+          description: Display name of the deal.
+          example: Gotham Supply Crate
+        Description:
+          type: string
+          description: A short description of the deal shown to partners.
+          example: Every mission needs a little extra. Unlock a mystery item with
+            your order.
+        Public:
+          type: boolean
+          description: Whether the deal is publicly visible to all partners. If false,
+            the deal is exclusive to specific partners.
+          example: true
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign this deal belongs to.
+          example: '10306'
+        State:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          description: The current state of the deal.
+          example: ACTIVE
+        Type:
+          type: string
+          enum:
+          - BOGO
+          - FREE_SHIPPING
+          - GENERAL_SALE
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          description: The type of promotional offer.
+          example: GENERAL_SALE
+        Scope:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+          description: The scope of products the deal applies to. Not returned for
+            BOGO deals.
+          example: ENTIRE_STORE
+        Products:
+          type: array
+          description: Products associated with the deal. Populated when Scope is
+            PRODUCT.
+          items:
+            $ref: '#/components/schemas/DealProduct'
+        Categories:
+          type: array
+          description: Product categories associated with the deal. Populated when
+            Scope is CATEGORY.
+          items:
+            type: string
+          example: []
+        DiscountType:
+          type: string
+          enum:
+          - FIXED
+          - PERCENT
+          - PERCENT_RANGE
+          - PERCENT_MAXIMUM
+          description: The method used to calculate the discount amount.
+          example: PERCENT
+        DiscountAmount:
+          type: string
+          description: The fixed discount amount. Populated when DiscountType is
+            FIXED.
+          example: ''
+        DiscountCurrency:
+          type: string
+          description: ISO 4217 currency code for the fixed discount amount.
+          example: ''
+        DiscountPercent:
+          type: string
+          description: The percentage discount. Populated when DiscountType is PERCENT.
+          example: '99'
+        DiscountMaximumPercent:
+          type: string
+          description: The maximum percentage discount. Populated when DiscountType
+            is PERCENT_MAXIMUM.
+          example: ''
+        DiscountPercentRangeStart:
+          type: string
+          description: The lower bound of a percentage discount range. Populated
+            when DiscountType is PERCENT_RANGE.
+          example: ''
+        DiscountPercentRangeEnd:
+          type: string
+          description: The upper bound of a percentage discount range. Populated
+            when DiscountType is PERCENT_RANGE.
+          example: ''
+        Gift:
+          type: string
+          description: Description of the gift item. Populated for GIFT_WITH_PURCHASE
+            deals.
+          example: ''
+        RebateAmount:
+          type: string
+          description: The rebate amount. Populated for REBATE deals.
+          example: ''
+        RebateCurrency:
+          type: string
+          description: ISO 4217 currency code for the rebate amount.
+          example: ''
+        DefaultPromoCode:
+          type: string
+          description: The default promo code associated with this deal, if any.
+          example: Percent Discount Deal Test
+        MinimumPurchaseAmount:
+          type: string
+          description: The minimum purchase amount required to qualify for the deal.
+          example: ''
+        MinimumPurchaseAmountCurrency:
+          type: string
+          description: ISO 4217 currency code for the minimum purchase amount.
+          example: ''
+        MaximumSavingsAmount:
+          type: string
+          description: The maximum savings a customer can receive from this deal.
+          example: ''
+        MaximumSavingsCurrency:
+          type: string
+          description: ISO 4217 currency code for the maximum savings amount.
+          example: ''
+        BogoBuyQuantity:
+          type: string
+          description: The quantity the customer must buy to trigger the BOGO offer.
+          example: '0'
+        BogoBuyScope:
+          type: string
+          description: The scope of products the customer must buy to qualify for
+            the BOGO offer (e.g., PRODUCT, CATEGORY, ENTIRE_STORE).
+          example: ''
+        BogoBuyName:
+          type: string
+          description: Display name of the product or category the customer must
+            buy.
+          example: ''
+        BogoBuyImageUrl:
+          type: string
+          description: URL of the image for the buy-side product in a BOGO offer.
+          example: ''
+        BogoGetQuantity:
+          type: string
+          description: The quantity of the free or discounted product the customer
+            receives in a BOGO offer.
+          example: '0'
+        BogoGetScope:
+          type: string
+          description: The scope of products the customer receives in a BOGO offer
+            (e.g., PRODUCT, CATEGORY, ENTIRE_STORE).
+          example: ''
+        BogoGetDiscountType:
+          type: string
+          enum:
+          - FREE
+          - AMOUNT
+          - PERCENT
+          description: The type of discount applied to the received product in a
+            BOGO offer.
+          example: ''
+        BogoGetName:
+          type: string
+          description: Display name of the product or category the customer receives
+            in a BOGO offer.
+          example: ''
+        BogoGetImageUrl:
+          type: string
+          description: URL of the image for the get-side product in a BOGO offer.
+          example: ''
+        BogoGetDiscountAmount:
+          type: string
+          description: The discount amount applied to the received product. Populated
+            when BogoGetDiscountType is AMOUNT.
+          example: ''
+        BogoGetDiscountCurrency:
+          type: string
+          description: ISO 4217 currency code for the BogoGetDiscountAmount.
+          example: ''
+        BogoGetDiscountPercent:
+          type: string
+          description: The discount percentage applied to the received product. Populated
+            when BogoGetDiscountType is PERCENT.
+          example: ''
+        PurchaseLimitQuantity:
+          type: string
+          description: The maximum number of times a customer can use this deal.
+            Zero means unlimited.
+          example: '0'
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the deal becomes active (ISO 8601). Empty
+            if the deal has no start date.
+          example: ''
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the deal expires (ISO 8601). Empty if the
+            deal has no end date.
+          example: ''
+        DateCreated:
+          type: string
+          format: date-time
+          description: Date and time the deal was created (ISO 8601).
+          example: '2020-12-11T11:08:42-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the deal was last updated (ISO 8601).
+          example: '2025-12-10T16:04:28-08:00'
+        Uri:
+          type: string
+          description: Unique reference to the deal object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812
+    DealProduct:
+      type: object
+      description: A product associated with a deal when Scope is PRODUCT.
+      properties:
+        ProductName:
+          type: string
+          description: Display name of the product.
+          example: Gotham Grapnel Kit
+        ProductImageUrl:
+          type: string
+          description: URL of the product image.
+          example: /display-deal-productimage/92805.gif
+        ProductBeforePriceAmount:
+          type: string
+          description: The original price of the product before the deal discount.
+          example: '50.00'
+        ProductBeforePriceCurrency:
+          type: string
+          description: ISO 4217 currency code for the before-deal price.
+          example: USD
+        ProductAfterPriceAmount:
+          type: string
+          description: The discounted price of the product after the deal is applied.
+          example: '49.00'
+        ProductAfterPriceCurrency:
+          type: string
+          description: ISO 4217 currency code for the after-deal price.
+          example: USD

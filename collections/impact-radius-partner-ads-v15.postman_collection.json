@@ -1,0 +1,770 @@
+{
+  "item": [
+    {
+      "id": "dbbce540-5d56-4551-85de-494431cb3c06",
+      "name": "Ads",
+      "description": {
+        "content": "Endpoints for retrieving ads and their associated code or tracking links.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd4b1005-ce97-45fc-85b2-c390d35c7ec0",
+          "name": "List Ads",
+          "request": {
+            "name": "List Ads",
+            "description": {
+              "content": "Returns a list of all ads available to you.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filters ads by type."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filters ads by the campaign (brand program) they belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<integer>",
+                  "description": "Filters ads by the deal associated with them."
+                },
+                {
+                  "disabled": false,
+                  "key": "MobileReady",
+                  "value": "<boolean>",
+                  "description": "Filters ads by whether they are optimized for mobile devices."
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters for ads updated on or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "UpdatedDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters for ads updated on or before this date."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b05756b5-6f73-477d-9f44-da736de17ec5",
+              "name": "A list of ad objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "DealId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MobileReady",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "UpdatedDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "UpdatedDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Ads\": [\n    {\n      \"Id\": \"3061348\",\n      \"Name\": \"Capsule Home Spring Promo\",\n      \"Description\": \"Spring promotion for the Capsule Home product line. Seasonal pricing on minimalist storage solutions.\",\n      \"CampaignId\": 8596,\n      \"CampaignName\": \"Capsule Corp\",\n      \"Type\": \"BANNER\",\n      \"TrackingLink\": \"https://capsulecorp.pxf.io/c/1924609/3061348/27154\",\n      \"LandingPageUrl\": \"https://www.capsulecorp.holdings/spring\",\n      \"AdvertiserId\": 937,\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"Code\": \"<a href=\\\"https://capsulecorp.pxf.io/c/1924609/3061348/27154\\\" target=\\\"_top\\\" id=\\\"3061348\\\"><img src=\\\"//a.impactradius-go.com/display-ad/27154-3061348\\\" border=\\\"0\\\" alt=\\\"\\\" width=\\\"674\\\" height=\\\"678\\\"/></a>\",\n      \"IFrameCode\": \"<iframe id=\\\"iframe_414\\\" src=\\\"//a.impactradius-go.com/gen-ad-code/1924609/3061348/27154/\\\" width=\\\"674\\\" height=\\\"678\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" marginheight=\\\"0\\\" marginwidth=\\\"0\\\"></iframe>\",\n      \"Width\": 5255,\n      \"Height\": 2083,\n      \"CreativeUrl\": \"//a.impactradius-go.com/display-ad/27154-3061348\",\n      \"Labels\": \"\",\n      \"AllowDeepLinking\": false,\n      \"MobileReady\": true,\n      \"Language\": \"ENGLISH\",\n      \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"EndDate\": \"2026-05-31T23:59:59-07:00\",\n      \"Season\": \"SPRING\",\n      \"TopSeller\": false,\n      \"SubjectLines\": \"\",\n      \"FromAddresses\": \"\",\n      \"UnsubscribeLink\": \"http://qIRVuhab.eyioHglJca1PdtCuTgeogB1HCC0iONe9eRG4urQXAk+7ETY2hl--bCRRt7n,ubJ..A7\",\n      \"DealId\": 7902,\n      \"DealName\": \"Capsule Home Spring Sale\",\n      \"DealDescription\": \"25% off all Capsule Home products for spring.\",\n      \"DealState\": \"ACTIVE\",\n      \"DealType\": \"GENERAL_SALE\",\n      \"DealScope\": \"ENTIRE_STORE\",\n      \"DealPublic\": false,\n      \"DealProducts\": [\n        {\n          \"ProductName\": \"Capsule Storage Box\",\n          \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n          \"ProductBeforePriceAmount\": 100,\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": 75,\n          \"ProductAfterPriceCurrency\": \"USD\"\n        },\n        {\n          \"ProductName\": \"Capsule Storage Box\",\n          \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n          \"ProductBeforePriceAmount\": 100,\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": 75,\n          \"ProductAfterPriceCurrency\": \"USD\"\n        }\n      ],\n      \"DealCategories\": \"\",\n      \"DiscountType\": \"PERCENT\",\n      \"DiscountAmount\": 293.23724378040095,\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": 25,\n      \"DiscountMaximumPercent\": 462.3866802747956,\n      \"DiscountPercentRangeStart\": 4372.5181436371,\n      \"DiscountPercentRangeEnd\": 1041.070228843003,\n      \"Gift\": \"\",\n      \"RebateAmount\": 527.9991002165718,\n      \"RebateCurrency\": \"\",\n      \"DealDefaultPromoCode\": \"SPRING25\",\n      \"MinimumPurchaseAmount\": 50,\n      \"MinimumPurchaseAmountCurrency\": \"USD\",\n      \"MaximumSavingsAmount\": 100,\n      \"MaximumSavingsCurrency\": \"USD\",\n      \"BogoBuyQuantity\": 1062,\n      \"BogoBuyScope\": \"CATEGORY\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"https://IatqnPQvhGggBPLviTFYkHDiHiNOi.sqwycL.sEP1,eHxve\",\n      \"BogoGetQuantity\": 1443,\n      \"BogoGetScope\": \"CATEGORY\",\n      \"BogoGetDiscountType\": \"PERCENT\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"https://AdjxQxJvpq.mvzbU6yWMwyT1B-NNZROOvf,\",\n      \"BogoGetDiscountAmount\": 9980.236379059495,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 5861.756360664905,\n      \"PurchaseLimitQuantity\": 8383,\n      \"DealStartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"DealEndDate\": \"2026-05-31T23:59:59-07:00\",\n      \"DealDateCreated\": \"1982-06-17T03:18:24.855Z\",\n      \"DealDateLastUpdated\": \"2024-05-09T09:40:14.873Z\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Ads/3061348\"\n    },\n    {\n      \"Id\": \"3061348\",\n      \"Name\": \"Capsule Home Spring Promo\",\n      \"Description\": \"Spring promotion for the Capsule Home product line. Seasonal pricing on minimalist storage solutions.\",\n      \"CampaignId\": 6087,\n      \"CampaignName\": \"Capsule Corp\",\n      \"Type\": \"BANNER\",\n      \"TrackingLink\": \"https://capsulecorp.pxf.io/c/1924609/3061348/27154\",\n      \"LandingPageUrl\": \"https://www.capsulecorp.holdings/spring\",\n      \"AdvertiserId\": 1667,\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"Code\": \"<a href=\\\"https://capsulecorp.pxf.io/c/1924609/3061348/27154\\\" target=\\\"_top\\\" id=\\\"3061348\\\"><img src=\\\"//a.impactradius-go.com/display-ad/27154-3061348\\\" border=\\\"0\\\" alt=\\\"\\\" width=\\\"674\\\" height=\\\"678\\\"/></a>\",\n      \"IFrameCode\": \"<iframe id=\\\"iframe_414\\\" src=\\\"//a.impactradius-go.com/gen-ad-code/1924609/3061348/27154/\\\" width=\\\"674\\\" height=\\\"678\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" marginheight=\\\"0\\\" marginwidth=\\\"0\\\"></iframe>\",\n      \"Width\": 8631,\n      \"Height\": 8333,\n      \"CreativeUrl\": \"//a.impactradius-go.com/display-ad/27154-3061348\",\n      \"Labels\": \"\",\n      \"AllowDeepLinking\": false,\n      \"MobileReady\": false,\n      \"Language\": \"ENGLISH\",\n      \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"EndDate\": \"2026-05-31T23:59:59-07:00\",\n      \"Season\": \"SPRING\",\n      \"TopSeller\": true,\n      \"SubjectLines\": \"\",\n      \"FromAddresses\": \"\",\n      \"UnsubscribeLink\": \"https://ksYqEv.kxpcI-FbmpW6vs3Hr+AFF.-mDDHyQGe9oU5C19r8NgBKY07HKEA4k8.hZ\",\n      \"DealId\": 7834,\n      \"DealName\": \"Capsule Home Spring Sale\",\n      \"DealDescription\": \"25% off all Capsule Home products for spring.\",\n      \"DealState\": \"ACTIVE\",\n      \"DealType\": \"GENERAL_SALE\",\n      \"DealScope\": \"ENTIRE_STORE\",\n      \"DealPublic\": true,\n      \"DealProducts\": [\n        {\n          \"ProductName\": \"Capsule Storage Box\",\n          \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n          \"ProductBeforePriceAmount\": 100,\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": 75,\n          \"ProductAfterPriceCurrency\": \"USD\"\n        },\n        {\n          \"ProductName\": \"Capsule Storage Box\",\n          \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n          \"ProductBeforePriceAmount\": 100,\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": 75,\n          \"ProductAfterPriceCurrency\": \"USD\"\n        }\n      ],\n      \"DealCategories\": \"\",\n      \"DiscountType\": \"PERCENT\",\n      \"DiscountAmount\": 482.50761908281146,\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": 25,\n      \"DiscountMaximumPercent\": 8158.0815000420835,\n      \"DiscountPercentRangeStart\": 4938.989603110632,\n      \"DiscountPercentRangeEnd\": 3121.4968385083907,\n      \"Gift\": \"\",\n      \"RebateAmount\": 5228.889965901121,\n      \"RebateCurrency\": \"\",\n      \"DealDefaultPromoCode\": \"SPRING25\",\n      \"MinimumPurchaseAmount\": 50,\n      \"MinimumPurchaseAmountCurrency\": \"USD\",\n      \"MaximumSavingsAmount\": 100,\n      \"MaximumSavingsCurrency\": \"USD\",\n      \"BogoBuyQuantity\": 2449,\n      \"BogoBuyScope\": \"PRODUCT\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"https://yJWmkhvroLOvsJQDEJNWms.cwbjj.YLfMBnuADUWDQzHHxhArloYi\",\n      \"BogoGetQuantity\": 7964,\n      \"BogoGetScope\": \"PRODUCT\",\n      \"BogoGetDiscountType\": \"AMOUNT\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"http://OcBvoluEyYxfF.glnY87mWADANCFZOIVFHzopjG6O6jYHth3lJKt\",\n      \"BogoGetDiscountAmount\": 3527.2989504387233,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 9276.90944977054,\n      \"PurchaseLimitQuantity\": 1432,\n      \"DealStartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"DealEndDate\": \"2026-05-31T23:59:59-07:00\",\n      \"DealDateCreated\": \"1988-05-24T21:09:17.869Z\",\n      \"DealDateLastUpdated\": \"1949-04-10T07:31:40.752Z\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Ads/3061348\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e04059ca-d319-4310-9fa4-04e713864a9a",
+          "name": "Retrieve an Ad",
+          "request": {
+            "name": "Retrieve an Ad",
+            "description": {
+              "content": "Retrieves the details of an existing ad using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Ads",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the ad."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4bea10c-5792-4e17-aefb-d45658998e69",
+              "name": "The ad object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Ads",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the ad."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"3061348\",\n  \"Name\": \"Capsule Home Spring Promo\",\n  \"Description\": \"Spring promotion for the Capsule Home product line. Seasonal pricing on minimalist storage solutions.\",\n  \"CampaignId\": 8493,\n  \"CampaignName\": \"Capsule Corp\",\n  \"Type\": \"BANNER\",\n  \"TrackingLink\": \"https://capsulecorp.pxf.io/c/1924609/3061348/27154\",\n  \"LandingPageUrl\": \"https://www.capsulecorp.holdings/spring\",\n  \"AdvertiserId\": 2810,\n  \"AdvertiserName\": \"Acme Corporation\",\n  \"Code\": \"<a href=\\\"https://capsulecorp.pxf.io/c/1924609/3061348/27154\\\" target=\\\"_top\\\" id=\\\"3061348\\\"><img src=\\\"//a.impactradius-go.com/display-ad/27154-3061348\\\" border=\\\"0\\\" alt=\\\"\\\" width=\\\"674\\\" height=\\\"678\\\"/></a>\",\n  \"IFrameCode\": \"<iframe id=\\\"iframe_414\\\" src=\\\"//a.impactradius-go.com/gen-ad-code/1924609/3061348/27154/\\\" width=\\\"674\\\" height=\\\"678\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" marginheight=\\\"0\\\" marginwidth=\\\"0\\\"></iframe>\",\n  \"Width\": 220,\n  \"Height\": 5103,\n  \"CreativeUrl\": \"//a.impactradius-go.com/display-ad/27154-3061348\",\n  \"Labels\": \"\",\n  \"AllowDeepLinking\": true,\n  \"MobileReady\": false,\n  \"Language\": \"ENGLISH\",\n  \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n  \"EndDate\": \"2026-05-31T23:59:59-07:00\",\n  \"Season\": \"SPRING\",\n  \"TopSeller\": false,\n  \"SubjectLines\": \"\",\n  \"FromAddresses\": \"\",\n  \"UnsubscribeLink\": \"https://dGqbXuSaAngrAKhWdFGlHDUL.lxfAo9GW6-0MiS7ayAZ6rMw+kHbIShNOXWSg0+l8wxjOWEC1kdO4SYAwKLzaHCLdtvLxN8Hi\",\n  \"DealId\": 4974,\n  \"DealName\": \"Capsule Home Spring Sale\",\n  \"DealDescription\": \"25% off all Capsule Home products for spring.\",\n  \"DealState\": \"ACTIVE\",\n  \"DealType\": \"GENERAL_SALE\",\n  \"DealScope\": \"ENTIRE_STORE\",\n  \"DealPublic\": true,\n  \"DealProducts\": [\n    {\n      \"ProductName\": \"Capsule Storage Box\",\n      \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n      \"ProductBeforePriceAmount\": 100,\n      \"ProductBeforePriceCurrency\": \"USD\",\n      \"ProductAfterPriceAmount\": 75,\n      \"ProductAfterPriceCurrency\": \"USD\"\n    },\n    {\n      \"ProductName\": \"Capsule Storage Box\",\n      \"ProductImageURL\": \"https://www.capsulecorp.holdings/products/storage.jpg\",\n      \"ProductBeforePriceAmount\": 100,\n      \"ProductBeforePriceCurrency\": \"USD\",\n      \"ProductAfterPriceAmount\": 75,\n      \"ProductAfterPriceCurrency\": \"USD\"\n    }\n  ],\n  \"DealCategories\": \"\",\n  \"DiscountType\": \"PERCENT\",\n  \"DiscountAmount\": 2041.0122533229812,\n  \"DiscountCurrency\": \"\",\n  \"DiscountPercent\": 25,\n  \"DiscountMaximumPercent\": 4217.5182798021,\n  \"DiscountPercentRangeStart\": 6529.168358083073,\n  \"DiscountPercentRangeEnd\": 4812.299750142995,\n  \"Gift\": \"\",\n  \"RebateAmount\": 8982.97200427389,\n  \"RebateCurrency\": \"\",\n  \"DealDefaultPromoCode\": \"SPRING25\",\n  \"MinimumPurchaseAmount\": 50,\n  \"MinimumPurchaseAmountCurrency\": \"USD\",\n  \"MaximumSavingsAmount\": 100,\n  \"MaximumSavingsCurrency\": \"USD\",\n  \"BogoBuyQuantity\": 3229,\n  \"BogoBuyScope\": \"CATEGORY\",\n  \"BogoBuyName\": \"\",\n  \"BogoBuyImageUrl\": \"http://PfBDcrQhnVEHlUXRazP.rloytQAlRq2TBhfIJTiGKKp4yc7ukhSBU0vO9HYa-WdJ2WmRA16DGW,kE1onXLf9EFtm\",\n  \"BogoGetQuantity\": 445,\n  \"BogoGetScope\": \"CATEGORY\",\n  \"BogoGetDiscountType\": \"PERCENT\",\n  \"BogoGetName\": \"\",\n  \"BogoGetImageUrl\": \"https://HcNjGxdaCGoVy.uujGhJ3wsO,PqiNVluBkSnoOyu6-bzcpzdm610hWc,1A0FaGyWtauFHWbeLZ7\",\n  \"BogoGetDiscountAmount\": 816.9169890590333,\n  \"BogoGetDiscountCurrency\": \"\",\n  \"BogoGetDiscountPercent\": 5706.844878866718,\n  \"PurchaseLimitQuantity\": 5912,\n  \"DealStartDate\": \"2026-03-01T00:00:00-08:00\",\n  \"DealEndDate\": \"2026-05-31T23:59:59-07:00\",\n  \"DealDateCreated\": \"1963-03-16T02:10:31.984Z\",\n  \"DealDateLastUpdated\": \"2024-12-17T15:33:46.718Z\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Ads/3061348\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74c7250e-f972-4805-81ac-d33da6b690f5",
+          "name": "Retrieve an Ad's Code",
+          "request": {
+            "name": "Retrieve an Ad's Code",
+            "description": {
+              "content": "Retrieves the HTML code of an existing ad, with optional tracking parameters appended to the tracking link.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Ads",
+                ":Id",
+                "Code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subId1",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId1= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId2",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId2= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId3",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId3= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedId",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as sharedId= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "landingPage",
+                  "value": "<uri>",
+                  "description": "Overrides the ad's landing page URL if the ad allows deep linking. Must be URL encoded."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the ad."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b7f566e-0d60-46ae-ba62-b4cbf02138c2",
+              "name": "The ad's HTML code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Ads",
+                    ":Id",
+                    "Code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subId1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sharedId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "landingPage",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the ad."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Code\": \"<a href=\\\"https://example.com/c/1299679/515236/8800\\\" target=\\\"_top\\\" id=\\\"515236\\\"><img src=\\\"//a.impactradius-go.com/display-ad/8800-515236\\\" border=\\\"0\\\" alt=\\\"\\\" width=\\\"442\\\" height=\\\"114\\\"/></a>\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Ads/123456/Code\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e989da7-e183-4fd7-a5d5-12a4421eac83",
+          "name": "Retrieve an Ad's IFrame Code",
+          "request": {
+            "name": "Retrieve an Ad's IFrame Code",
+            "description": {
+              "content": "Retrieves the inline frame (iframe) code for an existing ad, with optional tracking parameters appended to the tracking link.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Ads",
+                ":Id",
+                "IFrameCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subId1",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId1= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId2",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId2= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId3",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId3= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedId",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as sharedId= to the tracking link. Must be URL encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "landingPage",
+                  "value": "<uri>",
+                  "description": "Overrides the ad's landing page URL if the ad allows deep linking. Must be URL encoded."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the ad."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62551a9b-475f-4586-a154-e3e0ddca6dee",
+              "name": "The ad's iframe code.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Ads",
+                    ":Id",
+                    "IFrameCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subId1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sharedId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "landingPage",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the ad."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IFrameCode\": \"<iframe id=\\\"$iradid\\\" src=\\\"//a.impactradius-go.com/gen-ad-code/1299679/515236/8800/\\\" width=\\\"442\\\" height=\\\"114\\\" scrolling=\\\"no\\\" frameborder=\\\"0\\\" marginheight=\\\"0\\\" marginwidth=\\\"0\\\"></iframe>\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Ads/123456/IFrameCode\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "354f872a-a73b-4ba0-a311-4461a75e3bbf",
+          "name": "Retrieve an Ad's Tracking Link",
+          "request": {
+            "name": "Retrieve an Ad's Tracking Link",
+            "description": {
+              "content": "Retrieves the tracking link for an existing ad, with optional tracking parameters appended.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Ads",
+                ":Id",
+                "TrackingLink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "subId1",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId1= to the tracking link."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId2",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId2= to the tracking link."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId3",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as subId3= to the tracking link."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedId",
+                  "value": "<string>",
+                  "description": "Appends the submitted value as sharedId= to the tracking link."
+                },
+                {
+                  "disabled": false,
+                  "key": "landingPage",
+                  "value": "<uri>",
+                  "description": "Overrides the ad's landing page URL if the ad allows deep linking."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the ad."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2dd9e3a5-7328-4c03-81c4-b5eea2e14209",
+              "name": "The ad's tracking link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Ads",
+                    ":Id",
+                    "TrackingLink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "subId1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sharedId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "landingPage",
+                      "value": "<uri>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the ad."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TrackingLink\": \"https://example.com/c/1299679/515236/8800\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Ads/123456/TrackingLink\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c57c0c18-70dd-422a-94ac-b0435c2cd779",
+    "name": "Partner Ads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Ads are the brand advertisements used to drive actions for a brand and earn payouts. Ads can be purely text (such as just a link), or can consist of some type of creative (e.g. a banner image, video, or audio) with an embedded impact.com tracking link. All ads have a tracking link unique to your partner account that will credit you with an action if a payable event occurs (such as a customer converting).\n\n\nContact Support:\n Name: impact.com Developer Support\n Email: support@impact.com",
+      "type": "text/plain"
+    }
+  }
+}

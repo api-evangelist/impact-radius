@@ -1,0 +1,982 @@
+{
+  "item": [
+    {
+      "id": "08668e20-9f9e-4f83-8b22-eb79b34d9fc9",
+      "name": "Partners",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24022818-a2c1-448a-992c-31753c6a284d",
+          "name": "List All Partners",
+          "request": {
+            "name": "List All Partners",
+            "description": {
+              "content": "Returns a list of all your partners, sorted by creation date. The list can be filtered by various parameters such as Campaign, Group, Country, and State.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "MediaPartners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Id",
+                  "value": "<string>",
+                  "description": "Filter by one or more specific partner IDs, provided as a comma-separated list."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filter to list only partners joined to the specified campaign (program)."
+                },
+                {
+                  "disabled": false,
+                  "key": "GroupId",
+                  "value": "<integer>",
+                  "description": "Filter to list only partners that are part of a specific partner group."
+                },
+                {
+                  "disabled": false,
+                  "key": "Country",
+                  "value": "<string>",
+                  "description": "Filter to list only partners from a specific country. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<dateTime>",
+                  "description": "Filter by partners whose DateLastUpdated occurs after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<dateTime>",
+                  "description": "Filter by partners whose DateLastUpdated occurs before this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filter by the state of the partner account."
+                },
+                {
+                  "disabled": false,
+                  "key": "RelationshipState",
+                  "value": "<string>",
+                  "description": "Filter by the partner's current relationship with your program. Possible values:\n- `ACTIVE` — The partner has an active relationship with you.\n- `INACTIVE` — The partner doesn't have a contractual relationship with you."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec29910e-9b24-45bf-9c76-ca0798ea9843",
+              "name": "A paginated list of partner objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "MediaPartners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "GroupId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Country",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RelationshipState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Partners\": [\n    {\n      \"Id\": \"2552842\",\n      \"Name\": \"Wile E. Coyote Facebook\",\n      \"Description\": \"Affiliate website partner.\",\n      \"Website\": \"https://www.example-partner.com\",\n      \"State\": \"EXPIRED\",\n      \"Address\": {\n        \"Country\": \"US\",\n        \"Address1\": \"123 Main St\",\n        \"Address2\": \"Suite 200\",\n        \"City\": \"Santa Barbara\",\n        \"State\": \"CA\",\n        \"PostalCode\": \"93101\"\n      },\n      \"Phone\": {\n        \"Country\": \"US\",\n        \"Number\": \"8051234567\"\n      },\n      \"Currency\": \"USD\",\n      \"Timezone\": \"America/Los_Angeles\",\n      \"IndirectTax\": {\n        \"Country\": \"US\",\n        \"Number\": \"12-3456789\"\n      },\n      \"PartnerType\": \"MARKETPLACE\",\n      \"PromotionalMethods\": [\n        {\n          \"Type\": \"WEBSITE\",\n          \"IsPrimary\": true\n        },\n        {\n          \"Type\": \"WEBSITE\",\n          \"IsPrimary\": true\n        }\n      ],\n      \"PromotionalCountries\": [\n        \"US\",\n        \"US\"\n      ],\n      \"Properties\": [\n        {\n          \"Id\": \"P-1\",\n          \"Name\": \"Acme Tennis Blog\",\n          \"Type\": \"WEBSITE\",\n          \"Platform\": \"WEB\",\n          \"Url\": \"https://blog.example-partner.com\"\n        },\n        {\n          \"Id\": \"P-1\",\n          \"Name\": \"Acme Tennis Blog\",\n          \"Type\": \"WEBSITE\",\n          \"Platform\": \"WEB\",\n          \"Url\": \"https://blog.example-partner.com\"\n        }\n      ],\n      \"PromotionalCategories\": [\n        \"Sports\",\n        \"Sports\"\n      ],\n      \"Programs\": [\n        {\n          \"Id\": \"1000\",\n          \"Name\": \"Acme Affiliate Program\",\n          \"ContractId\": \"S-7777777\",\n          \"ContractName\": \"ACME Public Terms\",\n          \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n          \"ExpirationDate\": \"2006-12-25T23:31:51.414Z\"\n        },\n        {\n          \"Id\": \"1000\",\n          \"Name\": \"Acme Affiliate Program\",\n          \"ContractId\": \"S-7777777\",\n          \"ContractName\": \"ACME Public Terms\",\n          \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n          \"ExpirationDate\": \"2019-05-21T16:19:34.240Z\"\n        }\n      ],\n      \"Contacts\": [\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"Email\": \"ZH-XXXUyLx@xQyygIanHyNKDTIpDd.sued\",\n          \"IsPrimary\": true\n        },\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"Email\": \"sMpz5smqvUuX@puBrKHyYUUrAGmZ.hvk\",\n          \"IsPrimary\": true\n        }\n      ],\n      \"LinkedAccounts\": [\n        {\n          \"Id\": \"string\",\n          \"Reason\": \"string\",\n          \"Date\": \"1995-05-04T21:50:49.638Z\"\n        },\n        {\n          \"Id\": \"string\",\n          \"Reason\": \"string\",\n          \"Date\": \"1950-10-05T12:56:11.605Z\"\n        }\n      ],\n      \"PartnerValues\": {\n        \"Value1\": \"string\",\n        \"Value2\": \"string\",\n        \"Value3\": \"string\"\n      },\n      \"AccountManager\": \"string\",\n      \"DateCreated\": \"1965-07-27T19:24:25.437Z\",\n      \"DateLastUpdated\": \"1950-10-12T12:00:48.050Z\",\n      \"CreatedBy\": \"string\",\n      \"LastUpdatedBy\": \"string\",\n      \"Uri\": \"http://RifmtaRdqjFtbFNjXbZaQfB.ylepaDPdMfMosVoGE5YfyRD7jpSIgEPl6RVMOotWCYLi-wJn5UW97vaE2\"\n    },\n    {\n      \"Id\": \"2552842\",\n      \"Name\": \"Wile E. Coyote Facebook\",\n      \"Description\": \"Affiliate website partner.\",\n      \"Website\": \"https://www.example-partner.com\",\n      \"State\": \"EXPIRED\",\n      \"Address\": {\n        \"Country\": \"US\",\n        \"Address1\": \"123 Main St\",\n        \"Address2\": \"Suite 200\",\n        \"City\": \"Santa Barbara\",\n        \"State\": \"CA\",\n        \"PostalCode\": \"93101\"\n      },\n      \"Phone\": {\n        \"Country\": \"US\",\n        \"Number\": \"8051234567\"\n      },\n      \"Currency\": \"USD\",\n      \"Timezone\": \"America/Los_Angeles\",\n      \"IndirectTax\": {\n        \"Country\": \"US\",\n        \"Number\": \"12-3456789\"\n      },\n      \"PartnerType\": \"DIRECT\",\n      \"PromotionalMethods\": [\n        {\n          \"Type\": \"WEBSITE\",\n          \"IsPrimary\": true\n        },\n        {\n          \"Type\": \"WEBSITE\",\n          \"IsPrimary\": true\n        }\n      ],\n      \"PromotionalCountries\": [\n        \"US\",\n        \"US\"\n      ],\n      \"Properties\": [\n        {\n          \"Id\": \"P-1\",\n          \"Name\": \"Acme Tennis Blog\",\n          \"Type\": \"SOCIAL\",\n          \"Platform\": \"WEB\",\n          \"Url\": \"https://blog.example-partner.com\"\n        },\n        {\n          \"Id\": \"P-1\",\n          \"Name\": \"Acme Tennis Blog\",\n          \"Type\": \"SOCIAL\",\n          \"Platform\": \"WEB\",\n          \"Url\": \"https://blog.example-partner.com\"\n        }\n      ],\n      \"PromotionalCategories\": [\n        \"Sports\",\n        \"Sports\"\n      ],\n      \"Programs\": [\n        {\n          \"Id\": \"1000\",\n          \"Name\": \"Acme Affiliate Program\",\n          \"ContractId\": \"S-7777777\",\n          \"ContractName\": \"ACME Public Terms\",\n          \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n          \"ExpirationDate\": \"1962-07-01T14:14:30.870Z\"\n        },\n        {\n          \"Id\": \"1000\",\n          \"Name\": \"Acme Affiliate Program\",\n          \"ContractId\": \"S-7777777\",\n          \"ContractName\": \"ACME Public Terms\",\n          \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n          \"ExpirationDate\": \"1965-06-29T11:05:15.573Z\"\n        }\n      ],\n      \"Contacts\": [\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"Email\": \"dx3LEC65dRud9@tXfJ.bhj\",\n          \"IsPrimary\": false\n        },\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"Email\": \"Wc68lRUOrkmqn1@VyzhawsHnKVuHBvj.rjl\",\n          \"IsPrimary\": true\n        }\n      ],\n      \"LinkedAccounts\": [\n        {\n          \"Id\": \"string\",\n          \"Reason\": \"string\",\n          \"Date\": \"2025-11-17T12:29:04.756Z\"\n        },\n        {\n          \"Id\": \"string\",\n          \"Reason\": \"string\",\n          \"Date\": \"2005-12-23T15:31:05.193Z\"\n        }\n      ],\n      \"PartnerValues\": {\n        \"Value1\": \"string\",\n        \"Value2\": \"string\",\n        \"Value3\": \"string\"\n      },\n      \"AccountManager\": \"string\",\n      \"DateCreated\": \"1979-10-20T02:55:01.818Z\",\n      \"DateLastUpdated\": \"1984-06-20T12:54:54.002Z\",\n      \"CreatedBy\": \"string\",\n      \"LastUpdatedBy\": \"string\",\n      \"Uri\": \"http://QZJbyFtTjbVozhMvlyPTnvJRZIeBEM.eiYn4Yt8kO0OcY9C8gPu6gAAZsRk1RdEVL-fwu3-eCcHsLt2kbybB5zJ+TmBKgC7m2deeib\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e768500-fb68-4a52-9c57-0217f32ebd92",
+          "name": "Create a Direct Partner",
+          "request": {
+            "name": "Create a Direct Partner",
+            "description": {
+              "content": "Creates a new direct partner account, which automatically joins your program with a specified active contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "MediaPartners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "AccountName",
+                  "value": "<string>",
+                  "description": "(Required) The display name for the partner's account."
+                },
+                {
+                  "disabled": false,
+                  "key": "Website",
+                  "value": "<uri>",
+                  "description": "(Required) The partner's website URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "AddressLine1",
+                  "value": "<string>",
+                  "description": "(Required) Address line 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "City",
+                  "value": "<string>",
+                  "description": "(Required) City for the partner's address."
+                },
+                {
+                  "disabled": false,
+                  "key": "PostalCode",
+                  "value": "<string>",
+                  "description": "(Required) ZIP or postal code."
+                },
+                {
+                  "disabled": false,
+                  "key": "Country",
+                  "value": "<string>",
+                  "description": "(Required) Two-letter ISO 3166-1 alpha-2 country code. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "PhoneCountry",
+                  "value": "<string>",
+                  "description": "(Required) Two-letter ISO 3166-1 alpha-2 country code for the phone number."
+                },
+                {
+                  "disabled": false,
+                  "key": "PhoneNumber",
+                  "value": "<string>",
+                  "description": "(Required) The partner's contact phone number."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPromotionalMethod",
+                  "value": "<string>",
+                  "description": "(Required) The partner's primary method of promoting."
+                },
+                {
+                  "disabled": false,
+                  "key": "Username",
+                  "value": "<string>",
+                  "description": "(Required) The username for the partner's primary user account."
+                },
+                {
+                  "disabled": false,
+                  "key": "FirstName",
+                  "value": "<string>",
+                  "description": "(Required) First name of the primary contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "LastName",
+                  "value": "<string>",
+                  "description": "(Required) Last name of the primary contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "Password",
+                  "value": "<password>",
+                  "description": "(Required) Password for the primary user account."
+                },
+                {
+                  "disabled": false,
+                  "key": "EmailAddress",
+                  "value": "<email>",
+                  "description": "(Required) Email address of the primary contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "TemplateTermsId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique ID of the contract template to assign to this partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "Currency",
+                  "value": "<string>",
+                  "description": "(Required) 3-letter ISO 4217 currency code."
+                },
+                {
+                  "disabled": false,
+                  "key": "TaxId",
+                  "value": "<string>",
+                  "description": "Tax identification number for the partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrganizationType",
+                  "value": "<string>",
+                  "description": "Organization type for the partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "AddressLine2",
+                  "value": "<string>",
+                  "description": "Address line 2."
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryState",
+                  "value": "<string>",
+                  "description": "State or region within the country."
+                },
+                {
+                  "disabled": false,
+                  "key": "Timezone",
+                  "value": "<string>",
+                  "description": "The partner's timezone."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromotingCountries",
+                  "value": "<string>",
+                  "description": "Comma-separated list of 2-letter ISO 3166-1 alpha 2 country codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>",
+                  "description": "A description of the partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPGroupIDs",
+                  "value": "<string>",
+                  "description": "Comma-separated list of partner group IDs to add the partner to."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPValue1",
+                  "value": "<string>",
+                  "description": "Custom tracking value 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPValue2",
+                  "value": "<string>",
+                  "description": "Custom tracking value 2."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPValue3",
+                  "value": "<string>",
+                  "description": "Custom tracking value 3."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5544bbab-3de1-425a-b857-d4d3494f77bf",
+              "name": "The partner account was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "MediaPartners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The display name for the partner's account.",
+                        "type": "text/plain"
+                      },
+                      "key": "AccountName",
+                      "value": "Wile E. Coyote Facebook"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The partner's website URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "Website",
+                      "value": "https://www.example-partner.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Address line 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "AddressLine1",
+                      "value": "123 Main St"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) City for the partner's address.",
+                        "type": "text/plain"
+                      },
+                      "key": "City",
+                      "value": "Santa Barbara"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ZIP or postal code.",
+                        "type": "text/plain"
+                      },
+                      "key": "PostalCode",
+                      "value": "93101"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Two-letter ISO 3166-1 alpha-2 country code. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Country",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Two-letter ISO 3166-1 alpha-2 country code for the phone number.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The partner's contact phone number.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneNumber",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The partner's primary method of promoting.",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPromotionalMethod",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The username for the partner's primary user account.",
+                        "type": "text/plain"
+                      },
+                      "key": "Username",
+                      "value": "wile.coyote"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) First name of the primary contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "FirstName",
+                      "value": "Wile"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Last name of the primary contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "LastName",
+                      "value": "Coyote"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Password for the primary user account.",
+                        "type": "text/plain"
+                      },
+                      "key": "Password",
+                      "value": "<password>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Email address of the primary contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "EmailAddress",
+                      "value": "wile.coyote@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique ID of the contract template to assign to this partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "TemplateTermsId",
+                      "value": "99999"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) 3-letter ISO 4217 currency code.",
+                        "type": "text/plain"
+                      },
+                      "key": "Currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Tax identification number for the partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "TaxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Organization type for the partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrganizationType",
+                      "value": "CORP"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Address line 2.",
+                        "type": "text/plain"
+                      },
+                      "key": "AddressLine2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "State or region within the country.",
+                        "type": "text/plain"
+                      },
+                      "key": "CountryState",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The partner's timezone.",
+                        "type": "text/plain"
+                      },
+                      "key": "Timezone",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of 2-letter ISO 3166-1 alpha 2 country codes.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromotingCountries",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A description of the partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of partner group IDs to add the partner to.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPGroupIDs",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 2.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 3.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue3",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://NrVJOwPdumcayEWBULQDZrjDaVC.hfcpVb30DNzVJyC37?dey&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a69d663a-0c0d-4f20-89d2-c5eb6ddbb039",
+          "name": "Get Partner Details",
+          "request": {
+            "name": "Get Partner Details",
+            "description": {
+              "content": "Retrieves the details of an existing partner by their unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "MediaPartners",
+                ":PartnerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "PartnerId",
+                  "description": "(Required) The unique identifier for the partner."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4d62e7e-8cce-40f7-82e3-721f11d007af",
+              "name": "A single partner object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "MediaPartners",
+                    ":PartnerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "PartnerId",
+                      "description": "(Required) The unique identifier for the partner."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"2552842\",\n  \"Name\": \"Wile E. Coyote Facebook\",\n  \"Description\": \"Affiliate website partner.\",\n  \"Website\": \"https://www.example-partner.com\",\n  \"State\": \"PENDING\",\n  \"Address\": {\n    \"Country\": \"US\",\n    \"Address1\": \"123 Main St\",\n    \"Address2\": \"Suite 200\",\n    \"City\": \"Santa Barbara\",\n    \"State\": \"CA\",\n    \"PostalCode\": \"93101\"\n  },\n  \"Phone\": {\n    \"Country\": \"US\",\n    \"Number\": \"8051234567\"\n  },\n  \"Currency\": \"USD\",\n  \"Timezone\": \"America/Los_Angeles\",\n  \"IndirectTax\": {\n    \"Country\": \"US\",\n    \"Number\": \"12-3456789\"\n  },\n  \"PartnerType\": \"DIRECT\",\n  \"PromotionalMethods\": [\n    {\n      \"Type\": \"WEBSITE\",\n      \"IsPrimary\": true\n    },\n    {\n      \"Type\": \"WEBSITE\",\n      \"IsPrimary\": true\n    }\n  ],\n  \"PromotionalCountries\": [\n    \"US\",\n    \"US\"\n  ],\n  \"Properties\": [\n    {\n      \"Id\": \"P-1\",\n      \"Name\": \"Acme Tennis Blog\",\n      \"Type\": \"MOBILE\",\n      \"Platform\": \"WEB\",\n      \"Url\": \"https://blog.example-partner.com\"\n    },\n    {\n      \"Id\": \"P-1\",\n      \"Name\": \"Acme Tennis Blog\",\n      \"Type\": \"SOCIAL\",\n      \"Platform\": \"WEB\",\n      \"Url\": \"https://blog.example-partner.com\"\n    }\n  ],\n  \"PromotionalCategories\": [\n    \"Sports\",\n    \"Sports\"\n  ],\n  \"Programs\": [\n    {\n      \"Id\": \"1000\",\n      \"Name\": \"Acme Affiliate Program\",\n      \"ContractId\": \"S-7777777\",\n      \"ContractName\": \"ACME Public Terms\",\n      \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n      \"ExpirationDate\": \"1994-07-31T08:19:20.759Z\"\n    },\n    {\n      \"Id\": \"1000\",\n      \"Name\": \"Acme Affiliate Program\",\n      \"ContractId\": \"S-7777777\",\n      \"ContractName\": \"ACME Public Terms\",\n      \"JoinDate\": \"2026-01-19T23:51:01-08:00\",\n      \"ExpirationDate\": \"1971-08-22T21:30:21.527Z\"\n    }\n  ],\n  \"Contacts\": [\n    {\n      \"FirstName\": \"string\",\n      \"LastName\": \"string\",\n      \"Email\": \"M16nIhIKWzbg6M@nMBOOiNz.yhw\",\n      \"IsPrimary\": false\n    },\n    {\n      \"FirstName\": \"string\",\n      \"LastName\": \"string\",\n      \"Email\": \"drzCObq@isnwgPtautzQZFDYaQlXLjRiZhuTsuVX.fa\",\n      \"IsPrimary\": false\n    }\n  ],\n  \"LinkedAccounts\": [\n    {\n      \"Id\": \"string\",\n      \"Reason\": \"string\",\n      \"Date\": \"1959-06-14T05:55:21.656Z\"\n    },\n    {\n      \"Id\": \"string\",\n      \"Reason\": \"string\",\n      \"Date\": \"2013-04-27T06:54:53.560Z\"\n    }\n  ],\n  \"PartnerValues\": {\n    \"Value1\": \"string\",\n    \"Value2\": \"string\",\n    \"Value3\": \"string\"\n  },\n  \"AccountManager\": \"string\",\n  \"DateCreated\": \"1950-09-30T21:05:52.858Z\",\n  \"DateLastUpdated\": \"1971-06-03T11:59:50.223Z\",\n  \"CreatedBy\": \"string\",\n  \"LastUpdatedBy\": \"string\",\n  \"Uri\": \"http://ppiqHDbQtIqrgBND.fcsqRx-PydpHnvaPuDVFIMBSIN1UWe0D0VcfNYTm2EY7xdW2rU.FfSH6Fhd.fSjKKahr50t77\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5c4094e-5c8f-42ca-a218-61a6590d21dd",
+          "name": "Update Partner Values",
+          "request": {
+            "name": "Update Partner Values",
+            "description": {
+              "content": "Updates the custom `MPValue{i}` fields for a specified partner. These values can be used in tracking links.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "MediaPartners",
+                ":PartnerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "PartnerId",
+                  "description": "(Required) The unique identifier for the partner to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "MPValue1",
+                  "value": "<string>",
+                  "description": "Custom tracking value 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPValue2",
+                  "value": "<string>",
+                  "description": "Custom tracking value 2."
+                },
+                {
+                  "disabled": false,
+                  "key": "MPValue3",
+                  "value": "<string>",
+                  "description": "Custom tracking value 3."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf0d38e2-ffd1-49c7-a251-e7a99dd3627e",
+              "name": "The partner was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "MediaPartners",
+                    ":PartnerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "PartnerId",
+                      "description": "(Required) The unique identifier for the partner to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 1.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue1",
+                      "value": "vip"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 2.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue2",
+                      "value": "north-america"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom tracking value 3.",
+                        "type": "text/plain"
+                      },
+                      "key": "MPValue3",
+                      "value": "tennis"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://NrVJOwPdumcayEWBULQDZrjDaVC.hfcpVb30DNzVJyC37?dey&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8cf8fd73-0abc-44f3-a782-8275e864992e",
+    "name": "Brand API - Partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing partner accounts in your program. This includes viewing partner information, updating certain attributes, and creating new direct partner accounts.",
+      "type": "text/plain"
+    }
+  }
+}

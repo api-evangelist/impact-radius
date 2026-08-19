@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Partner Event Notifications API
+  version: '15'
+  description: |
+    Event Notifications (also known as webhooks or postbacks) are HTTP requests that **impact.com sends to your server** in real time when relevant events occur — actions tracked, clicks credited, status changes, and so on.
+
+    This is an **inbound** integration: you configure a URL in your impact.com account, and impact.com fires HTTP requests at that URL when events happen. You don't call any impact.com endpoint to receive notifications.
+
+    **How it works:**
+
+    1. In your impact.com partner account, configure an Event Notification URL.
+    2. Use placeholder tokens like `{CampaignId}`, `{ActionId}`, `{Status}`, `{Payout}` in either the URL (for GET delivery) or the JSON request body (for POST delivery). impact.com substitutes the real values at fire time.
+    3. impact.com calls your URL whenever a matching event occurs.
+    4. Your server returns a `2xx` response to acknowledge receipt. Non-`2xx` responses are retried by impact.com.
+
+    This spec documents the **shape of the request impact.com sends to your server** — it is not an endpoint you call.
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://your-server.example.com
+  description: Replace with the URL you configured in your impact.com Event Notifications settings. impact.com will send requests to this URL.
+tags:
+- name: Event Notifications
+  description: Inbound webhook payloads that impact.com sends to a partner-configured URL when events occur.
+paths:
+  /your-configured-path:
+    post:
+      operationId: receiveEventNotificationPost
+      tags:
+      - Event Notifications
+      summary: Receive an event notification (POST)
+      description: |
+        impact.com sends a POST request with a JSON body to your configured URL when an event occurs. Your server should return a `2xx` response to acknowledge successful receipt.
+
+        The fields included in the payload are determined by the URL template / body template you configure in impact.com. The schema below shows the most common fields.
+      requestBody:
+        description: Event notification payload sent by impact.com.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventNotificationPayload'
+      responses:
+        '200':
+          description: Your server has acknowledged the notification successfully. impact.com will not retry.
+        '202':
+          description: Accepted — same effect as 200 from impact.com's perspective.
+    get:
+      operationId: receiveEventNotificationGet
+      tags:
+      - Event Notifications
+      summary: Receive an event notification (GET)
+      description: |
+        impact.com sends a GET request to your configured URL with event data as query-string parameters. This delivery mode is typically used for simple pixel-style integrations.
+
+        The query parameters present depend on the URL template you configure in your impact.com Event Notifications settings.
+      parameters:
+      - name: campaign_id
+        in: query
+        schema:
+          type: string
+        description: Unique identifier of the brand program the event belongs to.
+        example: '10306'
+      - name: action_id
+        in: query
+        schema:
+          type: string
+        description: Unique identifier of the tracked action.
+        example: '1234567890'
+      - name: status
+        in: query
+        schema:
+          type: string
+        description: 'Status of the action at the time of notification (e.g., `APPROVED`, `PENDING`, `REVERSED`).'
+        example: APPROVED
+      - name: payout
+        in: query
+        schema:
+          type: string
+        description: Commission amount paid to the partner for this action, as a decimal string.
+        example: '5.00'
+      responses:
+        '200':
+          description: Your server has acknowledged the notification successfully.
+        '202':
+          description: Accepted — same effect as 200 from impact.com's perspective.
+components:
+  schemas:
+    EventNotificationPayload:
+      type: object
+      description: |
+        Shape of the JSON body impact.com posts to your configured URL. Fields are populated based on the body template you set up in your Event Notifications settings — partners typically include identifiers, status, payout amount, and any product-line detail relevant to their integration.
+      properties:
+        campaign_id:
+          type: string
+          description: Unique identifier of the brand program the event belongs to.
+          example: '10306'
+        action_id:
+          type: string
+          description: Unique identifier of the tracked action this notification is about.
+          example: '1234567890'
+        status:
+          type: string
+          description: 'Current status of the action at the time of notification (e.g., `APPROVED`, `PENDING`, `REVERSED`).'
+          example: APPROVED
+        payout:
+          type: string
+          description: Commission amount paid to the partner for this action, as a decimal string.
+          example: '5.00'
+        items:
+          type: array
+          description: Per-line-item detail for the action, when the brand sends SKU-level data.
+          items:
+            $ref: '#/components/schemas/EventNotificationItem'
+    EventNotificationItem:
+      type: object
+      description: A single product line item attached to the action.
+      properties:
+        sku:
+          type: string
+          description: The brand's SKU for the purchased product.
+          example: APP-0016
+        qty:
+          type: string
+          description: Quantity purchased, as a decimal string.
+          example: '1'
+        amt:
+          type: string
+          description: Total amount for this line item, as a decimal string.
+          example: '719.10'
+x-default-client: cURL

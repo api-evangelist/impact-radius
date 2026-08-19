@@ -1,0 +1,619 @@
+{
+  "item": [
+    {
+      "id": "2f41c5b7-33b7-4967-aa73-c334d5cd16bd",
+      "name": "Promo Codes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cce36bbe-d474-4f3f-9d3e-622cd339d0bc",
+          "name": "List All Promo Codes",
+          "request": {
+            "name": "List All Promo Codes",
+            "description": {
+              "content": "Returns a list of your promo codes, which can be filtered.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a94063ee-50e5-40c2-ae8a-141bfefe57c0",
+              "name": "A paginated list of promo code objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PromoCodes\": [\n    {\n      \"Id\": 12345,\n      \"Code\": \"SUMMER25\",\n      \"Type\": \"LI\",\n      \"CreditPolicy\": \"INVOLVED\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"AssignedPartnerId\": 2552842,\n      \"AssignedPartnerName\": \"Wile E. Coyote Facebook\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"StartDate\": \"2026-06-01T00:00:00-07:00\",\n      \"EndDate\": \"2026-08-31T23:59:59-07:00\",\n      \"State\": \"INACTIVE\",\n      \"DealId\": 3,\n      \"DealName\": \"AcmeDeal3\",\n      \"DealState\": \"ACTIVE\",\n      \"DealType\": \"GENERAL_SALE\",\n      \"DealScope\": \"PRODUCT\",\n      \"DealStartDate\": \"2026-06-01T00:00:00-07:00\",\n      \"DealEndDate\": \"2026-08-31T23:59:59-07:00\",\n      \"DiscountType\": \"FIXED\",\n      \"DiscountAmount\": 5,\n      \"DiscountCurrency\": \"USD\",\n      \"DiscountPercent\": 10,\n      \"MinimumPurchaseAmount\": 50,\n      \"MaximumSavingsAmount\": 20,\n      \"PurchaseLimitQuantity\": 1,\n      \"BogoBuyQuantity\": 0,\n      \"BogoBuyName\": \"\",\n      \"BogoGetQuantity\": 7701,\n      \"BogoGetName\": \"string\",\n      \"BogoGetDiscountType\": \"string\",\n      \"SynchAdsPromoCodes\": true,\n      \"Uri\": \"http://ELXuGEtbkFzcSnatwTqETKgyDdUl.owqjgbTCyJdXfSM-goZepEmF5z8n8tsuGTyTM?\"\n    },\n    {\n      \"Id\": 12345,\n      \"Code\": \"SUMMER25\",\n      \"Type\": \"RE\",\n      \"CreditPolicy\": \"WINNER\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"AssignedPartnerId\": 2552842,\n      \"AssignedPartnerName\": \"Wile E. Coyote Facebook\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"StartDate\": \"2026-06-01T00:00:00-07:00\",\n      \"EndDate\": \"2026-08-31T23:59:59-07:00\",\n      \"State\": \"ACTIVE\",\n      \"DealId\": 3,\n      \"DealName\": \"AcmeDeal3\",\n      \"DealState\": \"ACTIVE\",\n      \"DealType\": \"GENERAL_SALE\",\n      \"DealScope\": \"PRODUCT\",\n      \"DealStartDate\": \"2026-06-01T00:00:00-07:00\",\n      \"DealEndDate\": \"2026-08-31T23:59:59-07:00\",\n      \"DiscountType\": \"FIXED\",\n      \"DiscountAmount\": 5,\n      \"DiscountCurrency\": \"USD\",\n      \"DiscountPercent\": 10,\n      \"MinimumPurchaseAmount\": 50,\n      \"MaximumSavingsAmount\": 20,\n      \"PurchaseLimitQuantity\": 1,\n      \"BogoBuyQuantity\": 0,\n      \"BogoBuyName\": \"\",\n      \"BogoGetQuantity\": 1903,\n      \"BogoGetName\": \"string\",\n      \"BogoGetDiscountType\": \"string\",\n      \"SynchAdsPromoCodes\": true,\n      \"Uri\": \"https://muOmrTkWHLzUBNdiTfc.nerMV0vT5inupJMZHLTU1E0r5G-\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af93ba50-9fed-4a37-86d3-2faf8119e181",
+          "name": "Create a Promo Code",
+          "request": {
+            "name": "Create a Promo Code",
+            "description": {
+              "content": "Creates a new promo code and assigns it to a partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "AssignedPartnerId",
+                  "value": "<integer>",
+                  "description": "(Required) The partner account ID this promo code is assigned to."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The program ID this promo code applies to."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreditPolicy",
+                  "value": "<string>",
+                  "description": "(Required) How credit is awarded for actions involving this code."
+                },
+                {
+                  "disabled": false,
+                  "key": "Code",
+                  "value": "<string>",
+                  "description": "(Required) The promo code value."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "(Required) LI for Exact match, RE for Regex."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the promo code becomes active."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the promo code expires."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<integer>",
+                  "description": "The unique identifier of a Deal to link this promo code to."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealName",
+                  "value": "<string>",
+                  "description": "The display name of the linked Deal."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "661840a5-ea17-46ae-ab94-b51b56896194",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The partner account ID this promo code is assigned to.",
+                        "type": "text/plain"
+                      },
+                      "key": "AssignedPartnerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The program ID this promo code applies to.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) How credit is awarded for actions involving this code.",
+                        "type": "text/plain"
+                      },
+                      "key": "CreditPolicy",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The promo code value.",
+                        "type": "text/plain"
+                      },
+                      "key": "Code",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) LI for Exact match, RE for Regex.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the promo code becomes active.",
+                        "type": "text/plain"
+                      },
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the promo code expires.",
+                        "type": "text/plain"
+                      },
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The unique identifier of a Deal to link this promo code to.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The display name of the linked Deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://MpMDgZtIxfCSNjp.lkwyGvjRnxu1magefFWAF8VOUjlJ0mLA0aNZ7CqANf,5G\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3248792b-29cb-40c2-8d59-3c0bba87a6f8",
+          "name": "Get Promo Code Details",
+          "request": {
+            "name": "Get Promo Code Details",
+            "description": {
+              "content": "Retrieves the details of a single promo code by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodes",
+                ":PromoCodeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "PromoCodeId",
+                  "description": "(Required) The unique identifier for the promo code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adf9f86e-c313-4081-9bf2-a5bb13f48c25",
+              "name": "A single promo code object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodes",
+                    ":PromoCodeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "PromoCodeId",
+                      "description": "(Required) The unique identifier for the promo code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 12345,\n  \"Code\": \"SUMMER25\",\n  \"Type\": \"LI\",\n  \"CreditPolicy\": \"WINNER\",\n  \"CampaignId\": 1000,\n  \"CampaignName\": \"Acme Campaign\",\n  \"AssignedPartnerId\": 2552842,\n  \"AssignedPartnerName\": \"Wile E. Coyote Facebook\",\n  \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n  \"StartDate\": \"2026-06-01T00:00:00-07:00\",\n  \"EndDate\": \"2026-08-31T23:59:59-07:00\",\n  \"State\": \"ACTIVE\",\n  \"DealId\": 3,\n  \"DealName\": \"AcmeDeal3\",\n  \"DealState\": \"ACTIVE\",\n  \"DealType\": \"GENERAL_SALE\",\n  \"DealScope\": \"PRODUCT\",\n  \"DealStartDate\": \"2026-06-01T00:00:00-07:00\",\n  \"DealEndDate\": \"2026-08-31T23:59:59-07:00\",\n  \"DiscountType\": \"FIXED\",\n  \"DiscountAmount\": 5,\n  \"DiscountCurrency\": \"USD\",\n  \"DiscountPercent\": 10,\n  \"MinimumPurchaseAmount\": 50,\n  \"MaximumSavingsAmount\": 20,\n  \"PurchaseLimitQuantity\": 1,\n  \"BogoBuyQuantity\": 0,\n  \"BogoBuyName\": \"\",\n  \"BogoGetQuantity\": 2882,\n  \"BogoGetName\": \"string\",\n  \"BogoGetDiscountType\": \"string\",\n  \"SynchAdsPromoCodes\": false,\n  \"Uri\": \"https://LGaRytqBcjSbbKN.ypd7E,cXF\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e627fe71-00ab-4b27-ade9-0ae230550bf6",
+          "name": "Expire a Promo Code",
+          "request": {
+            "name": "Expire a Promo Code",
+            "description": {
+              "content": "Expires a promo code, which deactivates it. The code is not permanently deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodes",
+                ":PromoCodeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "PromoCodeId",
+                  "description": "(Required) The unique identifier for the promo code to expire."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "435ce387-63f4-4b6e-9b05-96ad5ce8ae46",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodes",
+                    ":PromoCodeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "PromoCodeId",
+                      "description": "(Required) The unique identifier for the promo code to expire."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://MpMDgZtIxfCSNjp.lkwyGvjRnxu1magefFWAF8VOUjlJ0mLA0aNZ7CqANf,5G\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "20bd5beb-26d8-4af7-a07d-9729c8949899",
+    "name": "Brand API - Promo Codes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing promo codes, which are used to track partner involvement in your program. This includes creating, retrieving, and expiring promo codes.",
+      "type": "text/plain"
+    }
+  }
+}

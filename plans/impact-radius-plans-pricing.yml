@@ -1,0 +1,54 @@
+generated: '2026-08-13'
+method: searched
+source: https://impact.com/products/pricing/
+docs:
+- https://impact.com/products/pricing/
+- https://impact.com/pricing/
+description: >-
+  impact.com publishes one entry-level price point for its self-serve e-commerce app and routes
+  everything else through "Request a demo" / "Talk to sales". No per-tier feature or quota table,
+  no API-metered pricing and no published overage schedule were found on the pricing pages.
+plan_count: 1
+currency: USD
+billing_period: month
+public_price_list: partial
+plans:
+- name: impact.com app (self-serve, e-commerce platform)
+  price: 30
+  price_qualifier: starts at
+  currency: USD
+  period: month
+  trial: 30-day risk-free
+  included_quota: null
+  overage: null
+  limits: null
+  source: https://impact.com/products/pricing/
+  note: >-
+    Published verbatim as "STARTS AT $30 USD /MONTH — Launch your partnerships program today,
+    risk-free for 30 days". Sign-up flow is scoped by primary e-commerce platform (Shopify /
+    BigCommerce and similar). No feature matrix or usage ceiling is published alongside the price.
+- name: Enterprise / platform (Performance, Creator, Advocate)
+  price: null
+  currency: null
+  period: null
+  included_quota: null
+  overage: null
+  limits: null
+  source: https://impact.com/pricing/
+  note: >-
+    The main /pricing/ page is a demo-request funnel — no numbers. Platform, Creator and
+    Advocate product pricing is quoted by sales; commercial terms are not published.
+api_pricing:
+  metered: false
+  note: >-
+    API access is not separately priced or metered on any published page; it is governed by the
+    account's rate limits rather than a billing plan. See rate-limits/impact-radius-rate-limits.yml.
+mcp_pricing:
+  note: >-
+    mcp.impact.com is in Open Beta and is enabled/disabled per account by an administrator; no
+    price is published for it. MCP Skills are described in the docs as "a direct add-on" but no
+    add-on price is published.
+notes: >-
+  method is searched: both pricing URLs were fetched and returned HTTP 200. The single numeric
+  price is the only published figure; everything else is honestly recorded as null rather than
+  estimated.

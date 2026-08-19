@@ -1,0 +1,320 @@
+{
+  "item": [
+    {
+      "id": "c1da5d10-9e4c-42a3-afda-fda78ee45436",
+      "name": "Contracts",
+      "description": {
+        "content": "Endpoints for retrieving partner contract details and payout terms.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d392715-9a80-4c1e-abd6-937c8fdfa8d9",
+          "name": "List Contracts",
+          "request": {
+            "name": "List Contracts",
+            "description": {
+              "content": "Returns a list of all contracts associated with your partner account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filters contracts by the campaign they belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>",
+                  "description": "Return contracts with a specific status. If omitted, only contracts where Status is ACTIVE are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "Signatory",
+                  "value": "<string>",
+                  "description": "Return contracts with a particular signatory. Matches against both BrandSignatory and PartnerSignatory."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts last updated before a specific date and time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts last updated after a specific date and time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that start before a specific date and time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that start after a specific date and time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that end before a specific date and time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that end after a specific date and time (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "439cb4b5-8602-4550-9ebe-d7fdc199fa1c",
+              "name": "A list of contract objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Signatory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DateLastUpdatedBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateAfter",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Contracts\": [\n    {\n      \"Id\": \"S-37085294\",\n      \"CampaignId\": \"10306\",\n      \"Status\": \"ACTIVE\",\n      \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"EndDate\": \"1964-02-05T20:23:56.672Z\",\n      \"BrandSignatory\": \"Robin Banks\",\n      \"BrandSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n      \"PartnerSignatory\": \"Carrie Oakey\",\n      \"PartnerSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n      \"DateCreated\": \"2026-02-28T23:51:22-08:00\",\n      \"DateLastUpdated\": \"2026-02-28T23:51:22-08:00\",\n      \"Terms\": {\n        \"TemplateTermName\": \"ScheduledTerms Test\",\n        \"Currency\": \"USD\",\n        \"TemplateId\": \"string\",\n        \"VersionId\": \"string\",\n        \"Name\": \"string\",\n        \"Labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"EventPayouts\": [\n          {\n            \"EventTypeId\": \"18503\",\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayoutRate\": \"0\",\n            \"PayoutLevel\": \"ITEM\",\n            \"DefaultPayout\": \"string\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRestrictions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutAdjustments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PerformanceBonus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Locking\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PayoutScheduling\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreditPolicy\": \"LAST_REFERRER\",\n            \"ValidReferrals\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"EventTypeId\": \"18503\",\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayoutRate\": \"0\",\n            \"PayoutLevel\": \"ITEM\",\n            \"DefaultPayout\": \"string\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRestrictions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutAdjustments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PerformanceBonus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Locking\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PayoutScheduling\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreditPolicy\": \"LAST_REFERRER\",\n            \"ValidReferrals\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"SpecialTermsList\": [\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n          },\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n          }\n        ],\n        \"ChangeNotificationPeriod\": \"0\",\n        \"ReturnPolicy\": \"ALWAYS_OK\",\n        \"MaxReturnPercentage\": \"100\",\n        \"CustomCreativePayer\": \"ADVERTISER\",\n        \"ActionLimit\": \"string\",\n        \"ActionLimitPeriod\": \"string\",\n        \"SpendLimit\": \"string\",\n        \"SpendLimitPeriod\": \"string\",\n        \"MinEarningPerClick\": \"string\",\n        \"ContractStartSlottingFee\": \"string\"\n      },\n      \"HasCampaignTerms\": true,\n      \"CampaignTerms\": [\n        {\n          \"Id\": \"3578\",\n          \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n          \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n          \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Id\": \"3578\",\n          \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n          \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n          \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"PdfUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/S-37085294/Download\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Contracts/S-37085294\"\n    },\n    {\n      \"Id\": \"S-37085294\",\n      \"CampaignId\": \"10306\",\n      \"Status\": \"ACTIVE\",\n      \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n      \"EndDate\": \"2011-03-25T14:35:18.515Z\",\n      \"BrandSignatory\": \"Robin Banks\",\n      \"BrandSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n      \"PartnerSignatory\": \"Carrie Oakey\",\n      \"PartnerSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n      \"DateCreated\": \"2026-02-28T23:51:22-08:00\",\n      \"DateLastUpdated\": \"2026-02-28T23:51:22-08:00\",\n      \"Terms\": {\n        \"TemplateTermName\": \"ScheduledTerms Test\",\n        \"Currency\": \"USD\",\n        \"TemplateId\": \"string\",\n        \"VersionId\": \"string\",\n        \"Name\": \"string\",\n        \"Labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"EventPayouts\": [\n          {\n            \"EventTypeId\": \"18503\",\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayoutRate\": \"0\",\n            \"PayoutLevel\": \"ITEM\",\n            \"DefaultPayout\": \"string\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRestrictions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutAdjustments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PerformanceBonus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Locking\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PayoutScheduling\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreditPolicy\": \"LAST_REFERRER\",\n            \"ValidReferrals\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"EventTypeId\": \"18503\",\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayoutRate\": \"0\",\n            \"PayoutLevel\": \"ITEM\",\n            \"DefaultPayout\": \"string\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRestrictions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutAdjustments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PerformanceBonus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"Locking\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"PayoutScheduling\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"CreditPolicy\": \"LAST_REFERRER\",\n            \"ValidReferrals\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"SpecialTermsList\": [\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n          },\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n          }\n        ],\n        \"ChangeNotificationPeriod\": \"0\",\n        \"ReturnPolicy\": \"ALWAYS_OK\",\n        \"MaxReturnPercentage\": \"100\",\n        \"CustomCreativePayer\": \"ADVERTISER\",\n        \"ActionLimit\": \"string\",\n        \"ActionLimitPeriod\": \"string\",\n        \"SpendLimit\": \"string\",\n        \"SpendLimitPeriod\": \"string\",\n        \"MinEarningPerClick\": \"string\",\n        \"ContractStartSlottingFee\": \"string\"\n      },\n      \"HasCampaignTerms\": true,\n      \"CampaignTerms\": [\n        {\n          \"Id\": \"3578\",\n          \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n          \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n          \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Id\": \"3578\",\n          \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n          \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n          \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"PdfUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/S-37085294/Download\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Contracts/S-37085294\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de1e2539-0f81-49a0-b3f6-ee31c9378684",
+          "name": "Retrieve a Contract",
+          "request": {
+            "name": "Retrieve a Contract",
+            "description": {
+              "content": "'Retrieves the full details of an existing contract using its unique\n\n**Note:** To retrieve `ScheduledTerms` and `CampaignTerms` objects, either upgrade your API version to the latest or append `?IrVersion=15` to your cURL request.\nID, including complete campaign-level term overrides. The `PdfUri` field in\nthe response can be used to download a PDF copy of the contract.'\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Contracts",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier for the contract."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2aedc03c-68e3-4fec-938e-a2b3ee9d264a",
+              "name": "The contract object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Contracts",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier for the contract."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"S-37085294\",\n  \"CampaignId\": \"10306\",\n  \"Status\": \"ACTIVE\",\n  \"StartDate\": \"2026-03-01T00:00:00-08:00\",\n  \"EndDate\": \"1974-08-01T01:42:09.060Z\",\n  \"BrandSignatory\": \"Robin Banks\",\n  \"BrandSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n  \"PartnerSignatory\": \"Carrie Oakey\",\n  \"PartnerSignatoryDate\": \"2026-02-28T23:51:22-08:00\",\n  \"DateCreated\": \"2026-02-28T23:51:22-08:00\",\n  \"DateLastUpdated\": \"2026-02-28T23:51:22-08:00\",\n  \"Terms\": {\n    \"TemplateTermName\": \"ScheduledTerms Test\",\n    \"Currency\": \"USD\",\n    \"TemplateId\": \"string\",\n    \"VersionId\": \"string\",\n    \"Name\": \"string\",\n    \"Labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"EventPayouts\": [\n      {\n        \"EventTypeId\": \"18503\",\n        \"EventTypeName\": \"Online Sale\",\n        \"EventCategory\": \"SALE\",\n        \"DefaultPayoutRate\": \"0\",\n        \"PayoutLevel\": \"ITEM\",\n        \"DefaultPayout\": \"string\",\n        \"PayoutGroups\": [\n          {\n            \"Id\": \"94bc1ae3-5f77-4e63-a862-3bbcf7f085dd\",\n            \"Rank\": \"1\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRate\": \"15\",\n            \"Payout\": \"0.10\",\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"Id\": \"94bc1ae3-5f77-4e63-a862-3bbcf7f085dd\",\n            \"Rank\": \"1\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRate\": \"15\",\n            \"Payout\": \"0.10\",\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"PayoutRestrictions\": [\n          {\n            \"Id\": \"string\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ZeroPayoutHideReport\": \"string\"\n          },\n          {\n            \"Id\": \"string\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ZeroPayoutHideReport\": \"string\"\n          }\n        ],\n        \"Limits\": [\n          {\n            \"Type\": \"string\",\n            \"Value\": \"string\",\n            \"LimitBy\": \"string\",\n            \"Period\": \"string\",\n            \"WeekendOverrideValue\": \"string\"\n          },\n          {\n            \"Type\": \"string\",\n            \"Value\": \"string\",\n            \"LimitBy\": \"string\",\n            \"Period\": \"string\",\n            \"WeekendOverrideValue\": \"string\"\n          }\n        ],\n        \"PayoutAdjustments\": [\n          {\n            \"Id\": \"8c281c2e-f61e-4b11-a9f9-9be38c79fe9e\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Direction\": \"INCREASE\",\n            \"Rate\": \"0\"\n          },\n          {\n            \"Id\": \"8c281c2e-f61e-4b11-a9f9-9be38c79fe9e\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Direction\": \"INCREASE\",\n            \"Rate\": \"0\"\n          }\n        ],\n        \"PerformanceBonus\": {\n          \"Type\": \"SUBSEQUENT_ACTIONS\",\n          \"Basis\": \"REVENUE\",\n          \"Period\": \"CALENDAR_MONTH\",\n          \"Tiers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"Locking\": {\n          \"Basis\": \"TRACKED\",\n          \"Period\": \"MONTH\",\n          \"MonthOffset\": \"1\",\n          \"DayOffset\": \"0\"\n        },\n        \"PayoutScheduling\": {\n          \"Basis\": \"LOCKED\",\n          \"Period\": \"END_OF_DAY\"\n        },\n        \"CreditPolicy\": \"LAST_REFERRER\",\n        \"ValidReferrals\": [\n          {\n            \"Type\": \"CLICKS\",\n            \"Window\": \"30\",\n            \"WindowUnit\": \"DAY\"\n          },\n          {\n            \"Type\": \"CLICKS\",\n            \"Window\": \"30\",\n            \"WindowUnit\": \"DAY\"\n          }\n        ]\n      },\n      {\n        \"EventTypeId\": \"18503\",\n        \"EventTypeName\": \"Online Sale\",\n        \"EventCategory\": \"SALE\",\n        \"DefaultPayoutRate\": \"0\",\n        \"PayoutLevel\": \"ITEM\",\n        \"DefaultPayout\": \"string\",\n        \"PayoutGroups\": [\n          {\n            \"Id\": \"94bc1ae3-5f77-4e63-a862-3bbcf7f085dd\",\n            \"Rank\": \"1\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRate\": \"15\",\n            \"Payout\": \"0.10\",\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"Id\": \"94bc1ae3-5f77-4e63-a862-3bbcf7f085dd\",\n            \"Rank\": \"1\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"PayoutRate\": \"15\",\n            \"Payout\": \"0.10\",\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"PayoutRestrictions\": [\n          {\n            \"Id\": \"string\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ZeroPayoutHideReport\": \"string\"\n          },\n          {\n            \"Id\": \"string\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ZeroPayoutHideReport\": \"string\"\n          }\n        ],\n        \"Limits\": [\n          {\n            \"Type\": \"string\",\n            \"Value\": \"string\",\n            \"LimitBy\": \"string\",\n            \"Period\": \"string\",\n            \"WeekendOverrideValue\": \"string\"\n          },\n          {\n            \"Type\": \"string\",\n            \"Value\": \"string\",\n            \"LimitBy\": \"string\",\n            \"Period\": \"string\",\n            \"WeekendOverrideValue\": \"string\"\n          }\n        ],\n        \"PayoutAdjustments\": [\n          {\n            \"Id\": \"8c281c2e-f61e-4b11-a9f9-9be38c79fe9e\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Direction\": \"INCREASE\",\n            \"Rate\": \"0\"\n          },\n          {\n            \"Id\": \"8c281c2e-f61e-4b11-a9f9-9be38c79fe9e\",\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Direction\": \"INCREASE\",\n            \"Rate\": \"0\"\n          }\n        ],\n        \"PerformanceBonus\": {\n          \"Type\": \"SUBSEQUENT_ACTIONS\",\n          \"Basis\": \"REVENUE\",\n          \"Period\": \"CALENDAR_MONTH\",\n          \"Tiers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"Locking\": {\n          \"Basis\": \"TRACKED\",\n          \"Period\": \"MONTH\",\n          \"MonthOffset\": \"1\",\n          \"DayOffset\": \"0\"\n        },\n        \"PayoutScheduling\": {\n          \"Basis\": \"LOCKED\",\n          \"Period\": \"END_OF_DAY\"\n        },\n        \"CreditPolicy\": \"LAST_REFERRER\",\n        \"ValidReferrals\": [\n          {\n            \"Type\": \"CLICKS\",\n            \"Window\": \"30\",\n            \"WindowUnit\": \"DAY\"\n          },\n          {\n            \"Type\": \"CLICKS\",\n            \"Window\": \"30\",\n            \"WindowUnit\": \"DAY\"\n          }\n        ]\n      }\n    ],\n    \"SpecialTermsList\": [\n      {\n        \"TermsName\": \"Custom Terms\",\n        \"TermsType\": \"CUSTOM\",\n        \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n      },\n      {\n        \"TermsName\": \"Custom Terms\",\n        \"TermsType\": \"CUSTOM\",\n        \"TermsContent\": \"<p>Custom terms and conditions content.</p>\"\n      }\n    ],\n    \"ChangeNotificationPeriod\": \"0\",\n    \"ReturnPolicy\": \"ALWAYS_OK\",\n    \"MaxReturnPercentage\": \"100\",\n    \"CustomCreativePayer\": \"ADVERTISER\",\n    \"ActionLimit\": \"string\",\n    \"ActionLimitPeriod\": \"string\",\n    \"SpendLimit\": \"string\",\n    \"SpendLimitPeriod\": \"string\",\n    \"MinEarningPerClick\": \"string\",\n    \"ContractStartSlottingFee\": \"string\"\n  },\n  \"HasCampaignTerms\": true,\n  \"CampaignTerms\": [\n    {\n      \"Id\": \"3578\",\n      \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n      \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n      \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": \"18503\",\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": \"18503\",\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"Id\": \"3578\",\n      \"Name\": \"ForgeMaster Anvils at Acme SuperCenter - Product Boost\",\n      \"StartDate\": \"2025-08-16T00:00:00-07:00\",\n      \"EndDate\": \"2029-08-31T23:59:59-07:00\",\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": \"18503\",\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": \"18503\",\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"PdfUri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Contracts/S-37085294/Download\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Contracts/S-37085294\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2b6d4a11-dd3d-4832-9fca-f43b43843b5b",
+    "name": "Partner Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A contract represents the formal agreement between a partner and a brand, outlining the payout terms, referral policies, and any special conditions governing the partnership. Each contract is associated with a campaign and includes detailed payout rules, locking schedules, and optional campaign-level term overrides.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

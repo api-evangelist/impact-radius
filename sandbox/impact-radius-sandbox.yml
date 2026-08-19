@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api.md
+docs:
+- https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api.md
+- https://integrations.impact.com/integration-guides/end-to-end-tests.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/end-to-end-testing-for-advocate.md
+description: >-
+  impact.com does not run a separate sandbox host. Testing is done two different ways depending on
+  the surface: Advocate ships true test-mode vs live-mode API keys against the same host, while
+  the partnership APIs (Brand/Partner/Agency) have no test mode at all and are tested with
+  production credentials against a Test Actions queue inside the live account.
+sandbox_host: null
+separate_credentials: partial
+modes:
+- surface: Advocate
+  host: https://app.referralsaasquatch.com/api/v1
+  test_mode: true
+  detail: >-
+    "To make the Advocate API as explorable as possible, accounts have test-mode API keys as well
+    as live-mode API keys. Use test-mode keys during development and live-mode keys in production."
+    Mode is selected by which key you authenticate with — same base URL, same operations. The
+    tenant_alias must match the key's mode, or the API returns RS003 / RS006 / RS032.
+  teardown:
+    graphql_mutation: deleteTestTenantData
+    detail: >-
+      The Advocate GraphQL schema exposes a deleteTestTenantData mutation, i.e. test data is
+      resettable rather than accumulating in the tenant.
+  source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/advocate-rest-api.md
+- surface: Brand / Partner / Agency REST
+  host: https://api.impact.com
+  test_mode: false
+  detail: >-
+    No test-mode credential and no sandbox host is published. Access tokens differ only by scope
+    and API version, not by environment. impact.com's own guidance is to promote "separate tokens
+    per environment (development / staging / production) with narrowly tailored scopes" — i.e.
+    environment separation is the customer's discipline, not a platform feature.
+  source: https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key.md
+test_conversions:
+  name: Test Actions
+  surface: Brand
+  description: >-
+    Conversion tracking is validated with a real transaction in the live account, routed to a Test
+    Actions queue rather than to payable Actions. impact.com requires at least one production
+    end-to-end test per new event type before launch.
+  flow:
+  - Settings -> Tracking -> Event Types, then [More] -> Test on the event type under test.
+  - Choose Template Term, Ad and optionally a Landing Page URL, then Start Test in New Window.
+  - Complete a conversion on your own site in the same browser session; record the Order ID and payload.
+  - Engage -> Transactions -> Test Actions, find the conversion by Order Id, [More] -> See Details.
+  - Approve to validate the integration, or Reject and repeat after fixing it.
+  latency: Up to 30 minutes for a test transaction to surface on the Test Actions screen.
+  browser_requirements:
+  - Clear cache and cookies before each test.
+  - Disable ad-blocking extensions.
+  - Private / incognito / guest mode is supported.
+  - Disable third-party cookies.
+  coverage_guidance:
+    sale: Multiple SKUs, minimum quantity 2 per SKU, some tests with a promo code and discount and some without.
+    lead: Several transactions varying promo codes, notes and text fields relevant to payout conditions.
+test_values:
+  test_cards: null
+  test_bank_accounts: null
+  test_tokens: null
+  note: >-
+    No published test card numbers, test bank accounts or hosted test tokens exist — impact.com
+    does not process the buyer's payment, it records the conversion the merchant reports. Payment
+    testing happens in the merchant's own store backend (the docs note e-commerce plugin users
+    must complete the payment there for the test action to be marked complete).
+time_simulation:
+  supported: false
+  note: No test clocks or time-travel fixtures are published.
+fixtures_and_triggers:
+- name: Event type Test
+  kind: trigger
+  surface: Brand UI
+  detail: Starts a tracked test session for one event type.
+- name: testWebhook
+  kind: trigger
+  surface: Advocate REST
+  operation: testWebhook
+  detail: Sends a `test` event to a webhook subscription to verify the receiver.
+- name: testWebhookSubscription
+  kind: trigger
+  surface: Advocate GraphQL
+  detail: GraphQL mutation equivalent of the webhook test.
+- name: testProgramSchedule
+  kind: trigger
+  surface: Advocate GraphQL
+  detail: Dry-runs a program's schedule.
+- name: previewUserCreation / previewUserEvent / formMetaPreview / renderWidget
+  kind: fixture
+  surface: Advocate GraphQL
+  detail: >-
+    Preview queries that compute what would happen (user creation, an event, a form, a widget
+    render) without committing it — the closest thing on the platform to a dry-run API.
+- name: markRevenueEventAsTest
+  kind: fixture
+  surface: Advocate GraphQL
+  detail: Flags a revenue event as test data.
+- name: sendPreviewEmail
+  kind: trigger
+  surface: Advocate GraphQL
+  detail: Sends a preview of a program email without triggering the real send.
+notes: >-
+  Every value here is published by impact.com; no test credentials, card numbers or endpoints were
+  invented. The GraphQL-side triggers are read from the introspected schema in
+  graphql/impact-radius-advocate-schema.graphql, which is a repo artifact, not a guess.

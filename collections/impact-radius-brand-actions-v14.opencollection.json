@@ -1,0 +1,319 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Actions",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CampaignId",
+                "value": "1000",
+                "type": "query",
+                "description": "The ID of the campaign (program) to list actions for."
+              },
+              {
+                "name": "State",
+                "value": "PENDING",
+                "type": "query",
+                "description": "Filters actions based on their current state."
+              },
+              {
+                "name": "StartDate",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for actions with a last updated date on or after this value (ISO 8601 with time component). Must be used with EndDate."
+              },
+              {
+                "name": "EndDate",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for actions with a last updated date on or before this value (ISO 8601 with time component). Requires StartDate."
+              },
+              {
+                "name": "ActionDateStart",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for actions with an EventDate on or after this value (ISO 8601 with time component). Can be used as an alternative to StartDate."
+              },
+              {
+                "name": "ActionDateEnd",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for actions with an EventDate on or before this value (ISO 8601 with time component). Requires ActionDateStart."
+              },
+              {
+                "name": "LockingDateStart",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for actions with a LockingDate on or after this value (ISO 8601 with time component)."
+              },
+              {
+                "name": "LockingDateEnd",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for actions with a LockingDate on or before this value (ISO 8601 with time component). Requires LockingDateStart."
+              }
+            ]
+          },
+          "docs": "Returns a list of actions your campaign has recorded, filtered by the provided parameters.\nActions are returned by creation date, with the most recently created actions appearing first.\n\n**Date filtering constraints (effective 5 August 2024):**\n- `StartDate` cannot be more than 3 years in the past.\n- The range between `StartDate` and `EndDate` cannot exceed 45 days.\n- If neither is specified, only the past 7 days are returned.\n- If `StartDate` is specified, `EndDate` must also be specified.\n- De"
+        },
+        {
+          "info": {
+            "name": "Update an action or its items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the specified action or its line items by setting the values of the parameters passed.\n\n- To update an action's top-level details (e.g., `CustomerStatus`), provide the `ActionId`\n  (or `ActionTrackerId` and `OrderId`) and the fields to update.\n- To update one or more items within an action, provide the `ActionId`, `Sku`, and\n  item-specific fields like `Quantity` and `Amount`.\n\nNote: impact.com allows a maximum of 1,000 modifications per action.\n"
+        },
+        {
+          "info": {
+            "name": "Reverse an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Reverses an action using its `ActionId` or a combination of `ActionTrackerId` and `OrderId`.\nThis will cancel any pending payouts to partners for the action.\n"
+        },
+        {
+          "info": {
+            "name": "Get action details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions/:ActionId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "ActionId",
+                "value": "1000.4636.158133",
+                "type": "path",
+                "description": "The unique impact.com identifier for the action."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing action by its unique impact.com ActionId."
+        },
+        {
+          "info": {
+            "name": "List action items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions/:ActionId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "ActionId",
+                "value": "1000.4636.158133",
+                "type": "path",
+                "description": "The unique impact.com identifier for the action."
+              }
+            ]
+          },
+          "docs": "Returns a list of the items within the specified action. The items are returned in the order they were originally recorded. All actions contain at least one item."
+        },
+        {
+          "info": {
+            "name": "Get action item details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Actions/:ActionId/Items/:Sku",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "ActionId",
+                "value": "1000.4636.158133",
+                "type": "path",
+                "description": "The unique impact.com identifier for the action."
+              },
+              {
+                "name": "Sku",
+                "value": "12345",
+                "type": "path",
+                "description": "The Stock-Keeping Unit (SKU) or product identifier of the item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific line item within an action. Requires the ActionId and the item's Sku."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Action Updates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List action updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ActionUpdates",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CampaignId",
+                "value": "1000",
+                "type": "query",
+                "description": "The ID of the campaign to view action updates for."
+              },
+              {
+                "name": "StartDate",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for updates with an UpdateDate on or after this value (ISO 8601 with time component). Must be used with EndDate."
+              },
+              {
+                "name": "EndDate",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for updates with an UpdateDate on or before this value (ISO 8601 with time component). Must be used with StartDate."
+              },
+              {
+                "name": "State",
+                "value": "PENDING",
+                "type": "query",
+                "description": "Filters updates to only those that match the State value passed."
+              },
+              {
+                "name": "ActionDateStart",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for updates with an ActionDate (EventDate) on or after this value (ISO 8601)."
+              },
+              {
+                "name": "ActionDateEnd",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for updates with an ActionDate (EventDate) on or before this value (ISO 8601)."
+              },
+              {
+                "name": "LockingDateStart",
+                "value": "2024-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filters for updates with a LockingDate on or after this value (ISO 8601)."
+              },
+              {
+                "name": "LockingDateEnd",
+                "value": "2024-01-31T23:59:59Z",
+                "type": "query",
+                "description": "Filters for updates with a LockingDate on or before this value (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of action updates, which serve as a changelog for actions.\nIt is recommended to filter by a date range using `StartDate` and `EndDate`.\n\n**Date filtering constraints (effective 5 August 2024):**\n- `StartDate` cannot be more than 3 years in the past.\n- The range between `StartDate` and `EndDate` cannot exceed 45 days.\n- If neither is specified, only the past 7 days are returned.\n- If `StartDate` is specified, `EndDate` must also be specified.\n\n**Recommendation:** Use action lifecyc"
+        },
+        {
+          "info": {
+            "name": "Get action update details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ActionUpdates/:ActionUpdateId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "ActionUpdateId",
+                "value": "1000.4636.158133.95095059",
+                "type": "path",
+                "description": "The unique identifier for the action update, obtainable from the list endpoint."
+              }
+            ]
+          },
+          "docs": "Retrieves the details for a specific update to an action by its unique ActionUpdateId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

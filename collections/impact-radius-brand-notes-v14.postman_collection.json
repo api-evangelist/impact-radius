@@ -1,0 +1,796 @@
+{
+  "item": [
+    {
+      "id": "4dd665b0-9451-4ec6-ae22-567e48643418",
+      "name": "Notes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5059a0ac-40e5-48ec-b0ee-910f140ae613",
+          "name": "List All Notes for a Campaign",
+          "request": {
+            "name": "List All Notes for a Campaign",
+            "description": {
+              "content": "Returns a list of notes for a specific campaign, sorted chronologically by creation date. The list can be filtered by partner (MediaId) and a date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "MediaId",
+                  "value": "<integer>",
+                  "description": "Filter notes for a specific partner account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filter for notes created on or after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filter for notes created on or before this date (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The ID of the campaign to retrieve notes from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80707cac-9ab1-462b-beac-6ca1e15c13cd",
+              "name": "A paginated list of note objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "MediaId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The ID of the campaign to retrieve notes from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Notes\": [\n    {\n      \"Id\": 123456,\n      \"MediaId\": 10000,\n      \"MediaName\": \"Acme Partner\",\n      \"Creator\": \"Brand Man\",\n      \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n      \"ModificationDate\": \"2020-10-21T14:51:42-07:00\",\n      \"Content\": \"Meep Meep\",\n      \"Type\": \"NONE\",\n      \"Attachments\": [\n        \"http://HAbEMCAlFZdcChzyfXilxrtKwpckbLHIK.ppeqEGK7lhBakE9oD1u14hfA5BuKH6+B?\",\n        \"https://nyDTMsLZwEhHqFhehkM.rod+x6GpFno.WCEvMjGB09cKROn6BJ+uM29FvVDU4D87ZGWmOWOIn,WXXf9Tirz-v87rH9k.G?ghqi&\"\n      ],\n      \"Uri\": \"http://utaarZnVTME.yuzVn6LhAm2CTHNf5xpeUXm?ri=rA2q&fowznk=2Y5&\"\n    },\n    {\n      \"Id\": 123456,\n      \"MediaId\": 10000,\n      \"MediaName\": \"Acme Partner\",\n      \"Creator\": \"Brand Man\",\n      \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n      \"ModificationDate\": \"2020-10-21T14:51:42-07:00\",\n      \"Content\": \"Meep Meep\",\n      \"Type\": \"NONE\",\n      \"Attachments\": [\n        \"http://AjPwWUqmypeArrTjtEulIKOBOyYGLfcrE.xjrb0HjNbOV9tl3ZOuStLrC.-9uit7oSwRpIri0iU.rAW.,LybbGaIJJgx9X1?lq&xzatv=X4A&qpmueb=k&\",\n        \"https://MWEkhMHEfwWXTE.mfkG+w+inWaVr9qY6BwjMN\"\n      ],\n      \"Uri\": \"http://MPRnz.aurP2-uGXRaEkOmCVS-CZ6fQ2K6Z3rLWxkaEfraWIuuZLA-Uml3R.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fec805b8-0a10-46b9-b4ce-099ff160e451",
+          "name": "Create a Note",
+          "request": {
+            "name": "Create a Note",
+            "description": {
+              "content": "Creates a new note for a specific partner. A note must contain either text content or an attachment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The ID of the campaign this note belongs to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "MediaId",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) The partner account ID this note is for."
+                },
+                {
+                  "key": "Content",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The plaintext content of the note. Optional if an Attachment is provided."
+                },
+                {
+                  "key": "Attachment",
+                  "type": "file",
+                  "description": "An image file to upload as an attachment. Optional if Content is provided."
+                },
+                {
+                  "key": "Type",
+                  "value": "NONE",
+                  "type": "text",
+                  "description": "The interaction type for this note. (This can only be one of EMAIL,IM,NONE,PHONE)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "26b0c94e-0892-4b8c-bd80-091cd1b2a26b",
+              "name": "The note was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The ID of the campaign this note belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The partner account ID this note is for.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaId",
+                      "value": "10000",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The plaintext content of the note. Optional if an Attachment is provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "Content",
+                      "value": "Following up on this partner.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "An image file to upload as an attachment. Optional if Content is provided.",
+                        "type": "text/plain"
+                      },
+                      "key": "Attachment",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The interaction type for this note. (This can only be one of EMAIL,IM,NONE,PHONE)",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "NONE",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://HSmJUWefsfwhZOWsKIADiu.blteCCKJhdT,?md=_q&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2271654-5cbb-47ff-9764-2df193f56e4c",
+          "name": "Get Note Details",
+          "request": {
+            "name": "Get Note Details",
+            "description": {
+              "content": "Retrieves the details of an existing note by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Notes",
+                ":NoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "NoteId",
+                  "description": "(Required) The unique identifier for the note."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd609811-c180-4ca5-a911-e2adf479c470",
+              "name": "A single note object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Notes",
+                    ":NoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "NoteId",
+                      "description": "(Required) The unique identifier for the note."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 123456,\n  \"MediaId\": 10000,\n  \"MediaName\": \"Acme Partner\",\n  \"Creator\": \"Brand Man\",\n  \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n  \"ModificationDate\": \"2020-10-21T14:51:42-07:00\",\n  \"Content\": \"Meep Meep\",\n  \"Type\": \"NONE\",\n  \"Attachments\": [\n    \"http://wtwcwfKSHDRFMwYT.mdzaGgmIBDmTkjpyov-ix4haTZGw4elYJqM1?mqhnp&jpxjc=M&\",\n    \"http://ZTVPUBJp.rtofKBhogCd\"\n  ],\n  \"Uri\": \"http://skQn.mkxuO8nq9CFN9?mf=aeao&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65999171-60b6-4b6c-b2ab-3aee1bd78b7c",
+          "name": "Update a Note",
+          "request": {
+            "name": "Update a Note",
+            "description": {
+              "content": "Updates the specified note by setting the values of the parameters passed. Any parameters not provided will be left unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Notes",
+                ":NoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "NoteId",
+                  "description": "(Required) The unique identifier for the note to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "Content",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The new plaintext content for the note."
+                },
+                {
+                  "key": "Type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The interaction type for this note. (This can only be one of EMAIL,IM,NONE,PHONE)"
+                },
+                {
+                  "key": "AttachmentsAdd",
+                  "type": "file",
+                  "description": "An image file to add as a new attachment."
+                },
+                {
+                  "key": "AttachmentsRemove",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The filename (e.g., 'crm_7654321_...') of the attachment to remove."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bba7bcce-e020-4b66-b351-ec0ad3c7ff51",
+              "name": "The note was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Notes",
+                    ":NoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "NoteId",
+                      "description": "(Required) The unique identifier for the note to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The new plaintext content for the note.",
+                        "type": "text/plain"
+                      },
+                      "key": "Content",
+                      "value": "Updated note content.",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The interaction type for this note. (This can only be one of EMAIL,IM,NONE,PHONE)",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "An image file to add as a new attachment.",
+                        "type": "text/plain"
+                      },
+                      "key": "AttachmentsAdd",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The filename (e.g., 'crm_7654321_...') of the attachment to remove.",
+                        "type": "text/plain"
+                      },
+                      "key": "AttachmentsRemove",
+                      "value": "1,2",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://HSmJUWefsfwhZOWsKIADiu.blteCCKJhdT,?md=_q&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc8a855d-11e0-44f9-b991-ed5af7f6bbaf",
+          "name": "Delete a Note",
+          "request": {
+            "name": "Delete a Note",
+            "description": {
+              "content": "Permanently deletes a note. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Notes",
+                ":NoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "NoteId",
+                  "description": "(Required) The unique identifier for the note to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbf5322b-49aa-43a9-81b7-605f8b0f1499",
+              "name": "The note was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Notes",
+                    ":NoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "NoteId",
+                      "description": "(Required) The unique identifier for the note to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "501550a9-430b-4874-8db9-1a19c1fc6acc",
+    "name": "Brand API - Notes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing internal notes about partners. These notes are visible to users within your impact.com account but not to partners.",
+      "type": "text/plain"
+    }
+  }
+}

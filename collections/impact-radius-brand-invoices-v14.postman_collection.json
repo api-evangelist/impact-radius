@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "cd193082-8a99-447f-b70f-849e5909e684",
+      "name": "Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a20e0d7-38bd-44d0-a2f1-fd156d947108",
+          "name": "List Invoices",
+          "request": {
+            "name": "List Invoices",
+            "description": {
+              "content": "Returns a list of partner invoices, sorted with the most recent appearing first. The list can be filtered by a creation date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters to show invoices created on or after the specified date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters to show invoices created on or before the specified date (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4501ebad-8e10-4e52-b3ae-a26e8cf24380",
+              "name": "A list of invoice objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoices\": [\n    {\n      \"Id\": \"1299679-33\",\n      \"CreatedDate\": \"2018-11-02T11:43:30-04:00\",\n      \"MediaId\": 1299679,\n      \"MediaName\": \"RoadRunner\",\n      \"Currency\": \"USD\",\n      \"TotalAmount\": 65,\n      \"TotalVatAmount\": 0,\n      \"LineItems\": [\n        {\n          \"CampaignId\": 1000,\n          \"CampaignName\": \"Acme Online\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"92018\",\n          \"Actions\": 13,\n          \"NetItemAmount\": 65,\n          \"VatItemAmount\": 0,\n          \"TotalItemAmount\": 65,\n          \"Status\": \"PAID\",\n          \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n          \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n        },\n        {\n          \"CampaignId\": 1000,\n          \"CampaignName\": \"Acme Online\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"92018\",\n          \"Actions\": 13,\n          \"NetItemAmount\": 65,\n          \"VatItemAmount\": 0,\n          \"TotalItemAmount\": 65,\n          \"Status\": \"PAID\",\n          \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n          \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n        }\n      ],\n      \"DetailedLineItems\": [\n        {\n          \"AccountId\": 1299679,\n          \"Name\": \"ACME Online\",\n          \"ProgramId\": 1000,\n          \"ProgramName\": \"ACME Online\",\n          \"EventMonthYear\": \"92018\",\n          \"ActionAmount\": 65,\n          \"OtherAmount\": 0,\n          \"TotalAmount\": 65\n        },\n        {\n          \"AccountId\": 1299679,\n          \"Name\": \"ACME Online\",\n          \"ProgramId\": 1000,\n          \"ProgramName\": \"ACME Online\",\n          \"EventMonthYear\": \"92018\",\n          \"ActionAmount\": 65,\n          \"OtherAmount\": 0,\n          \"TotalAmount\": 65\n        }\n      ],\n      \"PDF\": \"http://epqvDbdFttRdVbbpkA.tsmdi571RWizvNvNazviuPoeP,feqZH.hLfGZcmTI1Ym76MCWLmKnmVg\",\n      \"Uri\": \"https://cHZkAMiISfdH.xptldNDVJNEt9w1NLaCxA+5kvErlcH9ReJI?rfa=jTn&yct&\"\n    },\n    {\n      \"Id\": \"1299679-33\",\n      \"CreatedDate\": \"2018-11-02T11:43:30-04:00\",\n      \"MediaId\": 1299679,\n      \"MediaName\": \"RoadRunner\",\n      \"Currency\": \"USD\",\n      \"TotalAmount\": 65,\n      \"TotalVatAmount\": 0,\n      \"LineItems\": [\n        {\n          \"CampaignId\": 1000,\n          \"CampaignName\": \"Acme Online\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"92018\",\n          \"Actions\": 13,\n          \"NetItemAmount\": 65,\n          \"VatItemAmount\": 0,\n          \"TotalItemAmount\": 65,\n          \"Status\": \"PAID\",\n          \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n          \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n        },\n        {\n          \"CampaignId\": 1000,\n          \"CampaignName\": \"Acme Online\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"92018\",\n          \"Actions\": 13,\n          \"NetItemAmount\": 65,\n          \"VatItemAmount\": 0,\n          \"TotalItemAmount\": 65,\n          \"Status\": \"PAID\",\n          \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n          \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n        }\n      ],\n      \"DetailedLineItems\": [\n        {\n          \"AccountId\": 1299679,\n          \"Name\": \"ACME Online\",\n          \"ProgramId\": 1000,\n          \"ProgramName\": \"ACME Online\",\n          \"EventMonthYear\": \"92018\",\n          \"ActionAmount\": 65,\n          \"OtherAmount\": 0,\n          \"TotalAmount\": 65\n        },\n        {\n          \"AccountId\": 1299679,\n          \"Name\": \"ACME Online\",\n          \"ProgramId\": 1000,\n          \"ProgramName\": \"ACME Online\",\n          \"EventMonthYear\": \"92018\",\n          \"ActionAmount\": 65,\n          \"OtherAmount\": 0,\n          \"TotalAmount\": 65\n        }\n      ],\n      \"PDF\": \"http://sOiDQVTbslZHLQfRLy.knmjd7eBzqy2YZwkHEvrBRqT,qgjC3yQcCrZNqK2rgntCwojfRp4C7kuzlocP?zlg=q&snwd&fpjcjce&\",\n      \"Uri\": \"http://HLV.njmT9qkvj,lt7i-CUpovkYvfjTWmp,JGqBF6iNEsZ-Vm7d\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f94af8b5-9c5e-478a-b84d-7483e5cadd4e",
+          "name": "Get Invoice Details",
+          "request": {
+            "name": "Get Invoice Details",
+            "description": {
+              "content": "Retrieves the details of a single partner invoice by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Invoices",
+                ":InvoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "InvoiceId",
+                  "description": "(Required) The unique identifier for the invoice."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "126a8770-bce5-471a-a022-5f5c59155951",
+              "name": "A single invoice object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Invoices",
+                    ":InvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "InvoiceId",
+                      "description": "(Required) The unique identifier for the invoice."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1299679-33\",\n  \"CreatedDate\": \"2018-11-02T11:43:30-04:00\",\n  \"MediaId\": 1299679,\n  \"MediaName\": \"RoadRunner\",\n  \"Currency\": \"USD\",\n  \"TotalAmount\": 65,\n  \"TotalVatAmount\": 0,\n  \"LineItems\": [\n    {\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Online\",\n      \"Description\": \"MEDIA_PAYOUT\",\n      \"EventMonthYear\": \"92018\",\n      \"Actions\": 13,\n      \"NetItemAmount\": 65,\n      \"VatItemAmount\": 0,\n      \"TotalItemAmount\": 65,\n      \"Status\": \"PAID\",\n      \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n      \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n    },\n    {\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Online\",\n      \"Description\": \"MEDIA_PAYOUT\",\n      \"EventMonthYear\": \"92018\",\n      \"Actions\": 13,\n      \"NetItemAmount\": 65,\n      \"VatItemAmount\": 0,\n      \"TotalItemAmount\": 65,\n      \"Status\": \"PAID\",\n      \"DueDate\": \"2018-10-16T00:00:00-04:00\",\n      \"PaidDate\": \"2018-10-16T00:35:47-04:00\"\n    }\n  ],\n  \"DetailedLineItems\": [\n    {\n      \"AccountId\": 1299679,\n      \"Name\": \"ACME Online\",\n      \"ProgramId\": 1000,\n      \"ProgramName\": \"ACME Online\",\n      \"EventMonthYear\": \"92018\",\n      \"ActionAmount\": 65,\n      \"OtherAmount\": 0,\n      \"TotalAmount\": 65\n    },\n    {\n      \"AccountId\": 1299679,\n      \"Name\": \"ACME Online\",\n      \"ProgramId\": 1000,\n      \"ProgramName\": \"ACME Online\",\n      \"EventMonthYear\": \"92018\",\n      \"ActionAmount\": 65,\n      \"OtherAmount\": 0,\n      \"TotalAmount\": 65\n    }\n  ],\n  \"PDF\": \"http://Ba.fiofoKXwsqrv7c6t0KjML1ivc\",\n  \"Uri\": \"https://imOKojvHNhKeVMGeb.evclk.eA971ysTQ1Lcn,c?s=POoV&cts&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ec55591-b61c-4a09-a079-d29e9d6267e1",
+          "name": "Download Invoice PDF",
+          "request": {
+            "name": "Download Invoice PDF",
+            "description": {
+              "content": "Returns the specified partner invoice as a downloadable PDF file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Invoices",
+                ":InvoiceId",
+                "Download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "InvoiceId",
+                  "description": "(Required) The unique identifier for the invoice."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "432daada-db9f-41b5-b860-0fb7d96aad7c",
+              "name": "The invoice in PDF format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Invoices",
+                    ":InvoiceId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "InvoiceId",
+                      "description": "(Required) The unique identifier for the invoice."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c8479a9-4013-4a88-8a00-7b57dd7acce5",
+    "name": "Brand API - Partner Invoices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving partner invoices, which are statements of amounts owed to partners that are automatically generated by impact.com.",
+      "type": "text/plain"
+    }
+  }
+}

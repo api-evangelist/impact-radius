@@ -1,0 +1,206 @@
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/status-codes-and-errors.md
+docs:
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/status-codes-and-errors.md
+- https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1/readme/advocate-error-codes.md
+- https://integrations.impact.com/agency-v3/readme/status-and-error-codes.md
+derived_from: openapi/
+format: vendor
+rfc9457: false
+description: >-
+  impact.com REST APIs return a vendor error envelope (not RFC 9457 application/problem+json).
+  Errors carry a top-level Status/Message plus an Errors array of per-field failures. Both JSON
+  and XML representations are published. The Advocate surface adds a documented RS### error-code
+  vocabulary.
+envelope:
+  media_types:
+  - application/json
+  - application/xml
+  fields:
+    Status: Literal "ERROR" on failure.
+    Message: Human-readable summary, e.g. "Validation Failed".
+    Errors: Array of {Field, Message} objects naming the offending request field.
+  example:
+    Status: ERROR
+    Message: Validation Failed
+    Errors:
+    - Field: AccountId
+      Message: Not a numeric value
+status_codes:
+- code: 200
+  title: OK
+  description: Everything worked as expected.
+- code: 201
+  title: Created
+  description: Everything worked as expected.
+- code: 400
+  title: Bad request
+  description: Often missing a required parameter.
+  remediation: Inspect the Errors[] array for the offending Field and correct the request.
+- code: 401
+  title: Unauthorized
+  description: No valid API key provided.
+  remediation: >-
+    Send Authorization: Basic base64(AccountSID:AuthToken) over HTTPS. Requests over plain HTTP
+    fail.
+- code: 402
+  title: Request failed
+  description: Parameters were valid but the request failed.
+- code: 403
+  title: Forbidden
+  description: >-
+    Returned by scoped tokens if they are disabled, or if the scoped token is enabled but the
+    specific endpoint is not enabled for that token.
+  remediation: Enable the API category/scope on the access token in Settings -> Technical -> API.
+- code: 404
+  title: Not found
+  description: The requested resource does not exist.
+- code: 405
+  title: Method not allowed
+  description: Method used in the call is not supported.
+- code: 429
+  title: Too many requests
+  description: Too many requests hit the API too quickly.
+  remediation: Back off using X-RateLimit-Reset; see rate-limits/impact-radius-rate-limits.yml.
+- code: 500
+  title: Server error
+  description: Something went wrong on impact.com's end.
+  remediation: Retry with exponential back-off.
+- code: 502
+  title: Bad gateway
+  description: Something went wrong on impact.com's end.
+- code: 503
+  title: Service unavailable
+  description: Something went wrong on impact.com's end.
+- code: 504
+  title: Gateway timeout
+  description: Something went wrong on impact.com's end.
+advocate_error_codes:
+  surface: https://app.referralsaasquatch.com/api/v1
+  source: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1/readme/advocate-error-codes.md
+  codes:
+  - code: RS003
+    message: accountid is required at initialization.
+    action: Use the auth token (test or live) matching the correct tenant_alias when signing requests.
+  - code: RS005
+    message: Secure Mode enabled, checksum required.
+    action: Include a checksum or JWT.
+  - code: RS006
+    message: The checksum or JWT value is incorrect.
+    action: >-
+      Include the Account SID as a child in the JWT header; use the Auth Token and Account SID
+      matching your program; exclude client-only parameters (mode, locale) from the checksum.
+  - code: RS013
+    message: Maximum number of users per account reached (limit 1000 users per accountid).
+    action: Confirm users are not all grouped under a single accountid.
+  - code: RS014
+    message: Internal error; unable to generate referral code for new user.
+    action: Transient; retry.
+  - code: RS015
+    message: No tenant alias was provided or the provided tenant alias does not exist.
+    action: Contact support.
+  - code: RS016
+    message: Internal error; unsupported payment system.
+    action: Transient; retry.
+  - code: RS017
+    message: An internal error occurred.
+    action: Transient; retry.
+  - code: RS020
+    message: An internal error occurred.
+    action: Transient; retry.
+  - code: RS021
+    message: Internal error; account already exists.
+    action: Use a different accountid.
+  - code: RS023
+    message: The provided email field is an invalid email address.
+    action: Email must be >= 7 chars, have a local part, and a TLD of at least 2 characters.
+  - code: RS024
+    message: The first_name provided is invalid or does not exist.
+    action: Send first_name; ASCII character codes 65-90 and 97-122 only.
+  - code: RS026
+    message: No theme has successfully been published yet.
+    action: Transient; retry.
+  - code: RS027
+    message: An internal error occurred.
+    action: Transient; retry.
+  - code: RS031
+    message: The tenant associated with the provided alias has been deleted.
+    action: Contact support.
+  - code: RS032
+    message: The JWT value is incorrect.
+    action: Verify JWT header contains the Account SID and the signing key matches the tenant_alias.
+  - code: RS033
+    message: Rate limit exceeded.
+    action: >-
+      Confirm participants are not registered under one account and that server-side calls use
+      an API key rather than a JWT.
+  - code: RS034
+    message: The provided referralCode is empty or invalid.
+    action: Send a valid referral code, or omit the parameter entirely.
+  - code: RS036
+    message: The provided widgetType or widget field is invalid.
+    action: "Valid values include p/{programId}/w/referrerWidget and p/{programId}/w/websiteReferralWidget."
+  - code: RS037
+    message: The provided engagementMedium field is invalid.
+    action: Valid values are POPUP and EMBED.
+  - code: RS038
+    message: No tenant found for the provided alias.
+    action: Contact support.
+  - code: RS039
+    message: The provided locale field is an invalid locale.
+    action: Use ISO two-character language_country, or omit the parameter.
+  - code: RS041
+    message: No account found for the provided ID.
+    action: Verify accountid and tenant.
+  - code: RS042
+    message: No user found for the provided ID.
+    action: Verify userId and tenant.
+  - code: RS043
+    message: The user ID cannot be empty.
+    action: Send a valid userId.
+  - code: RS044
+    message: The account ID cannot be empty.
+    action: Send a valid accountid, or omit the parameter.
+  - code: RS045
+    message: The request did not have the necessary authorization credentials.
+    action: Include a JWT.
+  - code: RS046
+    message: The request had an incorrect content-type.
+    action: Send Content-Type application/json.
+  - code: RS047
+    message: The request was unauthorized because it must use SSL.
+    action: Use HTTPS.
+  - code: RS048
+    message: Internal error; user already exists.
+    action: Use a different user_id.
+  - code: RS049
+    message: There has been an error with one of your programs.
+    action: Pause the program and review the configured program rules; contact support if it persists.
+  - code: RS050
+    message: The user is set to do-not-track.
+    action: Contact support.
+  - code: RS051
+    message: Legacy call not compatible with your Growth Automation Program.
+    action: Check the call against the supported Advocate API call list.
+  - code: RS052
+    message: You have passed an invalid cookie value.
+    action: Base64-decode the cookie and verify the schema.
+  - code: RS053
+    message: You have passed an invalid shareLink.
+    action: Configure a custom short domain and pass a correctly formatted shareLink.
+spec_coverage:
+  note: >-
+    Derived counts from the 67 harvested OpenAPI documents in openapi/ — error responses that
+    the specs themselves declare.
+  responses:
+    '400': 12
+    '401': 19
+    '403': 14
+    '404': 39
+    '409': 2
+    default: 22
+notes: >-
+  No application/problem+json media type is declared anywhere in the published specs, so this
+  API family is not RFC 9457 conformant. Codes and remediation text captured verbatim from the
+  provider's own error reference pages; nothing was invented.

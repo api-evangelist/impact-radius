@@ -1,0 +1,1339 @@
+{
+  "item": [
+    {
+      "id": "422f2559-3c7f-4378-b2ab-7dd6ad6c1282",
+      "name": "Actions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6ee5dcb-8437-41df-9678-ae867761c9f6",
+          "name": "List actions",
+          "request": {
+            "name": "List actions",
+            "description": {
+              "content": "Returns a list of actions your campaign has recorded, filtered by the provided parameters.\nActions are returned by creation date, with the most recently created actions appearing first.\n\n**Date filtering constraints (effective 5 August 2024):**\n- `StartDate` cannot be more than 3 years in the past.\n- The range between `StartDate` and `EndDate` cannot exceed 45 days.\n- If neither is specified, only the past 7 days are returned.\n- If `StartDate` is specified, `EndDate` must also be specified.\n- Default page size is 20,000 records. Minimum page size is 2,000.\n- If the total record count exceeds 10× the page size, an error is returned — reduce the date range or increase PageSize.\n\n**Note on StartDate/EndDate:** These filter on the last updated date, not the event date. State transitions\n(e.g., Pending → Approved) are not considered updates and will not be reflected by these filters.\nUse `LockingDateStart`/`LockingDateEnd` to filter by approval date.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the campaign (program) to list actions for."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filters actions based on their current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with a last updated date on or after this value (ISO 8601 with time component). Must be used with EndDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with a last updated date on or before this value (ISO 8601 with time component). Requires StartDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with an EventDate on or after this value (ISO 8601 with time component). Can be used as an alternative to StartDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with an EventDate on or before this value (ISO 8601 with time component). Requires ActionDateStart."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with a LockingDate on or after this value (ISO 8601 with time component)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters for actions with a LockingDate on or before this value (ISO 8601 with time component). Requires LockingDateStart."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9de7b4fb-2338-4981-bf49-9c2611fb1221",
+              "name": "A paginated list of action objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "State",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "2024-01-31T23:59:59Z"
+                    },
+                    {
+                      "key": "ActionDateStart",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "ActionDateEnd",
+                      "value": "2024-01-31T23:59:59Z"
+                    },
+                    {
+                      "key": "LockingDateStart",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "LockingDateEnd",
+                      "value": "2024-01-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Actions\": [\n    {\n      \"Id\": \"1000.4636.158133\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"ActionTrackerId\": 2240,\n      \"ActionTrackerName\": \"Sale\",\n      \"EventCode\": \"\",\n      \"MediaPartnerId\": 10000,\n      \"MediaPartnerName\": \"Acme Partner\",\n      \"State\": \"PENDING\",\n      \"AdId\": 506720,\n      \"ClientCost\": 0.88,\n      \"Payout\": 0.88,\n      \"DeltaPayout\": 0.88,\n      \"IntendedPayout\": 0.88,\n      \"Amount\": 21.99,\n      \"DeltaAmount\": 21.99,\n      \"IntendedAmount\": 21.99,\n      \"Currency\": \"USD\",\n      \"ReferringDate\": \"2020-09-10T09:45:07-07:00\",\n      \"EventDate\": \"2020-09-10T10:42:38-07:00\",\n      \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n      \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n      \"ClearedDate\": \"1995-03-10T16:03:59.681Z\",\n      \"ReferringType\": \"CLICK_COOKIE\",\n      \"ReferringDomain\": \"\",\n      \"PromoCode\": \"SUMMERSALE2020\",\n      \"Oid\": \"9217374917472\",\n      \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n      \"CustomerStatus\": \"NEW\",\n      \"CustomerPostCode\": \"15122\",\n      \"CustomerArea\": \"n/a\",\n      \"CustomerCity\": \"Santa Barbara\",\n      \"CustomerRegion\": \"California\",\n      \"CustomerCountry\": \"US\",\n      \"IpAddress\": \"979823c536b3e06e4f1ee31af1f82b9d\",\n      \"SharedId\": \"RT-19247423\",\n      \"CallerId\": \"\",\n      \"Note\": \"\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\"\n    },\n    {\n      \"Id\": \"1000.4636.158133\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"ActionTrackerId\": 2240,\n      \"ActionTrackerName\": \"Sale\",\n      \"EventCode\": \"\",\n      \"MediaPartnerId\": 10000,\n      \"MediaPartnerName\": \"Acme Partner\",\n      \"State\": \"PENDING\",\n      \"AdId\": 506720,\n      \"ClientCost\": 0.88,\n      \"Payout\": 0.88,\n      \"DeltaPayout\": 0.88,\n      \"IntendedPayout\": 0.88,\n      \"Amount\": 21.99,\n      \"DeltaAmount\": 21.99,\n      \"IntendedAmount\": 21.99,\n      \"Currency\": \"USD\",\n      \"ReferringDate\": \"2020-09-10T09:45:07-07:00\",\n      \"EventDate\": \"2020-09-10T10:42:38-07:00\",\n      \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n      \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n      \"ClearedDate\": \"1984-07-20T14:44:02.769Z\",\n      \"ReferringType\": \"CLICK_COOKIE\",\n      \"ReferringDomain\": \"\",\n      \"PromoCode\": \"SUMMERSALE2020\",\n      \"Oid\": \"9217374917472\",\n      \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n      \"CustomerStatus\": \"NEW\",\n      \"CustomerPostCode\": \"15122\",\n      \"CustomerArea\": \"n/a\",\n      \"CustomerCity\": \"Santa Barbara\",\n      \"CustomerRegion\": \"California\",\n      \"CustomerCountry\": \"US\",\n      \"IpAddress\": \"979823c536b3e06e4f1ee31af1f82b9d\",\n      \"SharedId\": \"RT-19247423\",\n      \"CallerId\": \"\",\n      \"Note\": \"\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e39b325-996f-485a-9b78-11559bcf8302",
+          "name": "Update an action or its items",
+          "request": {
+            "name": "Update an action or its items",
+            "description": {
+              "content": "Updates the specified action or its line items by setting the values of the parameters passed.\n\n- To update an action's top-level details (e.g., `CustomerStatus`), provide the `ActionId`\n  (or `ActionTrackerId` and `OrderId`) and the fields to update.\n- To update one or more items within an action, provide the `ActionId`, `Sku`, and\n  item-specific fields like `Quantity` and `Amount`.\n\nNote: impact.com allows a maximum of 1,000 modifications per action.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ActionId",
+                  "value": "<string>",
+                  "description": "The unique impact.com identifier for the action to update. Required unless ActionTrackerId and OrderId are used together."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<integer>",
+                  "description": "The event type ID. Required with OrderId if ActionId is not used."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderId",
+                  "value": "<string>",
+                  "description": "Your unique order identifier. Required with ActionTrackerId if ActionId is not used."
+                },
+                {
+                  "disabled": false,
+                  "key": "Reason",
+                  "value": "<string>",
+                  "description": "Required. A valid reason code for the modification. Default reason codes:\n`ORDER_UPDATE`, `ITEM_RETURNED`, `CONS_FRAUD`, `CONS_ERROR`, `ORDER_ERROR`,\n`PUB_ACT_DISPUTE`, `ADV_ACT_DISPUTE`, `NOT_COMPLIANCE_TERMS`,\n`ITEM_OUT_OF_STOCK`, `TEST_ACTION`, `PARTNER_NOT_ACTIVE`,\n`CREDITED_DIFFERENT_MP`, `OTHER`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "DispositionCode",
+                  "value": "<string>",
+                  "description": "Submit `ORDER_UPDATE` as the default value for updating an action. Custom disposition codes may be used if configured in event type settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "Amount",
+                  "value": "<number>",
+                  "description": "The new total sale amount for the order. Setting to 0 on a tracked action with a non-zero amount will reverse the action."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerStatus",
+                  "value": "<string>",
+                  "description": "A new custom status for the customer (e.g., `NEW`, `EXISTING`). Must be configured in event type settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "Sku",
+                  "value": "<string>",
+                  "description": "SKU of the item to update. For bulk item updates use indexed params (Sku, Sku2, Sku3, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Category",
+                  "value": "<string>",
+                  "description": "Category for the product. Can be automatically pulled if a product catalog has been uploaded. For item-level modifications, include for each item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Quantity",
+                  "value": "<integer>",
+                  "description": "The new absolute quantity of the item. For bulk item updates use indexed params (Quantity, Quantity2, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemSubTotalDelta",
+                  "value": "<number>",
+                  "description": "A relative delta amount to add or subtract from the item's SaleAmount. Use instead of Amount for partial adjustments."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "53952469-d7f8-4972-8b80-e83781a1406b",
+              "name": "The update request has been queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The unique impact.com identifier for the action to update. Required unless ActionTrackerId and OrderId are used together.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionId",
+                      "value": "1000.4636.158133"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The event type ID. Required with OrderId if ActionId is not used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "2240"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique order identifier. Required with ActionTrackerId if ActionId is not used.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderId",
+                      "value": "9217374917472"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required. A valid reason code for the modification. Default reason codes:\n`ORDER_UPDATE`, `ITEM_RETURNED`, `CONS_FRAUD`, `CONS_ERROR`, `ORDER_ERROR`,\n`PUB_ACT_DISPUTE`, `ADV_ACT_DISPUTE`, `NOT_COMPLIANCE_TERMS`,\n`ITEM_OUT_OF_STOCK`, `TEST_ACTION`, `PARTNER_NOT_ACTIVE`,\n`CREDITED_DIFFERENT_MP`, `OTHER`.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "Reason",
+                      "value": "ORDER_UPDATE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Submit `ORDER_UPDATE` as the default value for updating an action. Custom disposition codes may be used if configured in event type settings.",
+                        "type": "text/plain"
+                      },
+                      "key": "DispositionCode",
+                      "value": "ORDER_UPDATE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The new total sale amount for the order. Setting to 0 on a tracked action with a non-zero amount will reverse the action.",
+                        "type": "text/plain"
+                      },
+                      "key": "Amount",
+                      "value": "19.99"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A new custom status for the customer (e.g., `NEW`, `EXISTING`). Must be configured in event type settings.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerStatus",
+                      "value": "EXISTING"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "SKU of the item to update. For bulk item updates use indexed params (Sku, Sku2, Sku3, etc.).",
+                        "type": "text/plain"
+                      },
+                      "key": "Sku",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Category for the product. Can be automatically pulled if a product catalog has been uploaded. For item-level modifications, include for each item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Category",
+                      "value": "Footwear"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The new absolute quantity of the item. For bulk item updates use indexed params (Quantity, Quantity2, etc.).",
+                        "type": "text/plain"
+                      },
+                      "key": "Quantity",
+                      "value": "2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A relative delta amount to add or subtract from the item's SaleAmount. Use instead of Amount for partial adjustments.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSubTotalDelta",
+                      "value": "-5"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4f7cb1c-9302-454e-8704-4c3e752350b8",
+          "name": "Reverse an action",
+          "request": {
+            "name": "Reverse an action",
+            "description": {
+              "content": "Reverses an action using its `ActionId` or a combination of `ActionTrackerId` and `OrderId`.\nThis will cancel any pending payouts to partners for the action.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "DispositionCode",
+                  "value": "<string>",
+                  "description": "(Required) Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionId",
+                  "value": "<string>",
+                  "description": "The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<integer>",
+                  "description": "The event type ID. Required with OrderId if ActionId is not used."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderId",
+                  "value": "<string>",
+                  "description": "Your unique order identifier. Required with ActionTrackerId if ActionId is not used."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8433a9b6-5508-4fca-9b3b-58d70acbddeb",
+              "name": "The reversal request has been queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED.",
+                        "type": "text/plain"
+                      },
+                      "key": "DispositionCode",
+                      "value": "ITEM_RETURNED"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionId",
+                      "value": "1000.4636.158133"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The event type ID. Required with OrderId if ActionId is not used.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "2240"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique order identifier. Required with ActionTrackerId if ActionId is not used.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderId",
+                      "value": "9217374917472"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c29a8e7-1af7-4572-bd68-8775781c5bc7",
+          "name": "Get action details",
+          "request": {
+            "name": "Get action details",
+            "description": {
+              "content": "Retrieves the details of an existing action by its unique impact.com ActionId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions",
+                ":ActionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ActionId",
+                  "description": "(Required) The unique impact.com identifier for the action."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "103e4b52-a563-4189-9208-40e5b1322828",
+              "name": "An action object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions",
+                    ":ActionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ActionId",
+                      "description": "(Required) The unique impact.com identifier for the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1000.4636.158133\",\n  \"CampaignId\": 1000,\n  \"CampaignName\": \"Acme Campaign\",\n  \"ActionTrackerId\": 2240,\n  \"ActionTrackerName\": \"Sale\",\n  \"EventCode\": \"\",\n  \"MediaPartnerId\": 10000,\n  \"MediaPartnerName\": \"Acme Partner\",\n  \"State\": \"PENDING\",\n  \"AdId\": 506720,\n  \"ClientCost\": 0.88,\n  \"Payout\": 0.88,\n  \"DeltaPayout\": 0.88,\n  \"IntendedPayout\": 0.88,\n  \"Amount\": 21.99,\n  \"DeltaAmount\": 21.99,\n  \"IntendedAmount\": 21.99,\n  \"Currency\": \"USD\",\n  \"ReferringDate\": \"2020-09-10T09:45:07-07:00\",\n  \"EventDate\": \"2020-09-10T10:42:38-07:00\",\n  \"CreationDate\": \"2020-09-10T10:51:23-07:00\",\n  \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n  \"ClearedDate\": \"1957-09-26T13:09:23.393Z\",\n  \"ReferringType\": \"CLICK_COOKIE\",\n  \"ReferringDomain\": \"\",\n  \"PromoCode\": \"SUMMERSALE2020\",\n  \"Oid\": \"9217374917472\",\n  \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n  \"CustomerStatus\": \"NEW\",\n  \"CustomerPostCode\": \"15122\",\n  \"CustomerArea\": \"n/a\",\n  \"CustomerCity\": \"Santa Barbara\",\n  \"CustomerRegion\": \"California\",\n  \"CustomerCountry\": \"US\",\n  \"IpAddress\": \"979823c536b3e06e4f1ee31af1f82b9d\",\n  \"SharedId\": \"RT-19247423\",\n  \"CallerId\": \"\",\n  \"Note\": \"\",\n  \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45556605-f87c-4108-a399-5bbe50df8f13",
+          "name": "List action items",
+          "request": {
+            "name": "List action items",
+            "description": {
+              "content": "Returns a list of the items within the specified action. The items are returned in the order they were originally recorded. All actions contain at least one item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions",
+                ":ActionId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ActionId",
+                  "description": "(Required) The unique impact.com identifier for the action."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ceb5602-0c25-43ac-a09f-2b8a68bd5f0e",
+              "name": "A paginated list of action item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions",
+                    ":ActionId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ActionId",
+                      "description": "(Required) The unique impact.com identifier for the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActionItems\": [\n    {\n      \"Sku\": \"12345\",\n      \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n      \"Category\": \"Sports\",\n      \"Quantity\": \"2\",\n      \"SaleAmount\": \"19.27\",\n      \"SaleAmountCurrency\": \"USD\",\n      \"Payout\": 0.77,\n      \"PayoutCurrency\": \"USD\",\n      \"Rebate\": 1,\n      \"RebateCurrency\": \"USD\",\n      \"AdjustmentDate\": \"1999-05-09T13:50:13.633Z\",\n      \"AdjustmentReason\": \"\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345\"\n    },\n    {\n      \"Sku\": \"12345\",\n      \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n      \"Category\": \"Sports\",\n      \"Quantity\": \"2\",\n      \"SaleAmount\": \"19.27\",\n      \"SaleAmountCurrency\": \"USD\",\n      \"Payout\": 0.77,\n      \"PayoutCurrency\": \"USD\",\n      \"Rebate\": 1,\n      \"RebateCurrency\": \"USD\",\n      \"AdjustmentDate\": \"2026-03-12T10:28:04.449Z\",\n      \"AdjustmentReason\": \"\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "989fd32f-0f4c-4e55-b735-72d6d848a44e",
+          "name": "Get action item details",
+          "request": {
+            "name": "Get action item details",
+            "description": {
+              "content": "Retrieves the details of a specific line item within an action. Requires the ActionId and the item's Sku.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Actions",
+                ":ActionId",
+                "Items",
+                ":Sku"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ActionId",
+                  "description": "(Required) The unique impact.com identifier for the action."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Sku",
+                  "description": "(Required) The Stock-Keeping Unit (SKU) or product identifier of the item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc361225-dd8c-4e83-8f6f-8ab084c92939",
+              "name": "An action item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Actions",
+                    ":ActionId",
+                    "Items",
+                    ":Sku"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ActionId",
+                      "description": "(Required) The unique impact.com identifier for the action."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Sku",
+                      "description": "(Required) The Stock-Keeping Unit (SKU) or product identifier of the item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Sku\": \"12345\",\n  \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n  \"Category\": \"Sports\",\n  \"Quantity\": \"2\",\n  \"SaleAmount\": \"19.27\",\n  \"SaleAmountCurrency\": \"USD\",\n  \"Payout\": 0.77,\n  \"PayoutCurrency\": \"USD\",\n  \"Rebate\": 1,\n  \"RebateCurrency\": \"USD\",\n  \"AdjustmentDate\": \"2005-06-25T08:12:16.049Z\",\n  \"AdjustmentReason\": \"\",\n  \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0a8afb09-a898-49c0-b713-cdc17c1bcf6f",
+      "name": "Action Updates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b32b5b1c-1c29-4d07-b804-508146b0ac41",
+          "name": "List action updates",
+          "request": {
+            "name": "List action updates",
+            "description": {
+              "content": "Returns a list of action updates, which serve as a changelog for actions.\nIt is recommended to filter by a date range using `StartDate` and `EndDate`.\n\n**Date filtering constraints (effective 5 August 2024):**\n- `StartDate` cannot be more than 3 years in the past.\n- The range between `StartDate` and `EndDate` cannot exceed 45 days.\n- If neither is specified, only the past 7 days are returned.\n- If `StartDate` is specified, `EndDate` must also be specified.\n\n**Recommendation:** Use action lifecycle postbacks instead of this endpoint for near-realtime updates.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ActionUpdates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the campaign to view action updates for."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with an UpdateDate on or after this value (ISO 8601 with time component). Must be used with EndDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with an UpdateDate on or before this value (ISO 8601 with time component). Must be used with StartDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filters updates to only those that match the State value passed."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with an ActionDate (EventDate) on or after this value (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with an ActionDate (EventDate) on or before this value (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with a LockingDate on or after this value (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters for updates with a LockingDate on or before this value (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc94426b-6ee5-4792-8776-d16d0a09040d",
+              "name": "A paginated list of action update objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ActionUpdates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "2024-01-31T23:59:59Z"
+                    },
+                    {
+                      "key": "State",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "ActionDateStart",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "ActionDateEnd",
+                      "value": "2024-01-31T23:59:59Z"
+                    },
+                    {
+                      "key": "LockingDateStart",
+                      "value": "2024-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "LockingDateEnd",
+                      "value": "2024-01-31T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActionUpdates\": [\n    {\n      \"Id\": \"1000.4636.158133.95095059\",\n      \"ActionId\": \"1000.4636.158133\",\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 2240,\n      \"EventTypeId\": \"2240\",\n      \"EventTypeName\": \"Sale\",\n      \"EventCode\": \"\",\n      \"MediaPartnerId\": 10000,\n      \"State\": \"PENDING\",\n      \"StateDetail\": \"\",\n      \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n      \"AdId\": 506720,\n      \"Disposition\": \"IR_BLANK\",\n      \"DeltaPayout\": 0.65,\n      \"DeltaAmount\": 16.29,\n      \"Currency\": \"USD\",\n      \"Category\": \"Sports\",\n      \"Sku\": \"12345\",\n      \"Quantity\": \"2\",\n      \"CatalogName\": \"\",\n      \"CatalogCategory\": \"\",\n      \"CatalogDescription\": \"\",\n      \"CatalogManufacturer\": \"\",\n      \"CatalogOriginalFormatCategory\": \"\",\n      \"CatalogSubCategory\": \"\",\n      \"PayoutLevel\": \"ITEM\",\n      \"DefaultPayoutRate\": \"2\",\n      \"ContractId\": \"S-3240326\",\n      \"UpdateDate\": \"2020-09-10T10:51:23-07:00\",\n      \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n      \"ClearingDate\": \"2020-09-30T00:00:00-07:00\",\n      \"ActionDate\": \"2020-09-10T10:42:38-07:00\",\n      \"Oid\": \"9217374917472\",\n      \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n      \"CustomerStatus\": \"\",\n      \"SharedId\": \"RT-19247423\",\n      \"ActionUri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/ActionUpdates/1000.4636.158133.95095059\"\n    },\n    {\n      \"Id\": \"1000.4636.158133.95095059\",\n      \"ActionId\": \"1000.4636.158133\",\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 2240,\n      \"EventTypeId\": \"2240\",\n      \"EventTypeName\": \"Sale\",\n      \"EventCode\": \"\",\n      \"MediaPartnerId\": 10000,\n      \"State\": \"PENDING\",\n      \"StateDetail\": \"\",\n      \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n      \"AdId\": 506720,\n      \"Disposition\": \"IR_BLANK\",\n      \"DeltaPayout\": 0.65,\n      \"DeltaAmount\": 16.29,\n      \"Currency\": \"USD\",\n      \"Category\": \"Sports\",\n      \"Sku\": \"12345\",\n      \"Quantity\": \"2\",\n      \"CatalogName\": \"\",\n      \"CatalogCategory\": \"\",\n      \"CatalogDescription\": \"\",\n      \"CatalogManufacturer\": \"\",\n      \"CatalogOriginalFormatCategory\": \"\",\n      \"CatalogSubCategory\": \"\",\n      \"PayoutLevel\": \"ITEM\",\n      \"DefaultPayoutRate\": \"2\",\n      \"ContractId\": \"S-3240326\",\n      \"UpdateDate\": \"2020-09-10T10:51:23-07:00\",\n      \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n      \"ClearingDate\": \"2020-09-30T00:00:00-07:00\",\n      \"ActionDate\": \"2020-09-10T10:42:38-07:00\",\n      \"Oid\": \"9217374917472\",\n      \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n      \"CustomerStatus\": \"\",\n      \"SharedId\": \"RT-19247423\",\n      \"ActionUri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\",\n      \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/ActionUpdates/1000.4636.158133.95095059\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd50a60d-35ea-4a38-98eb-7c658884ce55",
+          "name": "Get action update details",
+          "request": {
+            "name": "Get action update details",
+            "description": {
+              "content": "Retrieves the details for a specific update to an action by its unique ActionUpdateId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ActionUpdates",
+                ":ActionUpdateId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ActionUpdateId",
+                  "description": "(Required) The unique identifier for the action update, obtainable from the list endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "30043ea6-c86a-4583-96f4-7086da6216b8",
+              "name": "An action update object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ActionUpdates",
+                    ":ActionUpdateId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ActionUpdateId",
+                      "description": "(Required) The unique identifier for the action update, obtainable from the list endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1000.4636.158133.95095059\",\n  \"ActionId\": \"1000.4636.158133\",\n  \"CampaignId\": 1000,\n  \"ActionTrackerId\": 2240,\n  \"EventTypeId\": \"2240\",\n  \"EventTypeName\": \"Sale\",\n  \"EventCode\": \"\",\n  \"MediaPartnerId\": 10000,\n  \"State\": \"PENDING\",\n  \"StateDetail\": \"\",\n  \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n  \"AdId\": 506720,\n  \"Disposition\": \"IR_BLANK\",\n  \"DeltaPayout\": 0.65,\n  \"DeltaAmount\": 16.29,\n  \"Currency\": \"USD\",\n  \"Category\": \"Sports\",\n  \"Sku\": \"12345\",\n  \"Quantity\": \"2\",\n  \"CatalogName\": \"\",\n  \"CatalogCategory\": \"\",\n  \"CatalogDescription\": \"\",\n  \"CatalogManufacturer\": \"\",\n  \"CatalogOriginalFormatCategory\": \"\",\n  \"CatalogSubCategory\": \"\",\n  \"PayoutLevel\": \"ITEM\",\n  \"DefaultPayoutRate\": \"2\",\n  \"ContractId\": \"S-3240326\",\n  \"UpdateDate\": \"2020-09-10T10:51:23-07:00\",\n  \"LockingDate\": \"2020-09-26T00:00:00-07:00\",\n  \"ClearingDate\": \"2020-09-30T00:00:00-07:00\",\n  \"ActionDate\": \"2020-09-10T10:42:38-07:00\",\n  \"Oid\": \"9217374917472\",\n  \"CustomerId\": \"BCZ2WVSH674563PDPYOTM3AXDQ\",\n  \"CustomerStatus\": \"\",\n  \"SharedId\": \"RT-19247423\",\n  \"ActionUri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133\",\n  \"Uri\": \"/Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/ActionUpdates/1000.4636.158133.95095059\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3910075-2a62-4ebe-85da-90080873c8b4",
+    "name": "Brand API - Actions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing conversion events (Actions), their associated line items, and their modification history (ActionUpdates).\n\n- **Actions**: Represents conversion events credited to partners. Use this to retrieve, update, or reverse actions and their items.\n- **ActionUpdates**: Functions as a changelog, providing a feed of all modifications made to actions.",
+      "type": "text/plain"
+    }
+  }
+}

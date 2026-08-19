@@ -1,0 +1,279 @@
+openapi: 3.1.0
+info:
+  title: impact.com API - Referral Code
+  description: API for looking up and applying referral codes.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+- UserJWT: []
+tags:
+- name: Referral Code
+  description: |
+    Endpoints for working with referral codes: look up a code and its associated reward, or apply a code to a referred account. For background on what referral codes are, see the Referral Code Overview.
+paths:
+  /{tenant_alias}/code/{code}:
+    get:
+      summary: Lookup a referral code
+      description: |
+        **Deprecated.** Use the Open Endpoint *Lookup a referral code* instead.
+
+        Returns a referral code along with the referrer's name and the reward the code unlocks.
+      operationId: getCode
+      deprecated: true
+      tags:
+      - Referral Code
+      - Deprecated
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - name: code
+        in: path
+        description: The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Referral code found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '404':
+          description: Referral code NOT found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/open/code/{referral_code}:
+    get:
+      summary: Lookup a referral code (Open Endpoint)
+      description: |
+        Returns a referral code along with the referrer's name and the reward the code unlocks. Use this from client-side contexts such as the Mobile and Web SDKs.
+
+        This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.
+      operationId: openValidateCode
+      tags:
+      - Referral Code
+      - Open Endpoint
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - name: referral_code
+        in: path
+        description: The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Referral code found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeClassicReward'
+        '403':
+          description: Endpoint disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{tenant_alias}/open/code/{code}/account/{accountId}/user/{userId}:
+    post:
+      summary: Apply a referral code
+      description: |
+        Applies a referral code to the specified account and user, marking them as referred by the code's owner.
+
+        Requires a [write token](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) or an API key. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.
+      operationId: openApplyCode
+      tags:
+      - Referral Code
+      - Open Endpoint
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - name: code
+        in: path
+        description: The referral code to apply to the user's account.
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: path
+        description: The account to apply the referral code to. This account will be marked as referred by the owner of the code.
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: The user to apply the referral code to. This user will be marked as referred by the owner of the code.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Referral code applied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Endpoint disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method only in server-to-server interactions.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: A JWT for a given user. Used by the Mobile and Web SDKs and other client-side contexts via Open Endpoints.
+  parameters:
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      required: true
+      schema:
+        type: string
+  schemas:
+    RewardTemplate:
+      description: Details of the reward that could be earned, but is not yet earned.
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of reward.
+          enum: [PCT_DISCOUNT, FUELTANK, CREDIT, INTEGRATION]
+          example: CREDIT
+        unit:
+          type: string
+          description: An identifier for the unit of the reward. For example `CENTS`, `freemb`, `freemonth`. Only present for `CREDIT` rewards.
+          example: CENTS
+        credit:
+          type: integer
+          description: The amount of credit this referral code is valid for. For example, for $20 this would be `credit=2000`, `unit="CENTS"`. Only works with `CREDIT`.
+          example: 100
+        discountPercent:
+          type: integer
+          description: The percent discount the referral code is valid for. For example, `10` for `10%`. Only works with `PCT_DISCOUNT`.
+          example: 10
+        monthsDiscountIsValid:
+          type: integer
+          description: The number of months the discount is valid for. Only works with `PCT_DISCOUNT`.
+          example: 3
+        valueInCents:
+          type: integer
+          description: The value of the reward in cents. Works with `INTEGRATION`.
+          example: 2000
+        rewardDetails:
+          type: string
+          description: JSON object containing details about the reward. Works with `INTEGRATION`.
+          example: "{}"
+    ClassicRewardTemplate:
+      description: '<span class="label">Classic Only</span> Details of the reward that could be earned, but is not yet earned.'
+      allOf:
+      - $ref: '#/components/schemas/RewardTemplate'
+    Code:
+      description: A referral code, the referrer it belongs to, and details of the reward it unlocks.
+      type: object
+      properties:
+        code:
+          type: string
+          description: The unique identifier for the code. For example `BOBTESTERSON`.
+          example: CFMVQHNUEU2AWWDO
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the code was created.
+          example: 1774386824953
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program that the code belongs to. Null if not associated with a specific program.
+          example: null
+        referrerName:
+          type: string
+          description: The display name of the owner of this code. For example `Bob Testerson`.
+          example: Bob T
+        reward:
+          $ref: '#/components/schemas/RewardTemplate'
+    CodeClassicReward:
+      description: A referral code, the referrer it belongs to, and details of the reward it unlocks (Classic reward format).
+      type: object
+      properties:
+        code:
+          type: string
+          description: The unique identifier for the code. For example `BOBTESTERSON`.
+          example: CFMVQHNUEU2AWWDO
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the code was created.
+          example: 1774386824953
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program that the code belongs to. Null if not associated with a specific program.
+          example: null
+        referrerName:
+          type: string
+          description: The display name of the owner of this code. For example `Bob Testerson`.
+          example: Bob T
+        reward:
+          $ref: '#/components/schemas/ClassicRewardTemplate'
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+x-default-client: cURL

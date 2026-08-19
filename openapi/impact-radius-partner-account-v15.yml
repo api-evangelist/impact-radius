@@ -1,0 +1,599 @@
+openapi: 3.1.0
+info:
+  title: Company Information API
+  description: Retrieve or update metadata about your partner account, including
+    your profile, contact details, addresses, and tax information.
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+tags:
+- name: Accounts
+  description: Endpoints for managing partner company account information.
+paths:
+  /Mediapartners/{AccountSID}/CompanyInformation:
+    get:
+      summary: Retrieve Company Information
+      description: Retrieves the current profile and account metadata for your partner
+        account. The account is determined by the Account SID and Auth Token used
+        in the request.
+      operationId: retrieveCompanyInformation
+      tags:
+      - Accounts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      responses:
+        '200':
+          description: A company information object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyInformation'
+    put:
+      summary: Update Company Information
+      description: "Updates your partner account information. Only the parameters\
+        \ you provide will be updated — all others remain unchanged.\n\n**Note:**\
+        \ `FinancialContact`, `TechnicalContact`, and `CommercialContact` cannot be\
+        \ updated via API. These must be updated in the impact.com UI.\n"
+      operationId: updateCompanyInformation
+      tags:
+      - Accounts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - ContentInterests
+              - Description
+              - LogoImage
+              properties:
+                CompanyName:
+                  type: string
+                  description: The display name for your partner account.
+                Website:
+                  type: string
+                  description: The URL of your website or primary online presence.
+                ContentInterests:
+                  type: string
+                  description: Comma-separated tags describing your content categories
+                    and interests, with no spaces (e.g., travel,lifestyle,fitness).
+                Description:
+                  type: string
+                  description: A bio or description of your content and services,
+                    visible to brands on your profile.
+                LogoImage:
+                  type: string
+                  description: Your profile logo or photo as a Base64-encoded image
+                    string.
+                PrimaryPhoneNumber:
+                  type: string
+                  description: Your primary contact phone number.
+                PrimaryPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for your
+                    primary phone number. Required if PrimaryPhoneNumber is provided.
+                OrganizationType:
+                  $ref: '#/components/schemas/OrganizationType'
+                  description: The legal organization type for your account.
+                DateOfBirth:
+                  type: string
+                  format: date-time
+                  description: Your date of birth in ISO 8601 format.
+                Education:
+                  $ref: '#/components/schemas/Education'
+                  description: Your highest level of education.
+                Ethnicity:
+                  $ref: '#/components/schemas/Ethnicity'
+                  description: Your ethnicity.
+                Gender:
+                  $ref: '#/components/schemas/Gender'
+                  description: Your gender identity.
+                HouseholdIncome:
+                  $ref: '#/components/schemas/HouseholdIncome'
+                  description: Your annual household income bracket.
+                ParentalStatus:
+                  $ref: '#/components/schemas/ParentalStatus'
+                  description: Your parental status.
+                Pronouns:
+                  $ref: '#/components/schemas/Pronouns'
+                  description: Your preferred pronouns.
+                RelationshipStatus:
+                  $ref: '#/components/schemas/RelationshipStatus'
+                  description: Your relationship status.
+                CorporateAddressLine1:
+                  type: string
+                  description: The first line of your corporate address (street number
+                    and name).
+                CorporateAddressCity:
+                  type: string
+                  description: The city for your corporate address.
+                BillingAddressLine1:
+                  type: string
+                  description: The first line of your billing address (street number
+                    and name).
+                BillingAddressCity:
+                  type: string
+                  description: The city for your billing address.
+                CorporateAddressLine2:
+                  type: string
+                  description: The second line of your corporate address (suite, apartment, etc.).
+                CorporateAddressState:
+                  type: string
+                  description: The state or province for your corporate address.
+                CorporateAddressPostalCode:
+                  type: string
+                  description: The postal or ZIP code for your corporate address.
+                CorporateAddressCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for your corporate address.
+                BillingAddressLine2:
+                  type: string
+                  description: The second line of your billing address (suite, apartment, etc.).
+                BillingAddressState:
+                  type: string
+                  description: The state or province for your billing address.
+                BillingAddressPostalCode:
+                  type: string
+                  description: The postal or ZIP code for your billing address.
+                BillingAddressCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for your billing address.
+                ShippingAddressLine1:
+                  type: string
+                  description: The first line of your shipping address. When updating shipping address fields, all five sub-fields (Line1, City, State, PostalCode, Country) must be supplied together.
+                ShippingAddressLine2:
+                  type: string
+                  description: The second line of your shipping address (suite, apartment, etc.).
+                ShippingAddressCity:
+                  type: string
+                  description: The city for your shipping address.
+                ShippingAddressState:
+                  type: string
+                  description: The state or province for your shipping address.
+                ShippingAddressPostalCode:
+                  type: string
+                  description: The postal or ZIP code for your shipping address.
+                ShippingAddressCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for your shipping address.
+                SecondaryPhoneNumber:
+                  type: string
+                  description: Your secondary contact phone number. Must be supplied together with SecondaryPhoneNumberCountry.
+                SecondaryPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for your secondary phone number. Required if SecondaryPhoneNumber is provided.
+                FinancialContactName:
+                  type: string
+                  description: Name of the financial contact for your account.
+                FinancialContactEmail:
+                  type: string
+                  description: Email address of the financial contact for your account.
+                FinancialContactWorkPhoneNumber:
+                  type: string
+                  description: Work phone number of the financial contact.
+                FinancialContactWorkPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the financial contact's work phone.
+                FinancialContactCellPhoneNumber:
+                  type: string
+                  description: Cell phone number of the financial contact.
+                FinancialContactCellPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the financial contact's cell phone.
+                TechnicalContactName:
+                  type: string
+                  description: Name of the technical contact for your account.
+                TechnicalContactEmail:
+                  type: string
+                  description: Email address of the technical contact for your account.
+                TechnicalContactWorkPhoneNumber:
+                  type: string
+                  description: Work phone number of the technical contact.
+                TechnicalContactWorkPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the technical contact's work phone.
+                TechnicalContactCellPhoneNumber:
+                  type: string
+                  description: Cell phone number of the technical contact.
+                TechnicalContactCellPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the technical contact's cell phone.
+                CommercialContactName:
+                  type: string
+                  description: Name of the commercial contact for your account.
+                CommercialContactEmail:
+                  type: string
+                  description: Email address of the commercial contact for your account.
+                CommercialContactWorkPhoneNumber:
+                  type: string
+                  description: Work phone number of the commercial contact.
+                CommercialContactWorkPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's work phone.
+                CommercialContactCellPhoneNumber:
+                  type: string
+                  description: Cell phone number of the commercial contact.
+                CommercialContactCellPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the commercial contact's cell phone.
+                SecurityContactName:
+                  type: string
+                  description: Name of the security contact for your account.
+                SecurityContactEmail:
+                  type: string
+                  description: Email address of the security contact for your account.
+                SecurityContactWorkPhoneNumber:
+                  type: string
+                  description: Work phone number of the security contact.
+                SecurityContactWorkPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the security contact's work phone.
+                SecurityContactCellPhoneNumber:
+                  type: string
+                  description: Cell phone number of the security contact.
+                SecurityContactCellPhoneNumberCountry:
+                  type: string
+                  description: Two-letter ISO 3166-1 alpha-2 country code for the security contact's cell phone.
+                EinSsnForeignTaxId:
+                  type: string
+                  description: Your Employer Identification Number (EIN), Social Security Number (SSN), or foreign tax ID.
+                MinimumContactRating:
+                  type: string
+                  description: The minimum acceptable rating used when contacting partners. Numeric string.
+                PrimaryPromotionalMethod:
+                  type: string
+                  description: 'Your primary method of promoting brand campaigns (e.g., SOCIAL_INFLUENCER, CONTENT, COUPON).'
+                PromotionalMethods:
+                  type: string
+                  description: 'Comma-separated list of promotional methods you use (e.g., SOCIAL_INFLUENCER, CONTENT).'
+      responses:
+        '200':
+          description: Company information updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    example: /Mediapartners/<AccountSID>/CompanyInformation
+components:
+  schemas:
+    CompanyInformation:
+      type: object
+      properties:
+        CompanyName:
+          type: string
+          description: The display name for your partner account.
+          example: Carrie Oakey Music
+        PrimaryPromotionalMethod:
+          $ref: '#/components/schemas/PromotionalMethod'
+          description: Your primary promotional method, as specified in your account
+            settings.
+        PromotionalMethods:
+          type: string
+          description: A comma-separated list of all promotional methods associated
+            with your account.
+          example: SOCIAL_MEDIA_INFLUENCER,CONTENT
+        Website:
+          type: string
+          description: The website URL listed on your partner profile.
+          example: https://www.carrieOakeymusic.com
+        Description:
+          type: string
+          description: A bio or description of your content and services, visible
+            to brands on your profile.
+          example: Singer-songwriter and creator specializing in original music, brand
+            jingles, and audio content.
+        LogoImage:
+          type: string
+          description: The path to your profile logo or photo.
+          example: /display-content/profile-image.jpg
+        ContentAndInterests:
+          type: string
+          description: A comma-separated list of tags describing your content categories
+            and interests.
+          example: music,creator,songwriting,jingles,audiobranding
+        PrimaryPhoneNumber:
+          type: string
+          description: Your primary contact phone number.
+          example: '8051231234'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for your primary
+            phone number.
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: A secondary contact phone number, if provided.
+          example: ''
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for your secondary
+            phone number.
+          example: ''
+        MinimumContactRating:
+          type: string
+          description: The minimum star rating (1–5) a brand must have before you
+            can see their contact information.
+          example: '1'
+        Timezone:
+          type: string
+          description: The timezone associated with your account.
+          example: (GMT -07:00) Pacific Time (US & Canada); Tijuana
+        Currency:
+          type: string
+          description: The three-letter ISO 4217 currency code for your account.
+          example: USD
+        RegisteredForIndirectTax:
+          type: boolean
+          description: Whether your account is registered for indirect tax (e.g.,
+            VAT, GST, or HST).
+          example: 'false'
+        IndirectTaxNumber:
+          type: string
+          description: Your VAT, GST, or HST registration number, if applicable.
+          example: ''
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: The legal organization type for your account. Available options
+            vary depending on the country your business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: Your Employer Identification Number (EIN), Social Security
+            Number (SSN), or foreign tax ID.
+          example: ''
+        DateOfBirth:
+          type: string
+          format: date-time
+          description: Your date of birth.
+          example: '1994-04-01T00:00:00-08:00'
+        Gender:
+          $ref: '#/components/schemas/Gender'
+          description: Your gender identity.
+        Ethnicity:
+          $ref: '#/components/schemas/Ethnicity'
+          description: Your ethnicity.
+        ParentalStatus:
+          $ref: '#/components/schemas/ParentalStatus'
+          description: Your parental status.
+        RelationshipStatus:
+          $ref: '#/components/schemas/RelationshipStatus'
+          description: Your relationship status.
+        Education:
+          $ref: '#/components/schemas/Education'
+          description: Your highest level of education.
+        Pronouns:
+          $ref: '#/components/schemas/Pronouns'
+          description: Your preferred pronouns.
+        HouseholdIncome:
+          $ref: '#/components/schemas/HouseholdIncome'
+          description: Your annual household income bracket.
+        ShippingAddress:
+          $ref: '#/components/schemas/Address'
+          description: Your shipping address.
+        CorporateAddress:
+          $ref: '#/components/schemas/Address'
+          description: The primary business address for your account.
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+          description: The billing address for your account.
+        FinancialContact:
+          $ref: '#/components/schemas/Contact'
+          description: The financial contact for your account (e.g., CFO). Cannot
+            be updated via API — update this in the impact.com UI.
+        TechnicalContact:
+          $ref: '#/components/schemas/Contact'
+          description: The technical contact for your account (e.g., CTO). Cannot
+            be updated via API — update this in the impact.com UI.
+        SecurityContact:
+          $ref: '#/components/schemas/Contact'
+          description: The security contact for your account.
+        CommercialContact:
+          $ref: '#/components/schemas/Contact'
+          description: The commercial or marketing contact for your account (e.g.,
+            CMO). Cannot be updated via API — update this in the impact.com UI.
+        Uri:
+          type: string
+          description: Unique reference to the company information object in the
+            impact.com API.
+          example: /Mediapartners/<AccountSID>/CompanyInformation
+    Address:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: The first line of the address (street number and name).
+          example: 123 Harmony Lane
+        AddressLine2:
+          type: string
+          description: The second line of the address (apartment, suite, unit, etc.).
+          example: Unit 2B
+        City:
+          type: string
+          description: The city, district, suburb, town, or village.
+          example: Los Angeles
+        State:
+          type: string
+          description: The state, province, or territory.
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: The ZIP or postal code.
+          example: '90027'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Contact:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: The unique impact.com user ID for this contact.
+          example: '2320266'
+        Name:
+          type: string
+          description: The full name of the contact.
+          example: Hazel Nutt
+        Email:
+          type: string
+          description: The email address of the contact.
+          example: hazel.nutt@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The work phone number of the contact.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the work phone
+            number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The cell phone number of the contact.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone
+            number.
+          example: ''
+    PromotionalMethod:
+      type: string
+      description: A promotional method used to drive traffic and conversions.
+      enum:
+      - EMAIL
+      - SEARCH
+      - LOYALTY
+      - COUPON
+      - SYNDICATION_BLOG_NETWORKS
+      - CPA_NETWORK
+      - MOBILE
+      - CONTENT
+      - SHOPPING
+      - SOCIAL_MEDIA_INFLUENCER
+      - SERVICE_PROVIDER
+      - CONSUMER_SOFTWARE
+      - INCENTIVIZED
+      - OFFLINE
+      - OTHER
+      - CASHBACK
+    OrganizationType:
+      type: string
+      description: The legal structure of the organization. Available options vary
+        depending on the country the business is registered in.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+    Education:
+      type: string
+      description: The highest level of education completed.
+      enum:
+      - Bachelors_Degree
+      - PhD
+      - Masters_Degree
+      - High_School
+      - Some_high_school
+      - Some_college
+      - Other
+      - None
+    Ethnicity:
+      type: string
+      description: The ethnic background of the partner.
+      enum:
+      - African_American
+      - American_Indian
+      - Asian
+      - Black
+      - Hispanic
+      - Latino
+      - Middle_Eastern
+      - Multiracial
+      - Native_Hawaiian
+      - Pacific_Islander
+      - South_Asian
+      - White
+      - Other
+      - None
+    Gender:
+      type: string
+      description: The gender identity of the partner.
+      enum:
+      - Female
+      - Male
+      - Transgender
+      - Non-binary
+      - Genderqueer
+      - None
+    HouseholdIncome:
+      type: string
+      description: The annual household income bracket of the partner.
+      enum:
+      - 35K
+      - Over_35K
+      - Over_50K
+      - Over_75K
+      - Over_100K
+      - None
+    ParentalStatus:
+      type: string
+      description: The parental status of the partner.
+      enum:
+      - Mom
+      - Dad
+      - Grandfather
+      - Grandmother
+      - Other
+      - None
+    Pronouns:
+      type: string
+      description: The preferred pronouns of the partner.
+      enum:
+      - he_him
+      - she_her
+      - they_them
+      - ey_em
+      - ne_nem
+      - ve_ver
+      - xe_xem
+      - xie_xem
+      - ze_zir
+      - None
+    RelationshipStatus:
+      type: string
+      description: The relationship status of the partner.
+      enum:
+      - Married
+      - Not_Married
+      - Separated
+      - Widowed
+      - Divorced
+      - None

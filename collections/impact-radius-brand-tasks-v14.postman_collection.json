@@ -1,0 +1,326 @@
+{
+  "item": [
+    {
+      "id": "696cb746-99dd-458a-8eab-f07fa2074ae4",
+      "name": "Tasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc8be780-76db-4e8c-999a-a2443694616d",
+          "name": "List All Tasks",
+          "request": {
+            "name": "List All Tasks",
+            "description": {
+              "content": "Returns a list of existing, non-archived tasks for a specific program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "Tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filter tasks by one or more comma-separated task types. For compliance violations, use COMPLIANCE. Values match the Type field in the Task response."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubtypeName",
+                  "value": "<string>",
+                  "description": "Filter tasks by one or more comma-separated subtype names. Requires the Type parameter. For compliance violations, common values are Search, Promo, Social, and Content. Passing an unrecognized subtype returns a validation error."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateCreatedAfter",
+                  "value": "<dateTime>",
+                  "description": "Only return tasks created on or after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateCreatedBefore",
+                  "value": "<dateTime>",
+                  "description": "Only return tasks created on or before this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedBefore",
+                  "value": "<dateTime>",
+                  "description": "Only return tasks updated before this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedAfter",
+                  "value": "<dateTime>",
+                  "description": "Only return tasks updated after this date (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) The ID of the program to retrieve tasks from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbd3ed22-5088-412e-9fd7-d94c3622b82c",
+              "name": "A paginated list of task objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Type",
+                      "value": "COMPLIANCE"
+                    },
+                    {
+                      "key": "SubtypeName",
+                      "value": "Content"
+                    },
+                    {
+                      "key": "DateCreatedAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateCreatedBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedAfter",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The ID of the program to retrieve tasks from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Tasks\": [\n    {\n      \"Id\": \"3562529\",\n      \"Reference\": {\n        \"PartnerId\": 2552842,\n        \"PartnerValue1\": \"vip\",\n        \"PartnerValue2\": \"north-america\",\n        \"PartnerValue3\": \"tennis\"\n      },\n      \"Details\": {\n        \"Summary\": \"Acme Rewards Card Update\",\n        \"Description\": \"The Acme Rewards Card APR has changed, please update your ads to reflect this new value.\",\n        \"Urgent\": true,\n        \"State\": \"INPROGRESS\",\n        \"Type\": \"COMPLIANCE\",\n        \"SubtypeId\": \"275\",\n        \"SubtypeName\": \"Content\",\n        \"ResolutionId\": \"\",\n        \"ResolutionName\": \"\"\n      },\n      \"Attachments\": [\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        },\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        }\n      ],\n      \"DueDate\": \"2021-08-31T04:00:00.000+0000\",\n      \"AssigneeUser\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      },\n      \"AssigneeAccount\": \"Acme Partners\",\n      \"TotalActions\": 0,\n      \"TotalComments\": 1,\n      \"Comments\": [\n        {\n          \"Id\": 98765,\n          \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n          \"Commenter\": \"Wile E. Coyote\",\n          \"Attachments\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Id\": 98765,\n          \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n          \"Commenter\": \"Wile E. Coyote\",\n          \"Attachments\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"DateCreated\": \"2021-08-18T16:47:21.000+0000\",\n      \"DateLastUpdated\": \"2021-08-18T22:45:42.000+0000\",\n      \"CreatedBy\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      },\n      \"LastUpdatedBy\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      }\n    },\n    {\n      \"Id\": \"3562529\",\n      \"Reference\": {\n        \"PartnerId\": 2552842,\n        \"PartnerValue1\": \"vip\",\n        \"PartnerValue2\": \"north-america\",\n        \"PartnerValue3\": \"tennis\"\n      },\n      \"Details\": {\n        \"Summary\": \"Acme Rewards Card Update\",\n        \"Description\": \"The Acme Rewards Card APR has changed, please update your ads to reflect this new value.\",\n        \"Urgent\": true,\n        \"State\": \"INPROGRESS\",\n        \"Type\": \"COMPLIANCE\",\n        \"SubtypeId\": \"275\",\n        \"SubtypeName\": \"Content\",\n        \"ResolutionId\": \"\",\n        \"ResolutionName\": \"\"\n      },\n      \"Attachments\": [\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        },\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        }\n      ],\n      \"DueDate\": \"2021-08-31T04:00:00.000+0000\",\n      \"AssigneeUser\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      },\n      \"AssigneeAccount\": \"Acme Partners\",\n      \"TotalActions\": 0,\n      \"TotalComments\": 1,\n      \"Comments\": [\n        {\n          \"Id\": 98765,\n          \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n          \"Commenter\": \"Wile E. Coyote\",\n          \"Attachments\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Id\": 98765,\n          \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n          \"Commenter\": \"Wile E. Coyote\",\n          \"Attachments\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Filename\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Location\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"DateCreated\": \"2021-08-18T16:47:21.000+0000\",\n      \"DateLastUpdated\": \"2021-08-18T22:45:42.000+0000\",\n      \"CreatedBy\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      },\n      \"LastUpdatedBy\": {\n        \"Username\": \"Wile E. Coyote\",\n        \"EmailAddress\": \"wilecoyote@example.com\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e09dd38-7feb-463a-9c3a-5d222f40b2c5",
+          "name": "Get Task Details",
+          "request": {
+            "name": "Get Task Details",
+            "description": {
+              "content": "Retrieves the details of an existing task by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "Tasks",
+                ":TaskId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "TaskId",
+                  "description": "(Required) The unique identifier for the task."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e0e4f72-6331-4127-a41f-d9338da15ed8",
+              "name": "A single task object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Tasks",
+                    ":TaskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "TaskId",
+                      "description": "(Required) The unique identifier for the task."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"3562529\",\n  \"Reference\": {\n    \"PartnerId\": 2552842,\n    \"PartnerValue1\": \"vip\",\n    \"PartnerValue2\": \"north-america\",\n    \"PartnerValue3\": \"tennis\"\n  },\n  \"Details\": {\n    \"Summary\": \"Acme Rewards Card Update\",\n    \"Description\": \"The Acme Rewards Card APR has changed, please update your ads to reflect this new value.\",\n    \"Urgent\": true,\n    \"State\": \"INPROGRESS\",\n    \"Type\": \"COMPLIANCE\",\n    \"SubtypeId\": \"275\",\n    \"SubtypeName\": \"Content\",\n    \"ResolutionId\": \"\",\n    \"ResolutionName\": \"\"\n  },\n  \"Attachments\": [\n    {\n      \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n      \"Filename\": \"acme_reward_card_details.pdf\",\n      \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n    },\n    {\n      \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n      \"Filename\": \"acme_reward_card_details.pdf\",\n      \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n    }\n  ],\n  \"DueDate\": \"2021-08-31T04:00:00.000+0000\",\n  \"AssigneeUser\": {\n    \"Username\": \"Wile E. Coyote\",\n    \"EmailAddress\": \"wilecoyote@example.com\"\n  },\n  \"AssigneeAccount\": \"Acme Partners\",\n  \"TotalActions\": 0,\n  \"TotalComments\": 1,\n  \"Comments\": [\n    {\n      \"Id\": 98765,\n      \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n      \"Commenter\": \"Wile E. Coyote\",\n      \"Attachments\": [\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        },\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        }\n      ]\n    },\n    {\n      \"Id\": 98765,\n      \"Comment\": \"I've updated our home page with the latest ads, see attached screenshot.\",\n      \"Commenter\": \"Wile E. Coyote\",\n      \"Attachments\": [\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        },\n        {\n          \"Id\": \"task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7\",\n          \"Filename\": \"acme_reward_card_details.pdf\",\n          \"Location\": \"https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf\"\n        }\n      ]\n    }\n  ],\n  \"DateCreated\": \"2021-08-18T16:47:21.000+0000\",\n  \"DateLastUpdated\": \"2021-08-18T22:45:42.000+0000\",\n  \"CreatedBy\": {\n    \"Username\": \"Wile E. Coyote\",\n    \"EmailAddress\": \"wilecoyote@example.com\"\n  },\n  \"LastUpdatedBy\": {\n    \"Username\": \"Wile E. Coyote\",\n    \"EmailAddress\": \"wilecoyote@example.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff44f471-885c-4c1d-addb-951bcf099747",
+    "name": "Brand API - Tasks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving tasks, which are assignments for partners or other members in your impact.com account.",
+      "type": "text/plain"
+    }
+  }
+}

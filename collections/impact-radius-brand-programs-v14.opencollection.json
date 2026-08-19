@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Programs",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Programs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by program name."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filter by program state."
+              }
+            ]
+          },
+          "docs": "Returns a list of all programs for your account, sorted by Program ID."
+        },
+        {
+          "info": {
+            "name": "Get Program Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the program (campaign)."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing program by its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Unsubscribed Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Unsubscribed Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/UnsubscribedContacts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the program."
+              },
+              {
+                "name": "PartnerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by partner ID."
+              },
+              {
+                "name": "UserEmail",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a specific user email."
+              },
+              {
+                "name": "Page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve, starting at 0."
+              },
+              {
+                "name": "PageSize",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page. Maximum is 1000."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of all contacts who have unsubscribed from a specific program's Outreach communications."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe a Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/UnsubscribedContacts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the program."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "PartnerId",
+                  "value": ""
+                },
+                {
+                  "name": "UserEmail",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Unsubscribes a contact from a specific program's Outreach communications on behalf of a partner."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

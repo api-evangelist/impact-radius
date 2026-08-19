@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Withdrawal Settings API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Withdrawal Settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve withdrawal settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/WithdrawalSettings",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Returns the partner's current withdrawal settings, including bank account and payment scheduling information."
+        },
+        {
+          "info": {
+            "name": "Update withdrawal settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/WithdrawalSettings",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the partner's withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve required banking fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/WithdrawalSettings/RequiredFields",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "bankCountry",
+                "value": "US",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 or alpha-3 country code where the bank account is held."
+              },
+              {
+                "name": "paymentMethod",
+                "value": "",
+                "type": "query",
+                "description": "Filter the response to a single payment method. If omitted, requirements for all supported methods are returned."
+              }
+            ]
+          },
+          "docs": "Returns which fields are mandatory when configuring withdrawal settings for a given country and (optionally) payment method. Always call this before updating settings for a country you haven't configured before."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Action Inquiries
+  description: API for managing action inquiries, which are formal requests from partners to investigate the attribution or payout of a conversion action.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/ActionInquiries:
+    get:
+      summary: List All Action Inquiries
+      description: Returns a list of the action inquiries made for your campaign, filtered by the provided parameters. The inquiries are returned by creation date, with the most recent appearing first.
+      operationId: listActionInquiries
+      tags:
+      - Action Inquiries
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        required: true
+        description: The ID of the campaign (program) to view action inquiries for.
+        schema:
+          type: integer
+      - name: StartDate
+        in: query
+        description: Filters for inquiries created on or after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: Filters for inquiries created on or before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: TransactionDateStart
+        in: query
+        description: Filters for inquiries with a transaction date on or after this value.
+        schema:
+          type: string
+          format: date-time
+      - name: TransactionDateEnd
+        in: query
+        description: Filters for inquiries with a transaction date on or before this value.
+        schema:
+          type: string
+          format: date-time
+      - name: MediaPartnerId
+        in: query
+        description: Filters inquiries to a specific partner by their ID.
+        schema:
+          type: integer
+      - name: OrderId
+        in: query
+        description: Filters for inquiries associated with a specific order ID.
+        schema:
+          type: string
+      - name: ResolutionStatus
+        in: query
+        description: Filters inquiries by their resolution status.
+        schema:
+          type: string
+          enum:
+          - UNRESOLVED
+          - VALID
+          - DECLINED
+          - INCOMPLETE
+      responses:
+        '200':
+          description: A paginated list of action inquiry objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@page':
+                    type: string
+                  ActionInquiries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionInquiry'
+    put:
+      summary: Update an Action Inquiry
+      description: Updates an action inquiry by setting its resolution status and other related parameters.
+      operationId: updateActionInquiry
+      tags:
+      - Action Inquiries
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The details for resolving the action inquiry.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ActionInquiryUpdateRequest'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSid>/ActionInquiries/782287
+  /Advertisers/{AccountSID}/ActionInquiries/{InquiryId}:
+    get:
+      summary: Get Action Inquiry Details
+      description: Retrieves the details of an existing action inquiry by its unique ID.
+      operationId: getActionInquiryById
+      tags:
+      - Action Inquiries
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: InquiryId
+        in: path
+        required: true
+        description: The unique identifier for the action inquiry.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: An action inquiry object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionInquiry'
+components:
+  schemas:
+    ActionInquiry:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the action inquiry.
+          example: '778987'
+        CampaignId:
+          type: integer
+          description: Unique identifier for the associated campaign.
+          example: '1000'
+        CampaignName:
+          type: string
+          example: Acme Campaign
+        MediaPartnerId:
+          type: integer
+          description: Unique identifier for the partner who created the inquiry.
+          example: '10000'
+        MediaPartnerName:
+          type: string
+          example: Acme Partner
+        OrderId:
+          type: string
+          description: Your unique identifier for the consumer order.
+          example: '9234918172372'
+        TransactionDate:
+          type: string
+          format: date-time
+          example: '2020-09-10T00:00:00-07:00'
+        TransactionAmount:
+          type: number
+          format: decimal
+          example: '14.00'
+        InquiryType:
+          type: string
+          enum:
+          - UNTRACKED
+          - INCORRECT
+          - DECLINED
+          example: UNTRACKED
+        ExpectedPayout:
+          type: number
+          format: decimal
+          example: '3.00'
+        ResolutionDeadlineDate:
+          type: string
+          format: date-time
+          example: '2020-09-18T00:00:00-07:00'
+        Comments:
+          type: array
+          items:
+            type: object
+            properties:
+              User:
+                type: string
+              Comment:
+                type: string
+              Date:
+                type: string
+                format: date-time
+        TrackingLink:
+          type: string
+          format: uri
+          example: ''
+        ActionId:
+          type: string
+          example: 1017.4635.1023507
+        ActionUri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSid>/Actions/1000.4635.1023507
+        AutoApprovalDate:
+          type: string
+          format: date-time
+          example: '2020-09-11T13:41:52-07:00'
+        ResolutionStatus:
+          type: string
+          enum:
+          - UNRESOLVED
+          - VALID
+          - DECLINED
+          - INCOMPLETE
+          example: VALID
+          description: Only returns action inquiries that match the specified resolution status.
+        RejectReason:
+          type: string
+          nullable: true
+          enum:
+          - This transaction has been tracked successfully
+          - Another marketing channel was credited with the sale
+          - Another marketing channel was credited with the sale, due to a voucher/discount code used
+          - Did not meet terms and conditions set by merchant
+          - Transaction not completed - Order cancelled, changed, or returned
+          - Transaction cannot be traced
+          - Transaction not fully completed online
+          - Enquiry does not provide complete information required for evaluation
+          - Other
+          example: ''
+        FinalPayout:
+          type: number
+          format: decimal
+          nullable: true
+          example: '0.28'
+        ResolutionDate:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2020-09-11T13:41:57-07:00'
+        CreationDate:
+          type: string
+          format: date-time
+          example: '2020-09-11T13:41:52-07:00'
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSid>/ActionInquiries/778987
+    ActionInquiryUpdateRequest:
+      type: object
+      required:
+      - Id
+      - ResolutionStatus
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the action inquiry to update.
+          example: 778987
+        ResolutionStatus:
+          type: string
+          description: The new resolution status for the inquiry.
+          enum:
+          - VALID
+          - DECLINED
+          - INCOMPLETE
+          example: VALID
+        RejectReason:
+          type: string
+          description: Required if ResolutionStatus is 'DECLINED'.
+          enum:
+          - This transaction has been tracked successfully
+          - Another marketing channel was credited with the sale
+          - Another marketing channel was credited with the sale, due to a voucher/discount code used
+          - Did not meet terms and conditions set by merchant
+          - Transaction not completed - Order cancelled, changed, or returned
+          - Transaction cannot be traced
+          - Transaction not fully completed online
+          - Enquiry does not provide complete information required for evaluation
+          - Other
+          example: Enquiry does not provide complete information required for evaluation
+        ActionTrackerId:
+          type: integer
+          description: Required if ResolutionStatus is 'VALID'. Unique ID for the event type.
+          example: 4000
+        ResolutionNotes:
+          type: string
+          description: Optional notes about the resolution for the partner to see.
+          example: Customer confirmed delivery; approved.
+        TransactionAmount:
+          type: number
+          format: decimal
+          description: Overrides the transaction amount provided by the partner.
+          example: 14.00
+        FinalPayout:
+          type: number
+          format: decimal
+          description: Manually sets the final payout, overriding system calculations.
+          example: 0.28
+        TransactionDate:
+          type: string
+          format: date-time
+          description: Specifies a new transaction date.
+          example: '2026-09-10T00:00:00-07:00'
+        ItemSku[i]:
+          type: string
+          description: Indexed parameter for item SKU (e.g., ItemSku1, ItemSku2).
+        ItemCategory[i]:
+          type: string
+          description: Indexed parameter for item category.
+        ItemName[i]:
+          type: string
+          description: For a VALID action inquiry, specifies the name of the item. This information can also be automatically appended through uploading a product catalog. impact.com highly recommends submitting this parameter when approving action inquiries to maintain accurate records & reporting.
+          example: Acme Tennis Balls (One Dozen)
+        ItemSubCategory[i]:
+          type: string
+          description: The sub-category for the item.
+          example: Tennis
+        ItemMPN[i]:
+          type: string
+          description: Manufacturer Part Number for the item; primarily used for retail sales.
+          example: ACME-MPN-101
+        ItemTotalRebate[i]:
+          type: number
+          format: decimal
+          description: Discount applied to this line item (not just for each product of this type).
+          example: 5.0
+        ItemQty[i]:
+          type: integer
+          description: Indexed parameter for item quantity.
+        ItemSubtotal[i]:
+          type: number
+          format: decimal
+          description: Indexed parameter for item subtotal.
+        PromoCode:
+          type: string
+          description: Specifies the promo code used.
+          example: 10OFF-FORGE
+        CustomerId:
+          type: string
+          description: Your unique, non-PII customer identifier.
+          example: BCZ2WVSH674563PDPYOTM3AXDQ

@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Tracking Links API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a tracking link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Programs/:ProgramId/TrackingLinks",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the brand program the tracking link is for."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "The type of tracking link to generate.\n\n- `Regular`: System-generated short link.\n- `Vanity`: Branded link with a custom path (requires `CustomPath`).\n"
+              },
+              {
+                "name": "CustomPath",
+                "value": "",
+                "type": "query",
+                "description": "Custom path that follows the tracking domain (e.g., `SummerSale` produces `https://example.sjv.io/SummerSale`). Required when `Type=Vanity`. If omitted on a vanity link, a random path is generated."
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of an ad to deep-link into (see the Partner Ads API). If omitted, the tracking link redirects to the brand's default landing page."
+              },
+              {
+                "name": "DeepLink",
+                "value": "",
+                "type": "query",
+                "description": "The exact destination URL the tracking link should redirect to after attribution. Use this to send clicks to a specific product page instead of the brand's default landing page."
+              },
+              {
+                "name": "MediaPartnerPropertyId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the media property (website, social profile, or app) where the link will be used. See the Partner Media Properties API."
+              },
+              {
+                "name": "subId1",
+                "value": "",
+                "type": "query",
+                "description": "Sub-affiliate identifier surfaced as a column in partner performance reports. Use to segment traffic by your own categories."
+              },
+              {
+                "name": "subId2",
+                "value": "",
+                "type": "query",
+                "description": "Additional sub-affiliate identifier surfaced as a column in partner performance reports."
+              },
+              {
+                "name": "subId3",
+                "value": "",
+                "type": "query",
+                "description": "Additional sub-affiliate identifier surfaced as a column in partner performance reports."
+              },
+              {
+                "name": "sharedId",
+                "value": "",
+                "type": "query",
+                "description": "Shared identifier surfaced as a column in partner performance reports."
+              }
+            ]
+          },
+          "docs": "Generates a new tracking link for the specified program. Up to **5,000 vanity links** can exist on an account — exceeding that limit returns a 403 Forbidden response.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

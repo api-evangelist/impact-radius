@@ -1,0 +1,2469 @@
+{
+  "item": [
+    {
+      "id": "27c3effd-1935-4f22-8174-64b1e7834420",
+      "name": "Conversions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cebf2c89-df08-4e25-8b3e-71ba983c9ca0",
+          "name": "Submit a Conversion Event",
+          "request": {
+            "name": "Submit a Conversion Event",
+            "description": {
+              "content": "Submits a conversion event for tracking and attribution.\n\n  **Additional required parameters** not captured in the `required` list below:\n  - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).\n  - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).\n\n  **Note on conditional requirements:** Many parameters listed below as *optional* are conditionally required based on what else you submit. For example:\n  - Item-level fields (`ItemSku[i]`, `ItemQuantity[i]`, `ItemPrice[i]`, `ItemSubTotal[i]`, etc.) become required when reporting at the item level.\n  - `CurrencyCode` is required when monetary fields are provided.\n  - Mobile-app fields (`AppleIfa`, `GoogAId`, `AppPackage`, `AppInstallRef`, `PropertyId`) are required for mobile-app install attribution.\n  - Call-tracking fields (`PhoneNumber`, `CallerId`, `CountryCode`) are required for call-tracking conversions.\n\nIt is highly recommended to provide as much data as possible for accurate attribution and payout calculation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Conversions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) Unique identifier for your program/campaign."
+                },
+                {
+                  "disabled": false,
+                  "key": "EventDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) Timestamp of when the conversion occurred (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderId",
+                  "value": "<string>",
+                  "description": "(Required) Your unique identifier for the order."
+                },
+                {
+                  "disabled": false,
+                  "key": "EventTypeId",
+                  "value": "<integer>",
+                  "description": "Unique identifier for the event type (action tracker)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EventTypeCode",
+                  "value": "<string>",
+                  "description": "Configurable string code for the event type."
+                },
+                {
+                  "disabled": false,
+                  "key": "ClickId",
+                  "value": "<string>",
+                  "description": "Unique identifier of a referring click."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerId",
+                  "value": "<string>",
+                  "description": "Your unique, non-PII identifier for the customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomProfileId",
+                  "value": "<string>",
+                  "description": "Unique identifier for a visitor on your website."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderPromoCode",
+                  "value": "<string>",
+                  "description": "Promo code used for the order. Used for attribution if assigned to a specific partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "UniqueUrl",
+                  "value": "<uri>",
+                  "description": "Unique URL of a partner that referred the conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "GoogAId",
+                  "value": "<string>",
+                  "description": "Google Advertising ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppleIfa",
+                  "value": "<string>",
+                  "description": "Apple ID for Advertising (IDFA)."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppleIfv",
+                  "value": "<string>",
+                  "description": "Apple ID for Vendors (IDFV)."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaId",
+                  "value": "<integer>",
+                  "description": "Force attribution to a specific partner ID. Interchangeable with `MediaPartnerId` — provide either one, not both. Use with caution."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerId",
+                  "value": "<integer>",
+                  "description": "Force attribution to a specific partner ID. Interchangeable with `MediaId` — provide either one, not both. Use with caution."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubId1",
+                  "value": "<string>",
+                  "description": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubId2",
+                  "value": "<string>",
+                  "description": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text fields typically used by partners to segment their traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubId3",
+                  "value": "<string>",
+                  "description": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic."
+                },
+                {
+                  "disabled": false,
+                  "key": "SharedId",
+                  "value": "<string>",
+                  "description": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to share traffic segments with the brands they work with."
+                },
+                {
+                  "disabled": false,
+                  "key": "PhoneNumber",
+                  "value": "<string>",
+                  "description": "Phone number called for call tracking conversions."
+                },
+                {
+                  "disabled": false,
+                  "key": "CallerId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the customer in call tracking conversions."
+                },
+                {
+                  "disabled": false,
+                  "key": "CountryCode",
+                  "value": "<string>",
+                  "description": "Primarily used for conversions over the phone, this is the ISO 3166-1 alpha-2 two-letter country code of the number called by the customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "IpAddress",
+                  "value": "<string>",
+                  "description": "Customer's IP address. Used for fraud detection and install attribution."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerEmail",
+                  "value": "<string>",
+                  "description": "Customer's email, must be sent as a SHA1 or SHA256 hash. Plaintext emails are not accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerStatus",
+                  "value": "<string>",
+                  "description": "Status of the customer, such as NEW or EXISTING. Before being passed, values must be configured in the Customer Status Mapping section when editing an event type, found in the event type settings section of the platform."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerCity",
+                  "value": "<string>",
+                  "description": "City of the customer, such as Santa Barbara."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerPostCode",
+                  "value": "<string>",
+                  "description": "Postal (or \"ZIP\") code of the customer, such as 93101."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerCountry",
+                  "value": "<string>",
+                  "description": "Country of the customer, such as USA."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerRegion",
+                  "value": "<string>",
+                  "description": "Region of the customer, such as AMER."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderDiscount",
+                  "value": "<decimal>",
+                  "description": "For sales, this is the discount applied to the order overall. Amount is automatically subtracted from the order total on processing. If item amounts are used, this discount will be subtracted proportionally from each item amount sent in. Note that typically you will want to exclude shipping discounts from this field."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderSubTotalPostDiscount",
+                  "value": "<decimal>",
+                  "description": "Used when reporting conversions at the order-level (i.e., no item reporting). The subtotal of the order after discounts, taxes, shipping, and any other costs. If you're submitting item-level data, this value should not be submitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderShipping",
+                  "value": "<decimal>",
+                  "description": "Primarily used for retail sales. This is the cost of shipping for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderTax",
+                  "value": "<decimal>",
+                  "description": "Primarily used for retail sales. This is the cost of tax for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderMargin",
+                  "value": "<decimal>",
+                  "description": "Primarily used for retail sales. This is the total margin made on the conversion (revenue less costs). Typically this is provided either at an item level through the ItemMargin field or through the product catalog."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderDiscountRate",
+                  "value": "<decimal>",
+                  "description": "The discount rate (%) applied to the order."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaymentType",
+                  "value": "<string>",
+                  "description": "This method of payment used for this conversion (e.g. Credit)."
+                },
+                {
+                  "disabled": false,
+                  "key": "GiftPurchase",
+                  "value": "<boolean>",
+                  "description": "If you're tracking gift purchases, you can submit true to mark the order in the conversion as a gift purchase. Submit false if the order isn't a gift purchase."
+                },
+                {
+                  "disabled": false,
+                  "key": "CurrencyCode",
+                  "value": "<string>",
+                  "description": "3-character ISO 4217 currency code of the purchase."
+                },
+                {
+                  "disabled": false,
+                  "key": "Amount",
+                  "value": "<decimal>",
+                  "description": "This is the total order sale amount made on an item or order level of the conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemSku[i]",
+                  "value": "<string>",
+                  "description": "SKU for the item (e.g., ItemSku1, ItemSku2)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemPromoCode[i]",
+                  "value": "<string>",
+                  "description": "Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes setup for particular partners."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemName[i]",
+                  "value": "<string>",
+                  "description": "The name for the product referenced. Can also be automatically appended through uploading a product catalog."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemCategory[i]",
+                  "value": "<string>",
+                  "description": "Category of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemSubCategory[i]",
+                  "value": "<string>",
+                  "description": "If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemMpn[i]",
+                  "value": "<string>",
+                  "description": "Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemBrand[i]",
+                  "value": "<string>",
+                  "description": "Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemQuantity[i]",
+                  "value": "<integer>",
+                  "description": "Number of units for this line item."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemPrice[i]",
+                  "value": "<decimal>",
+                  "description": "Unit price for the item. Do not send if ItemSubTotal[i] is passed."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemSubTotal[i]",
+                  "value": "<decimal>",
+                  "description": "Total price for the line item. Do not send if ItemPrice[i] is passed."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemDiscount[i]",
+                  "value": "<decimal>",
+                  "description": "Discount applied to each item purchased of this type (not to the entire line item)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemDiscountRate[i]",
+                  "value": "<decimal>",
+                  "description": "The discount rate (%) applied to each item purchased."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemTotalDiscount[i]",
+                  "value": "<decimal>",
+                  "description": "Discount applied to this line item (not just for each product of this type). Note that this amount is automatically subtracted from the ItemSubTotal to determine the final sale amount for payout and reporting purposes."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemDeliveryType[i]",
+                  "value": "<string>",
+                  "description": "Type of delivery method specified for this item (e.g. INSTORE)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemText[i]_1 to ItemText[i]_50",
+                  "value": "<string>",
+                  "description": "You can associate up to 50 custom text fields with each line item using the ItemText{i}_[x] parameter syntax, where {i} is the line item index and [x] is the custom text parameter index (1 to 50). For example, ItemText1_1 is custom text parameter 1 for line item 1, and ItemText2_40 is custom text parameter 40 for line item 2. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemNumeric[i]_1 to ItemNumeric[i]_10",
+                  "value": "<decimal>",
+                  "description": "General numeral field associated with a specific line item, using the ItemNumeric{i}_[x] parameter syntax, where {i} is the line item index and [x] is the numeric parameter index (1 to 10). Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemDate[i]_1 to ItemDate[i]_10",
+                  "value": "<dateTime>",
+                  "description": "General date and time field (ISO 8601 format) associated with a specific line item, using the ItemDate{i}_[x] parameter syntax, where {i} is the line item index and [x] is the date parameter index (1 to 10). Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemMoney[i]_1 to ItemMoney[i]_3",
+                  "value": "<decimal>",
+                  "description": "General monetary field associated with a specific line item, using the ItemMoney{i}_[x] parameter syntax, where {i} is the line item index and [x] is the money parameter index (1 to 3). Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "UserAgent",
+                  "value": "<string>",
+                  "description": "User agent of the customer, used to provide device reporting."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeviceMfr",
+                  "value": "<string>",
+                  "description": "Mobile device's manufacturer. Pass `android.os.Build.MANUFACTURER` on Android or `\"Apple\"` on iOS."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeviceModel",
+                  "value": "<string>",
+                  "description": "Mobile device's model. Pass `android.os.Build.MODEL` on Android or the value from `systemInfo.machine` on iOS."
+                },
+                {
+                  "disabled": false,
+                  "key": "PropertyId",
+                  "value": "<integer>",
+                  "description": "For mobile app conversions, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppPackage",
+                  "value": "<string>",
+                  "description": "Package name for the mobile app the user installed. Only for mobile conversions. Note that this is also picked up through the PropertyId field."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppInstallRef",
+                  "value": "<string>",
+                  "description": "Only for Android conversions. Install referrer passed from the Google Play Store when the app is installed. Usually, the value passed from impact.com tracking links will be ClickId={clickidvalue}."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppVer",
+                  "value": "<string>",
+                  "description": "Version of the mobile app. Only for mobile conversions."
+                },
+                {
+                  "disabled": false,
+                  "key": "LocationId",
+                  "value": "<string>",
+                  "description": "Primarily used for accommodations, this is the unique identifier for the location specified in this conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "LocationName",
+                  "value": "<string>",
+                  "description": "Primarily used for accommodations, this is the name for the location specified in this conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "LocationType",
+                  "value": "<string>",
+                  "description": "Primarily used for accommodations, this is the category for the location specified in this conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "TrackingConsent",
+                  "value": "<boolean>",
+                  "description": "Indicates whether the user has provided consent to be tracked at the moment of the request. Derived from your consent management platform or through frameworks like Apple's ATT (App Tracking Transparency) available on iOS."
+                },
+                {
+                  "disabled": false,
+                  "key": "Note",
+                  "value": "<string>",
+                  "description": "General field used to pass information for event-level reporting purposes."
+                },
+                {
+                  "disabled": false,
+                  "key": "DispositionCode",
+                  "value": "<string>",
+                  "description": "If you have a custom disposition code configured in event type settings, you can submit that value as a default disposition for the action that results from this conversion."
+                },
+                {
+                  "disabled": false,
+                  "key": "Text1–Text50",
+                  "value": "<string>",
+                  "description": "General text field that accepts strings of any text data you want to send. Appears in your reports. There are 50 of these fields, from Text1 to Text50."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric1",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric2",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric3",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric4",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric5",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric6",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric7",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric8",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric9",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric10",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money1",
+                  "value": "<decimal>",
+                  "description": "General money field that accepts any monetary numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money2",
+                  "value": "<decimal>",
+                  "description": "General money field that accepts any monetary numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money3",
+                  "value": "<decimal>",
+                  "description": "General money field that accepts any monetary numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date1",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date2",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date3",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date4",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date5",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date6",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date7",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date8",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date9",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date10",
+                  "value": "<dateTime>",
+                  "description": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da5d4c73-4505-4120-a6ab-c3784d8735cf",
+              "name": "The conversion event has been successfully queued for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program/campaign.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "3641"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Timestamp of when the conversion occurred (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2023-02-15T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your unique identifier for the order.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderId",
+                      "value": "9217374917471"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier for the event type (action tracker).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventTypeId",
+                      "value": "8180"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Configurable string code for the event type.",
+                        "type": "text/plain"
+                      },
+                      "key": "EventTypeCode",
+                      "value": "ACME_SALE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier of a referring click.",
+                        "type": "text/plain"
+                      },
+                      "key": "ClickId",
+                      "value": "QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique, non-PII identifier for the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerId",
+                      "value": "BCZ2WVSH674563PDPYOTM3AXDQ"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier for a visitor on your website.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Promo code used for the order. Used for attribution if assigned to a specific partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderPromoCode",
+                      "value": "10OFF-ROCKET"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique URL of a partner that referred the conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "UniqueUrl",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Google Advertising ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Advertising (IDFA).",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Vendors (IDFV).",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfv",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Force attribution to a specific partner ID. Interchangeable with `MediaPartnerId` — provide either one, not both. Use with caution.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaId",
+                      "value": "10000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Force attribution to a specific partner ID. Interchangeable with `MediaId` — provide either one, not both. Use with caution.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaPartnerId",
+                      "value": "10000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId1",
+                      "value": "subid1value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text fields typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId2",
+                      "value": "subid2value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId3",
+                      "value": "subid3value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to share traffic segments with the brands they work with.",
+                        "type": "text/plain"
+                      },
+                      "key": "SharedId",
+                      "value": "sharedidvalue"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Phone number called for call tracking conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneNumber",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier of the customer in call tracking conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "CallerId",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for conversions over the phone, this is the ISO 3166-1 alpha-2 two-letter country code of the number called by the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CountryCode",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's IP address. Used for fraud detection and install attribution.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "72.194.216.61"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's email, must be sent as a SHA1 or SHA256 hash. Plaintext emails are not accepted.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerEmail",
+                      "value": "4db6c86b5d02c22ab6c5e1b1a0b82a7b5d4ef068"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Status of the customer, such as NEW or EXISTING. Before being passed, values must be configured in the Customer Status Mapping section when editing an event type, found in the event type settings section of the platform.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerStatus",
+                      "value": "NEW"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the customer, such as Santa Barbara.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerCity",
+                      "value": "Santa Barbara"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal (or \"ZIP\") code of the customer, such as 93101.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerPostCode",
+                      "value": "93101"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country of the customer, such as USA.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerCountry",
+                      "value": "USA"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Region of the customer, such as AMER.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerRegion",
+                      "value": "AMER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "For sales, this is the discount applied to the order overall. Amount is automatically subtracted from the order total on processing. If item amounts are used, this discount will be subtracted proportionally from each item amount sent in. Note that typically you will want to exclude shipping discounts from this field.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderDiscount",
+                      "value": "5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Used when reporting conversions at the order-level (i.e., no item reporting). The subtotal of the order after discounts, taxes, shipping, and any other costs. If you're submitting item-level data, this value should not be submitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderSubTotalPostDiscount",
+                      "value": "95"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the cost of shipping for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderShipping",
+                      "value": "5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the cost of tax for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderTax",
+                      "value": "8"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the total margin made on the conversion (revenue less costs). Typically this is provided either at an item level through the ItemMargin field or through the product catalog.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderMargin",
+                      "value": "30"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount rate (%) applied to the order.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderDiscountRate",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This method of payment used for this conversion (e.g. Credit).",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentType",
+                      "value": "CREDIT_CARD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If you're tracking gift purchases, you can submit true to mark the order in the conversion as a gift purchase. Submit false if the order isn't a gift purchase.",
+                        "type": "text/plain"
+                      },
+                      "key": "GiftPurchase",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "3-character ISO 4217 currency code of the purchase.",
+                        "type": "text/plain"
+                      },
+                      "key": "CurrencyCode",
+                      "value": "USD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This is the total order sale amount made on an item or order level of the conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "Amount",
+                      "value": "123"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "SKU for the item (e.g., ItemSku1, ItemSku2).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSku[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes setup for particular partners.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemPromoCode[i]",
+                      "value": "10OFF-ACME"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name for the product referenced. Can also be automatically appended through uploading a product catalog.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemName[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Category of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemCategory[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSubCategory[i]",
+                      "value": "Tennis"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemMpn[i]",
+                      "value": "ACME-MPN-101"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemBrand[i]",
+                      "value": "Acme"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of units for this line item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemQuantity[i]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unit price for the item. Do not send if ItemSubTotal[i] is passed.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemPrice[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Total price for the line item. Do not send if ItemPrice[i] is passed.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSubTotal[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Discount applied to each item purchased of this type (not to the entire line item).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDiscount[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount rate (%) applied to each item purchased.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDiscountRate[i]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Discount applied to this line item (not just for each product of this type). Note that this amount is automatically subtracted from the ItemSubTotal to determine the final sale amount for payout and reporting purposes.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemTotalDiscount[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of delivery method specified for this item (e.g. INSTORE).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDeliveryType[i]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "You can associate up to 50 custom text fields with each line item using the ItemText{i}_[x] parameter syntax, where {i} is the line item index and [x] is the custom text parameter index (1 to 50). For example, ItemText1_1 is custom text parameter 1 for line item 1, and ItemText2_40 is custom text parameter 40 for line item 2. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemText[i]_1 to ItemText[i]_50",
+                      "value": "itemtext1_2=Blue (Custom text parameter 2 for line item 1)"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field associated with a specific line item, using the ItemNumeric{i}_[x] parameter syntax, where {i} is the line item index and [x] is the numeric parameter index (1 to 10). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemNumeric[i]_1 to ItemNumeric[i]_10",
+                      "value": "100.5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General date and time field (ISO 8601 format) associated with a specific line item, using the ItemDate{i}_[x] parameter syntax, where {i} is the line item index and [x] is the date parameter index (1 to 10). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDate[i]_1 to ItemDate[i]_10",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General monetary field associated with a specific line item, using the ItemMoney{i}_[x] parameter syntax, where {i} is the line item index and [x] is the money parameter index (1 to 3). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemMoney[i]_1 to ItemMoney[i]_3",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User agent of the customer, used to provide device reporting.",
+                        "type": "text/plain"
+                      },
+                      "key": "UserAgent",
+                      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's manufacturer. Pass `android.os.Build.MANUFACTURER` on Android or `\"Apple\"` on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceMfr",
+                      "value": "Apple"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's model. Pass `android.os.Build.MODEL` on Android or the value from `systemInfo.machine` on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceModel",
+                      "value": "iPhone 15"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "For mobile app conversions, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps.",
+                        "type": "text/plain"
+                      },
+                      "key": "PropertyId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Package name for the mobile app the user installed. Only for mobile conversions. Note that this is also picked up through the PropertyId field.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for Android conversions. Install referrer passed from the Google Play Store when the app is installed. Usually, the value passed from impact.com tracking links will be ClickId={clickidvalue}.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppInstallRef",
+                      "value": "ClickId=QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Version of the mobile app. Only for mobile conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppVer",
+                      "value": "1.2.3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the unique identifier for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationId",
+                      "value": "LOC-12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the name for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationName",
+                      "value": "Acme Resort Santa Barbara"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the category for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationType",
+                      "value": "HOTEL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates whether the user has provided consent to be tracked at the moment of the request. Derived from your consent management platform or through frameworks like Apple's ATT (App Tracking Transparency) available on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "TrackingConsent",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field used to pass information for event-level reporting purposes.",
+                        "type": "text/plain"
+                      },
+                      "key": "Note",
+                      "value": "Customer confirmed delivery."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If you have a custom disposition code configured in event type settings, you can submit that value as a default disposition for the action that results from this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "DispositionCode",
+                      "value": "DEFAULT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General text field that accepts strings of any text data you want to send. Appears in your reports. There are 50 of these fields, from Text1 to Text50.",
+                        "type": "text/plain"
+                      },
+                      "key": "Text1–Text50",
+                      "value": "text1value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric1",
+                      "value": "100.5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric2",
+                      "value": "20"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric3",
+                      "value": "30"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric4",
+                      "value": "40"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric5",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric6",
+                      "value": "60"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric7",
+                      "value": "70"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric8",
+                      "value": "80"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric9",
+                      "value": "90"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric10",
+                      "value": "100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money1",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money2",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money3",
+                      "value": "75"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date1",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date2",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date3",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date4",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date5",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date6",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date7",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date8",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date9",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date10",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"http://RuMOZOQMdflCjxcgjnKvttPQY.auqob5qzhFXIDzLyed-VsjvQnkpAhGw6RhSWqq40EjxWUImOVLqU+jBvHZIpAk4lEruio3Hm2pi\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "932e7f3f-3850-45fa-8bea-d94353051c18",
+              "name": "Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Conversions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program/campaign.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "3641"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Timestamp of when the conversion occurred (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2023-02-15T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your unique identifier for the order.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderId",
+                      "value": "9217374917471"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier for the event type (action tracker).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventTypeId",
+                      "value": "8180"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Configurable string code for the event type.",
+                        "type": "text/plain"
+                      },
+                      "key": "EventTypeCode",
+                      "value": "ACME_SALE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier of a referring click.",
+                        "type": "text/plain"
+                      },
+                      "key": "ClickId",
+                      "value": "QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique, non-PII identifier for the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerId",
+                      "value": "BCZ2WVSH674563PDPYOTM3AXDQ"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier for a visitor on your website.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Promo code used for the order. Used for attribution if assigned to a specific partner.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderPromoCode",
+                      "value": "10OFF-ROCKET"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique URL of a partner that referred the conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "UniqueUrl",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Google Advertising ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Advertising (IDFA).",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Vendors (IDFV).",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfv",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Force attribution to a specific partner ID. Interchangeable with `MediaPartnerId` — provide either one, not both. Use with caution.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaId",
+                      "value": "10000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Force attribution to a specific partner ID. Interchangeable with `MediaId` — provide either one, not both. Use with caution.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaPartnerId",
+                      "value": "10000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId1",
+                      "value": "subid1value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text fields typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId2",
+                      "value": "subid2value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.",
+                        "type": "text/plain"
+                      },
+                      "key": "SubId3",
+                      "value": "subid3value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to share traffic segments with the brands they work with.",
+                        "type": "text/plain"
+                      },
+                      "key": "SharedId",
+                      "value": "sharedidvalue"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Phone number called for call tracking conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneNumber",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier of the customer in call tracking conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "CallerId",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for conversions over the phone, this is the ISO 3166-1 alpha-2 two-letter country code of the number called by the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CountryCode",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's IP address. Used for fraud detection and install attribution.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "72.194.216.61"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's email, must be sent as a SHA1 or SHA256 hash. Plaintext emails are not accepted.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerEmail",
+                      "value": "4db6c86b5d02c22ab6c5e1b1a0b82a7b5d4ef068"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Status of the customer, such as NEW or EXISTING. Before being passed, values must be configured in the Customer Status Mapping section when editing an event type, found in the event type settings section of the platform.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerStatus",
+                      "value": "NEW"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the customer, such as Santa Barbara.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerCity",
+                      "value": "Santa Barbara"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal (or \"ZIP\") code of the customer, such as 93101.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerPostCode",
+                      "value": "93101"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country of the customer, such as USA.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerCountry",
+                      "value": "USA"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Region of the customer, such as AMER.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerRegion",
+                      "value": "AMER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "For sales, this is the discount applied to the order overall. Amount is automatically subtracted from the order total on processing. If item amounts are used, this discount will be subtracted proportionally from each item amount sent in. Note that typically you will want to exclude shipping discounts from this field.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderDiscount",
+                      "value": "5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Used when reporting conversions at the order-level (i.e., no item reporting). The subtotal of the order after discounts, taxes, shipping, and any other costs. If you're submitting item-level data, this value should not be submitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderSubTotalPostDiscount",
+                      "value": "95"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the cost of shipping for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderShipping",
+                      "value": "5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the cost of tax for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderTax",
+                      "value": "8"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for retail sales. This is the total margin made on the conversion (revenue less costs). Typically this is provided either at an item level through the ItemMargin field or through the product catalog.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderMargin",
+                      "value": "30"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount rate (%) applied to the order.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderDiscountRate",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This method of payment used for this conversion (e.g. Credit).",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentType",
+                      "value": "CREDIT_CARD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If you're tracking gift purchases, you can submit true to mark the order in the conversion as a gift purchase. Submit false if the order isn't a gift purchase.",
+                        "type": "text/plain"
+                      },
+                      "key": "GiftPurchase",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "3-character ISO 4217 currency code of the purchase.",
+                        "type": "text/plain"
+                      },
+                      "key": "CurrencyCode",
+                      "value": "USD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "This is the total order sale amount made on an item or order level of the conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "Amount",
+                      "value": "123"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "SKU for the item (e.g., ItemSku1, ItemSku2).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSku[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes setup for particular partners.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemPromoCode[i]",
+                      "value": "10OFF-ACME"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name for the product referenced. Can also be automatically appended through uploading a product catalog.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemName[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Category of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemCategory[i]",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSubCategory[i]",
+                      "value": "Tennis"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemMpn[i]",
+                      "value": "ACME-MPN-101"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemBrand[i]",
+                      "value": "Acme"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of units for this line item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemQuantity[i]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unit price for the item. Do not send if ItemSubTotal[i] is passed.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemPrice[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Total price for the line item. Do not send if ItemPrice[i] is passed.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemSubTotal[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Discount applied to each item purchased of this type (not to the entire line item).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDiscount[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount rate (%) applied to each item purchased.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDiscountRate[i]",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Discount applied to this line item (not just for each product of this type). Note that this amount is automatically subtracted from the ItemSubTotal to determine the final sale amount for payout and reporting purposes.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemTotalDiscount[i]",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of delivery method specified for this item (e.g. INSTORE).",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDeliveryType[i]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "You can associate up to 50 custom text fields with each line item using the ItemText{i}_[x] parameter syntax, where {i} is the line item index and [x] is the custom text parameter index (1 to 50). For example, ItemText1_1 is custom text parameter 1 for line item 1, and ItemText2_40 is custom text parameter 40 for line item 2. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemText[i]_1 to ItemText[i]_50",
+                      "value": "itemtext1_2=Blue (Custom text parameter 2 for line item 1)"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field associated with a specific line item, using the ItemNumeric{i}_[x] parameter syntax, where {i} is the line item index and [x] is the numeric parameter index (1 to 10). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemNumeric[i]_1 to ItemNumeric[i]_10",
+                      "value": "100.5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General date and time field (ISO 8601 format) associated with a specific line item, using the ItemDate{i}_[x] parameter syntax, where {i} is the line item index and [x] is the date parameter index (1 to 10). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemDate[i]_1 to ItemDate[i]_10",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General monetary field associated with a specific line item, using the ItemMoney{i}_[x] parameter syntax, where {i} is the line item index and [x] is the money parameter index (1 to 3). Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemMoney[i]_1 to ItemMoney[i]_3",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User agent of the customer, used to provide device reporting.",
+                        "type": "text/plain"
+                      },
+                      "key": "UserAgent",
+                      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's manufacturer. Pass `android.os.Build.MANUFACTURER` on Android or `\"Apple\"` on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceMfr",
+                      "value": "Apple"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's model. Pass `android.os.Build.MODEL` on Android or the value from `systemInfo.machine` on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceModel",
+                      "value": "iPhone 15"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "For mobile app conversions, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps.",
+                        "type": "text/plain"
+                      },
+                      "key": "PropertyId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Package name for the mobile app the user installed. Only for mobile conversions. Note that this is also picked up through the PropertyId field.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for Android conversions. Install referrer passed from the Google Play Store when the app is installed. Usually, the value passed from impact.com tracking links will be ClickId={clickidvalue}.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppInstallRef",
+                      "value": "ClickId=QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Version of the mobile app. Only for mobile conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppVer",
+                      "value": "1.2.3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the unique identifier for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationId",
+                      "value": "LOC-12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the name for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationName",
+                      "value": "Acme Resort Santa Barbara"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primarily used for accommodations, this is the category for the location specified in this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "LocationType",
+                      "value": "HOTEL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates whether the user has provided consent to be tracked at the moment of the request. Derived from your consent management platform or through frameworks like Apple's ATT (App Tracking Transparency) available on iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "TrackingConsent",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field used to pass information for event-level reporting purposes.",
+                        "type": "text/plain"
+                      },
+                      "key": "Note",
+                      "value": "Customer confirmed delivery."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If you have a custom disposition code configured in event type settings, you can submit that value as a default disposition for the action that results from this conversion.",
+                        "type": "text/plain"
+                      },
+                      "key": "DispositionCode",
+                      "value": "DEFAULT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General text field that accepts strings of any text data you want to send. Appears in your reports. There are 50 of these fields, from Text1 to Text50.",
+                        "type": "text/plain"
+                      },
+                      "key": "Text1–Text50",
+                      "value": "text1value"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric1",
+                      "value": "100.5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric2",
+                      "value": "20"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric3",
+                      "value": "30"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric4",
+                      "value": "40"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric5",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric6",
+                      "value": "60"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric7",
+                      "value": "70"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric8",
+                      "value": "80"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric9",
+                      "value": "90"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric10",
+                      "value": "100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money1",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money2",
+                      "value": "50"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General money field that accepts any monetary numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money3",
+                      "value": "75"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date1",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date2",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date3",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date4",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date5",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date6",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date7",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date8",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date9",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Date10",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"ERROR\",\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8439b498-ac00-48c5-9550-213ea0adf023",
+    "name": "Brand API - Conversions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for submitting conversion events (e.g., sales, leads, subscriptions) to be reported on and potentially attributed to partners. Once a conversion is attributed, it becomes an Action.",
+      "type": "text/plain"
+    }
+  }
+}

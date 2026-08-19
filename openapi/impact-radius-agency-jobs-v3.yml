@@ -1,0 +1,325 @@
+openapi: 3.1.0
+info:
+  title: Agency API — Jobs Management
+  version: "3.0"
+
+servers:
+  - url: https://api.impact.com
+    description: Production
+
+tags:
+  - name: Jobs
+    description: Schedule, monitor, replay, and download large-scale asynchronous jobs.
+
+paths:
+  /Agencies/{AccountSID}/Jobs:
+    get:
+      operationId: listJobs
+      summary: List all jobs
+      description: |-
+        Returns the jobs scheduled by this agency account. Use the optional date filters to narrow results to a specific window.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: "#/components/parameters/AccountSID"
+        - name: CreatedAfter
+          in: query
+          required: false
+          description: Return only jobs created on or after this date, in `YYYY-MM-DD` format.
+          schema:
+            type: string
+            format: date
+          example: "2026-05-01"
+        - name: CreatedBefore
+          in: query
+          required: false
+          description: Return only jobs created on or before this date, in `YYYY-MM-DD` format.
+          schema:
+            type: string
+            format: date
+          example: "2026-05-29"
+      responses:
+        "200":
+          description: A list of job objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+      x-codeSamples:
+        - lang: Shell
+          label: curl
+          source: |-
+            curl -L \
+              --url 'https://api.impact.com/Agencies/{AccountSID}/Jobs' \
+              --user '{AccountSID}:{AuthToken}' \
+              --header 'Accept: */*'
+
+  /Agencies/{AccountSID}/Jobs/{JobId}:
+    get:
+      operationId: getJob
+      summary: Get a job
+      description: |-
+        Retrieves the current status and details of a specific job. Use this to poll a job created from another endpoint (such as `GET /ReportExport/{ReportId}`) until it reaches a terminal `Status` (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`).
+      tags:
+        - Jobs
+      parameters:
+        - $ref: "#/components/parameters/AccountSID"
+        - $ref: "#/components/parameters/JobId"
+      responses:
+        "200":
+          description: The job's current status and details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "404":
+          description: Job not found. Verify the `JobId` belongs to a job created by this agency.
+      x-codeSamples:
+        - lang: Shell
+          label: curl
+          source: |-
+            curl -L \
+              --url 'https://api.impact.com/Agencies/{AccountSID}/Jobs/{JobId}' \
+              --user '{AccountSID}:{AuthToken}' \
+              --header 'Accept: */*'
+
+  /Agencies/{AccountSID}/Jobs/{JobId}/Download:
+    get:
+      operationId: downloadJobResult
+      summary: Download a job result
+      description: |-
+        Downloads the result file produced by a completed job.
+
+        ## Response behaviour by job state
+
+        - **Job complete** — returns the result file. By default, the response is a `302` redirect to a short-lived signed URL on cloud storage; pass `Mode=Stream` to receive the file bytes directly with HTTP `200`.
+        - **Job still running** — returns HTTP `202` with the current `Job` object instead of a file. Poll with `GET /Jobs/{JobId}` until the job reaches `COMPLETED`.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: "#/components/parameters/AccountSID"
+        - $ref: "#/components/parameters/JobId"
+        - name: Mode
+          in: query
+          required: false
+          description: |-
+            Set to `Stream` to receive the result file bytes directly in the response body (HTTP `200`) instead of following a `302` redirect to a signed download URL.
+          schema:
+            type: string
+            enum:
+              - Stream
+          example: Stream
+      responses:
+        "200":
+          description: The result file. Returned directly when `Mode=Stream` is set.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        "202":
+          description: Job is still in progress. The body contains the current job status — poll the job again later.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "302":
+          description: |-
+            Default behaviour for completed jobs (when `Mode` is not `Stream`). Redirects to a temporary signed URL on cloud storage. Follow the `Location` header to download the file.
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "404":
+          description: Job not found.
+      x-codeSamples:
+        - lang: Shell
+          label: curl
+          source: |-
+            curl -L \
+              --url 'https://api.impact.com/Agencies/{AccountSID}/Jobs/{JobId}/Download' \
+              --user '{AccountSID}:{AuthToken}' \
+              --header 'Accept: */*'
+
+  /Agencies/{AccountSID}/Jobs/{JobId}/Replay:
+    put:
+      operationId: replayJob
+      summary: Replay a job
+      description: |-
+        Re-runs a previously executed job with the same parameters. Useful for jobs in a terminal state (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`) when fresh data is wanted over the same export window.
+
+        The `Job.Replayable` field on the original job indicates whether the job can be replayed. Replaying creates a new job with a new `Id` — the original job is not modified.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: "#/components/parameters/AccountSID"
+        - $ref: "#/components/parameters/JobId"
+      responses:
+        "200":
+          description: The status of the newly replayed job.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "403":
+          description: |-
+            Either the credentials lack permission to access this job, **or** the job is not in a replayable state (e.g., it is still `QUEUED` or `RUNNING`). The response `Message` will indicate which case applies.
+        "404":
+          description: Job not found.
+      x-codeSamples:
+        - lang: Shell
+          label: curl
+          source: |-
+            curl -L \
+              --request PUT \
+              --url 'https://api.impact.com/Agencies/{AccountSID}/Jobs/{JobId}/Replay' \
+              --user '{AccountSID}:{AuthToken}' \
+              --header 'Accept: */*'
+
+components:
+  parameters:
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      description: Your Agency Account SID.
+      schema:
+        type: string
+      example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+    JobId:
+      name: JobId
+      in: path
+      required: true
+      description: |-
+        The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`).
+      schema:
+        type: string
+        format: uuid
+      example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
+
+  schemas:
+    Job:
+      type: object
+      description: A scheduled job — created automatically by other endpoints (such as `ReportExport`) and tracked through its lifecycle.
+      properties:
+        Id:
+          type: string
+          format: uuid
+          description: The unique job identifier (UUID).
+          example: 81258bc5-54cf-4a09-9fbc-eb837637d02f
+        Type:
+          type: string
+          description: |-
+            The kind of work the job performs. Created automatically by the endpoint that schedules the job.
+
+            | Value | Description |
+            |---|---|
+            | `DownloadReport` | Download an existing pre-generated report file. |
+            | `ApiReport` | Asynchronous report export created via `GET /ReportExport/{ReportId}`. |
+            | `UploadAds` | Bulk ad upload job. |
+            | `TermModification` | Bulk modification of contract terms. |
+
+            Additional job types may exist beyond the values listed above.
+          enum:
+            - DownloadReport
+            - ApiReport
+            - UploadAds
+            - TermModification
+          example: ApiReport
+        ProgramId:
+          type: string
+          description: The program (also known as `CampaignId`) the job is scoped to, if applicable.
+          example: "3629"
+        CreatedBy:
+          type: string
+          description: The Account SID of the user or account that created this job.
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the job was created, in ISO 8601 format with UTC offset.
+          example: "2026-05-29T04:33:50-05:00"
+        StartedDate:
+          type: string
+          format: date-time
+          description: The date and time the job began processing. Empty until the job transitions out of `QUEUED`.
+          example: "2026-05-29T04:33:55-05:00"
+        CompletedDate:
+          type: string
+          format: date-time
+          description: The date and time the job finished successfully. Only populated when `Status` is `COMPLETED`.
+          example: "2026-05-29T04:35:12-05:00"
+        AbandonedDate:
+          type: string
+          format: date-time
+          description: The date and time the job was abandoned (timed out before completing).
+          example: ""
+        CancelledDate:
+          type: string
+          format: date-time
+          description: The date and time the job was cancelled. Only populated when `Status` is `CANCELLED`.
+          example: ""
+        FailedDate:
+          type: string
+          format: date-time
+          description: The date and time the job entered a failed state. Only populated when `Status` is `FAILED` or `ERROR`.
+          example: ""
+        LastProgressUpdateDate:
+          type: string
+          format: date-time
+          description: The date and time `PercentageComplete` was last updated.
+          example: "2026-05-29T04:34:30-05:00"
+        Status:
+          type: string
+          description: |-
+            The current lifecycle status of the job.
+
+            | Value | Description |
+            |---|---|
+            | `QUEUED` | The job is scheduled and awaiting processing. |
+            | `RUNNING` | The job is actively processing. |
+            | `COMPLETED` | The job finished successfully — a result file is available via the `Download` endpoint. |
+            | `CANCELLED` | The job was cancelled before completion. |
+            | `ERROR` | The job stopped due to an unrecoverable system error. |
+            | `FAILED` | The job ran but did not produce a usable result. |
+          enum:
+            - QUEUED
+            - RUNNING
+            - COMPLETED
+            - CANCELLED
+            - ERROR
+            - FAILED
+          example: COMPLETED
+        StatusMessage:
+          type: string
+          description: A human-readable description of the current status — useful for diagnosing failures.
+          example: "Job processing completed successfully."
+        RecordsProcessed:
+          type: integer
+          description: The total number of records the job has processed so far.
+          example: 250
+        PercentageComplete:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Progress through the job, from `0` to `100`.
+          example: 100
+        Replayable:
+          type: boolean
+          description: |-
+            Whether this job can be replayed (re-run with the same parameters) using `PUT /Jobs/{JobId}/Replay`. Typically `true` for jobs in a terminal state.
+          example: true
+        ResultUri:
+          type: string
+          format: uri-reference
+          description: |-
+            The relative URI to download the job's result file. Available once `Status` is `COMPLETED`.
+          example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download
+
+x-default-client: cURL

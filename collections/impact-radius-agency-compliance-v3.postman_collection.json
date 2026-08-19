@@ -1,0 +1,1140 @@
+{
+  "item": [
+    {
+      "id": "bced3e1f-44ac-4553-bac2-2c42468aa5a2",
+      "name": "Compliance Content",
+      "description": {
+        "content": "Submit content for impact.com compliance monitoring and retrieve job status and results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d5a98d06-c216-4329-bedb-966a560b0897",
+          "name": "Create compliance content submission",
+          "request": {
+            "name": "Create compliance content submission",
+            "description": {
+              "content": "Submits one or more content items for compliance monitoring. Content is processed asynchronously — the response returns immediately with a `QueuedUri` pointing to the job's status endpoint.\n\nUse the returned URI (or extract the submission `Id` from its tail) to poll the job with the **Get compliance submission status** endpoint. Once the status is `COMPLETED`, retrieve the per-item results from the **Get compliance submission results** endpoint.\n\nAccepts either `application/json` (recommended; supports batch submissions via the `Contents` array) or `application/x-www-form-urlencoded` (single item only).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Compliance",
+                "Content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "AdvertiserId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique numeric identifier of the advertiser account that owns the program this content is associated with."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique numeric identifier of the program (campaign) this content is part of."
+                },
+                {
+                  "disabled": false,
+                  "key": "Url",
+                  "value": "<uri>",
+                  "description": "(Required) The full URL of the content page being submitted for review."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "(Required) The type of compliance content being submitted. Only `PAGE` is currently supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "Reason",
+                  "value": "<string>",
+                  "description": "(Required) A free-text description of why this content is being submitted for compliance review. Useful for audit trails."
+                },
+                {
+                  "disabled": false,
+                  "key": "Source",
+                  "value": "<string>",
+                  "description": "(Required) The source system submitting the content. Only `CONTENT_API` is currently supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "PartnerId",
+                  "value": "<integer>",
+                  "description": "The numeric ID of the partner publishing the content. **Required** if the program has \"Partner ID Required\" enabled in its compliance settings."
+                },
+                {
+                  "disabled": false,
+                  "key": "ContentLabels",
+                  "value": "<string>",
+                  "description": "A comma-separated list of labels for categorizing the content (e.g., `\"product-review,paid\"`). Free-form values defined by the agency."
+                },
+                {
+                  "disabled": false,
+                  "key": "Products",
+                  "value": "<string>",
+                  "description": "A comma-separated list of product SKUs that this content refers to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Keywords",
+                  "value": "{\"Name\":\"<string>\",\"Status\":\"<string>\",\"Function\":\"<string>\"}",
+                  "description": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms."
+                },
+                {
+                  "disabled": false,
+                  "key": "Keywords",
+                  "value": "{\"Name\":\"<string>\",\"Status\":\"<string>\",\"Function\":\"<string>\"}",
+                  "description": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms."
+                },
+                {
+                  "disabled": false,
+                  "key": "Language",
+                  "value": "<string>",
+                  "description": "The language of the content as an ISO 639-1 two-letter code (e.g., `en`, `fr`, `es`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaidLink",
+                  "value": "<boolean>",
+                  "description": "Whether this content is a paid (sponsored) link. Defaults to `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Monitored",
+                  "value": "<boolean>",
+                  "description": "Whether to enroll this content in impact.com's ongoing Compliance Monitoring service. Defaults to `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Cadence",
+                  "value": "<boolean>",
+                  "description": "Whether to apply cadence rules (re-checking on a schedule) to this content within Compliance Monitoring. Only effective when `Monitored` is `true`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1edf10df-8c07-4b93-af6d-338e59f0caef",
+              "name": "Submission accepted and queued for processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the advertiser account that owns the program this content is associated with.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdvertiserId",
+                      "value": "1048291"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the program (campaign) this content is part of.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The full URL of the content page being submitted for review.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "https://www.partner-site.example.com/review/product-x"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The type of compliance content being submitted. Only `PAGE` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "PAGE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A free-text description of why this content is being submitted for compliance review. Useful for audit trails.",
+                        "type": "text/plain"
+                      },
+                      "key": "Reason",
+                      "value": "Quarterly compliance audit"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The source system submitting the content. Only `CONTENT_API` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Source",
+                      "value": "CONTENT_API"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The numeric ID of the partner publishing the content. **Required** if the program has \"Partner ID Required\" enabled in its compliance settings.",
+                        "type": "text/plain"
+                      },
+                      "key": "PartnerId",
+                      "value": "67890"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of labels for categorizing the content (e.g., `\"product-review,paid\"`). Free-form values defined by the agency.",
+                        "type": "text/plain"
+                      },
+                      "key": "ContentLabels",
+                      "value": "product-review,paid"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of product SKUs that this content refers to.",
+                        "type": "text/plain"
+                      },
+                      "key": "Products",
+                      "value": "SKU-100,SKU-200"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The language of the content as an ISO 639-1 two-letter code (e.g., `en`, `fr`, `es`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Language",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether this content is a paid (sponsored) link. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaidLink",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to enroll this content in impact.com's ongoing Compliance Monitoring service. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Monitored",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to apply cadence rules (re-checking on a schedule) to this content within Compliance Monitoring. Only effective when `Monitored` is `true`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Cadence",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/content_api_1603459292102\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcc83fac-0d20-4ed9-bd44-7aedf59c9f85",
+              "name": "Validation error. The request body is missing required fields or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the advertiser account that owns the program this content is associated with.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdvertiserId",
+                      "value": "1048291"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the program (campaign) this content is part of.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The full URL of the content page being submitted for review.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "https://www.partner-site.example.com/review/product-x"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The type of compliance content being submitted. Only `PAGE` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "PAGE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A free-text description of why this content is being submitted for compliance review. Useful for audit trails.",
+                        "type": "text/plain"
+                      },
+                      "key": "Reason",
+                      "value": "Quarterly compliance audit"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The source system submitting the content. Only `CONTENT_API` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Source",
+                      "value": "CONTENT_API"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The numeric ID of the partner publishing the content. **Required** if the program has \"Partner ID Required\" enabled in its compliance settings.",
+                        "type": "text/plain"
+                      },
+                      "key": "PartnerId",
+                      "value": "67890"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of labels for categorizing the content (e.g., `\"product-review,paid\"`). Free-form values defined by the agency.",
+                        "type": "text/plain"
+                      },
+                      "key": "ContentLabels",
+                      "value": "product-review,paid"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of product SKUs that this content refers to.",
+                        "type": "text/plain"
+                      },
+                      "key": "Products",
+                      "value": "SKU-100,SKU-200"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The language of the content as an ISO 639-1 two-letter code (e.g., `en`, `fr`, `es`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Language",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether this content is a paid (sponsored) link. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaidLink",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to enroll this content in impact.com's ongoing Compliance Monitoring service. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Monitored",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to apply cadence rules (re-checking on a schedule) to this content within Compliance Monitoring. Only effective when `Monitored` is `true`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Cadence",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"ERROR\",\n  \"Message\": \"Validation Errors\",\n  \"Errors\": {\n    \"Error\": {\n      \"Field\": \"Context\",\n      \"Message\": \"Context is an expected field\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "321c68d5-01c9-48fe-bcb0-814cd2c0a211",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the advertiser account that owns the program this content is associated with.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdvertiserId",
+                      "value": "1048291"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique numeric identifier of the program (campaign) this content is part of.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The full URL of the content page being submitted for review.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "https://www.partner-site.example.com/review/product-x"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The type of compliance content being submitted. Only `PAGE` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "PAGE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A free-text description of why this content is being submitted for compliance review. Useful for audit trails.",
+                        "type": "text/plain"
+                      },
+                      "key": "Reason",
+                      "value": "Quarterly compliance audit"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The source system submitting the content. Only `CONTENT_API` is currently supported.",
+                        "type": "text/plain"
+                      },
+                      "key": "Source",
+                      "value": "CONTENT_API"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The numeric ID of the partner publishing the content. **Required** if the program has \"Partner ID Required\" enabled in its compliance settings.",
+                        "type": "text/plain"
+                      },
+                      "key": "PartnerId",
+                      "value": "67890"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of labels for categorizing the content (e.g., `\"product-review,paid\"`). Free-form values defined by the agency.",
+                        "type": "text/plain"
+                      },
+                      "key": "ContentLabels",
+                      "value": "product-review,paid"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated list of product SKUs that this content refers to.",
+                        "type": "text/plain"
+                      },
+                      "key": "Products",
+                      "value": "SKU-100,SKU-200"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.",
+                        "type": "text/plain"
+                      },
+                      "key": "Keywords",
+                      "value": "{\"Name\":\"discount\",\"Status\":\"APPROVED\",\"Function\":\"MONITORED\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The language of the content as an ISO 639-1 two-letter code (e.g., `en`, `fr`, `es`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Language",
+                      "value": "en"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether this content is a paid (sponsored) link. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaidLink",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to enroll this content in impact.com's ongoing Compliance Monitoring service. Defaults to `false`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Monitored",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to apply cadence rules (re-checking on a schedule) to this content within Compliance Monitoring. Only effective when `Monitored` is `true`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Cadence",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c558976-c867-4302-a4fc-d19b5165eb46",
+          "name": "Get compliance submission status",
+          "request": {
+            "name": "Get compliance submission status",
+            "description": {
+              "content": "Retrieves the current processing status of a compliance content submission job.\n\nOnce the `Status` value reaches `COMPLETED`, the per-item results can be retrieved using the **Get compliance submission results** endpoint at the URI returned in `ResponseUri`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Compliance",
+                "Content",
+                "ComplianceAPISubmissions",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f51de890-3002-4524-9486-59c9d470c8fd",
+              "name": "The current status of the submission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"JobId\": \"content_api_1603459292102\",\n  \"Status\": \"COMPLETED\",\n  \"Source\": \"CONTENT_API\",\n  \"Type\": \"PAGE\",\n  \"StartDate\": \"2026-01-15T09:22:11Z\",\n  \"EndDate\": \"2026-01-15T09:23:47Z\",\n  \"Success\": 8,\n  \"PartialSuccess\": 1,\n  \"Error\": 1,\n  \"ResponseUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/Response/content_api_1603459292102\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f5b2804-00bb-4714-8a7e-ccc7b0f3c04d",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a038c93-42a0-4a36-9d1f-09d6e8f50205",
+              "name": "Submission not found. Verify the `Id` belongs to a submission made by this agency.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"ERROR\",\n  \"Message\": \"The requested resource was not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc2c8bc9-6c9f-4c6c-b6e6-9e7a9c3698e4",
+          "name": "Get compliance submission results",
+          "request": {
+            "name": "Get compliance submission results",
+            "description": {
+              "content": "Retrieves the per-item compliance results of a completed submission. Call this only when the job's `Status` (from the **Get compliance submission status** endpoint) is `COMPLETED`.\n\nThe relative URI is also returned as the `ResponseUri` field in the status response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Compliance",
+                "Content",
+                "ComplianceAPISubmissions",
+                "Response",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The submission ID returned in the `QueuedUri` of the create response."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df268c80-6c11-4ee8-b447-4ea94d0044ee",
+              "name": "Per-item processing results for the submission.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    "Response",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "685b5520-e084-40a4-84a3-da096b858814",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    "Response",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05f1994e-d4b7-4f5b-8e55-f13b8e469771",
+              "name": "Submission not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Compliance",
+                    "Content",
+                    "ComplianceAPISubmissions",
+                    "Response",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The submission ID returned in the `QueuedUri` of the create response."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eda59946-2edd-4f3d-bb37-82fec609aae0",
+    "name": "Agency API — Compliance Content",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

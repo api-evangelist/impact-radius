@@ -1,0 +1,261 @@
+{
+  "item": [
+    {
+      "id": "92b59fa6-4e44-4ae2-8393-ad5ac0af8eba",
+      "name": "Tracking Links",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ede37d2-0292-4b68-afda-826243619a7e",
+          "name": "Generate a Tracking Link",
+          "request": {
+            "name": "Generate a Tracking Link",
+            "description": {
+              "content": "Creates a new tracking link for a specified media partner within a program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "TrackingLinks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique identifier for the media partner."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) The unique identifier for the program."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "Regular",
+                  "description": "The type of tracking link to create. 'Vanity' allows for a `CustomPath`."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomPath",
+                  "value": "<string>",
+                  "description": "A custom path for a 'Vanity' link (e.g., 'MyCustomLink')."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<integer>",
+                  "description": "The unique ID of the ad to associate with the link. If omitted, redirects to the program's default landing page."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeepLink",
+                  "value": "<uri>",
+                  "description": "A specific URL to redirect the user to, overriding the default."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerPropertyId",
+                  "value": "<integer>",
+                  "description": "The unique ID of the partner's media property where the link will be used."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66b62f92-461c-4af7-91f5-62d35d08704e",
+              "name": "The tracking link was generated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "TrackingLinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "MediaPartnerId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The type of tracking link to create. 'Vanity' allows for a `CustomPath`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "Regular"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A custom path for a 'Vanity' link (e.g., 'MyCustomLink').",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomPath",
+                      "value": "summer-sale"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The unique ID of the ad to associate with the link. If omitted, redirects to the program's default landing page.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdId",
+                      "value": "656565"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A specific URL to redirect the user to, overriding the default.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeepLink",
+                      "value": "https://www.acme.com/products/tennis-balls"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The unique ID of the partner's media property where the link will be used.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaPartnerPropertyId",
+                      "value": "12345"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TrackingURL\": \"https://example.sjv.io/c/123456/98765/101010\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "007119ca-ffc7-48ed-ba4b-182221dc26b5",
+    "name": "Brand API - Tracking Links",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for programmatically generating tracking links for partners within a specified program. This can be used to create standard links, deep links, or custom vanity links.",
+      "type": "text/plain"
+    }
+  }
+}

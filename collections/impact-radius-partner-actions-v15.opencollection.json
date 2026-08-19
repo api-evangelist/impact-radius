@@ -1,0 +1,258 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Impact Publisher Actions API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Actions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions for a specific campaign."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions by their current state."
+              },
+              {
+                "name": "ActionDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions with an EventDate on or after this value."
+              },
+              {
+                "name": "ActionDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions with an EventDate on or before this value."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions last updated on or after this value. Requires EndDate. Cannot be more than 45 days before EndDate or more than 3 years in the past."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions last updated on or before this value. Requires StartDate."
+              },
+              {
+                "name": "LockingDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions with a LockingDate on or after this value. Requires LockingDateEnd. The range between LockingDateStart and LockingDateEnd cannot exceed 45 days."
+              },
+              {
+                "name": "LockingDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters actions with a LockingDate on or before this value. Requires LockingDateStart."
+              }
+            ]
+          },
+          "docs": "Returns a list of actions attributed to you, ordered by creation date (newest first).\n\n**Date filtering rules:**\n- If no `StartDate` and `EndDate` are specified, only records from the past 7 days are returned.\n- `StartDate` and `EndDate` cannot be more than 45 days apart.\n- `StartDate` cannot exceed 3 years in the past.\n- If `StartDate` is specified, `EndDate` must also be specified.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Actions/:id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the action."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing action using its unique ID."
+        },
+        {
+          "info": {
+            "name": "List all items for an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Actions/:id/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the action."
+              }
+            ]
+          },
+          "docs": "Returns a list of the items within the specified action in the order they were recorded. Each action has at least one item."
+        },
+        {
+          "info": {
+            "name": "Retrieve an item from an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Actions/:actionId/Items/:sku",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the action."
+              },
+              {
+                "name": "sku",
+                "value": "",
+                "type": "path",
+                "description": "The SKU or product identifier of the item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific item within an action using its SKU."
+        },
+        {
+          "info": {
+            "name": "List Action Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ActionUpdates",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates last modified on or after this value. Requires EndDate. Cannot be more than 45 days before EndDate or more than 3 years in the past."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates last modified on or before this value. Requires StartDate."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates for a specific campaign."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates by the action's current state."
+              },
+              {
+                "name": "ActionDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates whose action's EventDate is on or after this value. Requires ActionDateEnd. The range cannot exceed 45 days."
+              },
+              {
+                "name": "ActionDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates whose action's EventDate is on or before this value. Requires ActionDateStart."
+              },
+              {
+                "name": "LockingDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates whose action's LockingDate is on or after this value. Requires LockingDateEnd. The range cannot exceed 45 days."
+              },
+              {
+                "name": "LockingDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters action updates whose action's LockingDate is on or before this value. Requires LockingDateStart."
+              }
+            ]
+          },
+          "docs": "Returns a list of action updates, useful for syncing action state changes with internal systems. Each record represents a change to an action's state or payout.\n\n**Note:** impact.com recommends using action lifecycle postbacks instead of polling this endpoint for all but occasional requests, in order to receive low-latency near-realtime action updates.\n\n**Date filtering rules:**\n- If no `StartDate` and `EndDate` are specified, only records from the past 7 days are returned.\n- `StartDate` and `En"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Action Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ActionUpdates/:id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the action update record."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific action update record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

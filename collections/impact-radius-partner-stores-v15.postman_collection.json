@@ -1,0 +1,549 @@
+{
+  "item": [
+    {
+      "id": "d48918af-16e3-492d-83d3-6bfa3c23974e",
+      "name": "Stores",
+      "description": {
+        "content": "Endpoints for browsing partner storefronts, their groups, and the catalog items inside them.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3e6d1f8-fe1f-49d0-b778-b888b472c5db",
+          "name": "List all stores",
+          "request": {
+            "name": "List all stores",
+            "description": {
+              "content": "Returns a list of all stores available to your partner account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Stores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c824bf76-4bff-4d1d-a1a2-7650c21324ec",
+              "name": "An array of stores.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Stores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Stores\": [\n    {\n      \"Id\": \"10306\",\n      \"Name\": \"Hazel's Wellness Picks\",\n      \"NumberOfGroups\": \"1\",\n      \"DateLastUpdated\": \"2025-06-20T08:03:12-07:00\",\n      \"StoreUri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306\",\n      \"StoreAvatar\": \"https://cdn2.impact.com/display-logo-via-campaign/10306.png\",\n      \"StoreBanner\": \"https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Stores/10306\",\n      \"Groups\": [\n        {\n          \"Id\": \"817\",\n          \"Name\": \"Professional Equipment\",\n          \"NumberOfProducts\": \"17\",\n          \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n          \"StartDate\": \"2023-05-29T08:20:51.246Z\",\n          \"EndDate\": \"2000-07-15T05:13:36.844Z\",\n          \"Status\": \"ACTIVE\",\n          \"CatalogId\": \"24836\",\n          \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n          \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n          \"GroupProductPreview\": \"\"\n        },\n        {\n          \"Id\": \"817\",\n          \"Name\": \"Professional Equipment\",\n          \"NumberOfProducts\": \"17\",\n          \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n          \"StartDate\": \"2009-12-25T02:12:24.124Z\",\n          \"EndDate\": \"1979-12-18T05:58:57.214Z\",\n          \"Status\": \"ACTIVE\",\n          \"CatalogId\": \"24836\",\n          \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n          \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n          \"GroupProductPreview\": \"\"\n        }\n      ]\n    },\n    {\n      \"Id\": \"10306\",\n      \"Name\": \"Hazel's Wellness Picks\",\n      \"NumberOfGroups\": \"1\",\n      \"DateLastUpdated\": \"2025-06-20T08:03:12-07:00\",\n      \"StoreUri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306\",\n      \"StoreAvatar\": \"https://cdn2.impact.com/display-logo-via-campaign/10306.png\",\n      \"StoreBanner\": \"https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Stores/10306\",\n      \"Groups\": [\n        {\n          \"Id\": \"817\",\n          \"Name\": \"Professional Equipment\",\n          \"NumberOfProducts\": \"17\",\n          \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n          \"StartDate\": \"1954-03-01T03:32:31.277Z\",\n          \"EndDate\": \"2014-09-16T03:59:37.557Z\",\n          \"Status\": \"ACTIVE\",\n          \"CatalogId\": \"24836\",\n          \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n          \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n          \"GroupProductPreview\": \"\"\n        },\n        {\n          \"Id\": \"817\",\n          \"Name\": \"Professional Equipment\",\n          \"NumberOfProducts\": \"17\",\n          \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n          \"StartDate\": \"2000-03-06T10:42:14.023Z\",\n          \"EndDate\": \"1960-06-02T11:22:28.206Z\",\n          \"Status\": \"ACTIVE\",\n          \"CatalogId\": \"24836\",\n          \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n          \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n          \"GroupProductPreview\": \"\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "258c23b4-3b3e-4fd7-b749-48c2796556cd",
+          "name": "Retrieve a store",
+          "request": {
+            "name": "Retrieve a store",
+            "description": {
+              "content": "Retrieves a store's details, including its curated groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Stores",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ShowAutoCreatedGroups",
+                  "value": "TRUE",
+                  "description": "When `TRUE` (the default), the response includes groups that impact.com auto-generated for the storefront. Set to `FALSE` to return only brand-curated groups."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the store."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f9f01668-edac-46b9-a921-6eaefc58fbd3",
+              "name": "A store object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Stores",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShowAutoCreatedGroups",
+                      "value": "TRUE"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the store."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"10306\",\n  \"Name\": \"Hazel's Wellness Picks\",\n  \"NumberOfGroups\": \"1\",\n  \"DateLastUpdated\": \"2025-06-20T08:03:12-07:00\",\n  \"StoreUri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306\",\n  \"StoreAvatar\": \"https://cdn2.impact.com/display-logo-via-campaign/10306.png\",\n  \"StoreBanner\": \"https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Stores/10306\",\n  \"Groups\": [\n    {\n      \"Id\": \"817\",\n      \"Name\": \"Professional Equipment\",\n      \"NumberOfProducts\": \"17\",\n      \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n      \"StartDate\": \"2025-11-14T23:31:57.392Z\",\n      \"EndDate\": \"1998-07-23T12:06:19.711Z\",\n      \"Status\": \"ACTIVE\",\n      \"CatalogId\": \"24836\",\n      \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n      \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n      \"GroupProductPreview\": \"\"\n    },\n    {\n      \"Id\": \"817\",\n      \"Name\": \"Professional Equipment\",\n      \"NumberOfProducts\": \"17\",\n      \"DateLastUpdated\": \"2025-06-20T08:01:43-07:00\",\n      \"StartDate\": \"1962-09-06T00:19:43.195Z\",\n      \"EndDate\": \"1952-09-06T16:24:46.102Z\",\n      \"Status\": \"ACTIVE\",\n      \"CatalogId\": \"24836\",\n      \"Uri\": \"https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817\",\n      \"ItemsUri\": \"/Mediapartners/<AccountSID>/Stores/10306/Group/817/Items\",\n      \"GroupProductPreview\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a28358b-5381-4880-8233-17a220ebb35a",
+              "name": "No store exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Stores",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ShowAutoCreatedGroups",
+                      "value": "TRUE"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the store."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c02e2a85-7bb6-4461-b26d-c346acc76a68",
+          "name": "List items in a store group",
+          "request": {
+            "name": "List items in a store group",
+            "description": {
+              "content": "Returns the catalog items belonging to the given store and group, sorted by most recently created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Stores",
+                ":Id",
+                "Group",
+                ":GroupId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Query",
+                  "value": "<string>",
+                  "description": "Narrows the list by attribute (e.g., `CurrentPrice > 10.00`)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the store containing the group."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "GroupId",
+                  "description": "(Required) Unique identifier for the group whose items you want to list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c24aa7af-2d82-4154-9fad-b7d180d1fc47",
+              "name": "An array of catalog item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Stores",
+                    ":Id",
+                    "Group",
+                    ":GroupId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the store containing the group."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "GroupId",
+                      "description": "(Required) Unique identifier for the group whose items you want to list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Bullets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.sjv.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"AdditionalImageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Promotions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"\",\n      \"LaunchDate\": \"\",\n      \"ExpirationDate\": \"\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"\",\n      \"ShippingWeight\": \"\",\n      \"ShippingWeightUnit\": \"oz\",\n      \"ShippingLength\": \"\",\n      \"ShippingWidth\": \"\",\n      \"ShippingHeight\": \"\",\n      \"ShippingLengthUnit\": \"\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"\",\n      \"AdvertiserFormatCategories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Material\": \"\",\n      \"Pattern\": \"\",\n      \"Size\": \"\",\n      \"SizeUnit\": \"\",\n      \"Weight\": \"\",\n      \"WeightUnit\": \"\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"\",\n      \"Gender\": \"\",\n      \"Adult\": \"\",\n      \"Text1\": \"\",\n      \"Text2\": \"\",\n      \"Text3\": \"\",\n      \"Numeric1\": \"\",\n      \"Numeric2\": \"\",\n      \"Numeric3\": \"\",\n      \"Money1\": \"\",\n      \"Money2\": \"\",\n      \"Money3\": \"\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    },\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Bullets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.sjv.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"AdditionalImageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Promotions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"\",\n      \"LaunchDate\": \"\",\n      \"ExpirationDate\": \"\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"\",\n      \"ShippingWeight\": \"\",\n      \"ShippingWeightUnit\": \"oz\",\n      \"ShippingLength\": \"\",\n      \"ShippingWidth\": \"\",\n      \"ShippingHeight\": \"\",\n      \"ShippingLengthUnit\": \"\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"\",\n      \"AdvertiserFormatCategories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Material\": \"\",\n      \"Pattern\": \"\",\n      \"Size\": \"\",\n      \"SizeUnit\": \"\",\n      \"Weight\": \"\",\n      \"WeightUnit\": \"\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"\",\n      \"Gender\": \"\",\n      \"Adult\": \"\",\n      \"Text1\": \"\",\n      \"Text2\": \"\",\n      \"Text3\": \"\",\n      \"Numeric1\": \"\",\n      \"Numeric2\": \"\",\n      \"Numeric3\": \"\",\n      \"Money1\": \"\",\n      \"Money2\": \"\",\n      \"Money3\": \"\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0e0949e-89f4-4904-8390-0fe559c18b3c",
+              "name": "No store or group exists with the supplied Ids.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Stores",
+                    ":Id",
+                    "Group",
+                    ":GroupId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the store containing the group."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "GroupId",
+                      "description": "(Required) Unique identifier for the group whose items you want to list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "308786f0-2695-487a-ac65-6e8674d6b032",
+    "name": "Partner Stores API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A Store is a curated collection of products from a brand's catalog, grouped for promotion to your audience. Each store contains one or more **Groups**, and each group contains catalog **Items** (products).\n\nUse this API to:\n\n1. **List Stores** — see which brand storefronts are available to you.\n2. **Retrieve a Store** — get its details plus the curated groups inside it.\n3. **List items in a group** — fetch the products in a specific group, including price, stock, and tracking URLs you can surface to your audience.\n\nFor richer item-level operations and search across an entire catalog, see the Partner Catalogs API.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,349 @@
+openapi: 3.1.0
+info:
+  title: Action Inquiries API
+  version: '15'
+  description: 'Action Inquiries are formal requests to investigate the attribution
+    and/or payout of an action. You can submit an action inquiry if you believe an
+    action should have been attributed to you, or if the payout amount is incorrect.
+    This feature is exclusively available to cashback and loyalty partners.
+    '
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+paths:
+  /Mediapartners/{AccountSID}/ActionInquiries:
+    get:
+      operationId: listActionInquiries
+      tags:
+      - Action Inquiries
+      summary: List Action Inquiries
+      description: Returns a list of the action inquiries made for your campaign,
+        ordered by creation date (newest first).
+      parameters:
+      - $ref: '#/components/parameters/AccountSID'
+      - name: CampaignId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: View action inquiries for a specified campaign.
+      - name: MediaPartnerInquiryId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by your own internal reference ID for the inquiry.
+      - name: CustomerId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by the customer identifier associated with the transaction.
+      - name: ResolutionStatus
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ResolutionStatus'
+        description: Filter by the current resolution status of the inquiry.
+      - name: StartDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters inquiries with a CreationDate on or after this value.
+      - name: EndDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters inquiries with a CreationDate on or before this value.
+      - name: TransactionDateStart
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters inquiries with a TransactionDate on or after this value.
+      - name: TransactionDateEnd
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters inquiries with a TransactionDate on or before this value.
+      responses:
+        '200':
+          description: An array of action inquiry objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ActionInquiries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionInquiry'
+    post:
+      operationId: createActionInquiry
+      tags:
+      - Action Inquiries
+      summary: Create Action Inquiry
+      description: Creates an action inquiry by setting the values of the required
+        parameters.
+      parameters:
+      - $ref: '#/components/parameters/AccountSID'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - CampaignId
+              - OrderId
+              - TransactionDate
+              - TransactionAmount
+              - InquiryType
+              properties:
+                CampaignId:
+                  type: integer
+                  description: The unique identifier for the campaign associated with the inquiry.
+                OrderId:
+                  type: string
+                  description: The order identifier for the transaction being disputed.
+                TransactionDate:
+                  type: string
+                  format: date-time
+                  description: The date and time of the transaction being disputed.
+                TransactionAmount:
+                  type: number
+                  format: decimal
+                  description: The value of the transaction being disputed.
+                InquiryType:
+                  $ref: '#/components/schemas/InquiryType'
+                MediaPartnerInquiryId:
+                  type: string
+                  description: Your own internal reference ID for the inquiry.
+                ResolutionDeadlineDate:
+                  type: string
+                  format: date-time
+                  description: The deadline by which the inquiry must be resolved.
+                ExpectedPayout:
+                  type: number
+                  format: decimal
+                  description: The commission amount you expect to receive if the inquiry is approved.
+                TrackingLink:
+                  type: string
+                  description: The tracking link associated with the transaction, if applicable.
+                CustomerId:
+                  type: string
+                  description: A unique identifier for the customer associated with the transaction.
+                InquiryDate:
+                  type: string
+                  format: date-time
+                  description: The date and time the transaction was originally submitted.
+                InquiryNotes:
+                  type: string
+                  description: Additional notes or context to support the inquiry.
+      responses:
+        '200':
+          description: Action inquiry created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    example: /Mediapartners/<AccountSID>/ActionInquiries/15652378
+  /Mediapartners/{AccountSID}/ActionInquiries/{InquiryId}:
+    get:
+      operationId: retrieveActionInquiry
+      tags:
+      - Action Inquiries
+      summary: Retrieve an Action Inquiry
+      description: Retrieves the details of an existing action inquiry using its unique
+        InquiryId.
+      parameters:
+      - $ref: '#/components/parameters/AccountSID'
+      - name: InquiryId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the action inquiry.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionInquiry'
+components:
+  parameters:
+    AccountSID:
+      name: AccountSID
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the account.
+  schemas:
+    ActionInquiry:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the action inquiry.
+          example: '15652378'
+        MediaPartnerInquiryId:
+          type: string
+          description: Your own internal reference ID for the inquiry, submitted at creation.
+          example: ''
+        CampaignId:
+          type: integer
+          description: Unique identifier for the campaign associated with the inquiry.
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the campaign associated with the inquiry.
+          example: Wayne Enterprises
+        OrderId:
+          type: string
+          description: The order identifier for the transaction being disputed.
+          example: TEST-ORDER-001
+        TransactionDate:
+          type: string
+          format: date-time
+          description: The date and time of the transaction being disputed.
+          example: '2025-05-01T10:00:00-07:00'
+        TransactionAmount:
+          type: number
+          format: decimal
+          description: The value of the transaction being disputed.
+          example: '49.99'
+        CustomerId:
+          type: string
+          description: A unique identifier for the customer associated with the transaction.
+          example: ''
+        InquiryDate:
+          type: string
+          format: date-time
+          description: The date and time the transaction was originally submitted.
+          example: ''
+        InquiryType:
+          $ref: '#/components/schemas/InquiryType'
+          description: The type of inquiry being raised.
+        ExpectedPayout:
+          type: number
+          format: decimal
+          description: The commission amount you expect to receive if the inquiry is approved.
+          example: ''
+        ResolutionDeadlineDate:
+          type: string
+          format: date-time
+          description: The deadline by which the inquiry must be resolved.
+          example: ''
+        Comments:
+          type: array
+          description: A list of comments associated with the inquiry, including any InquiryNotes submitted at creation.
+          items:
+            $ref: '#/components/schemas/Comment'
+        InquiryNotes:
+          type: string
+          description: Additional notes or context submitted with the inquiry.
+          example: ''
+        TrackingLink:
+          type: string
+          description: The tracking link associated with the transaction, if applicable.
+          example: ''
+        ActionId:
+          type: string
+          description: The unique identifier of the action associated with the inquiry, if one was found.
+          example: '8882.4335'
+        ActionUri:
+          type: string
+          description: The API resource path for the associated action.
+          example: /Mediapartners/<AccountSID>/Actions/8882.4335
+        AutoApprovalDate:
+          type: string
+          format: date-time
+          description: The date and time the inquiry will be automatically approved if not manually reviewed.
+          example: ''
+        ResolutionStatus:
+          $ref: '#/components/schemas/ResolutionStatus'
+          description: The current resolution status of the inquiry.
+        RejectReason:
+          $ref: '#/components/schemas/RejectReason'
+          description: The reason the inquiry was declined. Only populated when ResolutionStatus is DECLINED.
+        FinalPayout:
+          type: number
+          format: decimal
+          description: The final commission amount paid out following resolution of the inquiry.
+          example: ''
+        ResolutionDate:
+          type: string
+          format: date-time
+          description: The date and time the inquiry was resolved.
+          example: ''
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time the inquiry was created.
+          example: '2026-05-25T11:35:38-07:00'
+        Uri:
+          type: string
+          description: Unique reference to the action inquiry object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ActionInquiries/15652378
+    InquiryType:
+      type: string
+      description: The type of inquiry being raised.
+      enum:
+      - UNTRACKED
+      - INCORRECT
+      - DECLINED
+    ResolutionStatus:
+      type: string
+      description: The current resolution status of the inquiry.
+      enum:
+      - UNRESOLVED
+      - VALID
+      - DECLINED
+      - INCOMPLETE
+    RejectReason:
+      type: string
+      description: The reason provided by the brand for declining the inquiry.
+      enum:
+      - This transaction has been tracked successfully
+      - Another marketing channel was credited with the sale
+      - Another marketing channel was credited with the sale, due to a voucher/discount
+        code used
+      - Did not meet terms and conditions set by merchant
+      - Transaction not completed - Order cancelled, changed, or returned
+      - Transaction cannot be traced
+      - Transaction not fully completed online
+      - Enquiry does not provide complete information required for evaluation
+      - Other
+    Comment:
+      type: object
+      properties:
+        User:
+          type: string
+          description: The name or identifier of the user who posted the comment.
+          example: Carrie Oakey
+        Comment:
+          type: string
+          description: The content of the comment.
+          example: Please approve!
+        Date:
+          type: string
+          format: date-time
+          description: The date and time the comment was posted.
+          example: '2026-05-25T11:35:38-07:00'

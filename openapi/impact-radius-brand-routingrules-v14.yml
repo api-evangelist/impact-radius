@@ -1,0 +1,413 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Routing Rules
+  description: API for retrieving routing rules that control where traffic is sent when a user clicks a link. These rules can redirect, block, or show an interstitial page to users based on various conditions.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/BlockRedirectRules:
+    get:
+      summary: List All Routing Rules
+      description: Returns a list of existing routing rules for a specific program, with options for filtering.
+      operationId: listRoutingRules
+      tags:
+      - Routing Rules
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The ID of the program to retrieve rules from.
+        schema:
+          type: integer
+      - name: Name
+        in: query
+        schema:
+          type: string
+      - name: Condition
+        in: query
+        schema:
+          type: string
+          enum:
+          - IP_ADDRESS
+          - SHARED_ID
+          - COUNTRY
+          - REGION
+          - AD_STATUS
+          - SUB_ID1
+          - SUB_ID2
+          - SUB_ID3
+          - MP_ID
+          - DEVICE_TYPE
+          - REF_URL
+          - LANDING_PAGE
+          - SKU
+          - AD_ID
+          - CURRENT_DATE
+          - RANDOM
+          - MOBILE_FALLBACK
+      - name: Action
+        in: query
+        schema:
+          type: string
+          enum:
+          - REDIRECT
+          - BLOCK
+          - INTERSTITIAL
+      - name: Rank
+        in: query
+        schema:
+          type: string
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+      - name: State
+        in: query
+        schema:
+          type: string
+          enum:
+          - RUNNING
+          - PAUSED
+          - ENDED
+          - ARCHIVED
+      - name: Source
+        in: query
+        schema:
+          type: string
+          enum:
+          - GENERIC
+          - AD
+          - COMPLIANCE
+          - TASK
+      - name: StartDateBefore
+        in: query
+        description: Return routing rules that start before a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateAfter
+        in: query
+        description: Return routing rules that start after a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateBefore
+        in: query
+        description: Return routing rules that end before a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateAfter
+        in: query
+        description: Return routing rules that end after a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdateBefore
+        in: query
+        description: Return routing rules that were last updated before a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdatedAfter
+        in: query
+        description: Return routing rules that were last updated after a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateCreatedBefore
+        in: query
+        description: Return routing rules that were created before a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateCreatedAfter
+        in: query
+        description: Return routing rules that were created after a specific date and time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: CreatedBy
+        in: query
+        description: Return routing rules that were created by a specific account user.
+        schema:
+          type: string
+      - name: LastUpdatedBy
+        in: query
+        description: Return routing rules that were last updated by a specific account user.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of routing rule objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  BlockRedirectRules:
+                    type: array
+                    description: The list of routing rule objects.
+                    items:
+                      $ref: '#/components/schemas/RoutingRule'
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/BlockRedirectRules/{RuleId}:
+    get:
+      summary: Get Routing Rule Details
+      description: Retrieves the details of an existing routing rule by its unique ID.
+      operationId: getRoutingRuleById
+      tags:
+      - Routing Rules
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: RuleId
+        in: path
+        required: true
+        description: The unique identifier for the routing rule.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single routing rule object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoutingRule'
+components:
+  schemas:
+    RoutingRule:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '50000'
+        Name:
+          type: string
+          example: Redirect 4
+          description: Name of the routing rule.
+        Condition:
+          type: array
+          items:
+            type: object
+            properties:
+              SubConditions:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubCondition'
+          description: What triggers the routing rule.
+        Action:
+          type: string
+          enum:
+          - REDIRECT
+          - BLOCK
+          - INTERSTITIAL
+          example: REDIRECT
+          description: What traffic will experience if the routing rule is triggered.
+        RedirectUrl:
+          type: string
+          format: uri
+          example: http://impact.com
+        Interstitial:
+          $ref: '#/components/schemas/Interstitial'
+        Rank:
+          type: string
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+          example: HIGH
+          description: This determines the specific routing rule's rank in relation to others that have the same conditions.
+        State:
+          type: string
+          enum:
+          - RUNNING
+          - PAUSED
+          - ENDED
+          - ARCHIVED
+          example: RUNNING
+          description: What state of use the routing rule is in.
+        StartDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the rule becomes active.
+          example: '2026-01-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the rule expires.
+          example: '2026-12-31T23:59:59-08:00'
+        Source:
+          type: string
+          enum:
+          - GENERIC
+          - AD
+          - COMPLIANCE
+          - TASK
+          example: GENERIC
+          description: From where the routing rule was created.
+        DateCreated:
+          type: string
+          format: date-time
+          example: '2019-10-28T17:53:01-04:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          example: '2019-10-28T17:53:01-04:00'
+        CreatedBy:
+          type: string
+          example: ACME Corp
+          description: Return routing rules that were created by a specific account user.
+        LastUpdatedBy:
+          type: string
+          example: ACME Corp
+          description: Return routing rules that were last updated by a specific account user.
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Programs/1000/BlockRedirectRules/50000
+    SubCondition:
+      type: object
+      properties:
+        Variable:
+          type: string
+          description: The variable to evaluate against.
+          enum:
+          - IP_ADDRESS
+          - SHARED_ID
+          - COUNTRY
+          - REGION
+          - AD_STATUS
+          - SUB_ID1
+          - SUB_ID2
+          - SUB_ID3
+          - MP_ID
+          - DEVICE_TYPE
+          - REF_URL
+          - LANDING_PAGE
+          - SKU
+          - AD_ID
+          - CURRENT_DATE
+          - RANDOM
+          - MOBILE_FALLBACK
+        Operator:
+          type: string
+          description: How the variable is compared to the values.
+          enum:
+          - CONTAINS
+          - STARTS_WITH
+          - ENDS_WITH
+          - EQUALS
+          - MATCHES
+          - IP_RANGE
+          - IN
+          - NOT_CONTAINS
+          - NOT_STARTS_WITH
+          - NOT_ENDS_WITH
+          - NOT_EQUALS
+          - NOT_IN
+          - REGEX
+          - LT
+          - GT
+        Values:
+          type: array
+          description: The values the variable is compared to.
+          items:
+            type: string
+            example: US
+    Interstitial:
+      type: object
+      properties:
+        HeaderText:
+          type: string
+          description: Header text displayed on the interstitial page.
+          example: Welcome to Acme
+        BodyText:
+          type: string
+          nullable: true
+          description: Body text displayed on the interstitial page.
+          example: Please confirm your details to continue.
+        RequireUserAcknowledgement:
+          type: boolean
+          description: Whether the user must acknowledge before continuing.
+          example: true
+        ButtonText:
+          type: string
+          nullable: true
+          description: Text shown on the acknowledgement button.
+          example: Continue
+        ButtonColor:
+          type: string
+          nullable: true
+          description: Color of the acknowledgement button.
+          example: '#FF0000'
+        RequireUserInput:
+          type: boolean
+          description: Whether the user must provide input before continuing.
+          example: true
+        UserInputs:
+          type: array
+          description: User input fields shown on the interstitial.
+          items:
+            type: object
+            properties:
+              Variable:
+                type: string
+                description: The variable the user input populates.
+                enum:
+                - SHARED_ID
+                - SUB_ID1
+                - SUB_ID2
+                - SUB_ID3
+                - PARAM1
+                - PARAM2
+                - PARAM3
+                - CUSTOMER_ID
+              DisplayValue:
+                type: string
+                description: Display label shown to the user.
+                example: Email Address
+              RegularExpression:
+                type: string
+                description: Validation pattern for the input.
+                example: ^[^@]+@[^@]+\.[^@]+$
+              ErrorMessage:
+                type: string
+                description: Error message shown if validation fails.
+                example: Please enter a valid email address.
+        IncludeSkipOption:
+          type: boolean
+          description: Whether to include a skip option.
+          example: false
+        ShowPageAtLeastOnce:
+          type: boolean
+          description: Whether the page must be shown at least once per session.
+          example: true
+        CoBranded:
+          type: boolean
+          description: Whether the interstitial is co-branded.
+          example: false
+        CustomizeCss:
+          type: boolean
+          description: Whether custom CSS is used.
+          example: false
+        CustomCss:
+          type: string
+          nullable: true
+          description: Custom CSS for styling the interstitial page.
+          example: ''

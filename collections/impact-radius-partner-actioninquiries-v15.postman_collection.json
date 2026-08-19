@@ -1,0 +1,593 @@
+{
+  "item": [
+    {
+      "id": "d5c41a08-ffbb-4a3a-a3a5-c63d774c8774",
+      "name": "Action Inquiries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e734f390-bd21-41e8-a34b-3cd915e8a46a",
+          "name": "List Action Inquiries",
+          "request": {
+            "name": "List Action Inquiries",
+            "description": {
+              "content": "Returns a list of the action inquiries made for your campaign, ordered by creation date (newest first).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ActionInquiries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "View action inquiries for a specified campaign."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerInquiryId",
+                  "value": "<string>",
+                  "description": "Filter by your own internal reference ID for the inquiry."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerId",
+                  "value": "<string>",
+                  "description": "Filter by the customer identifier associated with the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResolutionStatus",
+                  "value": "<string>",
+                  "description": "Filter by the current resolution status of the inquiry."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters inquiries with a CreationDate on or after this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters inquiries with a CreationDate on or before this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "TransactionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters inquiries with a TransactionDate on or after this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "TransactionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters inquiries with a TransactionDate on or before this value."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91f66ad9-5c42-4576-b14e-1f0e5ff452df",
+              "name": "An array of action inquiry objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ActionInquiries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MediaPartnerInquiryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResolutionStatus",
+                      "value": "INCOMPLETE"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "TransactionDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "TransactionDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActionInquiries\": [\n    {\n      \"Id\": 4592,\n      \"MediaPartnerInquiryId\": \"\",\n      \"CampaignId\": 443,\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"OrderId\": \"TEST-ORDER-001\",\n      \"TransactionDate\": \"2025-05-01T10:00:00-07:00\",\n      \"TransactionAmount\": 4748.630404417142,\n      \"CustomerId\": \"\",\n      \"InquiryDate\": \"2003-11-26T13:02:01.243Z\",\n      \"InquiryType\": \"UNTRACKED\",\n      \"ExpectedPayout\": 1212.5810825835526,\n      \"ResolutionDeadlineDate\": \"1953-01-26T15:37:32.055Z\",\n      \"Comments\": [\n        {\n          \"User\": \"Carrie Oakey\",\n          \"Comment\": \"Please approve!\",\n          \"Date\": \"2026-05-25T11:35:38-07:00\"\n        },\n        {\n          \"User\": \"Carrie Oakey\",\n          \"Comment\": \"Please approve!\",\n          \"Date\": \"2026-05-25T11:35:38-07:00\"\n        }\n      ],\n      \"InquiryNotes\": \"\",\n      \"TrackingLink\": \"\",\n      \"ActionId\": \"8882.4335\",\n      \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/8882.4335\",\n      \"AutoApprovalDate\": \"2001-01-30T05:04:44.031Z\",\n      \"ResolutionStatus\": \"VALID\",\n      \"RejectReason\": \"Another marketing channel was credited with the sale, due to a voucher/discount code used\",\n      \"FinalPayout\": 4552.076083512698,\n      \"ResolutionDate\": \"1997-08-09T22:32:06.746Z\",\n      \"CreationDate\": \"2026-05-25T11:35:38-07:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ActionInquiries/15652378\"\n    },\n    {\n      \"Id\": 3197,\n      \"MediaPartnerInquiryId\": \"\",\n      \"CampaignId\": 6722,\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"OrderId\": \"TEST-ORDER-001\",\n      \"TransactionDate\": \"2025-05-01T10:00:00-07:00\",\n      \"TransactionAmount\": 5792.241991828692,\n      \"CustomerId\": \"\",\n      \"InquiryDate\": \"1972-04-26T13:38:19.436Z\",\n      \"InquiryType\": \"INCORRECT\",\n      \"ExpectedPayout\": 6567.128083740225,\n      \"ResolutionDeadlineDate\": \"1977-07-13T00:07:15.933Z\",\n      \"Comments\": [\n        {\n          \"User\": \"Carrie Oakey\",\n          \"Comment\": \"Please approve!\",\n          \"Date\": \"2026-05-25T11:35:38-07:00\"\n        },\n        {\n          \"User\": \"Carrie Oakey\",\n          \"Comment\": \"Please approve!\",\n          \"Date\": \"2026-05-25T11:35:38-07:00\"\n        }\n      ],\n      \"InquiryNotes\": \"\",\n      \"TrackingLink\": \"\",\n      \"ActionId\": \"8882.4335\",\n      \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/8882.4335\",\n      \"AutoApprovalDate\": \"1958-08-23T22:11:57.909Z\",\n      \"ResolutionStatus\": \"UNRESOLVED\",\n      \"RejectReason\": \"Another marketing channel was credited with the sale\",\n      \"FinalPayout\": 7360.692152797036,\n      \"ResolutionDate\": \"2008-02-19T00:24:54.063Z\",\n      \"CreationDate\": \"2026-05-25T11:35:38-07:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ActionInquiries/15652378\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da824030-1e9c-4b81-b00d-e1b9680db0f4",
+          "name": "Create Action Inquiry",
+          "request": {
+            "name": "Create Action Inquiry",
+            "description": {
+              "content": "Creates an action inquiry by setting the values of the required parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ActionInquiries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique identifier for the campaign associated with the inquiry."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrderId",
+                  "value": "<string>",
+                  "description": "(Required) The order identifier for the transaction being disputed."
+                },
+                {
+                  "disabled": false,
+                  "key": "TransactionDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The date and time of the transaction being disputed."
+                },
+                {
+                  "disabled": false,
+                  "key": "TransactionAmount",
+                  "value": "<decimal>",
+                  "description": "(Required) The value of the transaction being disputed."
+                },
+                {
+                  "disabled": false,
+                  "key": "InquiryType",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerInquiryId",
+                  "value": "<string>",
+                  "description": "Your own internal reference ID for the inquiry."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResolutionDeadlineDate",
+                  "value": "<dateTime>",
+                  "description": "The deadline by which the inquiry must be resolved."
+                },
+                {
+                  "disabled": false,
+                  "key": "ExpectedPayout",
+                  "value": "<decimal>",
+                  "description": "The commission amount you expect to receive if the inquiry is approved."
+                },
+                {
+                  "disabled": false,
+                  "key": "TrackingLink",
+                  "value": "<string>",
+                  "description": "The tracking link associated with the transaction, if applicable."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerId",
+                  "value": "<string>",
+                  "description": "A unique identifier for the customer associated with the transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "InquiryDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the transaction was originally submitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "InquiryNotes",
+                  "value": "<string>",
+                  "description": "Additional notes or context to support the inquiry."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a53db57-4030-41a3-aadd-b059fe1f5812",
+              "name": "Action inquiry created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ActionInquiries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique identifier for the campaign associated with the inquiry.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The order identifier for the transaction being disputed.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The date and time of the transaction being disputed.",
+                        "type": "text/plain"
+                      },
+                      "key": "TransactionDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The value of the transaction being disputed.",
+                        "type": "text/plain"
+                      },
+                      "key": "TransactionAmount",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "InquiryType",
+                      "value": "INCORRECT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your own internal reference ID for the inquiry.",
+                        "type": "text/plain"
+                      },
+                      "key": "MediaPartnerInquiryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The deadline by which the inquiry must be resolved.",
+                        "type": "text/plain"
+                      },
+                      "key": "ResolutionDeadlineDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The commission amount you expect to receive if the inquiry is approved.",
+                        "type": "text/plain"
+                      },
+                      "key": "ExpectedPayout",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The tracking link associated with the transaction, if applicable.",
+                        "type": "text/plain"
+                      },
+                      "key": "TrackingLink",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A unique identifier for the customer associated with the transaction.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the transaction was originally submitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "InquiryDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Additional notes or context to support the inquiry.",
+                        "type": "text/plain"
+                      },
+                      "key": "InquiryNotes",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/ActionInquiries/15652378\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00a230ed-2a0a-454e-a346-8d41286024a6",
+          "name": "Retrieve an Action Inquiry",
+          "request": {
+            "name": "Retrieve an Action Inquiry",
+            "description": {
+              "content": "Retrieves the details of an existing action inquiry using its unique InquiryId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ActionInquiries",
+                ":InquiryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "InquiryId",
+                  "description": "(Required) The unique identifier for the action inquiry."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a7469dc-6cd5-498f-ad93-79747e98ff31",
+              "name": "Successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ActionInquiries",
+                    ":InquiryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "InquiryId",
+                      "description": "(Required) The unique identifier for the action inquiry."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 9697,\n  \"MediaPartnerInquiryId\": \"\",\n  \"CampaignId\": 8743,\n  \"CampaignName\": \"Wayne Enterprises\",\n  \"OrderId\": \"TEST-ORDER-001\",\n  \"TransactionDate\": \"2025-05-01T10:00:00-07:00\",\n  \"TransactionAmount\": 1419.8436906156076,\n  \"CustomerId\": \"\",\n  \"InquiryDate\": \"1967-03-05T06:46:02.187Z\",\n  \"InquiryType\": \"INCORRECT\",\n  \"ExpectedPayout\": 2274.4721685085956,\n  \"ResolutionDeadlineDate\": \"1970-09-23T02:25:19.181Z\",\n  \"Comments\": [\n    {\n      \"User\": \"Carrie Oakey\",\n      \"Comment\": \"Please approve!\",\n      \"Date\": \"2026-05-25T11:35:38-07:00\"\n    },\n    {\n      \"User\": \"Carrie Oakey\",\n      \"Comment\": \"Please approve!\",\n      \"Date\": \"2026-05-25T11:35:38-07:00\"\n    }\n  ],\n  \"InquiryNotes\": \"\",\n  \"TrackingLink\": \"\",\n  \"ActionId\": \"8882.4335\",\n  \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/8882.4335\",\n  \"AutoApprovalDate\": \"1971-12-07T20:47:50.705Z\",\n  \"ResolutionStatus\": \"DECLINED\",\n  \"RejectReason\": \"Another marketing channel was credited with the sale, due to a voucher/discount code used\",\n  \"FinalPayout\": 6336.468217543536,\n  \"ResolutionDate\": \"1968-09-15T03:44:45.889Z\",\n  \"CreationDate\": \"2026-05-25T11:35:38-07:00\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/ActionInquiries/15652378\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b386a6f1-fa79-4506-ba60-f9a691b40c9c",
+    "name": "Action Inquiries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Action Inquiries are formal requests to investigate the attribution and/or payout of an action. You can submit an action inquiry if you believe an action should have been attributed to you, or if the payout amount is incorrect. This feature is exclusively available to cashback and loyalty partners. \n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

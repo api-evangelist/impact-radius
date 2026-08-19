@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Action Inquiries API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Action Inquiries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Action Inquiries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ActionInquiries",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "View action inquiries for a specified campaign."
+              },
+              {
+                "name": "MediaPartnerInquiryId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by your own internal reference ID for the inquiry."
+              },
+              {
+                "name": "CustomerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the customer identifier associated with the transaction."
+              },
+              {
+                "name": "ResolutionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the current resolution status of the inquiry."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries with a CreationDate on or after this value."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries with a CreationDate on or before this value."
+              },
+              {
+                "name": "TransactionDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries with a TransactionDate on or after this value."
+              },
+              {
+                "name": "TransactionDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries with a TransactionDate on or before this value."
+              }
+            ]
+          },
+          "docs": "Returns a list of the action inquiries made for your campaign, ordered by creation date (newest first)."
+        },
+        {
+          "info": {
+            "name": "Create Action Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ActionInquiries",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "CampaignId",
+                  "value": ""
+                },
+                {
+                  "name": "OrderId",
+                  "value": ""
+                },
+                {
+                  "name": "TransactionDate",
+                  "value": ""
+                },
+                {
+                  "name": "TransactionAmount",
+                  "value": ""
+                },
+                {
+                  "name": "InquiryType",
+                  "value": ""
+                },
+                {
+                  "name": "MediaPartnerInquiryId",
+                  "value": ""
+                },
+                {
+                  "name": "ResolutionDeadlineDate",
+                  "value": ""
+                },
+                {
+                  "name": "ExpectedPayout",
+                  "value": ""
+                },
+                {
+                  "name": "TrackingLink",
+                  "value": ""
+                },
+                {
+                  "name": "CustomerId",
+                  "value": ""
+                },
+                {
+                  "name": "InquiryDate",
+                  "value": ""
+                },
+                {
+                  "name": "InquiryNotes",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates an action inquiry by setting the values of the required parameters."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Action Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ActionInquiries/:InquiryId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account."
+              },
+              {
+                "name": "InquiryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the action inquiry."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing action inquiry using its unique InquiryId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

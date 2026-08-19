@@ -1,0 +1,1390 @@
+{
+  "item": [
+    {
+      "id": "8ae85029-41db-44e0-85ee-ae04a761af09",
+      "name": "Referral",
+      "description": {
+        "content": "A Referral tracks who has referred whom.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6147a28c-8962-4bc8-8ead-95059af0f4d5",
+          "name": "List referrals",
+          "request": {
+            "name": "List referrals",
+            "description": {
+              "content": "List all of the referrals in your Referral SaaSquatch by impact.com tenant. This method supports pagination and filtering.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "referrals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referringAccountId",
+                  "value": "<string>",
+                  "description": "When included, filters the results to only referrals that were referred by users with this `AccountId`"
+                },
+                {
+                  "disabled": false,
+                  "key": "referringUserId",
+                  "value": "<string>",
+                  "description": "When included, filters the results to only referrals that were referred by users with this `UserId`"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateReferralPaid",
+                  "value": "<string>",
+                  "description": "When included, filters the results by an exact timestamp or a comma-separated range for when the referral was paid."
+                },
+                {
+                  "disabled": false,
+                  "key": "dateReferralEnded",
+                  "value": "<string>",
+                  "description": "When included, filters the results by an exact timestamp or a comma-separated range for when the referral ended."
+                },
+                {
+                  "disabled": false,
+                  "key": "referredModerationStatus",
+                  "value": "<string>",
+                  "description": "Filters the result to only include referred users with that status: `PENDING`, `APPROVED` or `DENIED`."
+                },
+                {
+                  "disabled": false,
+                  "key": "referrerModerationStatus",
+                  "value": "<string>",
+                  "description": "Filters the result to only include referrers with that status: `PENDING`, `APPROVED` or `DENIED`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "A limit on the number of results returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offsets the first result to return in the list for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6726e4c2-5239-4457-8767-e32825a98e8a",
+              "name": "A list of referrals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateReferralPaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateReferralEnded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredModerationStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrerModerationStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"totalCount\": 1,\n  \"referrals\": [\n    {\n      \"referralCodeUsed\": \"BOBTESTERSON\",\n      \"shareLinkUsed\": null,\n      \"moderationStatus\": \"ACTIONED\",\n      \"referredModerationStatus\": \"APPROVED\",\n      \"referrerModerationStatus\": \"APPROVED\",\n      \"fraudSignals\": null,\n      \"programId\": null,\n      \"dateReferralStarted\": 1779894752097,\n      \"dateReferralPaid\": null,\n      \"dateReferralEnded\": null,\n      \"dateModerated\": 1779894752099,\n      \"dateConverted\": null,\n      \"dateModified\": 1779894752494,\n      \"dateUserModified\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f4cb9e4-d82c-40e0-9933-73de5c748f7f",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateReferralPaid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dateReferralEnded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredModerationStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referrerModerationStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86378b7b-adf0-4005-ae52-d3096581cb3a",
+          "name": "Lookup a Referral",
+          "request": {
+            "name": "Lookup a Referral",
+            "description": {
+              "content": "Looks up a single Referral object by its associated `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "referrals",
+                ":referralId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referralId",
+                  "description": "(Required) The `id` of the referral to look up"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1f06e82-3a80-4f90-8e9a-91d67b8bc6c4",
+              "name": "Referral found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    ":referralId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referralId",
+                      "description": "(Required) The `id` of the referral to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6a1709e0eb067e53ef651c29\",\n  \"referredUser\": {\n    \"id\": \"abc123\",\n    \"accountId\": \"abc123\",\n    \"firstName\": \"Bob\",\n    \"lastName\": \"Testerson\",\n    \"lastInitial\": \"T\",\n    \"email\": \"bob.testerson@example.com\",\n    \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n    \"imageUrl\": \"\",\n    \"referralCode\": \"BOBTESTERSON\",\n    \"cookieId\": \"abc123cookie\",\n    \"paymentProviderId\": \"pay_abc123\",\n    \"locale\": \"en_US\",\n    \"countryCode\": \"US\",\n    \"referralSource\": \"DIRECT\",\n    \"firstSeenIP\": \"203.0.113.42\",\n    \"lastSeenIP\": \"203.0.113.42\",\n    \"dateCreated\": 1774386824964,\n    \"dateBlocked\": null,\n    \"shareLinks\": {}\n  },\n  \"referrerUser\": {\n    \"id\": \"abc123\",\n    \"accountId\": \"abc123\",\n    \"firstName\": \"Bob\",\n    \"lastName\": \"Testerson\",\n    \"lastInitial\": \"T\",\n    \"email\": \"bob.testerson@example.com\",\n    \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n    \"imageUrl\": \"\",\n    \"referralCode\": \"BOBTESTERSON\",\n    \"cookieId\": \"abc123cookie\",\n    \"paymentProviderId\": \"pay_abc123\",\n    \"locale\": \"en_US\",\n    \"countryCode\": \"US\",\n    \"referralSource\": \"DIRECT\",\n    \"firstSeenIP\": \"203.0.113.42\",\n    \"lastSeenIP\": \"203.0.113.42\",\n    \"dateCreated\": 1774386824964,\n    \"dateBlocked\": null,\n    \"shareLinks\": {}\n  },\n  \"referredReward\": {\n    \"id\": \"6a1709e0eb067e53ef651c3b\",\n    \"type\": \"CREDIT\",\n    \"uniqueId\": null,\n    \"dateCreated\": 1779894752360,\n    \"dateScheduledFor\": null,\n    \"dateGiven\": 1779894752451,\n    \"dateExpires\": null,\n    \"dateCancelled\": null,\n    \"accountId\": \"abc123\",\n    \"userId\": \"abc123\",\n    \"cancellable\": true,\n    \"rewardSource\": \"REFERRED\",\n    \"programId\": null,\n    \"programRewardKey\": null,\n    \"globalRewardKey\": null,\n    \"referralId\": \"6a1709e0eb067e53ef651c29\",\n    \"unit\": \"CENTS\",\n    \"assignedCredit\": 100,\n    \"redeemedCredit\": 0,\n    \"name\": \"Dollar Credit\",\n    \"currency\": null,\n    \"redemptions\": null\n  },\n  \"referrerReward\": {\n    \"id\": \"6a1709e0eb067e53ef651c3b\",\n    \"type\": \"CREDIT\",\n    \"uniqueId\": null,\n    \"dateCreated\": 1779894752360,\n    \"dateScheduledFor\": null,\n    \"dateGiven\": 1779894752451,\n    \"dateExpires\": null,\n    \"dateCancelled\": null,\n    \"accountId\": \"abc123\",\n    \"userId\": \"abc123\",\n    \"cancellable\": true,\n    \"rewardSource\": \"REFERRED\",\n    \"programId\": null,\n    \"programRewardKey\": null,\n    \"globalRewardKey\": null,\n    \"referralId\": \"6a1709e0eb067e53ef651c29\",\n    \"unit\": \"CENTS\",\n    \"assignedCredit\": 100,\n    \"redeemedCredit\": 0,\n    \"name\": \"Dollar Credit\",\n    \"currency\": null,\n    \"redemptions\": null\n  },\n  \"referralCodeUsed\": \"BOBTESTERSON\",\n  \"shareLinkUsed\": null,\n  \"moderationStatus\": \"ACTIONED\",\n  \"referredModerationStatus\": \"APPROVED\",\n  \"referrerModerationStatus\": \"APPROVED\",\n  \"fraudSignals\": {\n    \"name\": {\n      \"message\": \"string\",\n      \"score\": 5461\n    },\n    \"ip\": {\n      \"message\": \"string\",\n      \"score\": 1966\n    },\n    \"email\": {\n      \"message\": \"string\",\n      \"score\": 1041\n    },\n    \"rate\": {\n      \"message\": \"string\",\n      \"score\": 7890\n    }\n  },\n  \"dateReferralStarted\": 1779894752097,\n  \"dateReferralPaid\": null,\n  \"dateReferralEnded\": null,\n  \"dateModerated\": 1779894752099,\n  \"dateConverted\": null,\n  \"dateModified\": 1779894752494,\n  \"dateUserModified\": null,\n  \"programId\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd7d28eb-7ac9-4c9e-ab9e-01af4f41af5d",
+              "name": "Referral NOT found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    ":referralId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referralId",
+                      "description": "(Required) The `id` of the referral to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bc37f1b-d05e-4872-90bf-c874aee97ef9",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    ":referralId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referralId",
+                      "description": "(Required) The `id` of the referral to look up"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad63d497-b5cd-46f2-979c-0346de9356ba",
+          "name": "Moderate referrals",
+          "request": {
+            "name": "Moderate referrals",
+            "description": {
+              "content": "Moderates one or several referrals by either approving or denying.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "referrals",
+                "moderate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a46d8ee3-220b-4e25-959b-13e628d0cd80",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    "moderate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"string\",\n      \"action\": \"REFERRER_APPROVED\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2d0b5c16-cdd4-4331-81a8-0ec5b81d9a4a",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    "moderate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"string\",\n      \"action\": \"REFERRER_APPROVED\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d09dc83-0344-4420-86f4-6577d482cab1",
+          "name": "List referrals (Open Endpoint)",
+          "request": {
+            "name": "List referrals (Open Endpoint)",
+            "description": {
+              "content": "Lists all of the referrals involving the given user. This is an Open Endpoint and is disabled by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "referrals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referringAccountId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `AccountId` was the Referrer."
+                },
+                {
+                  "disabled": false,
+                  "key": "referringUserId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `UserId` was the Referrer."
+                },
+                {
+                  "disabled": false,
+                  "key": "referredAccountId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `AccountId` was the Referred User."
+                },
+                {
+                  "disabled": false,
+                  "key": "referredUserId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `UserId` was the Referred User."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "A limit on the number of results returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offsets the first result to return in the list for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1863920c-fd5c-498c-aff0-61903d5a06f6",
+              "name": "A list of referrals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"totalCount\": 1,\n  \"referrals\": [\n    {\n      \"referralCodeUsed\": \"BOBTESTERSON\",\n      \"shareLinkUsed\": null,\n      \"moderationStatus\": \"ACTIONED\",\n      \"referredModerationStatus\": \"APPROVED\",\n      \"referrerModerationStatus\": \"APPROVED\",\n      \"fraudSignals\": null,\n      \"programId\": null,\n      \"dateReferralStarted\": 1779894752097,\n      \"dateReferralPaid\": null,\n      \"dateReferralEnded\": null,\n      \"dateModerated\": 1779894752099,\n      \"dateConverted\": null,\n      \"dateModified\": 1779894752494,\n      \"dateUserModified\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89f8f57d-6874-430c-8bf3-2a4ab1ee969c",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5c17d12d-2bd1-4ad4-a36d-7e8a087ddc57",
+      "name": "Classic Only",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4715d05c-721c-490b-9074-fad156f00704",
+          "name": "Moderate referrals",
+          "request": {
+            "name": "Moderate referrals",
+            "description": {
+              "content": "Moderates one or several referrals by either approving or denying.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "referrals",
+                "moderate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"<string>\",\n      \"action\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4936dff-2f6c-476c-85bc-1fc1a1b54a2a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    "moderate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"string\",\n      \"action\": \"REFERRER_APPROVED\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e078dfeb-32c6-4822-8be7-1983eeff9114",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "referrals",
+                    "moderate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"actions\": [\n    {\n      \"referralId\": \"string\",\n      \"action\": \"REFERRER_APPROVED\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1373ece5-a76d-4102-b4d8-6d63fd464f89",
+      "name": "Open Endpoint",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fda3c6b8-eba9-4839-a2b7-7c3a43d9fdc4",
+          "name": "List referrals (Open Endpoint)",
+          "request": {
+            "name": "List referrals (Open Endpoint)",
+            "description": {
+              "content": "Lists all of the referrals involving the given user. This is an Open Endpoint and is disabled by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "referrals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referringAccountId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `AccountId` was the Referrer."
+                },
+                {
+                  "disabled": false,
+                  "key": "referringUserId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `UserId` was the Referrer."
+                },
+                {
+                  "disabled": false,
+                  "key": "referredAccountId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `AccountId` was the Referred User."
+                },
+                {
+                  "disabled": false,
+                  "key": "referredUserId",
+                  "value": "<string>",
+                  "description": "Filters for referrals where this `UserId` was the Referred User."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "A limit on the number of results returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offsets the first result to return in the list for pagination."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5b6bf4e-5d5e-405f-9077-4348af66b197",
+              "name": "A list of referrals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1,\n  \"totalCount\": 1,\n  \"referrals\": [\n    {\n      \"referralCodeUsed\": \"BOBTESTERSON\",\n      \"shareLinkUsed\": null,\n      \"moderationStatus\": \"ACTIONED\",\n      \"referredModerationStatus\": \"APPROVED\",\n      \"referrerModerationStatus\": \"APPROVED\",\n      \"fraudSignals\": null,\n      \"programId\": null,\n      \"dateReferralStarted\": 1779894752097,\n      \"dateReferralPaid\": null,\n      \"dateReferralEnded\": null,\n      \"dateModerated\": 1779894752099,\n      \"dateConverted\": null,\n      \"dateModified\": 1779894752494,\n      \"dateUserModified\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c07f7ad-4da9-4643-98d0-9d83d49f0e74",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referringAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referringUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredAccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referredUserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15ecc189-72e9-4a76-bb92-26fe8eb5147f",
+    "name": "SaaSquatch by impact.com API - Referral",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A Referral tracks who has referred whom. This API allows for listing and managing those referrals.",
+      "type": "text/plain"
+    }
+  }
+}

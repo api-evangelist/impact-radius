@@ -1,0 +1,76 @@
+generated: '2026-08-13'
+method: generated
+source: openapi/ (67 documents, 242 operations) + integrations.impact.com reference pages
+description: >-
+  Packaged Agent Skills for the impact.com platform, one per marquee flow. Every skill is
+  grounded in operationIds that exist in the harvested OpenAPI documents — each id in each skill's
+  frontmatter was verified against openapi/ before the skill was written — plus the published
+  conventions, error and rate-limit rules for that surface.
+provider_published_skills:
+  exists: true
+  url: https://integrations.impact.com/ai-solutions/mcp-skills.md
+  note: >-
+    impact.com publishes its own first-party MCP Skills (a Brand partner performance scorecard
+    and a Partner weekly performance digest) for use against mcp.impact.com. Those skill bodies
+    are rendered as GitBook cards and are absent from the markdown export, so they could not be
+    saved verbatim. The skills in this directory are complementary, not copies: they target the
+    REST/GraphQL contracts, which cover 204 operations that the MCP server does not expose at all.
+  ref: mcp/impact-radius-tool-crosswalk.yml
+skills:
+- name: impact-radius-conversion-reconciliation
+  file: impact-radius-conversion-reconciliation.md
+  api: impact.com Brand API v14
+  audience: brand
+  operations: 11
+  summary: >-
+    Investigate a missing, wrong or unpayable conversion through Actions, ActionItems, the
+    ActionUpdates audit feed and ActionInquiries, then correct or reverse it.
+- name: impact-radius-partner-recruitment-and-contracting
+  file: impact-radius-partner-recruitment-and-contracting.md
+  api: impact.com Brand API v14
+  audience: brand
+  operations: 15
+  summary: >-
+    Recruit a partner into a program, read the contract's payout terms including ScheduledTerms,
+    and accept or decline the application.
+- name: impact-radius-report-export
+  file: impact-radius-report-export.md
+  api: impact.com Brand API v14
+  audience: brand
+  operations: 9
+  summary: >-
+    Discover a report, read its metadata contract, queue an export and collect it through the
+    async job pipeline without burning the 100/day ReportExport budget.
+- name: impact-radius-catalog-sync
+  file: impact-radius-catalog-sync.md
+  api: impact.com Brand API v14
+  audience: brand
+  operations: 12
+  summary: >-
+    Push or pull a product catalog, bulk load it as a job, and read per-row outcomes from the job
+    result rather than trusting the upload's 200.
+- name: impact-radius-partner-tracking-links
+  file: impact-radius-partner-tracking-links.md
+  api: impact.com Partner API v15
+  audience: partner
+  operations: 16
+  summary: >-
+    Find contracted programs and ads, register media properties, and mint tracking links and
+    promo codes.
+- name: impact-radius-advocate-referral-lifecycle
+  file: impact-radius-advocate-referral-lifecycle.md
+  api: impact.com Advocate API v1
+  audience: brand
+  operations: 27
+  summary: >-
+    Register an Advocate participant, surface share links and referral codes, moderate referrals,
+    issue and redeem rewards, and subscribe to the webhook event catalog.
+cross_cutting_rules:
+  note: Every skill restates these because they change the shape of a correct integration.
+  rules:
+  - No idempotency key exists on any of the 242 operations; retries are real second mutations.
+  - Pagination is Page/PageSize with a self-navigating @nextpageuri envelope.
+  - 1,000 requests/hour default; 3,600/hour on /Catalogs; 100/day ReportExport; 10/day ClickExport.
+  - Errors are a vendor envelope {Status, Message, Errors[{Field, Message}]}, not RFC 9457.
+  - 403 means the scoped token does not enable the endpoint; 401 means the credentials are wrong.
+  - Pin IR-Version (or IrVersion) per request; the account default can be changed underneath you.

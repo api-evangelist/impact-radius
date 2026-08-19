@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Promo Codes",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Promo Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodes",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of your promo codes, which can be filtered."
+        },
+        {
+          "info": {
+            "name": "Create a Promo Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodes",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new promo code and assigns it to a partner."
+        },
+        {
+          "info": {
+            "name": "Get Promo Code Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodes/:PromoCodeId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PromoCodeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single promo code by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Expire a Promo Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodes/:PromoCodeId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PromoCodeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code to expire."
+              }
+            ]
+          },
+          "docs": "Expires a promo code, which deactivates it. The code is not permanently deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

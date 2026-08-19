@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SaaSquatch by impact.com API - Referral",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referral",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List referrals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/referrals",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "referringAccountId",
+                "value": "",
+                "type": "query",
+                "description": "When included, filters the results to only referrals that were referred by users with this `AccountId`"
+              },
+              {
+                "name": "referringUserId",
+                "value": "",
+                "type": "query",
+                "description": "When included, filters the results to only referrals that were referred by users with this `UserId`"
+              },
+              {
+                "name": "dateReferralPaid",
+                "value": "",
+                "type": "query",
+                "description": "When included, filters the results by an exact timestamp or a comma-separated range for when the referral was paid."
+              },
+              {
+                "name": "dateReferralEnded",
+                "value": "",
+                "type": "query",
+                "description": "When included, filters the results by an exact timestamp or a comma-separated range for when the referral ended."
+              },
+              {
+                "name": "referredModerationStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result to only include referred users with that status: `PENDING`, `APPROVED` or `DENIED`."
+              },
+              {
+                "name": "referrerModerationStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filters the result to only include referrers with that status: `PENDING`, `APPROVED` or `DENIED`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of results returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offsets the first result to return in the list for pagination."
+              }
+            ]
+          },
+          "docs": "List all of the referrals in your Referral SaaSquatch by impact.com tenant. This method supports pagination and filtering.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a Referral",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/referrals/:referralId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "referralId",
+                "value": "",
+                "type": "path",
+                "description": "The `id` of the referral to look up"
+              }
+            ]
+          },
+          "docs": "Looks up a single Referral object by its associated `id`."
+        },
+        {
+          "info": {
+            "name": "Moderate referrals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/referrals/moderate",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moderates one or several referrals by either approving or denying."
+        },
+        {
+          "info": {
+            "name": "List referrals (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/referrals",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "referringAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Filters for referrals where this `AccountId` was the Referrer."
+              },
+              {
+                "name": "referringUserId",
+                "value": "",
+                "type": "query",
+                "description": "Filters for referrals where this `UserId` was the Referrer."
+              },
+              {
+                "name": "referredAccountId",
+                "value": "",
+                "type": "query",
+                "description": "Filters for referrals where this `AccountId` was the Referred User."
+              },
+              {
+                "name": "referredUserId",
+                "value": "",
+                "type": "query",
+                "description": "Filters for referrals where this `UserId` was the Referred User."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of results returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offsets the first result to return in the list for pagination."
+              }
+            ]
+          },
+          "docs": "Lists all of the referrals involving the given user. This is an Open Endpoint and is disabled by default."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

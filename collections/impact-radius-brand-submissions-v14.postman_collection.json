@@ -1,0 +1,585 @@
+{
+  "item": [
+    {
+      "id": "0c33804f-ecc7-4895-985e-08561d4f7529",
+      "name": "API Submissions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "993620af-2aeb-4cac-be41-eef41453443c",
+          "name": "List All API Submissions",
+          "request": {
+            "name": "List All API Submissions",
+            "description": {
+              "content": "Returns a list of your API submissions. Note that impact.com does not recommend using this endpoint due to typically large response sizes and long call times.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "APISubmissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2632bedc-5160-44ea-9eec-35c7b99a8fc4",
+              "name": "A paginated list of API submission objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "APISubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"APISubmission\": [\n    {\n      \"BatchId\": \"A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l\",\n      \"AccountId\": 10001,\n      \"SubmissionDate\": \"2020-09-10T09:50:12-07:00\",\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 4000,\n      \"MediaPartnerId\": 10000,\n      \"EventCode\": \"ACME_SALE\",\n      \"OrderId\": \"1234567890123\",\n      \"Payload\": \"CampaignId=1000&EventTypeId=4000&EventDate=2024-08-01T23:55:24-08:00&OrderId=1234567890123&ClickId=SKhRQaSXwxyOUQ%253AwUx0Mo36FUkiXxtxVUQTEzY0&CustomerId=BCZ2WVSH674563PDPYOTM3AXDQ&OrderPromoCode=10OFF-FORGE&CustomerStatus=NEW&CustomerPostCode=93107&CurrencyCode=USD&OrderDiscount=5&IpAddress=12.345.678.90&ItemSku1=12345&ItemName1=Anvil&ItemCategory1=Anvils&ItemQuantity1=2&ItemPrice1=10&ItemSku2=55555&ItemName2=Hammer&ItemCategory2=Hammers&ItemQuantity2=1&ItemPrice2=6.99\",\n      \"Type\": \"Conversion\",\n      \"Status\": \"Complete\",\n      \"CompletionDate\": \"2020-09-10T10:11:15-07:00\",\n      \"ErrorType\": \"Contract Error\",\n      \"ErrorReason\": \"CONTRACT_NOT_FOUND RESTRICTED_PROMOCODE\",\n      \"Uri\": \"https://qtomwAiAgqw.wzjzIRjB-Khr7AM2xLe2nRPVL5cq4IwUlGvTzf.d1T8KPjfSPQ\"\n    },\n    {\n      \"BatchId\": \"A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l\",\n      \"AccountId\": 10001,\n      \"SubmissionDate\": \"2020-09-10T09:50:12-07:00\",\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 4000,\n      \"MediaPartnerId\": 10000,\n      \"EventCode\": \"ACME_SALE\",\n      \"OrderId\": \"1234567890123\",\n      \"Payload\": \"CampaignId=1000&EventTypeId=4000&EventDate=2024-08-01T23:55:24-08:00&OrderId=1234567890123&ClickId=SKhRQaSXwxyOUQ%253AwUx0Mo36FUkiXxtxVUQTEzY0&CustomerId=BCZ2WVSH674563PDPYOTM3AXDQ&OrderPromoCode=10OFF-FORGE&CustomerStatus=NEW&CustomerPostCode=93107&CurrencyCode=USD&OrderDiscount=5&IpAddress=12.345.678.90&ItemSku1=12345&ItemName1=Anvil&ItemCategory1=Anvils&ItemQuantity1=2&ItemPrice1=10&ItemSku2=55555&ItemName2=Hammer&ItemCategory2=Hammers&ItemQuantity2=1&ItemPrice2=6.99\",\n      \"Type\": \"Conversion\",\n      \"Status\": \"Complete\",\n      \"CompletionDate\": \"2020-09-10T10:11:15-07:00\",\n      \"ErrorType\": \"Contract Error\",\n      \"ErrorReason\": \"CONTRACT_NOT_FOUND RESTRICTED_PROMOCODE\",\n      \"Uri\": \"https://kPIMsFpvNlJwgmNxHDBWYhsqalPfVV.roIjaoTw65jJ79WuWF?g&modshsr=s6&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84471cc1-e0ad-4fd1-901a-069826aceb79",
+          "name": "Get API Submission Details",
+          "request": {
+            "name": "Get API Submission Details",
+            "description": {
+              "content": "Retrieves information about a specific record that was submitted via the API, including its processing status and any errors.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "APISubmissions",
+                ":BatchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "BatchId",
+                  "description": "(Required) The unique batch ID of the API submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1a8ac60-360b-4cd3-ad3f-beee4dda052e",
+              "name": "A single API submission object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "APISubmissions",
+                    ":BatchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "BatchId",
+                      "description": "(Required) The unique batch ID of the API submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BatchId\": \"A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l\",\n  \"AccountId\": 10001,\n  \"SubmissionDate\": \"2020-09-10T09:50:12-07:00\",\n  \"CampaignId\": 1000,\n  \"ActionTrackerId\": 4000,\n  \"MediaPartnerId\": 10000,\n  \"EventCode\": \"ACME_SALE\",\n  \"OrderId\": \"1234567890123\",\n  \"Payload\": \"CampaignId=1000&EventTypeId=4000&EventDate=2024-08-01T23:55:24-08:00&OrderId=1234567890123&ClickId=SKhRQaSXwxyOUQ%253AwUx0Mo36FUkiXxtxVUQTEzY0&CustomerId=BCZ2WVSH674563PDPYOTM3AXDQ&OrderPromoCode=10OFF-FORGE&CustomerStatus=NEW&CustomerPostCode=93107&CurrencyCode=USD&OrderDiscount=5&IpAddress=12.345.678.90&ItemSku1=12345&ItemName1=Anvil&ItemCategory1=Anvils&ItemQuantity1=2&ItemPrice1=10&ItemSku2=55555&ItemName2=Hammer&ItemCategory2=Hammers&ItemQuantity2=1&ItemPrice2=6.99\",\n  \"Type\": \"Conversion\",\n  \"Status\": \"Complete\",\n  \"CompletionDate\": \"2020-09-10T10:11:15-07:00\",\n  \"ErrorType\": \"Contract Error\",\n  \"ErrorReason\": \"CONTRACT_NOT_FOUND RESTRICTED_PROMOCODE\",\n  \"Uri\": \"https://lToyyOEVmAczCbtJEQrEkyWWWUSEnof.sctxe1y\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "82ed950d-6999-417a-921d-b245d372d1b9",
+      "name": "FTP Submissions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ec4740c-f8c2-4f67-ab98-661dfed35b45",
+          "name": "List All FTP File Submissions",
+          "request": {
+            "name": "List All FTP File Submissions",
+            "description": {
+              "content": "Returns a list of your FTP file submissions, which can be filtered by submission or completion date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "FTPFileSubmissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SubmissionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Return submissions submitted after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubmissionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Return submissions submitted before this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CompletedDateStart",
+                  "value": "<dateTime>",
+                  "description": "Return submissions completed after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CompletedDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Return submissions completed before this date (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49f2dfed-d302-403c-abde-1b7b07110e7a",
+              "name": "A paginated list of FTP submission objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "FTPFileSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SubmissionDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "SubmissionDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CompletedDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CompletedDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"FTPFileSubmissions\": [\n    {\n      \"BatchId\": \"BATCH-789\",\n      \"AccountId\": 12345,\n      \"SubmissionDate\": \"2026-09-10T22:55:32-08:00\",\n      \"FileName\": \"actions_20260910.csv\",\n      \"Type\": \"Reversal\",\n      \"Status\": \"Queued\",\n      \"TotalRecords\": 1000,\n      \"TotalErrors\": 5,\n      \"CompletionDate\": \"2026-09-10T22:55:45-08:00\",\n      \"ErrorsUri\": \"http://sNFhibsRkJuIwW.ibgbGa8rtgRxQYiK-mBG,ShVTxQZZOkoiypD7f2HD-WjBp5fo9DvS2FPQ7uTD\",\n      \"Uri\": \"http://yJTbIzQXOixwdSyfRcdRRQujCgGGl.qguT.MKKuOVOQiSyulQIYMqXGJungqQJh56eWGQbpgvp5dLb8-gCd,Y,phf?uoxkeel&plora=c&bzaqu&\"\n    },\n    {\n      \"BatchId\": \"BATCH-789\",\n      \"AccountId\": 12345,\n      \"SubmissionDate\": \"2026-09-10T22:55:32-08:00\",\n      \"FileName\": \"actions_20260910.csv\",\n      \"Type\": \"Conversion\",\n      \"Status\": \"Queued\",\n      \"TotalRecords\": 1000,\n      \"TotalErrors\": 5,\n      \"CompletionDate\": \"2026-09-10T22:55:45-08:00\",\n      \"ErrorsUri\": \"http://wNrreWibBTdOPpXrVYUEASfHax.lkqffJP1YPqEtX\",\n      \"Uri\": \"http://dckuFVJlsyVhEzAUZdMvSfieHkqjg.aaogPCjZf9nKiUaUGvSNZdue-5YyGBgmIywu9CmqYINNoctgw,2\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd1d2f42-e038-4e0d-b7f8-506d9f05cae2",
+          "name": "Get FTP Submission Details",
+          "request": {
+            "name": "Get FTP Submission Details",
+            "description": {
+              "content": "Retrieves information about records submitted in a specific FTP batch file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "FTPFileSubmissions",
+                ":BatchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "BatchId",
+                  "description": "(Required) The unique batch ID of the FTP submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9507b4dd-f775-4860-961b-114d8df8567b",
+              "name": "A single FTP submission object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "FTPFileSubmissions",
+                    ":BatchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "BatchId",
+                      "description": "(Required) The unique batch ID of the FTP submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BatchId\": \"BATCH-789\",\n  \"AccountId\": 12345,\n  \"SubmissionDate\": \"2026-09-10T22:55:32-08:00\",\n  \"FileName\": \"actions_20260910.csv\",\n  \"Type\": \"Modification\",\n  \"Status\": \"Queued\",\n  \"TotalRecords\": 1000,\n  \"TotalErrors\": 5,\n  \"CompletionDate\": \"2026-09-10T22:55:45-08:00\",\n  \"ErrorsUri\": \"https://ayFEOMbV.sqxe5AEe0KpCBCgSzjD5PN3DK0STW8RqqwY8n6+hteN\",\n  \"Uri\": \"http://QBmmhDul.lpsukfvYfK7J\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "645b5286-4542-46c3-a3d9-02a643ee55c7",
+          "name": "Get FTP Submission Error Details",
+          "request": {
+            "name": "Get FTP Submission Error Details",
+            "description": {
+              "content": "Returns a list of all errors that exist within a specific FTP file submission.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "FTPFileSubmissions",
+                ":BatchId",
+                "ErrorDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "BatchId",
+                  "description": "(Required) The unique batch ID of the FTP submission."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8eda6881-3407-49dd-af53-e9769b9b9d5e",
+              "name": "A paginated list of FTP submission error objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "FTPFileSubmissions",
+                    ":BatchId",
+                    "ErrorDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "BatchId",
+                      "description": "(Required) The unique batch ID of the FTP submission."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorDetail\": [\n    {\n      \"Line\": 42,\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 18500,\n      \"MediaPartnerId\": 2552842,\n      \"EventCode\": \"\",\n      \"OrderId\": \"9217374917471\",\n      \"Category\": \"VALIDATION\",\n      \"Sku\": \"ACME-TENNIS-101\",\n      \"Status\": \"Validation\",\n      \"Reason\": \"ACTIONTRACKER_CAMPAIGN_MISMATCH\",\n      \"Uri\": \"http://rfAvEpzJgeBNHzmYgwkDo.btfOcOFmjzNq8OX.2jX-nhAgnAQUd\"\n    },\n    {\n      \"Line\": 42,\n      \"CampaignId\": 1000,\n      \"ActionTrackerId\": 18500,\n      \"MediaPartnerId\": 2552842,\n      \"EventCode\": \"\",\n      \"OrderId\": \"9217374917471\",\n      \"Category\": \"VALIDATION\",\n      \"Sku\": \"ACME-TENNIS-101\",\n      \"Status\": \"Contract Error\",\n      \"Reason\": \"CAMPAIGN_NOT_FOUND\",\n      \"Uri\": \"https://LnsVZIWiSUdWnkmZbBdqEUwzFwxeQrRW.rwctWU3KGOTcCP+spnpb.6,R1ibodqsJsVKa-MyDNfzh,kqUAufPq5Q,PkTpjtkKpvwAs\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2b81ada8-c0ec-4566-872e-1cd2ba36a89e",
+    "name": "Brand API - Submissions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for checking the status of records submitted to impact.com via API or FTP. This allows you to see if submissions were received and view metadata and any processing errors.",
+      "type": "text/plain"
+    }
+  }
+}

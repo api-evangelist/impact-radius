@@ -1,0 +1,622 @@
+openapi: 3.1.0
+info:
+  title: Partner Catalogs API
+  description: 'Catalogs are product feeds provided by brands that contain item-level
+    details such as pricing, images, descriptions, and availability. Partners can
+    use catalogs to build dynamic product listings and deep-link directly to specific
+    products.
+
+    '
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+    email: support@impact.com
+servers:
+- url: https://api.impact.com
+tags:
+- name: Catalogs
+  description: Endpoints for retrieving brand product catalogs and their items.
+paths:
+  /Mediapartners/{AccountSID}/Catalogs:
+    get:
+      operationId: listCatalogs
+      tags:
+      - Catalogs
+      summary: List Catalogs
+      description: Returns a list of all product catalogs available to you.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filters catalogs by the campaign (brand program) they belong
+          to.
+      responses:
+        '200':
+          description: A list of catalog objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Catalogs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Catalog'
+  /Mediapartners/{AccountSID}/Catalogs/{Id}:
+    get:
+      operationId: retrieveCatalog
+      tags:
+      - Catalogs
+      summary: Retrieve a Catalog
+      description: Retrieves the details of an existing catalog using its unique ID.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique impact.com identifier for the catalog.
+      responses:
+        '200':
+          description: The catalog object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+  /Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items:
+    get:
+      operationId: listCatalogItems
+      tags:
+      - Catalogs
+      summary: List Catalog Items
+      description: Returns a list of all items in the specified catalog.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique impact.com identifier for the catalog.
+      - name: Query
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Filter expression to narrow the list of items. Uses a comparison syntax against item attributes (e.g., `CurrentPrice > 50`, `Manufacturer == ''Wayne Enterprises''`).'
+      responses:
+        '200':
+          description: A list of catalog item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+  /Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items/{Id}:
+    get:
+      operationId: retrieveCatalogItem
+      tags:
+      - Catalogs
+      summary: Retrieve a Catalog Item
+      description: Retrieves the details of a specific item within a catalog using
+        its unique ID.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CatalogId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique impact.com identifier for the catalog.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the catalog item.
+      responses:
+        '200':
+          description: The catalog item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+  /Mediapartners/{AccountSID}/Catalogs/ItemSearch:
+    get:
+      operationId: searchCatalogItems
+      tags:
+      - Catalogs
+      summary: Search Catalog Items
+      description: Searches for items across all available catalogs using a keyword.
+        Unlike the per-catalog `/Items` endpoint, this endpoint searches across all
+        catalogs in a single request and returns a paginated list of matching items.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Keyword
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Keyword to search for across all catalog item fields (name, description,
+          manufacturer, etc.). If omitted, all items across all catalogs are returned.
+        example: Wayne
+      - name: PageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Number of items to return per page. Defaults to 100.
+        example: 50
+      - name: Page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page number to retrieve (1-based). Use with `PageSize` to paginate
+          through large result sets.
+        example: 1
+      responses:
+        '200':
+          description: A paginated list of catalog item objects matching the search.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+components:
+  schemas:
+    Catalog:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the catalog.
+          example: '24836'
+        Name:
+          type: string
+          description: Display name of the catalog.
+          example: Wayne Enterprises Official Catalog
+        Language:
+          type: string
+          description: Language of the catalog content.
+          example: English (United States)
+        AdvertiserId:
+          type: string
+          description: Unique identifier for the brand's advertiser account.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand.
+          example: Acme Corporation
+        AdvertiserLocation:
+          type: string
+          description: Geographic location of the advertiser.
+          example: United States
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign (brand program) associated
+            with the catalog.
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the campaign associated with the catalog.
+          example: Wayne Enterprises
+        NumberOfItems:
+          type: string
+          description: The number of items currently in the catalog.
+          example: '20'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the catalog was last updated (ISO 8601).
+          example: '2022-09-02T01:37:15-07:00'
+        Locations:
+          type: array
+          description: Download paths for catalog files.
+          items:
+            type: string
+          example:
+          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
+          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz
+        Currency:
+          type: string
+          description: ISO 4217 currency code for the catalog's pricing.
+          example: USD
+        ServiceAreas:
+          type: string
+          description: Geographic regions the catalog serves.
+          example: ''
+        FTPLocations:
+          type: array
+          description: FTP access paths for catalog files. Includes authentication
+            credentials — handle securely.
+          items:
+            type: string
+          example:
+          - ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
+        ItemsUri:
+          type: string
+          description: API resource path for the catalog's items.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836/Items
+        Uri:
+          type: string
+          description: Unique reference to the catalog object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836
+    Item:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the catalog item, combining the catalog
+            ID and the brand's item ID.
+          example: product_24836_APP-0016
+        CatalogId:
+          type: string
+          description: Unique identifier for the catalog this item belongs to.
+          example: '24836'
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign associated with this item.
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the campaign associated with this item.
+          example: Wayne Enterprises
+        CatalogItemId:
+          type: string
+          description: The brand's own identifier for this item within the catalog.
+          example: APP-0016
+        Name:
+          type: string
+          description: Product name.
+          example: Wayne Reactive Armor Vest
+        Description:
+          type: string
+          description: Product description.
+          example: Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.
+        MultiPack:
+          type: string
+          description: Indicates if this is a multi-pack product and the quantity
+            included.
+          example: ''
+        Bullets:
+          type: array
+          description: Bullet-point product highlights.
+          items:
+            type: string
+          example: []
+        Labels:
+          type: array
+          description: Labels assigned to the item.
+          items:
+            type: string
+          example: []
+        Manufacturer:
+          type: string
+          description: The manufacturer of the product.
+          example: Wayne Enterprises
+        Url:
+          type: string
+          format: uri
+          description: Tracking URL for the product page, unique to your partner
+            account.
+          example: https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016
+        MobileUrl:
+          type: string
+          format: uri
+          description: Mobile-optimized tracking URL for the product page.
+          example: ''
+        ImageUrl:
+          type: string
+          format: uri
+          description: URL to the primary product image.
+          example: https://wayne.limited/images/armorvest.jpg
+        ProductBid:
+          type: string
+          description: Bid value for the product in automated campaigns.
+          example: ''
+        AdditionalImageUrls:
+          type: array
+          description: Additional product image URLs.
+          items:
+            type: string
+            format: uri
+          example: []
+        Promotions:
+          type: array
+          description: Promotions that apply to this item. Each entry is a summary of a promotion from the Partner Promotions API.
+          items:
+            type: object
+            properties:
+              AdvertiserId:
+                type: string
+                description: Unique identifier of the brand offering the promotion.
+                example: '1804207'
+              AdvertiserName:
+                type: string
+                description: Name of the brand offering the promotion.
+                example: Wayne Enterprises
+              PromotionFileId:
+                type: string
+                description: Unique identifier of the promotion file (upload batch) that this promotion was loaded from.
+                example: '4521003'
+              PromotionIds:
+                type: string
+                description: Unique identifier for the promotion. Despite the plural name, this is a single ID — use it as the path `Id` in the Partner Promotions API.
+                example: '7891234'
+              PromotionTitle:
+                type: string
+                description: Marketing headline for the promotion.
+                example: 10% Off All Tactical Gear
+              GenericRedemptionCode:
+                type: string
+                description: Promo code that customers apply at checkout to redeem the promotion. Empty when the promotion has no code or is auto-applied.
+                example: WAYNE10
+              PromotionEffectiveDates:
+                type: string
+                description: 'Date range during which the promotion is active, in ISO 8601 interval format `<start>/<end>`.'
+                example: 2025-01-01/2025-12-31
+              Uri:
+                type: string
+                description: Unique reference to this promotion in the Partner Promotions API.
+                example: /Mediapartners/<AccountSID>/Promotions/7891234
+        CurrentPrice:
+          type: string
+          description: Current selling price of the item.
+          example: '719.10'
+        OriginalPrice:
+          type: string
+          description: Original price before any discounts.
+          example: '799.00'
+        DiscountPercentage:
+          type: string
+          description: Discount percentage applied to the item.
+          example: '10'
+        Currency:
+          type: string
+          description: ISO 4217 currency code for the item's pricing.
+          example: USD
+        StockAvailability:
+          type: string
+          description: Current inventory status of the item (e.g., InStock, OutOfStock,
+            PreOrder).
+          example: InStock
+        EstimatedShipDate:
+          type: string
+          format: date-time
+          description: Estimated shipping date for the item.
+          example: ''
+        LaunchDate:
+          type: string
+          format: date-time
+          description: Date the product was launched.
+          example: ''
+        ExpirationDate:
+          type: string
+          format: date-time
+          description: Date the product listing expires.
+          example: ''
+        Gtin:
+          type: string
+          description: Global Trade Item Number (barcode) for the product.
+          example: '7774561230001'
+        GtinType:
+          type: string
+          description: The type of GTIN provided (e.g., EAN, UPC, ISBN, JAN).
+          example: EAN
+        Asin:
+          type: string
+          description: Amazon Standard Identification Number.
+          example: ''
+        Mpn:
+          type: string
+          description: Manufacturer Part Number.
+          example: ARM-VST-01
+        ShippingRate:
+          type: string
+          description: Shipping cost for the item.
+          example: '5.99'
+        ShippingWeight:
+          type: string
+          description: Weight of the packaged item for shipping.
+          example: '2.0'
+        ShippingWeightUnit:
+          type: string
+          description: Unit of measurement for the shipping weight (e.g., kg, lb).
+          example: lb
+        ShippingLength:
+          type: string
+          description: Length of the packaged item for shipping.
+          example: '12'
+        ShippingWidth:
+          type: string
+          description: Width of the packaged item for shipping.
+          example: '10'
+        ShippingHeight:
+          type: string
+          description: Height of the packaged item for shipping.
+          example: '3'
+        ShippingLengthUnit:
+          type: string
+          description: Unit of measurement for shipping dimensions (e.g., cm, in).
+          example: in
+        ShippingLabel:
+          type: string
+          description: Shipping label or carrier information.
+          example: ''
+        Category:
+          type: string
+          description: Product category hierarchy.
+          example: Apparel & Accessories > Clothing > Outerwear
+        SubCategory:
+          type: string
+          description: Product subcategory.
+          example: Tactical Outerwear
+        AdvertiserFormatCategories:
+          type: array
+          description: Categories in the advertiser's own taxonomy format.
+          items:
+            type: string
+          example:
+          - Apparel > Uniforms > Tactical
+        OriginalFormatCategory:
+          type: string
+          description: Category as provided in the original catalog feed format.
+          example: Apparel & Accessories > Clothing > Outerwear
+        OriginalFormatCategoryId:
+          type: string
+          description: Identifier for the original format category.
+          example: '424'
+        ParentName:
+          type: string
+          description: Name of the parent product if this item is a variant.
+          example: ''
+        ParentSku:
+          type: string
+          description: SKU of the parent product if this item is a variant.
+          example: ''
+        IsParent:
+          type: boolean
+          description: Whether this item is a parent product that has variants.
+          example: false
+        ItemGroupId:
+          type: string
+          description: Identifier grouping this item with its variants.
+          example: ''
+        Colors:
+          type: array
+          description: Available colors for the item.
+          items:
+            type: string
+          example:
+          - Black
+        Material:
+          type: string
+          description: Material the item is made of.
+          example: Reactive composite
+        Pattern:
+          type: string
+          description: Pattern or design of the item.
+          example: Solid
+        Size:
+          type: string
+          description: Size of the item.
+          example: L
+        SizeUnit:
+          type: string
+          description: Unit of measurement for the item's size.
+          example: US
+        Weight:
+          type: string
+          description: Weight of the item.
+          example: '1.8'
+        WeightUnit:
+          type: string
+          description: Unit of measurement for the item's weight (e.g., kg, lb).
+          example: lb
+        Condition:
+          type: string
+          description: Condition of the item (e.g., New, Used, Refurbished).
+          example: New
+        AgeGroup:
+          type: string
+          description: Target age group for the item (e.g., Adult, Kids, Infant).
+          example: adult
+        AgeRangeMin:
+          type: string
+          description: Minimum age in the target age range.
+          example: '0'
+        AgeRangeMax:
+          type: string
+          description: Maximum age in the target age range.
+          example: '0'
+        AgeRangeUnit:
+          type: string
+          description: Unit for the age range values (e.g., years, months).
+          example: years
+        Gender:
+          type: string
+          description: Target gender for the item (e.g., Male, Female, Unisex).
+          example: Unisex
+        Adult:
+          type: string
+          description: Whether the item is intended for adults only.
+          example: ''
+        Text1:
+          type: string
+          description: Custom text field 1, defined by the brand.
+          example: Wayne certified
+        Text2:
+          type: string
+          description: Custom text field 2, defined by the brand.
+          example: Active threat resistant
+        Text3:
+          type: string
+          description: Custom text field 3, defined by the brand.
+          example: NIJ Level IIIA
+        Numeric1:
+          type: string
+          description: Custom numeric field 1, defined by the brand.
+          example: '4.7'
+        Numeric2:
+          type: string
+          description: Custom numeric field 2, defined by the brand.
+          example: '127'
+        Numeric3:
+          type: string
+          description: Custom numeric field 3, defined by the brand.
+          example: '5'
+        Money1:
+          type: string
+          description: Custom monetary field 1, defined by the brand.
+          example: '79.90'
+        Money2:
+          type: string
+          description: Custom monetary field 2, defined by the brand.
+          example: '0.00'
+        Money3:
+          type: string
+          description: Custom monetary field 3, defined by the brand.
+          example: '0.00'
+        Uri:
+          type: string
+          description: Unique reference to the catalog item in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016

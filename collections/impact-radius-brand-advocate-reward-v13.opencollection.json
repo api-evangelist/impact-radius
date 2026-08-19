@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Reward",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reward",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List an account's rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/reward",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to look up"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filters rewards by `user.id`."
+              },
+              {
+                "name": "rewardTypeFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filters rewards by `type`."
+              }
+            ]
+          },
+          "docs": "Looks up a list of single rewards."
+        },
+        {
+          "info": {
+            "name": "Lookup a single reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/reward/:id",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the specific reward to lookup"
+              }
+            ]
+          },
+          "docs": "Used to lookup an individual reward using the ID of the reward. Works with: `CREDIT`, `PCT_DISCOUNT`, and `FUELTANK`."
+        },
+        {
+          "info": {
+            "name": "Redeem a single reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/credit/:id/redeem",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the specific reward to be redeemed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to redeem an individual credit earned from a referral program. Works with: `CREDIT`."
+        },
+        {
+          "info": {
+            "name": "Cancel a single reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/reward/:id/cancel",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the specific reward to be cancelled."
+              }
+            ]
+          },
+          "docs": "Used to cancel an individual reward earned from a referral program. Works with: `CREDIT`, `PCT_DISCOUNT`, and `FUELTANK`."
+        },
+        {
+          "info": {
+            "name": "Create a single reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/rewards/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user that will be given the reward."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account that will be given the reward."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to create a reward for a specified user. Note that the reward will only be redeemed automatically if the default program supports automatic redemption for the provided reward type (see the [install guides](https://integrations.impact.com/impact-brand/reference/tango-card-software-integration) for more on automatic redemption).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

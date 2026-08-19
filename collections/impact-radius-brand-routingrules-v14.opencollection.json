@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Routing Rules",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routing Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Routing Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/BlockRedirectRules",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the program to retrieve rules from."
+              },
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Condition",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Action",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Rank",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "Source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "StartDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that start before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "StartDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that start after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "EndDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that end before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "EndDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that end after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "DateLastUpdateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were last updated before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "DateLastUpdatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were last updated after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "DateCreatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were created before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "DateCreatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were created after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "CreatedBy",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were created by a specific account user."
+              },
+              {
+                "name": "LastUpdatedBy",
+                "value": "",
+                "type": "query",
+                "description": "Return routing rules that were last updated by a specific account user."
+              }
+            ]
+          },
+          "docs": "Returns a list of existing routing rules for a specific program, with options for filtering."
+        },
+        {
+          "info": {
+            "name": "Get Routing Rule Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/BlockRedirectRules/:RuleId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "RuleId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the routing rule."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing routing rule by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

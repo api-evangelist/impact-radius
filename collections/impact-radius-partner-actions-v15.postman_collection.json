@@ -1,0 +1,820 @@
+{
+  "item": [
+    {
+      "id": "74aa0b69-9ccf-4006-9162-322f7098fa9f",
+      "name": "Actions",
+      "description": {
+        "content": "Endpoints for managing and tracking conversion events and updates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb836d2b-737b-4289-af16-a4a5482faa18",
+          "name": "List Actions",
+          "request": {
+            "name": "List Actions",
+            "description": {
+              "content": "Returns a list of actions attributed to you, ordered by creation date (newest first).\n\n**Date filtering rules:**\n- If no `StartDate` and `EndDate` are specified, only records from the past 7 days are returned.\n- `StartDate` and `EndDate` cannot be more than 45 days apart.\n- `StartDate` cannot exceed 3 years in the past.\n- If `StartDate` is specified, `EndDate` must also be specified.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filters actions for a specific campaign."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filters actions by their current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters actions with an EventDate on or after this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters actions with an EventDate on or before this value."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters actions last updated on or after this value. Requires EndDate. Cannot be more than 45 days before EndDate or more than 3 years in the past."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters actions last updated on or before this value. Requires StartDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters actions with a LockingDate on or after this value. Requires LockingDateEnd. The range between LockingDateStart and LockingDateEnd cannot exceed 45 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters actions with a LockingDate on or before this value. Requires LockingDateStart."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7d16bd9-3673-4c09-a5f0-2d79354afa0c",
+              "name": "A list of action objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "APPROVED"
+                    },
+                    {
+                      "key": "ActionDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ActionDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "LockingDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "LockingDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Actions\": [\n    {\n      \"Id\": \"1000.4636.158133\",\n      \"CampaignId\": 2330,\n      \"CampaignName\": \"Acme Campaign\",\n      \"ActionTrackerId\": 8835,\n      \"ActionTrackerName\": \"Sale\",\n      \"State\": \"PENDING\",\n      \"AdId\": 9619,\n      \"Payout\": \"0.88\",\n      \"Amount\": \"21.99\",\n      \"Currency\": \"USD\",\n      \"EventDate\": \"2024-09-10T10:42:38-07:00\",\n      \"LockingDate\": \"2024-09-26T00:00:00-07:00\",\n      \"Oid\": \"9217374917472\",\n      \"EventCode\": \"\",\n      \"SharedId\": \"RT-19247423\",\n      \"SubId1\": \"\",\n      \"SubId2\": \"\",\n      \"SubId3\": \"\",\n      \"DeltaPayout\": \"0.88\",\n      \"IntendedPayout\": \"0.88\",\n      \"DeltaAmount\": \"21.99\",\n      \"IntendedAmount\": \"21.99\",\n      \"ReferringDate\": \"2024-09-10T09:45:07-07:00\",\n      \"CreationDate\": \"2024-09-10T10:51:23-07:00\",\n      \"ClearedDate\": \"2005-11-28T09:35:50.572Z\",\n      \"ReferringType\": \"CLICK_COOKIE\",\n      \"ReferringDomain\": \"\",\n      \"PromoCode\": \"SUMMERSALE2024\",\n      \"CustomerArea\": \"855\",\n      \"CustomerCity\": \"Santa Barbara\",\n      \"CustomerRegion\": \"California\",\n      \"CustomerCountry\": \"US\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133\"\n    },\n    {\n      \"Id\": \"1000.4636.158133\",\n      \"CampaignId\": 5627,\n      \"CampaignName\": \"Acme Campaign\",\n      \"ActionTrackerId\": 3882,\n      \"ActionTrackerName\": \"Sale\",\n      \"State\": \"APPROVED\",\n      \"AdId\": 1227,\n      \"Payout\": \"0.88\",\n      \"Amount\": \"21.99\",\n      \"Currency\": \"USD\",\n      \"EventDate\": \"2024-09-10T10:42:38-07:00\",\n      \"LockingDate\": \"2024-09-26T00:00:00-07:00\",\n      \"Oid\": \"9217374917472\",\n      \"EventCode\": \"\",\n      \"SharedId\": \"RT-19247423\",\n      \"SubId1\": \"\",\n      \"SubId2\": \"\",\n      \"SubId3\": \"\",\n      \"DeltaPayout\": \"0.88\",\n      \"IntendedPayout\": \"0.88\",\n      \"DeltaAmount\": \"21.99\",\n      \"IntendedAmount\": \"21.99\",\n      \"ReferringDate\": \"2024-09-10T09:45:07-07:00\",\n      \"CreationDate\": \"2024-09-10T10:51:23-07:00\",\n      \"ClearedDate\": \"1948-10-13T18:17:30.981Z\",\n      \"ReferringType\": \"CLICK_COOKIE\",\n      \"ReferringDomain\": \"\",\n      \"PromoCode\": \"SUMMERSALE2024\",\n      \"CustomerArea\": \"855\",\n      \"CustomerCity\": \"Santa Barbara\",\n      \"CustomerRegion\": \"California\",\n      \"CustomerCountry\": \"US\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d83e9f7d-614b-47d7-9eb0-c2bc0643aeb2",
+          "name": "Retrieve an Action",
+          "request": {
+            "name": "Retrieve an Action",
+            "description": {
+              "content": "Retrieves the details of an existing action using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Actions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier for the action."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dff2674d-4af4-47ba-8547-2f325e5b6ae1",
+              "name": "The action object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Actions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier for the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1000.4636.158133\",\n  \"CampaignId\": 9316,\n  \"CampaignName\": \"Acme Campaign\",\n  \"ActionTrackerId\": 4661,\n  \"ActionTrackerName\": \"Sale\",\n  \"State\": \"APPROVED\",\n  \"AdId\": 29,\n  \"Payout\": \"0.88\",\n  \"Amount\": \"21.99\",\n  \"Currency\": \"USD\",\n  \"EventDate\": \"2024-09-10T10:42:38-07:00\",\n  \"LockingDate\": \"2024-09-26T00:00:00-07:00\",\n  \"Oid\": \"9217374917472\",\n  \"EventCode\": \"\",\n  \"SharedId\": \"RT-19247423\",\n  \"SubId1\": \"\",\n  \"SubId2\": \"\",\n  \"SubId3\": \"\",\n  \"DeltaPayout\": \"0.88\",\n  \"IntendedPayout\": \"0.88\",\n  \"DeltaAmount\": \"21.99\",\n  \"IntendedAmount\": \"21.99\",\n  \"ReferringDate\": \"2024-09-10T09:45:07-07:00\",\n  \"CreationDate\": \"2024-09-10T10:51:23-07:00\",\n  \"ClearedDate\": \"1967-12-03T05:18:51.635Z\",\n  \"ReferringType\": \"CLICK_COOKIE\",\n  \"ReferringDomain\": \"\",\n  \"PromoCode\": \"SUMMERSALE2024\",\n  \"CustomerArea\": \"855\",\n  \"CustomerCity\": \"Santa Barbara\",\n  \"CustomerRegion\": \"California\",\n  \"CustomerCountry\": \"US\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "796460db-9316-4bfe-891c-689148743d90",
+          "name": "List all items for an action",
+          "request": {
+            "name": "List all items for an action",
+            "description": {
+              "content": "Returns a list of the items within the specified action in the order they were recorded. Each action has at least one item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Actions",
+                ":id",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier for the action."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eec10ba7-cbe3-4802-b595-cbc1fdfe63a3",
+              "name": "An array of action item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Actions",
+                    ":id",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier for the action."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActionItems\": [\n    {\n      \"Sku\": \"12345\",\n      \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n      \"Category\": \"Sports\",\n      \"Quantity\": \"2\",\n      \"SaleAmount\": \"19.27\",\n      \"SaleAmountCurrency\": \"USD\",\n      \"Payout\": \"0.77\",\n      \"PayoutCurrency\": \"USD\",\n      \"Rebate\": \"1.00\",\n      \"RebateCurrency\": \"USD\",\n      \"AdjustmentDate\": \"1990-06-14T08:07:56.116Z\",\n      \"AdjustmentReason\": \"CONS_FRAUD\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345\"\n    },\n    {\n      \"Sku\": \"12345\",\n      \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n      \"Category\": \"Sports\",\n      \"Quantity\": \"2\",\n      \"SaleAmount\": \"19.27\",\n      \"SaleAmountCurrency\": \"USD\",\n      \"Payout\": \"0.77\",\n      \"PayoutCurrency\": \"USD\",\n      \"Rebate\": \"1.00\",\n      \"RebateCurrency\": \"USD\",\n      \"AdjustmentDate\": \"2015-11-21T21:47:31.409Z\",\n      \"AdjustmentReason\": \"OVERLIMIT_WEEKDAYCAP\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61615e46-cc6e-40dd-85e6-1af47dda3b2e",
+          "name": "Retrieve an item from an action",
+          "request": {
+            "name": "Retrieve an item from an action",
+            "description": {
+              "content": "Retrieves the details of a specific item within an action using its SKU.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Actions",
+                ":actionId",
+                "Items",
+                ":sku"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Unique identifier for the action."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "sku",
+                  "description": "(Required) The SKU or product identifier of the item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bb42538-f7a0-4bfd-b903-c16a055bd2fe",
+              "name": "A single action item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Actions",
+                    ":actionId",
+                    "Items",
+                    ":sku"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Unique identifier for the action."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "sku",
+                      "description": "(Required) The SKU or product identifier of the item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Sku\": \"12345\",\n  \"ItemName\": \"Acme Tennis Balls (One Dozen)\",\n  \"Category\": \"Sports\",\n  \"Quantity\": \"2\",\n  \"SaleAmount\": \"19.27\",\n  \"SaleAmountCurrency\": \"USD\",\n  \"Payout\": \"0.77\",\n  \"PayoutCurrency\": \"USD\",\n  \"Rebate\": \"1.00\",\n  \"RebateCurrency\": \"USD\",\n  \"AdjustmentDate\": \"1984-05-30T18:49:46.365Z\",\n  \"AdjustmentReason\": \"CONS_ERROR\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08538ff7-8d5f-4dac-aa77-f42444c7c03b",
+          "name": "List Action Updates",
+          "request": {
+            "name": "List Action Updates",
+            "description": {
+              "content": "Returns a list of action updates, useful for syncing action state changes with internal systems. Each record represents a change to an action's state or payout.\n\n**Note:** impact.com recommends using action lifecycle postbacks instead of polling this endpoint for all but occasional requests, in order to receive low-latency near-realtime action updates.\n\n**Date filtering rules:**\n- If no `StartDate` and `EndDate` are specified, only records from the past 7 days are returned.\n- `StartDate` and `EndDate` cannot be more than 45 days apart.\n- `StartDate` cannot exceed 3 years in the past.\n- If `StartDate` is specified, `EndDate` must also be specified.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ActionUpdates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates last modified on or after this value. Requires EndDate. Cannot be more than 45 days before EndDate or more than 3 years in the past."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates last modified on or before this value. Requires StartDate."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filters action updates for a specific campaign."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filters action updates by the action's current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates whose action's EventDate is on or after this value. Requires ActionDateEnd. The range cannot exceed 45 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "ActionDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates whose action's EventDate is on or before this value. Requires ActionDateStart."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateStart",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates whose action's LockingDate is on or after this value. Requires LockingDateEnd. The range cannot exceed 45 days."
+                },
+                {
+                  "disabled": false,
+                  "key": "LockingDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Filters action updates whose action's LockingDate is on or before this value. Requires LockingDateStart."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9a39597-b883-4b84-a9d2-46fd06c63c83",
+              "name": "An array of action update objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ActionUpdates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "APPROVED"
+                    },
+                    {
+                      "key": "ActionDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "ActionDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "LockingDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "LockingDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ActionUpdates\": [\n    {\n      \"Id\": \"1000.1234.56789.10111213\",\n      \"ActionId\": \"1000.1234.56789\",\n      \"CampaignId\": 9022,\n      \"ActionTrackerId\": \"10000\",\n      \"EventCode\": \"\",\n      \"State\": \"PENDING\",\n      \"StateDetail\": \"\",\n      \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n      \"AdId\": \"123456\",\n      \"ReportingState\": \"IR_BLANK\",\n      \"DeltaPayout\": \"0.26\",\n      \"DeltaAmount\": \"17.29\",\n      \"Currency\": \"USD\",\n      \"Category\": \"Sports\",\n      \"Sku\": \"123ABC456\",\n      \"Quantity\": \"1\",\n      \"CatalogName\": \"\",\n      \"CatalogCategory\": \"\",\n      \"CatalogDescription\": \"\",\n      \"CatalogManufacturer\": \"\",\n      \"CatalogOriginalFormatCategory\": \"\",\n      \"CatalogSubCategory\": \"\",\n      \"UpdateDate\": \"2021-04-25T02:07:45-04:00\",\n      \"LockingDate\": \"2021-05-16T00:00:00-04:00\",\n      \"ClearingDate\": \"2021-05-16T00:00:00-04:00\",\n      \"ActionDate\": \"2021-04-24T19:50:23-04:00\",\n      \"Oid\": \"O987654\",\n      \"SubId1\": \"Blog\",\n      \"SubId2\": \"Website\",\n      \"SubId3\": \"\",\n      \"PaystubId\": \"116142\",\n      \"ContractId\": \"S-7751552\",\n      \"EventTypeId\": \"10000\",\n      \"EventTypeName\": \"Sale\",\n      \"PayoutLevel\": \"ORDER\",\n      \"DefaultPayout\": \"5.00\",\n      \"DefaultPayoutCurrency\": \"USD\",\n      \"SharedId\": \"\",\n      \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/1000.1234.56789\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ActionUpdates/1000.1234.56789.10111213\"\n    },\n    {\n      \"Id\": \"1000.1234.56789.10111213\",\n      \"ActionId\": \"1000.1234.56789\",\n      \"CampaignId\": 3982,\n      \"ActionTrackerId\": \"10000\",\n      \"EventCode\": \"\",\n      \"State\": \"REVERSED\",\n      \"StateDetail\": \"\",\n      \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n      \"AdId\": \"123456\",\n      \"ReportingState\": \"IR_BLANK\",\n      \"DeltaPayout\": \"0.26\",\n      \"DeltaAmount\": \"17.29\",\n      \"Currency\": \"USD\",\n      \"Category\": \"Sports\",\n      \"Sku\": \"123ABC456\",\n      \"Quantity\": \"1\",\n      \"CatalogName\": \"\",\n      \"CatalogCategory\": \"\",\n      \"CatalogDescription\": \"\",\n      \"CatalogManufacturer\": \"\",\n      \"CatalogOriginalFormatCategory\": \"\",\n      \"CatalogSubCategory\": \"\",\n      \"UpdateDate\": \"2021-04-25T02:07:45-04:00\",\n      \"LockingDate\": \"2021-05-16T00:00:00-04:00\",\n      \"ClearingDate\": \"2021-05-16T00:00:00-04:00\",\n      \"ActionDate\": \"2021-04-24T19:50:23-04:00\",\n      \"Oid\": \"O987654\",\n      \"SubId1\": \"Blog\",\n      \"SubId2\": \"Website\",\n      \"SubId3\": \"\",\n      \"PaystubId\": \"116142\",\n      \"ContractId\": \"S-7751552\",\n      \"EventTypeId\": \"10000\",\n      \"EventTypeName\": \"Sale\",\n      \"PayoutLevel\": \"ORDER\",\n      \"DefaultPayout\": \"5.00\",\n      \"DefaultPayoutCurrency\": \"USD\",\n      \"SharedId\": \"\",\n      \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/1000.1234.56789\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ActionUpdates/1000.1234.56789.10111213\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4340a69b-22ff-4b68-8602-364543924c0d",
+          "name": "Retrieve an Action Update",
+          "request": {
+            "name": "Retrieve an Action Update",
+            "description": {
+              "content": "Retrieves the details of a specific action update record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ActionUpdates",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Unique identifier for the action update record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66d60375-c968-46f8-b5fb-cb25c39fb3ec",
+              "name": "A single action update object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ActionUpdates",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Unique identifier for the action update record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1000.1234.56789.10111213\",\n  \"ActionId\": \"1000.1234.56789\",\n  \"CampaignId\": 7858,\n  \"ActionTrackerId\": \"10000\",\n  \"EventCode\": \"\",\n  \"State\": \"REVERSED\",\n  \"StateDetail\": \"\",\n  \"StateDetailDescription\": \"Action comes in DEFAULT and a locking date has not been set yet\",\n  \"AdId\": \"123456\",\n  \"ReportingState\": \"IR_BLANK\",\n  \"DeltaPayout\": \"0.26\",\n  \"DeltaAmount\": \"17.29\",\n  \"Currency\": \"USD\",\n  \"Category\": \"Sports\",\n  \"Sku\": \"123ABC456\",\n  \"Quantity\": \"1\",\n  \"CatalogName\": \"\",\n  \"CatalogCategory\": \"\",\n  \"CatalogDescription\": \"\",\n  \"CatalogManufacturer\": \"\",\n  \"CatalogOriginalFormatCategory\": \"\",\n  \"CatalogSubCategory\": \"\",\n  \"UpdateDate\": \"2021-04-25T02:07:45-04:00\",\n  \"LockingDate\": \"2021-05-16T00:00:00-04:00\",\n  \"ClearingDate\": \"2021-05-16T00:00:00-04:00\",\n  \"ActionDate\": \"2021-04-24T19:50:23-04:00\",\n  \"Oid\": \"O987654\",\n  \"SubId1\": \"Blog\",\n  \"SubId2\": \"Website\",\n  \"SubId3\": \"\",\n  \"PaystubId\": \"116142\",\n  \"ContractId\": \"S-7751552\",\n  \"EventTypeId\": \"10000\",\n  \"EventTypeName\": \"Sale\",\n  \"PayoutLevel\": \"ORDER\",\n  \"DefaultPayout\": \"5.00\",\n  \"DefaultPayoutCurrency\": \"USD\",\n  \"SharedId\": \"\",\n  \"ActionUri\": \"/Mediapartners/<AccountSID>/Actions/1000.1234.56789\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/ActionUpdates/1000.1234.56789.10111213\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0ef75a16-0d02-495a-8a3c-8603bb805bd3",
+    "name": "Impact Publisher Actions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Actions API allows publishers to manage and track conversion events. An action represents a conversion event credited to you and eligible for a payout. It includes details about the conversion, the winning click, and the calculated payout.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

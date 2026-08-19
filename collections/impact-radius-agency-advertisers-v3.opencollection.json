@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agency API — Advertisers",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Advertisers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all advertisers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Advertisers",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              }
+            ]
+          },
+          "docs": "Returns a list of all advertisers associated with your agency account.\n\nEach result includes full account details — contact information, billing setup, organization details, and a pre-authenticated `RestAccountURL` for making direct API calls to each advertiser's account."
+        },
+        {
+          "info": {
+            "name": "Get an advertiser",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Advertisers/:AdvertiserId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "AdvertiserId",
+                "value": "1048291",
+                "type": "path",
+                "description": "The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response."
+              }
+            ]
+          },
+          "docs": "Returns the full details of a single advertiser account by its numeric ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

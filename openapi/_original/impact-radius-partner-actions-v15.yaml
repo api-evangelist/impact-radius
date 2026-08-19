@@ -1,0 +1,748 @@
+openapi: 3.1.0
+info:
+  title: Impact Publisher Actions API
+  version: '15'
+  description: "The Actions API allows publishers to manage and track conversion events.\
+    \ An action represents a conversion event credited to you and eligible for a payout.\
+    \ It includes details about the conversion, the winning click, and the calculated\
+    \ payout.\n"
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+tags:
+- name: Actions
+  description: Endpoints for managing and tracking conversion events and updates.
+paths:
+  /Mediapartners/{AccountSID}/Actions:
+    get:
+      summary: List Actions
+      description: "Returns a list of actions attributed to you, ordered by creation\
+        \ date (newest first).\n\n**Date filtering rules:**\n- If no `StartDate` and\
+        \ `EndDate` are specified, only records from the past 7 days are returned.\n\
+        - `StartDate` and `EndDate` cannot be more than 45 days apart.\n- `StartDate`\
+        \ cannot exceed 3 years in the past.\n- If `StartDate` is specified, `EndDate`\
+        \ must also be specified.\n"
+      operationId: listActions
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: query
+        schema:
+          type: integer
+        description: Filters actions for a specific campaign.
+      - name: State
+        in: query
+        schema:
+          $ref: '#/components/schemas/ActionState'
+        description: Filters actions by their current state.
+      - name: ActionDateStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions with an EventDate on or after this value.
+      - name: ActionDateEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions with an EventDate on or before this value.
+      - name: StartDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions last updated on or after this value. Requires
+          EndDate. Cannot be more than 45 days before EndDate or more than 3 years
+          in the past.
+      - name: EndDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions last updated on or before this value. Requires
+          StartDate.
+      - name: LockingDateStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions with a LockingDate on or after this value. Requires LockingDateEnd. The range between LockingDateStart and LockingDateEnd cannot exceed 45 days.
+      - name: LockingDateEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters actions with a LockingDate on or before this value. Requires LockingDateStart.
+      responses:
+        '200':
+          description: A list of action objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Actions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Action'
+  /Mediapartners/{AccountSID}/Actions/{id}:
+    get:
+      summary: Retrieve an Action
+      description: Retrieves the details of an existing action using its unique ID.
+      operationId: retrieveAction
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the action.
+      responses:
+        '200':
+          description: The action object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Action'
+  /Mediapartners/{AccountSID}/Actions/{id}/Items:
+    get:
+      summary: List all items for an action
+      description: Returns a list of the items within the specified action in the
+        order they were recorded. Each action has at least one item.
+      operationId: listActionItems
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the action.
+      responses:
+        '200':
+          description: An array of action item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ActionItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+  /Mediapartners/{AccountSID}/Actions/{actionId}/Items/{sku}:
+    get:
+      summary: Retrieve an item from an action
+      description: Retrieves the details of a specific item within an action using
+        its SKU.
+      operationId: retrieveActionItem
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: actionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the action.
+      - name: sku
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The SKU or product identifier of the item.
+      responses:
+        '200':
+          description: A single action item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+  /Mediapartners/{AccountSID}/ActionUpdates:
+    get:
+      summary: List Action Updates
+      description: "Returns a list of action updates, useful for syncing action state\
+        \ changes with internal systems. Each record represents a change to an action's\
+        \ state or payout.\n\n**Note:** impact.com recommends using action lifecycle\
+        \ postbacks instead of polling this endpoint for all but occasional requests,\
+        \ in order to receive low-latency near-realtime action updates.\n\n**Date\
+        \ filtering rules:**\n- If no `StartDate` and `EndDate` are specified, only\
+        \ records from the past 7 days are returned.\n- `StartDate` and `EndDate`\
+        \ cannot be more than 45 days apart.\n- `StartDate` cannot exceed 3 years\
+        \ in the past.\n- If `StartDate` is specified, `EndDate` must also be specified.\n"
+      operationId: listActionUpdates
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: StartDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates last modified on or after this value.
+          Requires EndDate. Cannot be more than 45 days before EndDate or more than
+          3 years in the past.
+      - name: EndDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates last modified on or before this value.
+          Requires StartDate.
+      - name: CampaignId
+        in: query
+        schema:
+          type: integer
+        description: Filters action updates for a specific campaign.
+      - name: State
+        in: query
+        schema:
+          $ref: '#/components/schemas/ActionState'
+        description: Filters action updates by the action's current state.
+      - name: ActionDateStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates whose action's EventDate is on or after this value. Requires ActionDateEnd. The range cannot exceed 45 days.
+      - name: ActionDateEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates whose action's EventDate is on or before this value. Requires ActionDateStart.
+      - name: LockingDateStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates whose action's LockingDate is on or after this value. Requires LockingDateEnd. The range cannot exceed 45 days.
+      - name: LockingDateEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Filters action updates whose action's LockingDate is on or before this value. Requires LockingDateStart.
+      responses:
+        '200':
+          description: An array of action update objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ActionUpdates:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActionUpdate'
+  /Mediapartners/{AccountSID}/ActionUpdates/{id}:
+    get:
+      summary: Retrieve an Action Update
+      description: Retrieves the details of a specific action update record.
+      operationId: retrieveActionUpdate
+      tags:
+      - Actions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the action update record.
+      responses:
+        '200':
+          description: A single action update object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionUpdate'
+components:
+  schemas:
+    ActionState:
+      type: string
+      description: The current state of the action.
+      enum:
+      - PENDING
+      - APPROVED
+      - REVERSED
+    Action:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the action.
+          example: 1000.4636.158133
+        CampaignId:
+          type: integer
+          description: Unique identifier for the campaign that the action is associated
+            with.
+          example: '1000'
+        CampaignName:
+          type: string
+          description: Display name for the campaign that the action is associated
+            with.
+          example: Acme Campaign
+        ActionTrackerId:
+          type: integer
+          description: Unique identifier for the action tracker (event type) that
+            tracked the conversion.
+          example: '2240'
+        ActionTrackerName:
+          type: string
+          description: Display name for the action tracker (event type) that tracked
+            the conversion.
+          example: Sale
+        State:
+          $ref: '#/components/schemas/ActionState'
+          description: "The current state of the action:\n- `PENDING`: Awaiting the\
+            \ locking date for automatic approval, or manual review. Modified actions\
+            \ also have this state.\n- `APPROVED`: Approved and will pay out to the\
+            \ partner. No further modifications are possible.\n- `REVERSED`: Reversed\
+            \ and will not pay out to the partner.\n"
+        AdId:
+          type: integer
+          description: Unique identifier for the ad that drove the winning click.
+          example: '506720'
+        Payout:
+          type: string
+          format: decimal
+          description: Commission amount calculated for the action that will be paid
+            out to the partner.
+          example: '0.88'
+        Amount:
+          type: string
+          format: decimal
+          description: Revenue amount associated with the action.
+          example: '21.99'
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 code representing the currency for the
+            action.
+          example: USD
+        EventDate:
+          type: string
+          format: date-time
+          description: Date and time when the conversion event occurred.
+          example: '2024-09-10T10:42:38-07:00'
+        LockingDate:
+          type: string
+          format: date-time
+          description: Date and time when the action will lock and can no longer be
+            modified or reversed.
+          example: '2024-09-26T00:00:00-07:00'
+        Oid:
+          type: string
+          description: The unique identifier for the order associated with this conversion,
+            as provided by the brand.
+          example: '9217374917472'
+        EventCode:
+          type: string
+          description: For mobile app events, populates with the event code representing
+            the type of event tracked.
+          example: ''
+        SharedId:
+          type: string
+          description: The Shared ID value associated with the winning click. A query
+            string parameter you can append to the tracking link to share traffic
+            segments with the brand.
+          example: RT-19247423
+        SubId1:
+          type: string
+          description: The first Sub ID value associated with the winning click. A
+            query string parameter you can append to the tracking link that will appear
+            in your reporting.
+          example: ''
+        SubId2:
+          type: string
+          description: The second Sub ID value associated with the winning click.
+            A query string parameter you can append to the tracking link that will
+            appear in your reporting.
+          example: ''
+        SubId3:
+          type: string
+          description: The third Sub ID value associated with the winning click. A
+            query string parameter you can append to the tracking link that will appear
+            in your reporting.
+          example: ''
+        DeltaPayout:
+          type: string
+          format: decimal
+          description: The change in payout value between the current action update
+            and the previous one.
+          example: '0.88'
+        IntendedPayout:
+          type: string
+          format: decimal
+          description: Original payout amount calculated by the template terms before
+            any modifications.
+          example: '0.88'
+        DeltaAmount:
+          type: string
+          format: decimal
+          description: The change in amount value between the current action update
+            and the previous one.
+          example: '21.99'
+        IntendedAmount:
+          type: string
+          format: decimal
+          description: Original amount for the action before any modifications.
+          example: '21.99'
+        ReferringDate:
+          type: string
+          format: date-time
+          description: Date and time when the winning click occurred.
+          example: '2024-09-10T09:45:07-07:00'
+        CreationDate:
+          type: string
+          format: date-time
+          description: Date and time when the action was created in impact.com.
+          example: '2024-09-10T10:51:23-07:00'
+        ClearedDate:
+          type: string
+          format: date-time
+          description: Date and time when the action commission cleared your account
+            balance. Returns empty if the action has not cleared yet.
+          example: ''
+        ReferringType:
+          type: string
+          description: The attribution method associated with the winning referral.
+          enum:
+          - CLICK_COOKIE
+          - CLICK_FINGERPRINT
+          - CALL
+          - PROMOCODE
+          - ACTION
+          - REPORTED_PARTNER_ID
+          - IMPRESSION_COOKIE
+          - IMPRESSION_FINGERPRINT
+          - ACTION_INQUIRY
+          example: CLICK_COOKIE
+        ReferringDomain:
+          type: string
+          description: Domain of the site that the winning click occurred on.
+          example: ''
+        PromoCode:
+          type: string
+          description: The promotional code applied to the conversion, if one was
+            used.
+          example: SUMMERSALE2024
+        CustomerArea:
+          type: string
+          description: The Designated Market Area (DMA) code of the customer's area,
+            derived from IP address.
+          example: '855'
+        CustomerCity:
+          type: string
+          description: The city the customer resides in.
+          example: Santa Barbara
+        CustomerRegion:
+          type: string
+          description: The region or state the customer resides in.
+          example: California
+        CustomerCountry:
+          type: string
+          description: The country the customer resides in.
+          example: US
+        Uri:
+          type: string
+          description: Unique reference to the action object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133
+    Item:
+      type: object
+      properties:
+        Sku:
+          type: string
+          description: The product identifier or SKU for the item.
+          example: '12345'
+        ItemName:
+          type: string
+          description: The product name or description.
+          example: Acme Tennis Balls (One Dozen)
+        Category:
+          type: string
+          description: The product category.
+          example: Sports
+        Quantity:
+          type: string
+          description: The number of units purchased.
+          example: '2'
+        SaleAmount:
+          type: string
+          description: The transaction value or sale amount for the item.
+          example: '19.27'
+        SaleAmountCurrency:
+          type: string
+          description: The currency code for the sale amount.
+          example: USD
+        Payout:
+          type: string
+          format: decimal
+          description: The commission or payout earned for the item.
+          example: '0.77'
+        PayoutCurrency:
+          type: string
+          description: The currency code for the payout.
+          example: USD
+        Rebate:
+          type: string
+          description: The rebate amount for the item.
+          example: '1.00'
+        RebateCurrency:
+          type: string
+          description: The currency code for the rebate.
+          example: USD
+        AdjustmentDate:
+          type: string
+          format: date-time
+          description: The date and time of any adjustment applied to the item. Returns
+            empty if no adjustment has occurred.
+          example: ''
+        AdjustmentReason:
+          type: string
+          description: The reason for any adjustment applied to the item. Returns
+            empty if no adjustment has occurred.
+          enum:
+          - OVERLIMIT_WEEKDAYCAP
+          - OVERLIMIT_WEEKENDCAP
+          - OVERLIMIT_BUDGET
+          - OVERLIMIT_ACTIONCAP
+          - OVERLIMIT_CONCURRENTCALLS
+          - OVERLIMIT_UNKNOWN_CALLERID
+          - RECALC_COMM
+          - MP_RETURN
+          - APPROVED
+          - REJECTED
+          - CONS_INFO_INVALID
+          - CONS_ERROR
+          - CONS_FRAUD
+          - ITEM_RETURNED
+          - ITEM_OUT_OF_STOCK
+          - ORDER_ERROR
+          - PUB_ACT_DISPUTE
+          - ADV_ACT_DISPUTE
+          - NOT_COMPLIANCE_TERMS
+          - MP_ACCOUNT_DEATVIATED
+          - CREDITED_DIFFERENT_MP
+          - ORDER_UPDATE
+          - OTHER
+          - TEST_ACTION
+          - RESET
+          example: ''
+        Uri:
+          type: string
+          description: Unique reference to the action item object in the impact.com
+            API.
+          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345
+    ActionUpdate:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the action update record.
+          example: 1000.1234.56789.10111213
+        ActionId:
+          type: string
+          description: Identifier for the parent action associated with this update.
+          example: 1000.1234.56789
+        CampaignId:
+          type: integer
+          description: Unique identifier for the campaign associated with the action.
+          example: '1000'
+        ActionTrackerId:
+          type: string
+          description: Unique identifier of the action tracker (event type) that recorded the action.
+          example: '10000'
+        EventCode:
+          type: string
+          description: Internal event code associated with the action tracker.
+          example: ''
+        State:
+          $ref: '#/components/schemas/ActionState'
+          description: "The current state of the action:\n- `PENDING`: Awaiting the locking date for automatic approval, or manual review.\n- `APPROVED`: Approved and will pay out to the partner.\n- `REVERSED`: Reversed and will not pay out to the partner.\n"
+        StateDetail:
+          type: string
+          description: Additional detail about the current state of the action.
+          example: ''
+        StateDetailDescription:
+          type: string
+          description: Human-readable explanation of the state detail.
+          example: Action comes in DEFAULT and a locking date has not been set yet
+        AdId:
+          type: string
+          description: Unique identifier of the ad that drove the action, if applicable.
+          example: '123456'
+        ReportingState:
+          type: string
+          description: The reporting state of the action used by impact.com analytics.
+          example: IR_BLANK
+        DeltaPayout:
+          type: string
+          format: decimal
+          description: The change in payout amount between this update and the previous one.
+          example: '0.26'
+        DeltaAmount:
+          type: string
+          format: decimal
+          description: The change in transaction amount between this update and the previous one.
+          example: '17.29'
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the action amounts.
+          example: USD
+        Category:
+          type: string
+          description: Brand-defined category for the action.
+          example: Sports
+        Sku:
+          type: string
+          description: Stock keeping unit identifier for the product associated with the action, if applicable.
+          example: 123ABC456
+        Quantity:
+          type: string
+          description: Quantity of items associated with the action.
+          example: '1'
+        CatalogName:
+          type: string
+          description: Name of the catalog the action item belongs to.
+          example: ''
+        CatalogCategory:
+          type: string
+          description: Category of the action item from the brand's catalog.
+          example: ''
+        CatalogDescription:
+          type: string
+          description: Description of the action item from the brand's catalog.
+          example: ''
+        CatalogManufacturer:
+          type: string
+          description: Manufacturer of the action item from the brand's catalog.
+          example: ''
+        CatalogOriginalFormatCategory:
+          type: string
+          description: Original (unmodified) category of the action item from the brand's catalog.
+          example: ''
+        CatalogSubCategory:
+          type: string
+          description: Sub-category of the action item from the brand's catalog.
+          example: ''
+        UpdateDate:
+          type: string
+          format: date-time
+          description: Date and time of the most recent modification to the action.
+          example: '2021-04-25T02:07:45-04:00'
+        LockingDate:
+          type: string
+          format: date-time
+          description: Date and time the action will be (or was) locked for automatic state changes.
+          example: '2021-05-16T00:00:00-04:00'
+        ClearingDate:
+          type: string
+          format: date-time
+          description: Date and time the action payout was (or will be) cleared for payment.
+          example: '2021-05-16T00:00:00-04:00'
+        ActionDate:
+          type: string
+          format: date-time
+          description: Date and time when the original action or conversion event occurred.
+          example: '2021-04-24T19:50:23-04:00'
+        Oid:
+          type: string
+          description: The unique identifier for the order associated with the action, as provided by the brand.
+          example: O987654
+        SubId1:
+          type: string
+          description: First partner sub-identifier passed on the tracking link.
+          example: Blog
+        SubId2:
+          type: string
+          description: Second partner sub-identifier passed on the tracking link.
+          example: Website
+        SubId3:
+          type: string
+          description: Third partner sub-identifier passed on the tracking link.
+          example: ''
+        PaystubId:
+          type: string
+          description: Identifier of the paystub the action's payout is associated with, when paid.
+          example: '116142'
+        ContractId:
+          type: string
+          description: Identifier of the contract that determined the payout for this action.
+          example: S-7751552
+        EventTypeId:
+          type: string
+          description: Unique identifier of the event type that recorded the action.
+          example: '10000'
+        EventTypeName:
+          type: string
+          description: Display name of the event type that recorded the action.
+          example: Sale
+        PayoutLevel:
+          type: string
+          description: 'The level at which the payout was calculated (e.g., `ORDER`, `ITEM`).'
+          example: ORDER
+        DefaultPayout:
+          type: string
+          format: decimal
+          description: Default payout amount before any adjustments.
+          example: '5.00'
+        DefaultPayoutCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the default payout amount.
+          example: USD
+        SharedId:
+          type: string
+          description: Shared identifier passed on the tracking link.
+          example: ''
+        ActionUri:
+          type: string
+          description: API resource path to the parent action.
+          example: /Mediapartners/<AccountSID>/Actions/1000.1234.56789
+        Uri:
+          type: string
+          description: Unique reference to the action update object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ActionUpdates/1000.1234.56789.10111213

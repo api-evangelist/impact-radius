@@ -1,0 +1,705 @@
+{
+  "item": [
+    {
+      "id": "dccc16de-b1d7-4375-a2ab-cd5afbc12da8",
+      "name": "Webhook",
+      "description": {
+        "content": "Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs, remove existing ones, and send a test event to verify a subscription.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "871ec592-13e0-4f15-a176-db30d123c186",
+          "name": "Create a webhook subscription",
+          "request": {
+            "name": "Create a webhook subscription",
+            "description": {
+              "content": "Subscribes a URL to receive events via webhooks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "subscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"endpointUrl\": \"<string>\",\n  \"name\": \"<string>\",\n  \"webhookTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d65fd94-c899-48aa-8fc8-1de78d89e25b",
+              "name": "Webhook endpoint created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"endpointUrl\": \"http://app.example.com/endpoint/sqtch\",\n  \"name\": \"Zapier\",\n  \"webhookTypes\": [\n    \"*\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c03df97-4c62-4d87-8f3c-170213a91733",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"endpointUrl\": \"http://app.example.com/endpoint/sqtch\",\n  \"name\": \"Zapier\",\n  \"webhookTypes\": [\n    \"*\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9340fef8-9167-4eba-82ee-60957abed64a",
+          "name": "List webhook subscriptions",
+          "request": {
+            "name": "List webhook subscriptions",
+            "description": {
+              "content": "Lists all the URLs that are currently subscribed to receive events via webhooks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "subscription"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2885b0c5-b99b-4084-bca3-138cd3eb5a99",
+              "name": "A list of endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"endpointUrl\": \"https://example.com/hook\",\n    \"name\": \"Zapier\",\n    \"source\": \"MANUAL\",\n    \"webhookTypes\": [\n      \"*\"\n    ]\n  },\n  {\n    \"endpointUrl\": \"https://another.example.com/hook\",\n    \"name\": \"Example\",\n    \"source\": \"MANUAL\",\n    \"webhookTypes\": [\n      \"*\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f26e3195-0574-4654-ad91-cb3811e81605",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc59ddb5-1baa-4467-8476-d61d3fbb7606",
+          "name": "Delete a webhook subscription",
+          "request": {
+            "name": "Delete a webhook subscription",
+            "description": {
+              "content": "Removes a URL from receiving events via webhooks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "subscription",
+                ":url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "url",
+                  "description": "(Required) The url of the endpoint that will be removed. URL-encode this field."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f76c95f-462f-45ff-9319-61cd14012fe6",
+              "name": "Endpoint deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription",
+                    ":url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) The url of the endpoint that will be removed. URL-encode this field."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a38b93c-546a-49a9-876a-2e068786266d",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription",
+                    ":url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) The url of the endpoint that will be removed. URL-encode this field."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e0be881-58d2-4c6c-b6d9-0921e3961985",
+          "name": "Test a webhook subscription",
+          "request": {
+            "name": "Test a webhook subscription",
+            "description": {
+              "content": "Sends a test event to the specified webhook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "subscription",
+                ":url",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "url",
+                  "description": "(Required) The url of the endpoint to send a test message to. URL-encode this field."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0125fe73-4af8-4ae0-bce5-5c5b8286cc5d",
+              "name": "Test message sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription",
+                    ":url",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) The url of the endpoint to send a test message to. URL-encode this field."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cae0407c-66e0-434e-8e0b-7c05eb452dea",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "subscription",
+                    ":url",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "url",
+                      "description": "(Required) The url of the endpoint to send a test message to. URL-encode this field."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e6d97f66-ec12-4b0b-9ee1-1f21b6c6bffa",
+    "name": "impact.com API - Webhook",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing Webhook subscriptions.",
+      "type": "text/plain"
+    }
+  }
+}

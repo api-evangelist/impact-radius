@@ -1,0 +1,534 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Tracking Value Requests
+  description: API for managing partner requests for tracking values like Promo Codes, Unique URLs, and Phone Numbers.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/TrackingValueRequests:
+    get:
+      summary: List All Tracking Value Requests
+      description: Returns a list of tracking value requests, which can be filtered by campaign, deal, partner, state, and request type.
+      operationId: listTrackingValueRequests
+      tags:
+      - Tracking Value Requests
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        schema:
+          type: integer
+      - name: DealId
+        in: query
+        schema:
+          type: integer
+      - name: MediaPartnerId
+        in: query
+        schema:
+          type: integer
+      - name: State
+        in: query
+        schema:
+          type: string
+          enum:
+          - APPROVED
+          - COMPLETED
+          - DECLINED
+          - NEW
+      - name: RequestType
+        in: query
+        schema:
+          type: string
+          enum:
+          - PROMOCODE_TRACKING
+          - BRANDED_URL_TRACKING
+          - PHONE_NUMBER_TRACKING
+      responses:
+        '200':
+          description: A paginated list of tracking value request objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TrackingValueRequests:
+                    type: array
+                    description: The list of tracking value request objects.
+                    items:
+                      $ref: '#/components/schemas/TrackingValueRequest'
+  /Advertisers/{AccountSID}/TrackingValueRequests/{RequestId}:
+    get:
+      summary: Get Tracking Value Request Details
+      description: Retrieves the details of an existing tracking value request by its unique ID.
+      operationId: getTrackingValueRequestById
+      tags:
+      - Tracking Value Requests
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: RequestId
+        in: path
+        required: true
+        description: The unique identifier for the tracking value request.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single tracking value request object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackingValueRequest'
+    put:
+      summary: Approve a Tracking Value Request
+      description: Approves a specified tracking value request. Different parameters are required based on the request type.
+      operationId: approveTrackingValueRequest
+      tags:
+      - Tracking Value Requests
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: RequestId
+        in: path
+        required: true
+        description: The unique identifier for the request to approve.
+        schema:
+          type: integer
+      requestBody:
+        description: The approval details for the request.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrackingValueApproval'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+    delete:
+      summary: Reject a Tracking Value Request
+      description: Rejects a specified tracking value request.
+      operationId: rejectTrackingValueRequest
+      tags:
+      - Tracking Value Requests
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: RequestId
+        in: path
+        required: true
+        description: The unique identifier for the request to reject.
+        schema:
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+components:
+  schemas:
+    TrackingValueRequest:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the tracking value request.
+          example: '99999'
+        CampaignId:
+          type: integer
+          description: The ID of the program the request is for.
+          example: 1000
+        CampaignName:
+          type: string
+          description: The display name of the program.
+          example: Acme Campaign
+        MediaPartnerId:
+          type: integer
+          description: The unique identifier of the partner making the request.
+          example: 2552842
+        MediaPartnerName:
+          type: string
+          description: The display name of the partner.
+          example: Wile E. Coyote Facebook
+        RequestType:
+          type: string
+          description: The type of tracking value being requested.
+          enum:
+          - PROMOCODE_TRACKING
+          - BRANDED_URL_TRACKING
+          - PHONE_NUMBER_TRACKING
+        NumberRequested:
+          type: integer
+          description: The number of tracking values requested.
+          example: 5
+        PromoCodes:
+          type: array
+          description: Promo code details, when RequestType is PROMOCODE_TRACKING.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier for the promo code request item.
+                example: '1001'
+              RequestedPromoCode:
+                type: string
+                description: The promo code the partner requested.
+                example: SUMMER25
+              ApprovedPromoCode:
+                type: string
+                description: The promo code that was actually approved.
+                example: SUMMER25
+              CreditPolicy:
+                type: string
+                description: How credit is awarded for actions involving this code.
+                enum:
+                - ALWAYS
+                - INVOLVED
+                - WINNER
+              MatchMode:
+                type: string
+                description: LI for Exact match, RE for Regex.
+                enum:
+                - LI
+                - RE
+        UniqueUrls:
+          type: array
+          description: Unique URL details, when RequestType is BRANDED_URL_TRACKING.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier for the unique URL request item.
+                example: '2001'
+              Url:
+                type: string
+                format: uri
+                description: The unique URL itself.
+                example: https://www.acme.com/r/abc123
+        PhoneNumbers:
+          type: array
+          description: Phone number details, when RequestType is PHONE_NUMBER_TRACKING.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier for the phone number request item.
+                example: '3001'
+              AssignedPhoneNumberId:
+                type: string
+                description: The unique identifier of the assigned phone number.
+                example: '12345'
+              AssignedPhoneNumber:
+                type: string
+                description: The phone number that was assigned.
+                example: +1 805 123 4567
+        State:
+          type: string
+          description: The current state of the request.
+          enum:
+          - APPROVED
+          - COMPLETED
+          - DECLINED
+          - NEW
+        DatePlaced:
+          type: string
+          format: date-time
+          description: The date and time the request was placed.
+          example: '2026-01-15T10:00:00-08:00'
+        DateNeeded:
+          type: string
+          format: date-time
+          description: The date and time the partner needs the request fulfilled by.
+          example: '2026-01-20T10:00:00-08:00'
+        DateCompleted:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the request was completed, if applicable.
+          example: '2026-01-18T10:00:00-08:00'
+        AdditionalInstructions:
+          type: string
+          nullable: true
+          description: Additional instructions from the partner.
+          example: Please activate immediately.
+        ProcessingComments:
+          type: string
+          nullable: true
+          description: Internal processing comments.
+          example: Approved.
+        DealId:
+          type: integer
+          nullable: true
+          description: Optional ID of a Deal associated with the request.
+          example: 3
+        DealName:
+          type: string
+          description: Name of the associated deal. Empty if no deal is associated with the request.
+          example: ''
+        DealDescription:
+          type: string
+          description: Description of the associated deal — information about it or what it does. Empty if no deal is associated with the request.
+          example: ''
+        DealState:
+          type: string
+          description: 'What state the associated deal is in. Empty if no deal is associated. Possible values: `ACTIVE` — currently active; `EXPIRED` — not currently active; `PENDING` — waiting for approval.'
+          example: ''
+        DealType:
+          type: string
+          description: 'What the associated deal does. Empty if no deal is associated. Possible values: `GENERAL_SALE`, `FREE_SHIPPING`, `GIFT_WITH_PURCHASE`, `REBATE`, `BOGO`.'
+          example: ''
+        DealScope:
+          type: string
+          description: 'To what extent the deal applies. Possible values: `CATEGORY` — applies to a category of products; `ENTIRE_STORE` — applies to the entire store; `PRODUCT` — applies to a specific product or group.'
+          example: ''
+        DealProducts:
+          type: array
+          description: If `DealScope` is `PRODUCT`, an array of product info objects.
+          items:
+            type: object
+            properties:
+              ProductName:
+                type: string
+                description: Product's name.
+              ProductImageURL:
+                type: string
+                format: uri
+                description: URL that leads to the product's image.
+              ProductBeforePriceAmount:
+                type: number
+                format: decimal
+                description: Product's price prior to the deal applying.
+              ProductBeforePriceCurrency:
+                type: string
+                description: Product's currency code prior to the deal applying (ISO 4217).
+              ProductAfterPriceAmount:
+                type: number
+                format: decimal
+                description: Product's price after the deal applies.
+              ProductAfterPriceCurrency:
+                type: string
+                description: Product's currency code after the deal applies (ISO 4217).
+        DealCategories:
+          type: string
+          description: If `DealScope` is `CATEGORY`, a description of the categories the deal applies to.
+          example: ''
+        DiscountType:
+          type: string
+          description: 'Type of discount that applies. Possible values: `FIXED` — fixed amount off; `PERCENT` — percentage off; `PERCENT_RANGE` — percent within a range; `PERCENT_MAXIMUM` — maximum percentage off.'
+          example: ''
+        DiscountAmount:
+          type: number
+          format: decimal
+          description: If `DiscountType` is `FIXED`, the discount amount.
+          example: ''
+        DiscountCurrency:
+          type: string
+          description: If `DiscountType` is `FIXED`, the currency code of the discount amount (ISO 4217).
+          example: ''
+        DiscountPercent:
+          type: number
+          format: float
+          description: If `DiscountType` is `PERCENT`, the discount percent.
+          example: ''
+        DiscountMaximumPercent:
+          type: number
+          format: float
+          description: If `DiscountType` is `PERCENT_MAXIMUM`, the maximum discount percentage.
+          example: ''
+        DiscountPercentRangeStart:
+          type: number
+          format: float
+          description: If `DiscountType` is `PERCENT_RANGE`, the discount range beginning.
+          example: ''
+        DiscountPercentRangeEnd:
+          type: number
+          format: float
+          description: If `DiscountType` is `PERCENT_RANGE`, the discount range end.
+          example: ''
+        Gift:
+          type: string
+          description: If `DealType` is `GIFT_WITH_PURCHASE`, the gift's name.
+          example: ''
+        RebateAmount:
+          type: number
+          format: decimal
+          description: If `DealType` is `REBATE`, the rebate amount.
+          example: ''
+        RebateCurrency:
+          type: string
+          description: If `DealType` is `REBATE`, the rebate currency code (ISO 4217).
+          example: ''
+        DealDefaultPromoCode:
+          type: string
+          description: Default promo code consumers can use to activate the deal when making a purchase.
+          example: ''
+        MinimumPurchaseAmount:
+          type: number
+          format: decimal
+          description: Minimum amount the consumer needs to spend for the deal to apply.
+          example: ''
+        MinimumPurchaseAmountCurrency:
+          type: string
+          description: Currency of the deal's minimum purchase amount (ISO 4217).
+          example: ''
+        MaximumSavingsAmount:
+          type: number
+          format: decimal
+          description: Maximum amount a consumer can save when the deal applies.
+          example: ''
+        MaximumSavingsCurrency:
+          type: string
+          description: Currency of the deal's maximum savings (ISO 4217).
+          example: ''
+        BogoBuyQuantity:
+          type: integer
+          description: If `DealType` is `BOGO`, the "buy" quantity required.
+          example: ''
+        BogoBuyScope:
+          type: string
+          description: 'If `DealType` is `BOGO`, the "buy" scope. Possible values: `PRODUCT`, `CATEGORY`.'
+          example: ''
+        BogoBuyName:
+          type: string
+          description: If `DealType` is `BOGO`, the "buy" product name.
+          example: ''
+        BogoBuyImageUrl:
+          type: string
+          format: uri
+          description: If `DealType` is `BOGO`, the "buy" product image URL.
+          example: ''
+        BogoGetQuantity:
+          type: integer
+          description: If `DealType` is `BOGO`, the "get" quantity.
+          example: ''
+        BogoGetScope:
+          type: string
+          description: 'If `DealType` is `BOGO`, the "get" scope. Possible values: `PRODUCT`, `CATEGORY`.'
+          example: ''
+        BogoGetDiscountType:
+          type: string
+          description: 'If `DealType` is `BOGO`, the "get" discount type. Possible values: `FREE` — receive the GET item free; `AMOUNT` — receive a specific money amount off; `PERCENT` — receive a percentage off.'
+          example: ''
+        BogoGetName:
+          type: string
+          description: If `DealType` is `BOGO`, the "get" product name.
+          example: ''
+        BogoGetImageUrl:
+          type: string
+          format: uri
+          description: If `DealType` is `BOGO`, the "get" product image URL.
+          example: ''
+        BogoGetDiscountAmount:
+          type: number
+          format: decimal
+          description: If `BogoGetDiscountType` is `AMOUNT`, the "get" discount amount.
+          example: ''
+        BogoGetDiscountCurrency:
+          type: string
+          description: If `BogoGetDiscountType` is `AMOUNT`, the currency of the "get" discount amount.
+          example: ''
+        BogoGetDiscountPercent:
+          type: number
+          format: float
+          description: If `BogoGetDiscountType` is `PERCENT`, the "get" discount percent.
+          example: ''
+        PurchaseLimitQuantity:
+          type: integer
+          description: If `DealType` is `BOGO`, the maximum quantity of "buy" product purchasable per transaction. `0` means no purchase limit.
+          example: ''
+        DealStartDate:
+          type: string
+          format: date-time
+          description: Date and time the deal begins (ISO 8601).
+          example: ''
+        DealEndDate:
+          type: string
+          format: date-time
+          description: Date and time the deal ends (ISO 8601).
+          example: ''
+        SynchAdsPromoCodes:
+          type: boolean
+          description: Whether the deal aligns the state and date range of all associated ads and promo codes to the deal's.
+          example: ''
+        DealRestrictedMediaPartners:
+          type: array
+          description: Array of partner names that can use the deal.
+          items:
+            type: string
+        DealRestrictedMediaPartnerGroups:
+          type: array
+          description: Array of partner groups that can use the deal.
+          items:
+            type: string
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this request in the impact.com API.
+          example: /Advertisers/<AccountSID>/TrackingValueRequests/55555
+    TrackingValueApproval:
+      type: object
+      description: Fields required to approve a tracking value request. Required fields depend on the original request type.
+      properties:
+        PromoCode:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          example: SUMMER25
+        CreditPolicy:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          enum:
+          - ALWAYS
+          - INVOLVED
+          - WINNER
+        MatchMode:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          enum:
+          - LI
+          - RE
+        UrlId:
+          type: integer
+          description: Required for BRANDED_URL_TRACKING.
+          example: 2001
+        AssignedPhoneNumberId:
+          type: integer
+          description: Required for PHONE_NUMBER_TRACKING.
+          example: 12345
+        DealId:
+          type: integer
+          description: Optional ID of a Deal to associate with the approved value.
+          example: 3
+        DealName:
+          type: string
+          description: Optional display name of the associated Deal.
+          example: AcmeDeal3
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected request.

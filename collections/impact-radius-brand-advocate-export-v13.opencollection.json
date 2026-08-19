@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Export",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/export/history/list",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the maximum number of results to return, defaults to `10`."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The row number of the first result to return, defaults to `0`."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of exports in the tenant. Useful for finding a recent export when you don't have its `id`."
+        },
+        {
+          "info": {
+            "name": "Create an Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/export",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an asynchronous export request. The export is queued and processed in the background; the response returns the export's `id` and an initial `status` of `PENDING`.\n\nStore the returned `id` so you can look up the export's status or download it once complete. For details on the export lifecycle and how to detect completion, see the Export Overview.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup an Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/export/:exportId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "exportId",
+                "value": "",
+                "type": "path",
+                "description": "The `id` of the export to look up."
+              }
+            ]
+          },
+          "docs": "Returns the current state of an export, including its `status`. Use this to poll for completion before attempting to download."
+        },
+        {
+          "info": {
+            "name": "Download an Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/export/:exportId/download",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "exportId",
+                "value": "",
+                "type": "path",
+                "description": "The `id` of the export to download."
+              }
+            ]
+          },
+          "docs": "Downloads a completed export file. The export's `status` must be `COMPLETED`; use the lookup endpoint to confirm before calling this."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

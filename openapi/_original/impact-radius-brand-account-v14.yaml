@@ -1,0 +1,413 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Account Information
+  description: 'API for managing brand account information.
+
+
+    This specification includes two main resources:
+
+    - **CompanyInformation**: Contains general metadata about the company, such as name, website, and contacts. Supports retrieving and updating this information.
+
+    - **LegalEntities**: Contains information specific to any legal entities associated with the account, such as payment and tax details.'
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/CompanyInformation:
+    get:
+      summary: Get Company Information
+      description: Retrieves the details of the brand account, determined by the API keys used for authentication.
+      operationId: getCompanyInformation
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An object containing the account's company information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyInformation'
+    put:
+      summary: Update Company Information
+      description: 'Updates the account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+
+        Note: The following parameters cannot be updated via API: Timezone, Currency, RegisteredForIndirectTax, IndirectTaxNumber. The following parameters can only be updated in the platform: Industry, FinancialContact, TechnicalContact, SecurityContact, CommercialContact.
+
+
+        The corporate address fields (`CorporateAddressLine1`, `CorporateAddressLine2`, `CorporateAddressCity`, `CorporateAddressPostalCode`, `CorporateAddressCountry`) update the corporate address. The billing address fields (`BillingAddressLine1`, `BillingAddressLine2`, `BillingAddressCity`, `BillingAddressPostalCode`, `BillingAddressCountry`) update the billing address. These are returned as nested `CorporateAddress` and `BillingAddress` objects by the GET endpoint.'
+      operationId: updateCompanyInformation
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      requestBody:
+        description: The fields to update.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanyInformationUpdate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the update was successful.
+                    example: OK
+                  Uri:
+                    type: string
+                    format: uri-reference
+                    description: The unique reference to the updated resource.
+                    example: /Advertisers/<AccountSID>/CompanyInformation
+  /Advertisers/{AccountSID}/LegalEntities:
+    get:
+      summary: List Legal Entities
+      description: Retrieves a list of legal entities associated with this account.
+      operationId: listLegalEntities
+      tags:
+      - Legal Entities
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of legal entity objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  LegalEntities:
+                    type: array
+                    description: The legal entities associated with this account.
+                    items:
+                      $ref: '#/components/schemas/LegalEntity'
+  /Advertisers/{AccountSID}/LegalEntities/{LegalEntityId}:
+    get:
+      summary: Get a Single Legal Entity
+      description: Retrieves a single legal entity associated with this account by its unique ID.
+      operationId: getLegalEntity
+      tags:
+      - Legal Entities
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      - name: LegalEntityId
+        in: path
+        required: true
+        description: The unique identifier for the legal entity.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single legal entity object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalEntity'
+components:
+  schemas:
+    CompanyInformation:
+      type: object
+      properties:
+        CompanyName:
+          type: string
+          description: Brand name for the account; usually the legal name of the company.
+          example: Acme Corporation
+        Industry:
+          $ref: '#/components/schemas/Industry'
+          description: The industry that the account most closely associates with.
+        Website:
+          type: string
+          format: uri
+          description: Official website URL for the brand or company.
+          example: https://www.example.com
+        PrimaryPhoneNumber:
+          type: string
+          description: Primary domestic contact number for the account.
+          example: '1235550100'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: A secondary domestic contact phone number for the account.
+          example: '3215550100'
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+        MinimumContactRating:
+          type: string
+          description: Minimum star rating (1-5) a partner must have to see contact information.
+          example: '1'
+        Timezone:
+          type: string
+          description: Timezone used for the account.
+          example: (GMT -08:00) Pacific Time (US & Canada); Tijuana
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 code for the account's default currency.
+          example: USD
+        RegisteredForIndirectTax:
+          type: string
+          description: Whether the account is registered for indirect tax.
+          example: 'true'
+        IndirectTaxNumber:
+          type: string
+          description: Unique identifier used for VAT, GST, or HST registration.
+          example: '123456789'
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: Employer Identification Number, Social Security Number, or a foreign Tax ID.
+          example: 12-3456789
+        CorporateAddress:
+          $ref: '#/components/schemas/Address'
+          description: The primary address for the account.
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+          description: The billing address for the account.
+        FinancialContact:
+          $ref: '#/components/schemas/Contact'
+          description: A financial contact for the account (e.g., CFO).
+        TechnicalContact:
+          $ref: '#/components/schemas/Contact'
+          description: A technical contact for the account (e.g., CTO).
+        CommercialContact:
+          $ref: '#/components/schemas/Contact'
+          description: A commercial or marketing contact for the account (e.g., CMO).
+        SecurityContact:
+          $ref: '#/components/schemas/Contact'
+          description: This person is your company's point of contact for compliance and security policy matters.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this object in the impact.com API.
+          example: /Advertisers/<AccountSID>/CompanyInformation
+    CompanyInformationUpdate:
+      type: object
+      description: Fields available for updating company information.
+      properties:
+        CompanyName:
+          type: string
+          description: The name used for the account.
+          example: Acme Corporation
+        Website:
+          type: string
+          format: uri
+          description: The official company website URL.
+          example: https://www.example.com
+        PrimaryPhoneNumber:
+          type: string
+          description: The primary domestic contact number.
+          example: '1235550100'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided).
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: A secondary domestic contact phone number.
+          example: '3215550100'
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided).
+          example: US
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: EIN, SSN, or foreign Tax ID.
+          example: 12-3456789
+        CorporateAddressLine1:
+          type: string
+          description: Address line 1 for the corporate address.
+          example: 1640 Riverside Dr.
+        CorporateAddressLine2:
+          type: string
+          description: Address line 2 for the corporate address.
+          example: Suite 400
+        CorporateAddressCity:
+          type: string
+          description: City for the corporate address.
+          example: Hill Valley
+        CorporateAddressPostalCode:
+          type: string
+          description: Postal code for the corporate address.
+          example: '90210'
+        CorporateAddressCountry:
+          type: string
+          description: Two-letter country code for the corporate address.
+          example: US
+        BillingAddressLine1:
+          type: string
+          description: Address line 1 for the billing address.
+          example: 112 1/2 Beacon St.
+        BillingAddressLine2:
+          type: string
+          description: Address line 2 for the billing address.
+          example: Floor 2
+        BillingAddressCity:
+          type: string
+          description: City for the billing address.
+          example: Boston
+        BillingAddressPostalCode:
+          type: string
+          description: Postal code for the billing address.
+          example: '02116'
+        BillingAddressCountry:
+          type: string
+          description: Two-letter country code for the billing address.
+          example: US
+    LegalEntity:
+      type: object
+      description: Stores legal entity information like payment and tax details.
+      properties:
+        Id:
+          type: string
+          description: Unique impact.com identifier for the legal entity.
+          example: '12345'
+        Name:
+          type: string
+          description: The full name of the legal entity.
+          example: Acme Corporation Legal Entity
+        RegisteredForIndirectTax:
+          type: string
+          description: Whether the entity is registered for indirect tax.
+          example: 'false'
+        IndirectTaxNumber:
+          type: string
+          description: The tax number associated with VAT, GST, or HST registration.
+          example: '123456789'
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+          description: The billing address for the account.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this object in the impact.com API.
+          example: /Advertisers/<AccountSID>/LegalEntities/12345
+        EinSsnForeignTaxId:
+          type: string
+          description: The Employer Identification Number, Social Security Number, or a foreign Tax ID.
+          example: 12-3456789
+    Industry:
+      type: object
+      properties:
+        IndustryId:
+          type: string
+          description: Unique identifier for the selected industry.
+          example: '833'
+        IndustryName:
+          type: string
+          description: The display name for the selected industry.
+          example: Miscellaneous Retail Stores, Not Elsewhere Classified
+    Address:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Contact:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: Unique impact.com member account ID for the user.
+          example: '1234567'
+        Name:
+          type: string
+          description: The contact's full name.
+          example: Road Runner
+        Email:
+          type: string
+          format: email
+          description: The contact's email address.
+          example: finance@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's cell phone number.
+          example: '2065550133'
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the cell phone number.
+          example: US
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP

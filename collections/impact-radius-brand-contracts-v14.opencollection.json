@@ -1,0 +1,188 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Contracts",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contracts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "DateLastUpdatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts updated before a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "DateLastUpdatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts updated after a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "StartDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that start before a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "StartDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that start after a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "EndDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that end before a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "EndDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that end after a specific date and time (ISO-8601)."
+              },
+              {
+                "name": "PartnerId",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts for a specific partner."
+              },
+              {
+                "name": "Signatory",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts with a particular brand or partner signatory."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts with a specific status. Defaults to ACTIVE if not specified."
+              },
+              {
+                "name": "TemplateId",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts sourced from a specific Template Terms ID."
+              }
+            ]
+          },
+          "docs": "Returns a list of your contracts for a specific campaign, with options for filtering. If no status is specified, only ACTIVE contracts are returned."
+        },
+        {
+          "info": {
+            "name": "Get Contract Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contracts/:ContractId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ContractId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the contract."
+              }
+            ]
+          },
+          "docs": "Retrieves the object of an existing contract, including details on any associated Creator, Performance, or Product Boost campaigns."
+        },
+        {
+          "info": {
+            "name": "Accept a Pending Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/Contracts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your account SID."
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the program the contract belongs to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently waiting to be actioned, filter your contract list with the `Status=PENDING` parameter.\n\n## Decision precedence and conflict handling\n\nYou can accept a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.\n\n### The \"first-in\" rule\n\n- **Finality**: Once you accept a contract proposal"
+        },
+        {
+          "info": {
+            "name": "Decline a Pending Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/Contracts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your account SID."
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the program the contract belongs to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently awaiting action, filter your contract list with the `Status=PENDING` parameter.\n\n## Decision precedence and conflict handling\n\nYou can decline a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.\n\n### The \"first-in\" rule\n\n- **Finality**: Once you decline a contract proposal thr"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

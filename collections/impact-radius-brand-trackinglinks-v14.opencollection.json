@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Tracking Links",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a Tracking Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/TrackingLinks",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the program."
+              },
+              {
+                "name": "MediaPartnerId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the media partner."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new tracking link for a specified media partner within a program."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,148 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/ (67 documents, 242 operations), graphql/impact-radius-advocate-schema.graphql,
+  https://impact.com/security-and-privacy/, https://integrations.impact.com/
+description: >-
+  Cross-cutting and industry standards asserted for the impact.com API surface. Each entry states
+  whether the provider genuinely conforms, with the evidence used. Absence is recorded as
+  conforms:false rather than omitted, so a reader can tell "checked and no" from "not checked".
+standards:
+- id: openapi
+  version: 3.1.0 (Brand v14 / Partner v15 / Advocate); 3.0 declared on Agency v3
+  conforms: true
+  evidence: >-
+    67 machine-readable documents published and served from
+    openapi.gitbook.com/o/0mbgBjArWXoMupyWdFkH/spec/, linked from the Brand, Partner, Agency and
+    Advocate reference sets on integrations.impact.com. All 67 parse and declare paths; 242
+    operations carry explicit operationIds and servers[] naming api.impact.com or
+    app.referralsaasquatch.com.
+- id: graphql
+  conforms: true
+  evidence: >-
+    Advocate GraphQL endpoint at app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql.
+    Anonymous introspection returned a complete 543-type schema (118 Query fields, 138 Mutation
+    fields) on 2026-08-13; SDL saved to graphql/impact-radius-advocate-schema.graphql.
+- id: mcp
+  conforms: true
+  evidence: >-
+    First-party remote MCP endpoint at https://mcp.impact.com/mcp with a published tool catalog
+    (18 distinct tools) and first-party MCP Skills. tools/list returns 401 without OAuth, which
+    is correct MCP behaviour for a gated server.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    No application/problem+json media type appears in any of the 67 specs. Errors use a vendor
+    envelope {Status, Message, Errors[{Field, Message}]} in JSON or XML.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency-key header, no replay-safe POST contract in the docs, and no such parameter in
+    any of the 242 operations. The provider's own LLM-integration guidance tells clients to
+    "implement idempotency patterns where replay is safe" — the primitive is not server-side.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Documented, uniform page-number pagination with Page/PageSize request parameters and a
+    self-navigating response envelope (@page, @numpages, @pagesize, @total, @start, @end, @uri,
+    @firstpageuri, @nextpageuri, @previouspageuri, @lastpageuri).
+- id: ratelimit-headers
+  name: draft-polli-ratelimit-headers
+  conforms: partial
+  evidence: >-
+    Returns X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset with 429 on exhaustion,
+    and the docs cite draft-polli-ratelimit-headers-02 §3.3 for the Reset semantics. Uses the
+    legacy X- prefixed names, not the RFC 9238-style RateLimit-* field names.
+- id: rfc8594
+  name: Sunset HTTP Header
+  conforms: false
+  evidence: >-
+    Deprecation is announced editorially in per-version changelogs. No Sunset or Deprecation
+    response header is documented or declared in any spec, and no operation carries
+    `deprecated: true`.
+- id: oauth2
+  conforms: partial
+  evidence: >-
+    OAuth 2.1 is used for the MCP server, and the "Building with LLMs" guide states multi-customer
+    apps follow OAuth 2.0 Authorization Code + PKCE with documented token rotation. No oauth2
+    securityScheme is declared in any of the 67 OpenAPI documents — the published REST contracts
+    declare HTTP Basic only — and no RFC 8414 authorization-server metadata is served
+    (mcp.impact.com/.well-known/oauth-authorization-server returned 404 on 2026-08-13).
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on impact.com, api.impact.com and mcp.impact.com.
+- id: jwt
+  name: RFC 7519 JSON Web Token
+  conforms: true
+  evidence: >-
+    Advocate uses signed JWTs for secure-mode client-side calls (X-SaaSquatch-User-Token header,
+    Account SID carried in the JWT header) and publishes a JWT integration guide plus a jwks
+    GraphQL query. Documented error codes RS005/RS006/RS032/RS045 govern JWT failures.
+- id: webhooks
+  conforms: true
+  evidence: >-
+    Advocate webhook subscriptions with 9 documented event topics, create/list/delete/test
+    operations, hourly retry up to 72 attempts, and a separate webhook-security guide. Partner
+    API additionally publishes an EventNotifications spec.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    An event surface exists but no AsyncAPI document is published; the webhook catalog is prose
+    plus the brand-advocate-webhook OpenAPI document.
+- id: json-api
+  conforms: false
+  evidence: No JSON:API media type or convention appears in the specs or docs.
+- id: odata
+  conforms: false
+  evidence: Not referenced anywhere in the docs or specs.
+- id: llmstxt
+  conforms: true
+  evidence: >-
+    https://integrations.impact.com/llms.txt returns HTTP 200 text/markdown (956 lines), and
+    llms-full.txt plus per-page .md representations are published and documented as a supported
+    agent-integration contract.
+- id: soc1-type-ii
+  conforms: true
+  evidence: Named on https://impact.com/security-and-privacy/ as a held certification.
+- id: iso-27001
+  version: '2022'
+  conforms: true
+  evidence: ISO/IEC 27001:2022 named on https://impact.com/security-and-privacy/.
+- id: pci-dss
+  level: Level 4 Merchant
+  conforms: true
+  evidence: >-
+    PCI-DSS Level 4 Merchant, maintained through annual SAQ completion, per
+    https://impact.com/security-and-privacy/. Note this is merchant-level compliance, not a
+    service-provider AoC.
+- id: gdpr
+  conforms: true
+  evidence: >-
+    Published GDPR posture with data-subject rights and a named contact (compliance@impact.com);
+    consent/opt-out, right-to-be-forgotten and data-portability processes documented.
+- id: soc2
+  conforms: false
+  evidence: Not claimed on the published security-and-privacy page (SOC 1 Type II is, SOC 2 is not).
+- id: hipaa
+  conforms: false
+  evidence: Not claimed; not applicable to the partnership-management category.
+- id: fapi
+  conforms: false
+  evidence: Not applicable — not a financial-grade API surface.
+- id: scim
+  conforms: false
+  evidence: >-
+    No SCIM endpoint published. User provisioning is product-specific (Advocate users, Partner
+    users, Brand contacts) rather than standards-based.
+- id: security-txt
+  name: RFC 9116
+  conforms: true
+  evidence: >-
+    PGP-signed security.txt served at https://impact.com/.well-known/security.txt (HTTP 200),
+    pointing at https://impact.responsibledisclosure.com/hc/en-us.
+notes: >-
+  method is derived: every assertion is computed from artifacts already in this repo (the 67
+  OpenAPI documents, the introspected GraphQL SDL, the well-known probe results) or read from a
+  named provider page that was fetched in this pass. No conformance claim was accepted on the
+  strength of marketing language alone.

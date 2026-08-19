@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Contracts API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Contracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Contracts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filters contracts by the campaign they belong to."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts with a specific status. If omitted, only contracts where Status is ACTIVE are returned."
+              },
+              {
+                "name": "Signatory",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts with a particular signatory. Matches against both BrandSignatory and PartnerSignatory."
+              },
+              {
+                "name": "DateLastUpdatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts last updated before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "DateLastUpdatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts last updated after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "StartDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that start before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "StartDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that start after a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "EndDateBefore",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that end before a specific date and time (ISO 8601)."
+              },
+              {
+                "name": "EndDateAfter",
+                "value": "",
+                "type": "query",
+                "description": "Return contracts that end after a specific date and time (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all contracts associated with your partner account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Contract",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Contracts/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the contract."
+              }
+            ]
+          },
+          "docs": "'Retrieves the full details of an existing contract using its unique\n\n**Note:** To retrieve `ScheduledTerms` and `CampaignTerms` objects, either upgrade your API version to the latest or append `?IrVersion=15` to your cURL request.\nID, including complete campaign-level term overrides. The `PdfUri` field in\nthe response can be used to download a PDF copy of the contract.'\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

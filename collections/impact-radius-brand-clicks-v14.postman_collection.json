@@ -1,0 +1,347 @@
+{
+  "item": [
+    {
+      "id": "9d069523-789e-4084-87a6-75a98d4e4d49",
+      "name": "Clicks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e3e1f7c-1009-4610-9232-befff4e4f5a7",
+          "name": "Get Click Details",
+          "request": {
+            "name": "Get Click Details",
+            "description": {
+              "content": "Retrieves the details of a specific click event by its ID (`im_ref`). Note that a single ID can be associated with multiple click objects, representing a single consumer journey.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Clicks",
+                ":ClickId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The ID of the campaign (program) the click belongs to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ClickId",
+                  "description": "(Required) The generated click ID (`im_ref`) representing the consumer journey."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ef59010-8fc3-4dca-8675-5e0e3e882bae",
+              "name": "A click object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Clicks",
+                    ":ClickId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The ID of the campaign (program) the click belongs to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ClickId",
+                      "description": "(Required) The generated click ID (`im_ref`) representing the consumer journey."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"abcdefg1hijkl2mn3opq4rStUvwxyz5a6bcdef7\",\n  \"CampaignId\": 3290,\n  \"CampaignName\": \"Acme Campaign\",\n  \"ProfileId\": \"ab12345c-6789-0123-4de5-678f90g123h4\",\n  \"IpAddress\": \"abcdefghijklmnopqrstuvwxyz1234567890\",\n  \"EventDate\": \"2021-01-25T08:06:24-05:00\",\n  \"MediaId\": 2673,\n  \"MediaName\": \"Partner Person\",\n  \"AdId\": 9026,\n  \"AdName\": \"Our Anvils Are Awesome\",\n  \"AdType\": \"BANNER\",\n  \"ProductSku\": \"12345\",\n  \"BrandRelated\": {\n    \"AdCampaign\": \"Summer Sale\",\n    \"AdGroup\": \"Tennis Equipment\",\n    \"Keyword\": \"tennis balls\",\n    \"MatchType\": \"BROAD\",\n    \"Channel\": \"GOOGLE_SHOPPING\"\n  },\n  \"CustomerArea\": \"n/a\",\n  \"CustomerCity\": \"n/a\",\n  \"CustomerRegion\": \"n/a\",\n  \"CustomerCountry\": \"US\",\n  \"DeviceType\": \"UNKNOWN\",\n  \"DeviceFamily\": \"null\",\n  \"Browser\": \"null\",\n  \"Os\": \"null\",\n  \"ReferringUrl\": \"https://www.google.com/\",\n  \"ReferringDomain\": \"NA\",\n  \"LandingPageUrl\": \"http://google.com?irgwc=1\",\n  \"SharedId\": \"string\",\n  \"UniqueClick\": true,\n  \"CpcBid\": \"0.0\",\n  \"DealName\": \"string\",\n  \"DealType\": \"REBATE\",\n  \"DealScope\": \"CATEGORY\",\n  \"PartnerRelated\": {\n    \"SubId1\": \"subid1value\",\n    \"SubId2\": \"subid2value\",\n    \"SubId3\": \"subid3value\"\n  },\n  \"Payout\": 5,\n  \"TrafficCategory\": \"AFFILIATE\",\n  \"TrafficSource\": \"CONTENT\",\n  \"BidKeyword\": \"tennis balls\",\n  \"SearchText\": \"best tennis balls\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b041b60d-d8e0-4abc-9322-76c1fe54bb62",
+      "name": "ClickExport",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac8d273a-a167-42c0-98ac-0d6e0055619b",
+          "name": "Export Clicks Asynchronously",
+          "request": {
+            "name": "Export Clicks Asynchronously",
+            "description": {
+              "content": "Schedules a job to export daily clicks. It returns a URI to poll for job status updates and a URI to download the exported file once the job is complete.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "ClickExport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<integer>",
+                  "description": "ID of the ad that was clicked. Can be repeated for multiple ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<integer>",
+                  "description": "ID of the ad that was clicked. Can be repeated for multiple ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date",
+                  "value": "<date>",
+                  "description": "The date for the clicks to be exported, in 'yyyy-MM-dd' format. Defaults to today. Only dates after April 9, 2024 are supported."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaId",
+                  "value": "<integer>",
+                  "description": "The unique ID of the partner. Can be repeated for multiple partners."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaId",
+                  "value": "<integer>",
+                  "description": "The unique ID of the partner. Can be repeated for multiple partners."
+                },
+                {
+                  "disabled": false,
+                  "key": "UniqueClick",
+                  "value": "<boolean>",
+                  "description": "Filter for clicks that follow IAB standards for a unique click."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "CSV",
+                  "description": "The desired file format for the export."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) The ID of the program (campaign) to export clicks from."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93c29519-fac3-45e8-9bf6-2e3eedd67b7b",
+              "name": "The job has been queued successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "ClickExport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AdId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "AdId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "MediaId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MediaId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UniqueClick",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "CSV"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The ID of the program (campaign) to export clicks from."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"http://QprTleDGUYOGKUzHYCCvgN.ajscrkG44KcLrgrC+h2.wY58zvVwgeGLDrJy20w-v9irUIxIt4EScDUzCYr1Cp0NbE.tC\",\n  \"ResultUri\": \"https://lbPLTpzEz.obnugg-7PDrxa-j\",\n  \"ReplayUri\": \"http://fwejVkkaRPooyRCntPiCGcQIf.ihTZYpCuVctaNiroqMabqQVdNkJzhzoP64KmId7FZXVluoDxbtSp6-YZ9gZonluJ-fZOzT2g9boi?cbzwmp=u8pkX&ve=l&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0eb8c59f-93fb-48f9-813a-f95179a65d7d",
+    "name": "Brand API - Clicks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving and exporting click (or tap) referral events.\n\n- **Clicks**: Retrieve details for a specific click event by its ID.\n- **ClickExport**: Schedule an asynchronous job to export daily click data as a CSV, JSON, or XML file.",
+      "type": "text/plain"
+    }
+  }
+}

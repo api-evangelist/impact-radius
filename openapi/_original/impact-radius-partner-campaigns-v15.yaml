@@ -1,0 +1,492 @@
+openapi: 3.1.0
+info:
+  title: Partner Programs API
+  version: '15'
+  description: |
+    Programs (formerly known as Campaigns) are the brand partnerships that drive your earnings on impact.com. When a brand approves your application, you get a Program — a configured relationship with payout terms, tracking links, ad creatives, and a catalog of products you can promote.
+
+    Note that the URL path uses `/Campaigns` even though the concept is now called "Programs" — this is preserved for backwards compatibility.
+
+    Use this API to:
+
+    1. **List your programs** to discover which brands you partner with.
+    2. **Retrieve a program** for full details including tracking links, deep-linking permissions, and contract status.
+    3. **Retrieve the program logo** for display in your storefront or content.
+
+    Each program references your **Contract** (see the Partner Contracts API) and provides the **TrackingLink** used to drive attributed traffic.
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Programs
+  description: Endpoints for listing, retrieving, and fetching logos for the brand programs you've joined.
+paths:
+  /Mediapartners/{AccountSID}/Campaigns:
+    get:
+      operationId: listPrograms
+      tags:
+      - Programs
+      summary: List all joined programs
+      description: Returns the list of programs you have signed up for.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: InsertionOrderStatus
+        in: query
+        description: Filter the result to programs whose contract has the specified status.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Expired
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Campaigns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Program'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: application/json'
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}:
+    get:
+      operationId: retrieveProgram
+      tags:
+      - Programs
+      summary: Retrieve a program
+      description: Returns the details of a single program you've joined.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        description: Unique identifier for the program.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Program'
+        '404':
+          description: No program exists with the supplied CampaignId, or you haven't joined it.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns/{CampaignId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: application/json'
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Logo:
+    get:
+      operationId: retrieveProgramLogo
+      tags:
+      - Programs
+      summary: Retrieve program logo
+      description: |
+        Returns the program's logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        description: Unique identifier for the program.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Binary data of the requested logo.
+          content:
+            image/gif:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: No logo exists for this program.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Logo' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: image/png'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Program:
+      type: object
+      properties:
+        AdvertiserId:
+          type: string
+          description: Unique identifier of the brand (advertiser) running this program.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand.
+          example: Acme Corporation
+        AdvertiserUrl:
+          type: string
+          description: URL of the brand's main website.
+          example: https://www.acmecorporation.io
+        CampaignId:
+          type: string
+          description: Unique identifier of the program (the URL path still uses "Campaigns" for backwards compatibility).
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the program.
+          example: Wayne Enterprises
+        CampaignUrl:
+          type: string
+          description: URL of the program's landing site.
+          example: http://www.wayne.limited
+        CampaignDescription:
+          type: string
+          description: Description of the program supplied by the brand.
+          example: Wayne Enterprises delivers innovative automotive tech and premium sports equipment.
+        ShippingRegions:
+          type: array
+          description: Country/region codes where the brand ships physical products.
+          items:
+            $ref: '#/components/schemas/CountryCode'
+          example:
+          - SOUTHAFRICA
+          - UK
+          - US
+        CampaignLogoUri:
+          type: string
+          description: API resource path to retrieve the program's logo image.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Logo
+        PublicTermsUri:
+          type: string
+          description: API resource path to the public terms in the program's contract.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms
+        ContractStatus:
+          type: string
+          enum:
+          - Active
+          - Expired
+          description: Current state of your contract with this program.
+          example: Active
+        ContractUri:
+          type: string
+          description: API resource path to your active contract with this program (see the Partner Contracts API).
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active
+        TrackingLink:
+          type: string
+          description: A ready-to-use tracking link for this program. Generate additional links via the Partner Tracking Links API.
+          example: https://example.sjv.io/c/1924609/650971/10306
+        HasStandDownPolicy:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether the brand enforces a stand-down policy (rules around bidding restrictions or trademark use).
+          example: 'true'
+        AllowsDeeplinking:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether deep linking is enabled for this program.
+          example: 'true'
+        DeeplinkDomains:
+          type: array
+          description: Domains the brand permits deep linking to. Wildcards (e.g., `*.impact.com`) include all subdomains.
+          items:
+            type: string
+          example:
+          - impact.com
+          - '*.impact.com'
+        Uri:
+          type: string
+          description: API resource path for this program.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306
+    CountryCode:
+      type: string
+      description: ISO-style country/region code used by impact.com for shipping regions.
+      enum:
+      - US
+      - UK
+      - CANADA
+      - AUSTRALIA
+      - GERMANY
+      - FRANCE
+      - AFGHANISTAN
+      - ALBANIA
+      - ALGERIA
+      - AMERICANSAMOA
+      - ANDORRA
+      - ANGOLA
+      - ANGUILLA
+      - ANTARCTICA
+      - ANTIGUABARBUDA
+      - ARGENTINA
+      - ARMENIA
+      - ARUBA
+      - AUSTRIA
+      - AZERBAIJAN
+      - BAHAMAS
+      - BAHRAIN
+      - BANGLADESH
+      - BARBADOS
+      - BELARUS
+      - BELGIUM
+      - BELIZE
+      - BENIN
+      - BERMUDA
+      - BHUTAN
+      - BOLIVIA
+      - BOSNIAHERZEGOVINA
+      - BOTSWANA
+      - BRAZIL
+      - BRITISHINDIANOCEANTERRITORY
+      - BRUNEIDARUSSALAM
+      - BULGARIA
+      - BURKINAFASO
+      - BURUNDI
+      - CAMBODIA
+      - CAMEROON
+      - CAPVERDE
+      - CAYMANISLANDS
+      - CENTRALAFRICANREPUBLIC
+      - CHAD
+      - CHILE
+      - CHINA
+      - CHRISTMASISLAND
+      - COCOSISLANDS
+      - COLOMBIA
+      - COMOROS
+      - CONGO
+      - DEMOCRATICREPUBLICCONGO
+      - COOKISLANDS
+      - COSTARICA
+      - IVORYCOAST
+      - CROATIA
+      - CUBA
+      - CYPRUS
+      - CZECHREPUBLIC
+      - DENMARK
+      - DIJIBOUTI
+      - DOMINICA
+      - DOMINICANREPUBLIC
+      - ECUADOR
+      - EGYPT
+      - ELSALVADOR
+      - EQUATORIALGUINEA
+      - ERITREA
+      - ESTONIA
+      - ETHIOPIA
+      - FALKLANDISLANDS
+      - FAROEISLANDS
+      - FIJI
+      - FINLAND
+      - FRENCHGUIANA
+      - FRENCHPOLYNESIA
+      - FRENCHSOUTHERNTERRITORIES
+      - GABON
+      - GAMBIA
+      - GEORGIA
+      - GHANA
+      - GIBRALTAR
+      - GREECE
+      - GREENLAND
+      - GRENADA
+      - GUADELOUPE
+      - GUAM
+      - GUATEMALA
+      - GUERNSEY
+      - GUINEA
+      - GUINEABISSAU
+      - GUYANA
+      - HAITI
+      - VATICAN
+      - HONDURAS
+      - HONGKONG
+      - HUNGARY
+      - ICELAND
+      - INDIA
+      - INDONESIA
+      - IRAN
+      - IRAQ
+      - IRELAND
+      - ISRAEL
+      - ITALY
+      - JAMAICA
+      - JAPAN
+      - JORDAN
+      - KAZAKHSTAN
+      - KENYA
+      - KIRIBATI
+      - SOUTHKOREA
+      - KUWAIT
+      - KYRGYZSTAN
+      - LAOS
+      - LATVIA
+      - LEBANON
+      - LESOTHO
+      - LIBERIA
+      - LIBYA
+      - LICHTENSTEIN
+      - LITHUANIA
+      - LUXEMBOURG
+      - MACAO
+      - MACEDONIA
+      - MADAGASCAR
+      - MALAWI
+      - MALAYSIA
+      - MALDIVES
+      - MALI
+      - MALTA
+      - MARSHALLISLANDS
+      - MARTINIQUE
+      - MAURITANIA
+      - MAURITIUS
+      - MAYOTTE
+      - MEXICO
+      - MICRONESIA
+      - MOLDOVA
+      - MONACO
+      - MONGOLIA
+      - MONTENEGRO
+      - MONTSERRAT
+      - MOROCCO
+      - MOZAMBIQUE
+      - MYANMAR
+      - NAMIBIA
+      - NAURU
+      - NEPAL
+      - NETHERLANDS
+      - NETHERLANDSANTILLES
+      - NEWCALEDONIA
+      - NEWZEALAND
+      - NICARAGUA
+      - NIGER
+      - NIGERIA
+      - NIUE
+      - NORFOLKISLAND
+      - NORTHKOREA
+      - NORTHERNMARIANAISLANDS
+      - NORWAY
+      - OMAN
+      - PAKISTAN
+      - PALAU
+      - PALESTINIANTERRITORY
+      - PANAMA
+      - PAPUANEWGUINEA
+      - PARAGUAY
+      - PERU
+      - PHILIPPINES
+      - PITCAIRN
+      - POLAND
+      - PORTUGAL
+      - PUERTORICO
+      - QATAR
+      - REUNION
+      - ROMANIA
+      - RUSSIA
+      - RWANDA
+      - SAINTHELENA
+      - SAINTKITTSNEVIS
+      - SAINTLUCIA
+      - SAINTPIERREMIQUELON
+      - SAINTVINCENTGRENADINES
+      - SAMOA
+      - SANMARINO
+      - SAOTOME
+      - SAUDIARABIA
+      - SENEGAL
+      - YOGOSLAVIA
+      - SEYCHELLES
+      - SIERRALEONE
+      - SINGAPORE
+      - SLOVAKIA
+      - SLOVENIA
+      - SOLOMONISLANDS
+      - SOMALIA
+      - SOUTHAFRICA
+      - SPAIN
+      - SRILANKA
+      - SUDAN
+      - SURINAME
+      - SVALBARDJANMAYEN
+      - SWAZILAND
+      - SWEDEN
+      - SWITZERLAND
+      - SYRIA
+      - TAIWAN
+      - TAJIKISTAN
+      - TANZANIA
+      - THAILAND
+      - TIMOR
+      - TOGO
+      - TOKELAU
+      - TONGA
+      - TRINIDADTOBAGO
+      - TUNISIA
+      - TURKEY
+      - TURKMENISTAN
+      - TURKSCAICOSISLANDS
+      - TUVALU
+      - UGANDA
+      - UKRAINE
+      - UAE
+      - URUGUAY
+      - UZBEKISTAN
+      - VANUATU
+      - VENEZUELA
+      - VIETNAM
+      - BRITISHVIRGINISLANDS
+      - USVIRGINISLANDS
+      - WALLISFUTUNA
+      - WESTERNSAHARA
+      - YEMEN
+      - ZAMBIA
+      - ZIMBABWE

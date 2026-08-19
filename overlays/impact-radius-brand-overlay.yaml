@@ -1,0 +1,144 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the impact.com Brand API (v14)
+  version: '1.0.0'
+extends: openapi/
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Documented behaviour published on integrations.impact.com that the shipped OpenAPI documents do
+  not declare. Every action below adds something impact.com states in prose; nothing is invented,
+  and the original specs in openapi/ are left untouched.
+x-reference: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+x-server: https://api.impact.com
+x-applies-to:
+- openapi/impact-radius-brand-account-v14.yml
+- openapi/impact-radius-brand-actioninquiries-v14.yml
+- openapi/impact-radius-brand-actions-v14.yml
+- openapi/impact-radius-brand-ads-v14.yml
+- openapi/impact-radius-brand-calldata-v14.yml
+- openapi/impact-radius-brand-catalogs-v14.yml
+- openapi/impact-radius-brand-clicks-v14.yml
+- openapi/impact-radius-brand-contacts-v14.yml
+- openapi/impact-radius-brand-contracts-v14.yml
+- openapi/impact-radius-brand-conversions-v14.yml
+- openapi/impact-radius-brand-deals-v14.yml
+- openapi/impact-radius-brand-deferreddeeplink-v14.yml
+- openapi/impact-radius-brand-exceptionlists-v14.yml
+- openapi/impact-radius-brand-invoices-v14.yml
+- openapi/impact-radius-brand-jobs-v14.yml
+- openapi/impact-radius-brand-notes-v14.yml
+- openapi/impact-radius-brand-pageload-v14.yml
+- openapi/impact-radius-brand-partnergroups-v14.yml
+- openapi/impact-radius-brand-partners-v14.yml
+- openapi/impact-radius-brand-phonenumbers-v14.yml
+- openapi/impact-radius-brand-programs-v14.yml
+- openapi/impact-radius-brand-promocodeexceptionlists-v14.yml
+- openapi/impact-radius-brand-promocodes-v14.yml
+- openapi/impact-radius-brand-reports-v14.yml
+- openapi/impact-radius-brand-routingrules-v14.yml
+- openapi/impact-radius-brand-submissions-v14.yml
+- openapi/impact-radius-brand-tasks-v14.yml
+- openapi/impact-radius-brand-trackinglinks-v14.yml
+- openapi/impact-radius-brand-trackingvaluerequests-v14.yml
+actions:
+- target: $.paths.*.*.responses.*
+  description: >-
+    impact.com returns IETF-style rate-limit headers on every response but declares none of them
+    in the published specs. Documented at
+    https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/rate-limits.md.
+  update:
+    headers:
+      X-RateLimit-Limit:
+        description: Maximum number of requests allowed for the resource within the given time period.
+        schema:
+          type: integer
+      X-RateLimit-Remaining:
+        description: Number of requests left as of the current request within the given time period.
+        schema:
+          type: integer
+      X-RateLimit-Reset:
+        description: >-
+          Seconds until the limit resets, per draft-polli-ratelimit-headers-02 section 3.3.
+        schema:
+          type: integer
+
+- target: $.paths.*.*
+  description: >-
+    Every operation can return 429 on rate-limit exhaustion. None of the published specs declares
+    it, so an agent generating a client from the spec alone will not handle throttling.
+  update:
+    responses:
+      '429':
+        description: Too Many Requests — hourly or daily rate limit exceeded. Back off using X-RateLimit-Reset.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImpactErrorEnvelope'
+
+- target: $.components.schemas
+  description: >-
+    The documented vendor error envelope, published at
+    .../readme/status-codes-and-errors.md but not declared as a reusable schema in the specs.
+  update:
+    ImpactErrorEnvelope:
+      type: object
+      description: impact.com vendor error envelope. Not RFC 9457 problem+json.
+      properties:
+        Status:
+          type: string
+          description: Literal "ERROR" on failure.
+          example: ERROR
+        Message:
+          type: string
+          description: Human-readable summary of the failure.
+          example: Validation Failed
+        Errors:
+          type: array
+          description: Per-field validation failures.
+          items:
+            type: object
+            properties:
+              Field:
+                type: string
+                example: AccountId
+              Message:
+                type: string
+                example: Not a numeric value
+
+- target: $.paths.*.get
+  description: >-
+    Documented list pagination contract. Page/PageSize are accepted by all top-level list methods
+    and the response carries a self-navigating envelope, neither of which the specs declare
+    uniformly. Documented at .../readme/pagination.md.
+  update:
+    parameters:
+    - name: Page
+      in: query
+      required: false
+      description: Page requested; 1-indexed. Defaults to 1.
+      schema:
+        type: integer
+        minimum: 1
+    - name: PageSize
+      in: query
+      required: false
+      description: Objects per page. Resource default applies when omitted.
+      schema:
+        type: integer
+
+- target: $.paths.*.*
+  description: >-
+    Documented per-request API version override. Without it the account's pinned default applies,
+    which means an account-level upgrade can reshape responses under a running integration.
+    Documented at .../readme/versioning.md.
+  update:
+    parameters:
+    - name: IR-Version
+      in: header
+      required: false
+      description: >-
+        Overrides the account's pinned API version for this request. The IrVersion query-string
+        parameter is the equivalent.
+      schema:
+        type: string

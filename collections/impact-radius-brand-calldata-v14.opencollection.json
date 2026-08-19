@@ -1,0 +1,356 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Call Data",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Call Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Log Call Data via GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twilio.ivr.impactradius.com/calldata/logCallData",
+            "params": [
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier for your program (formerly known as campaign)."
+              },
+              {
+                "name": "MediaId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the Partner or Media Source in impact.com."
+              },
+              {
+                "name": "EventDate",
+                "value": "",
+                "type": "query",
+                "description": "The ISO 8601 time when the call event took place."
+              },
+              {
+                "name": "ActionTrackerId",
+                "value": "",
+                "type": "query",
+                "description": "A unique identifier for the Event Type (Phone_Action_Tracker_ID)."
+              },
+              {
+                "name": "CallProvider",
+                "value": "",
+                "type": "query",
+                "description": "The vendor or client sending the call event data."
+              },
+              {
+                "name": "CallSessionId",
+                "value": "",
+                "type": "query",
+                "description": "The unique session ID from the vendor to identify the call."
+              },
+              {
+                "name": "CallerId",
+                "value": "",
+                "type": "query",
+                "description": "The phone number of the originating call."
+              },
+              {
+                "name": "CalledPhoneNumber",
+                "value": "",
+                "type": "query",
+                "description": "The destination phone number that received the call."
+              },
+              {
+                "name": "CallDuration",
+                "value": "",
+                "type": "query",
+                "description": "Total duration (in seconds) of the call."
+              },
+              {
+                "name": "TalkDuration",
+                "value": "",
+                "type": "query",
+                "description": "Actual talk duration (in seconds) of the call."
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "query",
+                "description": "The unique ID of the ad associated with the call."
+              },
+              {
+                "name": "CallStatus",
+                "value": "",
+                "type": "query",
+                "description": "The final outcome of the call. Defaults to ANSWER if not provided."
+              },
+              {
+                "name": "CallerPhoneNumberCountry",
+                "value": "",
+                "type": "query",
+                "description": "Country code derived from the incoming phone call. Defaults to US."
+              },
+              {
+                "name": "CalledPhoneNumberCountry",
+                "value": "",
+                "type": "query",
+                "description": "Country code derived from the receiver of the incoming phone call. Defaults to US."
+              },
+              {
+                "name": "SubId1",
+                "value": "",
+                "type": "query",
+                "description": "First partner-specific value for data points to be reported back."
+              },
+              {
+                "name": "SubId2",
+                "value": "",
+                "type": "query",
+                "description": "Second partner-specific value for data points to be reported back."
+              },
+              {
+                "name": "SubId3",
+                "value": "",
+                "type": "query",
+                "description": "Third partner-specific value for data points to be reported back."
+              },
+              {
+                "name": "ClickId",
+                "value": "",
+                "type": "query",
+                "description": "The ClickId from the landing page URL."
+              },
+              {
+                "name": "City",
+                "value": "",
+                "type": "query",
+                "description": "City of the CallerId, as identified by the Call Tracking vendor."
+              },
+              {
+                "name": "Region",
+                "value": "",
+                "type": "query",
+                "description": "Region of the CallerId, as identified by the Call Tracking vendor."
+              },
+              {
+                "name": "Zip",
+                "value": "",
+                "type": "query",
+                "description": "Zip code of the CallerId, as identified by the Call Tracking vendor."
+              },
+              {
+                "name": "RepeatCaller",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the caller was recorded as a repeat caller by the Call Tracking vendor."
+              },
+              {
+                "name": "PhoneType",
+                "value": "",
+                "type": "query",
+                "description": "Landline or Mobile, or empty string if the type is unknown."
+              },
+              {
+                "name": "CallRecording",
+                "value": "",
+                "type": "query",
+                "description": "Unique URL of the call recording."
+              },
+              {
+                "name": "IvrDuration",
+                "value": "",
+                "type": "query",
+                "description": "Duration in seconds that the call spent in the IVR tree."
+              },
+              {
+                "name": "Keypresses",
+                "value": "",
+                "type": "query",
+                "description": "List of unique keynames pressed."
+              },
+              {
+                "name": "Key1",
+                "value": "",
+                "type": "query",
+                "description": "Name of the first key that was pressed."
+              },
+              {
+                "name": "Key2",
+                "value": "",
+                "type": "query",
+                "description": "Name of the second key that was pressed."
+              },
+              {
+                "name": "Key3",
+                "value": "",
+                "type": "query",
+                "description": "Name of the third key that was pressed."
+              },
+              {
+                "name": "Key4",
+                "value": "",
+                "type": "query",
+                "description": "Name of the fourth key that was pressed."
+              },
+              {
+                "name": "TrafficSource",
+                "value": "",
+                "type": "query",
+                "description": "Source of the transaction (referring media source)."
+              },
+              {
+                "name": "OptInSms",
+                "value": "",
+                "type": "query",
+                "description": "Whether the caller opted in to receive an SMS promotion."
+              },
+              {
+                "name": "UserAgent",
+                "value": "",
+                "type": "query",
+                "description": "The user agent of the conversion generator."
+              },
+              {
+                "name": "DispositionName",
+                "value": "",
+                "type": "query",
+                "description": "The Conversion Event Name."
+              },
+              {
+                "name": "SaleAmount",
+                "value": "",
+                "type": "query",
+                "description": "If there was a sale conversion, the sale amount."
+              },
+              {
+                "name": "ReferenceId",
+                "value": "",
+                "type": "query",
+                "description": "Customer Disposition Code for reference."
+              },
+              {
+                "name": "VendorEventId",
+                "value": "",
+                "type": "query",
+                "description": "A unique ID sent from the vendor for the Call and Conversion Event."
+              },
+              {
+                "name": "PromoNumberDescription",
+                "value": "",
+                "type": "query",
+                "description": "Describes the Called Phone Number."
+              },
+              {
+                "name": "CustomConversionEvent1Name",
+                "value": "",
+                "type": "query",
+                "description": "First custom name for reporting on Conversion events."
+              },
+              {
+                "name": "CustomConversionEvent2Name",
+                "value": "",
+                "type": "query",
+                "description": "Second custom name for reporting on Conversion events."
+              },
+              {
+                "name": "CustomConversionEvent3Name",
+                "value": "",
+                "type": "query",
+                "description": "Third custom name for reporting on Conversion events."
+              },
+              {
+                "name": "CustomConversionEvent1Value",
+                "value": "",
+                "type": "query",
+                "description": "First custom value for reporting on Conversion events."
+              },
+              {
+                "name": "CustomConversionEvent2Value",
+                "value": "",
+                "type": "query",
+                "description": "Second custom value for reporting on Conversion events."
+              },
+              {
+                "name": "CustomConversionEvent3Value",
+                "value": "",
+                "type": "query",
+                "description": "Third custom value for reporting on Conversion events."
+              },
+              {
+                "name": "CustomCallEvent1Name",
+                "value": "",
+                "type": "query",
+                "description": "First custom name for reporting on Call events."
+              },
+              {
+                "name": "CustomCallEvent2Name",
+                "value": "",
+                "type": "query",
+                "description": "Second custom name for reporting on Call events."
+              },
+              {
+                "name": "CustomCallEvent3Name",
+                "value": "",
+                "type": "query",
+                "description": "Third custom name for reporting on Call events."
+              },
+              {
+                "name": "CustomCallEvent1Value",
+                "value": "",
+                "type": "query",
+                "description": "First custom value for reporting on Call events."
+              },
+              {
+                "name": "CustomCallEvent2Value",
+                "value": "",
+                "type": "query",
+                "description": "Second custom value for reporting on Call events."
+              },
+              {
+                "name": "CustomCallEvent3Value",
+                "value": "",
+                "type": "query",
+                "description": "Third custom value for reporting on Call events."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submits call data from a call tracking provider to impact.com using query parameters."
+        },
+        {
+          "info": {
+            "name": "Log Call Data via POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://twilio.ivr.impactradius.com/calldata/logCallData",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submits call data from a call tracking provider to impact.com using a form-urlencoded body."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

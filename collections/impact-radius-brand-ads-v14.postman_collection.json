@@ -1,0 +1,1477 @@
+{
+  "item": [
+    {
+      "id": "cc0782c3-38b8-4e3f-929d-95d2afab6ce2",
+      "name": "Ads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdf388b7-e213-4b49-938d-dbc63d9ab065",
+          "name": "List All Ads",
+          "request": {
+            "name": "List All Ads",
+            "description": {
+              "content": "Lists existing ads, returned by creation date with the most recently created ad appearing first. The list can be filtered by various parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<string>",
+                  "description": "Filter ads by a specific campaign (program) ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filter ads by their type."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<string>",
+                  "description": "Filter ads associated with a specific deal ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "MobileReady",
+                  "value": "<boolean>",
+                  "description": "Filter ads based on whether they are optimized for mobile."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateCreatedStart",
+                  "value": "<dateTime>",
+                  "description": "Start of the date range for when ads were created."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateCreatedEnd",
+                  "value": "<dateTime>",
+                  "description": "End of the date range for when ads were created."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedStart",
+                  "value": "<dateTime>",
+                  "description": "Start of the date range for when ads were last updated."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedEnd",
+                  "value": "<dateTime>",
+                  "description": "End of the date range for when ads were last updated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c068642f-8ad4-470f-82ef-70e8e733959a",
+              "name": "A paginated list of ad objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DealId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "MobileReady",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "DateCreatedStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateCreatedEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@page\": \"string\",\n  \"Ads\": [\n    {\n      \"Id\": \"892081\",\n      \"Name\": \"Summer Sale 2020 250x250\",\n      \"Description\": \"Our best deals this summer creative.\",\n      \"CampaignId\": \"1000\",\n      \"CampaignName\": \"Acme Campaign\",\n      \"AdType\": \"BANNER\",\n      \"LandingPage\": \"http://www.test.com/6234652\",\n      \"MobileFallbacks\": {\n        \"Android\": \"string\",\n        \"IOS\": \"string\"\n      },\n      \"DateCreated\": \"2024-02-29T22:03:35-08:00\",\n      \"DateLastUpdated\": \"2024-02-29T22:03:35-08:00\",\n      \"CustomAdServingUrl\": \"https://zvnrQFVZNpcSLYceldFkqSIFlorwGSybu.lokP4UV8XbSKdAlj6KofUbi5DgUpJXv,.Xn8DjjjjhqNk+MDMbaomNgG7AGbG\",\n      \"IabAdUnit\": \"CUSTOM\",\n      \"ThirdPartyServableAdCreativeHeight\": \"250\",\n      \"ThirdPartyServableAdCreativeWidth\": \"250\",\n      \"BannerAlternativeTag\": \"summersale\",\n      \"LinkText\": \"\",\n      \"CouponLinkName\": \"string\",\n      \"GetHtmlCodeType\": \"HTML_AND_IFRAME\",\n      \"Labels\": \"sale,US\",\n      \"AllowDeepLinking\": \"true\",\n      \"Language\": \"ENGLISH\",\n      \"LimitedTimeStartDate\": \"2020-09-16T17:01:28-07:00\",\n      \"LimitedTimeEndDate\": \"2005-05-31T14:08:20.218Z\",\n      \"RestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Season\": \"SUMMER\",\n      \"Uri\": \"http://eyofdkvYnOCfR.cwJv6mhQLyvchkAsrLsFVgg-bq-qrrUmV,7Sxe?m&o=o&pxcwlg=1&\",\n      \"DealId\": \"85433\",\n      \"DealName\": \"Summer Sale 2020\",\n      \"AdCodeTemplate\": \"string\",\n      \"CouponAllowCustomPromoCode\": \"string\",\n      \"CustomisationCharge\": \"string\",\n      \"MobileReady\": \"string\",\n      \"PhoneTracking\": \"string\",\n      \"PromoCodeTracking\": \"string\",\n      \"TopSeller\": \"string\",\n      \"DealDescription\": \"string\",\n      \"DealState\": \"string\",\n      \"DealType\": \"string\",\n      \"DealScope\": \"string\",\n      \"DealProducts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealCategories\": \"string\",\n      \"DiscountType\": \"string\",\n      \"DiscountAmount\": \"string\",\n      \"DiscountCurrency\": \"string\",\n      \"DiscountPercent\": \"string\",\n      \"DiscountMaximumPercent\": \"string\",\n      \"DiscountPercentRangeStart\": \"string\",\n      \"DiscountPercentRangeEnd\": \"string\",\n      \"Gift\": \"string\",\n      \"RebateAmount\": \"string\",\n      \"RebateCurrency\": \"string\",\n      \"DealDefaultPromoCode\": \"string\",\n      \"MinimumPurchaseAmount\": \"string\",\n      \"MinimumPurchaseAmountCurrency\": \"string\",\n      \"MaximumSavingsAmount\": \"string\",\n      \"MaximumSavingsCurrency\": \"string\",\n      \"BogoBuyQuantity\": \"string\",\n      \"BogoBuyScope\": \"string\",\n      \"BogoBuyName\": \"string\",\n      \"BogoBuyImageUrl\": \"string\",\n      \"BogoGetQuantity\": \"string\",\n      \"BogoGetScope\": \"string\",\n      \"BogoGetDiscountType\": \"string\",\n      \"BogoGetName\": \"string\",\n      \"BogoGetImageUrl\": \"string\",\n      \"BogoGetDiscountAmount\": \"string\",\n      \"BogoGetDiscountCurrency\": \"string\",\n      \"BogoGetDiscountPercent\": \"string\",\n      \"PurchaseLimitQuantity\": \"string\",\n      \"DealStartDate\": \"2015-04-03T16:58:23.199Z\",\n      \"DealEndDate\": \"1962-11-20T11:40:39.387Z\",\n      \"SynchAdsPromoCodes\": \"string\",\n      \"DealRestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealRestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"Id\": \"892081\",\n      \"Name\": \"Summer Sale 2020 250x250\",\n      \"Description\": \"Our best deals this summer creative.\",\n      \"CampaignId\": \"1000\",\n      \"CampaignName\": \"Acme Campaign\",\n      \"AdType\": \"BANNER\",\n      \"LandingPage\": \"http://www.test.com/6234652\",\n      \"MobileFallbacks\": {\n        \"Android\": \"string\",\n        \"IOS\": \"string\"\n      },\n      \"DateCreated\": \"2024-02-29T22:03:35-08:00\",\n      \"DateLastUpdated\": \"2024-02-29T22:03:35-08:00\",\n      \"CustomAdServingUrl\": \"http://XHqOWCapxsSCWh.qoXp0xoNFcBKcG-2lFpuILAaLXMs.otukuaNN4GWimKXrIyk.aU2GKCtP+mwvfZcymkyjATDrp\",\n      \"IabAdUnit\": \"CUSTOM\",\n      \"ThirdPartyServableAdCreativeHeight\": \"250\",\n      \"ThirdPartyServableAdCreativeWidth\": \"250\",\n      \"BannerAlternativeTag\": \"summersale\",\n      \"LinkText\": \"\",\n      \"CouponLinkName\": \"string\",\n      \"GetHtmlCodeType\": \"HTML_AND_IFRAME\",\n      \"Labels\": \"sale,US\",\n      \"AllowDeepLinking\": \"true\",\n      \"Language\": \"ENGLISH\",\n      \"LimitedTimeStartDate\": \"2020-09-16T17:01:28-07:00\",\n      \"LimitedTimeEndDate\": \"1999-02-14T09:45:51.147Z\",\n      \"RestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Season\": \"SUMMER\",\n      \"Uri\": \"https://zIVAzlIInmndlpNGRASMkw.tovNBCEFxuMBkCBVglVwJGA.kkrmhY5pnR2AJjqB,G61dLutFrLLJjubyMXOoB?yprlji&zkmiumj&\",\n      \"DealId\": \"85433\",\n      \"DealName\": \"Summer Sale 2020\",\n      \"AdCodeTemplate\": \"string\",\n      \"CouponAllowCustomPromoCode\": \"string\",\n      \"CustomisationCharge\": \"string\",\n      \"MobileReady\": \"string\",\n      \"PhoneTracking\": \"string\",\n      \"PromoCodeTracking\": \"string\",\n      \"TopSeller\": \"string\",\n      \"DealDescription\": \"string\",\n      \"DealState\": \"string\",\n      \"DealType\": \"string\",\n      \"DealScope\": \"string\",\n      \"DealProducts\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealCategories\": \"string\",\n      \"DiscountType\": \"string\",\n      \"DiscountAmount\": \"string\",\n      \"DiscountCurrency\": \"string\",\n      \"DiscountPercent\": \"string\",\n      \"DiscountMaximumPercent\": \"string\",\n      \"DiscountPercentRangeStart\": \"string\",\n      \"DiscountPercentRangeEnd\": \"string\",\n      \"Gift\": \"string\",\n      \"RebateAmount\": \"string\",\n      \"RebateCurrency\": \"string\",\n      \"DealDefaultPromoCode\": \"string\",\n      \"MinimumPurchaseAmount\": \"string\",\n      \"MinimumPurchaseAmountCurrency\": \"string\",\n      \"MaximumSavingsAmount\": \"string\",\n      \"MaximumSavingsCurrency\": \"string\",\n      \"BogoBuyQuantity\": \"string\",\n      \"BogoBuyScope\": \"string\",\n      \"BogoBuyName\": \"string\",\n      \"BogoBuyImageUrl\": \"string\",\n      \"BogoGetQuantity\": \"string\",\n      \"BogoGetScope\": \"string\",\n      \"BogoGetDiscountType\": \"string\",\n      \"BogoGetName\": \"string\",\n      \"BogoGetImageUrl\": \"string\",\n      \"BogoGetDiscountAmount\": \"string\",\n      \"BogoGetDiscountCurrency\": \"string\",\n      \"BogoGetDiscountPercent\": \"string\",\n      \"PurchaseLimitQuantity\": \"string\",\n      \"DealStartDate\": \"2005-10-18T05:46:56.550Z\",\n      \"DealEndDate\": \"2022-05-08T12:14:05.152Z\",\n      \"SynchAdsPromoCodes\": \"string\",\n      \"DealRestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealRestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e143c22d-921b-4a89-a40c-34b43a6b6514",
+          "name": "Create an Ad",
+          "request": {
+            "name": "Create an Ad",
+            "description": {
+              "content": "Creates a new Banner, Coupon, or Text Link ad. Use `multipart/form-data` if uploading a creative file, otherwise use `application/x-www-form-urlencoded`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Ads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "AdType",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Language",
+                  "value": "<string>",
+                  "description": "(Required) The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LandingPage",
+                  "value": "<uri>"
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomAdServingUrl",
+                  "value": "<uri>",
+                  "description": "Required for BANNER if not using AdCodeTemplate or BannerCreativeFile."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdCodeTemplate",
+                  "value": "<string>",
+                  "description": "Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile."
+                },
+                {
+                  "disabled": false,
+                  "key": "BannerCreativeFile",
+                  "value": "<binary>",
+                  "description": "Creative file for a BANNER ad. Use multipart/form-data."
+                },
+                {
+                  "disabled": false,
+                  "key": "CouponLinkName",
+                  "value": "<string>",
+                  "description": "Required for COUPON ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "CouponAllowCustomPromoCode",
+                  "value": "<boolean>",
+                  "description": "Whether the ad allows partners to use a custom promo code (instead of the default coupon code)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomisationCharge",
+                  "value": "<decimal>",
+                  "description": "The charge applied when partners customise this ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "LinkText",
+                  "value": "<string>",
+                  "description": "Required for TEXT_LINK ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "IabAdUnit",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ThirdPartyServableAdCreativeHeight",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ThirdPartyServableAdCreativeWidth",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "BannerAlternativeTag",
+                  "value": "<string>",
+                  "description": "Only for BANNER ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "GetHtmlCodeType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Labels",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "AllowDeepLinking",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LimitedTimeStartDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LimitedTimeEndDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartners",
+                  "value": "<string>",
+                  "description": "Array of partner IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartners",
+                  "value": "<string>",
+                  "description": "Array of partner IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartnerGroups",
+                  "value": "<string>",
+                  "description": "Array of partner group IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartnerGroups",
+                  "value": "<string>",
+                  "description": "Array of partner group IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Android",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "IOS",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Season",
+                  "value": "<string>",
+                  "description": "If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`."
+                },
+                {
+                  "disabled": false,
+                  "key": "MobileReady",
+                  "value": "<string>",
+                  "description": "Whether the ad is optimized for mobile devices."
+                },
+                {
+                  "disabled": false,
+                  "key": "PhoneTracking",
+                  "value": "<string>",
+                  "description": "Whether phone call tracking is enabled for the ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromoCodeTracking",
+                  "value": "<string>",
+                  "description": "Whether promo code tracking is enabled for the ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "TopSeller",
+                  "value": "<string>",
+                  "description": "Whether the ad is marked as a top seller."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<string>",
+                  "description": "The ID of the deal to associate with this ad."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9fc430b2-f8c3-41d5-b761-910d2ea1500e",
+              "name": "The ad was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Ads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "Summer Sale 2020 250x250"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "AdType",
+                      "value": "BANNER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Language",
+                      "value": "ENGLISH"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Description",
+                      "value": "Our best deals this summer creative."
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LandingPage",
+                      "value": "http://www.test.com/6234652"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for BANNER if not using AdCodeTemplate or BannerCreativeFile.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomAdServingUrl",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdCodeTemplate",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Creative file for a BANNER ad. Use multipart/form-data.",
+                        "type": "text/plain"
+                      },
+                      "key": "BannerCreativeFile",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for COUPON ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "CouponLinkName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad allows partners to use a custom promo code (instead of the default coupon code).",
+                        "type": "text/plain"
+                      },
+                      "key": "CouponAllowCustomPromoCode",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The charge applied when partners customise this ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomisationCharge",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for TEXT_LINK ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "LinkText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "IabAdUnit",
+                      "value": "CUSTOM"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ThirdPartyServableAdCreativeHeight",
+                      "value": "250"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ThirdPartyServableAdCreativeWidth",
+                      "value": "250"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for BANNER ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "BannerAlternativeTag",
+                      "value": "summersale"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "GetHtmlCodeType",
+                      "value": "HTML_AND_IFRAME"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Labels",
+                      "value": "sale,US"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "AllowDeepLinking",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LimitedTimeStartDate",
+                      "value": "2026-09-16T17:01:28-07:00"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LimitedTimeEndDate",
+                      "value": "2026-12-31T23:59:59-07:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartners",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartners",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner group IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartnerGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner group IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartnerGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Android",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "IOS",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Season",
+                      "value": "SUMMER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad is optimized for mobile devices.",
+                        "type": "text/plain"
+                      },
+                      "key": "MobileReady",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether phone call tracking is enabled for the ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneTracking",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether promo code tracking is enabled for the ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromoCodeTracking",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad is marked as a top seller.",
+                        "type": "text/plain"
+                      },
+                      "key": "TopSeller",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the deal to associate with this ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://QQd.cmWsewtQuesGxO0xVZkHvNckQXg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b644068-b82e-4119-b5de-d07d20337fc9",
+          "name": "Get Ad Details",
+          "request": {
+            "name": "Get Ad Details",
+            "description": {
+              "content": "Retrieves the details of an existing ad by its unique impact.com Ad ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Ads",
+                ":AdId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AdId",
+                  "description": "(Required) The unique identifier for the ad."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5f4ce26-9cc2-4bc7-9b71-631e4764032a",
+              "name": "An ad object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Ads",
+                    ":AdId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AdId",
+                      "description": "(Required) The unique identifier for the ad."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"892081\",\n  \"Name\": \"Summer Sale 2020 250x250\",\n  \"Description\": \"Our best deals this summer creative.\",\n  \"CampaignId\": \"1000\",\n  \"CampaignName\": \"Acme Campaign\",\n  \"AdType\": \"BANNER\",\n  \"LandingPage\": \"http://www.test.com/6234652\",\n  \"MobileFallbacks\": {\n    \"Android\": \"string\",\n    \"IOS\": \"string\"\n  },\n  \"DateCreated\": \"2024-02-29T22:03:35-08:00\",\n  \"DateLastUpdated\": \"2024-02-29T22:03:35-08:00\",\n  \"CustomAdServingUrl\": \"http://MqlghGRSVgyJRyCnU.dgU0tiFLt+XSu48Eog5zoBT,ZeUD2aj\",\n  \"IabAdUnit\": \"CUSTOM\",\n  \"ThirdPartyServableAdCreativeHeight\": \"250\",\n  \"ThirdPartyServableAdCreativeWidth\": \"250\",\n  \"BannerAlternativeTag\": \"summersale\",\n  \"LinkText\": \"\",\n  \"CouponLinkName\": \"string\",\n  \"GetHtmlCodeType\": \"HTML_AND_IFRAME\",\n  \"Labels\": \"sale,US\",\n  \"AllowDeepLinking\": \"true\",\n  \"Language\": \"ENGLISH\",\n  \"LimitedTimeStartDate\": \"2020-09-16T17:01:28-07:00\",\n  \"LimitedTimeEndDate\": \"1990-08-18T05:23:11.756Z\",\n  \"RestrictedMediaPartners\": [\n    \"string\",\n    \"string\"\n  ],\n  \"RestrictedMediaPartnerGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Season\": \"SUMMER\",\n  \"Uri\": \"https://aFBdggbsRLGZKrfxKHDrOV.nfilZN+85v8EOJKPRbV2+TuE2?zeevuj&\",\n  \"DealId\": \"85433\",\n  \"DealName\": \"Summer Sale 2020\",\n  \"AdCodeTemplate\": \"string\",\n  \"CouponAllowCustomPromoCode\": \"string\",\n  \"CustomisationCharge\": \"string\",\n  \"MobileReady\": \"string\",\n  \"PhoneTracking\": \"string\",\n  \"PromoCodeTracking\": \"string\",\n  \"TopSeller\": \"string\",\n  \"DealDescription\": \"string\",\n  \"DealState\": \"string\",\n  \"DealType\": \"string\",\n  \"DealScope\": \"string\",\n  \"DealProducts\": [\n    \"string\",\n    \"string\"\n  ],\n  \"DealCategories\": \"string\",\n  \"DiscountType\": \"string\",\n  \"DiscountAmount\": \"string\",\n  \"DiscountCurrency\": \"string\",\n  \"DiscountPercent\": \"string\",\n  \"DiscountMaximumPercent\": \"string\",\n  \"DiscountPercentRangeStart\": \"string\",\n  \"DiscountPercentRangeEnd\": \"string\",\n  \"Gift\": \"string\",\n  \"RebateAmount\": \"string\",\n  \"RebateCurrency\": \"string\",\n  \"DealDefaultPromoCode\": \"string\",\n  \"MinimumPurchaseAmount\": \"string\",\n  \"MinimumPurchaseAmountCurrency\": \"string\",\n  \"MaximumSavingsAmount\": \"string\",\n  \"MaximumSavingsCurrency\": \"string\",\n  \"BogoBuyQuantity\": \"string\",\n  \"BogoBuyScope\": \"string\",\n  \"BogoBuyName\": \"string\",\n  \"BogoBuyImageUrl\": \"string\",\n  \"BogoGetQuantity\": \"string\",\n  \"BogoGetScope\": \"string\",\n  \"BogoGetDiscountType\": \"string\",\n  \"BogoGetName\": \"string\",\n  \"BogoGetImageUrl\": \"string\",\n  \"BogoGetDiscountAmount\": \"string\",\n  \"BogoGetDiscountCurrency\": \"string\",\n  \"BogoGetDiscountPercent\": \"string\",\n  \"PurchaseLimitQuantity\": \"string\",\n  \"DealStartDate\": \"1999-03-01T07:31:14.126Z\",\n  \"DealEndDate\": \"2023-11-11T20:07:41.748Z\",\n  \"SynchAdsPromoCodes\": \"string\",\n  \"DealRestrictedMediaPartners\": [\n    \"string\",\n    \"string\"\n  ],\n  \"DealRestrictedMediaPartnerGroups\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5babc4a-b357-468d-9916-db088248300e",
+          "name": "Update an Ad",
+          "request": {
+            "name": "Update an Ad",
+            "description": {
+              "content": "Updates an existing ad, including its creative file if needed. Use `multipart/form-data` if uploading a creative file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Ads",
+                ":AdId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AdId",
+                  "description": "(Required) The unique identifier for the ad to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "AdType",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Language",
+                  "value": "<string>",
+                  "description": "(Required) The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LandingPage",
+                  "value": "<uri>"
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomAdServingUrl",
+                  "value": "<uri>",
+                  "description": "Required for BANNER if not using AdCodeTemplate or BannerCreativeFile."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdCodeTemplate",
+                  "value": "<string>",
+                  "description": "Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile."
+                },
+                {
+                  "disabled": false,
+                  "key": "BannerCreativeFile",
+                  "value": "<binary>",
+                  "description": "Creative file for a BANNER ad. Use multipart/form-data."
+                },
+                {
+                  "disabled": false,
+                  "key": "CouponLinkName",
+                  "value": "<string>",
+                  "description": "Required for COUPON ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "CouponAllowCustomPromoCode",
+                  "value": "<boolean>",
+                  "description": "Whether the ad allows partners to use a custom promo code (instead of the default coupon code)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomisationCharge",
+                  "value": "<decimal>",
+                  "description": "The charge applied when partners customise this ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "LinkText",
+                  "value": "<string>",
+                  "description": "Required for TEXT_LINK ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "IabAdUnit",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ThirdPartyServableAdCreativeHeight",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ThirdPartyServableAdCreativeWidth",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "BannerAlternativeTag",
+                  "value": "<string>",
+                  "description": "Only for BANNER ad type."
+                },
+                {
+                  "disabled": false,
+                  "key": "GetHtmlCodeType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Labels",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "AllowDeepLinking",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LimitedTimeStartDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LimitedTimeEndDate",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartners",
+                  "value": "<string>",
+                  "description": "Array of partner IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartners",
+                  "value": "<string>",
+                  "description": "Array of partner IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartnerGroups",
+                  "value": "<string>",
+                  "description": "Array of partner group IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "TargetMediaPartnerGroups",
+                  "value": "<string>",
+                  "description": "Array of partner group IDs to restrict the ad to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Android",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "IOS",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Season",
+                  "value": "<string>",
+                  "description": "If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`."
+                },
+                {
+                  "disabled": false,
+                  "key": "MobileReady",
+                  "value": "<string>",
+                  "description": "Whether the ad is optimized for mobile devices."
+                },
+                {
+                  "disabled": false,
+                  "key": "PhoneTracking",
+                  "value": "<string>",
+                  "description": "Whether phone call tracking is enabled for the ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromoCodeTracking",
+                  "value": "<string>",
+                  "description": "Whether promo code tracking is enabled for the ad."
+                },
+                {
+                  "disabled": false,
+                  "key": "TopSeller",
+                  "value": "<string>",
+                  "description": "Whether the ad is marked as a top seller."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<string>",
+                  "description": "The ID of the deal to associate with this ad."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "65086028-bd37-4a49-9610-fc8c6857c834",
+              "name": "The ad was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Ads",
+                    ":AdId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AdId",
+                      "description": "(Required) The unique identifier for the ad to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "Summer Sale 2020 250x250"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "AdType",
+                      "value": "BANNER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Language",
+                      "value": "ENGLISH"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Description",
+                      "value": "Our best deals this summer creative."
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LandingPage",
+                      "value": "http://www.test.com/6234652"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for BANNER if not using AdCodeTemplate or BannerCreativeFile.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomAdServingUrl",
+                      "value": "<uri>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdCodeTemplate",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Creative file for a BANNER ad. Use multipart/form-data.",
+                        "type": "text/plain"
+                      },
+                      "key": "BannerCreativeFile",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for COUPON ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "CouponLinkName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad allows partners to use a custom promo code (instead of the default coupon code).",
+                        "type": "text/plain"
+                      },
+                      "key": "CouponAllowCustomPromoCode",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The charge applied when partners customise this ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomisationCharge",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for TEXT_LINK ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "LinkText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "IabAdUnit",
+                      "value": "CUSTOM"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ThirdPartyServableAdCreativeHeight",
+                      "value": "250"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ThirdPartyServableAdCreativeWidth",
+                      "value": "250"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for BANNER ad type.",
+                        "type": "text/plain"
+                      },
+                      "key": "BannerAlternativeTag",
+                      "value": "summersale"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "GetHtmlCodeType",
+                      "value": "HTML_AND_IFRAME"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Labels",
+                      "value": "sale,US"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "AllowDeepLinking",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LimitedTimeStartDate",
+                      "value": "2026-09-16T17:01:28-07:00"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LimitedTimeEndDate",
+                      "value": "2026-12-31T23:59:59-07:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartners",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartners",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner group IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartnerGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of partner group IDs to restrict the ad to.",
+                        "type": "text/plain"
+                      },
+                      "key": "TargetMediaPartnerGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Android",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "IOS",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Season",
+                      "value": "SUMMER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad is optimized for mobile devices.",
+                        "type": "text/plain"
+                      },
+                      "key": "MobileReady",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether phone call tracking is enabled for the ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "PhoneTracking",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether promo code tracking is enabled for the ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromoCodeTracking",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the ad is marked as a top seller.",
+                        "type": "text/plain"
+                      },
+                      "key": "TopSeller",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the deal to associate with this ad.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://gjNegGokJycQgiF.hkuRiUIbhFHO3HghxmHqsm\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "213e97cf-ff89-45e9-aa83-88a6bd802b0a",
+    "name": "Brand API - Ads",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing ads, which represent the creative content used to refer traffic from a partner to one of your properties. This includes creating, retrieving, updating, and listing ads such as banners, text links, and coupons.",
+      "type": "text/plain"
+    }
+  }
+}

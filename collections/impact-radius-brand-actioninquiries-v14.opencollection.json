@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Action Inquiries",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Action Inquiries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Action Inquiries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ActionInquiries",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the campaign (program) to view action inquiries for."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters for inquiries created on or after this date (ISO 8601)."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters for inquiries created on or before this date (ISO 8601)."
+              },
+              {
+                "name": "TransactionDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Filters for inquiries with a transaction date on or after this value."
+              },
+              {
+                "name": "TransactionDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Filters for inquiries with a transaction date on or before this value."
+              },
+              {
+                "name": "MediaPartnerId",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries to a specific partner by their ID."
+              },
+              {
+                "name": "OrderId",
+                "value": "",
+                "type": "query",
+                "description": "Filters for inquiries associated with a specific order ID."
+              },
+              {
+                "name": "ResolutionStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filters inquiries by their resolution status."
+              }
+            ]
+          },
+          "docs": "Returns a list of the action inquiries made for your campaign, filtered by the provided parameters. The inquiries are returned by creation date, with the most recent appearing first."
+        },
+        {
+          "info": {
+            "name": "Update an Action Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ActionInquiries",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates an action inquiry by setting its resolution status and other related parameters."
+        },
+        {
+          "info": {
+            "name": "Get Action Inquiry Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ActionInquiries/:InquiryId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "InquiryId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the action inquiry."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing action inquiry by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

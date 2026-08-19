@@ -1,0 +1,578 @@
+openapi: 3.1.0
+info:
+  title: SaaSquatch by impact.com API - Referral
+  description: A Referral tracks who has referred whom. This API allows for listing and managing those referrals.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+  description: SaaSquatch Production Server
+security:
+- APIKey: []
+- UserJWT: []
+tags:
+- name: Referral
+  description: A Referral tracks who has referred whom.
+paths:
+  /{tenant_alias}/referrals:
+    get:
+      summary: List referrals
+      description: |
+        List all of the referrals in your Referral SaaSquatch by impact.com tenant. This method supports pagination and filtering.
+      operationId: listReferrals
+      tags:
+      - Referral
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - name: referringAccountId
+        in: query
+        description: When included, filters the results to only referrals that were referred by users with this `AccountId`
+        schema:
+          type: string
+      - name: referringUserId
+        in: query
+        description: When included, filters the results to only referrals that were referred by users with this `UserId`
+        schema:
+          type: string
+      - name: dateReferralPaid
+        in: query
+        description: When included, filters the results by an exact timestamp or a comma-separated range for when the referral was paid.
+        schema:
+          type: string
+      - name: dateReferralEnded
+        in: query
+        description: When included, filters the results by an exact timestamp or a comma-separated range for when the referral ended.
+        schema:
+          type: string
+      - name: referredModerationStatus
+        in: query
+        description: 'Filters the result to only include referred users with that status: `PENDING`, `APPROVED` or `DENIED`.'
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+      - name: referrerModerationStatus
+        in: query
+        description: 'Filters the result to only include referrers with that status: `PENDING`, `APPROVED` or `DENIED`.'
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A list of referrals.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/referrals' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /{tenant_alias}/referrals/{referralId}:
+    get:
+      summary: Lookup a Referral
+      description: Looks up a single Referral object by its associated `id`.
+      operationId: getReferral
+      tags:
+      - Referral
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - name: referralId
+        in: path
+        description: The `id` of the referral to look up
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Referral found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Referral'
+        '404':
+          description: Referral NOT found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/referrals/{referralId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /{tenant_alias}/referrals/moderate:
+    post:
+      summary: Moderate referrals
+      description: Moderates one or several referrals by either approving or denying.
+      operationId: moderateReferrals
+      tags:
+      - Referral
+      - Classic Only
+      requestBody:
+        description: Details of the referrals to be moderated.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferralModerationBulkRequest'
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      responses:
+        '200':
+          description: Success
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/referrals/moderate' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+  /{tenant_alias}/open/referrals:
+    get:
+      summary: List referrals (Open Endpoint)
+      description: Lists all of the referrals involving the given user. This is an Open Endpoint and is disabled by default.
+      operationId: openListReferrals
+      tags:
+      - Referral
+      - Open Endpoint
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - name: referringAccountId
+        in: query
+        description: Filters for referrals where this `AccountId` was the Referrer.
+        schema:
+          type: string
+      - name: referringUserId
+        in: query
+        description: Filters for referrals where this `UserId` was the Referrer.
+        schema:
+          type: string
+      - name: referredAccountId
+        in: query
+        description: Filters for referrals where this `AccountId` was the Referred User.
+        schema:
+          type: string
+      - name: referredUserId
+        in: query
+        description: Filters for referrals where this `UserId` was the Referred User.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: A list of referrals.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferralList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/referrals' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: Authorize your requests using a JWT for a given user.
+  parameters:
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
+    limit:
+      name: limit
+      in: query
+      schema:
+        type: integer
+        default: 10
+      description: A limit on the number of results returned.
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Offsets the first result to return in the list for pagination.
+  schemas:
+    ReferralList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1
+        totalCount:
+          type: integer
+          example: 1
+        referrals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Referral'
+          example:
+          - id: 6a1709e0eb067e53ef651c29
+            referralCodeUsed: BOBTESTERSON
+            shareLinkUsed: null
+            moderationStatus: ACTIONED
+            referredModerationStatus: APPROVED
+            referrerModerationStatus: APPROVED
+            fraudSignals: null
+            programId: null
+            dateReferralStarted: 1779894752097
+            dateReferralPaid: null
+            dateReferralEnded: null
+            dateModerated: 1779894752099
+            dateConverted: null
+            dateModified: 1779894752494
+            dateUserModified: null
+    Referral:
+      description: A link between the user/account of the referrer and the new referred user/account.
+      properties:
+        id:
+          type: string
+          example: 6a1709e0eb067e53ef651c29
+        referredUser:
+          $ref: '#/components/schemas/User'
+        referrerUser:
+          $ref: '#/components/schemas/User'
+        referredReward:
+          $ref: '#/components/schemas/Reward'
+        referrerReward:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/Reward'
+        referralCodeUsed:
+          type: string
+          nullable: true
+          example: BOBTESTERSON
+        shareLinkUsed:
+          type: string
+          nullable: true
+          example: null
+        moderationStatus:
+          type: string
+          example: ACTIONED
+          enum:
+          - PENDING
+          - ACTIONED
+        referredModerationStatus:
+          type: string
+          example: APPROVED
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+        referrerModerationStatus:
+          type: string
+          example: APPROVED
+          enum:
+          - PENDING
+          - APPROVED
+          - DENIED
+        fraudSignals:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/FraudSignals'
+        dateReferralStarted:
+          type: integer
+          format: int64
+          example: 1779894752097
+        dateReferralPaid:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateReferralEnded:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateModerated:
+          type: integer
+          format: int64
+          nullable: true
+          example: 1779894752099
+        dateConverted:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the referral converted.
+          example: null
+        dateModified:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the referral was last modified.
+          example: 1779894752494
+        dateUserModified:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the referred user was last modified.
+          example: null
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program this referral belongs to.
+          example: null
+    ReferralModerationBulkRequest:
+      description: A request to perform one or several moderation actions.
+      required:
+      - actions
+      properties:
+        actions:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ReferralModerationRequest'
+    ReferralModerationRequest:
+      description: A request to moderate a single referral.
+      required:
+      - referralId
+      - action
+      properties:
+        referralId:
+          type: string
+        action:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+          - REFERRER_APPROVED
+          - REFERRED_APPROVED
+          - REFERRER_DENIED
+          - REFERRED_DENIED
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: abc123
+        accountId:
+          type: string
+          example: abc123
+        firstName:
+          type: string
+          example: Bob
+        lastName:
+          type: string
+          example: Testerson
+        lastInitial:
+          type: string
+          example: T
+        email:
+          type: string
+          format: email
+          example: bob.testerson@example.com
+        emailHash:
+          type: string
+          description: An MD5 hash of the user's email address.
+          example: 714ed06b2d5c95b93d499a3be731c19f
+        imageUrl:
+          type: string
+          description: URL of the user's profile image. Empty string if not set.
+          example: ""
+        referralCode:
+          type: string
+          example: BOBTESTERSON
+        cookieId:
+          type: string
+          nullable: true
+          example: abc123cookie
+        paymentProviderId:
+          type: string
+          nullable: true
+          example: pay_abc123
+        locale:
+          type: string
+          nullable: true
+          example: en_US
+        countryCode:
+          type: string
+          nullable: true
+          example: US
+        referralSource:
+          type: string
+          nullable: true
+          example: DIRECT
+        firstSeenIP:
+          type: string
+          nullable: true
+          example: "203.0.113.42"
+        lastSeenIP:
+          type: string
+          nullable: true
+          example: "203.0.113.42"
+        dateCreated:
+          type: integer
+          format: int64
+          example: 1774386824964
+        dateBlocked:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        shareLinks:
+          type: object
+          description: The user's share links, organised by share medium and engagement medium.
+    Reward:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6a1709e0eb067e53ef651c3b
+        type:
+          type: string
+          example: CREDIT
+        uniqueId:
+          type: string
+          nullable: true
+          example: null
+        dateCreated:
+          type: integer
+          format: int64
+          example: 1779894752360
+        dateScheduledFor:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateGiven:
+          type: integer
+          format: int64
+          nullable: true
+          example: 1779894752451
+        dateExpires:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        dateCancelled:
+          type: integer
+          format: int64
+          nullable: true
+          example: null
+        accountId:
+          type: string
+          example: abc123
+        userId:
+          type: string
+          example: abc123
+        cancellable:
+          type: boolean
+          example: true
+        rewardSource:
+          type: string
+          example: REFERRED
+        programId:
+          type: string
+          nullable: true
+          example: null
+        programRewardKey:
+          type: string
+          nullable: true
+          example: null
+        globalRewardKey:
+          type: string
+          nullable: true
+          example: null
+        referralId:
+          type: string
+          nullable: true
+          example: 6a1709e0eb067e53ef651c29
+        unit:
+          type: string
+          example: CENTS
+        assignedCredit:
+          type: integer
+          example: 100
+        redeemedCredit:
+          type: integer
+          example: 0
+        name:
+          type: string
+          example: Dollar Credit
+        currency:
+          type: string
+          nullable: true
+          example: null
+        redemptions:
+          type: object
+          nullable: true
+          example: null
+    FraudSignals:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FraudSignal'
+        ip:
+          $ref: '#/components/schemas/FraudSignal'
+        email:
+          $ref: '#/components/schemas/FraudSignal'
+        rate:
+          $ref: '#/components/schemas/FraudSignal'
+    FraudSignal:
+      type: object
+      properties:
+        message:
+          type: string
+        score:
+          type: integer
+    Error:
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          description: The human-readable description of what went wrong. Use this to help you debug.
+        apiErrorCode:
+          type: string
+          description: A machine-readable error code.
+        rsCode:
+          type: string
+          nullable: true
+          description: A secondary machine-readable error code.
+          example: RS042
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+x-default-client: cURL

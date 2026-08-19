@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "89a45883-56bb-4e83-86a4-836bf1b0153b",
+      "name": "Advertisers",
+      "description": {
+        "content": "Advertiser accounts managed by this agency.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ad638e56-3f84-48ce-8cab-39702627fb3c",
+          "name": "List all advertisers",
+          "request": {
+            "name": "List all advertisers",
+            "description": {
+              "content": "Returns a list of all advertisers associated with your agency account.\n\nEach result includes full account details — contact information, billing setup, organization details, and a pre-authenticated `RestAccountURL` for making direct API calls to each advertiser's account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Advertisers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78a38648-6a0b-4d8e-adc9-77347540cca2",
+              "name": "A list of advertisers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Advertisers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Id\": \"1048291\",\n    \"Name\": \"Nutt & Co. Outdoors\",\n    \"Description\": \"Premium outdoor gear and adventure accessories.\",\n    \"State\": \"ACTIVE\",\n    \"Website\": \"www.nuttandco.com\",\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"CountryState\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\",\n    \"IndirectTaxJurisdiction\": \"\",\n    \"VatRegistered\": \"false\",\n    \"OrganizationType\": \"CORP\",\n    \"TaxId\": \"XXXXX4832\",\n    \"IndirectTaxNumber\": \"\",\n    \"Timezone\": \"America/Chicago\",\n    \"Currency\": \"USD\",\n    \"PhoneNumber\": \"15125550191\",\n    \"DateCreated\": \"2021-03-15T09:22:11-07:00\",\n    \"FinancialSetup\": \"BILLED_BY_IR\",\n    \"AgencyOfRecord\": \"true\",\n    \"AccountManager\": \"Carrie Oakey\",\n    \"RestAccountURL\": \"IRxxxxxxxxxxxxxxxxx1:xxxxxxxxxxxxxxxxxxxxxxxx@api.impactradius.com/Advertisers/IRxxxxxxxxxxxxxxxxx1\",\n    \"Uri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Advertisers/1048291\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bf33063-db62-4693-925b-4ba57070b9a4",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Advertisers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90742710-974a-4b2e-93e4-840ac1965b0e",
+          "name": "Get an advertiser",
+          "request": {
+            "name": "Get an advertiser",
+            "description": {
+              "content": "Returns the full details of a single advertiser account by its numeric ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Advertisers",
+                ":AdvertiserId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AdvertiserId",
+                  "description": "(Required) The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3096f3f-09c0-4d2e-a5e2-31c2c81acc4d",
+              "name": "The advertiser object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Advertisers",
+                    ":AdvertiserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AdvertiserId",
+                      "description": "(Required) The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1048291\",\n  \"Name\": \"Nutt & Co. Outdoors\",\n  \"Description\": \"Premium outdoor gear and adventure accessories.\",\n  \"State\": \"ACTIVE\",\n  \"Website\": \"www.nuttandco.com\",\n  \"AddressLine1\": \"100 Commerce Drive\",\n  \"AddressLine2\": \"Suite 200\",\n  \"City\": \"Austin\",\n  \"CountryState\": \"TX\",\n  \"PostalCode\": \"78701\",\n  \"Country\": \"US\",\n  \"IndirectTaxJurisdiction\": \"\",\n  \"VatRegistered\": \"false\",\n  \"OrganizationType\": \"CORP\",\n  \"TaxId\": \"XXXXX4832\",\n  \"IndirectTaxNumber\": \"\",\n  \"Timezone\": \"America/Chicago\",\n  \"Currency\": \"USD\",\n  \"PhoneNumber\": \"15125550191\",\n  \"DateCreated\": \"2021-03-15T09:22:11-07:00\",\n  \"FinancialSetup\": \"BILLED_BY_IR\",\n  \"AgencyOfRecord\": \"true\",\n  \"AccountManager\": \"Carrie Oakey\",\n  \"RestAccountURL\": \"IRxxxxxxxxxxxxxxxxx1:xxxxxxxxxxxxxxxxxxxxxxxx@api.impactradius.com/Advertisers/IRxxxxxxxxxxxxxxxxx1\",\n  \"Uri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Advertisers/1048291\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0c5f2e1-001e-4bcb-914b-ae59812591ee",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Advertisers",
+                    ":AdvertiserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AdvertiserId",
+                      "description": "(Required) The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "252e1843-46ad-43bb-b9b0-abf24c93374d",
+              "name": "Advertiser not found. Verify that the AdvertiserId belongs to an advertiser managed by this agency.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Advertisers",
+                    ":AdvertiserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AdvertiserId",
+                      "description": "(Required) The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "51e1435d-b8df-4b3e-be0e-8a95ccba3f0b",
+    "name": "Agency API — Advertisers",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

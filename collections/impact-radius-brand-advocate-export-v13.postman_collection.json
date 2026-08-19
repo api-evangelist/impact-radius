@@ -1,0 +1,873 @@
+{
+  "item": [
+    {
+      "id": "e82c8a76-fd1d-4a7c-b14c-a845fa3ead3f",
+      "name": "Export",
+      "description": {
+        "content": "Endpoints for working with bulk data exports: create a new export, look up the status of an existing export, download a completed export, and list recent exports.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70f7a0e8-9625-4fe0-9da3-818401801f9d",
+          "name": "List Exports",
+          "request": {
+            "name": "List Exports",
+            "description": {
+              "content": "Returns a paginated list of exports in the tenant. Useful for finding a recent export when you don't have its `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "export",
+                "history",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "A limit on the maximum number of results to return, defaults to `10`."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The row number of the first result to return, defaults to `0`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "882de562-ea62-40b4-a5c4-e83ec4aa219e",
+              "name": "List of Exports found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    "history",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"USER\",\n      \"format\": \"CSV\",\n      \"name\": \"Monthly user export\",\n      \"requester\": \"API\",\n      \"params\": {\n        \"createdSince\": 113,\n        \"createdBefore\": 7816,\n        \"updatedSince\": 8063,\n        \"updatedBefore\": 9896,\n        \"createdOrUpdatedSince\": 1012,\n        \"createdOrUpdatedBefore\": 1101,\n        \"programId\": \"string\",\n        \"filter\": {},\n        \"at\": 146,\n        \"fields\": {\n          \"includeUserStatsFields\": false,\n          \"includeUserFields\": false,\n          \"includeReferralFields\": false\n        }\n      },\n      \"id\": \"abc123export\",\n      \"mailtoEmail\": \"bob.testerson@example.com\",\n      \"status\": \"COMPLETED\",\n      \"dateCreated\": 1779871222634,\n      \"dateCompleted\": 1779871250427,\n      \"dateExpires\": 1782290450427\n    },\n    {\n      \"type\": \"USER\",\n      \"format\": \"CSV\",\n      \"name\": \"Monthly user export\",\n      \"requester\": \"API\",\n      \"params\": {\n        \"createdSince\": 6233,\n        \"createdBefore\": 4746,\n        \"updatedSince\": 8056,\n        \"updatedBefore\": 4191,\n        \"createdOrUpdatedSince\": 4577,\n        \"createdOrUpdatedBefore\": 4776,\n        \"programId\": \"string\",\n        \"filter\": {},\n        \"at\": 2075,\n        \"fields\": {\n          \"includeUserStatsFields\": false,\n          \"includeUserFields\": false,\n          \"includeReferralFields\": false\n        }\n      },\n      \"id\": \"abc123export\",\n      \"mailtoEmail\": \"bob.testerson@example.com\",\n      \"status\": \"COMPLETED\",\n      \"dateCreated\": 1779871222634,\n      \"dateCompleted\": 1779871250427,\n      \"dateExpires\": 1782290450427\n    }\n  ],\n  \"count\": 2,\n  \"totalCount\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2833158b-2240-4868-bd13-2d45a62712bf",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    "history",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8748,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad2e2b38-04bf-446f-8d6f-be9125a91951",
+          "name": "Create an Export",
+          "request": {
+            "name": "Create an Export",
+            "description": {
+              "content": "Creates an asynchronous export request. The export is queued and processed in the background; the response returns the export's `id` and an initial `status` of `PENDING`.\n\nStore the returned `id` so you can look up the export's status or download it once complete. For details on the export lifecycle and how to detect completion, see the Export Overview.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "export"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"format\": \"CSV\",\n  \"name\": \"<string>\",\n  \"requester\": \"API\",\n  \"params\": {\n    \"createdSince\": \"<long>\",\n    \"createdBefore\": \"<long>\",\n    \"updatedSince\": \"<long>\",\n    \"updatedBefore\": \"<long>\",\n    \"createdOrUpdatedSince\": \"<long>\",\n    \"createdOrUpdatedBefore\": \"<long>\",\n    \"programId\": \"<string>\",\n    \"filter\": \"<object>\",\n    \"at\": \"<long>\",\n    \"fields\": {\n      \"includeUserStatsFields\": false,\n      \"includeUserFields\": false,\n      \"includeReferralFields\": false\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b4909251-f1fb-484a-a548-c6b31d2b62c9",
+              "name": "Export created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"USER\",\n  \"format\": \"CSV\",\n  \"name\": \"Monthly user export\",\n  \"requester\": \"API\",\n  \"params\": {\n    \"createdSince\": \"<long>\",\n    \"createdBefore\": \"<long>\",\n    \"updatedSince\": \"<long>\",\n    \"updatedBefore\": \"<long>\",\n    \"createdOrUpdatedSince\": \"<long>\",\n    \"createdOrUpdatedBefore\": \"<long>\",\n    \"programId\": \"<string>\",\n    \"filter\": \"<object>\",\n    \"at\": \"<long>\",\n    \"fields\": {\n      \"includeUserStatsFields\": false,\n      \"includeUserFields\": false,\n      \"includeReferralFields\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"USER\",\n  \"format\": \"CSV\",\n  \"name\": \"Monthly user export\",\n  \"requester\": \"API\",\n  \"params\": {\n    \"createdSince\": 348,\n    \"createdBefore\": 8204,\n    \"updatedSince\": 5697,\n    \"updatedBefore\": 6147,\n    \"createdOrUpdatedSince\": 7869,\n    \"createdOrUpdatedBefore\": 6280,\n    \"programId\": \"string\",\n    \"filter\": {},\n    \"at\": 7805,\n    \"fields\": {\n      \"includeUserStatsFields\": false,\n      \"includeUserFields\": false,\n      \"includeReferralFields\": false\n    }\n  },\n  \"id\": \"abc123export\",\n  \"mailtoEmail\": \"bob.testerson@example.com\",\n  \"status\": \"COMPLETED\",\n  \"dateCreated\": 1779871222634,\n  \"dateCompleted\": 1779871250427,\n  \"dateExpires\": 1782290450427\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cfae082-f444-4b3a-8a9b-34787c0f5c92",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"USER\",\n  \"format\": \"CSV\",\n  \"name\": \"Monthly user export\",\n  \"requester\": \"API\",\n  \"params\": {\n    \"createdSince\": \"<long>\",\n    \"createdBefore\": \"<long>\",\n    \"updatedSince\": \"<long>\",\n    \"updatedBefore\": \"<long>\",\n    \"createdOrUpdatedSince\": \"<long>\",\n    \"createdOrUpdatedBefore\": \"<long>\",\n    \"programId\": \"<string>\",\n    \"filter\": \"<object>\",\n    \"at\": \"<long>\",\n    \"fields\": {\n      \"includeUserStatsFields\": false,\n      \"includeUserFields\": false,\n      \"includeReferralFields\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8748,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33d8d59b-f911-4120-8145-f5848548ff9b",
+          "name": "Lookup an Export",
+          "request": {
+            "name": "Lookup an Export",
+            "description": {
+              "content": "Returns the current state of an export, including its `status`. Use this to poll for completion before attempting to download.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "export",
+                ":exportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exportId",
+                  "description": "(Required) The `id` of the export to look up."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0dd54da-684d-40d7-8ad5-de8438f50af1",
+              "name": "Export found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"USER\",\n  \"format\": \"CSV\",\n  \"name\": \"Monthly user export\",\n  \"requester\": \"API\",\n  \"params\": {\n    \"createdSince\": 348,\n    \"createdBefore\": 8204,\n    \"updatedSince\": 5697,\n    \"updatedBefore\": 6147,\n    \"createdOrUpdatedSince\": 7869,\n    \"createdOrUpdatedBefore\": 6280,\n    \"programId\": \"string\",\n    \"filter\": {},\n    \"at\": 7805,\n    \"fields\": {\n      \"includeUserStatsFields\": false,\n      \"includeUserFields\": false,\n      \"includeReferralFields\": false\n    }\n  },\n  \"id\": \"abc123export\",\n  \"mailtoEmail\": \"bob.testerson@example.com\",\n  \"status\": \"COMPLETED\",\n  \"dateCreated\": 1779871222634,\n  \"dateCompleted\": 1779871250427,\n  \"dateExpires\": 1782290450427\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cab183c-0da3-4174-8092-3f0adcaee384",
+              "name": "Export NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e969f66-ee52-4b14-a2a2-e1c296da1b59",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to look up."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8748,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c90b955-975a-43d8-8cba-f28c4a652d0f",
+          "name": "Download an Export",
+          "request": {
+            "name": "Download an Export",
+            "description": {
+              "content": "Downloads a completed export file. The export's `status` must be `COMPLETED`; use the lookup endpoint to confirm before calling this.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "export",
+                ":exportId",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exportId",
+                  "description": "(Required) The `id` of the export to download."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95f67b26-01bd-4691-a21a-a672848fd7ed",
+              "name": "Export file returned after following the redirect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf8cd157-5d59-4b19-9173-60abd27c511c",
+              "name": "Redirect to the export file. Follow the `Location` header to download the CSV from the storage provider. Ensure your HTTP client is configured to follow redirects (e.g. `curl -L`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Signed URL to the export file on the storage provider. The URL expires after a short period.",
+                  "key": "Location",
+                  "value": "https://storage.googleapis.com/tenant-files.ssqt.io/exports/aboih12h16t/abc123export.csv"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7505938-3edc-4cdc-84e8-e6acd84a6e3d",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "export",
+                    ":exportId",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exportId",
+                      "description": "(Required) The `id` of the export to download."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8748,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a34ad9d9-045b-4505-bf33-4ba09ceb82b3",
+    "name": "impact.com API - Export",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for creating and downloading bulk data exports.",
+      "type": "text/plain"
+    }
+  }
+}

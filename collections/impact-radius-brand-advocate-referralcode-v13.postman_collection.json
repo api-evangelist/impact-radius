@@ -1,0 +1,1935 @@
+{
+  "item": [
+    {
+      "id": "af97583a-f023-4a56-8eb3-3e305abae9a2",
+      "name": "Referral Code",
+      "description": {
+        "content": "Endpoints for working with referral codes: look up a code and its associated reward, or apply a code to a referred account. For background on what referral codes are, see the Referral Code Overview.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42823383-e98c-4c90-b76c-b4eb4ce88b5b",
+          "name": "Lookup a referral code",
+          "request": {
+            "name": "Lookup a referral code",
+            "description": {
+              "content": "**Deprecated.** Use the Open Endpoint *Lookup a referral code* instead.\n\nReturns a referral code along with the referrer's name and the reward the code unlocks.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "code",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0894dab4-701a-414e-9801-b8b90dd64aa5",
+              "name": "Referral code found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4382f4f5-4ec6-4ca3-9c7a-0bc2b584a941",
+              "name": "Referral code NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6dbdba0-3f14-45f6-8238-797e9419dd32",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e25ffe23-4354-4339-8e6c-b9057871804d",
+          "name": "Lookup a referral code (Open Endpoint)",
+          "request": {
+            "name": "Lookup a referral code (Open Endpoint)",
+            "description": {
+              "content": "Returns a referral code along with the referrer's name and the reward the code unlocks. Use this from client-side contexts such as the Mobile and Web SDKs.\n\nThis is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "code",
+                ":referral_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referral_code",
+                  "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22d19a7a-d4ed-4937-be40-cad0566e1c81",
+              "name": "Referral code found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef93d6f9-e004-4a45-9dee-1e5d09f04eed",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "651d5395-f872-4500-8224-d4e6defae342",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1441be39-2bc0-4247-b2fe-7bbbde5f1440",
+          "name": "Apply a referral code",
+          "request": {
+            "name": "Apply a referral code",
+            "description": {
+              "content": "Applies a referral code to the specified account and user, marking them as referred by the code's owner.\n\nRequires a [write token](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) or an API key. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "code",
+                ":code",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The referral code to apply to the user's account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9120b803-afb6-4083-bfb4-2e3ef5fa8c69",
+              "name": "Referral code applied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d324d153-c8f2-43ec-8ea9-bed46aba19d3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22969048-81bd-44d5-8416-0571eba8efb4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b78d9e0-5e17-485f-be81-b73e844ed2cf",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4177d6e-1356-4cb3-b35e-d7ba25cee33b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e7d0886f-c0dd-4ae5-b1e7-cf9cfd45d1ca",
+      "name": "Deprecated",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4ea04cf9-9671-4f7f-af35-11ecf1258d72",
+          "name": "Lookup a referral code",
+          "request": {
+            "name": "Lookup a referral code",
+            "description": {
+              "content": "**Deprecated.** Use the Open Endpoint *Lookup a referral code* instead.\n\nReturns a referral code along with the referrer's name and the reward the code unlocks.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "code",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "876001c1-b10a-47b3-931e-c5d731c05c2d",
+              "name": "Referral code found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3aeee6-fcbb-45cc-b2a6-320707895534",
+              "name": "Referral code NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fbc28c8-5280-467e-8af3-fe86ee211e96",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "code",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f924bca8-e64b-43d5-96bf-a41b29f97ae5",
+      "name": "Open Endpoint",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "97f48606-5ee9-4388-9a9c-28b7a1937bf7",
+          "name": "Lookup a referral code (Open Endpoint)",
+          "request": {
+            "name": "Lookup a referral code (Open Endpoint)",
+            "description": {
+              "content": "Returns a referral code along with the referrer's name and the reward the code unlocks. Use this from client-side contexts such as the Mobile and Web SDKs.\n\nThis is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "code",
+                ":referral_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referral_code",
+                  "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a980ce0-33fb-445e-acd6-ee24d5319ba0",
+              "name": "Referral code found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9232b6ac-6734-43c4-9813-7b4dff60c191",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88a60547-d84a-4654-aa00-e4717a081796",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":referral_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referral_code",
+                      "description": "(Required) The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1551367-ecfe-4f87-9e6d-a3303a14aa71",
+          "name": "Apply a referral code",
+          "request": {
+            "name": "Apply a referral code",
+            "description": {
+              "content": "Applies a referral code to the specified account and user, marking them as referred by the code's owner.\n\nRequires a [write token](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) or an API key. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "code",
+                ":code",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The referral code to apply to the user's account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f534f7ec-a12c-4529-aea4-fe093d650162",
+              "name": "Referral code applied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"CFMVQHNUEU2AWWDO\",\n  \"dateCreated\": 1774386824953,\n  \"programId\": null,\n  \"referrerName\": \"Bob T\",\n  \"reward\": {\n    \"type\": \"CREDIT\",\n    \"unit\": \"CENTS\",\n    \"credit\": 100,\n    \"discountPercent\": 10,\n    \"monthsDiscountIsValid\": 3,\n    \"valueInCents\": 2000,\n    \"rewardDetails\": \"{}\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5ddab76-056b-4e0c-bd7d-dbe1ae0766ff",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3c9c3e0-5267-43be-981f-3a0aa0a3e545",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07d474ef-40c3-4a2e-a339-eda27d86d0d3",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b8667a-f3ed-47bb-868d-269ecb9d4576",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "code",
+                    ":code",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The referral code to apply to the user's account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 4976,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f506b52b-d3c9-44ef-b4b8-bf0b277b88ba",
+    "name": "impact.com API - Referral Code",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for looking up and applying referral codes.",
+      "type": "text/plain"
+    }
+  }
+}

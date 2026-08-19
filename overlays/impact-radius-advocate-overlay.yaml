@@ -1,0 +1,122 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the impact.com Advocate API (v1)
+  version: '1.0.0'
+extends: openapi/
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Documented behaviour published on integrations.impact.com that the shipped OpenAPI documents do
+  not declare. Every action below adds something impact.com states in prose; nothing is invented,
+  and the original specs in openapi/ are left untouched.
+x-reference: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+x-server: https://app.referralsaasquatch.com/api/v1
+x-applies-to:
+- openapi/impact-radius-brand-advocate-account-v13.yml
+- openapi/impact-radius-brand-advocate-export-v13.yml
+- openapi/impact-radius-brand-advocate-referral-v13.yml
+- openapi/impact-radius-brand-advocate-referralcode-v13.yml
+- openapi/impact-radius-brand-advocate-reward-v13.yml
+- openapi/impact-radius-brand-advocate-rewardbalance-v13.yml
+- openapi/impact-radius-brand-advocate-sharelinks-v13.yml
+- openapi/impact-radius-brand-advocate-user-v13.yml
+- openapi/impact-radius-brand-advocate-webhook-v13.yml
+actions:
+- target: $.paths.*.*.responses.*
+  description: >-
+    impact.com returns IETF-style rate-limit headers on every response but declares none of them
+    in the published specs. Documented at
+    https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/rate-limits.md.
+  update:
+    headers:
+      X-RateLimit-Limit:
+        description: Maximum number of requests allowed for the resource within the given time period.
+        schema:
+          type: integer
+      X-RateLimit-Remaining:
+        description: Number of requests left as of the current request within the given time period.
+        schema:
+          type: integer
+      X-RateLimit-Reset:
+        description: >-
+          Seconds until the limit resets, per draft-polli-ratelimit-headers-02 section 3.3.
+        schema:
+          type: integer
+
+- target: $.paths.*.*
+  description: >-
+    Every operation can return 429 on rate-limit exhaustion. None of the published specs declares
+    it, so an agent generating a client from the spec alone will not handle throttling.
+  update:
+    responses:
+      '429':
+        description: Too Many Requests — hourly or daily rate limit exceeded. Back off using X-RateLimit-Reset.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImpactErrorEnvelope'
+
+- target: $.components.schemas
+  description: >-
+    The documented vendor error envelope, published at
+    .../readme/status-codes-and-errors.md but not declared as a reusable schema in the specs.
+  update:
+    ImpactErrorEnvelope:
+      type: object
+      description: impact.com vendor error envelope. Not RFC 9457 problem+json.
+      properties:
+        Status:
+          type: string
+          description: Literal "ERROR" on failure.
+          example: ERROR
+        Message:
+          type: string
+          description: Human-readable summary of the failure.
+          example: Validation Failed
+        Errors:
+          type: array
+          description: Per-field validation failures.
+          items:
+            type: object
+            properties:
+              Field:
+                type: string
+                example: AccountId
+              Message:
+                type: string
+                example: Not a numeric value
+
+- target: $.paths.*.get
+  description: >-
+    Documented list pagination contract. Page/PageSize are accepted by all top-level list methods
+    and the response carries a self-navigating envelope, neither of which the specs declare
+    uniformly. Documented at .../readme/pagination.md.
+  update:
+    parameters:
+    - name: Page
+      in: query
+      required: false
+      description: Page requested; 1-indexed. Defaults to 1.
+      schema:
+        type: integer
+        minimum: 1
+    - name: PageSize
+      in: query
+      required: false
+      description: Objects per page. Resource default applies when omitted.
+      schema:
+        type: integer
+
+- target: $.components.schemas
+  description: >-
+    Advocate returns an RS-prefixed error-code vocabulary documented at
+    .../advocate-api-reference-v1/readme/advocate-error-codes.md but absent from the specs.
+  update:
+    AdvocateErrorCode:
+      type: string
+      description: >-
+        Documented Advocate error code. See errors/impact-radius-problem-types.yml for the full
+        catalog with remediation for each code.
+      enum: [RS003, RS005, RS006, RS013, RS014, RS015, RS016, RS017, RS020, RS021, RS023, RS024,
+             RS026, RS027, RS031, RS032, RS033, RS034, RS036, RS037, RS038, RS039, RS041, RS042,
+             RS043, RS044, RS045, RS046, RS047, RS048, RS049, RS050, RS051, RS052, RS053]

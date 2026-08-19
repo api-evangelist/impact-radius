@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "2c289314-e3e7-4ef2-9ce3-031a78773f6a",
+      "name": "Identity Verification",
+      "description": {
+        "content": "Endpoint for creating and resuming identity verification sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1dd921cf-f9f6-4e86-ba9f-4e95d6e2cf7b",
+          "name": "Create or Resume an Identity Verification Session",
+          "request": {
+            "name": "Create or Resume an Identity Verification Session",
+            "description": {
+              "content": "Creates a new identity verification session or resumes an existing one. Returns a URL that can be used to launch the hosted verification flow. If a session is already in progress for the specified user, the existing session details are returned so verification can resume from where it left off.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "IdentityVerification",
+                "Session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"UserId\": \"<integer>\",\n  \"CallbackUrl\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7267f8ed-53ae-4ade-a97e-c0af956777d5",
+              "name": "The identity verification session object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "IdentityVerification",
+                    "Session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"UserId\": 5402850,\n  \"CallbackUrl\": \"https://example.com/verification/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/IdentityVerification/Session/48944\",\n  \"id\": \"48944\",\n  \"sessionId\": \"d9d96e4e-1b79-45b5-bfb4-44864b896aa6\",\n  \"sessionUrl\": \"https://verification.impact.com/v/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.EXAMPLE_TOKEN\",\n  \"memberId\": \"5402850\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "534585fb-4059-4f90-b58e-f9018b5d65ef",
+              "name": "Validation error or the supplied UserId is not accessible for the partner account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "IdentityVerification",
+                    "Session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"UserId\": 5402850,\n  \"CallbackUrl\": \"https://example.com/verification/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"ERROR\",\n  \"Message\": \"Validation Errors\",\n  \"Errors\": {\n    \"Error\": {\n      \"Field\": \"UserId\",\n      \"Message\": \"Invalid value [null] for parameter [UserId]\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baf8835f-3912-4640-bce4-600b1c169f94",
+              "name": "Unauthorized — invalid authentication credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "IdentityVerification",
+                    "Session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"UserId\": 5402850,\n  \"CallbackUrl\": \"https://example.com/verification/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 401,\n  \"title\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d8817a12-3a65-450d-bb65-f64761be8386",
+    "name": "Partner Identity Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Identity Verification endpoint creates or resumes an identity verification session and returns a URL that can be used to launch the hosted verification flow. Use this endpoint to verify your identity before accessing features that require identity confirmation.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

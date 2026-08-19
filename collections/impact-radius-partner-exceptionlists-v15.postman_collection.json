@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "d8953823-6f1c-457c-9a2c-378f959e7bda",
+      "name": "Exception Lists",
+      "description": {
+        "content": "Endpoints for retrieving exception list details and items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "116a3716-787f-4403-955a-3b148a6d699f",
+          "name": "Retrieve an Exception List",
+          "request": {
+            "name": "Retrieve an Exception List",
+            "description": {
+              "content": "Retrieves the details of an existing exception list using its unique ID. The ExceptionListId can be obtained from the Contracts API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac87993d-eecf-480f-8067-aad3b572870c",
+              "name": "The exception list object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"5001\",\n  \"Name\": \"Wayne Tech SKU Exclusions\",\n  \"State\": \"ACTIVE\",\n  \"CampaignId\": \"10306\",\n  \"Type\": \"SKU\",\n  \"CreatedDate\": \"2024-01-15T10:30:00-08:00\",\n  \"DeactivationDate\": \"1977-11-13T15:53:12.643Z\",\n  \"NumberOfItems\": 12,\n  \"ItemsUri\": \"/Mediapartners/<AccountSID>/ExceptionLists/5001/Items\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/ExceptionLists/5001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e52ecf30-0802-4b6f-a3e6-e7de65d80c5b",
+          "name": "List Exception List Items",
+          "request": {
+            "name": "List Exception List Items",
+            "description": {
+              "content": "Returns a list of all items in a specific exception list. Each item defines a product category or SKU value that triggers an alternate commission rate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list whose items are being retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "941e6a85-3471-4ead-bede-1a3ffbf1a93f",
+              "name": "A list of exception list item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list whose items are being retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExceptionListItems\": [\n    {\n      \"Id\": \"1\",\n      \"ListId\": \"5001\",\n      \"Name\": \"Batsuit SKU\",\n      \"Value\": \"BS-KVL-01\",\n      \"MatchMode\": \"EQ\",\n      \"CreatedDate\": \"2024-01-15T10:30:00-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1\"\n    },\n    {\n      \"Id\": \"1\",\n      \"ListId\": \"5001\",\n      \"Name\": \"Batsuit SKU\",\n      \"Value\": \"BS-KVL-01\",\n      \"MatchMode\": \"EQ\",\n      \"CreatedDate\": \"2024-01-15T10:30:00-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1873b8cd-50a3-4082-b028-a5cfcaca7778",
+    "name": "Partner Exception Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "An exception list allows a brand to pay different commission rates based on the product category or SKU associated with a tracked action. Exception lists are linked to contracts — retrieve the ExceptionListId from the Contracts API, then use these endpoints to retrieve the list details and its items.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

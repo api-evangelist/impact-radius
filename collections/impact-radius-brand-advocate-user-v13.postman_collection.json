@@ -1,0 +1,4191 @@
+{
+  "item": [
+    {
+      "id": "bc79200b-7c1d-4020-96c7-ea4a67363839",
+      "name": "User",
+      "description": {
+        "content": "API for managing users, including creation, lookup, and blocking.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a2c105f-b369-4450-bdce-e68c95f61a6f",
+          "name": "Create or Update a User",
+          "request": {
+            "name": "Create or Update a User",
+            "description": {
+              "content": "This method creates or updates a User object by performing an atomic upsert operation.\nThis method will not create or update the Account linked by `accountId`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"locale\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"referralCode\": \"<string>\",\n  \"customFields\": {\n    \"key_0\": 1274,\n    \"key_1\": 4462.007982507243\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54e4795c-44b4-4fb6-844e-b0c5f79d20f7",
+              "name": "User Created or Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referralCode\": \"BOBTESTERSON\",\n  \"customFields\": {\n    \"key_0\": false,\n    \"key_1\": 7256,\n    \"key_2\": 9935\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"lastInitial\": \"T\",\n  \"email\": \"bob.testerson@example.com\",\n  \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n  \"imageUrl\": \"\",\n  \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n  \"cookieId\": \"abc123cookie\",\n  \"paymentProviderId\": \"pay_abc123\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referralSource\": \"DIRECT\",\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"dateBlocked\": 1779871222634,\n  \"shareLinks\": {\n    \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n    \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n    \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n    \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n    \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\",\n    \"mobileShareLink\": \"https://share.impact.squatchtesting.com/mebnEye\",\n    \"mobileFacebookShareLink\": \"https://share.impact.squatchtesting.com/mnbnEye\",\n    \"mobileTwitterShareLink\": \"https://share.impact.squatchtesting.com/mCbnEye\",\n    \"mobileEmailShareLink\": \"https://share.impact.squatchtesting.com/mEbnEye\",\n    \"EMBED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"POPUP\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"HOSTED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"MOBILE\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"EMAIL\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71fa0d9c-d805-46ef-9cdb-a0d2fd38939e",
+          "name": "Lookup a user by Referral Code",
+          "request": {
+            "name": "Lookup a user by Referral Code",
+            "description": {
+              "content": "Looks up a user based upon their `referralCode` and returns their personal information.\nThis method is useful for retrieving the user when only the Referral Code is available.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referralCode",
+                  "value": "<string>",
+                  "description": "(Required) The `referralCode` of the user you want to retrieve."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c2a9df63-9ca4-41c3-86b0-0fdc32f92fb8",
+              "name": "User found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "BOBTESTERSON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"lastInitial\": \"T\",\n  \"email\": \"bob.testerson@example.com\",\n  \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n  \"imageUrl\": \"\",\n  \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n  \"cookieId\": \"abc123cookie\",\n  \"paymentProviderId\": \"pay_abc123\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referralSource\": \"DIRECT\",\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"dateBlocked\": 1779871222634,\n  \"shareLinks\": {\n    \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n    \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n    \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n    \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n    \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\",\n    \"mobileShareLink\": \"https://share.impact.squatchtesting.com/mebnEye\",\n    \"mobileFacebookShareLink\": \"https://share.impact.squatchtesting.com/mnbnEye\",\n    \"mobileTwitterShareLink\": \"https://share.impact.squatchtesting.com/mCbnEye\",\n    \"mobileEmailShareLink\": \"https://share.impact.squatchtesting.com/mEbnEye\",\n    \"EMBED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"POPUP\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"HOSTED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"MOBILE\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"EMAIL\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93ecf198-9b5b-4568-8d3a-c697594cee59",
+              "name": "User NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "BOBTESTERSON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "925b28b8-2ae0-4188-b32f-87615f2388c1",
+          "name": "Lookup a user",
+          "request": {
+            "name": "Lookup a user",
+            "description": {
+              "content": "Looks up a user based upon their `id` and returns their personal information.\nThis method just returns the details of the user in question, and not all associated properties like Rewards, Balances, or Referrals.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a990b19-5cca-4a75-9678-076d435e3814",
+              "name": "User found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"lastInitial\": \"T\",\n  \"email\": \"bob.testerson@example.com\",\n  \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n  \"imageUrl\": \"\",\n  \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n  \"cookieId\": \"abc123cookie\",\n  \"paymentProviderId\": \"pay_abc123\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referralSource\": \"DIRECT\",\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"dateBlocked\": 1779871222634,\n  \"shareLinks\": {\n    \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n    \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n    \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n    \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n    \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\",\n    \"mobileShareLink\": \"https://share.impact.squatchtesting.com/mebnEye\",\n    \"mobileFacebookShareLink\": \"https://share.impact.squatchtesting.com/mnbnEye\",\n    \"mobileTwitterShareLink\": \"https://share.impact.squatchtesting.com/mCbnEye\",\n    \"mobileEmailShareLink\": \"https://share.impact.squatchtesting.com/mEbnEye\",\n    \"EMBED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"POPUP\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"HOSTED\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"MOBILE\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    },\n    \"EMAIL\": {\n      \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n      \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n      \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n      \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n      \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf8b8e90-fa0c-4de0-973c-b5d977ef8cd1",
+              "name": "User NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24418352-987f-46ff-8c96-63bece6ef59c",
+          "name": "Lookup a user PII",
+          "request": {
+            "name": "Lookup a user PII",
+            "description": {
+              "content": "Returns details of the personally identifiable information stored in the impact.com system for a specific user.\n> 🚧 **Warning!** This method should only be used in connection with data protection and privacy compliance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "pii"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af7e3a7d-03d7-4671-9647-c5ce7d16adcd",
+              "name": "User found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "pii"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"lastInitial\": \"T\",\n  \"email\": \"bob.testerson@example.com\",\n  \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"paymentProviderId\": \"pay_abc123\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"referralSource\": \"UNKNOWN\",\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"firstSeenIPLocation\": \"San Francisco, CA, US\",\n  \"lastSeenIPLocation\": \"San Francisco, CA, US\",\n  \"firstSeenUserAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36\",\n  \"lastSeenUserAgent\": \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36\",\n  \"dateCreated\": 1774386824964,\n  \"customFields\": {\n    \"key_0\": true,\n    \"key_1\": 207.8566991769404\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"http://IopldETTqibrlSHMwASmSScZwAC.ydcsBOJwWQHgk4NAmr-ArDdlvfx0fRwLMLOJg0pO.f6gFJgGcBKoyBAGry9XYR48uBdYCcNuKx13\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"http://jLkbHhXWlz.cjkUz76,cGnQznWYNRmZCKcguCxTni5-4jFCU-.VUg66vewUNYUJqw\",\n        \"key_1\": \"https://nELtJnDSPJHCONpYUh.rchQYjU15MdGC9,xraATD,ZI.RHzVdyMhaWjtn9\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"http://ljcgDitMWwhywLRr.soMfhrDjU9wdWgqnjKFMYFhUulfPXcmppFZ5P9u,\",\n        \"key_1\": \"https://GeenhlBtKUduvRuzPRtbFE.eqGMzqdnzezDKi46FdYCPRekh08r8d4-cYBsLhIH\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"http://pCvoBNvCggrtezoyjbyAxHDQwcXPP.udPrk5i\",\n        \"key_1\": \"https://HhYMKyFBNxmpff.ykqssv2x2zF0TzDRWjkZ83+Ls9a4GYWMANh5Hq.a7EpX+DL8ADvS,K+n50r\",\n        \"key_2\": \"https://wjHCzgbNYc.uprcWC38jFBgxDLkxPXnM+aiaqT,tYfnmAgxWk4np6SZUNQ\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"http://EVrpBENzNKYXDBBxtnYZCXA.zbbccU8ibGArjoP.QnsY-wL7wdRCZl6ypOL\",\n        \"key_1\": \"https://pLYicsqvcSvlPHFjDXp.hpwnzYAaf8c7\",\n        \"key_2\": \"http://WtgPkBUpgOw.bbwbfCoWtU-Ev1YH,Ol4iraXfwY+zvKqVEBRMrAHOkZ,pxJZvWmDWvWnh5V8kjOYmdfsmDfv2bJV0MuZ,,DYzgKpbdNF7Lkd\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"https://jJcZoFsYXOh.izuPASK2ZsadwQhnsQus7zEZsK,PJmSwfVcM\"\n      }\n    },\n    \"key_1\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"http://SuSAdXlgiBRaqdDzwfq.ziuxh2mRo+0iInINqPIWj8eymqfoxpLMPy+WIk-9DnGdrTzeUcN1Z\",\n        \"key_1\": \"https://kesfDgKGKypBRUEIQDyDOOzjZkeA.qqgRxJH-pTGo3aH+W4D8CPt2TyiakdQ0OxRkc5m\",\n        \"key_2\": \"https://GWymkqJOpKSatPvrrCSdcPOCvY.qpSLk8j.5uWsvbPfddxhyS7dzu0\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://deCDhVyux.njdqKIDOScNgwjSUGi0lze\",\n        \"key_1\": \"https://fVTzlzGVuxoTVDfUKe.udvgt7+.VJ-ksBGl\",\n        \"key_2\": \"https://StQWcjfDROKE.zllzO8HIUOtaCggrsWIv-G0BtpAXPhSApU6j8hRLZnHOfLfBVkAAi\",\n        \"key_3\": \"http://FoNYOEYGaoIL.daS0dXjz\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"http://klEotqIcHOcpsmqgKnoiLtYUzEAOT.snwCmcW7S27\",\n        \"key_1\": \"https://BY.eomlig.t,iBhrYV5rV9sOEx68G\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"https://Skvz.uwBgs-2+0UqBJX\",\n        \"key_1\": \"http://rTSa.qduldjBJ.n\",\n        \"key_2\": \"https://SKtyDcIGhGcHH.ajeF7xQnc-DjdXy6mCO-dl8KcRvH5KYqHagMg0QZXpVjF7Zsou,INS1iO\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"https://qBJhczDowKbmwt.dewZugpJFbSfr9KPoRWfZEoT88-G5,fobhtP7mcx-TO6TBTrrj+\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"https://eJmJkczyjgJXlymVEz.cnaMgbddORz-oaIenKa6eiBKVI5kcbzuqu43n.Bf12qdez9PGw+rg\",\n        \"key_1\": \"https://MCpQWkIeJDuzDroOuCXP.nnVStpVvD5TLZco.kf3JMCC1tvAU2fLSNQSCu9J0c2klv6I-,Mpsf1qYqgjW8n\"\n      }\n    }\n  },\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ],\n  \"referredByReferrals\": [\n    {\n      \"id\": \"ref_abc123\",\n      \"moderationStatus\": \"ACTIONED\",\n      \"dateReferralStarted\": 1774386824964,\n      \"dateReferralPaid\": 9268,\n      \"dateReferralEnded\": 9784,\n      \"dateModerated\": 1521,\n      \"referredModerationStatus\": \"APPROVED\",\n      \"referrerModerationStatus\": \"APPROVED\",\n      \"programId\": \"47255\",\n      \"referredReward\": {},\n      \"referrerReward\": {},\n      \"publicMeta\": {},\n      \"privateMeta\": {},\n      \"fraudSignals\": {}\n    },\n    {\n      \"id\": \"ref_abc123\",\n      \"moderationStatus\": \"ACTIONED\",\n      \"dateReferralStarted\": 1774386824964,\n      \"dateReferralPaid\": 5191,\n      \"dateReferralEnded\": 7752,\n      \"dateModerated\": 3704,\n      \"referredModerationStatus\": \"APPROVED\",\n      \"referrerModerationStatus\": \"APPROVED\",\n      \"programId\": \"47255\",\n      \"referredReward\": {},\n      \"referrerReward\": {},\n      \"publicMeta\": {},\n      \"privateMeta\": {},\n      \"fraudSignals\": {}\n    }\n  ],\n  \"rewards\": {\n    \"totalCount\": 1\n  },\n  \"rewardBalances\": [\n    {\n      \"type\": \"CREDIT\",\n      \"unit\": \"CENTS\",\n      \"count\": 1,\n      \"totalAssignedCredit\": 100,\n      \"totalRedeemedCredit\": 0,\n      \"totalPendingCredit\": 0,\n      \"totalExpiredCredit\": 0,\n      \"totalCancelledCredit\": 0,\n      \"prettyAssignedCredit\": \"$1.00\",\n      \"prettyRedeemedCredit\": \"$0.00\",\n      \"prettyPendingCredit\": \"$0.00\",\n      \"value\": 100,\n      \"prettyValue\": \"$1.00\"\n    },\n    {\n      \"type\": \"CREDIT\",\n      \"unit\": \"CENTS\",\n      \"count\": 1,\n      \"totalAssignedCredit\": 100,\n      \"totalRedeemedCredit\": 0,\n      \"totalPendingCredit\": 0,\n      \"totalExpiredCredit\": 0,\n      \"totalCancelledCredit\": 0,\n      \"prettyAssignedCredit\": \"$1.00\",\n      \"prettyRedeemedCredit\": \"$0.00\",\n      \"prettyPendingCredit\": \"$0.00\",\n      \"value\": 100,\n      \"prettyValue\": \"$1.00\"\n    }\n  ],\n  \"referrals\": {\n    \"totalCount\": 0\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdbcafc8-bab2-4a29-a316-82c025295027",
+              "name": "User NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "pii"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "233675e8-90a4-477d-9c6a-523575e8088e",
+          "name": "Block user",
+          "request": {
+            "name": "Block user",
+            "description": {
+              "content": "Block a user from making successful referrals based upon their user and account `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "block"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c780e63-4de0-49f2-900a-a632bf8b8b16",
+              "name": "User blocked successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "block"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bd86911-8686-49d5-9c67-8415292ab42d",
+              "name": "User account NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "block"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18bff87e-a163-4e9c-ae06-cd5c522847f4",
+          "name": "Unblock user",
+          "request": {
+            "name": "Unblock user",
+            "description": {
+              "content": "Unblock a user based upon their user and account `id`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "unblock"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "614bf3ec-bc63-477b-b2de-38aa535c3bb7",
+              "name": "User unblocked successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "unblock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69382b71-bbd4-4382-80a8-b5ab27353e0c",
+              "name": "User account NOT found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "unblock"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c6feef1-e6a9-4f10-93e0-6a19a34206be",
+          "name": "List users",
+          "request": {
+            "name": "List users",
+            "description": {
+              "content": "List all of the users in your Advocate referral programs.\nThis method supports pagination and search queries.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "A search query that can be used to filter users by email, name or ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "A limit on the number of results returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "When included, offsets the first result returned in the list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0e21247-0c51-41fc-b2a1-e809a3bcd933",
+              "name": "Users found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 1006,\n  \"totalCount\": 6698,\n  \"users\": [\n    {\n      \"id\": \"abc123\",\n      \"accountId\": \"abc123\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Testerson\",\n      \"lastInitial\": \"T\",\n      \"email\": \"bob.testerson@example.com\",\n      \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n      \"imageUrl\": \"\",\n      \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n      \"cookieId\": \"abc123cookie\",\n      \"paymentProviderId\": \"pay_abc123\",\n      \"locale\": \"en_US\",\n      \"countryCode\": \"US\",\n      \"referralSource\": \"DIRECT\",\n      \"firstSeenIP\": \"203.0.113.42\",\n      \"lastSeenIP\": \"203.0.113.42\",\n      \"dateCreated\": 1774386824964,\n      \"dateBlocked\": 1779871222634,\n      \"shareLinks\": {\n        \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n        \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n        \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n        \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n        \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\",\n        \"mobileShareLink\": \"https://share.impact.squatchtesting.com/mebnEye\",\n        \"mobileFacebookShareLink\": \"https://share.impact.squatchtesting.com/mnbnEye\",\n        \"mobileTwitterShareLink\": \"https://share.impact.squatchtesting.com/mCbnEye\",\n        \"mobileEmailShareLink\": \"https://share.impact.squatchtesting.com/mEbnEye\",\n        \"EMBED\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"POPUP\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"HOSTED\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"MOBILE\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"EMAIL\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        }\n      }\n    },\n    {\n      \"id\": \"abc123\",\n      \"accountId\": \"abc123\",\n      \"firstName\": \"Bob\",\n      \"lastName\": \"Testerson\",\n      \"lastInitial\": \"T\",\n      \"email\": \"bob.testerson@example.com\",\n      \"emailHash\": \"714ed06b2d5c95b93d499a3be731c19f\",\n      \"imageUrl\": \"\",\n      \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n      \"cookieId\": \"abc123cookie\",\n      \"paymentProviderId\": \"pay_abc123\",\n      \"locale\": \"en_US\",\n      \"countryCode\": \"US\",\n      \"referralSource\": \"DIRECT\",\n      \"firstSeenIP\": \"203.0.113.42\",\n      \"lastSeenIP\": \"203.0.113.42\",\n      \"dateCreated\": 1774386824964,\n      \"dateBlocked\": 1779871222634,\n      \"shareLinks\": {\n        \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n        \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n        \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n        \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n        \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\",\n        \"mobileShareLink\": \"https://share.impact.squatchtesting.com/mebnEye\",\n        \"mobileFacebookShareLink\": \"https://share.impact.squatchtesting.com/mnbnEye\",\n        \"mobileTwitterShareLink\": \"https://share.impact.squatchtesting.com/mCbnEye\",\n        \"mobileEmailShareLink\": \"https://share.impact.squatchtesting.com/mEbnEye\",\n        \"EMBED\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"POPUP\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"HOSTED\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"MOBILE\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        },\n        \"EMAIL\": {\n          \"shareLink\": \"https://share.impact.squatchtesting.com/mvbnEye\",\n          \"facebookShareLink\": \"https://share.impact.squatchtesting.com/mmbnEye\",\n          \"twitterShareLink\": \"https://share.impact.squatchtesting.com/mRbnEye\",\n          \"emailShareLink\": \"https://share.impact.squatchtesting.com/mLbnEye\",\n          \"linkedinShareLink\": \"https://share.impact.squatchtesting.com/m6bnEye\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ecd265b-153a-441f-871e-06799ce4aa89",
+          "name": "Lookup a user (Open Endpoint)",
+          "request": {
+            "name": "Lookup a user (Open Endpoint)",
+            "description": {
+              "content": "This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "58dbffc1-6d64-484b-aea8-72bd189f195d",
+              "name": "User found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"https://sPQrecAEqSZgD.gpKiYSWZqdWcMxYqFKnMbs\",\n        \"key_1\": \"https://WPMFHvDQkBpCDGYY.dwmeaPN8yEfvBVhP-.78yMx0G\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://t.aenfoe-JEF,mOn+ZVWg\",\n        \"key_1\": \"http://nmLaXvpoHkI.nyyvSRNDQUuNVbYIer7I0KJUIlyS\",\n        \"key_2\": \"http://pezRryOtMMrsEwwyFIL.gvlsBZJ73z+EwgpxZO+0h1Gy\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"https://TzSLcUYMfvpXEHpcTBserwPwnxxh.rctpY1r1yNjD3PjUapwDiaX.pOSUqnTW\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"http://l.skaEDAFVbFS6JJLGP.lQMQjPR\",\n        \"key_1\": \"https://IyQSvFawJDNfQK.rtryzlpVCY3WGivyvwWSuTx1,0p,xm9k4julJKaP98FtN57pujWI76U8n-NLn-0vCu1CLh3MW\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"http://FJOZrUtVrUvOMYjakYJtBF.jwTxQ1Q0l3\",\n        \"key_1\": \"http://TUXrRqe.ovteX47DgZFRace3+qj5ZjaTBHKpeu-LanUGA0NcH+u\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"http://LNneuLYYFrJIhvwzAUfIID.xfoiMayWtLeSC92dDVmI.jd\",\n        \"key_1\": \"http://dZvbYmuKjAoZoOqd.glviGRzXIg3fQQeWZzJ-32PaW0vAiEQMVk-l\",\n        \"key_2\": \"http://PLVdKIobvtzxVwqtPUmQwxzhKwi.krzxIEX+xy9AcPYWbfoUFJtUsFWbC2aqa45lxourw,.yHFzpL,NQcYY+-.Rv0E\",\n        \"key_3\": \"https://AJflXw.pobkhRpy3,KYJ8+XmPx,TEIocAVSY\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9733,\n    \"key_2\": 3581.179611325409,\n    \"key_3\": 9797\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2391ff67-b6ae-4274-8c74-1e907f611b91",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6719ab3b-0885-4bdb-9445-74de844a83f8",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daecb5f4-d7f9-4d90-bf70-d9855de5c67e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f57274de-16c4-4086-a449-aa4dd68d471d",
+          "name": "User Upsert (Open Endpoint)",
+          "request": {
+            "name": "User Upsert (Open Endpoint)",
+            "description": {
+              "content": "This method updates/creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"<string>\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": false,\n    \"key_1\": 7708\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0dc4e905-d32f-461a-9077-b9c7578b05b1",
+              "name": "Information about the upserted user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"https://sPQrecAEqSZgD.gpKiYSWZqdWcMxYqFKnMbs\",\n        \"key_1\": \"https://WPMFHvDQkBpCDGYY.dwmeaPN8yEfvBVhP-.78yMx0G\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://t.aenfoe-JEF,mOn+ZVWg\",\n        \"key_1\": \"http://nmLaXvpoHkI.nyyvSRNDQUuNVbYIer7I0KJUIlyS\",\n        \"key_2\": \"http://pezRryOtMMrsEwwyFIL.gvlsBZJ73z+EwgpxZO+0h1Gy\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"https://TzSLcUYMfvpXEHpcTBserwPwnxxh.rctpY1r1yNjD3PjUapwDiaX.pOSUqnTW\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"http://l.skaEDAFVbFS6JJLGP.lQMQjPR\",\n        \"key_1\": \"https://IyQSvFawJDNfQK.rtryzlpVCY3WGivyvwWSuTx1,0p,xm9k4julJKaP98FtN57pujWI76U8n-NLn-0vCu1CLh3MW\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"http://FJOZrUtVrUvOMYjakYJtBF.jwTxQ1Q0l3\",\n        \"key_1\": \"http://TUXrRqe.ovteX47DgZFRace3+qj5ZjaTBHKpeu-LanUGA0NcH+u\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"http://LNneuLYYFrJIhvwzAUfIID.xfoiMayWtLeSC92dDVmI.jd\",\n        \"key_1\": \"http://dZvbYmuKjAoZoOqd.glviGRzXIg3fQQeWZzJ-32PaW0vAiEQMVk-l\",\n        \"key_2\": \"http://PLVdKIobvtzxVwqtPUmQwxzhKwi.krzxIEX+xy9AcPYWbfoUFJtUsFWbC2aqa45lxourw,.yHFzpL,NQcYY+-.Rv0E\",\n        \"key_3\": \"https://AJflXw.pobkhRpy3,KYJ8+XmPx,TEIocAVSY\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9733,\n    \"key_2\": 3581.179611325409,\n    \"key_3\": 9797\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "706e30b1-87d6-479c-8b28-72028a87bd1e",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6b87359-e875-450e-ac33-77423e24714b",
+          "name": "Create a user and account (Open Endpoint)",
+          "request": {
+            "name": "Create a user and account (Open Endpoint)",
+            "description": {
+              "content": "This method creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"<string>\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": false,\n    \"key_1\": 7708\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bee9dc01-6f62-4d41-a99f-28501012755e",
+              "name": "Information about the newly created user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"https://sPQrecAEqSZgD.gpKiYSWZqdWcMxYqFKnMbs\",\n        \"key_1\": \"https://WPMFHvDQkBpCDGYY.dwmeaPN8yEfvBVhP-.78yMx0G\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://t.aenfoe-JEF,mOn+ZVWg\",\n        \"key_1\": \"http://nmLaXvpoHkI.nyyvSRNDQUuNVbYIer7I0KJUIlyS\",\n        \"key_2\": \"http://pezRryOtMMrsEwwyFIL.gvlsBZJ73z+EwgpxZO+0h1Gy\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"https://TzSLcUYMfvpXEHpcTBserwPwnxxh.rctpY1r1yNjD3PjUapwDiaX.pOSUqnTW\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"http://l.skaEDAFVbFS6JJLGP.lQMQjPR\",\n        \"key_1\": \"https://IyQSvFawJDNfQK.rtryzlpVCY3WGivyvwWSuTx1,0p,xm9k4julJKaP98FtN57pujWI76U8n-NLn-0vCu1CLh3MW\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"http://FJOZrUtVrUvOMYjakYJtBF.jwTxQ1Q0l3\",\n        \"key_1\": \"http://TUXrRqe.ovteX47DgZFRace3+qj5ZjaTBHKpeu-LanUGA0NcH+u\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"http://LNneuLYYFrJIhvwzAUfIID.xfoiMayWtLeSC92dDVmI.jd\",\n        \"key_1\": \"http://dZvbYmuKjAoZoOqd.glviGRzXIg3fQQeWZzJ-32PaW0vAiEQMVk-l\",\n        \"key_2\": \"http://PLVdKIobvtzxVwqtPUmQwxzhKwi.krzxIEX+xy9AcPYWbfoUFJtUsFWbC2aqa45lxourw,.yHFzpL,NQcYY+-.Rv0E\",\n        \"key_3\": \"https://AJflXw.pobkhRpy3,KYJ8+XmPx,TEIocAVSY\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9733,\n    \"key_2\": 3581.179611325409,\n    \"key_3\": 9797\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7f99d38-fd6d-4e1d-9a5d-4efd3f6ac677",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e42f6501-89b6-4f2e-8b42-1b3eb12e4d24",
+          "name": "Delete a user (Open Endpoint)",
+          "request": {
+            "name": "Delete a user (Open Endpoint)",
+            "description": {
+              "content": "Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "doNotTrack",
+                  "value": "<boolean>",
+                  "description": "Do not track this user (this user cannot be re-registered on the same account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "preserveEmptyAccount",
+                  "value": "<boolean>",
+                  "description": "Do not delete accounts when all the users in the account are deleted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "819bcf41-2371-4216-b9e9-8ead15b8ea0d",
+              "name": "User successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "doNotTrack",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preserveEmptyAccount",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3418be1b-8e42-42a9-956a-ee1f7fe49c6f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "doNotTrack",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preserveEmptyAccount",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19544695-ce3b-4f66-929f-76b8357af41b",
+          "name": "Get a user by a referral code (Open Endpoint)",
+          "request": {
+            "name": "Get a user by a referral code (Open Endpoint)",
+            "description": {
+              "content": "Looks up a user based upon their `ReferralCode` and returns their personal information. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and disabled by default.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referralCode",
+                  "value": "<string>",
+                  "description": "(Required) The code with which to lookup the user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c33c684a-6ebf-4b9c-8a00-056930a9fd3b",
+              "name": "Found user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastInitial\": \"T\",\n  \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n  \"imageUrl\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b1a810f-1213-406e-a6a5-88b67716e68f",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f70d03c-3761-4d05-adf8-12af5fa63969",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6af15310-cef1-42af-9155-41786ed9e100",
+      "name": "Open Endpoint",
+      "description": {
+        "content": "Special methods designed for Client-facing applications like the Mobile and Javascript SDKs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d539a370-40d7-4098-95d1-b126b3bd840b",
+          "name": "Lookup a user (Open Endpoint)",
+          "request": {
+            "name": "Lookup a user (Open Endpoint)",
+            "description": {
+              "content": "This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4813dda-20b8-45d5-8e82-924882f96a41",
+              "name": "User found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"http://CDSrGbwlGUTLoHlF.sitnEwMscwtVOcgzBotOkQNKFSSKHKr4GCsGv63ZLcCH8-Q01\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://PMoIARBtNlXCmCmidcoqu.vmS78T8blzpfQ6IM86J+pdy,ksc\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"http://aEFdSWCTxm.gfqRgly.sKBW6UdKvO-l9yBKlJXpAVk\",\n        \"key_1\": \"https://GIuztglvBDMJMCJur.tnmDzJ,PvrlmmNnyFuad5CqhprMpGPxyPtm.tvSATjXN\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"https://oSnXvGEAVM.lmkwDxoOlrRC.DSecX0csvk26Iy,ii0JsZaKNZDcYniD.GtqTMZ\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"https://xvb.xtbirSgz4EaBEbIc6f,smqraFxHpraeLkahHDHh-IRYebNim\",\n        \"key_1\": \"http://WGWqqxNfOhMMzsGbXNaRwL.fytdOdiUqGndzKcOoVqMWih8MRCGNOkAMQP4PmMFis.6k6+UhjCShyed\",\n        \"key_2\": \"http://ZceeYhjxsStpvPWpRXS.vbxff4CW6sn\",\n        \"key_3\": \"https://eHsSqkdndoXJzaOvFiL.shuoG8dYPX04StYlobFl9\",\n        \"key_4\": \"https://QVlYNlapVXiFUocIym.bmK1xgaVLt15NEv7zFW,r,r0qUkbheZ4l7bLMLxAQM-eX-dlXC19XybF\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"https://oxGdIVgwzmFqPjSHtPQQj.yllzz0kv1LKFCLNcjmVWV45HkZk9TSmtfKgD+FI0oG+PYTSSRZ+76.32Jt.7ImJ7HMWmr8\",\n        \"key_1\": \"https://dEIecKKlBgmgFB.ifoxSfN5,bQp9vx26DWnC8\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9103\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bdf1bdf-4bfe-4f8d-bb3d-db74851b56f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c4e132c-16a6-41a8-af17-52ea20f66551",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "042c2f47-3b1a-4640-998a-3615e095be9e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52761caf-3798-4740-982c-9642fca123a9",
+          "name": "User Upsert (Open Endpoint)",
+          "request": {
+            "name": "User Upsert (Open Endpoint)",
+            "description": {
+              "content": "This method updates/creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"<string>\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": 8339.14050216711\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7c3bca9c-7915-4648-858f-97f2e503d8e1",
+              "name": "Information about the upserted user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"http://CDSrGbwlGUTLoHlF.sitnEwMscwtVOcgzBotOkQNKFSSKHKr4GCsGv63ZLcCH8-Q01\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://PMoIARBtNlXCmCmidcoqu.vmS78T8blzpfQ6IM86J+pdy,ksc\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"http://aEFdSWCTxm.gfqRgly.sKBW6UdKvO-l9yBKlJXpAVk\",\n        \"key_1\": \"https://GIuztglvBDMJMCJur.tnmDzJ,PvrlmmNnyFuad5CqhprMpGPxyPtm.tvSATjXN\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"https://oSnXvGEAVM.lmkwDxoOlrRC.DSecX0csvk26Iy,ii0JsZaKNZDcYniD.GtqTMZ\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"https://xvb.xtbirSgz4EaBEbIc6f,smqraFxHpraeLkahHDHh-IRYebNim\",\n        \"key_1\": \"http://WGWqqxNfOhMMzsGbXNaRwL.fytdOdiUqGndzKcOoVqMWih8MRCGNOkAMQP4PmMFis.6k6+UhjCShyed\",\n        \"key_2\": \"http://ZceeYhjxsStpvPWpRXS.vbxff4CW6sn\",\n        \"key_3\": \"https://eHsSqkdndoXJzaOvFiL.shuoG8dYPX04StYlobFl9\",\n        \"key_4\": \"https://QVlYNlapVXiFUocIym.bmK1xgaVLt15NEv7zFW,r,r0qUkbheZ4l7bLMLxAQM-eX-dlXC19XybF\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"https://oxGdIVgwzmFqPjSHtPQQj.yllzz0kv1LKFCLNcjmVWV45HkZk9TSmtfKgD+FI0oG+PYTSSRZ+76.32Jt.7ImJ7HMWmr8\",\n        \"key_1\": \"https://dEIecKKlBgmgFB.ifoxSfN5,bQp9vx26DWnC8\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9103\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6afb215e-ad32-4e99-b08f-041cce183917",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68dc0e74-ef17-4b0e-96b5-62260c6dbbf3",
+          "name": "Create a user and account (Open Endpoint)",
+          "request": {
+            "name": "Create a user and account (Open Endpoint)",
+            "description": {
+              "content": "This method creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+                },
+                {
+                  "disabled": false,
+                  "key": "extraFields",
+                  "value": "<string>",
+                  "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"accountId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"<string>\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": 8339.14050216711\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a2afea0-a04b-43ae-8273-fa2789bd747d",
+              "name": "Information about the newly created user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"imageUrl\": \"\",\n  \"cookieId\": \"abc123cookie\",\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"referable\": true,\n  \"firstSeenIP\": \"203.0.113.42\",\n  \"lastSeenIP\": \"203.0.113.42\",\n  \"dateCreated\": 1774386824964,\n  \"referralCodes\": {\n    \"47255\": \"BOBTESTERSON\"\n  },\n  \"programShareLinks\": {\n    \"key_0\": {\n      \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n      \"UNKNOWN\": {\n        \"key_0\": \"http://CDSrGbwlGUTLoHlF.sitnEwMscwtVOcgzBotOkQNKFSSKHKr4GCsGv63ZLcCH8-Q01\"\n      },\n      \"EMAIL\": {\n        \"key_0\": \"https://PMoIARBtNlXCmCmidcoqu.vmS78T8blzpfQ6IM86J+pdy,ksc\"\n      },\n      \"MOBILE\": {\n        \"key_0\": \"http://aEFdSWCTxm.gfqRgly.sKBW6UdKvO-l9yBKlJXpAVk\",\n        \"key_1\": \"https://GIuztglvBDMJMCJur.tnmDzJ,PvrlmmNnyFuad5CqhprMpGPxyPtm.tvSATjXN\"\n      },\n      \"EMBED\": {\n        \"key_0\": \"https://oSnXvGEAVM.lmkwDxoOlrRC.DSecX0csvk26Iy,ii0JsZaKNZDcYniD.GtqTMZ\"\n      },\n      \"POPUP\": {\n        \"key_0\": \"https://xvb.xtbirSgz4EaBEbIc6f,smqraFxHpraeLkahHDHh-IRYebNim\",\n        \"key_1\": \"http://WGWqqxNfOhMMzsGbXNaRwL.fytdOdiUqGndzKcOoVqMWih8MRCGNOkAMQP4PmMFis.6k6+UhjCShyed\",\n        \"key_2\": \"http://ZceeYhjxsStpvPWpRXS.vbxff4CW6sn\",\n        \"key_3\": \"https://eHsSqkdndoXJzaOvFiL.shuoG8dYPX04StYlobFl9\",\n        \"key_4\": \"https://QVlYNlapVXiFUocIym.bmK1xgaVLt15NEv7zFW,r,r0qUkbheZ4l7bLMLxAQM-eX-dlXC19XybF\"\n      },\n      \"HOSTED\": {\n        \"key_0\": \"https://oxGdIVgwzmFqPjSHtPQQj.yllzz0kv1LKFCLNcjmVWV45HkZk9TSmtfKgD+FI0oG+PYTSSRZ+76.32Jt.7ImJ7HMWmr8\",\n        \"key_1\": \"https://dEIecKKlBgmgFB.ifoxSfN5,bQp9vx26DWnC8\"\n      }\n    }\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": 9103\n  },\n  \"segments\": [\n    \"string\",\n    \"string\"\n  ],\n  \"referredByCodes\": [\n    \"NCC8IQ4ADTVDQAOA\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10369eee-470d-4509-9e8e-89f75c9e364e",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extraFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"bob.testerson@example.com\",\n  \"accountId\": \"bob.testerson@example.com\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Testerson\",\n  \"email\": \"bob.testerson@example.com\",\n  \"referable\": \"<boolean>\",\n  \"referralCodes\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"locale\": \"en_US\",\n  \"countryCode\": \"US\",\n  \"dateUsTaxFormSubmitted\": \"<long>\",\n  \"referredByCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cookies\": \"eyJjb29raWVJZCI6ImFiYzEyMyJ9\",\n  \"segments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"shareLinks\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"customFields\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7580809-4c6a-4326-b7ef-e399d949df07",
+          "name": "Delete a user (Open Endpoint)",
+          "request": {
+            "name": "Delete a user (Open Endpoint)",
+            "description": {
+              "content": "Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "doNotTrack",
+                  "value": "<boolean>",
+                  "description": "Do not track this user (this user cannot be re-registered on the same account)."
+                },
+                {
+                  "disabled": false,
+                  "key": "preserveEmptyAccount",
+                  "value": "<boolean>",
+                  "description": "Do not delete accounts when all the users in the account are deleted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e4f97896-b933-4199-8ba6-950ee6d0c0d0",
+              "name": "User successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "doNotTrack",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preserveEmptyAccount",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c60fe27d-9608-4845-a3f5-ab869a339f51",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "doNotTrack",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preserveEmptyAccount",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1852894-6baa-4666-b5b0-39d5e53fb2d4",
+          "name": "Get a user by a referral code (Open Endpoint)",
+          "request": {
+            "name": "Get a user by a referral code (Open Endpoint)",
+            "description": {
+              "content": "Looks up a user based upon their `ReferralCode` and returns their personal information. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and disabled by default.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referralCode",
+                  "value": "<string>",
+                  "description": "(Required) The code with which to lookup the user."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59a06ac4-0722-4d2c-aa06-590cc7294cca",
+              "name": "Found user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"accountId\": \"abc123\",\n  \"firstName\": \"Bob\",\n  \"lastInitial\": \"T\",\n  \"referralCode\": \"CFMVQHNUEU2AWWDO\",\n  \"imageUrl\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47714340-4a19-4108-8148-a1014ec0dce1",
+              "name": "Forbidden/Endpoint Disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf448861-e7e2-4727-b161-fab26a88c9f2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referralCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"`"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a359669-8c47-4bdb-8a19-ed1e8911fd53",
+    "name": "impact.com API - User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Users are the people in your program. In other places a User might also be called a Contact, Lead or Participant. Users are each mapped to one specific account.\nThe following information is controlled at the user level: First and last name, Email address, Referral code, Share links, Custom fields.\n",
+      "type": "text/plain"
+    }
+  }
+}

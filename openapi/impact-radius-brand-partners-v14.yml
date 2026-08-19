@@ -1,0 +1,601 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Partners
+  description: API for managing partner accounts in your program. This includes viewing partner information, updating certain attributes, and creating new direct partner accounts.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/MediaPartners:
+    get:
+      summary: List All Partners
+      description: Returns a list of all your partners, sorted by creation date. The list can be filtered by various parameters such as Campaign, Group, Country, and State.
+      operationId: listPartners
+      tags:
+      - Partners
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Id
+        in: query
+        description: Filter by one or more specific partner IDs, provided as a comma-separated list.
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        description: Filter to list only partners joined to the specified campaign (program).
+        schema:
+          type: integer
+      - name: GroupId
+        in: query
+        description: Filter to list only partners that are part of a specific partner group.
+        schema:
+          type: integer
+      - name: Country
+        in: query
+        description: 'Filter to list only partners from a specific country. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`.'
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: Filter by partners whose DateLastUpdated occurs after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by partners whose DateLastUpdated occurs before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: State
+        in: query
+        description: Filter by the state of the partner account.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          - DECLINED
+          - SUSPENDED
+          - DEACTIVATED
+          - CLOSING
+          - CLOSED
+          - NOT_APPLICABLE
+      - name: RelationshipState
+        in: query
+        description: "Filter by the partner's current relationship with your program. Possible values:\n- `ACTIVE` — The partner has an active relationship with you.\n- `INACTIVE` — The partner doesn't have a contractual relationship with you."
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of partner objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Partners:
+                    type: array
+                    description: The list of partner objects.
+                    items:
+                      $ref: '#/components/schemas/Partner'
+    post:
+      summary: Create a Direct Partner
+      description: Creates a new direct partner account, which automatically joins your program with a specified active contract.
+      operationId: createPartner
+      tags:
+      - Partners
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The details of the direct partner to create.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PartnerCreate'
+      responses:
+        '200':
+          description: The partner account was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+  /Advertisers/{AccountSID}/MediaPartners/{PartnerId}:
+    get:
+      summary: Get Partner Details
+      description: Retrieves the details of an existing partner by their unique ID.
+      operationId: getPartnerById
+      tags:
+      - Partners
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: PartnerId
+        in: path
+        required: true
+        description: The unique identifier for the partner.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single partner object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Partner'
+    put:
+      summary: Update Partner Values
+      description: Updates the custom `MPValue{i}` fields for a specified partner. These values can be used in tracking links.
+      operationId: updatePartner
+      tags:
+      - Partners
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: PartnerId
+        in: path
+        required: true
+        description: The unique identifier for the partner to update.
+        schema:
+          type: integer
+      requestBody:
+        description: The custom MPValue fields to update.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                MPValue1:
+                  type: string
+                  description: Custom tracking value 1.
+                  example: vip
+                MPValue2:
+                  type: string
+                  description: Custom tracking value 2.
+                  example: north-america
+                MPValue3:
+                  type: string
+                  description: Custom tracking value 3.
+                  example: tennis
+      responses:
+        '200':
+          description: The partner was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+components:
+  schemas:
+    Partner:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the partner.
+          example: '2552842'
+        Name:
+          type: string
+          description: The display name of the partner.
+          example: Wile E. Coyote Facebook
+        Description:
+          type: string
+          description: A description of the partner.
+          example: Affiliate website partner.
+        Website:
+          type: string
+          format: uri
+          description: The partner's website URL.
+          example: https://www.example-partner.com
+        State:
+          type: string
+          description: The current state of the partner's account.
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          - DECLINED
+          - SUSPENDED
+          - DEACTIVATED
+          - CLOSING
+          - CLOSED
+          - NOT_APPLICABLE
+        Address:
+          type: object
+          description: The partner's address.
+          properties:
+            Country:
+              type: string
+              description: Two-letter ISO 3166-1 alpha-2 country code.
+              example: US
+            Address1:
+              type: string
+              description: Address line 1.
+              example: 123 Main St
+            Address2:
+              type: string
+              nullable: true
+              description: Address line 2.
+              example: Suite 200
+            City:
+              type: string
+              description: City, district, suburb, town, or village.
+              example: Santa Barbara
+            State:
+              type: string
+              description: State or region.
+              example: CA
+            PostalCode:
+              type: string
+              description: ZIP or postal code.
+              example: '93101'
+        Phone:
+          type: object
+          description: The partner's contact phone number.
+          properties:
+            Country:
+              type: string
+              description: Two-letter ISO 3166-1 alpha-2 country code for the phone number.
+              example: US
+            Number:
+              type: string
+              description: The phone number.
+              example: '8051234567'
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the partner's payouts.
+          example: USD
+        Timezone:
+          type: string
+          description: The partner's timezone.
+          example: America/Los_Angeles
+        IndirectTax:
+          type: object
+          description: The partner's indirect tax registration details.
+          properties:
+            Country:
+              type: string
+              description: Country code for the tax registration.
+              example: US
+            Number:
+              type: string
+              description: Indirect tax registration number (e.g., VAT, GST).
+              example: 12-3456789
+        PartnerType:
+          type: string
+          description: Whether the partner is a direct or marketplace partner.
+          enum:
+          - DIRECT
+          - MARKETPLACE
+        PromotionalMethods:
+          type: array
+          description: The partner's promotional methods.
+          items:
+            type: object
+            properties:
+              Type:
+                type: string
+                description: The type of promotional method (e.g., EMAIL, SEARCH, CONTENT).
+                example: WEBSITE
+              IsPrimary:
+                type: boolean
+                description: Whether this is the partner's primary promotional method.
+                example: true
+        PromotionalCountries:
+          type: array
+          description: Country codes where the partner promotes.
+          items:
+            type: string
+            example: US
+        Properties:
+          type: array
+          description: The partner's promotional properties (websites, apps, social accounts).
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier for the promotional property.
+                example: P-1
+              Name:
+                type: string
+                description: Display name of the promotional property.
+                example: Acme Tennis Blog
+              Type:
+                type: string
+                description: The category of promotional property.
+                enum:
+                - WEBSITE
+                - MOBILE
+                - SOCIAL
+              Platform:
+                type: string
+                description: The specific platform (e.g., FACEBOOK, TWITTER).
+                example: WEB
+              Url:
+                type: string
+                format: uri
+                description: URL of the promotional property.
+                example: https://blog.example-partner.com
+        PromotionalCategories:
+          type: array
+          description: Categories the partner promotes in.
+          items:
+            type: string
+            example: Sports
+        Programs:
+          type: array
+          description: The programs the partner is joined to.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier of the program.
+                example: '1000'
+              Name:
+                type: string
+                description: The display name of the program.
+                example: Acme Affiliate Program
+              ContractId:
+                type: string
+                description: The unique identifier of the partner's contract on this program.
+                example: S-7777777
+              ContractName:
+                type: string
+                description: The display name of the contract.
+                example: ACME Public Terms
+              JoinDate:
+                type: string
+                format: date-time
+                description: The date and time the partner joined the program.
+                example: '2026-01-19T23:51:01-08:00'
+              ExpirationDate:
+                type: string
+                format: date-time
+                nullable: true
+                description: The date and time the partner's contract expires.
+        Contacts:
+          type: array
+          description: Contacts at the partner organization.
+          items:
+            type: object
+            properties:
+              FirstName:
+                type: string
+                description: The contact's first name.
+              LastName:
+                type: string
+                description: The contact's last name.
+              Email:
+                type: string
+                format: email
+                description: The contact's email address.
+              IsPrimary:
+                type: boolean
+                description: Whether this is the partner's primary contact.
+        LinkedAccounts:
+          type: array
+          description: Other accounts linked to this partner.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier of the linked account.
+              Reason:
+                type: string
+                description: The reason the accounts are linked.
+              Date:
+                type: string
+                format: date-time
+                description: The date and time the accounts were linked.
+        PartnerValues:
+          type: object
+          description: Custom tracking values associated with the partner.
+          properties:
+            Value1:
+              type: string
+              description: Custom tracking value 1.
+            Value2:
+              type: string
+              description: Custom tracking value 2.
+            Value3:
+              type: string
+              description: Custom tracking value 3.
+        AccountManager:
+          type: string
+          description: The account manager assigned to this partner.
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time the partner account was created.
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the partner account was last updated.
+        CreatedBy:
+          type: string
+          description: The user who created the partner account.
+        LastUpdatedBy:
+          type: string
+          description: The user who last updated the partner account.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this partner in the impact.com API.
+    PartnerCreate:
+      type: object
+      required:
+      - AccountName
+      - Website
+      - AddressLine1
+      - City
+      - PostalCode
+      - Country
+      - PhoneCountry
+      - PhoneNumber
+      - PrimaryPromotionalMethod
+      - Username
+      - FirstName
+      - LastName
+      - Password
+      - EmailAddress
+      - TemplateTermsId
+      - Currency
+      properties:
+        AccountName:
+          type: string
+          description: The display name for the partner's account.
+          example: Wile E. Coyote Facebook
+        Website:
+          type: string
+          format: uri
+          description: The partner's website URL.
+          example: https://www.example-partner.com
+        AddressLine1:
+          type: string
+          description: Address line 1.
+          example: 123 Main St
+        City:
+          type: string
+          description: City for the partner's address.
+          example: Santa Barbara
+        PostalCode:
+          type: string
+          description: ZIP or postal code.
+          example: '93101'
+        Country:
+          type: string
+          description: 'Two-letter ISO 3166-1 alpha-2 country code. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`.'
+          example: US
+        PhoneCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the phone number.
+          example: US
+        PhoneNumber:
+          type: string
+          description: The partner's contact phone number.
+          example: '8051234567'
+        PrimaryPromotionalMethod:
+          type: string
+          description: The partner's primary method of promoting.
+          enum:
+          - EMAIL
+          - SEARCH
+          - LOYALTY
+          - COUPON
+          - SYNDICATION_BLOG_NETWORKS
+          - CPA_NETWORK
+          - MOBILE
+          - CONTENT
+          - SHOPPING
+          - SOCIAL_MEDIA_INFLUENCER
+          - SERVICE_PROVIDER
+          - CONSUMER_SOFTWARE
+          - INCENTIVIZED
+          - OFFLINE
+          - OTHER
+          - CASHBACK
+        Username:
+          type: string
+          description: The username for the partner's primary user account.
+          example: wile.coyote
+        FirstName:
+          type: string
+          description: First name of the primary contact.
+          example: Wile
+        LastName:
+          type: string
+          description: Last name of the primary contact.
+          example: Coyote
+        Password:
+          type: string
+          format: password
+          description: Password for the primary user account.
+        EmailAddress:
+          type: string
+          format: email
+          description: Email address of the primary contact.
+          example: wile.coyote@example.com
+        TemplateTermsId:
+          type: integer
+          description: The unique ID of the contract template to assign to this partner.
+          example: 99999
+        Currency:
+          type: string
+          description: 3-letter ISO 4217 currency code.
+        TaxId:
+          type: string
+          description: Tax identification number for the partner.
+        OrganizationType:
+          type: string
+          description: Organization type for the partner.
+          enum:
+          - NONP_GOV
+          - CORP
+          - SOLE_IND
+          - LLC_LLP_LLS
+          - TRUST
+          - SOLE_TRD
+          - PARTNERS
+          - LLC
+          - LLP
+          - COMPANY
+          - GOVERNMENT
+          - OTHER
+          example: CORP
+        AddressLine2:
+          type: string
+          description: Address line 2.
+        CountryState:
+          type: string
+          description: State or region within the country.
+        Timezone:
+          type: string
+          description: The partner's timezone.
+        PromotingCountries:
+          type: string
+          description: Comma-separated list of 2-letter ISO 3166-1 alpha 2 country codes.
+        Description:
+          type: string
+          description: A description of the partner.
+        MPGroupIDs:
+          type: string
+          description: Comma-separated list of partner group IDs to add the partner to.
+        MPValue1:
+          type: string
+          description: Custom tracking value 1.
+        MPValue2:
+          type: string
+          description: Custom tracking value 2.
+        MPValue3:
+          type: string
+          description: Custom tracking value 3.
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected partner.

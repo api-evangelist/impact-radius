@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Deferred Deep Linking",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deferred Deep Linking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Deferred Deep Link Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://trkapi.impact.com/DeferredDeepLink",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Retrieves information about the deferred deep linking event after an app install has occurred. This call is performed when the user first opens the app."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

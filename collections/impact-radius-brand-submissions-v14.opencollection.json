@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Submissions",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All API Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/APISubmissions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a list of your API submissions. Note that impact.com does not recommend using this endpoint due to typically large response sizes and long call times."
+        },
+        {
+          "info": {
+            "name": "Get API Submission Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/APISubmissions/:BatchId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "BatchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique batch ID of the API submission."
+              }
+            ]
+          },
+          "docs": "Retrieves information about a specific record that was submitted via the API, including its processing status and any errors."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "FTP Submissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All FTP File Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/FTPFileSubmissions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "SubmissionDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Return submissions submitted after this date (ISO 8601)."
+              },
+              {
+                "name": "SubmissionDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return submissions submitted before this date (ISO 8601)."
+              },
+              {
+                "name": "CompletedDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Return submissions completed after this date (ISO 8601)."
+              },
+              {
+                "name": "CompletedDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Return submissions completed before this date (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of your FTP file submissions, which can be filtered by submission or completion date."
+        },
+        {
+          "info": {
+            "name": "Get FTP Submission Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/FTPFileSubmissions/:BatchId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "BatchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique batch ID of the FTP submission."
+              }
+            ]
+          },
+          "docs": "Retrieves information about records submitted in a specific FTP batch file."
+        },
+        {
+          "info": {
+            "name": "Get FTP Submission Error Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/FTPFileSubmissions/:BatchId/ErrorDetails",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "BatchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique batch ID of the FTP submission."
+              }
+            ]
+          },
+          "docs": "Returns a list of all errors that exist within a specific FTP file submission."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

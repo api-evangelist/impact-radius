@@ -1,0 +1,314 @@
+{
+  "item": [
+    {
+      "id": "a1903fd1-1531-41be-91fa-38c0c648e0a4",
+      "name": "Promotions",
+      "description": {
+        "content": "Endpoints for listing and retrieving brand promotions available to your partner account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07f161a6-d0a3-4e74-8047-2d9ad61e53ba",
+          "name": "List promotions",
+          "request": {
+            "name": "List promotions",
+            "description": {
+              "content": "Returns a list of all brand promotions currently available to your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Promotions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38179ae6-4711-496e-8469-0a9e7bba2316",
+              "name": "An array of promotion objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Promotions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Promotions\": [\n    {\n      \"AdvertiserId\": \"12345\",\n      \"AdvertiserName\": \"Hazel's Wellness Co\",\n      \"AdvertiserLocation\": \"United States\",\n      \"PromotionFileId\": \"37\",\n      \"PromotionIds\": \"123456789\",\n      \"PromotionTitle\": \"20% Off Wellness Essentials — New Year Sale\",\n      \"NumberOfProducts\": 24,\n      \"PromotionEffectiveDates\": \"2026-01-01/2026-01-31\",\n      \"GenericRedemptionCode\": \"WELLNESS20\",\n      \"PromotionItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/ItemSearch?Query=PromotionIds='123456789'\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/123456789\"\n    },\n    {\n      \"AdvertiserId\": \"12345\",\n      \"AdvertiserName\": \"Hazel's Wellness Co\",\n      \"AdvertiserLocation\": \"United States\",\n      \"PromotionFileId\": \"37\",\n      \"PromotionIds\": \"123456789\",\n      \"PromotionTitle\": \"20% Off Wellness Essentials — New Year Sale\",\n      \"NumberOfProducts\": 24,\n      \"PromotionEffectiveDates\": \"2026-01-01/2026-01-31\",\n      \"GenericRedemptionCode\": \"WELLNESS20\",\n      \"PromotionItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/ItemSearch?Query=PromotionIds='123456789'\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/123456789\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "49d03b5c-e040-430b-8533-f1eee2e383d5",
+          "name": "Retrieve a promotion",
+          "request": {
+            "name": "Retrieve a promotion",
+            "description": {
+              "content": "Retrieves the details of a single promotion. Pass the value of `PromotionIds` (from a List Promotions response) as the path `Id`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Promotions",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier of the promotion (matches `PromotionIds` from a List Promotions response)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00686cda-22b2-4faa-a4b0-db379bca91a6",
+              "name": "A promotion object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Promotions",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier of the promotion (matches `PromotionIds` from a List Promotions response)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"AdvertiserId\": \"12345\",\n  \"AdvertiserName\": \"Hazel's Wellness Co\",\n  \"AdvertiserLocation\": \"United States\",\n  \"PromotionFileId\": \"37\",\n  \"PromotionIds\": \"123456789\",\n  \"PromotionTitle\": \"20% Off Wellness Essentials — New Year Sale\",\n  \"NumberOfProducts\": 24,\n  \"PromotionEffectiveDates\": \"2026-01-01/2026-01-31\",\n  \"GenericRedemptionCode\": \"WELLNESS20\",\n  \"PromotionItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/ItemSearch?Query=PromotionIds='123456789'\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/123456789\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccef71ef-0e20-4a24-95cb-7c3e941fcc0a",
+              "name": "No promotion exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Promotions",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier of the promotion (matches `PromotionIds` from a List Promotions response)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ebe21f6-de0d-47bb-9f7d-d2f37020d43c",
+    "name": "Partner Promotions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use the Promotions API to discover limited-time offers from the brands you partner with —\nsales, coupon codes, seasonal campaigns — and surface them to your audience.\n\nEach promotion includes a headline, an active date range, an optional redemption code, and a\ndirect link to the products it covers in the Catalogs API. Use this endpoint to power deal\npages, coupon directories, browser extensions, and newsletter content.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

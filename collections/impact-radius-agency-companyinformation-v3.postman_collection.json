@@ -1,0 +1,366 @@
+{
+  "item": [
+    {
+      "id": "f913e657-94ef-42b6-89d6-678a896341b1",
+      "name": "Company Information",
+      "description": {
+        "content": "Your agency's company profile, addresses, and key contacts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec920f2a-9e08-4cc3-bff2-92dcc9b1175d",
+          "name": "Get company information",
+          "request": {
+            "name": "Get company information",
+            "description": {
+              "content": "Returns your agency's company profile, including registered addresses, contact people, tax details, and platform preferences.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "937e895b-eb29-458b-8f4a-a75d92c39058",
+              "name": "Your agency's company information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CompanyName\": \"Nutt & Co. Agency\",\n  \"Website\": \"https://www.nuttandco-agency.com\",\n  \"PrimaryPhoneNumber\": \"15125550191\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"SecondaryPhoneNumber\": \"\",\n  \"SecondaryPhoneNumberCountry\": \"\",\n  \"MinimumContactRating\": \"3\",\n  \"Timezone\": \"(GMT -06:00) Central Time (US & Canada)\",\n  \"Currency\": \"USD\",\n  \"RegisteredForIndirectTax\": \"false\",\n  \"IndirectTaxNumber\": \"\",\n  \"OrganizationType\": \"CORP\",\n  \"EinSsnForeignTaxId\": \"XXXXX4832\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"State\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\"\n  },\n  \"BillingAddress\": {\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"State\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\"\n  },\n  \"FinancialContact\": {\n    \"UserId\": \"5402850\",\n    \"Name\": \"Carrie Oakey\",\n    \"Email\": \"carrie.oakey@nuttandco-agency.com\",\n    \"WorkPhoneNumber\": \"15125550191\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"15125550192\",\n    \"CellPhoneNumberCountry\": \"US\"\n  },\n  \"TechnicalContact\": {\n    \"UserId\": \"5402851\",\n    \"Name\": \"Noah Lott\",\n    \"Email\": \"noah.lott@nuttandco-agency.com\",\n    \"WorkPhoneNumber\": \"15125550193\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"SecurityContact\": {\n    \"UserId\": \"5402852\",\n    \"Name\": \"Robin Banks\",\n    \"Email\": \"robin.banks@nuttandco-agency.com\",\n    \"WorkPhoneNumber\": \"15125550194\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"CommercialContact\": {\n    \"UserId\": \"5402853\",\n    \"Name\": \"Hazel Nutt\",\n    \"Email\": \"hazel.nutt@nuttandco-agency.com\",\n    \"WorkPhoneNumber\": \"15125550195\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"\",\n    \"CellPhoneNumberCountry\": \"\"\n  },\n  \"Uri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebc46a04-50f9-49d4-a0c7-d9694a7dd26c",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a087bfae-e8d6-4ff0-8d49-fefb07776274",
+          "name": "Update company information",
+          "request": {
+            "name": "Update company information",
+            "description": {
+              "content": "Updates your agency's company profile. Send only the fields you want to change — omitted fields keep their existing values.\n\nReturns a status confirmation and the resource URI on success. To see the updated values, follow up with a `GET` request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"CompanyName\": \"<string>\",\n  \"Website\": \"<string>\",\n  \"PrimaryPhoneNumber\": \"<string>\",\n  \"PrimaryPhoneNumberCountry\": \"<string>\",\n  \"SecondaryPhoneNumber\": \"<string>\",\n  \"SecondaryPhoneNumberCountry\": \"<string>\",\n  \"MinimumContactRating\": \"<string>\",\n  \"Timezone\": \"<string>\",\n  \"Currency\": \"<string>\",\n  \"RegisteredForIndirectTax\": \"<string>\",\n  \"IndirectTaxNumber\": \"<string>\",\n  \"OrganizationType\": \"<string>\",\n  \"EinSsnForeignTaxId\": \"<string>\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"<string>\",\n    \"AddressLine2\": \"<string>\",\n    \"City\": \"<string>\",\n    \"State\": \"<string>\",\n    \"PostalCode\": \"<string>\",\n    \"Country\": \"<string>\"\n  },\n  \"BillingAddress\": {\n    \"AddressLine1\": \"<string>\",\n    \"AddressLine2\": \"<string>\",\n    \"City\": \"<string>\",\n    \"State\": \"<string>\",\n    \"PostalCode\": \"<string>\",\n    \"Country\": \"<string>\"\n  },\n  \"FinancialContact\": {\n    \"UserId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Email\": \"<email>\",\n    \"WorkPhoneNumber\": \"<string>\",\n    \"WorkPhoneNumberCountry\": \"<string>\",\n    \"CellPhoneNumber\": \"<string>\",\n    \"CellPhoneNumberCountry\": \"<string>\"\n  },\n  \"TechnicalContact\": {\n    \"UserId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Email\": \"<email>\",\n    \"WorkPhoneNumber\": \"<string>\",\n    \"WorkPhoneNumberCountry\": \"<string>\",\n    \"CellPhoneNumber\": \"<string>\",\n    \"CellPhoneNumberCountry\": \"<string>\"\n  },\n  \"SecurityContact\": {\n    \"UserId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Email\": \"<email>\",\n    \"WorkPhoneNumber\": \"<string>\",\n    \"WorkPhoneNumberCountry\": \"<string>\",\n    \"CellPhoneNumber\": \"<string>\",\n    \"CellPhoneNumberCountry\": \"<string>\"\n  },\n  \"CommercialContact\": {\n    \"UserId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Email\": \"<email>\",\n    \"WorkPhoneNumber\": \"<string>\",\n    \"WorkPhoneNumberCountry\": \"<string>\",\n    \"CellPhoneNumber\": \"<string>\",\n    \"CellPhoneNumberCountry\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84c0cd2a-aa5e-4fc4-91df-ff57976d353b",
+              "name": "Update confirmed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CompanyName\": \"Nutt & Co. Agency\",\n  \"Website\": \"https://www.nuttandco-agency.com\",\n  \"PrimaryPhoneNumber\": \"15125550191\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"MinimumContactRating\": \"3\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"State\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation/\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d843001e-a94f-44a2-8121-e4d3fc5cbbb4",
+              "name": "Invalid request body. Check field formats and values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CompanyName\": \"Nutt & Co. Agency\",\n  \"Website\": \"https://www.nuttandco-agency.com\",\n  \"PrimaryPhoneNumber\": \"15125550191\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"MinimumContactRating\": \"3\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"State\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac7cb96a-6ce3-4a91-a94b-ca5cd5f2ab39",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CompanyName\": \"Nutt & Co. Agency\",\n  \"Website\": \"https://www.nuttandco-agency.com\",\n  \"PrimaryPhoneNumber\": \"15125550191\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"MinimumContactRating\": \"3\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"100 Commerce Drive\",\n    \"AddressLine2\": \"Suite 200\",\n    \"City\": \"Austin\",\n    \"State\": \"TX\",\n    \"PostalCode\": \"78701\",\n    \"Country\": \"US\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "58ca2003-535f-4fe7-aff4-c9dc780cf525",
+    "name": "Agency API — Company Information",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

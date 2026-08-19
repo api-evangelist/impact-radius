@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Promotions API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promotions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List promotions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Promotions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Returns a list of all brand promotions currently available to your account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a promotion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Promotions/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the promotion (matches `PromotionIds` from a List Promotions response)."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single promotion. Pass the value of `PromotionIds` (from a List Promotions response) as the path `Id`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

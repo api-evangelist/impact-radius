@@ -1,0 +1,592 @@
+{
+  "item": [
+    {
+      "id": "af11bdf0-63b3-4440-95a7-f9aec67307d5",
+      "name": "Report Export",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf2c75d5-6aca-41a6-96ca-8d66e77dab5c",
+          "name": "Export a Report Asynchronously",
+          "request": {
+            "name": "Export a Report Asynchronously",
+            "description": {
+              "content": "Schedules a job to export a report. The response contains URIs to poll for job status and to download the result file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ReportExport",
+                ":ReportId_or_Handle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SUBAID",
+                  "value": "<integer>",
+                  "description": "Program ID to refine the report. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "Start date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "End date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "CONV_CURRENCY",
+                  "value": "<string>",
+                  "description": "Specify the report's currency (e.g., USD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "CSV",
+                  "description": "The file format for the exported report."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ReportId_or_Handle",
+                  "description": "(Required) The unique ID or handle for the report (e.g., '4222' or 'adv_click_data_pm_only')."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "620be5d0-df45-4549-b59a-14bd7d2a1fa1",
+              "name": "The job has been queued successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ReportExport",
+                    ":ReportId_or_Handle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CONV_CURRENCY",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "CSV"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ReportId_or_Handle",
+                      "description": "(Required) The unique ID or handle for the report (e.g., '4222' or 'adv_click_data_pm_only')."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"https://rTTDyFgZMPezF.eorqZpOa..OiEAG5JLrOJmD11KZovZGIAevTx-aJwa8,iYGbP+GFwY5tNEUuh?pgx=39r9&zlic=uU&\",\n  \"ResultUri\": \"https://kteJzqdPMa.wvLRSS1YcI-BaL8V+P6CzJj7TImJVrY2xaIHeTVJTYxnwtxiZVkEj3g.Z3s2MKdCs.YkGWF\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cf2447c4-d515-463e-9e4f-d1bd1477a538",
+      "name": "Reports (Legacy)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b57526ff-7d5a-49e6-8a1a-8e5bcee95c3c",
+          "name": "List All Available Reports",
+          "request": {
+            "name": "List All Available Reports",
+            "description": {
+              "content": "Retrieves a list of all reports available to the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c14d9a9-92da-4a12-96df-627678e1a2a3",
+              "name": "A paginated list of report objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Reports\": [\n    {\n      \"Name\": \"DEFAULT_MODEL\",\n      \"Id\": \"adv_action_listing_pm\",\n      \"Category\": \"Performance\",\n      \"Description\": \"Lists all actions for a date range.\",\n      \"ApiAccessible\": true,\n      \"ApiRunUri\": \"https://ZBA.xybqv8G644Mb5rEzXQlDmfC51KlXzcPQJjlutRvdKeR7BLUwSwsg9ZYxEV\",\n      \"DeferredApiRunUri\": \"http://vQaFvfyHbBLWT.ljA6tfddvfCy5B18fNIcCPkIfI51PbgZ2,Je4P7yHZT00RXgt5jXD3UIBtd.8etfXX1f6CBdXC?d=O6&lsgrlbw=_L&neop&\",\n      \"MetaDataUri\": \"https://jGZByhZcf.inysnll3FibGDqtvPeAkxJomKUWfcMLMzQfaYf51gtV8n8i\",\n      \"RunUri\": \"https://app.impact.com/secure/reports/run/adv_action_listing_pm\"\n    },\n    {\n      \"Name\": \"DEFAULT_MODEL\",\n      \"Id\": \"adv_action_listing_pm\",\n      \"Category\": \"Performance\",\n      \"Description\": \"Lists all actions for a date range.\",\n      \"ApiAccessible\": true,\n      \"ApiRunUri\": \"http://jNPV.owXkCVzfF-zhBGLPB-6jBKcqZAaZHIt,yMM6ivv+J\",\n      \"DeferredApiRunUri\": \"https://WKwfBJzCaGOOuB.jgqVVtenemIo2zXjuFXu8GMS4kfp2T.6-sKrcGEy14FC-WKFe5yi,q?\",\n      \"MetaDataUri\": \"http://MKzXCPAkZVQLhbKEFNjgx.kscshUwqkpmqLQnE9oSI2DXdXPuSbS92bCl-sGkRALEQg5drqQFC0O7x,0b6W3d4?bsq&haua&f&\",\n      \"RunUri\": \"https://app.impact.com/secure/reports/run/adv_action_listing_pm\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87bffc47-9e6e-45db-bec2-91b563cb4129",
+          "name": "Run a Report (Legacy)",
+          "request": {
+            "name": "Run a Report (Legacy)",
+            "description": {
+              "content": "Runs a report and returns the records synchronously. This is a legacy endpoint with pagination limits. Use the `ReportExport` endpoint for more efficient exporting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Reports",
+                ":ReportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SUBAID",
+                  "value": "<integer>",
+                  "description": "Program ID. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<date>",
+                  "description": "Start date in YYYY-MM-DD format. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<date>",
+                  "description": "End date in YYYY-MM-DD format. Required for most reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "RQueryIDx",
+                  "value": "0",
+                  "description": "For reports with multiple tables, specifies which table to return (0-indexed)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ReportId",
+                  "description": "(Required) The unique ID or handle for the report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e1adbff-d314-4855-a291-7dfa5560756d",
+              "name": "A paginated list of report records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Reports",
+                    ":ReportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "StartDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "RQueryIDx",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ReportId",
+                      "description": "(Required) The unique ID or handle for the report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Records\": [\n    {\n      \"key_0\": 3394.9626334276195,\n      \"key_1\": 397.29189039132365\n    },\n    {\n      \"key_0\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d0758ff-ffdc-4dcb-b980-5aab871e3274",
+          "name": "Retrieve Report Metadata",
+          "request": {
+            "name": "Retrieve Report Metadata",
+            "description": {
+              "content": "Retrieves the dynamically generated documentation (metadata) for a specific report, including available filters and attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Reports",
+                ":ReportId",
+                "MetaData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ReportId",
+                  "description": "(Required) The unique ID or handle of the report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0db2d097-c1ab-4012-83ba-3855bdc38a45",
+              "name": "The metadata object for the requested report.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Reports",
+                    ":ReportId",
+                    "MetaData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ReportId",
+                      "description": "(Required) The unique ID or handle of the report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Name\": \"Action Listing\",\n  \"Id\": \"adv_action_listing_pm\",\n  \"Description\": \"Lists all actions for a date range.\",\n  \"Filters\": [\n    {\n      \"Name\": \"START_DATE\",\n      \"DataType\": \"DATE\",\n      \"Format\": \"yyyy-MM-dd\"\n    },\n    {\n      \"Name\": \"START_DATE\",\n      \"DataType\": \"DATE\",\n      \"Format\": \"yyyy-MM-dd\"\n    }\n  ],\n  \"Attributes\": [\n    {\n      \"Name\": \"ActionDate\",\n      \"DataType\": \"DATETIME\",\n      \"Description\": \"Date the action occurred.\"\n    },\n    {\n      \"Name\": \"ActionDate\",\n      \"DataType\": \"DATETIME\",\n      \"Description\": \"Date the action occurred.\"\n    }\n  ],\n  \"RunUri\": \"http://JYkriNvUfsNahwmGEJ.nbsrgb4lccbggnB.xuvgYNN0LZ75jFa8HO8SnuVT6eOYYYK-hsyMrDEW02Jh1rLPZM6NY\",\n  \"Uri\": \"https://NSXgckEyfBYSjUDWHGTsI.sfoen0dWw1.eeQYPCtumx6mtJ1EeOuO6ZyqUzN,gahXP96U-lpKPXbGzdLpnT0?m&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6540b7e4-201b-4705-8e11-b8a6165c8d80",
+    "name": "Brand API - Reports & Exports",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for listing available reports and exporting report data.\n- The `Reports` endpoints are for listing and discovering reports and their metadata.\n- The `ReportExport` endpoint is the recommended method for asynchronously exporting large report datasets.",
+      "type": "text/plain"
+    }
+  }
+}

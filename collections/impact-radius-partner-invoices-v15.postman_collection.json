@@ -1,0 +1,358 @@
+{
+  "item": [
+    {
+      "id": "37491e3a-e839-4c8d-9dd0-853612df6cc5",
+      "name": "Invoices",
+      "description": {
+        "content": "Endpoints for listing, retrieving, and downloading partner invoices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "faacb1a6-7b99-430c-8905-61b0320dc5d0",
+          "name": "List invoices",
+          "request": {
+            "name": "List invoices",
+            "description": {
+              "content": "Returns a list of invoices. The transactions are returned in sorted order, with the most recent transactions appearing first. \nParameters can be used to create a date range to only list invoices that were created within the range.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 format that filters the list to only show invoices created on or after this date."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "ISO 8601 format that filters the list to only show invoices created on or before this date."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4d5294b-60d5-4090-a897-7f3c6d0f1125",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "StartDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDate",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Invoices\": [\n    {\n      \"Id\": \"1924609-1\",\n      \"CreatedDate\": \"2024-09-02T07:37:12-07:00\",\n      \"RecipientId\": 1804207,\n      \"RecipientName\": \"Acme Corporation\",\n      \"Currency\": \"USD\",\n      \"TotalAmount\": \"50.00\",\n      \"TotalVatAmount\": \"0.00\",\n      \"LineItems\": [\n        {\n          \"CampaignId\": \"10306\",\n          \"CampaignName\": \"Wayne Enterprises\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"12021\",\n          \"Actions\": \"5\",\n          \"NetItemAmount\": \"50.00\",\n          \"VatItemAmount\": \"0.00\",\n          \"TotalItemAmount\": \"50.00\",\n          \"Status\": \"OVERDUE\",\n          \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n          \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n        },\n        {\n          \"CampaignId\": \"10306\",\n          \"CampaignName\": \"Wayne Enterprises\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"12021\",\n          \"Actions\": \"5\",\n          \"NetItemAmount\": \"50.00\",\n          \"VatItemAmount\": \"0.00\",\n          \"TotalItemAmount\": \"50.00\",\n          \"Status\": \"OVERDUE\",\n          \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n          \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n        }\n      ],\n      \"DetailedLineItems\": [\n        {\n          \"AccountId\": 1804207,\n          \"Name\": \"Acme Corporation\",\n          \"ProgramId\": \"10306\",\n          \"ProgramName\": \"Wayne Enterprises\",\n          \"EventMonthYear\": \"12021\",\n          \"ActionAmount\": \"48.00\",\n          \"OtherAmount\": \"2.00\",\n          \"TotalAmount\": \"50.00\"\n        },\n        {\n          \"AccountId\": 1804207,\n          \"Name\": \"Acme Corporation\",\n          \"ProgramId\": \"10306\",\n          \"ProgramName\": \"Wayne Enterprises\",\n          \"EventMonthYear\": \"12021\",\n          \"ActionAmount\": \"48.00\",\n          \"OtherAmount\": \"2.00\",\n          \"TotalAmount\": \"50.00\"\n        }\n      ],\n      \"PDF\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1/Download\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1\"\n    },\n    {\n      \"Id\": \"1924609-1\",\n      \"CreatedDate\": \"2024-09-02T07:37:12-07:00\",\n      \"RecipientId\": 1804207,\n      \"RecipientName\": \"Acme Corporation\",\n      \"Currency\": \"USD\",\n      \"TotalAmount\": \"50.00\",\n      \"TotalVatAmount\": \"0.00\",\n      \"LineItems\": [\n        {\n          \"CampaignId\": \"10306\",\n          \"CampaignName\": \"Wayne Enterprises\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"12021\",\n          \"Actions\": \"5\",\n          \"NetItemAmount\": \"50.00\",\n          \"VatItemAmount\": \"0.00\",\n          \"TotalItemAmount\": \"50.00\",\n          \"Status\": \"OVERDUE\",\n          \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n          \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n        },\n        {\n          \"CampaignId\": \"10306\",\n          \"CampaignName\": \"Wayne Enterprises\",\n          \"Description\": \"MEDIA_PAYOUT\",\n          \"EventMonthYear\": \"12021\",\n          \"Actions\": \"5\",\n          \"NetItemAmount\": \"50.00\",\n          \"VatItemAmount\": \"0.00\",\n          \"TotalItemAmount\": \"50.00\",\n          \"Status\": \"OVERDUE\",\n          \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n          \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n        }\n      ],\n      \"DetailedLineItems\": [\n        {\n          \"AccountId\": 1804207,\n          \"Name\": \"Acme Corporation\",\n          \"ProgramId\": \"10306\",\n          \"ProgramName\": \"Wayne Enterprises\",\n          \"EventMonthYear\": \"12021\",\n          \"ActionAmount\": \"48.00\",\n          \"OtherAmount\": \"2.00\",\n          \"TotalAmount\": \"50.00\"\n        },\n        {\n          \"AccountId\": 1804207,\n          \"Name\": \"Acme Corporation\",\n          \"ProgramId\": \"10306\",\n          \"ProgramName\": \"Wayne Enterprises\",\n          \"EventMonthYear\": \"12021\",\n          \"ActionAmount\": \"48.00\",\n          \"OtherAmount\": \"2.00\",\n          \"TotalAmount\": \"50.00\"\n        }\n      ],\n      \"PDF\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1/Download\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a5da711-6a2b-4367-b206-4807bad0fff9",
+          "name": "Retrieve a specific invoice",
+          "request": {
+            "name": "Retrieve a specific invoice",
+            "description": {
+              "content": "This request allows you to retrieve an invoice from both impact.com's invoicing methods.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Invoices",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the invoice object."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7c426f3-8227-4688-ae4a-632364aa4f6e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Invoices",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the invoice object."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1924609-1\",\n  \"CreatedDate\": \"2024-09-02T07:37:12-07:00\",\n  \"RecipientId\": 1804207,\n  \"RecipientName\": \"Acme Corporation\",\n  \"Currency\": \"USD\",\n  \"TotalAmount\": \"50.00\",\n  \"TotalVatAmount\": \"0.00\",\n  \"LineItems\": [\n    {\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"Description\": \"MEDIA_PAYOUT\",\n      \"EventMonthYear\": \"12021\",\n      \"Actions\": \"5\",\n      \"NetItemAmount\": \"50.00\",\n      \"VatItemAmount\": \"0.00\",\n      \"TotalItemAmount\": \"50.00\",\n      \"Status\": \"OVERDUE\",\n      \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n      \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n    },\n    {\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"Description\": \"MEDIA_PAYOUT\",\n      \"EventMonthYear\": \"12021\",\n      \"Actions\": \"5\",\n      \"NetItemAmount\": \"50.00\",\n      \"VatItemAmount\": \"0.00\",\n      \"TotalItemAmount\": \"50.00\",\n      \"Status\": \"OVERDUE\",\n      \"DueDate\": \"2021-02-05T17:51:35-08:00\",\n      \"PaidDate\": \"2024-10-01T00:00:00-07:00\"\n    }\n  ],\n  \"DetailedLineItems\": [\n    {\n      \"AccountId\": 1804207,\n      \"Name\": \"Acme Corporation\",\n      \"ProgramId\": \"10306\",\n      \"ProgramName\": \"Wayne Enterprises\",\n      \"EventMonthYear\": \"12021\",\n      \"ActionAmount\": \"48.00\",\n      \"OtherAmount\": \"2.00\",\n      \"TotalAmount\": \"50.00\"\n    },\n    {\n      \"AccountId\": 1804207,\n      \"Name\": \"Acme Corporation\",\n      \"ProgramId\": \"10306\",\n      \"ProgramName\": \"Wayne Enterprises\",\n      \"EventMonthYear\": \"12021\",\n      \"ActionAmount\": \"48.00\",\n      \"OtherAmount\": \"2.00\",\n      \"TotalAmount\": \"50.00\"\n    }\n  ],\n  \"PDF\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1/Download\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Invoices/1924609-1\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67771ae7-81a1-4a05-962b-d99c663b5940",
+          "name": "Download an invoice",
+          "request": {
+            "name": "Download an invoice",
+            "description": {
+              "content": "Returns the specified invoice as a downloaded file in PDF format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Invoices",
+                ":Id",
+                "Download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the invoice."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29191809-81be-4b96-a025-c84e9451374a",
+              "name": "PDF file of the invoice.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Invoices",
+                    ":Id",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the invoice."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "93c43245-d37d-4825-854e-19469b8123a3",
+    "name": "Partner Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Invoices (or partner invoices) are statements of amounts owed to partners that are automatically generated by impact.com. \nThey contain information about payments due to partners, including individual line item(s) within an invoice.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

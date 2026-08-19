@@ -1,0 +1,384 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Submissions
+  description: API for checking the status of records submitted to impact.com via API or FTP. This allows you to see if submissions were received and view metadata and any processing errors.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/APISubmissions:
+    get:
+      summary: List All API Submissions
+      description: Returns a list of your API submissions. Note that impact.com does not recommend using this endpoint due to typically large response sizes and long call times.
+      operationId: listApiSubmissions
+      tags:
+      - API Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of API submission objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  APISubmission:
+                    type: array
+                    description: The list of API submission objects.
+                    items:
+                      $ref: '#/components/schemas/ApiSubmission'
+  /Advertisers/{AccountSID}/APISubmissions/{BatchId}:
+    get:
+      summary: Get API Submission Details
+      description: Retrieves information about a specific record that was submitted via the API, including its processing status and any errors.
+      operationId: getApiSubmissionById
+      tags:
+      - API Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: BatchId
+        in: path
+        required: true
+        description: The unique batch ID of the API submission.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single API submission object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSubmission'
+  /Advertisers/{AccountSID}/FTPFileSubmissions:
+    get:
+      summary: List All FTP File Submissions
+      description: Returns a list of your FTP file submissions, which can be filtered by submission or completion date.
+      operationId: listFtpSubmissions
+      tags:
+      - FTP Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: SubmissionDateStart
+        in: query
+        description: Return submissions submitted after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: SubmissionDateEnd
+        in: query
+        description: Return submissions submitted before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: CompletedDateStart
+        in: query
+        description: Return submissions completed after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: CompletedDateEnd
+        in: query
+        description: Return submissions completed before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A paginated list of FTP submission objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FTPFileSubmissions:
+                    type: array
+                    description: The list of FTP submission objects.
+                    items:
+                      $ref: '#/components/schemas/FtpSubmission'
+  /Advertisers/{AccountSID}/FTPFileSubmissions/{BatchId}:
+    get:
+      summary: Get FTP Submission Details
+      description: Retrieves information about records submitted in a specific FTP batch file.
+      operationId: getFtpSubmissionById
+      tags:
+      - FTP Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: BatchId
+        in: path
+        required: true
+        description: The unique batch ID of the FTP submission.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single FTP submission object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FtpSubmission'
+  /Advertisers/{AccountSID}/FTPFileSubmissions/{BatchId}/ErrorDetails:
+    get:
+      summary: Get FTP Submission Error Details
+      description: Returns a list of all errors that exist within a specific FTP file submission.
+      operationId: getFtpSubmissionErrorDetails
+      tags:
+      - FTP Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: BatchId
+        in: path
+        required: true
+        description: The unique batch ID of the FTP submission.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of FTP submission error objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ErrorDetail:
+                    type: array
+                    description: The list of FTP submission error objects.
+                    items:
+                      $ref: '#/components/schemas/FtpErrorDetail'
+components:
+  schemas:
+    ApiSubmission:
+      type: object
+      properties:
+        BatchId:
+          type: string
+          description: Id of the API submission.
+          example: A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l
+        AccountId:
+          type: integer
+          description: Id of the brand account that submitted the API submission.
+          example: 10001
+        SubmissionDate:
+          type: string
+          format: date-time
+          description: Date and time the API submission was submitted (ISO 8601).
+          example: '2020-09-10T09:50:12-07:00'
+        CampaignId:
+          type: integer
+          description: Id of the program (formerly known as campaign) to which the record was submitted.
+          example: 1000
+        ActionTrackerId:
+          type: integer
+          description: Id of the action tracker (event type) the record applies to.
+          example: 4000
+        MediaPartnerId:
+          type: integer
+          description: Id of the partner (formerly known as media partner) that drove the record submitted via API.
+          example: 10000
+        EventCode:
+          type: string
+          description: Configurable string code identifying the event type, if used instead of EventTypeId.
+          example: ACME_SALE
+        OrderId:
+          type: string
+          nullable: true
+          example: '1234567890123'
+          description: If the record submitted is a conversion, this is the unique Id associated with that conversion.
+        Payload:
+          type: string
+          example: CampaignId=1000&EventTypeId=4000&EventDate=2024-08-01T23:55:24-08:00&OrderId=1234567890123&ClickId=SKhRQaSXwxyOUQ%253AwUx0Mo36FUkiXxtxVUQTEzY0&CustomerId=BCZ2WVSH674563PDPYOTM3AXDQ&OrderPromoCode=10OFF-FORGE&CustomerStatus=NEW&CustomerPostCode=93107&CurrencyCode=USD&OrderDiscount=5&IpAddress=12.345.678.90&ItemSku1=12345&ItemName1=Anvil&ItemCategory1=Anvils&ItemQuantity1=2&ItemPrice1=10&ItemSku2=55555&ItemName2=Hammer&ItemCategory2=Hammers&ItemQuantity2=1&ItemPrice2=6.99
+          description: Information about the tracking data itself that was submitted to impact.com via an API call.
+        Type:
+          type: string
+          enum:
+          - Conversion
+          - Modification
+          - Reversal
+          example: Conversion
+          description: Type of record submitted.
+        Status:
+          type: string
+          enum:
+          - Queued
+          - In Progress
+          - Complete
+          example: Complete
+          description: Status of the API submission. Will always begin as Queued .
+        CompletionDate:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2020-09-10T10:11:15-07:00'
+          description: Date and time that the submission finished processing. Will be empty if the submission is not finished processing. See ISO 8601 .
+        ErrorType:
+          type: string
+          nullable: true
+          example: Contract Error
+          description: Errors encountered during the submission process. Will be empty if no errors were encountered. Some common values are listed below.
+        ErrorReason:
+          type: string
+          nullable: true
+          example: CONTRACT_NOT_FOUND RESTRICTED_PROMOCODE
+          description: List of error explanations to help describe the ErrorType .
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/APISubmissions/A-f6675c69-4a69-4c04-8a1d-3f2eb7a6754e
+          description: API submission's direct URI to view only one specific API submission.
+    FtpSubmission:
+      type: object
+      properties:
+        BatchId:
+          type: string
+          description: Id of the FTP submission.
+          example: BATCH-789
+        AccountId:
+          type: integer
+          description: Id of the brand account that submitted the file.
+          example: 12345
+        SubmissionDate:
+          type: string
+          format: date-time
+          description: Date and time the FTP submission was submitted (ISO 8601).
+          example: '2026-09-10T22:55:32-08:00'
+        FileName:
+          type: string
+          description: Name of the file that was submitted.
+          example: actions_20260910.csv
+        Type:
+          type: string
+          description: Type of records submitted.
+          enum:
+          - Conversion
+          - Modification
+          - Reversal
+        Status:
+          type: string
+          description: Status of the FTP submission. Will always begin as Queued.
+          enum:
+          - Queued
+          - In Progress
+          - Complete
+        TotalRecords:
+          type: integer
+          description: Total number of records in the submitted file.
+          example: 1000
+        TotalErrors:
+          type: integer
+          description: Total number of errors found in the submitted file.
+          example: 5
+        CompletionDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Date and time that the submission finished processing (ISO 8601). Empty if not finished.
+          example: '2026-09-10T22:55:45-08:00'
+        ErrorsUri:
+          type: string
+          format: uri-reference
+          description: The URI to retrieve detailed error information for this submission.
+          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789/Errors
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this FTP submission in the impact.com API.
+          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789
+    FtpErrorDetail:
+      type: object
+      properties:
+        Line:
+          type: integer
+          description: On which line of the FTP file the error exists.
+          example: 42
+        CampaignId:
+          type: integer
+          description: Id of the program (formerly known as campaign) that received the FTP file.
+          example: 1000
+        ActionTrackerId:
+          type: integer
+          description: Id of the event type (formerly known as action tracker) that received the FTP file.
+          example: 18500
+        MediaPartnerId:
+          type: integer
+          description: Id of the partner (formerly known as media partner) that the FTP file is submitting an event (or events) for.
+          example: 2552842
+        EventCode:
+          type: string
+          description: Id of a mobile payable event. A legacy feature that is no longer supported.
+          example: ''
+        OrderId:
+          type: string
+          description: Id of the order associated with the record in the FTP file submission.
+          example: '9217374917471'
+        Category:
+          type: string
+          description: Category for the product associated with the record in the FTP file submission.
+          example: VALIDATION
+        Sku:
+          type: string
+          description: Unique stock-keeping unit (SKU) Id that represents the item that the ad is marketing. This Id will coincide with the item's SKU Id as it is listed in the product catalog.
+          example: ACME-TENNIS-101
+        Status:
+          type: string
+          description: "What the error is. Possible values:\n- `Validation` — Errors exist in the data submitted (e.g., data fields were not formatted correctly).\n- `Contract Error` — Submission contains valid data fields, but the data does not meet criteria set in the contract — no payout can be generated."
+          enum:
+          - Validation
+          - Contract Error
+        Reason:
+          type: string
+          enum:
+          - ACTION_REF_NOT_FOUND
+          - ACTIONTERMS_NOT_FOUND
+          - ACTIONTRACKER_CAMPAIGN_MISMATCH
+          - ACTIONTRACKER_NOT_ACTIVE
+          - ACTIONTRACKER_NOT_FOUND
+          - BLACKLISTED_SOURCE_IP
+          - BLOCKED_BY_PROMOCODE
+          - CALL_DUPLICATE
+          - CALL_DURATION_TOO_SHORT
+          - CALL_FOR_CALL_PER_CONV_AT
+          - CALL_INCOMPLETE
+          - CALL_OUTSIDE_DAILY_RANGE
+          - CAMPAIGN_NOT_FOUND
+          - CONTRACT_NOT_FOUND
+          - CONV_DUPLICATE
+          - CREDITING_RULE_MISMATCH
+          - MALFORMED
+          - MAX_RECURRENCES_REACHED
+          - NO_ITEM
+          - NO_VALID_ACTION_REF
+          - OID_MISSING
+          - OTHER_REF_PRIORITIZED
+          - OUTSIDE_ASSOCIATION_WINDOW
+          - PARTNER_NOT_ACTIVE
+          - REFTYPE_NOT_ACCEPTED
+          - RESTRICTED_PROMOCODE
+          - UNCLAIMED
+          description: "Reason for the error existing. Possible values:\n- `ACTION_REF_NOT_FOUND` — No referral information for the event submitted can be found.\n- `ACTIONTERMS_NOT_FOUND` — The contract that would apply to the submission contains no terms for the event type within the submission.\n- `ACTIONTRACKER_CAMPAIGN_MISMATCH` — The event type (or action tracker) listed does not belong to the program listed.\n- `ACTIONTRACKER_NOT_ACTIVE` — The event type (or action tracker) exists, but is yet to be enabled.\n- `ACTIONTRACKER_NOT_FOUND` — The event type (or action tracker) cannot be found.\n- `BLACKLISTED_SOURCE_IP` — A restriction was placed on the customer's IP (usually a country restriction).\n- `BLOCKED_BY_PROMOCODE` — Partner promoted a promo code that was not assigned to them.\n- `CALL_DUPLICATE` — Determined by duplication rules — same caller generated an action within a pre-determined amount of days.\n- `CALL_DURATION_TOO_SHORT` — Call event in the submission was too short to be payable.\n- `CALL_FOR_CALL_PER_CONV_AT` — Call was meant to turn into a pay-per-sale but did not reach that point.\n- `CALL_INCOMPLETE` — Call did not connect properly.\n- `CALL_OUTSIDE_DAILY_RANGE` — Call event was outside pre-determined hours.\n- `CAMPAIGN_NOT_FOUND` — Program listed in the submission cannot be found.\n- `CONTRACT_NOT_FOUND` — No contract for the partner existed at the time of the submission.\n- `CONV_DUPLICATE` — An action with the same OrderId was registered within the OID deduplication window.\n- `CREDITING_RULE_MISMATCH` — The event represented in the submission does not follow crediting rules (e.g., partner drove first click, but last click wins the credit).\n- `MALFORMED` — Click data is incomprehensible, or was tagged in error (e.g., a deeplink domain mismatch).\n- `MAX_RECURRENCES_REACHED` — The referral was already credited with enough actions.\n- `NO_ITEM` — No products, items, services, etc. were contained in the sale submission.\n- `NO_VALID_ACTION_REF` — A referral is present for the submission, but is not commissionable.\n- `OID_MISSING` — No Order Id (OID) can be found for the event submitted. OrderId is a required field.\n- `OTHER_REF_PRIORITIZED` — Another referral was prioritized for the event within the submission. This will only apply to attribution reports.\n- `OUTSIDE_ASSOCIATION_WINDOW` — Action date in the submission lands outside of the click referral window.\n- `PARTNER_NOT_ACTIVE` — The partner associated with the submission was not active at the time of the submission.\n- `REFTYPE_NOT_ACCEPTED` — The contract that would apply to the submission contains no terms for the referral used in the event being submitted.\n- `RESTRICTED_PROMOCODE` — Promo code used by the customer classified the event as a whole as part of another partner's channel.\n- `UNCLAIMED` — The event represented in the submission has only non-preferred media sources associated with it. Only applicable to legacy attribution reports."
+          example: Invalid date format
+        Uri:
+          type: string
+          format: uri-reference
+          description: FTP submission error's direct URI to view only one specific FTP submission error.
+          example: /Advertisers/<AccountSID>/FTPSubmissions/BATCH-789/Errors/42

@@ -1,0 +1,605 @@
+{
+  "item": [
+    {
+      "id": "25930df7-29db-4f4c-afb2-a70bec581692",
+      "name": "Tracking Value Requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d0c2237f-ca02-4336-8686-f71fd7534a33",
+          "name": "List All Tracking Value Requests",
+          "request": {
+            "name": "List All Tracking Value Requests",
+            "description": {
+              "content": "Returns a list of tracking value requests, which can be filtered by campaign, deal, partner, state, and request type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "TrackingValueRequests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerId",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "RequestType",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7aff375c-0b21-416d-8d1b-4fa82b8384c6",
+              "name": "A paginated list of tracking value request objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "TrackingValueRequests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "DealId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "MediaPartnerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "RequestType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TrackingValueRequests\": [\n    {\n      \"Id\": \"99999\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"MediaPartnerId\": 2552842,\n      \"MediaPartnerName\": \"Wile E. Coyote Facebook\",\n      \"RequestType\": \"PROMOCODE_TRACKING\",\n      \"NumberRequested\": 5,\n      \"PromoCodes\": [\n        {\n          \"Id\": \"1001\",\n          \"RequestedPromoCode\": \"SUMMER25\",\n          \"ApprovedPromoCode\": \"SUMMER25\",\n          \"CreditPolicy\": \"INVOLVED\",\n          \"MatchMode\": \"RE\"\n        },\n        {\n          \"Id\": \"1001\",\n          \"RequestedPromoCode\": \"SUMMER25\",\n          \"ApprovedPromoCode\": \"SUMMER25\",\n          \"CreditPolicy\": \"INVOLVED\",\n          \"MatchMode\": \"RE\"\n        }\n      ],\n      \"UniqueUrls\": [\n        {\n          \"Id\": \"2001\",\n          \"Url\": \"https://www.acme.com/r/abc123\"\n        },\n        {\n          \"Id\": \"2001\",\n          \"Url\": \"https://www.acme.com/r/abc123\"\n        }\n      ],\n      \"PhoneNumbers\": [\n        {\n          \"Id\": \"3001\",\n          \"AssignedPhoneNumberId\": \"12345\",\n          \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n        },\n        {\n          \"Id\": \"3001\",\n          \"AssignedPhoneNumberId\": \"12345\",\n          \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n        }\n      ],\n      \"State\": \"APPROVED\",\n      \"DatePlaced\": \"2026-01-15T10:00:00-08:00\",\n      \"DateNeeded\": \"2026-01-20T10:00:00-08:00\",\n      \"DateCompleted\": \"2026-01-18T10:00:00-08:00\",\n      \"AdditionalInstructions\": \"Please activate immediately.\",\n      \"ProcessingComments\": \"Approved.\",\n      \"DealId\": 3,\n      \"DealName\": \"\",\n      \"DealDescription\": \"\",\n      \"DealState\": \"\",\n      \"DealType\": \"\",\n      \"DealScope\": \"\",\n      \"DealProducts\": [\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageURL\": \"https://qyWXnH.kyiNhWaEOVxenhpTjjM5iMwYtkiymoiK+7cT4zflNz6-whpV0F\",\n          \"ProductBeforePriceAmount\": 1857.2097439933223,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 5703.355957014204,\n          \"ProductAfterPriceCurrency\": \"string\"\n        },\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageURL\": \"http://txGVSbnAyhjdQh.yyrndM-4ZFZYq+S9RPk,.4Ouj2zy,9O++uA2R3iAkHc7Hryc4oLt94i\",\n          \"ProductBeforePriceAmount\": 1214.7135968808698,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 6104.285493670197,\n          \"ProductAfterPriceCurrency\": \"string\"\n        }\n      ],\n      \"DealCategories\": \"\",\n      \"DiscountType\": \"\",\n      \"DiscountAmount\": 1482.5918127420966,\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": 1086.7177474493094,\n      \"DiscountMaximumPercent\": 4831.164319037673,\n      \"DiscountPercentRangeStart\": 6891.359765991892,\n      \"DiscountPercentRangeEnd\": 5753.102539721366,\n      \"Gift\": \"\",\n      \"RebateAmount\": 2660.271483429254,\n      \"RebateCurrency\": \"\",\n      \"DealDefaultPromoCode\": \"\",\n      \"MinimumPurchaseAmount\": 9977.023012860658,\n      \"MinimumPurchaseAmountCurrency\": \"\",\n      \"MaximumSavingsAmount\": 2809.6500130222425,\n      \"MaximumSavingsCurrency\": \"\",\n      \"BogoBuyQuantity\": 6870,\n      \"BogoBuyScope\": \"\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"http://JN.jtulRvgW7LEZ94zucyYOpE,oSatPEj+DIQRUxx1oqpPTNn4\",\n      \"BogoGetQuantity\": 8764,\n      \"BogoGetScope\": \"\",\n      \"BogoGetDiscountType\": \"\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"https://CMbzHUvyzb.eqosLlUUtubmY49Vq3nniDTMd6,wdRjhRuY-gfOlzAZoqRrnLqzphRs0DC2ad3jCd\",\n      \"BogoGetDiscountAmount\": 597.6792753233507,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 9073.160406757903,\n      \"PurchaseLimitQuantity\": 8339,\n      \"DealStartDate\": \"2012-09-27T08:47:19.113Z\",\n      \"DealEndDate\": \"2025-10-16T14:21:39.558Z\",\n      \"SynchAdsPromoCodes\": false,\n      \"DealRestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealRestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Uri\": \"https://aKnnshyyIzvSTzEYHXmBae.sabcZNpcYKmy?ei=fqdQj&eaij&zvcbdf&\"\n    },\n    {\n      \"Id\": \"99999\",\n      \"CampaignId\": 1000,\n      \"CampaignName\": \"Acme Campaign\",\n      \"MediaPartnerId\": 2552842,\n      \"MediaPartnerName\": \"Wile E. Coyote Facebook\",\n      \"RequestType\": \"PHONE_NUMBER_TRACKING\",\n      \"NumberRequested\": 5,\n      \"PromoCodes\": [\n        {\n          \"Id\": \"1001\",\n          \"RequestedPromoCode\": \"SUMMER25\",\n          \"ApprovedPromoCode\": \"SUMMER25\",\n          \"CreditPolicy\": \"INVOLVED\",\n          \"MatchMode\": \"RE\"\n        },\n        {\n          \"Id\": \"1001\",\n          \"RequestedPromoCode\": \"SUMMER25\",\n          \"ApprovedPromoCode\": \"SUMMER25\",\n          \"CreditPolicy\": \"INVOLVED\",\n          \"MatchMode\": \"RE\"\n        }\n      ],\n      \"UniqueUrls\": [\n        {\n          \"Id\": \"2001\",\n          \"Url\": \"https://www.acme.com/r/abc123\"\n        },\n        {\n          \"Id\": \"2001\",\n          \"Url\": \"https://www.acme.com/r/abc123\"\n        }\n      ],\n      \"PhoneNumbers\": [\n        {\n          \"Id\": \"3001\",\n          \"AssignedPhoneNumberId\": \"12345\",\n          \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n        },\n        {\n          \"Id\": \"3001\",\n          \"AssignedPhoneNumberId\": \"12345\",\n          \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n        }\n      ],\n      \"State\": \"NEW\",\n      \"DatePlaced\": \"2026-01-15T10:00:00-08:00\",\n      \"DateNeeded\": \"2026-01-20T10:00:00-08:00\",\n      \"DateCompleted\": \"2026-01-18T10:00:00-08:00\",\n      \"AdditionalInstructions\": \"Please activate immediately.\",\n      \"ProcessingComments\": \"Approved.\",\n      \"DealId\": 3,\n      \"DealName\": \"\",\n      \"DealDescription\": \"\",\n      \"DealState\": \"\",\n      \"DealType\": \"\",\n      \"DealScope\": \"\",\n      \"DealProducts\": [\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageURL\": \"http://IDqGKMZDRRdNHnLfkWEKILBe.dohmSwemDZywrRWWdtrsRc3\",\n          \"ProductBeforePriceAmount\": 2500.1141515754234,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 2739.1044286890287,\n          \"ProductAfterPriceCurrency\": \"string\"\n        },\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageURL\": \"https://sdlqTPLLSlZfEfqfipYaoxxvpm.ghxq9JH-b.3Ety\",\n          \"ProductBeforePriceAmount\": 3601.7368470803135,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 6626.485101937023,\n          \"ProductAfterPriceCurrency\": \"string\"\n        }\n      ],\n      \"DealCategories\": \"\",\n      \"DiscountType\": \"\",\n      \"DiscountAmount\": 4107.351263705945,\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": 4121.13090691406,\n      \"DiscountMaximumPercent\": 2061.777792315955,\n      \"DiscountPercentRangeStart\": 4624.7556857025465,\n      \"DiscountPercentRangeEnd\": 9795.491242847127,\n      \"Gift\": \"\",\n      \"RebateAmount\": 9421.31974761941,\n      \"RebateCurrency\": \"\",\n      \"DealDefaultPromoCode\": \"\",\n      \"MinimumPurchaseAmount\": 2357.3363315330266,\n      \"MinimumPurchaseAmountCurrency\": \"\",\n      \"MaximumSavingsAmount\": 2166.4994498683386,\n      \"MaximumSavingsCurrency\": \"\",\n      \"BogoBuyQuantity\": 5345,\n      \"BogoBuyScope\": \"\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"https://O.toujp-xUuNjgtSBbXKpq4UqkzUiqs5\",\n      \"BogoGetQuantity\": 9761,\n      \"BogoGetScope\": \"\",\n      \"BogoGetDiscountType\": \"\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"https://aogTEeYKyAxOdekRKTAjsgoEHwBOYQdDH.fxioW0a3t9q8bzf9eHXZcD9R\",\n      \"BogoGetDiscountAmount\": 1515.329207733719,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 6452.822729172845,\n      \"PurchaseLimitQuantity\": 190,\n      \"DealStartDate\": \"1984-08-15T10:19:59.145Z\",\n      \"DealEndDate\": \"1969-11-09T20:16:30.724Z\",\n      \"SynchAdsPromoCodes\": false,\n      \"DealRestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"DealRestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Uri\": \"http://EEnvdIElygTpjXChyLk.huQ5FQ0FQeg+tieFAWHgNf7.bgbmYwFlMuUfqJgz6YNj\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f454b96c-ca77-4fe1-810f-ebcd7b5dcd64",
+          "name": "Get Tracking Value Request Details",
+          "request": {
+            "name": "Get Tracking Value Request Details",
+            "description": {
+              "content": "Retrieves the details of an existing tracking value request by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "TrackingValueRequests",
+                ":RequestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "RequestId",
+                  "description": "(Required) The unique identifier for the tracking value request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff199361-57d3-49a3-88aa-5fd7dce21379",
+              "name": "A single tracking value request object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "TrackingValueRequests",
+                    ":RequestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "RequestId",
+                      "description": "(Required) The unique identifier for the tracking value request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"99999\",\n  \"CampaignId\": 1000,\n  \"CampaignName\": \"Acme Campaign\",\n  \"MediaPartnerId\": 2552842,\n  \"MediaPartnerName\": \"Wile E. Coyote Facebook\",\n  \"RequestType\": \"PROMOCODE_TRACKING\",\n  \"NumberRequested\": 5,\n  \"PromoCodes\": [\n    {\n      \"Id\": \"1001\",\n      \"RequestedPromoCode\": \"SUMMER25\",\n      \"ApprovedPromoCode\": \"SUMMER25\",\n      \"CreditPolicy\": \"ALWAYS\",\n      \"MatchMode\": \"LI\"\n    },\n    {\n      \"Id\": \"1001\",\n      \"RequestedPromoCode\": \"SUMMER25\",\n      \"ApprovedPromoCode\": \"SUMMER25\",\n      \"CreditPolicy\": \"ALWAYS\",\n      \"MatchMode\": \"LI\"\n    }\n  ],\n  \"UniqueUrls\": [\n    {\n      \"Id\": \"2001\",\n      \"Url\": \"https://www.acme.com/r/abc123\"\n    },\n    {\n      \"Id\": \"2001\",\n      \"Url\": \"https://www.acme.com/r/abc123\"\n    }\n  ],\n  \"PhoneNumbers\": [\n    {\n      \"Id\": \"3001\",\n      \"AssignedPhoneNumberId\": \"12345\",\n      \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n    },\n    {\n      \"Id\": \"3001\",\n      \"AssignedPhoneNumberId\": \"12345\",\n      \"AssignedPhoneNumber\": \"+1 805 123 4567\"\n    }\n  ],\n  \"State\": \"NEW\",\n  \"DatePlaced\": \"2026-01-15T10:00:00-08:00\",\n  \"DateNeeded\": \"2026-01-20T10:00:00-08:00\",\n  \"DateCompleted\": \"2026-01-18T10:00:00-08:00\",\n  \"AdditionalInstructions\": \"Please activate immediately.\",\n  \"ProcessingComments\": \"Approved.\",\n  \"DealId\": 3,\n  \"DealName\": \"\",\n  \"DealDescription\": \"\",\n  \"DealState\": \"\",\n  \"DealType\": \"\",\n  \"DealScope\": \"\",\n  \"DealProducts\": [\n    {\n      \"ProductName\": \"string\",\n      \"ProductImageURL\": \"https://lUUUHlZLQkKxKfUNfBNga.gkbcAfHej46eVe\",\n      \"ProductBeforePriceAmount\": 9997.93538940003,\n      \"ProductBeforePriceCurrency\": \"string\",\n      \"ProductAfterPriceAmount\": 864.1047942134661,\n      \"ProductAfterPriceCurrency\": \"string\"\n    },\n    {\n      \"ProductName\": \"string\",\n      \"ProductImageURL\": \"http://GtFYEvdwAyUBWHVPfUCOYJdKAHV.ktFTbVRhfBae6AI6hYqkJrgy8H7eFh\",\n      \"ProductBeforePriceAmount\": 3989.0317818605304,\n      \"ProductBeforePriceCurrency\": \"string\",\n      \"ProductAfterPriceAmount\": 2884.4632124119516,\n      \"ProductAfterPriceCurrency\": \"string\"\n    }\n  ],\n  \"DealCategories\": \"\",\n  \"DiscountType\": \"\",\n  \"DiscountAmount\": 5816.428470643016,\n  \"DiscountCurrency\": \"\",\n  \"DiscountPercent\": 7410.354897122231,\n  \"DiscountMaximumPercent\": 8215.724393084036,\n  \"DiscountPercentRangeStart\": 9184.814908946713,\n  \"DiscountPercentRangeEnd\": 656.0230189418437,\n  \"Gift\": \"\",\n  \"RebateAmount\": 1510.497752284442,\n  \"RebateCurrency\": \"\",\n  \"DealDefaultPromoCode\": \"\",\n  \"MinimumPurchaseAmount\": 2497.128605132365,\n  \"MinimumPurchaseAmountCurrency\": \"\",\n  \"MaximumSavingsAmount\": 552.7762303779593,\n  \"MaximumSavingsCurrency\": \"\",\n  \"BogoBuyQuantity\": 3988,\n  \"BogoBuyScope\": \"\",\n  \"BogoBuyName\": \"\",\n  \"BogoBuyImageUrl\": \"http://nrckhrTkNgKhhORhja.nwwfX+c4tv8wFSO-ELUFVkZsAscR8cpV6HpTu0mczcDABY+FoCg-jvGEA1aS1ZcxVAfx+CQzx6KrAHCbw\",\n  \"BogoGetQuantity\": 824,\n  \"BogoGetScope\": \"\",\n  \"BogoGetDiscountType\": \"\",\n  \"BogoGetName\": \"\",\n  \"BogoGetImageUrl\": \"http://lQyAdwUKoKMpmNeNwRj.ohapi0NOHK4dGI-FGq3\",\n  \"BogoGetDiscountAmount\": 6685.282994179775,\n  \"BogoGetDiscountCurrency\": \"\",\n  \"BogoGetDiscountPercent\": 4011.019164716546,\n  \"PurchaseLimitQuantity\": 3121,\n  \"DealStartDate\": \"1976-08-30T19:24:11.718Z\",\n  \"DealEndDate\": \"1973-06-19T07:40:46.442Z\",\n  \"SynchAdsPromoCodes\": true,\n  \"DealRestrictedMediaPartners\": [\n    \"string\",\n    \"string\"\n  ],\n  \"DealRestrictedMediaPartnerGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Uri\": \"http://loEKeuZJdoPrRWn.znnvs.fsqsfQvteUZr27jcIzr1mIx,qDTJW7vyw7z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "687616ee-9499-4710-986c-7f9881531e2b",
+          "name": "Approve a Tracking Value Request",
+          "request": {
+            "name": "Approve a Tracking Value Request",
+            "description": {
+              "content": "Approves a specified tracking value request. Different parameters are required based on the request type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "TrackingValueRequests",
+                ":RequestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "RequestId",
+                  "description": "(Required) The unique identifier for the request to approve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "PromoCode",
+                  "value": "<string>",
+                  "description": "Required for PROMOCODE_TRACKING."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreditPolicy",
+                  "value": "<string>",
+                  "description": "Required for PROMOCODE_TRACKING."
+                },
+                {
+                  "disabled": false,
+                  "key": "MatchMode",
+                  "value": "<string>",
+                  "description": "Required for PROMOCODE_TRACKING."
+                },
+                {
+                  "disabled": false,
+                  "key": "UrlId",
+                  "value": "<integer>",
+                  "description": "Required for BRANDED_URL_TRACKING."
+                },
+                {
+                  "disabled": false,
+                  "key": "AssignedPhoneNumberId",
+                  "value": "<integer>",
+                  "description": "Required for PHONE_NUMBER_TRACKING."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<integer>",
+                  "description": "Optional ID of a Deal to associate with the approved value."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealName",
+                  "value": "<string>",
+                  "description": "Optional display name of the associated Deal."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5ef0b93f-8410-4fde-b4d9-093a47a78ee2",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "TrackingValueRequests",
+                    ":RequestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "RequestId",
+                      "description": "(Required) The unique identifier for the request to approve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for PROMOCODE_TRACKING.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromoCode",
+                      "value": "SUMMER25"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for PROMOCODE_TRACKING.",
+                        "type": "text/plain"
+                      },
+                      "key": "CreditPolicy",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for PROMOCODE_TRACKING.",
+                        "type": "text/plain"
+                      },
+                      "key": "MatchMode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for BRANDED_URL_TRACKING.",
+                        "type": "text/plain"
+                      },
+                      "key": "UrlId",
+                      "value": "2001"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required for PHONE_NUMBER_TRACKING.",
+                        "type": "text/plain"
+                      },
+                      "key": "AssignedPhoneNumberId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional ID of a Deal to associate with the approved value.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealId",
+                      "value": "3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional display name of the associated Deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealName",
+                      "value": "AcmeDeal3"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://XKdFtvqhhmhRuFyOaciLvGMsWbVhJi.zfxstFkw6eCb62DzSJtX8Qk8Msa8Ebe6madM.t-?rk=3W&etyxq&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9be7d59a-9aac-4802-8df2-1d27c216a638",
+          "name": "Reject a Tracking Value Request",
+          "request": {
+            "name": "Reject a Tracking Value Request",
+            "description": {
+              "content": "Rejects a specified tracking value request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "TrackingValueRequests",
+                ":RequestId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "RequestId",
+                  "description": "(Required) The unique identifier for the request to reject."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5daa4a30-a8b8-4cb6-b1e4-371274f8d248",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "TrackingValueRequests",
+                    ":RequestId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "RequestId",
+                      "description": "(Required) The unique identifier for the request to reject."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://XKdFtvqhhmhRuFyOaciLvGMsWbVhJi.zfxstFkw6eCb62DzSJtX8Qk8Msa8Ebe6madM.t-?rk=3W&etyxq&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "388355cf-65af-47b3-bb79-0af55d9cc3cf",
+    "name": "Brand API - Tracking Value Requests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing partner requests for tracking values like Promo Codes, Unique URLs, and Phone Numbers.",
+      "type": "text/plain"
+    }
+  }
+}

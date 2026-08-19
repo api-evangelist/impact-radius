@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Deals API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Campaigns/:CampaignId/Deals",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the campaign whose deals are being retrieved."
+              },
+              {
+                "name": "Scope",
+                "value": "",
+                "type": "query",
+                "description": "Filters deals by the scope of products they apply to."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filters deals by their current state."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filters deals by their promotional type."
+              }
+            ]
+          },
+          "docs": "Returns a list of all deals associated with a specific campaign."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Campaigns/:CampaignId/Deals/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the campaign whose deals are being retrieved."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the deal."
+              }
+            ]
+          },
+          "docs": "Retrieves the full details of an existing deal using its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

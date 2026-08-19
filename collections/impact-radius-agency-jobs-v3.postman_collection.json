@@ -1,0 +1,982 @@
+{
+  "item": [
+    {
+      "id": "ce838794-09d3-43ff-88a1-f101655b1b8e",
+      "name": "Jobs",
+      "description": {
+        "content": "Schedule, monitor, replay, and download large-scale asynchronous jobs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d68d9585-6a6b-4b70-9817-cf57c8b107b5",
+          "name": "List all jobs",
+          "request": {
+            "name": "List all jobs",
+            "description": {
+              "content": "Returns the jobs scheduled by this agency account. Use the optional date filters to narrow results to a specific window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CreatedAfter",
+                  "value": "<date>",
+                  "description": "Return only jobs created on or after this date, in `YYYY-MM-DD` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreatedBefore",
+                  "value": "<date>",
+                  "description": "Return only jobs created on or before this date, in `YYYY-MM-DD` format."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97027f07-7432-4430-a2da-8a13c17f2e7f",
+              "name": "A list of job objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CreatedAfter",
+                      "value": "2026-05-01"
+                    },
+                    {
+                      "key": "CreatedBefore",
+                      "value": "2026-05-29"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Id\": \"81258bc5-54cf-4a09-9fbc-eb837637d02f\",\n    \"Type\": \"ApiReport\",\n    \"ProgramId\": \"3629\",\n    \"CreatedBy\": \"IRq8mWJybvoQ1020978kbj7am8zzM2dBL1\",\n    \"CreatedDate\": \"2026-05-29T04:33:50-05:00\",\n    \"StartedDate\": \"2026-05-29T04:33:55-05:00\",\n    \"CompletedDate\": \"2026-05-29T04:35:12-05:00\",\n    \"AbandonedDate\": \"1962-08-21T01:09:22.347Z\",\n    \"CancelledDate\": \"1989-08-12T21:56:50.079Z\",\n    \"FailedDate\": \"1948-06-10T19:34:25.889Z\",\n    \"LastProgressUpdateDate\": \"2026-05-29T04:34:30-05:00\",\n    \"Status\": \"COMPLETED\",\n    \"StatusMessage\": \"Job processing completed successfully.\",\n    \"RecordsProcessed\": 250,\n    \"PercentageComplete\": 100,\n    \"Replayable\": true,\n    \"ResultUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download\"\n  },\n  {\n    \"Id\": \"81258bc5-54cf-4a09-9fbc-eb837637d02f\",\n    \"Type\": \"ApiReport\",\n    \"ProgramId\": \"3629\",\n    \"CreatedBy\": \"IRq8mWJybvoQ1020978kbj7am8zzM2dBL1\",\n    \"CreatedDate\": \"2026-05-29T04:33:50-05:00\",\n    \"StartedDate\": \"2026-05-29T04:33:55-05:00\",\n    \"CompletedDate\": \"2026-05-29T04:35:12-05:00\",\n    \"AbandonedDate\": \"1982-02-27T12:15:20.222Z\",\n    \"CancelledDate\": \"1988-03-30T12:53:35.648Z\",\n    \"FailedDate\": \"2010-08-04T22:54:10.678Z\",\n    \"LastProgressUpdateDate\": \"2026-05-29T04:34:30-05:00\",\n    \"Status\": \"COMPLETED\",\n    \"StatusMessage\": \"Job processing completed successfully.\",\n    \"RecordsProcessed\": 250,\n    \"PercentageComplete\": 100,\n    \"Replayable\": true,\n    \"ResultUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e496bbe-54b4-4015-a034-e797d1f2673d",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CreatedAfter",
+                      "value": "2026-05-01"
+                    },
+                    {
+                      "key": "CreatedBefore",
+                      "value": "2026-05-29"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42e27fa4-aa33-4686-95cc-dfea9a33b85d",
+          "name": "Get a job",
+          "request": {
+            "name": "Get a job",
+            "description": {
+              "content": "Retrieves the current status and details of a specific job. Use this to poll a job created from another endpoint (such as `GET /ReportExport/{ReportId}`) until it reaches a terminal `Status` (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Jobs",
+                ":JobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "JobId",
+                  "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "350075e9-a5f2-4708-bf87-b646bfc51205",
+              "name": "The job's current status and details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"81258bc5-54cf-4a09-9fbc-eb837637d02f\",\n  \"Type\": \"ApiReport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"IRq8mWJybvoQ1020978kbj7am8zzM2dBL1\",\n  \"CreatedDate\": \"2026-05-29T04:33:50-05:00\",\n  \"StartedDate\": \"2026-05-29T04:33:55-05:00\",\n  \"CompletedDate\": \"2026-05-29T04:35:12-05:00\",\n  \"AbandonedDate\": \"2003-01-10T14:20:21.805Z\",\n  \"CancelledDate\": \"2009-02-19T16:59:21.034Z\",\n  \"FailedDate\": \"2007-04-20T19:05:07.206Z\",\n  \"LastProgressUpdateDate\": \"2026-05-29T04:34:30-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df458490-778e-4d81-9bff-cf9c156747df",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c99c4d0-21ff-49f4-a6da-d32e0f95a601",
+              "name": "Job not found. Verify the `JobId` belongs to a job created by this agency.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "183c4620-24ff-4d26-8765-c5b29e89e40f",
+          "name": "Download a job result",
+          "request": {
+            "name": "Download a job result",
+            "description": {
+              "content": "Downloads the result file produced by a completed job.\n\n## Response behaviour by job state\n\n- **Job complete** — returns the result file. By default, the response is a `302` redirect to a short-lived signed URL on cloud storage; pass `Mode=Stream` to receive the file bytes directly with HTTP `200`.\n- **Job still running** — returns HTTP `202` with the current `Job` object instead of a file. Poll with `GET /Jobs/{JobId}` until the job reaches `COMPLETED`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Jobs",
+                ":JobId",
+                "Download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Mode",
+                  "value": "<string>",
+                  "description": "Set to `Stream` to receive the result file bytes directly in the response body (HTTP `200`) instead of following a `302` redirect to a signed download URL."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "JobId",
+                  "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29944454-6e51-4aa0-93aa-c56e5845d963",
+              "name": "The result file. Returned directly when `Mode=Stream` is set.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "Stream"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f59567ce-4f22-4973-a6f0-58a14980d56d",
+              "name": "Job is still in progress. The body contains the current job status — poll the job again later.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "Stream"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"81258bc5-54cf-4a09-9fbc-eb837637d02f\",\n  \"Type\": \"ApiReport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"IRq8mWJybvoQ1020978kbj7am8zzM2dBL1\",\n  \"CreatedDate\": \"2026-05-29T04:33:50-05:00\",\n  \"StartedDate\": \"2026-05-29T04:33:55-05:00\",\n  \"CompletedDate\": \"2026-05-29T04:35:12-05:00\",\n  \"AbandonedDate\": \"2003-01-10T14:20:21.805Z\",\n  \"CancelledDate\": \"2009-02-19T16:59:21.034Z\",\n  \"FailedDate\": \"2007-04-20T19:05:07.206Z\",\n  \"LastProgressUpdateDate\": \"2026-05-29T04:34:30-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6af36564-78ae-4f42-b74c-31b53820f2c6",
+              "name": "Default behaviour for completed jobs (when `Mode` is not `Stream`). Redirects to a temporary signed URL on cloud storage. Follow the `Location` header to download the file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "Stream"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7177328d-f24a-4d64-baa3-0663a8a98492",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "Stream"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9b2f7e1-56fa-4e5b-997f-b81cda4e8926",
+              "name": "Job not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "Stream"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fdc2d331-5629-49c6-af52-3f9e57734401",
+          "name": "Replay a job",
+          "request": {
+            "name": "Replay a job",
+            "description": {
+              "content": "Re-runs a previously executed job with the same parameters. Useful for jobs in a terminal state (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`) when fresh data is wanted over the same export window.\n\nThe `Job.Replayable` field on the original job indicates whether the job can be replayed. Replaying creates a new job with a new `Id` — the original job is not modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Agencies",
+                ":AccountSID",
+                "Jobs",
+                ":JobId",
+                "Replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your Agency Account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "JobId",
+                  "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f974efc0-8dbc-41ef-8b4c-fe21d25e85b9",
+              "name": "The status of the newly replayed job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"81258bc5-54cf-4a09-9fbc-eb837637d02f\",\n  \"Type\": \"ApiReport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"IRq8mWJybvoQ1020978kbj7am8zzM2dBL1\",\n  \"CreatedDate\": \"2026-05-29T04:33:50-05:00\",\n  \"StartedDate\": \"2026-05-29T04:33:55-05:00\",\n  \"CompletedDate\": \"2026-05-29T04:35:12-05:00\",\n  \"AbandonedDate\": \"2003-01-10T14:20:21.805Z\",\n  \"CancelledDate\": \"2009-02-19T16:59:21.034Z\",\n  \"FailedDate\": \"2007-04-20T19:05:07.206Z\",\n  \"LastProgressUpdateDate\": \"2026-05-29T04:34:30-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Jobs/81258bc5-54cf-4a09-9fbc-eb837637d02f/Download\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93624a7f-6005-4ed2-a671-e33b05ba494d",
+              "name": "Unauthorized. Check that your Account SID and Auth Token are correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04397d59-7e48-4b6b-8a02-93de8a6b6c45",
+              "name": "Either the credentials lack permission to access this job, **or** the job is not in a replayable state (e.g., it is still `QUEUED` or `RUNNING`). The response `Message` will indicate which case applies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "390da689-ac5c-4f96-b886-69b85b624c25",
+              "name": "Job not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Agencies",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your Agency Account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "JobId",
+                      "description": "(Required) The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "57332c4d-24a3-49a2-bd0f-0d25e98d7b42",
+    "name": "Agency API — Jobs Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1066 @@
+{
+  "item": [
+    {
+      "id": "011fc976-6bf9-4ac0-9f57-99eb876bd224",
+      "name": "Contacts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c44f8f45-5fcf-4c1d-abc6-218294e7e44a",
+          "name": "List All Contacts",
+          "request": {
+            "name": "List All Contacts",
+            "description": {
+              "content": "Returns a list of your contacts for a specific campaign, with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "AccountId",
+                  "value": "<string>",
+                  "description": "Filter by a contact's partner account ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "Title",
+                  "value": "<string>",
+                  "description": "Filter by a contact's title (must be URL-encoded)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48b4b867-5014-4451-a87d-95b127a2cc2b",
+              "name": "A paginated list of contact objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "AccountId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Title",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Contacts\": [\n    {\n      \"Id\": \"2750\",\n      \"FirstName\": \"Wile\",\n      \"LastName\": \"Coyote\",\n      \"EmailAddress\": \"wile.coyote@example.com\",\n      \"Title\": \"\",\n      \"ProfileImage\": \"https://fIUiblZKsdqrIyRfWqzQwbSmffC.jtfBmb9KqDmDjAEVPryn\",\n      \"WorkPhoneNumberCountry\": \"US\",\n      \"WorkPhoneNumber\": \"8051234567\",\n      \"CellphoneNumberCountry\": \"US\",\n      \"CellphoneNumber\": \"8059876543\",\n      \"Editable\": false,\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Accounts\": [\n        {\n          \"Id\": \"string\",\n          \"Name\": \"string\"\n        },\n        {\n          \"Id\": \"string\",\n          \"Name\": \"string\"\n        }\n      ],\n      \"Uri\": \"https://PtdGocZuIdrBXimHkMc.rqztdADKy1?kge&klw&\"\n    },\n    {\n      \"Id\": \"2750\",\n      \"FirstName\": \"Wile\",\n      \"LastName\": \"Coyote\",\n      \"EmailAddress\": \"wile.coyote@example.com\",\n      \"Title\": \"\",\n      \"ProfileImage\": \"https://vTxfLgFeORZrWnNUziZCcsxT.rytUVrLYJEnt2mSBc,ZHbn1XyarvcrYkarh-5wZRwiwVAzphY1CCPbzmhFGVIE1.NA?\",\n      \"WorkPhoneNumberCountry\": \"US\",\n      \"WorkPhoneNumber\": \"8051234567\",\n      \"CellphoneNumberCountry\": \"US\",\n      \"CellphoneNumber\": \"8059876543\",\n      \"Editable\": false,\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Accounts\": [\n        {\n          \"Id\": \"string\",\n          \"Name\": \"string\"\n        },\n        {\n          \"Id\": \"string\",\n          \"Name\": \"string\"\n        }\n      ],\n      \"Uri\": \"http://qTuKtSpsheQGpjRvUvTRTLR.vdxeDlU6GmTl.OFPUi\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a470fc0e-cd47-41a1-8c14-a25273fd89a0",
+          "name": "Create a Contact",
+          "request": {
+            "name": "Create a Contact",
+            "description": {
+              "content": "Creates a new contact associated with one or more partner accounts. Use `multipart/form-data` for profile image uploads.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "FirstName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "LastName",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "EmailAddress",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "Accounts",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated string of partner account IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "Title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ProfileImageUrl",
+                  "value": "<uri>",
+                  "description": "URL of an image file. Cannot be used with `ProfileImageFile`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProfileImageFile",
+                  "value": "<binary>",
+                  "description": "An image file to upload. Use `multipart/form-data`."
+                },
+                {
+                  "disabled": false,
+                  "key": "WorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "Requires `WorkPhoneNumberCountry`."
+                },
+                {
+                  "disabled": false,
+                  "key": "WorkPhoneNumberCountry",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "CellphoneNumber",
+                  "value": "<string>",
+                  "description": "Requires `CellphoneNumberCountry`."
+                },
+                {
+                  "disabled": false,
+                  "key": "CellphoneNumberCountry",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Labels",
+                  "value": "<string>",
+                  "description": "A comma-separated string of labels."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64eac785-6b0d-4bd7-abab-3194df59df98",
+              "name": "The contact was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "FirstName",
+                      "value": "Wile"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "LastName",
+                      "value": "Coyote"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "EmailAddress",
+                      "value": "wile.coyote@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) A comma-separated string of partner account IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "Accounts",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Title",
+                      "value": "Marketing Manager"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL of an image file. Cannot be used with `ProfileImageFile`.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProfileImageUrl",
+                      "value": "https://example.com/profile.jpg"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "An image file to upload. Use `multipart/form-data`.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProfileImageFile",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Requires `WorkPhoneNumberCountry`.",
+                        "type": "text/plain"
+                      },
+                      "key": "WorkPhoneNumber",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "WorkPhoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Requires `CellphoneNumberCountry`.",
+                        "type": "text/plain"
+                      },
+                      "key": "CellphoneNumber",
+                      "value": "8059876543"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "CellphoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated string of labels.",
+                        "type": "text/plain"
+                      },
+                      "key": "Labels",
+                      "value": "VIP,Tier1"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://qZSlphhbtdJasUAtApGeXnOqxvuhNL.fyHd0l2-m.m1wmbQIV7xvdYDcmOrr-RctGxQmZYt0ln9DCzeQRyqNM5yJj3u\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a039b47e-381d-43b7-bb65-025af379769e",
+          "name": "Get Contact Details",
+          "request": {
+            "name": "Get Contact Details",
+            "description": {
+              "content": "Retrieves the details of an existing contact by their unique impact.com Contact ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contacts",
+                ":ContactId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ContactId",
+                  "description": "(Required) The unique identifier for the contact (e.g., '2750' or 'M1369520')."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74218e9f-3002-40cb-94fd-be2642ffc3a9",
+              "name": "A single contact object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contacts",
+                    ":ContactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ContactId",
+                      "description": "(Required) The unique identifier for the contact (e.g., '2750' or 'M1369520')."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"2750\",\n  \"FirstName\": \"Wile\",\n  \"LastName\": \"Coyote\",\n  \"EmailAddress\": \"wile.coyote@example.com\",\n  \"Title\": \"\",\n  \"ProfileImage\": \"http://sLdaBEDneLnOaMb.aszaLVe3DTDFgb..g2DnxpH1+uQlKZgdDBIMtrATkrW\",\n  \"WorkPhoneNumberCountry\": \"US\",\n  \"WorkPhoneNumber\": \"8051234567\",\n  \"CellphoneNumberCountry\": \"US\",\n  \"CellphoneNumber\": \"8059876543\",\n  \"Editable\": false,\n  \"Labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Accounts\": [\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\"\n    },\n    {\n      \"Id\": \"string\",\n      \"Name\": \"string\"\n    }\n  ],\n  \"Uri\": \"https://MN.ryoncvmTUq-9uLGMZ56D+kdScGY\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "749df8c1-4f62-458d-9b22-53b24b611639",
+          "name": "Update a Contact",
+          "request": {
+            "name": "Update a Contact",
+            "description": {
+              "content": "Updates the specified contact.\n- **User-created contacts** (`\"Editable\": \"true\"`) can have any parameter updated.\n- **System-created contacts** (`\"Editable\": \"false\"`) can only have `Title` and `Labels` updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contacts",
+                ":ContactId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ContactId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "FirstName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "LastName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "EmailAddress",
+                  "value": "<email>"
+                },
+                {
+                  "disabled": false,
+                  "key": "Title",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ProfileImageUrl",
+                  "value": "<uri>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ProfileImageFile",
+                  "value": "<binary>"
+                },
+                {
+                  "disabled": false,
+                  "key": "WorkPhoneNumber",
+                  "value": "<string>",
+                  "description": "The contact's work phone number. Requires `WorkPhoneNumberCountry` if updated."
+                },
+                {
+                  "disabled": false,
+                  "key": "WorkPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code. Required when `WorkPhoneNumber` is updated."
+                },
+                {
+                  "disabled": false,
+                  "key": "CellphoneNumber",
+                  "value": "<string>",
+                  "description": "The contact's cellphone number. Requires `CellphoneNumberCountry` if updated."
+                },
+                {
+                  "disabled": false,
+                  "key": "CellphoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter ISO 3166-1 alpha-2 country code. Required when `CellphoneNumber` is updated."
+                },
+                {
+                  "disabled": false,
+                  "key": "LabelsAdd",
+                  "value": "<string>",
+                  "description": "A comma-separated string of labels to add."
+                },
+                {
+                  "disabled": false,
+                  "key": "LabelsRemove",
+                  "value": "<string>",
+                  "description": "A comma-separated string of labels to remove."
+                },
+                {
+                  "disabled": false,
+                  "key": "AccountsAdd",
+                  "value": "<string>",
+                  "description": "A comma-separated string of partner account IDs to add."
+                },
+                {
+                  "disabled": false,
+                  "key": "AccountsRemove",
+                  "value": "<string>",
+                  "description": "A comma-separated string of partner account IDs to remove."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "607711c3-c414-4ed0-9d25-424b9fee9752",
+              "name": "The contact was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contacts",
+                    ":ContactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ContactId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "FirstName",
+                      "value": "Wile"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "LastName",
+                      "value": "Coyote"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "EmailAddress",
+                      "value": "wile.coyote@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "Title",
+                      "value": "Marketing Manager"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ProfileImageUrl",
+                      "value": "https://example.com/profile.jpg"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "ProfileImageFile",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The contact's work phone number. Requires `WorkPhoneNumberCountry` if updated.",
+                        "type": "text/plain"
+                      },
+                      "key": "WorkPhoneNumber",
+                      "value": "8051234567"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code. Required when `WorkPhoneNumber` is updated.",
+                        "type": "text/plain"
+                      },
+                      "key": "WorkPhoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The contact's cellphone number. Requires `CellphoneNumberCountry` if updated.",
+                        "type": "text/plain"
+                      },
+                      "key": "CellphoneNumber",
+                      "value": "8059876543"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter ISO 3166-1 alpha-2 country code. Required when `CellphoneNumber` is updated.",
+                        "type": "text/plain"
+                      },
+                      "key": "CellphoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated string of labels to add.",
+                        "type": "text/plain"
+                      },
+                      "key": "LabelsAdd",
+                      "value": "VIP"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated string of labels to remove.",
+                        "type": "text/plain"
+                      },
+                      "key": "LabelsRemove",
+                      "value": "Tier2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated string of partner account IDs to add.",
+                        "type": "text/plain"
+                      },
+                      "key": "AccountsAdd",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A comma-separated string of partner account IDs to remove.",
+                        "type": "text/plain"
+                      },
+                      "key": "AccountsRemove",
+                      "value": "67890"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://qZSlphhbtdJasUAtApGeXnOqxvuhNL.fyHd0l2-m.m1wmbQIV7xvdYDcmOrr-RctGxQmZYt0ln9DCzeQRyqNM5yJj3u\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a95a98f-9164-4972-843e-0897f96ed667",
+          "name": "Delete a Contact",
+          "request": {
+            "name": "Delete a Contact",
+            "description": {
+              "content": "Permanently deletes a user-created contact. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contacts",
+                ":ContactId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ContactId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4aff3949-0482-4992-b633-1fd5b24fee68",
+              "name": "The contact was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contacts",
+                    ":ContactId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ContactId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "51c49ff7-70df-468f-9607-682f2e75f8f0",
+    "name": "Brand API - Contacts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing the contact list of people associated with partner accounts in your program. This includes creating, retrieving, updating, and deleting contacts.",
+      "type": "text/plain"
+    }
+  }
+}

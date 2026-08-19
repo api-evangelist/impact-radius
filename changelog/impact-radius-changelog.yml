@@ -1,29 +1,62 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
 scheme: major-version-path
 current_versions:
-  brand: v13
+  brand: v14
   partner: v15
   agency: v3
+  advocate: v1
 changelogs:
-  brand: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+  brand_v14: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  brand_v13: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
   partner: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
   agency: https://integrations.impact.com/agency-v3/readme/changelog.md
+version_releases:
+- version: '11'
+  released: '2022-10-12'
+- version: '12'
+  released: '2024-05-06'
+- version: '13'
+  released: '2025-03-01'
+- version: '14'
+  released: '2026-06-01'
+  breaking: true
+  note: >-
+    Current Brand major version. A new dated version is only cut for backwards-incompatible
+    change (fields removed from responses, or an attribute's Type changing), so v14 is by
+    definition a breaking release relative to v13.
 entries:
+- version: brand-v14
+  date: '2026-06-01'
+  breaking: true
+  additions: []
+  highlights:
+  - >-
+    New Brand major version published with a full 29-document OpenAPI reference set at
+    /brand-api-reference/brand-api-reference-v14; v13, v12 and v11 remain documented and callable.
+  note: >-
+    Captured from the versioning release table and the live v14 reference set. The per-item v14
+    changelog detail was not transcribed in this pass — the live changelog page is the source of
+    truth.
 - version: brand-v13
   breaking: false
   highlights:
-  - Application Processing API — Contracts endpoint gained POST (accept partner applications
-    with optional groupId) and DELETE (decline proposals with optional reason and groupId).
+  - Application Processing API — Contracts endpoint gained POST (accept partner applications with optional groupId) and DELETE (decline proposals with optional reason and groupId).
   - New PromoCodeExceptionLists endpoint (create, update, retrieve, delete).
   - Scoped Tokens — API credentials with fine-grained per-endpoint permissions.
   - New Upload endpoint for batch catalog uploads.
   - Contracts API responses now include a ScheduledTerms object when relevant.
-  - Rate-limit changes announced — ReportExport 100 requests/day, ClickExport 10 requests/day
-    (enforcement deferred to the new year).
+  - Rate-limit changes announced — ReportExport 100 requests/day, ClickExport 10 requests/day (enforcement deferred to the new year).
   - ReportExport recommended as the migration path off the legacy Reports API before 2025-09-01.
+docs_changelog:
+  note: >-
+    Beyond the API changelogs, the Integrations Hub itself gained an AI Solutions section since
+    the 2026-07-19 pass — MCP Tools (Brand and Partner reference pages), MCP Skills (Brand and
+    Partner), an mcp.impact.com FAQ, and enable/disable + account-switching guides. These are new
+    documentation surfaces, not API changes.
+  observed: '2026-08-13'
 notes: >-
-  Each of the Brand (v13/v12/v11), Partner (v15/v14) and Agency (v3/v2) reference sets keeps a
-  per-version dated changelog page. Only the recent Brand v13 window is structured here; the
-  live changelog pages are the source of truth.
+  Each reference set (Brand v14/v13/v12/v11, Partner v15/v14, Agency v3/v2) keeps its own dated
+  changelog page. Only the recent Brand window is structured here; the live changelog pages are
+  the source of truth.

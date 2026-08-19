@@ -1,22 +1,168 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
-source: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/
-notes: >-
-  impact.com publishes first-party mobile SDKs for Advocate (referral) program tracking. No
-  first-party server-side REST client libraries (JavaScript/Python/etc.) were found published
-  on npm/PyPI/Maven/NuGet under an official impact.com namespace; the REST APIs are consumed
-  directly over HTTP Basic. Mobile SDK distribution artifacts (CocoaPods/Maven) are referenced
-  from the SDK overview pages rather than a public registry landing page.
+source: https://github.com/saasquatch
+docs:
+- https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/ios-sdk-overview.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/android-sdk-overview.md
+- https://registry.npmjs.org/@saasquatch/squatch-js
+ownership_note: >-
+  Every first-party client library impact.com publishes lives in the github.com/saasquatch
+  organisation and ships under the @saasquatch npm scope. That is not a third party: Advocate is
+  the productised Referral SaaSquatch acquisition, and impact.com's own SDK overview pages link
+  directly to these repositories as "Our iOS SDK" and "Our Android SDK". The Advocate API host is
+  app.referralsaasquatch.com for the same reason.
+summary:
+  official_packages: 7
+  registries: [npm, jitpack, spm, github]
+  server_side_rest_clients: 0
+  note: >-
+    There is still NO first-party server-side client library for the Brand, Partner or Agency
+    REST APIs in any language — no npm, PyPI, Maven Central, NuGet, RubyGems, Packagist,
+    crates.io or pkg.go.dev package under an impact.com or Impact Radius namespace. Those 242
+    operations are consumed directly over HTTP Basic. Everything published is Advocate-side.
 packages:
-- language: swift
-  platform: ios
-  name: impact.com iOS SDK (Advocate)
-  url: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/ios-sdk-overview.md
+- name: "@saasquatch/squatch-js"
+  language: javascript
+  platform: browser
+  registry: npm
   official: true
-  kind: mobile-sdk
-- language: kotlin
+  kind: browser-sdk
+  version: 2.8.4
+  published: '2026-04-02'
+  url: https://www.npmjs.com/package/@saasquatch/squatch-js
+  repo: https://github.com/saasquatch/squatch-js
+  description: The official Referral SaaSquatch JavaScript Web/Browser SDK — mounts Advocate widgets and calls the Advocate API from the browser.
+- name: "@saasquatch/mint-components"
+  language: javascript
+  platform: browser
+  registry: npm
+  official: true
+  kind: component-library
+  version: 2.3.0
+  published: '2026-08-11'
+  url: https://www.npmjs.com/package/@saasquatch/mint-components
+  repo: https://github.com/saasquatch/program-tools
+  description: Minimal design library of web components for referral and loyalty widgets. The most recently released first-party package.
+- name: "@saasquatch/bedrock-components"
+  language: javascript
+  platform: browser
+  registry: npm
+  official: true
+  kind: component-library
+  version: 1.5.3
+  published: '2026-04-01'
+  url: https://www.npmjs.com/package/@saasquatch/bedrock-components
+  repo: https://github.com/saasquatch/program-tools
+  description: Component library adding advanced logic to Advocate widgets.
+- name: "@saasquatch/component-boilerplate"
+  language: javascript
+  platform: browser
+  registry: npm
+  official: true
+  kind: scaffold
+  version: 1.6.10
+  published: '2026-02-27'
+  url: https://www.npmjs.com/package/@saasquatch/component-boilerplate
+  description: Boilerplate for writing custom web components for the Advocate widget surface.
+- name: "@saasquatch/program-boilerplate"
+  language: javascript
+  platform: node
+  registry: npm
+  official: true
+  kind: scaffold
+  version: 4.1.0
+  published: '2026-03-20'
+  url: https://www.npmjs.com/package/@saasquatch/program-boilerplate
+  repo: https://github.com/saasquatch/program-tools
+  description: Boilerplate for writing Advocate program templates (referral program logic).
+- name: squatch-android
+  language: java
   platform: android
-  name: impact.com Android SDK (Advocate)
-  url: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/android-sdk-overview.md
+  registry: jitpack
+  coordinates: com.github.saasquatch:squatch-android
   official: true
   kind: mobile-sdk
+  version: 0.1.2
+  published: '2026-04-10'
+  url: https://jitpack.io/#saasquatch/squatch-android
+  repo: https://github.com/saasquatch/squatch-android
+  docs: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/android-sdk-overview.md
+  description: >-
+    Official Android SDK for Advocate — REST API wrapper plus widget loading in Android WebViews.
+    Distributed via JitPack, not Maven Central; a Maven Central search for the saasquatch and
+    com.saasquatch coordinates returned zero artifacts on 2026-08-13.
+- name: squatch-ios
+  language: swift
+  platform: ios
+  registry: spm
+  official: true
+  kind: mobile-sdk
+  version: v1.0.0-beta.1
+  published: '2021-05-18'
+  url: https://github.com/saasquatch/squatch-ios
+  repo: https://github.com/saasquatch/squatch-ios
+  docs: https://integrations.impact.com/integration-guides/for-brands/advocate/mobile-options-for-advocate/ios-sdk-overview.md
+  description: >-
+    Official Swift SDK for Advocate — REST API wrapper plus widgets in an iOS WKWebView.
+    Installed through Swift Package Manager; there is no CocoaPods trunk entry (SquatchIOS and
+    squatch-ios both returned "No pod found" on 2026-08-13), so there is no package-registry
+    metadata endpoint. The version and date are read from the newest git tag on the repository.
+  decay_signal: >-
+    The newest tag is a 2021 beta — five years old and never promoted to 1.0 — while the
+    repository itself was still being pushed to in April 2026. An integrator resolving by tag
+    gets a 2021 beta; one resolving by branch gets unpinned HEAD. Neither is a released 1.0.
+- name: saasquatch-java-sdk
+  language: java
+  platform: jvm
+  registry: jitpack
+  coordinates: com.github.saasquatch:saasquatch-java-sdk
+  official: true
+  kind: server-sdk
+  version: 0.2.0
+  published: '2024-11-22'
+  url: https://jitpack.io/#saasquatch/saasquatch-java-sdk
+  repo: https://github.com/saasquatch/saasquatch-java-sdk
+  description: >-
+    SaaSquatch SDK for Java — a server-side client for the Advocate API only, not the
+    Brand/Partner/Agency partnership APIs. Referenced from the Android SDK overview page as
+    additional context.
+  decay_signal: >-
+    Last release 0.2.0 (2024-11-22) and last push 2024-11-22; the only first-party server-side
+    library on the platform has been untouched for over 18 months.
+adjacent_first_party:
+- name: saasquatch-cli
+  registry: npm
+  version: 1.4.0
+  published: '2017-01-11'
+  official: true
+  status: abandoned
+  url: https://www.npmjs.com/package/saasquatch-cli
+  note: >-
+    A first-party CLI for the Referral SaaSquatch API exists on npm but its last publish was
+    January 2017 and it is not referenced from any current impact.com documentation. Recorded
+    here rather than in cli/ because it cannot honestly be presented as a supported CLI surface.
+registry_absences:
+  checked: '2026-08-13'
+  note: >-
+    Recorded so a reader can tell "checked, nothing there" from "not checked".
+  results:
+  - registry: npm
+    query: squatch-js (unscoped)
+    result: absent
+  - registry: npm
+    query: "@saasquatch/saasquatch-cli"
+    result: absent
+  - registry: maven-central
+    query: "g:com.saasquatch"
+    result: 0 artifacts
+  - registry: maven-central
+    query: saasquatch (free text)
+    result: no JSON response
+  - registry: cocoapods
+    query: SquatchIOS / squatch-ios
+    result: No pod found with the specified name
+notes: >-
+  Upgraded from the 2026-07-19 pass, which recorded only the two mobile SDKs with no version or
+  date fields. Versions and publish dates come from registry.npmjs.org metadata, the JitPack
+  coordinates in each repository README, and git tag commit dates from the GitHub API. Where no
+  registry exists (iOS via SPM) the version is read from the tag and that is stated.

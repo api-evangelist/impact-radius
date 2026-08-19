@@ -1,0 +1,1498 @@
+{
+  "item": [
+    {
+      "id": "51e81979-23c4-4eae-ac29-124f79c1074f",
+      "name": "Deals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62522746-38cb-44cc-b9a8-ba32f430bff9",
+          "name": "List All Deals",
+          "request": {
+            "name": "List All Deals",
+            "description": {
+              "content": "Returns a list of your deals, which can be filtered by CampaignId, Scope, State, and Type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filter deals by the ID of the associated campaign."
+                },
+                {
+                  "disabled": false,
+                  "key": "Scope",
+                  "value": "<string>",
+                  "description": "Filter deals by the extent to which they apply."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filter deals by their current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filter deals by what they do."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b755fc1-c953-4b4b-90d5-ca506f35c2cb",
+              "name": "A paginated list of deal objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Deals\": [\n    {\n      \"Id\": 3,\n      \"Name\": \"AcmeDeal3\",\n      \"Description\": \"\",\n      \"CampaignId\": 10000,\n      \"State\": \"ACTIVE\",\n      \"Type\": \"GENERAL_SALE\",\n      \"Scope\": \"PRODUCT\",\n      \"Products\": [\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageUrl\": \"https://bGPNopJYKjSdQnHorSpSZpLdWoZN.ptmAFrMYAN+8L?pissvs=iOY6&r&yqpbihc&\",\n          \"ProductBeforePriceAmount\": 9478.423274108001,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 214.20265467379184,\n          \"ProductAfterPriceCurrency\": \"string\"\n        },\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageUrl\": \"https://oAuueTUyFQZWCtQEdqujSkKCWEajEe.zbqfWlL\",\n          \"ProductBeforePriceAmount\": 7571.343712383931,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 6153.752403593698,\n          \"ProductAfterPriceCurrency\": \"string\"\n        }\n      ],\n      \"Categories\": \"\",\n      \"DiscountType\": \"FIXED\",\n      \"DiscountAmount\": 5,\n      \"DiscountCurrency\": \"USD\",\n      \"MinimumPurchaseAmount\": 1365.9830383778294,\n      \"MinimumPurchaseAmountCurrency\": \"string\",\n      \"MaximumSavingsAmount\": 2453.825415688323,\n      \"MaximumSavingsCurrency\": \"string\",\n      \"DiscountPercent\": 10,\n      \"DiscountMaximumPercent\": 25,\n      \"DiscountPercentRangeStart\": 5,\n      \"DiscountPercentRangeEnd\": 25,\n      \"Gift\": \"\",\n      \"RebateAmount\": 0,\n      \"RebateCurrency\": \"\",\n      \"DefaultPromoCode\": \"APlusAnvils\",\n      \"StartDate\": \"1959-03-31T18:41:39.260Z\",\n      \"EndDate\": \"2018-12-27T14:17:51.887Z\",\n      \"SynchAdsPromoCodes\": false,\n      \"RestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Uri\": \"http://UZZmBtFevrPBxpb.vhqdkLYL2pqKTlBlg7lPz3WAfAR,awGbY6WJug?kqfeknu=8J_hm&xsd=9joh&vczr&\",\n      \"BogoBuyQuantity\": 0,\n      \"BogoBuyScope\": \"PRODUCT\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"http://bDRCIHqtQmVSaendAIXYiOgpBjro.vvboDChPGXui7QtxMIuZy2gj9ZzIlvZxwysVX+c0qsP\",\n      \"BogoGetQuantity\": 0,\n      \"BogoGetScope\": \"PRODUCT\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"http://yfylGssvoOQp.apeGdY\",\n      \"BogoGetDiscountType\": \"AMOUNT\",\n      \"BogoGetDiscountAmount\": 0,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 0,\n      \"PurchaseLimitQuantity\": 0\n    },\n    {\n      \"Id\": 3,\n      \"Name\": \"AcmeDeal3\",\n      \"Description\": \"\",\n      \"CampaignId\": 10000,\n      \"State\": \"ACTIVE\",\n      \"Type\": \"GENERAL_SALE\",\n      \"Scope\": \"PRODUCT\",\n      \"Products\": [\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageUrl\": \"http://dMiLToEouS.efjSL0FMrpgJ5g5hikzV+k3LswklrdQ95PKPtxcbfZ\",\n          \"ProductBeforePriceAmount\": 8179.252444033043,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 2240.9211523064855,\n          \"ProductAfterPriceCurrency\": \"string\"\n        },\n        {\n          \"ProductName\": \"string\",\n          \"ProductImageUrl\": \"http://CCyKTXW.mgltTc8WNulztt\",\n          \"ProductBeforePriceAmount\": 7057.505038299201,\n          \"ProductBeforePriceCurrency\": \"string\",\n          \"ProductAfterPriceAmount\": 114.45484856862365,\n          \"ProductAfterPriceCurrency\": \"string\"\n        }\n      ],\n      \"Categories\": \"\",\n      \"DiscountType\": \"FIXED\",\n      \"DiscountAmount\": 5,\n      \"DiscountCurrency\": \"USD\",\n      \"MinimumPurchaseAmount\": 9553.1878144677,\n      \"MinimumPurchaseAmountCurrency\": \"string\",\n      \"MaximumSavingsAmount\": 6468.55175944318,\n      \"MaximumSavingsCurrency\": \"string\",\n      \"DiscountPercent\": 10,\n      \"DiscountMaximumPercent\": 25,\n      \"DiscountPercentRangeStart\": 5,\n      \"DiscountPercentRangeEnd\": 25,\n      \"Gift\": \"\",\n      \"RebateAmount\": 0,\n      \"RebateCurrency\": \"\",\n      \"DefaultPromoCode\": \"APlusAnvils\",\n      \"StartDate\": \"2011-01-09T07:36:06.205Z\",\n      \"EndDate\": \"1953-01-06T01:22:39.375Z\",\n      \"SynchAdsPromoCodes\": false,\n      \"RestrictedMediaPartners\": [\n        \"string\",\n        \"string\"\n      ],\n      \"RestrictedMediaPartnerGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Uri\": \"http://wBdgToUMMWioK.oasZ9QvcvgzKlo5n0OUhqP+Mflxn6.iGNrVYKxnl?xqpo=H7I&krfqbtj&yobi=D9NA5&\",\n      \"BogoBuyQuantity\": 0,\n      \"BogoBuyScope\": \"CATEGORY\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"https://wYGWtGFyHYGGwcNpyUjzsDWFCLPEjkFRM.okbyqk33DziCgwfvOFIRjErk2J4GzIworhUA\",\n      \"BogoGetQuantity\": 0,\n      \"BogoGetScope\": \"PRODUCT\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"http://jLSxUUSPLoikycVcjEJHCQH.fgyovRplR9+gpNJuWU5W5Qguj\",\n      \"BogoGetDiscountType\": \"AMOUNT\",\n      \"BogoGetDiscountAmount\": 0,\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": 0,\n      \"PurchaseLimitQuantity\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e3afdf9-367f-49d4-ba2f-bee66b99ea61",
+          "name": "Create a Deal",
+          "request": {
+            "name": "Create a Deal",
+            "description": {
+              "content": "Creates a new deal with specified attributes and restrictions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique identifier of the campaign the deal belongs to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) The display name of the deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "Scope",
+                  "value": "<string>",
+                  "description": "(Required) What the deal applies to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "(Required) The type of deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>",
+                  "description": "A description of the deal that may be shown to partners."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the deal becomes active."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the deal expires."
+                },
+                {
+                  "disabled": false,
+                  "key": "SynchAdsPromoCodes",
+                  "value": "false",
+                  "description": "Whether to synchronize promo codes with ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProductName",
+                  "value": "<string>",
+                  "description": "Required if Scope is PRODUCT."
+                },
+                {
+                  "disabled": false,
+                  "key": "Categories",
+                  "value": "<string>",
+                  "description": "Required if Scope is CATEGORY."
+                },
+                {
+                  "disabled": false,
+                  "key": "RestrictedMediaPartners",
+                  "value": "<string>",
+                  "description": "Comma-separated list of Partner IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "RestrictedMediaPartnerGroups",
+                  "value": "<string>",
+                  "description": "Comma-separated list of Partner Group IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "DefaultPromoCode",
+                  "value": "<string>",
+                  "description": "The default promo code partners can promote for this deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountType",
+                  "value": "<string>",
+                  "description": "How the discount is calculated."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountAmount",
+                  "value": "<decimal>",
+                  "description": "The flat discount amount, when DiscountType is FIXED."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountCurrency",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 currency code for the discount amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountPercent",
+                  "value": "<float>",
+                  "description": "The discount percentage, when DiscountType is PERCENT."
+                },
+                {
+                  "disabled": false,
+                  "key": "Gift",
+                  "value": "<string>",
+                  "description": "The gift offered, when Type is GIFT_WITH_PURCHASE."
+                },
+                {
+                  "disabled": false,
+                  "key": "RebateAmount",
+                  "value": "<decimal>",
+                  "description": "The rebate amount, when Type is REBATE."
+                },
+                {
+                  "disabled": false,
+                  "key": "RebateCurrency",
+                  "value": "<string>",
+                  "description": "Three-letter ISO 4217 currency code for the rebate amount."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyName",
+                  "value": "<string>",
+                  "description": "Name of the item the customer must buy in a BOGO deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyQuantity",
+                  "value": "<integer>",
+                  "description": "Quantity the customer must buy in a BOGO deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyScope",
+                  "value": "<string>",
+                  "description": "Whether the \"buy\" requirement is a specific product or category."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetName",
+                  "value": "<string>",
+                  "description": "Name of the item the customer receives in a BOGO deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetQuantity",
+                  "value": "<integer>",
+                  "description": "Quantity the customer receives in a BOGO deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetScope",
+                  "value": "<string>",
+                  "description": "Whether the \"get\" item is a specific product or category."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountType",
+                  "value": "<string>",
+                  "description": "How the discount on the \"get\" item is calculated."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountAmount",
+                  "value": "<decimal>",
+                  "description": "The flat discount amount on the \"get\" item."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountPercent",
+                  "value": "<float>",
+                  "description": "The discount percentage on the \"get\" item."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f98dea3-f3d4-4bdd-97e6-147f571504a7",
+              "name": "The deal was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique identifier of the campaign the deal belongs to.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "10000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The display name of the deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "AcmeDeal3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) What the deal applies to.",
+                        "type": "text/plain"
+                      },
+                      "key": "Scope",
+                      "value": "PRODUCT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The type of deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "GENERAL_SALE"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A description of the deal that may be shown to partners.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "10% off Acme tennis balls"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the deal becomes active.",
+                        "type": "text/plain"
+                      },
+                      "key": "StartDate",
+                      "value": "2026-01-01T00:00:00-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the deal expires.",
+                        "type": "text/plain"
+                      },
+                      "key": "EndDate",
+                      "value": "2026-12-31T23:59:59-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to synchronize promo codes with ads.",
+                        "type": "text/plain"
+                      },
+                      "key": "SynchAdsPromoCodes",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if Scope is PRODUCT.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProductName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required if Scope is CATEGORY.",
+                        "type": "text/plain"
+                      },
+                      "key": "Categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of Partner IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "RestrictedMediaPartners",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of Partner Group IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "RestrictedMediaPartnerGroups",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The default promo code partners can promote for this deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "DefaultPromoCode",
+                      "value": "APlusAnvils"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How the discount is calculated.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountType",
+                      "value": "FIXED"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The flat discount amount, when DiscountType is FIXED.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountAmount",
+                      "value": "5"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Three-letter ISO 4217 currency code for the discount amount.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountCurrency",
+                      "value": "USD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount percentage, when DiscountType is PERCENT.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountPercent",
+                      "value": "10"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The gift offered, when Type is GIFT_WITH_PURCHASE.",
+                        "type": "text/plain"
+                      },
+                      "key": "Gift",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The rebate amount, when Type is REBATE.",
+                        "type": "text/plain"
+                      },
+                      "key": "RebateAmount",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Three-letter ISO 4217 currency code for the rebate amount.",
+                        "type": "text/plain"
+                      },
+                      "key": "RebateCurrency",
+                      "value": "USD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the item the customer must buy in a BOGO deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Quantity the customer must buy in a BOGO deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyQuantity",
+                      "value": "0"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the \"buy\" requirement is a specific product or category.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyScope",
+                      "value": "PRODUCT"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the item the customer receives in a BOGO deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Quantity the customer receives in a BOGO deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetQuantity",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the \"get\" item is a specific product or category.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetScope",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How the discount on the \"get\" item is calculated.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The flat discount amount on the \"get\" item.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountAmount",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The discount percentage on the \"get\" item.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountPercent",
+                      "value": "<float>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://ViEvKYmWQArmWyVMPgYXgpVSP.mqwuiXYeI+5xWqqy9PIgkeQLXl0EPZcAsgkFGaeUuJo+yx58+0Qd?soctcz=q4z&zcevqfz&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "490b8d59-38fc-410e-8b51-08d60e497ecc",
+          "name": "Get Deal Details",
+          "request": {
+            "name": "Get Deal Details",
+            "description": {
+              "content": "Retrieves the object of an existing deal by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Deals",
+                ":DealId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "DealId",
+                  "description": "(Required) The unique identifier for the deal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "180f8548-a14c-4b2f-83a7-f866f7ecb24d",
+              "name": "A single deal object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Deals",
+                    ":DealId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "DealId",
+                      "description": "(Required) The unique identifier for the deal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 3,\n  \"Name\": \"AcmeDeal3\",\n  \"Description\": \"\",\n  \"CampaignId\": 10000,\n  \"State\": \"ACTIVE\",\n  \"Type\": \"GENERAL_SALE\",\n  \"Scope\": \"PRODUCT\",\n  \"Products\": [\n    {\n      \"ProductName\": \"string\",\n      \"ProductImageUrl\": \"http://RKkNNiqFmdqGwIsjRNTjmAbsDXiJwypsz.ajlSlVa0SOuN5.Hr1eDvvZkJTeoOGcTVcFGdE4dP-BdM3QMBrxLrNm83vczd,jUUzYMngLfN,OQ?n&deapa=wZ&hxot=oKplH&\",\n      \"ProductBeforePriceAmount\": 1589.324606416006,\n      \"ProductBeforePriceCurrency\": \"string\",\n      \"ProductAfterPriceAmount\": 8262.093045362573,\n      \"ProductAfterPriceCurrency\": \"string\"\n    },\n    {\n      \"ProductName\": \"string\",\n      \"ProductImageUrl\": \"https://u.iimdk+VXeItCsB8oLHwQz5Q1yTR1Rl?rdbhm=7XYb&lkvuu&\",\n      \"ProductBeforePriceAmount\": 6007.544722225753,\n      \"ProductBeforePriceCurrency\": \"string\",\n      \"ProductAfterPriceAmount\": 7378.6298265379055,\n      \"ProductAfterPriceCurrency\": \"string\"\n    }\n  ],\n  \"Categories\": \"\",\n  \"DiscountType\": \"FIXED\",\n  \"DiscountAmount\": 5,\n  \"DiscountCurrency\": \"USD\",\n  \"MinimumPurchaseAmount\": 7158.5352601449895,\n  \"MinimumPurchaseAmountCurrency\": \"string\",\n  \"MaximumSavingsAmount\": 3074.9462431847173,\n  \"MaximumSavingsCurrency\": \"string\",\n  \"DiscountPercent\": 10,\n  \"DiscountMaximumPercent\": 25,\n  \"DiscountPercentRangeStart\": 5,\n  \"DiscountPercentRangeEnd\": 25,\n  \"Gift\": \"\",\n  \"RebateAmount\": 0,\n  \"RebateCurrency\": \"\",\n  \"DefaultPromoCode\": \"APlusAnvils\",\n  \"StartDate\": \"1964-10-26T18:58:36.740Z\",\n  \"EndDate\": \"1963-08-18T02:12:35.477Z\",\n  \"SynchAdsPromoCodes\": false,\n  \"RestrictedMediaPartners\": [\n    \"string\",\n    \"string\"\n  ],\n  \"RestrictedMediaPartnerGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Uri\": \"https://MCWpmmLrseLNERyCiSeR.ywoVC5tMGfLUijtCPU\",\n  \"BogoBuyQuantity\": 0,\n  \"BogoBuyScope\": \"PRODUCT\",\n  \"BogoBuyName\": \"\",\n  \"BogoBuyImageUrl\": \"http://GsPJbNWDYKinPfhaey.rlgCxxgEaJYNFb0QqpH.HH+3OY\",\n  \"BogoGetQuantity\": 0,\n  \"BogoGetScope\": \"PRODUCT\",\n  \"BogoGetName\": \"\",\n  \"BogoGetImageUrl\": \"https://ErPrirkAKSrVSNQxCG.wuRDJJKsmd6wYM\",\n  \"BogoGetDiscountType\": \"FREE\",\n  \"BogoGetDiscountAmount\": 0,\n  \"BogoGetDiscountCurrency\": \"\",\n  \"BogoGetDiscountPercent\": 0,\n  \"PurchaseLimitQuantity\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e99fe439-2bfd-494a-9be2-e4b80c526fe2",
+          "name": "Update a Deal",
+          "request": {
+            "name": "Update a Deal",
+            "description": {
+              "content": "Updates the specified deal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Deals",
+                ":DealId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "DealId",
+                  "description": "(Required) The unique identifier for the deal to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>",
+                  "description": "A description of the deal that may be shown to partners."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the deal becomes active."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDate",
+                  "value": "<dateTime>",
+                  "description": "The date and time the deal expires."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "The display name of the deal."
+                },
+                {
+                  "disabled": false,
+                  "key": "SynchAdsPromoCodes",
+                  "value": "<boolean>",
+                  "description": "Whether to synchronize promo codes with ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealScope",
+                  "value": "<string>",
+                  "description": "To what extent the deal applies to the store. Enum values: `PRODUCT`, `CATEGORY`, `ENTIRE_STORE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountType",
+                  "value": "<string>",
+                  "description": "What kind of discount a consumer receives. Use only if `DealType=GENERAL_SALE`. Enum values: `FIXED`, `PERCENT`, `PERCENT_RANGE`, `PERCENT_MAXIMUM`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountAmount",
+                  "value": "<decimal>",
+                  "description": "Deal's discount amount. Required when `DiscountType=FIXED`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountPercent",
+                  "value": "<float>",
+                  "description": "Deal's discount percent. Required when `DiscountType=PERCENT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountPercentRangeStart",
+                  "value": "<float>",
+                  "description": "Beginning of the discount range. Required when `DiscountType=PERCENT_RANGE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountPercentRangeEnd",
+                  "value": "<float>",
+                  "description": "End of the discount range. Required when `DiscountType=PERCENT_RANGE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountMaximumPercent",
+                  "value": "<float>",
+                  "description": "Maximum discount percent. Required when `DiscountType=PERCENT_MAXIMUM`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Gift",
+                  "value": "<string>",
+                  "description": "Name of the gift that comes with a purchase. Required when `DealType=GIFT_WITH_PURCHASE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "RebateAmount",
+                  "value": "<decimal>",
+                  "description": "Purchase rebate amount. Required when `DealType=REBATE`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyName",
+                  "value": "<string>",
+                  "description": "Name of the \"buy\" product. Required when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyQuantity",
+                  "value": "<integer>",
+                  "description": "\"Buy\" product quantity available. Required when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyScope",
+                  "value": "<string>",
+                  "description": "\"Buy\" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoBuyImageFileName",
+                  "value": "<string>",
+                  "description": "URL to the \"buy\" product's image. Used when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetName",
+                  "value": "<string>",
+                  "description": "\"Get\" product name. Required when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetQuantity",
+                  "value": "<integer>",
+                  "description": "\"Get\" product quantity available. Required when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetScope",
+                  "value": "<string>",
+                  "description": "\"Get\" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountType",
+                  "value": "<string>",
+                  "description": "\"Get\" product discount type. Required when `DealType=BOGO`. Enum values: `FREE`, `AMOUNT`, `PERCENT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountAmount",
+                  "value": "<decimal>",
+                  "description": "\"Get\" product discount amount. Required when `DealType=BOGO` and `BogoGetDiscountType=AMOUNT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetDiscountPercent",
+                  "value": "<float>",
+                  "description": "\"Get\" product discount percentage. Required when `DealType=BOGO` and `BogoGetDiscountType=PERCENT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BogoGetImageFileName",
+                  "value": "<string>",
+                  "description": "URL to the \"get\" product's image. Used when `DealType=BOGO`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProductName",
+                  "value": "<string>",
+                  "description": "Product's name. Required when `DealScope=PRODUCT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProductFileName",
+                  "value": "<string>",
+                  "description": "Product's image file name. Used when `DealScope=PRODUCT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "RegularPrice",
+                  "value": "<decimal>",
+                  "description": "Product's original price. Used when `DealScope=PRODUCT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealPrice",
+                  "value": "<decimal>",
+                  "description": "Product's deal price. Used when `DealScope=PRODUCT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "PurchaseLimitQuantity",
+                  "value": "<integer>",
+                  "description": "Maximum quantity of \"buy\" product purchasable in one transaction. Enter `0` for no limit. Used when `DealScope=PRODUCT`."
+                },
+                {
+                  "disabled": false,
+                  "key": "Categories",
+                  "value": "<string>",
+                  "description": "Comma-separated list of deal categories. Used when `DealScope=CATEGORY`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c63db459-cd06-4f9f-b1e5-b4a372d5beef",
+              "name": "The deal was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Deals",
+                    ":DealId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "DealId",
+                      "description": "(Required) The unique identifier for the deal to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A description of the deal that may be shown to partners.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "Updated description."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the deal becomes active.",
+                        "type": "text/plain"
+                      },
+                      "key": "StartDate",
+                      "value": "2026-01-01T00:00:00-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The date and time the deal expires.",
+                        "type": "text/plain"
+                      },
+                      "key": "EndDate",
+                      "value": "2026-12-31T23:59:59-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The display name of the deal.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "AcmeDeal3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to synchronize promo codes with ads.",
+                        "type": "text/plain"
+                      },
+                      "key": "SynchAdsPromoCodes",
+                      "value": "false"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "To what extent the deal applies to the store. Enum values: `PRODUCT`, `CATEGORY`, `ENTIRE_STORE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealScope",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "What kind of discount a consumer receives. Use only if `DealType=GENERAL_SALE`. Enum values: `FIXED`, `PERCENT`, `PERCENT_RANGE`, `PERCENT_MAXIMUM`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Deal's discount amount. Required when `DiscountType=FIXED`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountAmount",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Deal's discount percent. Required when `DiscountType=PERCENT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountPercent",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Beginning of the discount range. Required when `DiscountType=PERCENT_RANGE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountPercentRangeStart",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "End of the discount range. Required when `DiscountType=PERCENT_RANGE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountPercentRangeEnd",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum discount percent. Required when `DiscountType=PERCENT_MAXIMUM`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountMaximumPercent",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the gift that comes with a purchase. Required when `DealType=GIFT_WITH_PURCHASE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Gift",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Purchase rebate amount. Required when `DealType=REBATE`.",
+                        "type": "text/plain"
+                      },
+                      "key": "RebateAmount",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the \"buy\" product. Required when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Buy\" product quantity available. Required when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyQuantity",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Buy\" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyScope",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL to the \"buy\" product's image. Used when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoBuyImageFileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product name. Required when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product quantity available. Required when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetQuantity",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetScope",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product discount type. Required when `DealType=BOGO`. Enum values: `FREE`, `AMOUNT`, `PERCENT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product discount amount. Required when `DealType=BOGO` and `BogoGetDiscountType=AMOUNT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountAmount",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "\"Get\" product discount percentage. Required when `DealType=BOGO` and `BogoGetDiscountType=PERCENT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetDiscountPercent",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL to the \"get\" product's image. Used when `DealType=BOGO`.",
+                        "type": "text/plain"
+                      },
+                      "key": "BogoGetImageFileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Product's name. Required when `DealScope=PRODUCT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProductName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Product's image file name. Used when `DealScope=PRODUCT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProductFileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Product's original price. Used when `DealScope=PRODUCT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "RegularPrice",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Product's deal price. Used when `DealScope=PRODUCT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "DealPrice",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum quantity of \"buy\" product purchasable in one transaction. Enter `0` for no limit. Used when `DealScope=PRODUCT`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PurchaseLimitQuantity",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of deal categories. Used when `DealScope=CATEGORY`.",
+                        "type": "text/plain"
+                      },
+                      "key": "Categories",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://ViEvKYmWQArmWyVMPgYXgpVSP.mqwuiXYeI+5xWqqy9PIgkeQLXl0EPZcAsgkFGaeUuJo+yx58+0Qd?soctcz=q4z&zcevqfz&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "627c3f27-12dd-425e-9fa4-01643fc11b6d",
+          "name": "Delete a Deal",
+          "request": {
+            "name": "Delete a Deal",
+            "description": {
+              "content": "Permanently deletes a deal. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Deals",
+                ":DealId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "DealId",
+                  "description": "(Required) The unique identifier for the deal to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b240af8f-8621-426c-8923-ca4fba1c8a56",
+              "name": "The deal was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Deals",
+                    ":DealId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "DealId",
+                      "description": "(Required) The unique identifier for the deal to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7280ef4c-c6e1-4ef4-bdfb-bbf4e4ee0960",
+    "name": "Brand API - Deals",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing deals, which are the various discounts and offers that partners can promote. This includes creating, retrieving, updating, and deleting deals.",
+      "type": "text/plain"
+    }
+  }
+}

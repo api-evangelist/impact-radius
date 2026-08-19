@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Reward Balance",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reward Balance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List reward balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/reward/balance",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account to look up."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filters rewards by `user.id`."
+              },
+              {
+                "name": "rewardTypeFilter",
+                "value": "",
+                "type": "query",
+                "description": "Filters rewards by `type`."
+              }
+            ]
+          },
+          "docs": "Looks up the balance for all rewards of the same type and units."
+        },
+        {
+          "info": {
+            "name": "Debit a reward balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/credit/bulkredeem",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Used to redeem the credit earned from a referral program. Permanently debits an account balance. Works with: `CREDIT`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

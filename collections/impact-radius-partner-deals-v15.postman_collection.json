@@ -1,0 +1,296 @@
+{
+  "item": [
+    {
+      "id": "9d3d2ef9-8b1e-422f-a667-e4e050e12f7e",
+      "name": "Deals",
+      "description": {
+        "content": "Endpoints for retrieving partner deal and promotional offer details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3190b287-cfd9-4abd-b863-1f36272fa06e",
+          "name": "List Deals",
+          "request": {
+            "name": "List Deals",
+            "description": {
+              "content": "Returns a list of all deals associated with a specific campaign.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Deals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Scope",
+                  "value": "<string>",
+                  "description": "Filters deals by the scope of products they apply to."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filters deals by their current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filters deals by their promotional type."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CampaignId",
+                  "description": "(Required) Unique identifier for the campaign whose deals are being retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9b25a10-980b-4d76-a6cc-a647f694a841",
+              "name": "A list of deal objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Deals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the campaign whose deals are being retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Deals\": [\n    {\n      \"Id\": \"92812\",\n      \"Name\": \"Gotham Supply Crate\",\n      \"Description\": \"Every mission needs a little extra. Unlock a mystery item with your order.\",\n      \"Public\": true,\n      \"CampaignId\": \"10306\",\n      \"State\": \"ACTIVE\",\n      \"Type\": \"GENERAL_SALE\",\n      \"Scope\": \"ENTIRE_STORE\",\n      \"Products\": [\n        {\n          \"ProductName\": \"Gotham Grapnel Kit\",\n          \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n          \"ProductBeforePriceAmount\": \"50.00\",\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": \"49.00\",\n          \"ProductAfterPriceCurrency\": \"USD\"\n        },\n        {\n          \"ProductName\": \"Gotham Grapnel Kit\",\n          \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n          \"ProductBeforePriceAmount\": \"50.00\",\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": \"49.00\",\n          \"ProductAfterPriceCurrency\": \"USD\"\n        }\n      ],\n      \"DiscountType\": \"PERCENT\",\n      \"DiscountAmount\": \"\",\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": \"99\",\n      \"DiscountMaximumPercent\": \"\",\n      \"DiscountPercentRangeStart\": \"\",\n      \"DiscountPercentRangeEnd\": \"\",\n      \"Gift\": \"\",\n      \"RebateAmount\": \"\",\n      \"RebateCurrency\": \"\",\n      \"DefaultPromoCode\": \"Percent Discount Deal Test\",\n      \"MinimumPurchaseAmount\": \"\",\n      \"MinimumPurchaseAmountCurrency\": \"\",\n      \"MaximumSavingsAmount\": \"\",\n      \"MaximumSavingsCurrency\": \"\",\n      \"BogoBuyQuantity\": \"0\",\n      \"BogoBuyScope\": \"\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"\",\n      \"BogoGetQuantity\": \"0\",\n      \"BogoGetScope\": \"\",\n      \"BogoGetDiscountType\": \"PERCENT\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"\",\n      \"BogoGetDiscountAmount\": \"\",\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": \"\",\n      \"PurchaseLimitQuantity\": \"0\",\n      \"StartDate\": \"1970-05-01T04:59:54.598Z\",\n      \"EndDate\": \"2020-02-14T07:08:15.136Z\",\n      \"DateCreated\": \"2020-12-11T11:08:42-08:00\",\n      \"DateLastUpdated\": \"2025-12-10T16:04:28-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n    },\n    {\n      \"Id\": \"92812\",\n      \"Name\": \"Gotham Supply Crate\",\n      \"Description\": \"Every mission needs a little extra. Unlock a mystery item with your order.\",\n      \"Public\": true,\n      \"CampaignId\": \"10306\",\n      \"State\": \"ACTIVE\",\n      \"Type\": \"GENERAL_SALE\",\n      \"Scope\": \"ENTIRE_STORE\",\n      \"Products\": [\n        {\n          \"ProductName\": \"Gotham Grapnel Kit\",\n          \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n          \"ProductBeforePriceAmount\": \"50.00\",\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": \"49.00\",\n          \"ProductAfterPriceCurrency\": \"USD\"\n        },\n        {\n          \"ProductName\": \"Gotham Grapnel Kit\",\n          \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n          \"ProductBeforePriceAmount\": \"50.00\",\n          \"ProductBeforePriceCurrency\": \"USD\",\n          \"ProductAfterPriceAmount\": \"49.00\",\n          \"ProductAfterPriceCurrency\": \"USD\"\n        }\n      ],\n      \"DiscountType\": \"PERCENT\",\n      \"DiscountAmount\": \"\",\n      \"DiscountCurrency\": \"\",\n      \"DiscountPercent\": \"99\",\n      \"DiscountMaximumPercent\": \"\",\n      \"DiscountPercentRangeStart\": \"\",\n      \"DiscountPercentRangeEnd\": \"\",\n      \"Gift\": \"\",\n      \"RebateAmount\": \"\",\n      \"RebateCurrency\": \"\",\n      \"DefaultPromoCode\": \"Percent Discount Deal Test\",\n      \"MinimumPurchaseAmount\": \"\",\n      \"MinimumPurchaseAmountCurrency\": \"\",\n      \"MaximumSavingsAmount\": \"\",\n      \"MaximumSavingsCurrency\": \"\",\n      \"BogoBuyQuantity\": \"0\",\n      \"BogoBuyScope\": \"\",\n      \"BogoBuyName\": \"\",\n      \"BogoBuyImageUrl\": \"\",\n      \"BogoGetQuantity\": \"0\",\n      \"BogoGetScope\": \"\",\n      \"BogoGetDiscountType\": \"FREE\",\n      \"BogoGetName\": \"\",\n      \"BogoGetImageUrl\": \"\",\n      \"BogoGetDiscountAmount\": \"\",\n      \"BogoGetDiscountCurrency\": \"\",\n      \"BogoGetDiscountPercent\": \"\",\n      \"PurchaseLimitQuantity\": \"0\",\n      \"StartDate\": \"2024-09-10T20:13:46.749Z\",\n      \"EndDate\": \"2008-08-20T04:47:28.747Z\",\n      \"DateCreated\": \"2020-12-11T11:08:42-08:00\",\n      \"DateLastUpdated\": \"2025-12-10T16:04:28-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d178b096-cc15-4c7b-b34b-60909718819d",
+          "name": "Retrieve a Deal",
+          "request": {
+            "name": "Retrieve a Deal",
+            "description": {
+              "content": "Retrieves the full details of an existing deal using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Deals",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CampaignId",
+                  "description": "(Required) Unique identifier for the campaign whose deals are being retrieved."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier for the deal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41f0dd21-c9ca-4b90-a6d4-3f34220bf791",
+              "name": "The deal object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Deals",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CampaignId",
+                      "description": "(Required) Unique identifier for the campaign whose deals are being retrieved."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier for the deal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"92812\",\n  \"Name\": \"Gotham Supply Crate\",\n  \"Description\": \"Every mission needs a little extra. Unlock a mystery item with your order.\",\n  \"Public\": true,\n  \"CampaignId\": \"10306\",\n  \"State\": \"ACTIVE\",\n  \"Type\": \"GENERAL_SALE\",\n  \"Scope\": \"ENTIRE_STORE\",\n  \"Products\": [\n    {\n      \"ProductName\": \"Gotham Grapnel Kit\",\n      \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n      \"ProductBeforePriceAmount\": \"50.00\",\n      \"ProductBeforePriceCurrency\": \"USD\",\n      \"ProductAfterPriceAmount\": \"49.00\",\n      \"ProductAfterPriceCurrency\": \"USD\"\n    },\n    {\n      \"ProductName\": \"Gotham Grapnel Kit\",\n      \"ProductImageUrl\": \"/display-deal-productimage/92805.gif\",\n      \"ProductBeforePriceAmount\": \"50.00\",\n      \"ProductBeforePriceCurrency\": \"USD\",\n      \"ProductAfterPriceAmount\": \"49.00\",\n      \"ProductAfterPriceCurrency\": \"USD\"\n    }\n  ],\n  \"DiscountType\": \"PERCENT\",\n  \"DiscountAmount\": \"\",\n  \"DiscountCurrency\": \"\",\n  \"DiscountPercent\": \"99\",\n  \"DiscountMaximumPercent\": \"\",\n  \"DiscountPercentRangeStart\": \"\",\n  \"DiscountPercentRangeEnd\": \"\",\n  \"Gift\": \"\",\n  \"RebateAmount\": \"\",\n  \"RebateCurrency\": \"\",\n  \"DefaultPromoCode\": \"Percent Discount Deal Test\",\n  \"MinimumPurchaseAmount\": \"\",\n  \"MinimumPurchaseAmountCurrency\": \"\",\n  \"MaximumSavingsAmount\": \"\",\n  \"MaximumSavingsCurrency\": \"\",\n  \"BogoBuyQuantity\": \"0\",\n  \"BogoBuyScope\": \"\",\n  \"BogoBuyName\": \"\",\n  \"BogoBuyImageUrl\": \"\",\n  \"BogoGetQuantity\": \"0\",\n  \"BogoGetScope\": \"\",\n  \"BogoGetDiscountType\": \"PERCENT\",\n  \"BogoGetName\": \"\",\n  \"BogoGetImageUrl\": \"\",\n  \"BogoGetDiscountAmount\": \"\",\n  \"BogoGetDiscountCurrency\": \"\",\n  \"BogoGetDiscountPercent\": \"\",\n  \"PurchaseLimitQuantity\": \"0\",\n  \"StartDate\": \"1995-10-31T11:21:53.605Z\",\n  \"EndDate\": \"1970-02-17T17:17:03.826Z\",\n  \"DateCreated\": \"2020-12-11T11:08:42-08:00\",\n  \"DateLastUpdated\": \"2025-12-10T16:04:28-08:00\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a51b674-be7f-4bed-b7aa-75280bd4013d",
+    "name": "Partner Deals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A deal represents a promotional offer created by a brand for their program. Each deal has a type (such as a general sale, BOGO, free shipping, rebate, or gift with purchase) and contains detailed discount rules, scope, and optional product or category associations. Deals are accessed as a sub-resource of a campaign.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

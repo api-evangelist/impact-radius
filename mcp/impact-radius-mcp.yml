@@ -1,31 +1,160 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 status: published
-source: https://integrations.impact.com/ai-solutions/mcp-quick-start.md
+source: https://integrations.impact.com/ai-solutions/mcp-tools.md
+docs:
+- https://integrations.impact.com/ai-solutions/mcp-quick-start.md
+- https://integrations.impact.com/ai-solutions/mcp-tools.md
+- https://integrations.impact.com/ai-solutions/mcp-tools/brand-mcp-tools.md
+- https://integrations.impact.com/ai-solutions/mcp-tools/partner-mcp-tools.md
+- https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp.impact.com-faq.md
+- https://integrations.impact.com/ai-solutions/mcp-skills.md
 server:
   name: impact.com
   transport: http
   url: https://mcp.impact.com/mcp
   hosted: true
   enabled_by_default: true
+  lifecycle: open-beta
+deployment:
+  mode: remote
+  endpoint: https://mcp.impact.com/mcp
+  install: null
+  package: null
+  auth: oauth
+  verified: probed
+  probe:
+    method: POST tools/list (JSON-RPC 2.0)
+    url: https://mcp.impact.com/mcp
+    http_status: 401
+    body: '{"message":"Unauthorized"}'
+    checked: '2026-08-13'
+    result: gated
+  note: >-
+    Remote HTTPS endpoint an MCP client POSTs to directly. No stdio package is published — there
+    is nothing to npx or pip install. Live tools/list is auth-gated (401), so the tool inventory
+    below comes from the provider's own published tool reference pages, not from introspection;
+    input schemas therefore require an authenticated session to enumerate.
 auth:
   type: oauth2.1
   notes: >-
     OAuth 2.1 authorization. Separate MCP usage tokens are minted per LLM client with refresh
     tokens for session persistence; user credentials are never shared with the AI assistant,
-    only a revocable token. Account administrators can disable MCP globally, which deletes
-    existing tokens.
+    only a revocable token. Account administrators can enable or disable MCP globally, which
+    deletes existing tokens. Tool visibility and data scope are set automatically by the
+    authenticated account type (Brand / Partner) and that account's permissions.
+  discovery:
+    oauth_authorization_server: 404
+    oauth_protected_resource: 404
+    note: >-
+      No RFC 8414 / RFC 9728 discovery documents are served on mcp.impact.com; both probed 404
+      on 2026-08-13. The OAuth flow is documented in prose in the per-client quick starts.
 capabilities:
 - data_query: Search and summarize account information using natural language.
 - write_operations: Create and update campaigns, settings, and partners.
 - workflow_automation: Streamline repetitive tasks.
+tools:
+  source: https://integrations.impact.com/ai-solutions/mcp-tools.md
+  schemas: gated
+  scoping: >-
+    The authenticated account type determines which set is exposed. search_help_center,
+    get_marketing_guidance, query_performance, list_invoices and get_invoice are common to both.
+  shared:
+  - name: search_help_center
+    description: >-
+      Searches the impact.com Help Center for how-to and support answers, scoped to the account
+      type; results can link directly to the relevant screen in the platform.
+  - name: get_marketing_guidance
+    description: >-
+      Answers strategy and best-practice questions about referral and partnership marketing,
+      tailored to account type, and recommends Partner Experience Academy courses.
+  - name: query_performance
+    description: >-
+      Retrieves performance analytics (clicks, actions, revenue) grouped by dimensions such as
+      brand, partner or date, over a requested date range. Data scope is set by account identity.
+  - name: list_invoices
+    description: >-
+      Lists recipient-generated invoices, newest first, 25 per page, optionally filtered by
+      created date. Not a source for current overdue funding or payout eligibility.
+  - name: get_invoice
+    description: >-
+      Retrieves one recipient-generated invoice by invoice number, including line items and
+      per-program breakdown.
+  brand:
+  - name: get_website_metrics
+    description: Retrieves traffic, engagement and audience metrics for a given website domain.
+  - name: get_social_metrics
+    description: Retrieves follower, engagement and reach metrics for a social media profile, by platform and handle.
+  - name: investigate_order_action
+    description: >-
+      Looks up conversion and action-tracking records for a specific order ID within a campaign —
+      why an order did or did not convert, and whether the action is payable.
+  - name: get_brand_overdue_amount
+    description: >-
+      Retrieves total overdue fees, split into overdue impact.com fees and overdue partner fees.
+  - name: recommend_partners
+    description: >-
+      Retrieves a ranked list of partners recommended for the program based on category, country,
+      promotional method and audience-similarity signals.
+  - name: evaluate_partner_recommendation
+    description: Evaluates a specific partner recommendation for the account's program.
+  partner:
+  - name: search_products
+    description: Searches brand product catalogs available to the partner.
+  - name: list_partner_promo_codes
+    description: Lists promo codes issued to the partner.
+  - name: get_partner_promo_code
+    description: Retrieves one promo code by identifier.
+  - name: create_tracking_links
+    description: Creates partner tracking links. Write operation.
+  - name: recommend_programs
+    description: Retrieves a ranked list of brand programs recommended for the partner.
+  - name: evaluate_program_recommendation
+    description: Evaluates a specific program recommendation for the partner.
+  - name: get_payout_status
+    description: Retrieves the partner's payout status.
+  counts:
+    shared: 5
+    brand_only: 6
+    partner_only: 7
+    distinct_total: 18
+skills:
+  published: true
+  source: https://integrations.impact.com/ai-solutions/mcp-skills.md
+  description: >-
+    impact.com publishes a curated set of first-party MCP Skills — reusable workflows a user
+    copies into their AI client so the assistant knows how to drive mcp.impact.com for a
+    recurring job. Described in the docs as a direct add-on on top of MCP Tools.
+  catalog:
+  - name: Brand partner performance scorecard
+    audience: brand
+    url: https://integrations.impact.com/ai-solutions/mcp-skills/brand-skills/brand-partner-performance-scorecard.md
+    summary: >-
+      Ranked partner table (clicks / actions / revenue) with period vs prior and three next
+      actions.
+  - name: Partner Weekly Performance Digest
+    audience: partner
+    url: https://integrations.impact.com/ai-solutions/mcp-skills/partner-skills/partner-weekly-performance-digest.md
+  note: >-
+    The skill bodies are rendered in-page as GitBook cards and are NOT present in the .md export
+    (the markdown representation of each skill page is empty apart from the title), so the skill
+    text itself could not be captured verbatim. Recorded as a provider-published surface, and the
+    API Evangelist skills in skills/ are grounded in the OpenAPI rather than copied from these.
 clients:
-- name: Cursor
-  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-cursor.md
-- name: VS Code
-  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-vs-code.md
-- name: Claude Desktop & Claude Code
-  docs: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-claude-desktop-and-claude-code.md
+  supported: [Claude Code, Claude Desktop, Cursor, VS Code]
+  docs:
+  - name: Cursor
+    url: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-cursor.md
+  - name: VS Code
+    url: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-vs-code.md
+  - name: Claude Desktop & Claude Code
+    url: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp-for-claude-desktop-and-claude-code.md
+administration:
+- https://integrations.impact.com/ai-solutions/mcp-quick-start/enable-or-disable-mcp-access.md
+- https://integrations.impact.com/ai-solutions/mcp-quick-start/switch-between-accounts-in-the-mcp-beta.md
+crosswalk: mcp/impact-radius-tool-crosswalk.yml
 notes: >-
-  Official first-party hosted/remote MCP server. Exact tool list is not publicly enumerated in
-  the quick-start docs; tools are exposed dynamically over the platform APIs.
+  Upgraded from the 2026-07-19 pass, which recorded the server as published but could not
+  enumerate tools ("not publicly enumerated in the quick-start docs"). impact.com has since
+  published Brand and Partner tool reference pages and an MCP Skills section; 18 distinct tools
+  are now named with descriptions. Input schemas remain gated behind OAuth.

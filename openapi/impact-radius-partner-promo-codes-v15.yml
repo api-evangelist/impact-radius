@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: Partner Promo Codes API
+  description: |
+    Promo Codes are discount codes assigned to your partner account by the brands you partner with.
+    Use this API to surface available codes to your audience and to track which deals and programs each code belongs to.
+
+    Typical workflow:
+
+    1. **List Promo Codes** — discover the codes available to your account, optionally filtered by program, advertiser, deal, or date range.
+    2. **Retrieve a Promo Code** — get the full details of a specific code by its Id.
+
+    Each code links back to its Program, Advertiser, and (optionally) a Deal — use those references to fetch deeper context via the Partner Programs, Account, and Deals APIs.
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+  version: '15'
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Promo Codes
+  description: Endpoints for listing and retrieving brand-issued promo codes available to your partner account.
+paths:
+  /Mediapartners/{AccountSID}/PromoCodes:
+    get:
+      summary: List Promo Codes
+      description: Returns the promo codes available to your partner account. Supports filtering by program, advertiser, deal, credit rule, match mode, and creation date range.
+      operationId: listPromoCodes
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: SearchString
+        in: query
+        description: Free-text search across all promo code fields.
+        schema:
+          type: string
+      - name: ProgramId
+        in: query
+        description: Filter by one or more program IDs.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: AdvertiserId
+        in: query
+        description: Filter by one or more advertiser (brand) IDs.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: DealId
+        in: query
+        description: Filter by one or more deal IDs.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: CreditRule
+        in: query
+        description: Filter by credit policy.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditRule'
+      - name: MatchMode
+        in: query
+        description: Filter by code matching type.
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/MatchMode'
+      - name: CreatedDateStart
+        in: query
+        description: Return only codes created on or after this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: CreatedDateEnd
+        in: query
+        description: Return only codes created on or before this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateStart
+        in: query
+        description: Return only promo codes whose `StartDate` is on or after this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateEnd
+        in: query
+        description: Return only promo codes whose `StartDate` is on or before this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateStart
+        in: query
+        description: Return only promo codes whose `EndDate` is on or after this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateEnd
+        in: query
+        description: Return only promo codes whose `EndDate` is on or before this date/time (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A list of promo code objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PromoCodes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PromoCode'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/PromoCodes' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Mediapartners/{AccountSID}/PromoCodes/{Id}:
+    get:
+      summary: Retrieve a Promo Code
+      description: Returns the full details of a single promo code by its unique Id.
+      operationId: retrievePromoCode
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: The unique identifier assigned to the promo code.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single promo code object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCode'
+        '404':
+          description: No promo code exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/PromoCodes/{Id}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    PromoCode:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier assigned to the promo code.
+          example: '8111554'
+        Code:
+          type: string
+          description: The alphanumeric string customers enter at checkout to redeem the offer.
+          example: HAZEL10OFF
+        State:
+          type: string
+          enum:
+          - ACTIVE
+          - FUTUREDATE
+          - EXPIRED
+          description: Current state of the promo code.
+          example: ACTIVE
+        Program:
+          type: object
+          description: The brand program this promo code belongs to.
+          properties:
+            Id:
+              type: string
+              description: Unique identifier for the program.
+              example: '21282'
+            Name:
+              type: string
+              description: Display name of the program.
+              example: Acme's Creator Program
+            Uri:
+              type: string
+              description: API resource path for this program.
+              example: /Mediapartners/<AccountSID>/Campaigns/21282
+            LogoUri:
+              type: string
+              description: API resource path to the program's logo image.
+              example: /Mediapartners/<AccountSID>/Campaigns/21282/Logo
+        Advertiser:
+          type: object
+          description: The brand (advertiser) that issued this promo code.
+          properties:
+            Id:
+              type: string
+              description: Unique identifier for the advertiser.
+              example: '1804207'
+            Name:
+              type: string
+              description: Display name of the advertiser.
+              example: Acme Corporation
+            Uri:
+              type: string
+              description: API resource path for this advertiser.
+              example: /Mediapartners/<AccountSID>/Advertisers/1804207
+            LogoUri:
+              type: string
+              description: API resource path to the advertiser's logo image.
+              example: /Mediapartners/<AccountSID>/Advertisers/1804207/Logo
+        Deal:
+          type: object
+          description: The deal this promo code is associated with, if any.
+          properties:
+            Id:
+              type: string
+              description: Unique identifier for the deal.
+              example: '92812'
+            Name:
+              type: string
+              description: Display name of the deal.
+              example: Summer Promotion
+            Uri:
+              type: string
+              description: API resource path for this deal.
+              example: /Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812
+        MatchMode:
+          $ref: '#/components/schemas/MatchMode'
+        CreditRule:
+          $ref: '#/components/schemas/CreditRule'
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time the promo code was created (ISO 8601).
+          example: '2023-12-12T03:28:40-08:00'
+        StartDate:
+          type: string
+          format: date-time
+          description: Date and time the promo code becomes active (ISO 8601). Only returned when the code is scheduled with a start date.
+          example: '2026-01-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: Date and time the promo code expires (ISO 8601). Only returned when the code is scheduled with an end date.
+          example: '2026-01-31T23:59:59-08:00'
+        Uri:
+          type: string
+          format: uri
+          description: API resource path for this promo code.
+          example: /Mediapartners/<AccountSID>/PromoCodes/8111554
+    MatchMode:
+      type: string
+      enum:
+      - LI
+      - RE
+      description: |
+        How the promo code value is matched against codes used at checkout.
+
+        - `LI`: Literal — the code must match exactly.
+        - `RE`: Regex — the code is interpreted as a regular expression.
+    CreditRule:
+      type: string
+      enum:
+      - ALWAYS
+      - INVOLVED
+      - WINNER
+      description: |
+        When the partner is credited for a conversion that used this code.
+
+        - `ALWAYS`: The partner is always credited.
+        - `INVOLVED`: Credited only when involved in the click path leading to the sale.
+        - `WINNER`: Credited only when the partner drove the last click before the sale.
+x-default-client: cURL

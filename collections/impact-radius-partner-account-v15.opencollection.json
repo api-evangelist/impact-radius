@@ -1,0 +1,317 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company Information API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Company Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Retrieves the current profile and account metadata for your partner account. The account is determined by the Account SID and Auth Token used in the request."
+        },
+        {
+          "info": {
+            "name": "Update Company Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "CompanyName",
+                  "value": ""
+                },
+                {
+                  "name": "Website",
+                  "value": ""
+                },
+                {
+                  "name": "ContentInterests",
+                  "value": ""
+                },
+                {
+                  "name": "Description",
+                  "value": ""
+                },
+                {
+                  "name": "LogoImage",
+                  "value": ""
+                },
+                {
+                  "name": "PrimaryPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "PrimaryPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "OrganizationType",
+                  "value": ""
+                },
+                {
+                  "name": "DateOfBirth",
+                  "value": ""
+                },
+                {
+                  "name": "Education",
+                  "value": ""
+                },
+                {
+                  "name": "Ethnicity",
+                  "value": ""
+                },
+                {
+                  "name": "Gender",
+                  "value": ""
+                },
+                {
+                  "name": "HouseholdIncome",
+                  "value": ""
+                },
+                {
+                  "name": "ParentalStatus",
+                  "value": ""
+                },
+                {
+                  "name": "Pronouns",
+                  "value": ""
+                },
+                {
+                  "name": "RelationshipStatus",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressLine1",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressCity",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressLine1",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressCity",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressLine2",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressState",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressPostalCode",
+                  "value": ""
+                },
+                {
+                  "name": "CorporateAddressCountry",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressLine2",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressState",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressPostalCode",
+                  "value": ""
+                },
+                {
+                  "name": "BillingAddressCountry",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressLine1",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressLine2",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressCity",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressState",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressPostalCode",
+                  "value": ""
+                },
+                {
+                  "name": "ShippingAddressCountry",
+                  "value": ""
+                },
+                {
+                  "name": "SecondaryPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "SecondaryPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactName",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactEmail",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactWorkPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactWorkPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactCellPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "FinancialContactCellPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactName",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactEmail",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactWorkPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactWorkPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactCellPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "TechnicalContactCellPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactName",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactEmail",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactWorkPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactWorkPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactCellPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "CommercialContactCellPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactName",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactEmail",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactWorkPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactWorkPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactCellPhoneNumber",
+                  "value": ""
+                },
+                {
+                  "name": "SecurityContactCellPhoneNumberCountry",
+                  "value": ""
+                },
+                {
+                  "name": "EinSsnForeignTaxId",
+                  "value": ""
+                },
+                {
+                  "name": "MinimumContactRating",
+                  "value": ""
+                },
+                {
+                  "name": "PrimaryPromotionalMethod",
+                  "value": ""
+                },
+                {
+                  "name": "PromotionalMethods",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates your partner account information. Only the parameters you provide will be updated — all others remain unchanged.\n\n**Note:** `FinancialContact`, `TechnicalContact`, and `CommercialContact` cannot be updated via API. These must be updated in the impact.com UI.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

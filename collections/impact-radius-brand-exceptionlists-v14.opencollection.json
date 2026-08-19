@@ -1,0 +1,317 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Exception Lists",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exception Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Exception Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the program ID the list applies to."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filter lists by their current state."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filter lists by whether they apply to CATEGORY or SKU."
+              }
+            ]
+          },
+          "docs": "Returns a list of your exception lists, which can be filtered by campaign, state, or type."
+        },
+        {
+          "info": {
+            "name": "Create an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new, empty exception list for a specific campaign and type."
+        },
+        {
+          "info": {
+            "name": "Get Exception List Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing exception list by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the specified exception list's name, type, or associated action trackers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exception List Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Items in an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              },
+              {
+                "name": "Value",
+                "value": "",
+                "type": "query",
+                "description": "Filter items by their 'Value' (the specific SKU or Category)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all items within a specific exception list."
+        },
+        {
+          "info": {
+            "name": "Create Items in an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates one or more new items for an exception list, either via form parameters for a single item or by uploading a file for multiple items."
+        },
+        {
+          "info": {
+            "name": "Replace All Items in an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "File",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replaces all items within an existing exception list by uploading a new .CSV or .XLSX file."
+        },
+        {
+          "info": {
+            "name": "Delete All Items from an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              }
+            ]
+          },
+          "docs": "Permanently deletes all items in an exception list. This cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get Exception List Item Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items/:ItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ItemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single item from an exception list."
+        },
+        {
+          "info": {
+            "name": "Delete an Exception List Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ExceptionLists/:ExceptionListId/Items/:ItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ItemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list item."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a single item from an exception list. This cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

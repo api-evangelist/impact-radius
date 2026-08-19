@@ -1,0 +1,562 @@
+{
+  "item": [
+    {
+      "id": "ccea7cda-f461-43df-be28-14efb6c38ed6",
+      "name": "Programs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7e52e94b-38f8-4ab7-95f5-87b418550d69",
+          "name": "List All Programs",
+          "request": {
+            "name": "List All Programs",
+            "description": {
+              "content": "Returns a list of all programs for your account, sorted by Program ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "Filter by program name."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filter by program state."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90ba59d5-5d35-4e21-a29c-0538a72f831a",
+              "name": "A paginated list of program objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Campaigns\": [\n    {\n      \"Id\": 7236,\n      \"Name\": \"string\",\n      \"State\": \"AWAITING_REVIEW\",\n      \"Type\": \"Performance\",\n      \"Categories\": {\n        \"PrimaryCategory\": \"string\",\n        \"PrimarySubCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"AdditionalCategory\": \"string\",\n        \"AdditionalSubCategories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ShortDescription\": \"string\",\n      \"LongDescription\": \"string\",\n      \"ListInMarketplace\": true,\n      \"DisplayServicingAgency\": false,\n      \"Rating\": 6162,\n      \"SearchKeywords\": \"string\",\n      \"ShippingRegions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Resources\": {\n        \"CompanyHomepage\": \"http://geXjsWbSyddXiv.rwPXiV\",\n        \"ExampleLandingPage\": \"https://ftlVvVE.ifeUcSFbSZe+IO-TYprNJYi7DA4J-snOCuePj-XZFY-Kl7jyNk2QPKuixCgn\",\n        \"InformationPage\": \"http://grjReIztzLflYiiuz.ttz787a4P0EHbyaBaKNl\",\n        \"AdditionalRelatedLinks\": [\n          {\n            \"LinkType\": \"PDF\",\n            \"LinkDisplayName\": \"string\",\n            \"LinkUrl\": \"http://pVtPbmPbLbPt.fcrrDM6iCOhDcskW8LKs8AUnLfV2PM,.Lh+GahYjIovlmDQmmX\"\n          },\n          {\n            \"LinkType\": \"PDF\",\n            \"LinkDisplayName\": \"string\",\n            \"LinkUrl\": \"https://BQzfyKeGucttIgmgTWselVAAuuhlC.qfpzT6QJKW1J1Y\"\n          }\n        ]\n      },\n      \"CompanyContacts\": [\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"EmailAddress\": \"4df@UoVJZjk.pkw\",\n          \"PhoneNumber\": \"string\"\n        },\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"EmailAddress\": \"2kn8gpaC@xVUWWhPKeAiAMubX.nqs\",\n          \"PhoneNumber\": \"string\"\n        }\n      ],\n      \"GiftCardPayouts\": false,\n      \"TrademarkBidding\": false,\n      \"ThirdPartyImpressionPixel\": \"string\",\n      \"MobileReadyAds\": true,\n      \"DisplayFutureAds\": false,\n      \"PromoCodeTracking\": false,\n      \"TrackingDomain\": \"string\",\n      \"SiteDefinition\": \"string\",\n      \"ImpressionTracking\": true,\n      \"ViewThroughCrediting\": true,\n      \"IdentityMatching\": \"ACCOUNT\",\n      \"HasStandDownPolicy\": true,\n      \"GatewayTrackingSettings\": {\n        \"DefaultLandingPage\": \"https://tFmubdNJJMu.kjf0kSayAmBABHHXCIROzmy\",\n        \"MediaPartnerTrackingTemplate\": \"string\",\n        \"CampaignTrackingTemplate\": \"string\",\n        \"SSLSupport\": true,\n        \"DeepLinking\": true,\n        \"DeepLinkDomains\": \"string\",\n        \"ThirdPartyGatewayUrl\": \"http://VtIqLlwcNwOAuGPLTNBvJncB.jzZPtj\",\n        \"ThirdPartyGatewayQueryStringParameters\": \"string\",\n        \"UniqueClickWindowLength\": \"1h\",\n        \"UniqueClickWindowType\": \"ROLLING\"\n      },\n      \"DirectTrackingSettings\": {\n        \"UnidentifiedName\": \"string\",\n        \"SessionWindowLength\": 6582\n      },\n      \"Uri\": \"https://yhnepvmBDKxWlMlewdCRk.tch4q-ay7sGq-QfOW3VEoZyrYNvxfMudBVHq\"\n    },\n    {\n      \"Id\": 7945,\n      \"Name\": \"string\",\n      \"State\": \"SETUP_COMPLETE\",\n      \"Type\": \"Performance\",\n      \"Categories\": {\n        \"PrimaryCategory\": \"string\",\n        \"PrimarySubCategories\": [\n          \"string\",\n          \"string\"\n        ],\n        \"AdditionalCategory\": \"string\",\n        \"AdditionalSubCategories\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ShortDescription\": \"string\",\n      \"LongDescription\": \"string\",\n      \"ListInMarketplace\": false,\n      \"DisplayServicingAgency\": true,\n      \"Rating\": 7190,\n      \"SearchKeywords\": \"string\",\n      \"ShippingRegions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Resources\": {\n        \"CompanyHomepage\": \"http://EgBDLSz.azzFCeGOVhVhHqqCvXuYdnU8nzfhK,G61WmP3T+JuiHYHyKy-\",\n        \"ExampleLandingPage\": \"https://bWyqJvHNScIJMbSUQBggGjbFwQMHv.fkpJ01SCFQTuu\",\n        \"InformationPage\": \"https://ueyqCBwbkAZLIdniU.yptbVmWuiaRFsYfhsT+JgxbnaA-RYpKpGf-eian7Xv6.m.ENtEufKAZciDw,Y\",\n        \"AdditionalRelatedLinks\": [\n          {\n            \"LinkType\": \"URL\",\n            \"LinkDisplayName\": \"string\",\n            \"LinkUrl\": \"http://VgtkUcvMIjPysPommyjZIjWXVLz.ngtHlSAWXEVCLvmDHw\"\n          },\n          {\n            \"LinkType\": \"URL\",\n            \"LinkDisplayName\": \"string\",\n            \"LinkUrl\": \"http://nmc.rnqYGe6FKui0ydeXyCAhofIZo+gyXxDHEsitWDhOXw-b-oE+\"\n          }\n        ]\n      },\n      \"CompanyContacts\": [\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"EmailAddress\": \"nqgldU6ixwfX0@pRKMzaTzQTiWIAu.kjbu\",\n          \"PhoneNumber\": \"string\"\n        },\n        {\n          \"FirstName\": \"string\",\n          \"LastName\": \"string\",\n          \"EmailAddress\": \"8LFscrG503@qLjjaUi.irh\",\n          \"PhoneNumber\": \"string\"\n        }\n      ],\n      \"GiftCardPayouts\": false,\n      \"TrademarkBidding\": true,\n      \"ThirdPartyImpressionPixel\": \"string\",\n      \"MobileReadyAds\": true,\n      \"DisplayFutureAds\": true,\n      \"PromoCodeTracking\": true,\n      \"TrackingDomain\": \"string\",\n      \"SiteDefinition\": \"string\",\n      \"ImpressionTracking\": true,\n      \"ViewThroughCrediting\": true,\n      \"IdentityMatching\": \"ACCOUNT\",\n      \"HasStandDownPolicy\": false,\n      \"GatewayTrackingSettings\": {\n        \"DefaultLandingPage\": \"http://yvVjLyGPVEVvLCDHOTtvum.uemwLkQXmSD6Jp5PuWeCPSFRvs+ZZO6IgiMvqQHI2k,k+YJP8\",\n        \"MediaPartnerTrackingTemplate\": \"string\",\n        \"CampaignTrackingTemplate\": \"string\",\n        \"SSLSupport\": false,\n        \"DeepLinking\": false,\n        \"DeepLinkDomains\": \"string\",\n        \"ThirdPartyGatewayUrl\": \"http://SZoqmDTknNymQDBLIkHitwpKlYbVJ.bdcrJCA7PvyZbK\",\n        \"ThirdPartyGatewayQueryStringParameters\": \"string\",\n        \"UniqueClickWindowLength\": \"24h\",\n        \"UniqueClickWindowType\": \"FIXED\"\n      },\n      \"DirectTrackingSettings\": {\n        \"UnidentifiedName\": \"string\",\n        \"SessionWindowLength\": 7825\n      },\n      \"Uri\": \"https://BnKPZXEGJwguXvajTOcRPEfXAkYAlqtSe.tfHS.Y+iYxJPGq4LkCauHKBC2zTIhzN-Sczmq3dncCe+4zoNkPAgigoQv2kwfy1?h=i8O&tuusev=O_&frlx&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43ce6521-070b-42de-9bf2-484614d83b79",
+          "name": "Get Program Details",
+          "request": {
+            "name": "Get Program Details",
+            "description": {
+              "content": "Retrieves the details of an existing program by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The unique identifier for the program (campaign)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "737f0b92-aa0f-4c41-bd92-3585d42f6d3f",
+              "name": "A single program object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The unique identifier for the program (campaign)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 2151,\n  \"Name\": \"string\",\n  \"State\": \"SETUP_COMPLETE\",\n  \"Type\": \"Performance\",\n  \"Categories\": {\n    \"PrimaryCategory\": \"string\",\n    \"PrimarySubCategories\": [\n      \"string\",\n      \"string\"\n    ],\n    \"AdditionalCategory\": \"string\",\n    \"AdditionalSubCategories\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"ShortDescription\": \"string\",\n  \"LongDescription\": \"string\",\n  \"ListInMarketplace\": true,\n  \"DisplayServicingAgency\": false,\n  \"Rating\": 5456,\n  \"SearchKeywords\": \"string\",\n  \"ShippingRegions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Resources\": {\n    \"CompanyHomepage\": \"https://xMmTjNBBweaRUSmhcCneJBlRPbRX.rtvbrDjchVTM2B.jBUN-ff3RddBPKp9QNFVKuTVz9uGVobodd05n9BPT2Nmb,ZU9Ic+5xl\",\n    \"ExampleLandingPage\": \"https://zvxgZAFPehDeVjAiYXlFJpl.vwvnsA.4oY.mc5jgu.Ody\",\n    \"InformationPage\": \"https://dletKoHULbRRAWJQQBWTXFNaGIjVBlBOq.zrigy6d6JPpWFuu,.lWh\",\n    \"AdditionalRelatedLinks\": [\n      {\n        \"LinkType\": \"URL\",\n        \"LinkDisplayName\": \"string\",\n        \"LinkUrl\": \"http://aMphvdbUOXzhOmNg.muIQ..x5BI9I\"\n      },\n      {\n        \"LinkType\": \"PDF\",\n        \"LinkDisplayName\": \"string\",\n        \"LinkUrl\": \"https://rfTJWCMMNldXWowzj.fxghSon9\"\n      }\n    ]\n  },\n  \"CompanyContacts\": [\n    {\n      \"FirstName\": \"string\",\n      \"LastName\": \"string\",\n      \"EmailAddress\": \"7lTbfwy5cpt@nwpwGqwbYzRePSaklXpVqqNButBuALLUj.gxij\",\n      \"PhoneNumber\": \"string\"\n    },\n    {\n      \"FirstName\": \"string\",\n      \"LastName\": \"string\",\n      \"EmailAddress\": \"ilAlpbhVP0sgW@DTiPMQqaaTVuyRmktwsuUq.rwr\",\n      \"PhoneNumber\": \"string\"\n    }\n  ],\n  \"GiftCardPayouts\": false,\n  \"TrademarkBidding\": false,\n  \"ThirdPartyImpressionPixel\": \"string\",\n  \"MobileReadyAds\": true,\n  \"DisplayFutureAds\": true,\n  \"PromoCodeTracking\": true,\n  \"TrackingDomain\": \"string\",\n  \"SiteDefinition\": \"string\",\n  \"ImpressionTracking\": false,\n  \"ViewThroughCrediting\": false,\n  \"IdentityMatching\": \"ACCOUNT\",\n  \"HasStandDownPolicy\": false,\n  \"GatewayTrackingSettings\": {\n    \"DefaultLandingPage\": \"http://AuQXuFJNfcCqW.xoQ.Zim7N.sp,odp0dCQ8gwEkpz8HUHIP6OenaiZBf1,lq1qN.vEwhvxNRhM4\",\n    \"MediaPartnerTrackingTemplate\": \"string\",\n    \"CampaignTrackingTemplate\": \"string\",\n    \"SSLSupport\": true,\n    \"DeepLinking\": false,\n    \"DeepLinkDomains\": \"string\",\n    \"ThirdPartyGatewayUrl\": \"https://eZOG.rgwnXWi7Q.hCdunr9RcrYc-,zjOCHdvEeigUu+twm\",\n    \"ThirdPartyGatewayQueryStringParameters\": \"string\",\n    \"UniqueClickWindowLength\": \"5m\",\n    \"UniqueClickWindowType\": \"ROLLING\"\n  },\n  \"DirectTrackingSettings\": {\n    \"UnidentifiedName\": \"string\",\n    \"SessionWindowLength\": 2115\n  },\n  \"Uri\": \"https://BMaREjAbWNjFzYPP.covfF,CNK2iuZVpGvqfldVPL3QXHX5.8Rv0Vzd0EtLc3sr1g4\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6f0001b9-205d-4cf0-83ab-4a1967298756",
+      "name": "Unsubscribed Contacts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77f84f46-ee96-46b0-8757-8f9bcd2157eb",
+          "name": "List Unsubscribed Contacts",
+          "request": {
+            "name": "List Unsubscribed Contacts",
+            "description": {
+              "content": "Retrieves a paginated list of all contacts who have unsubscribed from a specific program's Outreach communications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "UnsubscribedContacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "PartnerId",
+                  "value": "<integer>",
+                  "description": "Filter by partner ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "UserEmail",
+                  "value": "<email>",
+                  "description": "Filter by a specific user email."
+                },
+                {
+                  "disabled": false,
+                  "key": "Page",
+                  "value": "0",
+                  "description": "The page number to retrieve, starting at 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "PageSize",
+                  "value": "20",
+                  "description": "The number of items per page. Maximum is 1000."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The unique identifier for the program."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c9e5424-d6be-4e2f-98bb-cc2f708ca345",
+              "name": "A paginated list of unsubscribed contacts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "UnsubscribedContacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "PartnerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "UserEmail",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "Page",
+                      "value": "0"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Page\": 0,\n  \"NumPages\": 1,\n  \"PageSize\": 20,\n  \"Total\": 1,\n  \"Start\": 0,\n  \"End\": 1,\n  \"Uri\": \"/UnsubscribedContacts?page=0&size=20\",\n  \"FirstPageUri\": \"/UnsubscribedContacts?page=0&size=20\",\n  \"PreviousPageUri\": \"\",\n  \"NextPageUri\": \"\",\n  \"LastPageUri\": \"/UnsubscribedContacts?page=0&size=20\",\n  \"Results\": [\n    {\n      \"UserEmail\": \"partnerA@mail.com\",\n      \"PartnerId\": 1234,\n      \"CreatedAt\": \"2026-02-05T12:13:08Z\",\n      \"UpdatedAt\": \"2026-02-05T12:13:08Z\"\n    },\n    {\n      \"UserEmail\": \"partnerA@mail.com\",\n      \"PartnerId\": 1234,\n      \"CreatedAt\": \"2026-02-05T12:13:08Z\",\n      \"UpdatedAt\": \"2026-02-05T12:13:08Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8feadefc-6cfd-4f28-ba4c-4b330418c351",
+          "name": "Unsubscribe a Contact",
+          "request": {
+            "name": "Unsubscribe a Contact",
+            "description": {
+              "content": "Unsubscribes a contact from a specific program's Outreach communications on behalf of a partner.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "UnsubscribedContacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) The unique identifier for the program."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "PartnerId",
+                  "value": "<integer>",
+                  "description": "(Required) The unique identifier for the Partner associated with the contact."
+                },
+                {
+                  "disabled": false,
+                  "key": "UserEmail",
+                  "value": "<email>",
+                  "description": "(Required) The email address of the contact to unsubscribe."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9de291c8-cca2-44e2-b9f7-e68828561580",
+              "name": "A confirmation object indicating success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "UnsubscribedContacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) The unique identifier for the program."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The unique identifier for the Partner associated with the contact.",
+                        "type": "text/plain"
+                      },
+                      "key": "PartnerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The email address of the contact to unsubscribe.",
+                        "type": "text/plain"
+                      },
+                      "key": "UserEmail",
+                      "value": "<email>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://cnjIpSumDZbNH.zcinYLCmdcptk.DDUUalYm4BIc3pDKuUp8DfG2A,XkH5ghZTKWBk\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6bd91fec-ddee-4987-8973-ee0fd78d5929",
+    "name": "Brand API - Programs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing your programs (campaigns) on impact.com. This includes retrieving program details and managing unsubscribed contacts from your outreach communications.",
+      "type": "text/plain"
+    }
+  }
+}

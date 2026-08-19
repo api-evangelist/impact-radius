@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Media Properties API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Media Properties",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List media properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/MediaProperties",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Lists all media properties for your account. This request should never return an error."
+        },
+        {
+          "info": {
+            "name": "Create a media property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/MediaProperties",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "Name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Type",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "MobilePlatform",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "AppStoreRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Installs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "SocialPlatform",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Followers",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Thumbnail",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Description",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Tags",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "RevenueModel",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "MonthlyUniqueVisitors",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "AlexaRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "QuantcastRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Price",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Handle",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new media property object. New media properties need to be verified by impact.com \nbefore they are fully approved.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a media property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/MediaProperties/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the media property."
+              }
+            ]
+          },
+          "docs": "Retrieves a media property for the specified Id value."
+        },
+        {
+          "info": {
+            "name": "Update a media property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/MediaProperties/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the media property."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "Name",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Thumbnail",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Description",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Tags",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "RevenueModel",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Url",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "MonthlyUniqueVisitors",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "AlexaRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "QuantcastRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "MobilePlatform",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "AppStoreRating",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Price",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Installs",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "SocialPlatform",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Followers",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "Handle",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the specified media property's attributes. Any parameter not provided will leave the \ncorresponding attribute unchanged. Submitted values overwrite existing values entirely.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a media property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/MediaProperties/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the media property."
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified media property. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

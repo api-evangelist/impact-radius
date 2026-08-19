@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Partner Invoices",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Invoices",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters to show invoices created on or after the specified date (ISO 8601)."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filters to show invoices created on or before the specified date (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of partner invoices, sorted with the most recent appearing first. The list can be filtered by a creation date range."
+        },
+        {
+          "info": {
+            "name": "Get Invoice Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Invoices/:InvoiceId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "InvoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the invoice."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single partner invoice by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Download Invoice PDF",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Invoices/:InvoiceId/Download",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "InvoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the invoice."
+              }
+            ]
+          },
+          "docs": "Returns the specified partner invoice as a downloadable PDF file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

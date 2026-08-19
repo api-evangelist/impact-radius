@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Reports & Exports",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export a Report Asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/ReportExport/:ReportId_or_Handle",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ReportId_or_Handle",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID or handle for the report (e.g., '4222' or 'adv_click_data_pm_only')."
+              },
+              {
+                "name": "SUBAID",
+                "value": "",
+                "type": "query",
+                "description": "Program ID to refine the report. Required for most reports."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports."
+              },
+              {
+                "name": "CONV_CURRENCY",
+                "value": "",
+                "type": "query",
+                "description": "Specify the report's currency (e.g., USD)."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "The file format for the exported report."
+              }
+            ]
+          },
+          "docs": "Schedules a job to export a report. The response contains URIs to poll for job status and to download the result file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports (Legacy)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Available Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Reports",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all reports available to the account."
+        },
+        {
+          "info": {
+            "name": "Run a Report (Legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Reports/:ReportId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ReportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID or handle for the report."
+              },
+              {
+                "name": "SUBAID",
+                "value": "",
+                "type": "query",
+                "description": "Program ID. Required for most reports."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date in YYYY-MM-DD format. Required for most reports."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "End date in YYYY-MM-DD format. Required for most reports."
+              },
+              {
+                "name": "RQueryIDx",
+                "value": "",
+                "type": "query",
+                "description": "For reports with multiple tables, specifies which table to return (0-indexed)."
+              }
+            ]
+          },
+          "docs": "Runs a report and returns the records synchronously. This is a legacy endpoint with pagination limits. Use the `ReportExport` endpoint for more efficient exporting."
+        },
+        {
+          "info": {
+            "name": "Retrieve Report Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Reports/:ReportId/MetaData",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ReportId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID or handle of the report."
+              }
+            ]
+          },
+          "docs": "Retrieves the dynamically generated documentation (metadata) for a specific report, including available filters and attributes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

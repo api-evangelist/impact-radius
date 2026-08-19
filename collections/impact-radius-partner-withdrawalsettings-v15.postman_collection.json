@@ -1,0 +1,785 @@
+{
+  "item": [
+    {
+      "id": "6ea0bc51-fd53-4225-98b7-1ad82ec5ec17",
+      "name": "Withdrawal Settings",
+      "description": {
+        "content": "Endpoints for retrieving and updating your bank account, PayPal, and payment scheduling settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8b84ce2-2408-43de-8067-710bef385cd2",
+          "name": "Retrieve withdrawal settings",
+          "request": {
+            "name": "Retrieve withdrawal settings",
+            "description": {
+              "content": "Returns the partner's current withdrawal settings, including bank account and payment scheduling information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "WithdrawalSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c03ede4f-7745-47d0-86d3-e471a44e3935",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "WithdrawalSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PaymentMethod\": \"BANK_TRANSFER\",\n  \"PaypalEmailAddress\": \"\",\n  \"BankCountry\": \"US\",\n  \"BeneficiaryAccountName\": \"\",\n  \"BeneficiaryClassification\": \"CNPJ\",\n  \"ClassificationCode\": \"\",\n  \"BeneficiaryAlternativeName\": \"\",\n  \"BeneficiaryTaxPayerId\": \"\",\n  \"BankAccountType\": \"NOT_SET\",\n  \"BankAccountNumber\": \"\",\n  \"SwiftCode\": \"\",\n  \"RoutingCode\": \"\",\n  \"VoCode\": \"\",\n  \"AgencyCode\": \"\",\n  \"BankAddress\": \"\",\n  \"BankPostalCode\": \"\",\n  \"BankCity\": \"\",\n  \"BankState\": \"\",\n  \"BranchCode\": \"\",\n  \"BankName\": \"\",\n  \"BranchName\": \"\",\n  \"PaymentSchedulingType\": \"BALANCE_THRESHOLD\",\n  \"PaymentThreshold\": \"10000.00\",\n  \"PaymentDay\": \"0\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/WithdrawalSettings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c397f9a-36d7-4ec1-9c33-aac90d0bbc44",
+              "name": "No withdrawal settings are configured for this partner account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "WithdrawalSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4760af2-96e3-423d-a76a-866bfe8af9d1",
+          "name": "Update withdrawal settings",
+          "request": {
+            "name": "Update withdrawal settings",
+            "description": {
+              "content": "Updates the partner's withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "WithdrawalSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "PaymentMethod",
+                  "value": "<string>",
+                  "description": "How impact.com sends your payouts. Required when changing payout method."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaypalEmailAddress",
+                  "value": "<string>",
+                  "description": "Email address of the PayPal account that receives payouts. Required when `PaymentMethod` is `PAYPAL`."
+                },
+                {
+                  "disabled": false,
+                  "key": "BeneficiaryAccountName",
+                  "value": "<string>",
+                  "description": "Full name on the bank account that will receive funds."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankCountry",
+                  "value": "<string>",
+                  "description": "ISO 3166-1 alpha-2 country code where the bank account is held."
+                },
+                {
+                  "disabled": false,
+                  "key": "BeneficiaryClassification",
+                  "value": "<string>",
+                  "description": "Classification of the account holder. `BUSINESS` and `INDIVIDUAL` apply globally; `CPF` and `CNPJ` are Brazilian taxpayer types."
+                },
+                {
+                  "disabled": false,
+                  "key": "ClassificationCode",
+                  "value": "<string>",
+                  "description": "Additional classification code required by some country/classification combinations (notably Brazil)."
+                },
+                {
+                  "disabled": false,
+                  "key": "BeneficiaryAlternativeName",
+                  "value": "<string>",
+                  "description": "Alternative name on the account, where the bank's system requires one."
+                },
+                {
+                  "disabled": false,
+                  "key": "BeneficiaryTaxPayerId",
+                  "value": "<string>",
+                  "description": "Taxpayer identifier of the beneficiary, in the format used by `BankCountry` (e.g., SSN/EIN for US, CPF/CNPJ for Brazil)."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankAccountType",
+                  "value": "<string>",
+                  "description": "Type of bank account that will receive funds."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankAccountNumber",
+                  "value": "<string>",
+                  "description": "The bank account number that will receive funds. For SEPA countries this is the IBAN."
+                },
+                {
+                  "disabled": false,
+                  "key": "SwiftCode",
+                  "value": "<string>",
+                  "description": "SWIFT/BIC code identifying the receiving bank. Required for international transfers."
+                },
+                {
+                  "disabled": false,
+                  "key": "RoutingCode",
+                  "value": "<string>",
+                  "description": "Domestic routing code for the receiving bank (e.g., US ABA routing number, UK sort code)."
+                },
+                {
+                  "disabled": false,
+                  "key": "VoCode",
+                  "value": "<string>",
+                  "description": "Country-specific verification code used by some banking jurisdictions."
+                },
+                {
+                  "disabled": false,
+                  "key": "AgencyCode",
+                  "value": "<string>",
+                  "description": "Bank agency identifier used in some Latin American banking systems."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankAddress",
+                  "value": "<string>",
+                  "description": "Street address of the receiving bank branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankPostalCode",
+                  "value": "<string>",
+                  "description": "Postal code of the receiving bank branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankCity",
+                  "value": "<string>",
+                  "description": "City of the receiving bank branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankState",
+                  "value": "<string>",
+                  "description": "State or province of the receiving bank branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "BranchCode",
+                  "value": "<string>",
+                  "description": "Branch identifier code (e.g., transit number, sort code segment, branch number)."
+                },
+                {
+                  "disabled": false,
+                  "key": "BankName",
+                  "value": "<string>",
+                  "description": "Name of the receiving bank."
+                },
+                {
+                  "disabled": false,
+                  "key": "BranchName",
+                  "value": "<string>",
+                  "description": "Name of the receiving bank's branch."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaymentSchedulingType",
+                  "value": "<string>",
+                  "description": "Determines whether payouts trigger by balance threshold or on a fixed day of the month."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaymentThreshold",
+                  "value": "<string>",
+                  "description": "Minimum balance that triggers a payout when `PaymentSchedulingType` is `BALANCE_THRESHOLD`. Min $20 USD, max $10,000 USD."
+                },
+                {
+                  "disabled": false,
+                  "key": "PaymentDay",
+                  "value": "<string>",
+                  "description": "Day of month payouts are issued when `PaymentSchedulingType` is `FIXED_DAY`. Either `1` or `15`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24cae5c9-d6fe-45d3-b518-f1863aa1123c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "WithdrawalSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How impact.com sends your payouts. Required when changing payout method.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentMethod",
+                      "value": "BANK_TRANSFER"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email address of the PayPal account that receives payouts. Required when `PaymentMethod` is `PAYPAL`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaypalEmailAddress",
+                      "value": "hazel.nutt@example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Full name on the bank account that will receive funds.",
+                        "type": "text/plain"
+                      },
+                      "key": "BeneficiaryAccountName",
+                      "value": "Hazel Nutt"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "ISO 3166-1 alpha-2 country code where the bank account is held.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Classification of the account holder. `BUSINESS` and `INDIVIDUAL` apply globally; `CPF` and `CNPJ` are Brazilian taxpayer types.",
+                        "type": "text/plain"
+                      },
+                      "key": "BeneficiaryClassification",
+                      "value": "INDIVIDUAL"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Additional classification code required by some country/classification combinations (notably Brazil).",
+                        "type": "text/plain"
+                      },
+                      "key": "ClassificationCode",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Alternative name on the account, where the bank's system requires one.",
+                        "type": "text/plain"
+                      },
+                      "key": "BeneficiaryAlternativeName",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Taxpayer identifier of the beneficiary, in the format used by `BankCountry` (e.g., SSN/EIN for US, CPF/CNPJ for Brazil).",
+                        "type": "text/plain"
+                      },
+                      "key": "BeneficiaryTaxPayerId",
+                      "value": "123-45-6789"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of bank account that will receive funds.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankAccountType",
+                      "value": "CHECKING"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The bank account number that will receive funds. For SEPA countries this is the IBAN.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankAccountNumber",
+                      "value": "000123456789"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "SWIFT/BIC code identifying the receiving bank. Required for international transfers.",
+                        "type": "text/plain"
+                      },
+                      "key": "SwiftCode",
+                      "value": "CHASUS33"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Domestic routing code for the receiving bank (e.g., US ABA routing number, UK sort code).",
+                        "type": "text/plain"
+                      },
+                      "key": "RoutingCode",
+                      "value": "021000021"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Country-specific verification code used by some banking jurisdictions.",
+                        "type": "text/plain"
+                      },
+                      "key": "VoCode",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Bank agency identifier used in some Latin American banking systems.",
+                        "type": "text/plain"
+                      },
+                      "key": "AgencyCode",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Street address of the receiving bank branch.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankAddress",
+                      "value": "270 Park Avenue"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal code of the receiving bank branch.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankPostalCode",
+                      "value": "10017"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City of the receiving bank branch.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankCity",
+                      "value": "New York"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "State or province of the receiving bank branch.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankState",
+                      "value": "NY"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Branch identifier code (e.g., transit number, sort code segment, branch number).",
+                        "type": "text/plain"
+                      },
+                      "key": "BranchCode",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the receiving bank.",
+                        "type": "text/plain"
+                      },
+                      "key": "BankName",
+                      "value": "JPMorgan Chase Bank"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the receiving bank's branch.",
+                        "type": "text/plain"
+                      },
+                      "key": "BranchName",
+                      "value": "Park Avenue Branch"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Determines whether payouts trigger by balance threshold or on a fixed day of the month.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentSchedulingType",
+                      "value": "BALANCE_THRESHOLD"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Minimum balance that triggers a payout when `PaymentSchedulingType` is `BALANCE_THRESHOLD`. Min $20 USD, max $10,000 USD.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentThreshold",
+                      "value": "50.00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Day of month payouts are issued when `PaymentSchedulingType` is `FIXED_DAY`. Either `1` or `15`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PaymentDay",
+                      "value": "15"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/WithdrawalSettings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34074aec-595a-4611-97cd-4d8d0b04b3ad",
+          "name": "Retrieve required banking fields",
+          "request": {
+            "name": "Retrieve required banking fields",
+            "description": {
+              "content": "Returns which fields are mandatory when configuring withdrawal settings for a given country and (optionally) payment method. Always call this before updating settings for a country you haven't configured before.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "WithdrawalSettings",
+                "RequiredFields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "bankCountry",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 or alpha-3 country code where the bank account is held."
+                },
+                {
+                  "disabled": false,
+                  "key": "paymentMethod",
+                  "value": "<string>",
+                  "description": "Filter the response to a single payment method. If omitted, requirements for all supported methods are returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59e92633-60b1-4ab8-97a2-408ebabda609",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "WithdrawalSettings",
+                    "RequiredFields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "bankCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "paymentMethod",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"BankCountry\": \"US\",\n  \"Currency\": \"USD\",\n  \"PaymentMethods\": {\n    \"key_0\": {\n      \"RequiredFields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"key_1\": {\n      \"RequiredFields\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"key_2\": {\n      \"RequiredFields\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "abfcdd16-1bd9-4c64-9781-8797611d4697",
+    "name": "Partner Withdrawal Settings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Withdrawal Settings hold the bank account, PayPal, and payment scheduling information impact.com uses to pay you out. Required fields vary by country and payment method.\n\nTypical workflow:\n\n1. **Retrieve required fields** for your country (and optionally a payment method) to learn which fields are mandatory.\n2. **Update your settings** with the values you've collected.\n3. **Retrieve your settings** to confirm what's saved.\n\nThe `PaymentSchedulingType` field controls when payouts trigger — either when your balance crosses `PaymentThreshold` (`BALANCE_THRESHOLD`) or on a fixed day of the month (`FIXED_DAY`).\n\n\nContact Support:\n Name: impact.com Developer Support\n Email: developer-support@impact.com",
+      "type": "text/plain"
+    }
+  }
+}

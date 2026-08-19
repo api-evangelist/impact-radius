@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Phone Numbers
+  description: API for retrieving phone numbers available to your impact.com brand account for use with impact.com's native call tracking solution.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/PhoneNumbers:
+    get:
+      summary: List All Phone Numbers
+      description: Returns a list of available phone numbers for your account, with options for filtering.
+      operationId: listPhoneNumbers
+      tags:
+      - Phone Numbers
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Id
+        in: query
+        description: Filter by one or more specific Phone Number IDs, provided as a comma-separated list.
+        schema:
+          type: string
+      - name: LastDateAssigned
+        in: query
+        description: Filter for numbers last assigned on a specific date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: LastDateReleased
+        in: query
+        description: Filter for numbers last released on a specific date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: Number
+        in: query
+        description: Filter by one or more specific phone numbers, provided as a comma-separated list.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of phone number objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PhoneNumbers:
+                    type: array
+                    description: The list of phone number objects.
+                    items:
+                      $ref: '#/components/schemas/PhoneNumber'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/PhoneNumbers' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/PhoneNumbers/{PhoneNumberId}:
+    get:
+      summary: Get Phone Number Details
+      description: Retrieves the details of a specific phone number by its unique ID.
+      operationId: getPhoneNumberById
+      tags:
+      - Phone Numbers
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: PhoneNumberId
+        in: path
+        required: true
+        description: The unique identifier for the phone number.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single phone number object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneNumber'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/PhoneNumbers/{PhoneNumberId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    PhoneNumber:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the phone number (Phone Number ID).
+          example: 12345
+        Country:
+          type: string
+          description: Two-letter country code for the number (ISO 3166).
+          example: US
+        Number:
+          type: string
+          description: The full phone number.
+          example: '8051234567'
+        InternationalNumber:
+          type: string
+          description: The full phone number with the international prefix.
+          example: +1 805 123 4567
+        DateCreated:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the phone number was created.
+          example: '2026-01-15T10:00:00-08:00'
+        LastDateAssigned:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the phone number was last assigned to a partner.
+          example: '2026-02-01T10:00:00-08:00'
+        LastDateReleased:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the phone number was last released from a partner.
+          example: '2026-03-15T10:00:00-08:00'
+        Uri:
+          type: string
+          format: uri-reference
+          description: The URI path to this phone number object.
+          example: /Advertisers/<AccountSID>/PhoneNumbers/12345
+x-default-client: cURL

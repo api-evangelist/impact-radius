@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "b9922ffd-fbbb-4fea-966f-d84e5e5d8de4",
+      "name": "Clicks",
+      "description": {
+        "content": "Endpoints for retrieving click event data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a55187a9-be5f-4187-8436-775af3099db5",
+          "name": "Retrieve a Click",
+          "request": {
+            "name": "Retrieve a Click",
+            "description": {
+              "content": "Retrieves the details of an existing click using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Clicks",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier for the click (also known as `im_ref` or `irclickid`)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef98f611-618c-4be3-b191-4475ca38ea53",
+              "name": "The click object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Clicks",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier for the click (also known as `im_ref` or `irclickid`)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"abcdefg1hijkl2mn3opq4rStUvwxyz5a6bcdef7\",\n  \"CampaignId\": 1674,\n  \"CampaignName\": \"Capsule Corp\",\n  \"ProfileId\": \"ab12345c-6789-0123-4de5-678f90g123h4\",\n  \"IpAddress\": \"\",\n  \"EventDate\": \"2021-01-25T08:06:24-05:00\",\n  \"MediaId\": 3404,\n  \"MediaName\": \"Hazel Nutt\",\n  \"AdId\": 1941,\n  \"AdName\": \"Capsule Home Spring Promo\",\n  \"AdType\": \"BANNER\",\n  \"ProductSku\": \"APP-0016\",\n  \"DealName\": \"Capsule Home Spring Sale\",\n  \"DealType\": \"GENERAL_SALE\",\n  \"DealScope\": \"ENTIRE_STORE\",\n  \"CustomerArea\": \"San Francisco\",\n  \"CustomerCity\": \"San Francisco\",\n  \"CustomerRegion\": \"California\",\n  \"CustomerCountry\": \"US\",\n  \"DeviceType\": \"DESKTOP\",\n  \"DeviceFamily\": \"WINDOWS_MACHINE\",\n  \"Browser\": \"CHROME\",\n  \"Os\": \"WINDOWS_10\",\n  \"ReferringUrl\": \"https://hazelwellness.blog/spring-deals\",\n  \"ReferringDomain\": \"hazelwellness.blog\",\n  \"LandingPageUrl\": \"https://www.capsulecorp.holdings/spring?irgwc=1\",\n  \"TrafficCategory\": \"Content\",\n  \"TrafficSource\": \"hazelwellness.blog\",\n  \"BidKeyword\": \"\",\n  \"SearchText\": \"\",\n  \"SharedId\": \"spring2026\",\n  \"PartnerRelated\": [\n    {\n      \"SubId1\": \"storm\",\n      \"SubId2\": \"spring2026\",\n      \"SubId3\": \"\"\n    }\n  ],\n  \"CpcBid\": \"\",\n  \"Payout\": \"\",\n  \"UniqueClick\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "09dc6e8d-5d66-4701-a454-95e236330ddf",
+      "name": "ClickExport",
+      "description": {
+        "content": "Asynchronously export click event data as CSV, JSON, or XML.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9577cbd8-fa7c-4000-9b8b-405aa4f5deef",
+          "name": "Export Clicks",
+          "request": {
+            "name": "Export Clicks",
+            "description": {
+              "content": "Schedules a background job to asynchronously export clicks. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.\n\n**Migration note:** If you're migrating from the `Clicks` endpoint to `ClickExport`, note that the result object uses `ProgramId` and `ProgramName` in place of the previous `CampaignId` and `CampaignName`.\n\nSee the impact.com rate-limit documentation for this endpoint's request limits.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ClickExport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ProgramId",
+                  "value": "<string>",
+                  "description": "Filter to clicks for a specific Program (formerly known as Campaign). Repeat the parameter to include multiple Programs."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProgramId",
+                  "value": "<string>",
+                  "description": "Filter to clicks for a specific Program (formerly known as Campaign). Repeat the parameter to include multiple Programs."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<string>",
+                  "description": "Filter to clicks on a specific ad. Repeat the parameter to include multiple ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<string>",
+                  "description": "Filter to clicks on a specific ad. Repeat the parameter to include multiple ads."
+                },
+                {
+                  "disabled": false,
+                  "key": "Date",
+                  "value": "<date>",
+                  "description": "Click date to export in `yyyy-MM-dd` format. Defaults to today if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubId",
+                  "value": "<string>",
+                  "description": "Filter to clicks that include the specified Sub ID value. Repeat the parameter to include multiple Sub IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "SubId",
+                  "value": "<string>",
+                  "description": "Filter to clicks that include the specified Sub ID value. Repeat the parameter to include multiple Sub IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "UniqueClick",
+                  "value": "<string>",
+                  "description": "Set to `TRUE` to return only clicks that meet the IAB standards for a unique click. See the IAB Click Measurement Guidelines for details."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "CSV",
+                  "description": "Format for the exported result file."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c59dee27-652b-4fb5-8520-f1fbb99e5545",
+              "name": "Job successfully queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ClickExport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ProgramId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ProgramId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "SubId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "SubId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "UniqueClick",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "CSV"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"/Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n  \"ResultUri\": \"/Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download\",\n  \"ReplayUri\": \"/Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Replay\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a03ff5ac-8b1e-4c49-b33a-4c884427aff7",
+    "name": "Partner Clicks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A click object captures data about a user's interaction with an advertisement. Each click is identified by a unique consumer journey ID (also known as `im_ref` or `irclickid`) and includes details about the ad, device, geography, traffic source, and partner payout.\n\n\nContact Support:\n Name: impact.com Developer Support\n Email: support@impact.com",
+      "type": "text/plain"
+    }
+  }
+}

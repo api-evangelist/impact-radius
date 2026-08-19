@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: Partner Jobs API
+  description: "The job endpoint allows the scheduling of a job to extract data and fetch the results once complete. \nJobs protect you from hitting rate limits and ensure a smoother data retrieval experience.\n"
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Jobs
+  description: Endpoints for listing, retrieving, downloading, and replaying partner jobs.
+paths:
+  /Mediapartners/{AccountSID}/Jobs:
+    get:
+      summary: List Jobs
+      description: Returns a list of jobs based on creation date filters.
+      operationId: listJobs
+      tags:
+      - Jobs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CreatedAfter
+        in: query
+        description: Return jobs scheduled after this date (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+      - name: CreatedBefore
+        in: query
+        description: Return jobs scheduled before this date (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: A list of job objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Mediapartners/{AccountSID}/Jobs/{JobId}:
+    get:
+      summary: Retrieve Job Status
+      description: Returns an object describing the status of the queried job.
+      operationId: retrieveJobStatus
+      tags:
+      - Jobs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: JobId
+        in: path
+        required: true
+        description: The unique job identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current job status and details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs/{JobId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Mediapartners/{AccountSID}/Jobs/{JobId}/Download:
+    get:
+      summary: Download Job Results
+      description: "Download the job result file if the job was completed successfully. \nIf the job isn't done, the job status will be returned. \nA job result is available for download for 90 days.\n"
+      operationId: downloadJobResults
+      tags:
+      - Jobs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: JobId
+        in: path
+        required: true
+        description: The unique job identifier.
+        schema:
+          type: string
+      - name: Mode
+        in: query
+        description: If set to Stream, the file is streamed directly instead of using a signed URL redirect.
+        schema:
+          type: string
+          enum:
+          - Stream
+      responses:
+        '200':
+          description: Returns the job result file.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '202':
+          description: Job is not yet complete. Returns the current job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '302':
+          description: Redirects to a temporary signed URL for file download.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs/{JobId}/Download' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Mediapartners/{AccountSID}/Jobs/{JobId}/Replay:
+    put:
+      summary: Replay Job
+      description: "Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status, \nor if additional results are expected for the chosen export window.\n"
+      operationId: replayJob
+      tags:
+      - Jobs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: JobId
+        in: path
+        required: true
+        description: The unique job identifier.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job successfully queued for replay.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '403':
+          description: The job is not in a replayable state or is not of a replayable type.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Jobs/{JobId}/Replay' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Job:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for this job.
+          example: d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f
+        Type:
+          type: string
+          enum:
+          - DownloadReport
+          - ApiReport
+          - UploadAds
+          - TermModification
+          - ClickExport
+          description: The type of job.
+          example: ClickExport
+        ProgramId:
+          type: string
+          description: The impact.com Program ID (CampaignId) this job was scheduled for.
+          example: '3629'
+        CreatedBy:
+          type: string
+          description: The Account SID of the account that scheduled this job.
+          example: <AccountSID>
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the job was initially scheduled.
+          example: '2022-06-07T04:33:50-05:00'
+        StartedDate:
+          type: string
+          format: date-time
+          description: The date and time the job last started running.
+          example: '2022-06-07T04:33:50-05:00'
+        CompletedDate:
+          type: string
+          format: date-time
+          description: The date and time the job was last successfully completed.
+          example: '2022-06-07T04:33:50-05:00'
+        AbandonedDate:
+          type: string
+          format: date-time
+          description: Set when an attempt is made to start a job that is already running.
+          example: '2022-06-07T04:33:50-05:00'
+        CancelledDate:
+          type: string
+          format: date-time
+          description: The date and time the job was last canceled.
+          example: '2022-06-07T04:33:50-05:00'
+        FailedDate:
+          type: string
+          format: date-time
+          description: The date and time processing of this job last raised an error.
+          example: '2022-06-07T04:33:50-05:00'
+        LastProgressUpdateDate:
+          type: string
+          format: date-time
+          description: The date and time progress on job processing was last updated.
+          example: '2022-06-07T04:33:50-05:00'
+        Status:
+          type: string
+          enum:
+          - QUEUED
+          - RUNNING
+          - COMPLETED
+          - CANCELLED
+          - ERROR
+          - FAILED
+          description: The current processing status of the job.
+          example: COMPLETED
+        StatusMessage:
+          type: string
+          description: A human-readable message describing the current job status.
+          example: Job processing completed successfully.
+        RecordsProcessed:
+          type: integer
+          description: The number of records processed up to the last progress update.
+          example: 250
+        PercentageComplete:
+          type: integer
+          description: The percentage of job processing that has been completed.
+          example: 100
+        Replayable:
+          type: boolean
+          description: Indicates whether this job type supports replay.
+          example: true
+        ResultUri:
+          type: string
+          description: API resource path to download the result file once the job is complete.
+          example: /Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download
+x-default-client: cURL

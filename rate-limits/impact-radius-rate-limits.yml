@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/rate-limits.md
+docs:
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/rate-limits.md
+- https://integrations.impact.com/partner-api-reference/partner-v15/readme/rate-limits.md
+description: >-
+  impact.com publishes hourly and daily rate limits for the REST APIs and returns IETF-style
+  RateLimit response headers on throttled resources. Limits are applied per access token /
+  account and may differ per app; the docs state limits are subject to change.
+limit_count: 4
+exhaustion:
+  status: 429
+  status_text: Too Many Requests
+  retry_after_header: null
+  guidance: >-
+    Applications should monitor the X-RateLimit-* headers on every response and dynamically
+    throttle. impact.com recommends retry with exponential back-off for 429 and 5xx.
+headers:
+- name: X-RateLimit-Limit
+  description: Maximum number of requests allowed for the resource within the given time period.
+- name: X-RateLimit-Remaining
+  description: Number of requests left as of the current request within the given time period.
+- name: X-RateLimit-Reset
+  description: >-
+    Number of seconds until the limit is reset. Documented as in line with
+    draft-polli-ratelimit-headers-02 section 3.3.
+limits:
+- scope: per-endpoint
+  resource: /Catalogs
+  window: hour
+  limit: 3600
+  unit: requests
+  note: Elevated hourly ceiling for the Catalogs endpoint.
+- scope: per-account
+  resource: default (all other endpoints)
+  window: hour
+  limit: 1000
+  unit: requests
+  note: Default system-wide hourly ceiling. Each app may have different default rate limits.
+- scope: per-endpoint
+  resource: /ReportExport
+  window: day
+  limit: 100
+  unit: requests
+  note: Announced in the Brand v13 changelog; daily cap on report export jobs.
+- scope: per-endpoint
+  resource: /ClickExport
+  window: day
+  limit: 10
+  unit: requests
+  note: Announced in the Brand v13 changelog; daily cap on click export jobs.
+advocate:
+  note: >-
+    The Advocate surface (app.referralsaasquatch.com) signals throttling through the RS033
+    "Rate limit exceeded" error code rather than the X-RateLimit-* headers; published numeric
+    limits were not found.
+  ref: errors/impact-radius-problem-types.yml
+notes: >-
+  Rate limits are documented per API-reference version set (Brand v11/v12/v13/v14, Partner
+  v14/v15) with identical content. Values captured verbatim from the published tables; no
+  numbers were inferred.

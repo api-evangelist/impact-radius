@@ -1,0 +1,726 @@
+{
+  "item": [
+    {
+      "id": "b02a4b1e-f835-44bc-8549-86b9200455c9",
+      "name": "Tax Documents",
+      "description": {
+        "content": "Endpoints for creating, completing, and retrieving partner tax documents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "545f6435-2652-4712-977a-aa5a3bf5a017",
+          "name": "Retrieve the latest tax document",
+          "request": {
+            "name": "Retrieve the latest tax document",
+            "description": {
+              "content": "Returns the most recently saved tax document for the partner account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "TaxDocument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80ae6ad3-d72f-4a7a-bcdc-5d4bf1b0ac45",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"224289\",\n  \"UserId\": \"12345\",\n  \"Email\": \"hazelnutt@example.com\",\n  \"Status\": \"NEW\",\n  \"EnvelopeId\": \"47b6c24d-f313-4343-9252-7e477f8a267c\",\n  \"Type\": \"W9\",\n  \"SubmitDate\": \"2024-02-23T04:32:47-08:00\",\n  \"UpdateDate\": \"2024-02-23T04:32:47-08:00\",\n  \"Provider\": \"DOCUSIGN\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "442a65b4-218a-4a58-b714-033004a58dfa",
+          "name": "Create a tax document",
+          "request": {
+            "name": "Create a tax document",
+            "description": {
+              "content": "Initiates a new tax document submission. Returns an iframe URL the partner opens to fill in and sign the form. All parameters except `Provider` apply to DocuSign only.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "TaxDocument"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "DocType",
+                  "value": "<string>",
+                  "description": "The IRS tax form type to collect."
+                },
+                {
+                  "disabled": false,
+                  "key": "Id",
+                  "value": "<string>",
+                  "description": "The ID of the account user. Defaults to the first user on the account when omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "ReturnUrl",
+                  "value": "<string>",
+                  "description": "Absolute URL DocuSign uses as the callback after signing."
+                },
+                {
+                  "disabled": false,
+                  "key": "Provider",
+                  "value": "<string>",
+                  "description": "Required when collecting via Comply Exchange. Defaults to DOCUSIGN."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da2196d7-674d-4505-95d9-2f9f8e4115d3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocument"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The IRS tax form type to collect.",
+                        "type": "text/plain"
+                      },
+                      "key": "DocType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the account user. Defaults to the first user on the account when omitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Absolute URL DocuSign uses as the callback after signing.",
+                        "type": "text/plain"
+                      },
+                      "key": "ReturnUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Required when collecting via Comply Exchange. Defaults to DOCUSIGN.",
+                        "type": "text/plain"
+                      },
+                      "key": "Provider",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\",\n  \"Email\": \"hazelnutt@example.com\",\n  \"Id\": \"224289\",\n  \"UserId\": \"12345\",\n  \"Url\": \"https://demo.docusign.net/Signing/StartInSession.aspx?t=example\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b57a157a-ca01-4ad5-a83e-4eb178c1ae74",
+          "name": "Retrieve a specific tax document",
+          "request": {
+            "name": "Retrieve a specific tax document",
+            "description": {
+              "content": "Returns a specific tax document by its unique Id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "TaxDocument",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier of the tax document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b61448d-0bc7-472f-8b3d-b8b8e4fef37a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocument",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier of the tax document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"224289\",\n  \"UserId\": \"12345\",\n  \"Email\": \"hazelnutt@example.com\",\n  \"Status\": \"NEW\",\n  \"EnvelopeId\": \"47b6c24d-f313-4343-9252-7e477f8a267c\",\n  \"Type\": \"W9\",\n  \"SubmitDate\": \"2024-02-23T04:32:47-08:00\",\n  \"UpdateDate\": \"2024-02-23T04:32:47-08:00\",\n  \"Provider\": \"DOCUSIGN\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d1df64-ef6b-47ec-b700-c98cfc3c04d2",
+              "name": "No tax document exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocument",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier of the tax document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb62dd40-0025-4f34-bd47-2594ec0fc0fd",
+          "name": "List all tax documents",
+          "request": {
+            "name": "List all tax documents",
+            "description": {
+              "content": "Returns every tax document submitted for the partner account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "TaxDocuments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6cad7c74-65e4-40a5-a0cb-579506a92117",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocuments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TaxDocuments\": [\n    {\n      \"Id\": \"224289\",\n      \"UserId\": \"12345\",\n      \"Email\": \"hazelnutt@example.com\",\n      \"Status\": \"NEW\",\n      \"EnvelopeId\": \"47b6c24d-f313-4343-9252-7e477f8a267c\",\n      \"Type\": \"W9\",\n      \"SubmitDate\": \"2024-02-23T04:32:47-08:00\",\n      \"UpdateDate\": \"2024-02-23T04:32:47-08:00\",\n      \"Provider\": \"DOCUSIGN\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\"\n    },\n    {\n      \"Id\": \"224289\",\n      \"UserId\": \"12345\",\n      \"Email\": \"hazelnutt@example.com\",\n      \"Status\": \"NEW\",\n      \"EnvelopeId\": \"47b6c24d-f313-4343-9252-7e477f8a267c\",\n      \"Type\": \"W9\",\n      \"SubmitDate\": \"2024-02-23T04:32:47-08:00\",\n      \"UpdateDate\": \"2024-02-23T04:32:47-08:00\",\n      \"Provider\": \"DOCUSIGN\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a14531e-0e8e-42fe-88a7-4d9d2dd5c69d",
+          "name": "Complete tax document submission",
+          "request": {
+            "name": "Complete tax document submission",
+            "description": {
+              "content": "Records the outcome of a tax document submission collected via the Comply Exchange iframe. Call this immediately after the user finalizes submission in the iframe so the document is recorded as submitted in impact.com. DocuSign signals completion via the `ReturnUrl` callback supplied at Create time instead.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "TaxDocument",
+                "Complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The Id of the tax document being submitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "event",
+                  "value": "<string>",
+                  "description": "(Required) The lifecycle event being signalled. Always `Complete`."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc5e56e9-8bd2-42d9-9a81-9354fc0d93e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "TaxDocument",
+                    "Complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The Id of the tax document being submitted.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The lifecycle event being signalled. Always `Complete`.",
+                        "type": "text/plain"
+                      },
+                      "key": "event",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/TaxDocuments/224289\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a6123e15-11b8-4aa3-a2bd-0773dc63cbef",
+    "name": "Partner Tax Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tax Documents capture the IRS tax form (W9, W8BEN, W8BENE) that impact.com requires from partners\nbefore payouts can be issued. Documents are collected through a hosted signing flow provided by\nDocuSign or Comply Exchange.\n\nTypical workflow:\n\n1. **Create a tax document** (POST `/TaxDocument`) — returns an iframe URL that the partner opens to fill in and sign the form.\n2. **Complete** (POST `/TaxDocument/Complete`) — called after the user finalizes submission in the Comply Exchange iframe so the system records the outcome. DocuSign uses the `ReturnUrl` callback instead.\n3. **Retrieve** the latest document (GET `/TaxDocument`), a specific document by Id (GET `/TaxDocument/{Id}`), or the full list (GET `/TaxDocuments`) to track status.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1468 @@
+{
+  "item": [
+    {
+      "id": "9f242692-8750-462d-bb27-64b01277927e",
+      "name": "Exception Lists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "411b03ee-ca80-4c88-b243-766b9acf37e1",
+          "name": "List Exception Lists",
+          "request": {
+            "name": "List Exception Lists",
+            "description": {
+              "content": "Returns a list of your exception lists, which can be filtered by campaign, state, or type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filter by the program ID the list applies to."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filter lists by their current state."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Filter lists by whether they apply to CATEGORY or SKU."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c36cfc33-d853-4429-87dd-be38399de67e",
+              "name": "A paginated list of exception list objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExceptionLists\": [\n    {\n      \"Id\": 99999,\n      \"Name\": \"USA-State-CA-Exclusions\",\n      \"State\": \"DEACTIVATED\",\n      \"CampaignId\": 1000,\n      \"Type\": \"SKU\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"DeactivationDate\": \"2026-12-31T23:59:59-08:00\",\n      \"ActionTrackers\": [\n        {\n          \"Id\": 18500,\n          \"Name\": \"Online Sale\"\n        },\n        {\n          \"Id\": 18500,\n          \"Name\": \"Online Sale\"\n        }\n      ],\n      \"NumberOfItems\": 50,\n      \"ItemsUri\": \"https://XzBfOdAPf.ixlve,Z.3fsZNykxGzNl4\",\n      \"Uri\": \"https://EmQYSeQYAbpQhJyPaVOjGyEeHu.czphxAB,m,7ZdB7bzp7vg8ruoD-SofkMgpllVanvj5Jb9-zF10KlcApdNYae+2s7\"\n    },\n    {\n      \"Id\": 99999,\n      \"Name\": \"USA-State-CA-Exclusions\",\n      \"State\": \"ACTIVE\",\n      \"CampaignId\": 1000,\n      \"Type\": \"SKU\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"DeactivationDate\": \"2026-12-31T23:59:59-08:00\",\n      \"ActionTrackers\": [\n        {\n          \"Id\": 18500,\n          \"Name\": \"Online Sale\"\n        },\n        {\n          \"Id\": 18500,\n          \"Name\": \"Online Sale\"\n        }\n      ],\n      \"NumberOfItems\": 50,\n      \"ItemsUri\": \"https://mipgwDUaKdcBNWy.xafBLI-wxA1iLN5KxPftTXzS6BqNAgeaIxewR\",\n      \"Uri\": \"https://HruifCJIWtcKFQtbijlv.qfnkVWTNR61TtCK6,OWYa5c+i87zaHT6HiMC+ou0wY7ZEUmp7?ag=TQ6&g=cCE&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b6f79a5-efaa-4845-acd5-2d7637d6c25d",
+          "name": "Create an Exception List",
+          "request": {
+            "name": "Create an Exception List",
+            "description": {
+              "content": "Creates a new, empty exception list for a specific campaign and type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of event type IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) The program ID the list applies to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) The display name for the exception list."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "(Required) Whether this list applies to CATEGORY or SKU."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73d6a776-6766-4f01-82d5-5e4894221d78",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Comma-separated list of event type IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "18500"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The program ID the list applies to.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The display name for the exception list.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "USA-State-CA-Exclusions"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Whether this list applies to CATEGORY or SKU.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://edswYBVnwtBqPtKufkhDvDjzGznitDo.zfl8VkcvbZQlMNJnVKrth9vvt6JLMg9jUL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af2a97a4-7227-4c26-a9d2-c951e716de81",
+          "name": "Get Exception List Details",
+          "request": {
+            "name": "Get Exception List Details",
+            "description": {
+              "content": "Retrieves the details of an existing exception list by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e06d36d7-7ee3-42ab-b467-8bc538d44dba",
+              "name": "A single exception list object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 99999,\n  \"Name\": \"USA-State-CA-Exclusions\",\n  \"State\": \"ACTIVE\",\n  \"CampaignId\": 1000,\n  \"Type\": \"CATEGORY\",\n  \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n  \"DeactivationDate\": \"2026-12-31T23:59:59-08:00\",\n  \"ActionTrackers\": [\n    {\n      \"Id\": 18500,\n      \"Name\": \"Online Sale\"\n    },\n    {\n      \"Id\": 18500,\n      \"Name\": \"Online Sale\"\n    }\n  ],\n  \"NumberOfItems\": 50,\n  \"ItemsUri\": \"https://dULOlEioCEYDckjqkroQTLaOffLk.msEWwaCrogqA51Z4eC8\",\n  \"Uri\": \"https://fuoaFcsarboZsuykeTvCdWDOFLBpKZU.sggYQg4jc7dd4tptDO7y,+ZBIry-lIU08lwmJayOvjN1-oPoJ9zCdk0foui9duueQWX-Ae\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14906e63-1f5d-47bd-b467-7b30c8605a83",
+          "name": "Update an Exception List",
+          "request": {
+            "name": "Update an Exception List",
+            "description": {
+              "content": "Updates the specified exception list's name, type, or associated action trackers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<string>",
+                  "description": "Comma-separated list of event type IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "The display name for the exception list."
+                },
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "<string>",
+                  "description": "Whether this list applies to CATEGORY or SKU."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e07c0c51-e9be-493c-8df4-ea917fa346d6",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Comma-separated list of event type IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "18500"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The display name for the exception list.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "USA-State-CA-Exclusions"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether this list applies to CATEGORY or SKU.",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://edswYBVnwtBqPtKufkhDvDjzGznitDo.zfl8VkcvbZQlMNJnVKrth9vvt6JLMg9jUL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0af21368-ac8d-409a-8258-e65682d25f23",
+      "name": "Exception List Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ae7bbc7-dd23-4738-b53e-6ecb21648246",
+          "name": "List Items in an Exception List",
+          "request": {
+            "name": "List Items in an Exception List",
+            "description": {
+              "content": "Returns a list of all items within a specific exception list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Value",
+                  "value": "<string>",
+                  "description": "Filter items by their 'Value' (the specific SKU or Category)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0aa7ad73-84a7-445e-9b8b-864adc81d9bd",
+              "name": "A paginated list of exception list item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExceptionListItems\": [\n    {\n      \"Id\": 1001,\n      \"Value\": \"CA\",\n      \"Name\": \"California\",\n      \"MatchMode\": \"REGEX\",\n      \"ListId\": 99999,\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"Uri\": \"http://JdBaVThckLFiOrpqviZXvC.vecvnLxyVni-gO9Bjk6Bn+nmf?rdbm&ufc=94jBk&hcx&\"\n    },\n    {\n      \"Id\": 1001,\n      \"Value\": \"CA\",\n      \"Name\": \"California\",\n      \"MatchMode\": \"EQ\",\n      \"ListId\": 99999,\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"Uri\": \"https://RlSPaDqK.yrybAZu.W3Nc.AHBAr.fUaALD2n1OyLS45jwbvr.QoZG.tO73?mdxi=C48&h&jasdtbj=Yz&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29619fdb-236b-452e-88d0-cce394d3c38b",
+          "name": "Create Items in an Exception List",
+          "request": {
+            "name": "Create Items in an Exception List",
+            "description": {
+              "content": "Creates one or more new items for an exception list, either via form parameters for a single item or by uploading a file for multiple items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Value",
+                  "value": "<string>",
+                  "description": "(Required) The CATEGORY or SKU value."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "Display name for contracting purposes."
+                },
+                {
+                  "disabled": false,
+                  "key": "Upsert",
+                  "value": "false",
+                  "description": "If true, updates an existing item with the same 'Value'."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2e512ba7-cdc0-4523-ba8b-513a29ddf373",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The CATEGORY or SKU value.",
+                        "type": "text/plain"
+                      },
+                      "key": "Value",
+                      "value": "CA"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Display name for contracting purposes.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "California"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If true, updates an existing item with the same 'Value'.",
+                        "type": "text/plain"
+                      },
+                      "key": "Upsert",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://edswYBVnwtBqPtKufkhDvDjzGznitDo.zfl8VkcvbZQlMNJnVKrth9vvt6JLMg9jUL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89038991-0c29-4e47-b1c6-23ff8c2e94d1",
+          "name": "Replace All Items in an Exception List",
+          "request": {
+            "name": "Replace All Items in an Exception List",
+            "description": {
+              "content": "Replaces all items within an existing exception list by uploading a new .CSV or .XLSX file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "File",
+                  "type": "file",
+                  "description": "(Required) A .CSV or .XLSX file containing the new items."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24f6281d-0e30-4528-b2a8-20b2eada689e",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) A .CSV or .XLSX file containing the new items.",
+                        "type": "text/plain"
+                      },
+                      "key": "File",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"http://edswYBVnwtBqPtKufkhDvDjzGznitDo.zfl8VkcvbZQlMNJnVKrth9vvt6JLMg9jUL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "318c90d6-2c1c-4a0a-a8c3-b188b307bcd3",
+          "name": "Delete All Items from an Exception List",
+          "request": {
+            "name": "Delete All Items from an Exception List",
+            "description": {
+              "content": "Permanently deletes all items in an exception list. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) The unique identifier for the exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4202a0f-6ddb-4cef-a337-064dad9a0222",
+              "name": "All items were deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) The unique identifier for the exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f6d7d08-22d8-488f-81e4-95e7bb30cd0e",
+          "name": "Get Exception List Item Details",
+          "request": {
+            "name": "Get Exception List Item Details",
+            "description": {
+              "content": "Retrieves the details of a single item from an exception list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items",
+                ":ItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ItemId",
+                  "description": "(Required) The unique identifier for the exception list item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39d9234c-dcd0-4bf8-8479-8fdb3b472512",
+              "name": "A single exception list item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items",
+                    ":ItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ItemId",
+                      "description": "(Required) The unique identifier for the exception list item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 1001,\n  \"Value\": \"CA\",\n  \"Name\": \"California\",\n  \"MatchMode\": \"REGEX\",\n  \"ListId\": 99999,\n  \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n  \"Uri\": \"https://RUvaPVxYtdzbfVoYFLnH.jhc,MmC2jkhuQlUzWQUIhbOjD2iY+-sb9o+SmvlzxL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4290265f-b0ba-4396-a6ab-1aa3486a9cdd",
+          "name": "Delete an Exception List Item",
+          "request": {
+            "name": "Delete an Exception List Item",
+            "description": {
+              "content": "Permanently deletes a single item from an exception list. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "ExceptionLists",
+                ":ExceptionListId",
+                "Items",
+                ":ItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ExceptionListId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ItemId",
+                  "description": "(Required) The unique identifier for the exception list item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39042c39-2c0f-4bfb-a919-c53da0bfacf4",
+              "name": "The item was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "ExceptionLists",
+                    ":ExceptionListId",
+                    "Items",
+                    ":ItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ExceptionListId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ItemId",
+                      "description": "(Required) The unique identifier for the exception list item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3c14a58-8b7e-4e08-91b4-867056ca602f",
+    "name": "Brand API - Exception Lists",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing Exception Lists, which are used to pay partners different rates based on the category or SKU of products in a conversion. This includes managing the lists and their individual items.",
+      "type": "text/plain"
+    }
+  }
+}

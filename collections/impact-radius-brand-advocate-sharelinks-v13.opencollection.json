@@ -1,0 +1,170 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Share Links",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Share Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup a user's share links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId/sharelinks",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to look up"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Filters share links by `user.id`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "**Deprecated.** Use *Lookup a user's share URLs* instead.\n\nReturns a flat object of share links for a user, with one property per share medium (`shareLink`, `facebookShareLink`, `twitterShareLink`, etc.) and nested objects per engagement medium.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a user's share URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId/shareurls",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to look up"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Filters share links by `user.id`."
+              },
+              {
+                "name": "engagementMedium",
+                "value": "",
+                "type": "query",
+                "description": "Filters share urls by `engagementMedium`."
+              },
+              {
+                "name": "shareMedium",
+                "value": "",
+                "type": "query",
+                "description": "Filters share urls by `shareMedium`."
+              },
+              {
+                "name": "programId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the program whose share links to return. Required — the API returns `400` if omitted."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns a user's share links, organised by engagement medium and share medium. Use the optional `engagementMedium` and `shareMedium` query parameters to filter the response.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a user's share URLs (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/account/:accountId/user/:userId/shareurls",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to look up"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Filters share links by `user.id`."
+              },
+              {
+                "name": "engagementMedium",
+                "value": "",
+                "type": "query",
+                "description": "Filters share urls by `engagementMedium`."
+              },
+              {
+                "name": "shareMedium",
+                "value": "",
+                "type": "query",
+                "description": "Filters share urls by `shareMedium`."
+              },
+              {
+                "name": "programId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the program whose share links to return. Required — the API returns `400` if omitted."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-SaaSquatch-User-Token",
+              "value": "{{X-SaaSquatch-User-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Same as *Lookup a user's share URLs*, but authenticated with a user JWT instead of an API key. Use this from client-side contexts such as the Mobile and Web SDKs.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

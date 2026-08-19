@@ -1,0 +1,5981 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"""Reason for a blocked email"""
+enum BlockedEmailReason {
+  """Email is blocked because it's in the static disposable email domains list"""
+  DISPOSABLE_EMAIL_DOMAINS
+  """Email is blocked because it's in the custom email domains list"""
+  CUSTOM_EMAIL_DOMAINS
+}
+
+enum DataFileFormat {
+  CSV
+  XLSX
+  JSONL
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum DomainAuthType {
+  NONE
+  LOGIN_DISALLOWED
+  SSO
+  GOOGLE_OAUTH
+}
+
+enum DomainEmailConfigurationState {
+  ERROR
+  UNINITIATED
+  ENABLED
+  ENABLED_AND_DNS_VERIFIED
+}
+
+enum DomainHostingConfigurationState {
+  ERROR
+  UNINITIATED
+  PENDING_DNS_RECORD_VERIFICATION
+  PENDING_TLS_SUBSCRIPTION
+  CONFIGURED
+}
+
+enum DomainOwnershipVerificationMethod {
+  MANUAL
+  TXT_RECORD
+  SUBDOMAIN
+}
+
+enum DomainSsoConnectionState {
+  ERROR
+  NONE
+  INACTIVE
+  ACTIVE
+}
+
+enum DomainUse {
+  HOSTING
+  EMAIL_FROM_ADDRESS
+}
+
+enum EmailTransactionStatus {
+  PENDING
+  QUEUED
+  SENT
+  FAILED
+}
+
+"""Option of enforcing tax compliance"""
+enum EnforceTaxComplianceOption {
+  """Tax compliance is enforced for no users"""
+  NONE
+  """Tax compliance is enforced for users with the explicit matching countryCode"""
+  EXPLICIT_COUNTRY_CODE
+  """
+  Tax compliance is enforced for users with the explicit matching countryCode
+and users without a country code but a locale with the matching countryCode
+  """
+  IMPLIED_COUNTRY_CODE
+  """Tax compliance is enforced for all users"""
+  ALL
+  """Tax compliance is enforced for all rewards that are fulfilled by Impact Cash Payouts only"""
+  CASH_ONLY
+  """Impact Cash Payouts require payout information, but does not require a tax form to earn rewards for US/USD publishers"""
+  CASH_ONLY_DEFER_W9
+}
+
+"""The type of a form handler error"""
+enum FormHandlerErrorType {
+  """The form handler cannot be connected"""
+  CONNECTION_ERROR
+  """The form handler can be connected, but returns unexpected status codes"""
+  UNEXPECTED_STATUS_CODE
+  """The form handler returns with invalid response format"""
+  INVALID_RESPONSE
+  """The form handler returns a valid error"""
+  DOWNSTREAM_ERROR
+}
+
+enum FormType {
+  """A custom form with a user-specified schema"""
+  CUSTOM
+  """A registration form to be used with microsite registration"""
+  REGISTRATION
+}
+
+enum FraudStrictness {
+  OFF
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum FraudType {
+  IP
+  EMAIL
+  NAME
+  RATE
+  DAILY_REFERRAL_REWARD_LIMIT
+  TEMP_EMAIL
+  BLOCKED_USER
+  BLOCKED_IP
+  CREDIT_CARD
+  ADDRESS
+}
+
+enum FuelTankSyncSetting {
+  NONE
+  SHOPIFY
+}
+
+enum FuelTankType {
+  PCT_DISCOUNT
+  CREDIT
+}
+
+enum GAProgramType {
+  ACQUISITION
+  LOYALTY
+  RETENTION
+}
+
+enum GenericFieldFilterOperator {
+  eq
+  gt
+  gte
+  lt
+  lte
+  exists
+  or
+}
+
+enum GraphNodeType {
+  REWARD
+  PROGRAM_EMAIL
+  REFERRAL
+  USER_EVENT
+}
+
+enum ImpactConnectionStatus {
+  NOT_STARTED
+  STARTED
+  COMPLETED
+}
+
+enum ImpactPublisherBankAccountType {
+  CHECKING
+  SAVINGS
+  NOT_SET
+}
+
+enum ImpactPublisherBeneficiaryClassification {
+  BUSINESS
+  INDIVIDUAL
+  CPF
+  CNPJ
+}
+
+enum ImpactPublisherPaymentMethod {
+  PAYPAL
+  BANK_TRANSFER
+}
+
+enum ImpactPublisherPaymentSchedulingType {
+  BALANCE_THRESHOLD
+  FIXED_DAY
+}
+
+enum ImpactPublisherTaxDocumentProvider {
+  DOCUSIGN
+  COMPLY_EXCHANGE
+}
+
+enum IntegrationType {
+  LINK_GENERATOR
+  EMAIL_DELIVERY
+  REWARD_PROVIDER
+}
+
+enum JobCreationErrorType {
+  FILE_REF_IO
+  CSV_PARSING
+  MISSING_HEADERS
+  MISSING_FIELDS
+  INVALID_FIELD
+  INVALID_JOB_PARAM
+}
+
+enum JobStatus {
+  PENDING
+  ABORTED
+  COMPLETED
+}
+
+enum LinkCodeInvalidReason {
+  BLANK_CODE
+  MAX_LENGTH_EXCEEDED
+  INVALID_CHARACTER
+  CUSTOM_LINK_DOMAIN_REQUIRED
+  BLOCKED_WORD
+  EXISTING_CODE_CONFLICT
+}
+
+enum MicrositePageAllowedUsersOption {
+  """Users who have logged in and verified their email address"""
+  VERIFIED
+  """Users who have logged in, but haven't yet verified their email address"""
+  UNVERIFIED
+  """Users who are not logged in"""
+  PUBLIC
+}
+
+enum Month {
+  JANUARY
+  FEBRUARY
+  MARCH
+  APRIL
+  MAY
+  JUNE
+  JULY
+  AUGUST
+  SEPTEMBER
+  OCTOBER
+  NOVEMBER
+  DECEMBER
+}
+
+"""The type of a PortalUser"""
+enum PortalUserType {
+  """A PortalUser that has not signed up yet"""
+  PENDING
+  """A PortalUser authenticated with OAuth"""
+  OAUTH
+  """A PortalUser authenticated with SSO"""
+  SSO
+  """A PortalUser authenticated with a password"""
+  PASSWORD
+  """A PortalUser that is not human"""
+  MACHINE
+  IMPACT
+}
+
+enum ProgramOpenGraphSource {
+  HOSTED
+  LANDING_PAGE
+}
+
+enum ProgramRequirementValidationStatus {
+  SUCCESS
+  WARN
+  ERROR
+}
+
+enum ProgramStatus {
+  LIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum ProgramTriggerType {
+  AFTER_USER_CREATED_OR_UPDATED
+  SCHEDULED
+  REWARD_SCHEDULED
+  REFERRAL
+  AFTER_USER_EVENT_PROCESSED
+}
+
+enum RSSortOrder {
+  ASC
+  DESC
+}
+
+enum RSSubjectType {
+  PORTAL_USER
+  DEFAULT_MACHINE
+  INTEGRATION
+  ADMIN
+  USER
+}
+
+enum ReferralEventType {
+  STARTED
+  MODERATION_ACTION_APPLIED
+  AUTOMODERATION_COMPLETE
+}
+
+enum ReferralModerationStatus {
+  PENDING
+  ACTIONED
+}
+
+enum ReferralShareMedium {
+  FACEBOOK
+  TWITTER
+  EMAIL
+  DIRECT
+  LINKEDIN
+  SMS
+  FBMESSENGER
+  WHATSAPP
+  LINEMESSENGER
+  PINTEREST
+  REMINDER
+  UNKNOWN
+}
+
+enum ReferralSideModerationStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+"""The reason a reward is cancelled"""
+enum RewardCancelledReason {
+  UNKNOWN
+  """The reward is cancelled due to a program graph moderation"""
+  PROGRAM_GRAPH_MODERATION
+  """The reward is cancelled due to suspected fraud"""
+  SUSPECTED_FRAUD
+}
+
+"""The type of a RewardExchangeRule"""
+enum RewardExchangeRuleType {
+  """A reward exchange where the destination is a fixed global reward"""
+  FIXED_GLOBAL_REWARD
+  """A reward exchange where the destination is a global reward with a value override"""
+  VARIABLE_GLOBAL_REWARD
+  """A reward exchange where the destination is a dynamic CREDIT reward"""
+  VARIABLE_CREDIT_REWARD
+  """A reward exchange where the destination is a list of fixed global rewards"""
+  STEPPED_FIXED_GLOBAL_REWARD
+}
+
+enum RewardMetaStatus {
+  SUCCESS
+  IN_PROGRESS
+  WARN
+  ERROR
+}
+
+"""The reason a reward is pending"""
+enum RewardPendingReason {
+  """The reward is pending because it was scheduled"""
+  SCHEDULED
+  """The reward is pending due to an unhandled error"""
+  UNHANDLED_ERROR
+  """The reward is pending due to US tax reasons"""
+  US_TAX
+  """The reward is pending due to suspected fraud"""
+  SUSPECTED_FRAUD
+  """The reward is pending due to missing banking details"""
+  MISSING_PAYOUT_CONFIGURATION
+  """The fuel tank reward is configured to be synced externally, and the sync failed"""
+  ERROR_SYNCING_FUEL_TANK_CODE
+  """The reward is pending for a review of the publisher banking details"""
+  CASH_HOLD
+}
+
+enum RewardSourceType {
+  """
+  This source type designates a reward that was given to a user (A) for their friend (B)
+signing up.
+  """
+  FRIEND_SIGNUP
+  """This source type designates a reward that was given to a user for signing up by referral"""
+  REFERRED
+  """This source type designates a reward that was manually added to a user via portal or API"""
+  MANUAL
+  PROGRAM
+  ACTIVATION
+  ACQUISITION
+  RETENTION
+  REACTIVATION
+  """Reward given by a program"""
+  AUTOMATED
+}
+
+enum RewardStatus {
+  PENDING
+  CANCELLED
+  EXPIRED
+  REDEEMED
+  AVAILABLE
+}
+
+enum RewardType {
+  PCT_DISCOUNT
+  CREDIT
+  FUELTANK
+  INTEGRATION
+}
+
+enum RewardValueFormatType {
+  """Formatted number only"""
+  NUMBER_FORMATTED
+  """Formatted integer only with rounding"""
+  INTEGER_FORMATTED
+  """Full currency format with number and currency code"""
+  UNIT_FORMATTED
+  NUMBER_UNFORMATTED
+  INTEGER_UNFORMATTED
+}
+
+enum ScheduledTaskStatus {
+  RUNNING
+  IDLE
+}
+
+"""The type of a segment operation"""
+enum SegmentOperationType {
+  """Add a segment"""
+  ADD
+  """Delete a segment"""
+  DELETE
+  """Clear all segments"""
+  CLEAR
+}
+
+enum SegmentStatus {
+  ACTIVE
+  ARCHIVED
+}
+
+enum SquatchFlavor {
+  SAASQUATCH
+  IMPACT
+}
+
+enum SuspectedFraudModerationState {
+  DENY
+  PENDING
+  IGNORE
+}
+
+enum TaxDocumentStatus {
+  NOT_VERIFIED
+  ACTIVE
+  INACTIVE
+}
+
+enum TaxDocumentType {
+  W9
+  W8BEN
+  W8BENE
+  W8ECI
+  W8EXP
+  W8IMY
+  UNKNOWN
+}
+
+enum UserAnalyticsEventType {
+  USER_REFERRAL_PROGRAM_LOADED_EVENT
+  USER_REFERRAL_PROGRAM_ENGAGEMENT_EVENT
+}
+
+enum UserEngagementMedium {
+  NOCONTENT
+  EMBED
+  HOSTED
+  MOBILE
+  POPUP
+  DEMO_EMBED
+  DEMO
+  EMPTY
+  EMAIL
+  UNKNOWN
+}
+
+"""The source that created a WebhookSubscription"""
+enum WebhookSubscriptionSourceType {
+  """Created through the portal or API"""
+  MANUAL
+  """Managed by an integration"""
+  INTEGRATION
+}
+
+"""The type of a WebhookSubscriptionStatus"""
+enum WebhookSubscriptionStatusType {
+  ENABLED
+  DISABLED
+}
+
+input AddReferralCodeInput {
+  referralCode: String!
+  programId: ID!
+  userId: String!
+  accountId: String!
+  """
+  Whether the added referral code should be set as the primary for the program.
+false by default.
+  """
+  makeReferralCodePrimaryForProgram: Boolean
+}
+
+input AddShareLinkCodeInput {
+  linkCode: String!
+  referralCode: String
+  userId: String!
+  accountId: String!
+  programId: ID!
+  """
+  Whether the added share link should be set as the primary for the referral code.
+false by default.
+  """
+  makeShareLinkCodePrimaryForReferralCode: Boolean
+}
+
+input AuthenticateManagedIdentityWithEmailAndPasswordInput {
+  """The user's email address"""
+  email: String!
+  """The user's password"""
+  password: String!
+}
+
+input AuthenticateManagedIdentityWithGoogleInput {
+  """A valid Google OAuth ID token"""
+  idToken: String!
+}
+
+input AuthenticateManagedIdentityWithInstantAccessInput {
+  email: String!
+  firstName: String
+  lastName: String
+  """The locale of the user"""
+  locale: RSLocale
+  """The country code of the user"""
+  countryCode: RSCountryCode
+  """The Base64URL encoded attribution cookie values."""
+  cookies: String
+}
+
+input BulkRewardMetaInput {
+  """The ids of the rewards to be updated"""
+  rewardIds: [ID!]!
+  """The status of the RewardMeta"""
+  status: RewardMetaStatus!
+  """The message of the RewardMeta"""
+  message: String
+  """The internal message of the RewardMeta"""
+  internalMessage: String
+  """The integration service that manages this RewardMeta"""
+  integrationService: String
+  """The custom defined metadata"""
+  customMeta: RSJsonNode
+}
+
+input ChangeManagedIdentityPasswordInput {
+  """The new password for the user"""
+  password: String!
+}
+
+input CreateCookieUserInput {
+  cookieId: ID!
+  cookies: String
+  referredByCodes: [String!]
+}
+
+input CreateImpactPublisherTaxDocumentInput {
+  user: UserIdInput!
+}
+
+input CustomCodeFilterInput {
+  AND: [CustomCodeFilterInput!]
+  OR: [CustomCodeFilterInput!]
+  code_eq: String
+  code_in: [String!]
+  dateUsed_gte: RSDate
+  dateUsed_lt: RSDate
+  dateUsed_timeframe: RSRelativeTimeframe
+  dateUsed_interval: IsoInterval
+  dateUsed_exists: Boolean
+  dateFirstUsedInReferral_exists: Boolean
+  dateLastUsedInReferral_exists: Boolean
+}
+
+input CustomCodesInput {
+  """See IsPredefinedReward"""
+  predefinedRewardType: PredefinedRewardType!
+  codes: [String!]!
+}
+
+input DomainFilterInput {
+  AND: [DomainFilterInput!]
+  OR: [DomainFilterInput!]
+  domain_eq: String
+  domain_in: [String!]
+  dateOwnershipVerified_exists: Boolean
+}
+
+"""Domain input for creating domains and setting uses"""
+input DomainInput {
+  """The domain name"""
+  domain: String!
+  """The intended uses for this domain"""
+  domainUses: [DomainUse!]!
+  """The organization ID"""
+  organizationId: ID!
+}
+
+input EditReferralCodeInput {
+  """The existing referral code to be edited"""
+  existingReferralCode: String!
+  """The new referral code"""
+  newReferralCode: String!
+  """Whether the existing referral code should be replaced/deleted. false by default."""
+  deleteExisting: Boolean
+  """
+  Whether the share links associated with the existing referral code should be
+transferred to the new referral code. false by default.
+  """
+  transferShareLinks: Boolean
+}
+
+input EditShareLinkCodeInput {
+  """The existing share link code to be edited"""
+  existingLinkCode: String!
+  """The new share link code"""
+  newLinkCode: String!
+  """Whether the existing share link code should be replaced/deleted. false by default."""
+  deleteExisting: Boolean
+}
+
+"""Input for a reward exchange"""
+input ExchangeRewardInput {
+  userId: String!
+  accountId: String!
+  redeemCreditInput: RedeemCreditInput!
+  """https://docs.saasquatch.com/api/methods/#create_reward"""
+  rewardInput: RSJsonNode
+  """The key for the GlobalRewardConfig to create this reward from. When this is present"""
+  globalRewardKey: String
+  """The ID of the program the created reward should be attributed to"""
+  programId: ID
+  """The optional initial RewardStatus"""
+  status: RewardStatus
+}
+
+"""Input for a SaaSquatch form"""
+input FormInput {
+  """The form key"""
+  key: String!
+  """The human readable name of the form"""
+  name: String
+  """The type of the form"""
+  type: FormType
+  """The JSON schema used for validating form data"""
+  schema: JsonSchema
+  """The JSONata expression that produces the initial data"""
+  initialDataTransformer: JSONata
+  """The JSONata expression that checks if this form is enabled"""
+  isEnabledPredicate: JSONata
+  """Email addresses to receive successful form submission notifications"""
+  successNotificationEmails: [String!]
+  """Email addresses to receive failed form submission notifications"""
+  failureNotificationEmails: [String!]
+  """Segment operations to apply to a user for successful form submissions"""
+  successSegments: [SegmentOperation!]
+  """Segment operations to apply to a user for failed form submissions"""
+  failureSegments: [SegmentOperation!]
+  """All the integration configs of this form"""
+  integrationConfigs: [FormIntegrationConfigInput!]
+  """The global level config"""
+  globalConfig: RSJsonNode
+  """Whether anonymous submissions without identified users are allowed. False by default."""
+  allowAnonymousSubmissions: Boolean
+}
+
+"""Input for FormIntegrationConfig"""
+input FormIntegrationConfigInput {
+  """The integration service"""
+  service: String!
+  """The JSON config"""
+  config: RSJsonNode
+}
+
+"""Input of submitForm"""
+input FormSubmissionInput {
+  """The form key"""
+  key: String!
+  """The form data to submit"""
+  formData: RSJsonNode!
+  """Optional user identifier"""
+  user: UserIdInput
+}
+
+"""Filter type for FormSubmissionRecord"""
+input FormSubmissionRecordFilterInput {
+  id_eq: ID
+  formKey_eq: String
+  dateSubmitted_gte: RSDate
+  dateSubmitted_lt: RSDate
+  dateSubmitted_timeframe: RSRelativeTimeframe
+  dateSubmitted_interval: IsoInterval
+  success_eq: Boolean
+}
+
+"""Input of validateForm"""
+input FormValidationInput {
+  """The form key"""
+  key: String!
+  """The form data to submit"""
+  formData: RSJsonNode!
+  """Optional user identifier"""
+  user: UserIdInput
+}
+
+input GenericFieldFilterInput {
+  field: String
+  operator: GenericFieldFilterOperator!
+  value: RSJsonNode!
+}
+
+"""Input for GlobalEmailConfig"""
+input GlobalEmailConfigInput {
+  key: String!
+  values: RSJsonNode!
+  marketing: Boolean
+}
+
+"""Input type for GlobalRewardConfig"""
+input GlobalRewardConfigInput {
+  key: String!
+  name: String
+  description: String
+  rewardType: RewardType!
+  amount: Int
+  unit: String
+  validityDuration: IsoDuration
+  pendingDuration: IsoDuration
+  fuelTankType: FuelTankType
+  fuelTankSyncSetting: FuelTankSyncSetting
+  fuelTankAutoCreateCodePrefix: String
+  integrationId: ID
+  integrationSettings: RSJsonNode
+  allowsInstantAccess: Boolean
+}
+
+"""Input for GlobalWidgetConfig"""
+input GlobalWidgetConfigInput {
+  key: String!
+  values: RSJsonNode!
+}
+
+"""Input for a GraphQL request"""
+input GraphQLRequestInput {
+  """The GraphQL query string"""
+  query: GraphQLQueryString!
+  """The GraphQL query variables"""
+  variables: RSJsonNode
+  """The operation name"""
+  operationName: String
+}
+
+"""Input for creating or updating an impact partner for a user"""
+input ImpactConnectionInput {
+  user: UserIdInput!
+  firstName: String!
+  lastName: String!
+  address: String
+  city: String
+  state: String
+  postalCode: String
+  countryCode: RSCountryCode!
+  currency: RSCurrencyCode!
+  phoneNumberCountryCode: RSCountryCode
+  phoneNumber: String
+  indirectTaxCountryCode: RSCountryCode
+  indirectTaxRegion: String
+  indirectTaxId: String
+  additionalTaxId: String
+  withholdingTaxId: String
+}
+
+input ImpactFinanceNetworkSettingsFilterInput {
+  countryCode_eq: RSCountryCode
+  currency_eq: RSCurrencyCode
+}
+
+input ImpactPublisherFinanceStatusFilterInput {
+  hold_eq: Boolean
+  holdReasons_eq: String
+  holdReasons_in: [String!]
+}
+
+input JobFilterInput {
+  AND: [JobFilterInput!]
+  OR: [JobFilterInput!]
+  id_eq: ID
+  id_in: [ID!]
+  type_eq: JobType
+  type_in: [JobType!]
+  type_ne: JobType
+  type_nin: [JobType!]
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+  dateCompleted_gte: RSDate
+  dateCompleted_lt: RSDate
+  dateCompleted_timeframe: RSRelativeTimeframe
+  status_eq: JobStatus
+  status_ne: JobStatus
+  status_in: [JobStatus!]
+}
+
+input JobInput {
+  type: JobType!
+  name: String
+  requester: String
+  outputFormat: DataFileFormat
+  mailtoEmail: String
+  fileRef: String
+  params: RSJsonNode
+}
+
+input MatchedImpactPartnerAddressFilterInput {
+  countryCode_eq: RSCountryCode
+  countryCode_in: [RSCountryCode!]
+}
+
+input MatchedImpactPartnerBrandRelationshipFilterInput {
+  state: MatchedImpactPartnerRelationshipStateFilterInput
+}
+
+input MatchedImpactPartnerFilterInput {
+  reachRating_gte: Float
+  reachRating_lt: Float
+  sizeRating_eq: String
+  sizeRating_in: [String!]
+  creatorTier_eq: String
+  creatorTier_in: [String!]
+  programSubtypes_eq: String
+  programSubtypes_in: [String]
+  address: MatchedImpactPartnerAddressFilterInput
+  mediaProperties: MatchedImpactPartnerMediaPropertiesFilterInput
+  brandRelationship_exists: Boolean
+  brandRelationship: MatchedImpactPartnerBrandRelationshipFilterInput
+}
+
+input MatchedImpactPartnerMediaPropertiesFilterInput {
+  instagram_exists: Boolean
+  twitter_exists: Boolean
+  youtube_exists: Boolean
+  tiktok_exists: Boolean
+}
+
+input MatchedImpactPartnerRelationshipStateFilterInput {
+  state_eq: String
+  state_in: [String!]
+  category_eq: String
+  category_in: [String!]
+}
+
+input MicrositeLayoutConfigInput {
+  """The unique key of this MicrositeLayoutConfig"""
+  key: String!
+  """The human readable name"""
+  name: String
+  """The key of the parent MicrositeLayoutConfig"""
+  parentKey: String
+  """
+  The config values JSON.
+Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/microsite/MicrositeLayoutConfigValues.schema.json
+  """
+  values: RSJsonNode
+}
+
+input MicrositePageConfigInput {
+  """The unique key of this MicrositePageConfig"""
+  key: String!
+  """The key of the corresponding MicrositeLayoutConfig"""
+  layoutKey: String
+  """The URL path this page should be served under"""
+  urlPath: String
+  """The URL path to redirect users who are not of the type allowedUsers"""
+  disallowedUrlPath: String
+  """The users who are allowed to view this page"""
+  allowedUsers: MicrositePageAllowedUsersOption
+  """
+  The config values JSON.
+Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/microsite/MicrositePageConfigValues.schema.json
+  """
+  values: RSJsonNode
+}
+
+input ModerationActionPredicateInput {
+  programId_eq: ID
+}
+
+input ModerationInput {
+  """The moderation action, can be "APPROVE" or "DENY""""
+  action: String!
+  """The max depth of side effects"""
+  maxDepth: Int!
+  """
+  graph lookup size limit.
+Default to 20 for query, and 1000 for moderation.
+  """
+  limit: Int
+  """
+  graph lookup offset.
+Default to 0.
+  """
+  offset: Int
+  """
+  Graph nodes must meet this condition to be moderated.
+Graph nodes that don't meet this condition will still show up in the result,
+but the action will be NOTHING.
+  """
+  actionPredicate: ModerationActionPredicateInput
+}
+
+input PortalProjectInput {
+  name: String
+}
+
+input PortalStorageEntryInput {
+  """The key of the portal storage entry"""
+  key: ID!
+  """Optionally scope the entry to a program by program id"""
+  programId: ID
+  """The JSON object to store"""
+  values: RSJsonNode!
+  dateExpires: RSDate
+}
+
+"""A filter for portal users."""
+input PortalUserFilterInput {
+  AND: [PortalUserFilterInput!]
+  OR: [PortalUserFilterInput!]
+  email_eq: String
+  type_eq: PortalUserType
+}
+
+"""Input for a user creation preview"""
+input PreviewUserCreationInput {
+  """The locale of this user"""
+  locale: RSLocale
+  """The country code of the user"""
+  countryCode: RSCountryCode
+  """All the referral codes this user is referred by"""
+  referredByCodes: [String!]
+  """The Base64URL encoded attribution cookie values."""
+  cookies: String
+  """The user's custom fields"""
+  customFields: RSJsonNode
+  """The segment operations to be applied to this user"""
+  segments: [SegmentOperation!]
+  """Whether this user can be referred"""
+  referable: Boolean
+}
+
+input ProgramEmailConfigInput {
+  key: String
+  enabled: Boolean!
+  values: RSJsonNode!
+}
+
+input ProgramEmailTransactionFilterInput {
+  AND: [ProgramEmailTransactionFilterInput!]
+  OR: [ProgramEmailTransactionFilterInput!]
+  id_eq: ID
+  id_in: [ID!]
+  programId_eq: ID
+  programId_exists: Boolean
+  """Deprecated. Use programEmailKey_eq instead."""
+  key_eq: String
+  """Deprecated. Use globalEmailKey_eq instead."""
+  key_in: [String!]
+  programEmailKey_eq: String
+  programEmailKey_in: [String!]
+  globalEmailKey_eq: String
+  globalEmailKey_in: [String!]
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+  dateQueued_gte: RSDate
+  dateQueued_lt: RSDate
+  dateQueued_timeframe: RSRelativeTimeframe
+  dateSent_gte: RSDate
+  dateSent_lt: RSDate
+  dateSent_timeframe: RSRelativeTimeframe
+  status_eq: EmailTransactionStatus
+  status_in: [EmailTransactionStatus!]
+}
+
+input ProgramFilterInput {
+  AND: [ProgramFilterInput!]
+  OR: [ProgramFilterInput!]
+  id_eq: ID
+  id_in: [ID!]
+  name_eq: String
+  name_in: [String!]
+  status_eq: ProgramStatus
+  status_ne: ProgramStatus
+  status_in: [ProgramStatus!]
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+  referralsEnabled: Boolean
+}
+
+"""Input for importing program goals"""
+input ProgramGoalInput {
+  """The program goal ID"""
+  goalId: String!
+  """The program ID this goal ID is for"""
+  programId: ID!
+  """The number of times this goal has been achieved"""
+  count: Int!
+  """The date this goal was achieved for the first time"""
+  firstDate: RSDate!
+  """The date this goal was achieved for the last time"""
+  lastDate: RSDate!
+  """The number of conversions"""
+  conversionCount: Int!
+}
+
+input ProgramInput {
+  id: ID!
+  name: String
+  status: ProgramStatus
+  emails: [ProgramEmailConfigInput!]
+  rewards: [ProgramRewardConfigInput!]
+  widgets: [ProgramWidgetConfigInput!]
+  sharing: ProgramSharingConfigInput
+  """An instance of the values in the Program Template's rules schema"""
+  rules: RSJsonNode
+  analytics: RSJsonNode
+  """Deprecated. Use taskStates instead."""
+  taskState: ProgramTaskStateInput
+  taskStates: [ProgramTaskStateInput!]
+}
+
+"""Input for program introspection preview"""
+input ProgramIntrospectionPreviewInput {
+  rules: RSJsonNode!
+}
+
+input ProgramLinkConfigInput {
+  messaging: RSJsonNode
+}
+
+input ProgramRedirectUrlConfigInput {
+  url: String!
+  fallbackUrl: String
+  """Expiry duration for referral code cookies"""
+  cookieExpiryDuration: IsoDuration
+  rules: RSJsonNode
+}
+
+input ProgramReferralCodeConfigInput {
+  fuelTank: Boolean
+  singleUse: Boolean
+  codesPerUser: Int
+  alertCodeCountThreshold: Long
+}
+
+"""Input type for ProgramRewardConfig"""
+input ProgramRewardConfigInput {
+  key: String!
+  """
+  The key for GlobalRewardConfig to be linked. When this field is present, all of the
+other fields must be null.
+  """
+  globalRewardKey: String
+  name: String
+  description: String
+  rewardType: RewardType
+  amount: Int
+  unit: String
+  """Deprecated. Use unit with an ISO currency code instead."""
+  currency: String
+  """Deprecated. Use validityDuration instead."""
+  monthsDiscountIsValid: Int
+  validityDuration: IsoDuration
+  pendingDuration: IsoDuration
+  fuelTankType: FuelTankType
+  fuelTankSyncSetting: FuelTankSyncSetting
+  fuelTankAutoCreateCodePrefix: String
+  integrationId: ID
+  integrationSettings: RSJsonNode
+  allowsInstantAccess: Boolean
+}
+
+input ProgramSharingConfigInput {
+  redirectUrl: ProgramRedirectUrlConfigInput
+  linkConfig: ProgramLinkConfigInput
+  referralCodeConfig: ProgramReferralCodeConfigInput
+}
+
+input ProgramTaskStateInput {
+  key: String!
+  invocationNumber: Long!
+  status: ScheduledTaskStatus!
+}
+
+input ProgramWidgetConfigInput {
+  key: String!
+  values: RSJsonNode!
+}
+
+"""Input for queueing a global email"""
+input QueueGlobalEmailInput {
+  """Global email key"""
+  key: String!
+  """The recipient user"""
+  user: UserIdInput!
+  """The GraphQL request for generating the rendering context"""
+  contextGraphQLRequest: GraphQLRequestInput
+  dateScheduledFor: RSDate
+  """
+  If provided, emails will only be sent to email addresses in the list.
+If the user email address is updated to outside of this list, the email
+transaction will fail.
+  """
+  allowedEmails: [String!]
+}
+
+input RSSortByInput {
+  field: String!
+  order: RSSortOrder!
+}
+
+"""The input for redeeming credit"""
+input RedeemCreditInput {
+  """The amount to redeem"""
+  amount: Int!
+  """The unit to redeem"""
+  unit: String!
+}
+
+input ReferralCodeFilterInput {
+  AND: [ReferralCodeFilterInput!]
+  OR: [ReferralCodeFilterInput!]
+  programId_eq: ID
+  programId_in: [ID!]
+  fuelTank_eq: Boolean
+  singleUse_eq: Boolean
+  dateUsed_exists: Boolean
+  dateCopied_exists: Boolean
+}
+
+input ReferralFilterInput {
+  AND: [ReferralFilterInput!]
+  OR: [ReferralFilterInput!]
+  id_eq: ID
+  id_in: [ID!]
+  programId_eq: ID
+  programId_in: [ID!]
+  programId_exists: Boolean
+  dateReferralStarted_gte: RSDate
+  dateReferralStarted_lt: RSDate
+  dateReferralStarted_timeframe: RSRelativeTimeframe
+  dateReferralStarted_interval: IsoInterval
+  dateReferralPaid_gte: RSDate
+  dateReferralPaid_lt: RSDate
+  dateReferralPaid_timeframe: RSRelativeTimeframe
+  dateReferralPaid_exists: Boolean
+  dateReferralEnded_gte: RSDate
+  dateReferralEnded_lt: RSDate
+  dateReferralEnded_timeframe: RSRelativeTimeframe
+  dateReferralEnded_exists: Boolean
+  dateConverted_gte: RSDate
+  dateConverted_lt: RSDate
+  dateConverted_timeframe: RSRelativeTimeframe
+  dateConverted_interval: IsoInterval
+  dateConverted_exists: Boolean
+  dateModerated_gte: RSDate
+  dateModerated_lt: RSDate
+  dateModerated_timeframe: RSRelativeTimeframe
+  dateModerated_exists: Boolean
+  dateModified_gte: RSDate
+  dateModified_lt: RSDate
+  dateModified_timeframe: RSRelativeTimeframe
+  referredModerationStatus_eq: ReferralSideModerationStatus
+  referredModerationStatus_in: [ReferralSideModerationStatus!]
+  referrerModerationStatus_eq: ReferralSideModerationStatus
+  referrerModerationStatus_in: [ReferralSideModerationStatus!]
+  moderationStatus_eq: ReferralModerationStatus
+  moderationStatus_in: [ReferralModerationStatus!]
+  fraudData_exists: Boolean
+  fraudData: ReferralFraudDataFilterInput
+}
+
+input ReferralFraudDataFilterInput {
+  overallScore_gte: Float
+  overallScore_lt: Float
+  moderationStatus_eq: ReferralSideModerationStatus
+  autoModerationStatus_eq: ReferralSideModerationStatus
+  manualModerationStatus_eq: ReferralSideModerationStatus
+}
+
+"""The filter for referral leaderboards"""
+input ReferralLeaderboardFilterInput {
+  programId_eq: ID
+  programId_in: [ID!]
+  programId_exists: Boolean
+  dateReferralStarted_interval: IsoInterval
+  dateConverted_interval: IsoInterval
+  dateConverted_exists: Boolean
+}
+
+input RegisterManagedIdentityWithEmailAndPasswordInput {
+  """The user's email address"""
+  email: String!
+  """The new password for the user"""
+  password: String!
+  """Additional data provided by the form"""
+  formData: RSJsonNode
+  """The URL path to direct the user to for email verification, defaults to /verifyEmail"""
+  redirectPath: String
+}
+
+input RequestManagedIdentityEmailInput {
+  """The user's email address"""
+  email: String!
+  urlParams: RSJsonNode
+  """defaults to /verifyEmail and /resetPassword"""
+  redirectPath: String
+}
+
+input RerunJobInput {
+  id: ID!
+  name: String
+  params: RSJsonNode
+  requester: String
+}
+
+input ResetManagedIdentityPasswordInput {
+  """The user's new password"""
+  password: String!
+  """The out-of-band (OOB) code for the password reset"""
+  oobCode: String!
+}
+
+input RewardBalanceFilterInput {
+  type_eq: RewardType
+  unit_eq: String
+  unit_in: [String!]
+  unitType_eq: String
+  currency_eq: RSCurrencyCode
+}
+
+input RewardExchangeRuleInput {
+  key: String!
+  """The type of this RewardExchangeRule"""
+  ruleType: RewardExchangeRuleType!
+  """The human readable name for end users"""
+  name: String
+  """The human readable name for portal display"""
+  internalName: String
+  """The long description"""
+  description: String
+  """The URL of the thumbnail"""
+  imageUrl: String
+  """
+  A list of country codes where this reward exchange is visible.
+An empty list means this reward exchange is available in all countries.
+  """
+  visibilityCountryCodes: [RSCountryCode!]
+  """JSONata expression that calculates whether this reward exchange is visible to a user"""
+  visibilityPredicate: JSONata
+  """JSONata expression that calculates whether this reward exchange is available to a user"""
+  availabilityPredicate: JSONata
+  """The arbitrary list order"""
+  listOrder: Int
+  """The unit of the reward being redeemed"""
+  sourceUnit: String
+  """The unit of the destination reward, applicable to VARIABLE_CREDIT_REWARD"""
+  destinationUnit: String
+  """
+  The key of the destination global reward, applicable to FIXED_GLOBAL_REWARD
+and VARIABLE_GLOBAL_REWARD
+  """
+  globalRewardKey: String
+  """The value of the reward being redeemed for fixed exchanges"""
+  sourceValue: Int
+  """
+  The rate of this reward exchange, applicable to VARIABLE_GLOBAL_REWARD and
+VARIABLE_CREDIT_REWARD
+  """
+  rate: Float
+  """
+  The step of this reward exchange, applicable to VARIABLE_GLOBAL_REWARD and
+VARIABLE_CREDIT_REWARD
+  """
+  step: Int
+  """The min value of the reward being redeemed for variable exchanges"""
+  sourceMinValue: Int
+  """The max value of the reward being redeemed for variable exchanges"""
+  sourceMaxValue: Int
+  """The steps of this reward exchange, if applicable."""
+  steps: [RewardExchangeRuleStepInput!]
+}
+
+input RewardExchangeRuleStepInput {
+  sourceValue: Int!
+  globalRewardKey: String!
+}
+
+input RewardFilterInput {
+  AND: [RewardFilterInput!]
+  OR: [RewardFilterInput!]
+  id_eq: ID
+  id_in: [ID!]
+  type_eq: RewardType
+  type_in: [RewardType!]
+  """only applies to credit rewards"""
+  unit_eq: String
+  """only applies to credit rewards"""
+  unit_in: [String!]
+  """only applies to credit rewards"""
+  unit_ne: String
+  """only applies to credit rewards"""
+  unit_nin: [String!]
+  """only applies to credit rewards"""
+  baseUnit_in: [String!]
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+  dateCreated_interval: IsoInterval
+  dateGiven_gte: RSDate
+  dateGiven_lt: RSDate
+  dateGiven_timeframe: RSRelativeTimeframe
+  dateGiven_interval: IsoInterval
+  dateGiven_exists: Boolean
+  dateExpires_gte: RSDate
+  dateExpires_lt: RSDate
+  dateExpires_timeframe: RSRelativeTimeframe
+  dateExpires_interval: IsoInterval
+  dateExpires_exists: Boolean
+  dateCancelled_gte: RSDate
+  dateCancelled_lt: RSDate
+  dateCancelled_timeframe: RSRelativeTimeframe
+  dateCancelled_interval: IsoInterval
+  dateCancelled_exists: Boolean
+  dateScheduledFor_gte: RSDate
+  dateScheduledFor_lt: RSDate
+  dateScheduledFor_timeframe: RSRelativeTimeframe
+  dateScheduledFor_interval: IsoInterval
+  dateScheduledFor_exists: Boolean
+  dateRedeemed_gte: RSDate
+  dateRedeemed_lt: RSDate
+  dateRedeemed_timeframe: RSRelativeTimeframe
+  dateRedeemed_interval: IsoInterval
+  dateRedeemed_exists: Boolean
+  dateModified_gte: RSDate
+  dateModified_lt: RSDate
+  dateModified_timeframe: RSRelativeTimeframe
+  dateModified_interval: IsoInterval
+  datePendingForUsTax_gte: RSDate
+  datePendingForUsTax_lt: RSDate
+  datePendingForUsTax_timeframe: RSRelativeTimeframe
+  datePendingForUsTax_interval: IsoInterval
+  datePendingForUsTax_exists: Boolean
+  datePendingForUnhandledError_gte: RSDate
+  datePendingForUnhandledError_lt: RSDate
+  datePendingForUnhandledError_timeframe: RSRelativeTimeframe
+  datePendingForUnhandledError_interval: IsoInterval
+  datePendingForUnhandledError_exists: Boolean
+  datePendingForSuspectedFraud_gte: RSDate
+  datePendingForSuspectedFraud_lt: RSDate
+  datePendingForSuspectedFraud_timeframe: RSRelativeTimeframe
+  datePendingForSuspectedFraud_interval: IsoInterval
+  datePendingForSuspectedFraud_exists: Boolean
+  datePendingForMissingPayoutConfiguration_gte: RSDate
+  datePendingForMissingPayoutConfiguration_lt: RSDate
+  datePendingForMissingPayoutConfiguration_timeframe: RSRelativeTimeframe
+  datePendingForMissingPayoutConfiguration_interval: IsoInterval
+  datePendingForMissingPayoutConfiguration_exists: Boolean
+  datePendingForErrorSyncingFuelTankCode_gte: RSDate
+  datePendingForErrorSyncingFuelTankCode_lt: RSDate
+  datePendingForErrorSyncingFuelTankCode_timeframe: RSRelativeTimeframe
+  datePendingForErrorSyncingFuelTankCode_interval: IsoInterval
+  datePendingForErrorSyncingFuelTankCode_exists: Boolean
+  datePendingForCashHold_gte: RSDate
+  datePendingForCashHold_lt: RSDate
+  datePendingForCashHold_timeframe: RSRelativeTimeframe
+  datePendingForCashHold_interval: IsoInterval
+  datePendingForCashHold_exists: Boolean
+  rewardSource_eq: RewardSourceType
+  rewardSource_in: [RewardSourceType!]
+  userId_eq: String
+  accountId_eq: String
+  currency_eq: RSCurrencyCode
+  currency_in: [RSCurrencyCode!]
+  programId_eq: ID
+  programId_in: [ID!]
+  programId_exists: Boolean
+  programRewardKey_eq: String
+  programRewardKey_in: [String!]
+  programRewardKey_exists: Boolean
+  globalRewardKey_eq: String
+  globalRewardKey_in: [String!]
+  globalRewardKey_exists: Boolean
+  referralId_eq: ID
+  rewardedCash_eq: Boolean
+  """statuses contains"""
+  statuses_eq: RewardStatusFilterInput
+  """statuses does not contain"""
+  statuses_ne: RewardStatusFilterInput
+  """statuses contains any"""
+  statuses_in: [RewardStatusFilterInput!]
+  """statuses contains all"""
+  statuses_all: [RewardStatusFilterInput!]
+  """statuses contains none"""
+  statuses_nin: [RewardStatusFilterInput!]
+}
+
+"""The filter for the reward leaderboard"""
+input RewardLeaderboardFilterInput {
+  programId_eq: ID
+  programId_in: [ID!]
+  programId_exists: Boolean
+  type_eq: RewardType
+  type_in: [RewardType!]
+  dateCreated_interval: IsoInterval
+  dateGiven_interval: IsoInterval
+  dateGiven_exists: Boolean
+  unit_eq: String
+  unit_in: [String!]
+  rewardSource_eq: RewardSourceType
+  rewardSource_in: [RewardSourceType!]
+  """statuses contains"""
+  statuses_eq: RewardStatusFilterInput
+  """statuses does not contain"""
+  statuses_ne: RewardStatusFilterInput
+  """statuses contains any"""
+  statuses_in: [RewardStatusFilterInput!]
+  """statuses contains all"""
+  statuses_all: [RewardStatusFilterInput!]
+  """statuses contains none"""
+  statuses_nin: [RewardStatusFilterInput!]
+}
+
+input RewardMetaInput {
+  """The id of the reward to be updated"""
+  rewardId: ID!
+  """The status of the RewardMeta"""
+  status: RewardMetaStatus!
+  """The message of the RewardMeta"""
+  message: String
+  """The internal message of the RewardMeta"""
+  internalMessage: String
+  """The integration service that manages this RewardMeta"""
+  integrationService: String
+  """The custom defined metadata"""
+  customMeta: RSJsonNode
+}
+
+"""Input for RewardStatus filter"""
+input RewardStatusFilterInput {
+  """The status"""
+  status: RewardStatus!
+  """At a specific point in time"""
+  at: RSDate
+}
+
+input RewardUnitSettingsInput {
+  id: RewardUnitSettingsId!
+  config: RSJsonNode!
+}
+
+input SegmentFilterInput {
+  key_eq: SegmentKey
+  key_in: [SegmentKey!]
+  status_eq: SegmentStatus
+  status_in: [SegmentStatus!]
+}
+
+input SegmentInput {
+  key: SegmentKey!
+  name: String
+  status: SegmentStatus
+}
+
+input SendPortalEmailInput {
+  """The name of the internal email template"""
+  templateName: String!
+  """The rendering context of the email"""
+  context: RSJsonNode!
+  """
+  The recipients of the email.
+Each email address will receive a separate email as the sole recipient.
+  """
+  emails: [String!]!
+}
+
+input SetImpactPublisherWithdrawalSettingsInput {
+  user: UserIdInput!
+  paymentMethod: ImpactPublisherPaymentMethod!
+  paypalEmailAddress: String
+  beneficiaryAccountName: String
+  bankCountry: String
+  beneficiaryClassification: ImpactPublisherBeneficiaryClassification
+  beneficiaryAlternativeName: String
+  beneficiaryTaxPayerId: String
+  bankAccountType: ImpactPublisherBankAccountType
+  bankAccountNumber: String
+  swiftCode: String
+  routingCode: String
+  voCode: String
+  agencyCode: String
+  bankAddress: String
+  bankPostalCode: String
+  bankCity: String
+  bankState: String
+  bankName: String
+  branchCode: String
+  branchName: String
+  classificationCode: String
+  paymentSchedulingType: ImpactPublisherPaymentSchedulingType
+  paymentThreshold: String
+  paymentDay: String
+}
+
+input TenantCustomLinkDomainsInput {
+  primaryLinkDomain: String
+  secondaryLinkDomains: [String!]
+}
+
+input TenantInput {
+  clockOffsetMillis: Long
+  clockOffsetDuration: IsoDuration
+}
+
+input TenantIntegrationInput {
+  service: String!
+  enabled: Boolean
+  config: RSJsonNode
+}
+
+input TenantSettingsInput {
+  companyName: String
+  multiProgramEnabled: Boolean
+  allowReferralCodeEditOnUserUpsert: Boolean
+  timeZone: RSTimeZoneId
+  fraudStrictness: FraudStrictness
+  collectUserBillingDataFromStorefronts: Boolean
+  billingFraudTypesEnabled: Boolean
+  partnerFundsTransferDelayDuration: IsoDuration
+}
+
+input TranslationInstanceInput {
+  id: TranslationInstanceId!
+  content: RSJsonNode!
+}
+
+input UpdateImpactPublisherWithdrawalSettingsInput {
+  user: UserIdInput!
+  paymentMethod: ImpactPublisherPaymentMethod!
+  accessKey: String!
+  paypalEmailAddress: String
+  beneficiaryAccountName: String
+  bankCountry: String
+  beneficiaryClassification: ImpactPublisherBeneficiaryClassification
+  beneficiaryAlternativeName: String
+  beneficiaryTaxPayerId: String
+  bankAccountType: ImpactPublisherBankAccountType
+  bankAccountNumber: String
+  swiftCode: String
+  routingCode: String
+  voCode: String
+  agencyCode: String
+  bankAddress: String
+  bankPostalCode: String
+  bankCity: String
+  bankState: String
+  bankName: String
+  branchCode: String
+  branchName: String
+  classificationCode: String
+  paymentSchedulingType: ImpactPublisherPaymentSchedulingType
+  paymentThreshold: String
+  paymentDay: String
+}
+
+input UserAnalyticsEvent {
+  """user identifier"""
+  id: String!
+  """account identifier"""
+  accountId: String!
+  """program associated with this analytics event - required (default to 'classic')"""
+  programId: ID!
+  """the type of analytic to fire"""
+  type: UserAnalyticsEventType!
+  """event metat data that will be included along with the analytic and validated via user analytic json schema"""
+  meta: RSJsonNode!
+}
+
+input UserEventDataFilterInput {
+  key: String
+  id_eq: ID
+  dateTriggered_gte: RSDate
+  dateTriggered_lt: RSDate
+  dateTriggered_timeframe: RSRelativeTimeframe
+  dateTriggered_interval: IsoInterval
+  dateReceived_gte: RSDate
+  dateReceived_lt: RSDate
+  dateReceived_timeframe: RSRelativeTimeframe
+  dateReceived_interval: IsoInterval
+  dateProcessed_gte: RSDate
+  dateProcessed_lt: RSDate
+  dateProcessed_timeframe: RSRelativeTimeframe
+  dateProcessed_interval: IsoInterval
+  isRevenueEvent_eq: Boolean
+  isModification_eq: Boolean
+  userId_eq: String
+  accountId_eq: String
+  fields: RSJsonNode
+}
+
+"""
+An input object specifying the details of a user event.
+
+Events have a `key` to specify the type of the event, and an arbitrary JSON object
+which holds the `fields`.
+
+Events are processed immediately, but you can specify the `dateTriggered` indicating
+when the event actually took place.
+"""
+input UserEventDataInput {
+  """Deprecated. This field is ignored."""
+  id: ID
+  """The key of the event, like `purchase` or `refund`."""
+  key: String!
+  """
+  The fields of the event, which can be an arbitrary JSON object.
+
+A an example event may contain the fields:
+
+```json
+{
+  "currency": "USD",
+  "revenue": 50
+}
+```
+  """
+  fields: RSJsonNode
+  """
+  The trigger date of an event indicates when the event took place.
+
+Specifying `dateTriggered` is optional - if it is not provided then the event
+is assumed to have taken place at the time that it is received.
+  """
+  dateTriggered: RSDate
+}
+
+"""An input object to associate one or more events with a user."""
+input UserEventInput {
+  """The id of the user to associate the events with."""
+  userId: String!
+  """The account id of the user to associate the events with."""
+  accountId: String!
+  """
+  The idempotency key for a logUserEvent request.
+
+To prevent processing an event more than once, you can provide an idempotency
+key to achieve "at most once" processing semantics. The idempotency key
+uniquely identifies the event, and is generated by the caller.
+
+The idempotency key can be any string identifier that your system associates
+with the event, with the following restrictions:
+
+- It must be at least 8 characters long
+- It must be no more than 64 characters long
+- It can only contain alphanumerics characters, as well as the `.`, `-`,
+  or `_` characters
+
+For example, a good choice for an idempotency key is a UUID, in particular
+a random version 4 UUID like `ec524601-975c-458a-9948-ae4448ce8944`.
+
+Idempotency keys are guaranteed to be stored by SaaSquatch for at least 24 hours,
+such that any event inputs with the same idempotency key within 24 hours will
+be guaranteed to process the events only once.
+
+Subsequent attempts to process an event with an idempotency key that has already
+been processed once will result in an HTTP 409 Conflict response, so you will
+need to ensure that you are handling this status code in your request logic.
+  """
+  idempotencyKey: String
+  """A list of `UserEventDataInput` objects which specify the details of the events."""
+  events: [UserEventDataInput!]
+}
+
+"""filter to find only relevant users to trigger a program with"""
+input UserFilterInput {
+  AND: [UserFilterInput!]
+  OR: [UserFilterInput!]
+  id_eq: String
+  accountId_eq: String
+  firstName_eq: String
+  lastName_eq: String
+  email_eq: String
+  email_in: [String!]
+  email_exists: Boolean
+  locale_eq: RSLocale
+  locale_in: [RSLocale!]
+  countryCode_eq: RSCountryCode
+  countryCode_in: [RSCountryCode!]
+  firstSeenIP_eq: String
+  lastSeenIP_eq: String
+  dateBlocked_exists: Boolean
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+  dateCreated_interval: IsoInterval
+  customFields: RSJsonNode
+  """contains"""
+  segments_eq: String
+  """does not contain"""
+  segments_ne: String
+  """contains any"""
+  segments_in: [String!]
+  """contains all"""
+  segments_all: [String!]
+  """contains none"""
+  segments_nin: [String!]
+  fraudFlags_exists: Boolean
+  fraudFlags_in: [FraudType!]
+  fraudFlags_all: [FraudType!]
+  stats: UserStatsFilterInput
+  marketingEmailOptIn_eq: Boolean
+  matchedImpactPartner_exists: Boolean
+  matchedImpactPartner: MatchedImpactPartnerFilterInput
+  impactConnection_exists: Boolean
+  impactPublisherFinanceStatus: ImpactPublisherFinanceStatusFilterInput
+}
+
+"""User ID input that identifies a user"""
+input UserIdInput {
+  """User ID"""
+  id: String!
+  """Account ID"""
+  accountId: String!
+}
+
+input UserInput {
+  id: String
+  accountId: String
+  firstName: String
+  lastName: String
+  """Deprecated. Ignored field. Use lastName instead."""
+  lastInitial: String
+  referralCode: String
+  referralCodes: RSShallowMap
+  """
+  Optionally create vanity links.
+Example:
+shareLinks: {
+  program1: "https://example.com/foobar"
+}
+  """
+  shareLinks: RSShallowMap
+  imageUrl: String
+  email: String
+  cookieId: ID
+  """Deprecated. Ignored field."""
+  paymentProviderId: String
+  """The locale of the user"""
+  locale: RSLocale
+  """The country code of the user"""
+  countryCode: RSCountryCode
+  """Deprecated. Use referredByCodes instead."""
+  referredBy: RSJsonNode
+  """All the referral codes this user is referred by"""
+  referredByCodes: [String!]
+  """The Base64URL encoded attribution cookie values."""
+  cookies: String
+  """Whether this user can be referred"""
+  referable: Boolean
+  """The user's custom fields"""
+  customFields: RSJsonNode
+  """The segment operations to be applied to this user"""
+  segments: [SegmentOperation!]
+  """The date a user is created. Useful for creating historic users."""
+  dateCreated: RSDate
+  """Historical program goals to be imported for a user"""
+  programGoals: [ProgramGoalInput!]
+  """The date this user submitted the US tax form"""
+  dateUsTaxFormSubmitted: RSDate
+  marketingEmailOptIn: Boolean
+}
+
+"""The filter for a leaderboard"""
+input UserLeaderboardFilterInput {
+  programId_eq: ID
+  """The interval of this leaderboard"""
+  interval: IsoInterval
+}
+
+input UserMetricInput {
+  customFieldKey: String!
+  name: String
+  aggregateId: ID
+  aggregateRules: RSJsonNode
+  userEventKey: String
+  dateTriggeredWindow: IsoInterval
+  """Deprecated. The fieldsFilters field no longer functions. Use the JSONata based filter instead."""
+  fieldsFilters: [GenericFieldFilterInput!]
+  """
+  An JSONata expression to filter events, the provided context is defined in
+https://fast.ssqt.io/npm/@saasquatch/schema/json/UserMetricJSONataFilterContext.schema.json
+  """
+  filter: JSONata
+}
+
+input UserStatsFilterInput {
+  traffic_gte: Int
+  traffic_lt: Int
+  referrals_gte: Int
+  referrals_lt: Int
+  conversions_gte: Int
+  conversions_lt: Int
+  goals_gte: Int
+  goals_lt: Int
+  rewards_gte: Int
+  rewards_lt: Int
+  widgetLoads_gte: Int
+  widgetLoads_lt: Int
+  revenue_gte: Int
+  revenue_lt: Int
+  generatedRevenue_gte: Int
+  generatedRevenue_lt: Int
+  referredRevenue_gte: Int
+  referredRevenue_lt: Int
+}
+
+input VerifyManagedIdentityEmailInput {
+  """The out-of-band (OOB) code for the email verification"""
+  oobCode: String!
+}
+
+input VerifyManagedIdentityPasswordResetCodeInput {
+  """The out-of-band (OOB) code for the password reset"""
+  oobCode: String!
+}
+
+input WebhookFilterInput {
+  AND: [WebhookFilterInput!]
+  OR: [WebhookFilterInput!]
+  id_eq: ID
+  type_eq: WebhookType
+  dateCreated_gte: RSDate
+  dateCreated_lt: RSDate
+  dateCreated_timeframe: RSRelativeTimeframe
+}
+
+input WebhookSubscriptionInput {
+  """The url of the endpoint that receives events"""
+  endpointUrl: String!
+  """Optional name of the endpoint that receives events"""
+  name: String
+  """Operations for adding/deleting WebhookTypes for this WebhookSubscription"""
+  webhookTypes: [WebhookTypeOperation!]
+}
+
+interface DomainOwnershipVerification {
+  method: DomainOwnershipVerificationMethod!
+}
+
+interface DomainUsedByEmailConfig {
+  tenant: Tenant!
+}
+
+interface GraphNodeData {
+  id: ID!
+  moderationPreview(moderationInput: ModerationInput!): GraphNodeModerationPreviewList!
+}
+
+"""Interface type for either a ProgramRewardConfig or a GlobalRewardConfig"""
+interface IsPredefinedReward {
+  """Unique global ID for predefined rewards"""
+  predefinedRewardType: PredefinedRewardType!
+}
+
+"""A link code for a share link or message link"""
+interface LinkCode {
+  linkCode: String!
+  """The link this link code represents in the default custom short domain, if available."""
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  """The link domains this link code can be used with"""
+  supportedLinkDomains: [LinkDomain!]!
+}
+
+interface ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+}
+
+interface RewardBalance {
+  type: RewardType!
+  unit: String!
+  rewardUnit: RewardUnit!
+  availableValue: Int!
+  prettyAvailableValue(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+}
+
+interface TranslatableAsset {
+  translationInfo: TranslationInfo!
+}
+
+interface Viewer {
+  permissions: [String!]!
+}
+
+"""Config values for a widget"""
+interface WidgetConfig {
+  """The config value"""
+  values: RSJsonNode!
+}
+
+type AddReferralCodeResult {
+  referralCode: ReferralCode!
+}
+
+type AddShareLinkCodeResult {
+  linkCode: ShareLinkCode!
+}
+
+type AfterUserCreatedOrUpdatedTrigger implements ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+  previous: User
+  events: [UserEventData!]!
+}
+
+type AfterUserEventProcessedTrigger implements ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+  events: [UserEventData!]!
+}
+
+"""The taxable value for a year"""
+type AnnualTaxableValue {
+  """The tax year"""
+  year: Int!
+  """The taxable value"""
+  value: Int!
+  """The number of rewards"""
+  count: Int!
+}
+
+type ApiError {
+  message: String!
+  statusCode: Int!
+  rsCode: String
+}
+
+type AutoSetupMicrositeResult {
+  success: Boolean!
+}
+
+type BeefreeServerSideLoginResult {
+  accessToken: String!
+}
+
+type BulkUpsertRewardMetaResult {
+  success: Boolean!
+}
+
+type CompleteImpactPublisherTaxDocumentResult {
+  success: Boolean!
+}
+
+type ConvertEmailHtmlContentToJsonResult {
+  jsonContent: RSJsonNode!
+}
+
+type ConvertEmailJsonContentToHtmlResult {
+  htmlContent: String!
+}
+
+type CookieUser {
+  cookieId: ID!
+  dateCreated: RSDate!
+  dateUsed: RSDate
+  referredByCodes: [String!]
+  cookies: String
+}
+
+type CookieUserDeleteResult {
+  deletedCount: Long!
+}
+
+type CookieUserList {
+  data: [CookieUser!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type CreateCookieUserResult {
+  success: Boolean!
+}
+
+type CreateImpactConnectionResult {
+  success: Boolean!
+  message: String
+  validationErrors: [ImpactApiValidationError!]!
+  user: User!
+}
+
+type CreateRelationshipBetweenPartnerAndProgramResult {
+  success: Boolean!
+}
+
+type CreditRewardBalance implements RewardBalance {
+  type: RewardType!
+  unit: String!
+  rewardUnit: RewardUnit!
+  availableValue: Int!
+  prettyAvailableValue(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  count: Int!
+  totalPendingCredit: Int!
+  totalAssignedCredit: Int!
+  totalRedeemedCredit: Int!
+  totalExpiredCredit: Int!
+  totalCancelledCredit: Int!
+  prettyPendingCredit(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  prettyAssignedCredit(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  prettyRedeemedCredit(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  prettyExpiredCredit(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  prettyCancelledCredit(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+}
+
+"""Codes used for FUELTANK rewards"""
+type CustomCode {
+  code: String!
+  dateUploaded: RSDate
+  """
+  The date when a custom code was allocated to someone,
+not necessarily when it was redeemed.
+  """
+  dateUsed: RSDate
+  predefinedRewardType: PredefinedRewardType!
+  reward: FlatReward
+  referralCode: ReferralCode
+  dateFirstUsedInReferral: RSDate
+  dateLastUsedInReferral: RSDate
+}
+
+type CustomCodeDeleteResult {
+  deletedCount: Long!
+}
+
+type CustomCodeInsertResult {
+  rejectedCodes: [RejectedCustomCode!]!
+  numCodesRejected: Int!
+  numCodesAccepted: Int!
+}
+
+type CustomCodeList {
+  data: [CustomCode!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type CustomCodeUpsertResult {
+  rejectedCodes: [RejectedCustomCode!]!
+  numCodesRejected: Int!
+  numCodesInserted: Int!
+  numCodesUpdated: Int!
+}
+
+type CustomField {
+  key: String!
+  name: String
+  schema: JsonSchema
+  """The UserMetric that updates this custom field, if there is one"""
+  userMetric: UserMetric
+  """Get all the Programs that use this custom field"""
+  usedByPrograms(limit: Int! = 20, offset: Int! = 0): ProgramList!
+  """The integration that manages this custom field"""
+  integration: TenantIntegration
+}
+
+type CustomFieldList {
+  data: [CustomField!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type DiscountPercentRewardBalance implements RewardBalance {
+  type: RewardType!
+  unit: String!
+  rewardUnit: RewardUnit!
+  availableValue: Int!
+  prettyAvailableValue(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  totalDiscountPercent: Int!
+  referredDiscountPercent: Int!
+  referrerDiscountPercent: Int!
+}
+
+type Domain {
+  domain: String!
+  apexDomain: String!
+  organization: Organization
+  dateCreated: RSDate!
+  dateOwnershipVerified: RSDate
+  ownershipVerification: DomainOwnershipVerification
+  requiredAuthType: DomainAuthType!
+  ssoSetupUrl: String
+  ssoConnectionType: String
+  ssoSetupConnectionState: DomainSsoConnectionState!
+  hostingConfigurationState: DomainHostingConfigurationState!
+  requiredHostingDnsRecords: [RequiredDnsRecord!]!
+  emailConfigurationState: DomainEmailConfigurationState!
+  requiredManagedEmailDnsRecords: [RequiredDnsRecord!]!
+  portalUsers(filter: PortalUserFilterInput, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): PortalUserList!
+  usedByEmailConfigs(limit: Int! = 20, offset: Int! = 0): DomainUsedByEmailConfigList!
+  usedByMicrositeForTenant: Tenant
+  usedByLinksForTenants: [Tenant!]!
+}
+
+type DomainDeleteResult {
+  deletedCount: Long!
+}
+
+type DomainList {
+  data: [Domain!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type DomainUsedByClassicThemeEmailConfig implements DomainUsedByEmailConfig {
+  tenant: Tenant!
+  key: String!
+}
+
+type DomainUsedByEmailConfigList {
+  data: [DomainUsedByEmailConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type DomainUsedByGlobalEmailConfig implements DomainUsedByEmailConfig {
+  tenant: Tenant!
+  key: String!
+}
+
+type DomainUsedByProgramEmailConfig implements DomainUsedByEmailConfig {
+  tenant: Tenant!
+  programId: ID!
+  key: String!
+}
+
+type EditReferralCodeResult {
+  referralCode: ReferralCode!
+}
+
+type EditShareLinkCodeResult {
+  linkCode: ShareLinkCode!
+}
+
+type EmailPreview {
+  headers: RSJsonNode
+  body: String
+}
+
+type EndImpactSessionResult {
+  success: Boolean!
+}
+
+"""Result for a reward exchange"""
+type ExchangeRewardResult {
+  """The RewardRedemptionTransaction related to this reward exchange"""
+  rewardRedemptionTransaction: RewardRedemptionTransaction!
+  """The created reward"""
+  reward: FlatReward!
+}
+
+"""A link code for a fallback URL"""
+type FallbackLinkCode implements LinkCode {
+  linkCode: String!
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  supportedLinkDomains: [LinkDomain!]!
+}
+
+type FlatReward implements GraphNodeData {
+  id: ID!
+  uniqueId: ID
+  """The type of reward"""
+  type: RewardType!
+  """The value of the reward"""
+  value: Int!
+  """A human-readable formatted string value based on the reward's unit"""
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  availableValue(at: RSDate): Int!
+  prettyAvailableValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED, at: RSDate): String!
+  """The unit represented by the value of this reward"""
+  unit: String!
+  """The base unit of this reward"""
+  baseUnit: String!
+  """The detailed information about the reward unit"""
+  rewardUnit: RewardUnit!
+  """The displayable name for the reward"""
+  name: String
+  """The date the reward was created"""
+  dateCreated: RSDate
+  """The date the reward is scheduled to be given"""
+  dateScheduledFor: RSDate
+  """The date the reward was given"""
+  dateGiven: RSDate
+  """The date the reward expires (null if it doesn't expire)"""
+  dateExpires: RSDate
+  """The date the reward was cancelled"""
+  dateCancelled: RSDate
+  """The date this reward was cancelled because of a program graph moderation"""
+  dateCancelledForProgramGraphModeration: RSDate
+  """The date this reward was cancelled because of suspected fraud"""
+  dateCancelledForSuspectedFraud: RSDate
+  """The date the reward was fully redeemed"""
+  dateRedeemed: RSDate
+  """The date the reward was last modified"""
+  dateModified: RSDate
+  """The source of the reward (i.e. by friend referral, manual, etc)"""
+  rewardSource: RewardSourceType
+  """The fuel tank code associated with the reward if this is fuel tank reward"""
+  fuelTankCode: String
+  """The fuel tank type associated with the reward if this is a fuel tank reward"""
+  fuelTankType: FuelTankType
+  """Status of the code sync to external integration"""
+  fuelTankSyncSetting: FuelTankSyncSetting
+  """The currency the reward was associated with if applicable (gift cards are associated with a currency)"""
+  currency: RSCurrencyCode
+  cancellable: Boolean!
+  redeemable: Boolean!
+  """External metadata set by integrations or third-parties"""
+  meta: RewardMeta
+  """The id of the program that created this reward"""
+  programId: String
+  """The corresponding reward key in the program that created this reward"""
+  programRewardKey: String
+  """The corresponding reward key in the GlobalRewardConfig that created this reward"""
+  globalRewardKey: String
+  """The program that created this reward"""
+  program: Program
+  """The user this reward belongs to"""
+  user: User
+  integrationId: ID @deprecated
+  """The integration that's used to fulfill this reward"""
+  integration: TenantIntegration
+  integrationServiceId: String
+  integrationServiceData: RSJsonNode
+  description: String
+  assignedCredit: Int
+  redeemedCredit(at: RSDate): Int
+  prettyAssignedCredit(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  prettyRedeemedCredit(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED, at: RSDate): String
+  """The id of the referral that caused this reward"""
+  referralId: ID
+  """The referral that caused this reward"""
+  referral: Referral
+  """The user event that caused this reward. Note: Only events from the past 2 years will be included"""
+  userEvent: UserEventData
+  statuses(at: RSDate): [RewardStatus!]!
+  """All the RewardRedemptionTransactions where this reward has been redeemed"""
+  rewardRedemptionTransactions(limit: Int! = 20, offset: Int! = 0): RewardRedemptionTransactionList!
+  """The RewardRedemptionTransaction that exchanged for this reward"""
+  exchangedRewardRedemptionTransaction: RewardRedemptionTransaction
+  moderationPreview(moderationInput: ModerationInput!): GraphNodeModerationPreviewList!
+  """Get all the reasons this reward is pending"""
+  pendingReasons: [RewardPendingReason!]!
+  """Get the reason this reward is cancelled"""
+  cancelledReason: RewardCancelledReason
+  """The date this reward went to pending because of US tax reasons"""
+  datePendingForUsTax: RSDate
+  """The date this reward went to pending because of missing payout configuration"""
+  datePendingForMissingPayoutConfiguration: RSDate
+  """The date this reward went to pending because of an error syncing the fuel tank code"""
+  datePendingForErrorSyncingFuelTankCode: RSDate
+  """The date this reward went to pending because of an unhandled error"""
+  datePendingForUnhandledError: RSDate
+  """The date this reward went to pending because of suspected fraud"""
+  datePendingForSuspectedFraud: RSDate
+  """The date this reward went to pending because of a hold for review of banking details"""
+  datePendingForCashHold: RSDate
+  """The US taxable value of this reward"""
+  usTaxableValue(at: RSDate): Int!
+  """The USD value based on the currency exchange when the reward was given"""
+  usdValue: Float
+  partnerFundsTransfer: PartnerFundsTransfer
+  isFulfilledByCashPayout: Boolean!
+  rewardedCash: Boolean!
+}
+
+type FlatRewardList {
+  data: [FlatReward!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""A SaaSquatch form"""
+type Form {
+  """The form key"""
+  key: String!
+  """The human readable name of the form"""
+  name: String
+  """The type of the form"""
+  type: FormType!
+  """The JSON schema used for validating form data"""
+  schema: JsonSchema
+  """The date this form was created. This field is auto generated."""
+  dateCreated: RSDate!
+  """The date this form was last modified. This field is auto generated."""
+  dateModified: RSDate
+  """The JSONata expression that produces the initial data"""
+  initialDataTransformer: JSONata
+  """The JSONata expression that checks if this form is enabled"""
+  isEnabledPredicate: JSONata
+  """Email addresses to receive successful form submission notifications"""
+  successNotificationEmails: [String!]!
+  """Email addresses to receive failed form submission notifications"""
+  failureNotificationEmails: [String!]!
+  """Segment operations to apply to a user for successful form submissions"""
+  successSegments: [SegmentOperation!]!
+  """Segment operations to apply to a user for failed form submissions"""
+  failureSegments: [SegmentOperation!]!
+  """Detailed information of successSegments"""
+  successSegmentsDetails: [SegmentOperationDetails!]!
+  """Detailed information of failureSegments"""
+  failureSegmentsDetails: [SegmentOperationDetails!]!
+  """The meta of this form"""
+  meta: FormMeta!
+  """Get the initial data of this form in the current context"""
+  initialData(user: UserIdInput): FormInitialDataResult!
+  """Get the integration specific config for a service"""
+  integrationConfig(service: String!): RSJsonNode
+  """Get all the integration specific configs of this form"""
+  integrationConfigs: [FormIntegrationConfig!]!
+  """The global level config"""
+  globalConfig: RSJsonNode!
+  """Whether anonymous submissions without identified users are allowed"""
+  allowAnonymousSubmissions: Boolean!
+}
+
+"""Result for deleteForm"""
+type FormDeleteResult {
+  deletedCount: Long!
+}
+
+"""A form handler"""
+type FormHandler {
+  """The name of this form handler"""
+  name: String
+  """The endpoint URL of this form handler"""
+  endpointUrl: String!
+  """The integration that manages this form handler"""
+  integration: TenantIntegration
+  """
+  The namespace of this FormHandler.
+It should match the namespace of its integration, if there is one.
+  """
+  namespace: String!
+  """Get the meta for a form key"""
+  meta(key: String!): FormHandlerMetaResponse!
+}
+
+"""Unified error type from a form handler"""
+type FormHandlerError {
+  """The form handler"""
+  formHandler: FormHandler
+  """The type of this error"""
+  errorType: FormHandlerErrorType!
+  """The human readable error message"""
+  error: String
+  """The error code defined by the form handler"""
+  errorCode: String
+}
+
+"""The single result from a form handler of an initial data request"""
+type FormHandlerInitialDataResult {
+  """The input data for initial data of this form handler"""
+  inputData: RSJsonNode
+  """The form handler"""
+  formHandler: FormHandler
+}
+
+"""Meta result from a form handler"""
+type FormHandlerMeta {
+  """The actions this form handler is supposed to perform"""
+  actions: [FormHandlerMetaAction!]!
+  """The input data this form handler is supposed to provide"""
+  inputData: [FormHandlerMetaInputDataInfo!]!
+  """The schema of the input data provided by this form handler"""
+  inputDataSchema: JsonSchema!
+  """The form handler"""
+  formHandler: FormHandler
+}
+
+"""The form handler action metadata"""
+type FormHandlerMetaAction {
+  """The action name"""
+  name: String!
+  """Optional description"""
+  description: String
+}
+
+"""The form handler input data metadata"""
+type FormHandlerMetaInputDataInfo {
+  """The input data field name"""
+  name: String!
+  """Optional description"""
+  description: String
+}
+
+"""Submission result from a form handler"""
+type FormHandlerSubmissionResult {
+  """The form handler"""
+  formHandler: FormHandler
+  """The JSON result from the form handler"""
+  result: RSJsonNode!
+}
+
+"""Validation result from a form handler"""
+type FormHandlerValidationResult {
+  """The form handler"""
+  formHandler: FormHandler
+  """The JSON result from the form handler"""
+  result: RSJsonNode!
+}
+
+"""The result of the form initial data request"""
+type FormInitialDataResult {
+  """The initial data result"""
+  initialData: RSJsonNode
+  """Whether this form is enabled in the current context"""
+  isEnabled: Boolean!
+  """The optional error message for why a form is disabled"""
+  isEnabledErrorMessage: String
+  """The results from individual form handlers"""
+  results: [FormHandlerInitialDataResultResponse!]!
+  """The form for this initial data result"""
+  form: Form!
+}
+
+"""Integration specific config for a form"""
+type FormIntegrationConfig {
+  """The integration service"""
+  service: String!
+  """The config JSON"""
+  config: RSJsonNode
+  """The integration corresponding to the service"""
+  integration: TenantIntegration
+}
+
+"""Pagination list for Form"""
+type FormList {
+  data: [Form!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""The meta information of a form"""
+type FormMeta {
+  """The meta for individual form handlers"""
+  formHandlerMeta: [FormHandlerMetaResponse!]!
+  """The JSON schema of the input data for initial data"""
+  inputDataSchema: JsonSchema!
+}
+
+"""A record for a form submission"""
+type FormSubmissionRecord {
+  """Randomly generated unique ID"""
+  id: ID!
+  """The key of the form that did the submission"""
+  formKey: String!
+  """The schema of the form at the time of the submission"""
+  schema: JsonSchema
+  """Email addresses to receive successful form submission notifications at the time of submission"""
+  successNotificationEmails: [String!]!
+  """Email addresses to receive failed form submission notifications at the time of submission"""
+  failureNotificationEmails: [String!]!
+  """Segment operations to apply to a user for successful form submissions at the time of submission"""
+  successSegments: [SegmentOperation!]!
+  """Segment operations to apply to a user for failed form submissions at the time of submission"""
+  failureSegments: [SegmentOperation!]!
+  """The effective logical segment operations that were actually applied for this submission"""
+  effectiveSegments: [SegmentOperation!]!
+  """Detailed information of successSegments"""
+  successSegmentsDetails: [SegmentOperationDetails!]!
+  """Detailed information of failureSegments"""
+  failureSegmentsDetails: [SegmentOperationDetails!]!
+  """Detailed information of effectiveSegments"""
+  effectiveSegmentsDetails: [SegmentOperationDetails!]!
+  """The form data"""
+  formData: RSJsonNode
+  """The user that submitted the form"""
+  user: User
+  """The date the form was submitted"""
+  dateSubmitted: RSDate!
+  """Whether the submission was successful"""
+  success: Boolean!
+  """Submission results"""
+  results: [FormSubmissionRecordResponse!]!
+  """Access log information about this form submission"""
+  updatedBy: RSUpdatedBy
+  """The form that did the submission"""
+  form: Form
+}
+
+"""Result for deleteFormSubmissionRecord"""
+type FormSubmissionRecordDeleteResult {
+  deletedCount: Long!
+}
+
+"""The submission error result of a form stored in FormSubmissionRecord"""
+type FormSubmissionRecordError {
+  """The form handler that generated this result"""
+  formHandler: FormHandler
+  """The type of this error"""
+  errorType: FormHandlerErrorType!
+  """The error message"""
+  error: String
+  """The error code defined by the form handler"""
+  errorCode: String
+}
+
+"""Pagination list for FormSubmissionRecord"""
+type FormSubmissionRecordList {
+  data: [FormSubmissionRecord!]!
+  count: Int!
+}
+
+"""The submission result of a form stored in FormSubmissionRecord"""
+type FormSubmissionRecordResult {
+  """The form handler that generated this result"""
+  formHandler: FormHandler
+  """The result received from the form handler"""
+  result: RSJsonNode!
+}
+
+"""Result of a form submission"""
+type FormSubmissionResult {
+  """Whether this submission is valid"""
+  success: Boolean!
+  """Individual results from form handlers"""
+  results: [FormHandlerSubmissionResponse!]!
+  """The resulting form submission record"""
+  formSubmissionRecord: FormSubmissionRecord
+}
+
+"""Result of a form submission"""
+type FormValidationResult {
+  """Whether this validation is valid"""
+  valid: Boolean!
+  """Individual results from form handlers"""
+  results: [FormHandlerValidationResponse!]!
+}
+
+type FraudCheckSettings {
+  ipCheckEnabled: Boolean
+  nameCheckEnabled: Boolean
+  emailCheckEnabled: Boolean
+  rateCheckEnabled: Boolean
+  tempMailCheckEnabled: Boolean
+  customEmailDomainBlacklist: [String!]
+  dailyReferralRewardLimitEnabled: Boolean
+}
+
+type FraudFlag {
+  type: FraudType!
+  message: String!
+}
+
+type FuelTankRewardBalance implements RewardBalance {
+  type: RewardType!
+  unit: String!
+  rewardUnit: RewardUnit!
+  availableValue: Int!
+  prettyAvailableValue(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  totalFuelTankCodes: Int!
+}
+
+type GenericFieldFilter {
+  field: String
+  operator: GenericFieldFilterOperator!
+  value: RSJsonNode!
+}
+
+type GitConfig {
+  repositoryUrl: String
+  branch: String
+  username: String
+  password: String
+}
+
+"""Config values for a global email type"""
+type GlobalEmailConfig implements TranslatableAsset {
+  key: String!
+  values: RSJsonNode!
+  marketing: Boolean!
+  """Whether this GlobalEmailConfig can be deleted"""
+  canDelete: Boolean!
+  """Whether this GlobalEmailConfig is used by the US tax notification email"""
+  usedByUsTaxNotificationEmail: Boolean!
+  """Whether this GlobalEmailConfig is used by the monthly cash notification email"""
+  usedByMonthlyCashNotificationEmail: Boolean!
+  """Whether this GlobalEmailConfig is used by managed identity reset password email"""
+  usedByManagedIdentityResetPasswordEmail: Boolean!
+  """Whether this GlobalEmailConfig is used by managed identity verify email"""
+  usedByManagedIdentityVerifyEmail: Boolean!
+  """Translation details of this email"""
+  translationInfo: TranslationInfo!
+}
+
+type GlobalEmailConfigDeleteResult {
+  deletedCount: Long!
+}
+
+type GlobalEmailConfigList {
+  data: [GlobalEmailConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Config for a global reward"""
+type GlobalRewardConfig implements IsPredefinedReward {
+  key: String!
+  name: String
+  description: String
+  rewardType: RewardType
+  amount: Int
+  unit: String
+  currency: RSCurrencyCode
+  """The corresponding RewardUnitSettings, if one exists"""
+  rewardUnitSettings: RewardUnitSettings
+  """The duration between reward creation and reward expiry"""
+  validityDuration: IsoDuration
+  """The duration between reward creation and reward given"""
+  pendingDuration: IsoDuration
+  fuelTankType: FuelTankType
+  fuelTankSyncSetting: FuelTankSyncSetting
+  fuelTankAutoCreateCodePrefix: String
+  integration: TenantIntegration
+  """Integration specific configuration (i.e. external gift card identifiers)"""
+  integrationSettings: RSJsonNode
+  allowsInstantAccess: Boolean!
+  """Unique global ID for predefined rewards"""
+  predefinedRewardType: PredefinedRewardType!
+  """The custom codes used for FUELTANK rewards"""
+  customCodes(filter: CustomCodeFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): CustomCodeList!
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """The limits of integration reward values"""
+  valueLimits: RewardValueLimits
+  """All the RewardExchangeRules that use this GlobalRewardConfig"""
+  usedByRewardExchangeRules(limit: Int! = 20, offset: Int! = 0): RewardExchangeRuleList!
+  """Get all the Programs with rewards that reference this GlobalRewardConfig"""
+  usedByPrograms(limit: Int! = 20, offset: Int! = 0): ProgramList!
+}
+
+type GlobalRewardConfigDeleteResult {
+  deletedCount: Long!
+}
+
+type GlobalRewardConfigList {
+  data: [GlobalRewardConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Config values for a global widget type"""
+type GlobalWidgetConfig implements TranslatableAsset & WidgetConfig {
+  key: String!
+  values: RSJsonNode!
+  """Translation details of this widget"""
+  translationInfo: TranslationInfo!
+}
+
+type GlobalWidgetConfigDeleteResult {
+  deletedCount: Long!
+}
+
+type GlobalWidgetConfigList {
+  data: [GlobalWidgetConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type GraphNode {
+  data: GraphNodeData
+  parent: GraphNodeData
+  depth: Int!
+}
+
+type GraphNodeList {
+  data: [GraphNode!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type GraphNodeModerationPreview {
+  data: GraphNodeData
+  parent: GraphNodeData
+  depth: Int
+  action: String
+  description: String
+}
+
+type GraphNodeModerationPreviewList {
+  data: [GraphNodeModerationPreview!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type GraphNodeModerationResult {
+  data: GraphNodeData
+  moderationResults: GraphNodeModerationPreviewList
+}
+
+type GraphNodeModerationResultList {
+  data: [GraphNodeModerationResult!]!
+  count: Int!
+  """totalCount is null for USER_EVENT"""
+  totalCount: Long
+}
+
+"""A GraphQL request"""
+type GraphQLRequest {
+  """The GraphQL query string"""
+  query: GraphQLQueryString!
+  """The GraphQL query variables"""
+  variables: RSJsonNode
+  """The operation name"""
+  operationName: String
+}
+
+type ImpactApiValidationError {
+  field: String
+  message: String
+  code: String
+}
+
+type ImpactConnection {
+  connected: Boolean!
+  connectionStatus: ImpactConnectionStatus!
+  taxHandlingEnabled: Boolean!
+  user: ImpactUser
+  publisher: ImpactPublisher
+}
+
+type ImpactEventType {
+  id: ID!
+  name: String
+  type: String
+  programId: ID
+  programName: String
+  participantSharing: Boolean
+}
+
+type ImpactEventTypeList {
+  data: [ImpactEventType!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ImpactFinanceNetworkSetting {
+  countryCode: RSCountryCode
+  currency: RSCurrencyCode
+  defaultFinancePaymentMethodId: Int
+  thresholdOptions: String
+  withdrawalSettingId: Int
+  internationalEftFee: Float
+  foreignFxFee: Float
+  defaultFxFee: Float
+}
+
+type ImpactFinanceNetworkSettingList {
+  data: [ImpactFinanceNetworkSetting!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ImpactProgram {
+  id: ID!
+  name: String
+  description: String
+  shortDescription: String
+  type: String
+  state: String
+  sourceProgramId: ID
+}
+
+type ImpactProgramList {
+  data: [ImpactProgram!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ImpactPublisher {
+  id: String!
+  brandedSignup: Boolean!
+  countryCode: RSCountryCode!
+  currency: RSCurrencyCode!
+  billingAddress: String
+  billingCity: String
+  billingState: String
+  billingCountryCode: RSCountryCode
+  billingPostalCode: String
+  phoneNumberCountryCode: RSCountryCode
+  phoneNumber: String
+  taxInformation: ImpactPublisherTaxInformation
+  requiredTaxDocumentType: TaxDocumentType
+  currentTaxDocument: ImpactPublisherCurrentTaxDocument
+  withdrawalSettings: ImpactPublisherWithdrawalSettings
+  payoutsAccount: ImpactPublisherPayoutsAccount
+  invoices(limit: Int! = 20, offset: Int! = 0): ImpactPublisherInvoiceList!
+}
+
+type ImpactPublisherCurrentTaxDocument {
+  status: TaxDocumentStatus!
+  type: TaxDocumentType!
+  dateCreated: RSDate
+}
+
+type ImpactPublisherEmail2FAResult {
+  """The email that was used for 2fa verification"""
+  verifiedEmail: String!
+  """Time limited single use access key"""
+  accessKey: String!
+}
+
+type ImpactPublisherIdentityVerificationSessionUrl {
+  sessionUrl: String!
+}
+
+type ImpactPublisherInvoice {
+  id: String!
+  dateCreated: RSDate
+  currency: RSCurrencyCode
+  totalAmount: Float
+  totalVatAmount: Float
+  downloadUrl: String
+}
+
+type ImpactPublisherInvoiceList {
+  data: [ImpactPublisherInvoice!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ImpactPublisherPayoutsAccount {
+  hold: Boolean!
+  holdReasons: [String!]!
+  balance: String!
+  balanceAmount: Int!
+  currencyCode: String!
+}
+
+type ImpactPublisherTaxDocumentUrl {
+  documentUrl: String!
+}
+
+type ImpactPublisherTaxInformation {
+  indirectTaxId: String!
+  indirectTaxCountryCode: RSCountryCode!
+  indirectTaxRegion: String
+  additionalTaxId: String
+  withholdingTaxId: String
+  withholdingTaxCountryCode: RSCountryCode
+}
+
+type ImpactPublisherWithdrawalSettings {
+  paymentMethod: ImpactPublisherPaymentMethod!
+  paypalEmailAddress: String
+  bankCountry: RSCountryCode
+  bankAccountNumber: String
+  paymentSchedulingType: ImpactPublisherPaymentSchedulingType!
+  paymentThreshold: String
+  paymentDay: String
+}
+
+type ImpactTempAccessUser implements Viewer {
+  email: String!
+  portalProject: PortalProject!
+  role: PortalUserRole!
+  permissions: [String!]!
+}
+
+type ImpactUser {
+  id: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+type IntegrationRewardBalance implements RewardBalance {
+  type: RewardType!
+  unit: String!
+  rewardUnit: RewardUnit!
+  availableValue: Int!
+  prettyAvailableValue(formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """Shallow map of string to integer"""
+  unitBalances: RSShallowMap!
+}
+
+"""An external integration template"""
+type IntegrationTemplate {
+  """Human-readable name of the integration"""
+  name: String!
+  """Unique client ID for the integration"""
+  clientId: String!
+  """URL for the integration's configuration UI"""
+  configUrl: String
+  """URL for the integration's introspection endpoint"""
+  introspectionUrl: String
+  """Description of the integration"""
+  description: String
+  """URL to the integration's logo image"""
+  logo: String
+  """URL to the integration's icon image"""
+  icon: String
+  """Heading text for the integration panel"""
+  panelHeading: String
+  """Whether the integration can be installed from the portal"""
+  portalInstallable: Boolean!
+  """List of feature flags required for this integration to be available"""
+  requiredFeatureFlags: [String!]
+  """Namespace for the integration (used for form handlers)"""
+  namespace: String
+  """Whether the integration supports classic SaaSquatch"""
+  supportsClassic: Boolean
+  """The flavors supported by this integration"""
+  supportedFlavors: [SquatchFlavor!]!
+  """The integration configuration JSON"""
+  integrationConfig: RSJsonNode
+}
+
+type IntegrationTemplateList {
+  data: [IntegrationTemplate!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Internal type not intended for public use"""
+type InternalReferralProgramInfo {
+  tenantAlias: String!
+  userToken: String!
+}
+
+type InviteEmailsToPortalProjectResult {
+  success: Boolean!
+}
+
+"""The result for checking whether an email is blocked"""
+type IsBlockedEmailResult {
+  """Whether the email is blocked"""
+  isBlocked: Boolean!
+  """The reason why the email is blocked, if available"""
+  reason: BlockedEmailReason
+}
+
+type IsPredefinedRewardList {
+  data: [IsPredefinedReward!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type Job {
+  id: ID!
+  type: JobType!
+  name: String
+  requester: String
+  dateCreated: RSDate
+  dateCompleted: RSDate
+  outputFormat: DataFileFormat
+  dateExpires: RSDate
+  status: JobStatus!
+  mailtoEmail: String
+  downloadUrl(publicLink: Boolean! = false): String
+  downloadErrorUrl(publicLink: Boolean! = false): String
+  downloadFileRefUrl(publicLink: Boolean! = false): String
+  params: RSJsonNode
+  fileRef: String
+  stats: JobStats
+  rerunJobId: ID
+}
+
+type JobCreationError {
+  type: JobCreationErrorType!
+  lineNumber: Long
+  error: RSJsonNode
+}
+
+type JobDeleteResult {
+  deletedCount: Long!
+}
+
+type JobList {
+  data: [Job!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type JobStats {
+  recordsProcessed: Long!
+  errors: Long!
+}
+
+type JobToken {
+  token: String
+}
+
+type LatLon {
+  lat: Float!
+  lon: Float!
+}
+
+"""
+A rank in a leaderboard.
+For more information about the difference between rank, denseRank, and rowNumber,
+see: https://codingsight.com/similarities-and-differences-among-rank-dense_rank-and-row_number-functions/
+"""
+type LeaderboardRank {
+  """The value of the corresponding leaderboard row, e.g. the number of referrals"""
+  value: Long!
+  """The formatted value of the corresponding leaderboard row, which may be the reward unit prettyValue"""
+  textValue(locale: RSLocale): String
+  """The rank of the row within the leaderboard with possible gaps between values"""
+  rank: Long!
+  """The rank of the row within the leaderboard without possible gaps between values"""
+  denseRank: Long!
+  """The row number of the row within the leaderboard"""
+  rowNumber: Long!
+}
+
+type LinkCodeDeleteResult {
+  deletedCount: Long!
+}
+
+"""A custom domain for links, e.g. "example.com""""
+type LinkDomain {
+  host: String!
+  scheme: String!
+}
+
+type MakeReferralCodePrimaryResult {
+  """The new primary referral code"""
+  referralCode: ReferralCode!
+  """The previous primary referral code, if one exists"""
+  previousPrimary: ReferralCode
+}
+
+type MakeShareLinkCodePrimaryResult {
+  """The new primary share link code"""
+  linkCode: ShareLinkCode!
+  """The previous primary share link code if one exists"""
+  previousPrimary: ShareLinkCode
+}
+
+type ManagedIdentityAuthenticationResult {
+  """A JWT session token for the user"""
+  token: String!
+  """The user's email address"""
+  email: String
+  """Whether the user has verified their email address"""
+  emailVerified: Boolean
+  """Additional session data used by managed identity session handlers"""
+  sessionData: RSJsonNode
+}
+
+type ManagedIdentityConfig {
+  """Whether this ManagedIdentityConfig has been modified"""
+  isModified: Boolean!
+  """Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/ManagedIdentityConfig.schema.json"""
+  config: RSJsonNode!
+}
+
+type ManagedIdentityProviderUserInfo {
+  """The user identifier for the linked provider."""
+  uid: String
+  """The display name for the linked provider."""
+  displayName: String
+  """The email for the linked provider."""
+  email: String
+  """The phone number for the linked provider."""
+  phoneNumber: String
+  """The photo URL for the linked provider."""
+  photoURL: String
+  """The linked provider ID (for example, "google.com" for the Google provider)."""
+  providerId: String!
+}
+
+type ManagedIdentityResult {
+  """Whether or not the user is disabled: true for disabled; false for enabled"""
+  disabled: Boolean!
+  """The user's display name"""
+  displayName: String!
+  """The user's primary email"""
+  email: String!
+  """Whether or not the user's primary email is verified"""
+  emailVerified: Boolean!
+  """The user's uid"""
+  uid: String!
+  """The user's sign in methods if set"""
+  providerData: [ManagedIdentityProviderUserInfo!]!
+  """The date the user was created"""
+  dateCreated: RSDate!
+  """
+  The time at which the user was last active (ID token refreshed).
+Returns null if the user was never active.
+  """
+  dateLastRefreshed: RSDate
+  """The date the user last signed in"""
+  dateLastSignedIn: RSDate
+}
+
+type ManagedIdentitySessionResult {
+  """The user's email address"""
+  email: String
+  """Whether the user has verified their email address"""
+  emailVerified: Boolean
+  """Additional session data used by managed identity session handlers"""
+  sessionData: RSJsonNode
+}
+
+type ManagedIdentitySuccessResult {
+  success: Boolean!
+}
+
+type ManualDomainOwnershipVerification implements DomainOwnershipVerification {
+  method: DomainOwnershipVerificationMethod!
+}
+
+type MarkReferralCodeCopiedResult {
+  referralCode: ReferralCode!
+}
+
+type MarkRevenueEventAsTestResult {
+  userEvent: UserEventData!
+}
+
+type MatchedImpactPartner {
+  impactPartnerId: ID!
+  privacyLevel: String!
+  reachRating: Float
+  sizeRating: String
+  creatorTier: String
+  programSubtypes: [String!]!
+  address: MatchedImpactPartnerAddress
+  mediaProperties: MatchedImpactPartnerMediaProperties!
+  brandRelationship: MatchedImpactPartnerBrandRelationship
+  brandRelationships: [MatchedImpactPartnerBrandRelationship!]!
+}
+
+type MatchedImpactPartnerAddress {
+  address: String
+  countryCode: RSCountryCode
+  region: String
+}
+
+type MatchedImpactPartnerBrandRelationship {
+  impactProgramId: ID!
+  impactProgram: ImpactProgram
+  state: MatchedImpactPartnerRelationshipState!
+  originalJoinDate: RSDate
+}
+
+type MatchedImpactPartnerMediaProperties {
+  instagram: MatchedImpactPartnerMediaProperty
+  twitter: MatchedImpactPartnerMediaProperty
+  youtube: MatchedImpactPartnerMediaProperty
+  tiktok: MatchedImpactPartnerMediaProperty
+}
+
+type MatchedImpactPartnerMediaProperty {
+  type: String!
+  url: String
+  socialHandle: String
+  followers: Long
+  isVerified: Boolean
+}
+
+type MatchedImpactPartnerRelationshipState {
+  state: String!
+  category: String!
+}
+
+"""A link code for a message link"""
+type MessageLinkCode implements LinkCode {
+  linkCode: String!
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  supportedLinkDomains: [LinkDomain!]!
+  user: User
+  program: Program
+}
+
+type MicrositeHostingConfig {
+  """The default (auto-generated) domain for the microsite"""
+  defaultDomain: String!
+  """Wether the microsite is based on a single global widget (legacy) or pages/layouts"""
+  isSingleGlobalWidget: Boolean!
+  """Whether this MicrositeHostingConfig has been modified"""
+  isModified: Boolean!
+  """Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/HostedPortalConfig.schema.json"""
+  config: RSJsonNode!
+}
+
+type MicrositeLayoutConfig implements TranslatableAsset {
+  """The unique key of this MicrositeLayoutConfig"""
+  key: String!
+  """The human readable name"""
+  name: String
+  """The key of the parent MicrositeLayoutConfig, if there is one."""
+  parentKey: String
+  """The date this MicrositeLayoutConfig was created. This field is auto generated."""
+  dateCreated: RSDate!
+  """The date this MicrositeLayoutConfig was last modified. This field is auto generated."""
+  dateModified: RSDate
+  """
+  The config values JSON.
+Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/microsite/MicrositeLayoutConfigValues.schema.json
+  """
+  values: RSJsonNode!
+  """The ancestry layouts of this layout"""
+  layoutAncestry: [MicrositeLayoutConfig!]!
+  """Whether this MicrositeLayoutConfig can be deleted"""
+  canDelete: Boolean!
+  """Get all the MicrositeLayoutConfigs that have this MicrositeLayoutConfig as the parent"""
+  usedByMicrositeLayoutConfigs: [MicrositeLayoutConfig!]!
+  """Get all the MicrositePageConfigs that have this MicrositeLayoutConfig as the parent"""
+  usedByMicrositePageConfigs: [MicrositePageConfig!]!
+  translationInfo: TranslationInfo!
+}
+
+type MicrositeLayoutConfigDeleteResult {
+  deletedCount: Int!
+}
+
+type MicrositeLayoutConfigList {
+  data: [MicrositeLayoutConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type MicrositePageConfig implements TranslatableAsset {
+  """The unique key of this MicrositePageConfig"""
+  key: String!
+  """The key of the corresponding MicrositeLayoutConfig"""
+  layoutKey: String
+  """The URL path this page should be served under (must be unique for each page)"""
+  urlPath: String!
+  """The URL path to redirect users who are not of the type allowedUsers"""
+  disallowedUrlPath: String
+  """The users who are allowed to view this page"""
+  allowedUsers: MicrositePageAllowedUsersOption!
+  """The date this MicrositePageConfig was created. This field is auto generated."""
+  dateCreated: RSDate!
+  """The date this MicrositePageConfig was last modified. This field is auto generated."""
+  dateModified: RSDate
+  """
+  The config values JSON.
+Schema defined at https://fast.ssqt.io/npm/@saasquatch/schema/json/microsite/MicrositePageConfigValues.schema.json
+  """
+  values: RSJsonNode!
+  """The ancestry layouts of this page"""
+  layoutAncestry: [MicrositeLayoutConfig!]!
+  """Whether this MicrositePageConfig can be deleted"""
+  canDelete: Boolean!
+  """Whether this MicrositePageConfig is used as the 404 not found page"""
+  usedAsNotFound: Boolean!
+  translationInfo: TranslationInfo!
+}
+
+type MicrositePageConfigDeleteResult {
+  deletedCount: Int!
+}
+
+type MicrositePageConfigList {
+  data: [MicrositePageConfig!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type MicrositeTemplate {
+  """The unique key of this microsite template"""
+  key: String!
+  """The human readable name"""
+  name: String!
+  """The human readable long description"""
+  description: String!
+  """
+  Determine whether a microsite can be automatically setup for the given microsite template.
+
+This checks ensures that:
+ - Microsite hosting has never been enabled, see MicrositeHostingConfig.isModified
+ - Managed identity has never been enabled, see ManagedIdentityConfig.isModified
+ - That none of the forms, emails, layouts, or pages that would be created by the template already exist
+  """
+  canAutoSetup: Boolean!
+  """All the GlobalEmailConfigs defined by this template that already exist, disallowing auto setup"""
+  existingGlobalEmailConfigs: [GlobalEmailConfig!]!
+  """All the Forms defined by this template that already exist, disallowing auto setup"""
+  existingForms: [Form!]!
+  """All the MicrositeLayoutConfigs defined by this template that already exist, disallowing auto setup"""
+  existingMicrositeLayoutConfigs: [MicrositeLayoutConfig!]!
+  """All the MicrositePageConfigs defined by this template that already exist, disallowing auto setup"""
+  existingMicrositePageConfigs: [MicrositePageConfig!]!
+}
+
+type MicrositeTemplateList {
+  data: [MicrositeTemplate!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ModerationInputView {
+  action: String!
+  maxDepth: Int!
+  limit: Int
+  offset: Int
+}
+
+type Mutation {
+  """Creates a new program from a Program Template ID"""
+  createProgram(id: ID, name: String!, programTemplateId: String!): Program!
+  """Updates an existing program by id"""
+  updateProgram(programInput: ProgramInput!): Program!
+  updateProgramId(id: ID!, newId: ID!): Program!
+  """Update the draft of an existing program. If a draft does not exist, one will be created automatically."""
+  updateProgramDraft(programInput: ProgramInput!): Program!
+  """Delete the draft of an existing program"""
+  deleteProgramDraft(programId: ID!): ProgramDraftDeleteResult!
+  """Publish the draft of an existing program"""
+  publishProgramDraft(programId: ID!): Program!
+  deleteProgram(id: String!): ProgramDeleteResult!
+  """Create a user. If the user already exists, this mutation will cause an error."""
+  createUser(userInput: UserInput!): User!
+  """Create a user or update the user if the user already exists."""
+  upsertUser(userInput: UserInput!): User!
+  """Batched version of upsertUser. It allows a maximum of 100 UserInputs."""
+  upsertUsers(userInputs: [UserInput!]!): [UserUpsertResult!]!
+  """Request an email verification code for a participant's email or the connected publisher's email"""
+  requestUserEmailVerification(user: UserIdInput!): RequestUserEmailVerificationResult!
+  """Submit the code received from requestUserEmailVerification"""
+  verifyUserEmail(user: UserIdInput!, code: String!): User!
+  """Create a connection to an Impact User and Publisher"""
+  createImpactConnection(impactConnectionInput: ImpactConnectionInput!): CreateImpactConnectionResult!
+  """Create connection with limited Impact User and Publisher fields"""
+  startImpactConnection(impactConnectionInput: ImpactConnectionInput!): CreateImpactConnectionResult!
+  """Fill in missing Impact User and Publisher fields, this will not overwrite existing fields or modify the connection mapping"""
+  completeImpactConnection(impactConnectionInput: ImpactConnectionInput!): CreateImpactConnectionResult!
+  """Create a tax document for an Impact Publisher"""
+  createImpactPublisherTaxDocument(createImpactPublisherTaxDocumentInput: CreateImpactPublisherTaxDocumentInput!): ImpactPublisherTaxDocumentUrl!
+  """Create identity verification session for an Impact Publisher"""
+  createImpactPublisherIdentityVerificationSession(user: UserIdInput!): ImpactPublisherIdentityVerificationSessionUrl!
+  """Mark the user's current tax document as complete"""
+  completeImpactPublisherTaxDocument(user: UserIdInput!): CompleteImpactPublisherTaxDocumentResult!
+  """Set withdrawal settings for an Impact Publisher"""
+  setImpactPublisherWithdrawalSettings(setImpactPublisherWithdrawalSettingsInput: SetImpactPublisherWithdrawalSettingsInput!): SetImpactPublisherWithdrawalSettingsResult!
+  """Request an email verification code for a participant's email or the connected publisher's email"""
+  requestImpactPublisherEmail2FA(user: UserIdInput!): RequestImpactPublisherEmail2FAResult!
+  """Submit the code received from requestUserEmailVerification"""
+  submitImpactPublisherEmail2FACode(user: UserIdInput!, code: String!): ImpactPublisherEmail2FAResult!
+  """Update withdrawal settings for an Impact Publisher. Requires valid 2fa access key."""
+  updateImpactPublisherWithdrawalSettings(updateImpactPublisherWithdrawalSettingsInput: UpdateImpactPublisherWithdrawalSettingsInput!): SetImpactPublisherWithdrawalSettingsResult!
+  """Create or update an instant access user"""
+  authenticateManagedIdentityWithInstantAccess(authenticateManagedIdentityWithInstantAccessInput: AuthenticateManagedIdentityWithInstantAccessInput!): ManagedIdentityAuthenticationResult!
+  """Creates an anonymous cookie user that can be upgraded to a regular"""
+  createCookieUser(createCookieUserInput: CreateCookieUserInput!): CreateCookieUserResult!
+  """
+  Sends a preview of either a program email (if programId is specified) or a global email.
+
+The placeholders in the template will not be replaced with resolved values as no context
+is speficied, however this can be used to ensure that the general layout of an email looks
+correct in email clients.
+  """
+  sendPreviewEmail(programId: String, emailKey: String!, values: RSJsonNode, toAddress: String!, locale: String): Boolean! @deprecated
+  updateTenant(tenantInput: TenantInput!): Tenant!
+  updateTenantSettings(tenantSettingsInput: TenantSettingsInput!): TenantSettings!
+  testProgramSchedule(epochMilli: Long): [RSJsonNode!]!
+  """Bulk custom code uploading for fueltank rewards"""
+  addCustomCodes(data: CustomCodesInput!): CustomCodeInsertResult!
+  upsertCustomCodes(data: CustomCodesInput!): CustomCodeUpsertResult!
+  deleteCustomCodes(data: CustomCodesInput!, createdBefore: RSDate): CustomCodeDeleteResult!
+  upsertTranslationInstance(translationInstanceInput: TranslationInstanceInput!): TranslationInstance!
+  deleteTranslationInstance(id: TranslationInstanceId!): TranslationInstanceDeleteResult!
+  createJob(jobInput: JobInput!): Job!
+  deleteJob(id: ID!): JobDeleteResult!
+  rerunJob(rerunJobInput: RerunJobInput!): Job!
+  upsertSegment(segmentInput: SegmentInput!): Segment!
+  upsertUserMetric(userMetricInput: UserMetricInput!): UserMetric! @deprecated
+  """Create a UserMetric. Returns an error if a UserMetric with the given customFieldKey already exists."""
+  createUserMetric(userMetricInput: UserMetricInput!): UserMetric!
+  """Update an existing UserMetric. Returns an error if a UserMetric with the given customFieldKey does not exist."""
+  setUserMetric(userMetricInput: UserMetricInput!): UserMetric!
+  """Delete a UserMetric by customFieldKey"""
+  deleteUserMetric(customFieldKey: String!): UserMetricDeleteResult!
+  """
+  Log user events for a single user.
+This mutation is not available for Impact tenants and programs.
+  """
+  logUserEvent(userEventInput: UserEventInput!): UserEventResult!
+  """Bulk version of logUserEvent"""
+  logUserEvents(userEventInputs: [UserEventInput!]!): [BulkUserEventResult!]!
+  markRevenueEventAsTest(userEventId: ID!): MarkRevenueEventAsTestResult!
+  blockUser(accountId: String!, id: String!): UserBlockingResult!
+  unblockUser(accountId: String!, id: String!): UserBlockingResult!
+  deleteUser(accountId: String!, id: String!, doNotTrack: Boolean! = false, preserveEmptyAccount: Boolean! = true): Boolean!
+  deleteAccount(accountId: String!, doNotTrack: Boolean! = false): Boolean!
+  deleteUserDoNotTrackIdentifier(id: String!, accountId: String!): UserDoNotTrackIdentifierDeleteResult!
+  createReward(rewardInput: RSJsonNode, globalRewardKey: String, programId: ID, userId: String!, accountId: String!, status: RewardStatus): FlatReward!
+  updateRewardStatus(id: ID!, status: RewardStatus!): FlatReward!
+  """Fully or partially redeem a credit reward"""
+  redeemRewardCredit(id: ID!, redeemCreditInput: RedeemCreditInput!): RedeemCreditResult!
+  """Redeem one or multiple rewards of the given value for a user"""
+  redeemUserCredit(userId: String!, accountId: String!, redeemCreditInput: RedeemCreditInput!): RedeemCreditResult!
+  """Exchange a set amount of credit for another reward"""
+  exchangeReward(exchangeRewardInput: ExchangeRewardInput!): ExchangeRewardResult!
+  updateProgramEmailTransactionStatus(id: ID!, status: EmailTransactionStatus!): ProgramEmailTransaction!
+  deleteProgramEmailTransaction(id: ID!): ProgramEmailTransactionDeleteResult!
+  createUserAnalyticsEvent(eventMeta: UserAnalyticsEvent!): Boolean!
+  moderateGraphNodes(graphNodeType: GraphNodeType!, filter: RSJsonNode!, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, moderationInput: ModerationInput!): GraphNodeModerationResultList!
+  updatePortalProject(portalProjectInput: PortalProjectInput!): PortalProject!
+  """Create or update a tenant integration"""
+  upsertIntegration(integrationInput: TenantIntegrationInput!): TenantIntegration
+  deleteIntegration(service: String!): TenantIntegrationDeleteResult!
+  """Patch the config of a TenantIntegration"""
+  patchIntegrationConfig(service: String!, configPatch: RSJsonNode!): TenantIntegration!
+  """Subscribes a URL to receive events via webhooks"""
+  upsertWebhookSubscription(webhookSubscriptionInput: WebhookSubscriptionInput!): WebhookSubscription!
+  """Removes a URL from receiving events via webhooks"""
+  deleteWebhookSubscription(endpointUrl: String!): WebhookSubscriptionDeleteResult!
+  """Sends a test event to the specified webhook"""
+  testWebhookSubscription(endpointUrl: String!): TestWebhookSubscriptionResult!
+  """Upsert external metadata for a reward"""
+  upsertRewardMeta(rewardMetaInput: RewardMetaInput!): FlatReward!
+  """Upsert the same external metadata for multiple rewards"""
+  bulkUpsertRewardMeta(bulkRewardMetaInput: BulkRewardMetaInput!): BulkUpsertRewardMetaResult!
+  """Upsert a RewardUnitSettings"""
+  upsertRewardUnitSettings(rewardUnitSettingsInput: RewardUnitSettingsInput!): RewardUnitSettings!
+  """Delete a RewardUnitSettings"""
+  deleteRewardUnitSettings(id: RewardUnitSettingsId!): RewardUnitSettingsDeleteResult!
+  """Clear the current tenant data if it's a test tenant"""
+  deleteTestTenantData: Boolean!
+  """Set this tenant to hide classic or not"""
+  setHideClassic(hideClassic: Boolean!): Boolean! @deprecated
+  """Upsert a GlobalRewardConfig"""
+  upsertGlobalRewardConfig(globalRewardConfigInput: GlobalRewardConfigInput!): GlobalRewardConfig!
+  """Delete a GlobalRewardConfig"""
+  deleteGlobalRewardConfig(key: String!): GlobalRewardConfigDeleteResult!
+  """Insert a new share link code"""
+  addShareLinkCode(addShareLinkCodeInput: AddShareLinkCodeInput!): AddShareLinkCodeResult!
+  """Delete a link code"""
+  deleteLinkCode(linkCode: String!): LinkCodeDeleteResult!
+  """Make a share link code primary for its referral code"""
+  makeShareLinkCodePrimaryForReferralCode(linkCode: String!): MakeShareLinkCodePrimaryResult!
+  """Make a share link code primary for its program"""
+  makeShareLinkCodePrimaryForProgram(linkCode: String!): MakeShareLinkCodePrimaryResult!
+  """Insert a new referral code"""
+  addReferralCode(addReferralCodeInput: AddReferralCodeInput!): AddReferralCodeResult!
+  """Delete a referral code"""
+  deleteReferralCode(referralCode: String!): ReferralCodeDeleteResult!
+  """Make a referral code primary for its program"""
+  makeReferralCodePrimaryForProgram(referralCode: String!): MakeReferralCodePrimaryResult!
+  """Edit a share link code"""
+  editShareLinkCode(editShareLinkCodeInput: EditShareLinkCodeInput!): EditShareLinkCodeResult!
+  """Edit a referral code"""
+  editReferralCode(editReferralCodeInput: EditReferralCodeInput!): EditReferralCodeResult!
+  markReferralCodeCopied(referralCode: String!): MarkReferralCodeCopiedResult!
+  """Create a form"""
+  createForm(formInput: FormInput!): Form!
+  """Update a form"""
+  updateForm(formInput: FormInput!): Form!
+  """Delete a form by key. A form with more than 1000 submissions cannot be deleted."""
+  deleteForm(key: String!): FormDeleteResult!
+  """Submit a form"""
+  submitForm(formSubmissionInput: FormSubmissionInput!): FormSubmissionResult!
+  """Delete a FormSubmissionRecord by id"""
+  deleteFormSubmissionRecord(id: ID!): FormSubmissionRecordDeleteResult!
+  """Create a GlobalEmailConfig"""
+  createGlobalEmailConfig(globalEmailConfigInput: GlobalEmailConfigInput!): GlobalEmailConfig!
+  """Update a GlobalEmailConfig"""
+  updateGlobalEmailConfig(globalEmailConfigInput: GlobalEmailConfigInput!): GlobalEmailConfig!
+  """Delete a GlobalEmailConfig by key"""
+  deleteGlobalEmailConfig(key: String!): GlobalEmailConfigDeleteResult!
+  """Create a GlobalWidgetConfig"""
+  createGlobalWidgetConfig(globalWidgetConfigInput: GlobalWidgetConfigInput!): GlobalWidgetConfig!
+  """Update a GlobalWidgetConfig"""
+  updateGlobalWidgetConfig(globalWidgetConfigInput: GlobalWidgetConfigInput!): GlobalWidgetConfig!
+  """Delete a GlobalWidgetConfig by key"""
+  deleteGlobalWidgetConfig(key: String!): GlobalWidgetConfigDeleteResult!
+  """Queue a global email for sending"""
+  queueGlobalEmail(queueGlobalEmailInput: QueueGlobalEmailInput!): ProgramEmailTransaction!
+  """Registers a user with managed identity, given an email and password"""
+  registerManagedIdentityWithEmailAndPassword(registerManagedIdentityWithEmailAndPasswordInput: RegisterManagedIdentityWithEmailAndPasswordInput!): ManagedIdentityAuthenticationResult! @deprecated
+  """Authenticate a user with managed identity, given an email and password"""
+  authenticateManagedIdentityWithEmailAndPassword(authenticateManagedIdentityWithEmailAndPasswordInput: AuthenticateManagedIdentityWithEmailAndPasswordInput!): ManagedIdentityAuthenticationResult!
+  """Authenticate a user with managed identity, given a Google ID token"""
+  authenticateManagedIdentityWithGoogle(authenticateManagedIdentityWithGoogleInput: AuthenticateManagedIdentityWithGoogleInput!): ManagedIdentityAuthenticationResult!
+  """Change a user's managed identity password"""
+  changeManagedIdentityPassword(changeManagedIdentityPasswordInput: ChangeManagedIdentityPasswordInput!): ManagedIdentitySuccessResult!
+  """
+  Request a new email verification email for a given identity.
+
+If no managed identity exists with the given email, or that identity is already verified,
+no email will be sent.
+  """
+  requestManagedIdentityVerificationEmail(requestManagedIdentityVerificationEmailInput: RequestManagedIdentityEmailInput!): ManagedIdentitySuccessResult!
+  """Verify a managed identity email address with an out-of-band (OOB) code"""
+  verifyManagedIdentityEmail(verifyManagedIdentityEmailInput: VerifyManagedIdentityEmailInput!): ManagedIdentitySuccessResult!
+  """
+  Request a password reset email for a given identity.
+
+If no managed identity exists with the given email, no email will be sent.
+  """
+  requestManagedIdentityPasswordResetEmail(requestManagedIdentityPasswordResetEmailInput: RequestManagedIdentityEmailInput!): ManagedIdentitySuccessResult!
+  """Verify a managed identity password reset out-of-band (OOB) code"""
+  verifyManagedIdentityPasswordResetCode(verifyManagedIdentityPasswordResetCodeInput: VerifyManagedIdentityPasswordResetCodeInput!): ManagedIdentitySuccessResult!
+  """Change the password of a managed identity, given a new password and an out-of-band (OOB) code"""
+  resetManagedIdentityPassword(resetManagedIdentityPasswordInput: ResetManagedIdentityPasswordInput!): ManagedIdentityAuthenticationResult!
+  """Set the current tenant's microsite hosting config"""
+  setMicrositeHostingConfig(config: RSJsonNode!): MicrositeHostingConfig!
+  """Set the current tenant's managed identity config"""
+  setManagedIdentityConfig(config: RSJsonNode!): ManagedIdentityConfig!
+  """
+  Create a new microsite layout config
+ - The provided key must uniquely identify the new layout config
+ - The parentKey (if provided) must refer to an existing layout config
+  """
+  createMicrositeLayoutConfig(micrositeLayoutConfigInput: MicrositeLayoutConfigInput!): MicrositeLayoutConfig!
+  """Update a microsite layout config"""
+  updateMicrositeLayoutConfig(micrositeLayoutConfigInput: MicrositeLayoutConfigInput!): MicrositeLayoutConfig!
+  """Delete a microsite layout config"""
+  deleteMicrositeLayoutConfig(key: String!): MicrositeLayoutConfigDeleteResult!
+  """
+  Create a new microsite page config
+ - The provided key must uniquely identify the new page config
+ - The provided urlPath must be unique amongst all pages
+  """
+  createMicrositePageConfig(micrositePageConfigInput: MicrositePageConfigInput!): MicrositePageConfig!
+  """Update a microsite page config"""
+  updateMicrositePageConfig(micrositePageConfigInput: MicrositePageConfigInput!): MicrositePageConfig!
+  """Delete a microsite page config"""
+  deleteMicrositePageConfig(key: String!): MicrositePageConfigDeleteResult!
+  """
+  Auto setup a microsite, creating all of the components required for the given template.
+If a programId is provided, the mircosite sqb-program-section component will use this program id
+
+Requirements:
+ - Microsite hosting has never been enabled
+ - Managed identity has never been enabled
+ - That none of the forms, emails, layouts, or pages that would be created by the template
+   already exist
+  """
+  autoSetupMicrosite(templateKey: String!, context: RSJsonNode): AutoSetupMicrositeResult!
+  """Destroy all microsite components from any microsite template. Useful for testing."""
+  destroyMicrosite: Boolean! @deprecated
+  """Set multiple portal users' role within this project. Administrators cannot change their own role."""
+  setPortalUserRoles(identities: [ID!]!, roleId: ID!): SetPortalUserRolesResult!
+  """Remove multiple portal users from this project. Administrators cannot remove themselves from the project."""
+  removePortalUsersFromPortalProject(identities: [ID!]!): RemovePortalUsersFromPortalProjectResult!
+  """Invite email addresses to a project with a given role. Invite emails will be sent to new users."""
+  inviteEmailsToPortalProject(emails: [String!]!, roleId: ID!): InviteEmailsToPortalProjectResult!
+  """Resend an invite to a pending portal user."""
+  resendPortalProjectInviteEmail(identity: ID!): ResendPortalProjectInviteEmailResult!
+  """
+  Send a portal email to the specified recipients.
+This mutation requires the machine portal user permission.
+  """
+  sendPortalEmail(sendPortalEmailInput: SendPortalEmailInput!): SendPortalEmailResult!
+  """Reset the tenant API key to a new one that is randomly generated"""
+  regenerateTenantApiKey: String!
+  createRewardExchangeRule(rewardExchangeRuleInput: RewardExchangeRuleInput!): RewardExchangeRule!
+  updateRewardExchangeRule(rewardExchangeRuleInput: RewardExchangeRuleInput!): RewardExchangeRule!
+  deleteRewardExchangeRule(key: String!): RewardExchangeRuleDeleteResult!
+  """
+  Create a domain under the current users organization
+Optionally specify domain uses
+  """
+  createDomain(domainInput: DomainInput!): Domain!
+  """Delete a domain"""
+  deleteDomain(domain: String!): DomainDeleteResult!
+  """Select which uses you wish to use theis domain for."""
+  addDomainUses(domain: String!, domainUses: [DomainUse!]!): Domain!
+  """Set a domain's required auth type"""
+  setDomainRequiredAuthType(domain: String!, requiredAuthType: DomainAuthType!): Domain!
+  """Check DNS records and configuration state of a domain and updates the domain."""
+  checkDomainConfigurationState(domain: String!): Domain!
+  """Starts the SSO setup process and will generate a ssoSetupUrl on the domain"""
+  setupSsoForDomain(domain: String!): Domain!
+  """Sets primary and secondary custom link domains for the tenant. Null input fields will unset values."""
+  setTenantCustomLinkDomains(tenantCustomLinkDomainsInput: TenantCustomLinkDomainsInput!): TenantSettings!
+  startImpactSession(token: String!): StartImpactSessionResult!
+  endImpactSession(token: String!): EndImpactSessionResult!
+  deleteReferral(id: ID!): ReferralDeleteResult!
+  refreshMatchedImpactPartnerForUser(user: UserIdInput!): RefreshMatchedImpactPartnerForUserResult!
+  createRelationshipBetweenPartnerAndProgram(impactPartnerId: ID!, impactProgramId: ID!): CreateRelationshipBetweenPartnerAndProgramResult!
+  setEnforceUsTaxCompliance(enforceUsTaxComplianceOption: EnforceTaxComplianceOption!): TenantSettings!
+  refreshImpactPublisherFinanceStatus(user: UserIdInput!): User!
+  """Set a portal storage entry"""
+  upsertPortalStorageEntry(portalStorageEntryInput: PortalStorageEntryInput!): PortalStorageEntry!
+  deletePortalStorageEntry(key: ID!, programId: ID): PortalStorageEntryDeleteResult!
+  deleteCookieUser(cookieId: ID!): CookieUserDeleteResult!
+}
+
+type Organization {
+  """The ID of this organization"""
+  id: ID!
+  """The date this organization was created"""
+  dateCreated: RSDate!
+  """The human readable name of this organization"""
+  name: String
+  """The portal projects that are a part of this organization"""
+  portalProjects(limit: Int! = 20, offset: Int! = 0, query: String): PortalProjectList!
+  """The domains that have been added to this organization"""
+  domains(limit: Int! = 20, offset: Int! = 0, query: String, filter: DomainFilterInput): DomainList!
+  """A domain that is in the organization by domain string or ID"""
+  domain(domain: String!): Domain
+  impactBrandId: ID
+}
+
+type PartnerFundsTransfer {
+  id: String!
+  status: String
+  dateCreated: RSDate
+  dateScheduled: RSDate
+  dateTransferred: RSDate
+}
+
+type PaymentAccount {
+  id: String!
+  dateCreated: RSDate
+  dateModified: RSDate
+  users(limit: Int! = 20, offset: Int! = 0): UserList!
+}
+
+type PersistedEvent {
+  meta: RSJsonNode
+  blob: RSJsonNode
+}
+
+type PersistedEventList {
+  data: [PersistedEvent!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type PortalProject {
+  id: ID!
+  name: String
+  """The date this portal project was created"""
+  dateCreated: RSDate
+  """The end date of the trial period this portal project, or null if the project already has a payment plan."""
+  trialEndDate: RSDate
+  liveTenant: Tenant
+  testTenant: Tenant
+  """List of portal users with access to this project."""
+  portalUsers(filter: PortalUserFilterInput, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): PortalUserList!
+  """List of SaaSquatch staff users with access to this project."""
+  staffUsers(limit: Int! = 20, offset: Int! = 0): PortalUserList!
+  """List of available portal user roles."""
+  portalUserRoles: [PortalUserRole!]
+  """Get the invoice history of this portal project"""
+  invoices(limit: Int! = 20, offset: Int! = 0): PortalProjectInvoiceList!
+  """The organization that this project is a part of"""
+  organization: Organization
+  impactBrandId: ID
+}
+
+type PortalProjectInvoice {
+  """The unique ID of this invoice"""
+  id: ID!
+  """The date this invoice was created"""
+  dateCreated: RSDate
+  """The due date of this invoice"""
+  dueDate: RSDate
+  """The state of this invoice"""
+  state: String
+  """The total of this invoice in its currency's fractional unit"""
+  total: Int
+  """The currency of this invoice"""
+  currency: RSCurrencyCode
+  """The formatted human readable value of the total of this invoice"""
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """
+  The URL for downloading the invoice PDF.
+The returned URL requires a valid portal session.
+  """
+  downloadPdfUrl: String!
+}
+
+type PortalProjectInvoiceList {
+  data: [PortalProjectInvoice!]!
+  count: Int!
+}
+
+type PortalProjectList {
+  data: [PortalProject!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type PortalStorageEntry {
+  key: ID!
+  programId: ID
+  values: RSJsonNode!
+  dateCreated: RSDate!
+  dateModified: RSDate
+  dateExpires: RSDate
+}
+
+type PortalStorageEntryDeleteResult {
+  deletedCount: Long!
+}
+
+type PortalUser implements Viewer {
+  identity: ID!
+  """The type of this PortalUser"""
+  type: PortalUserType!
+  email: String!
+  portalProjects: [PortalProject!]!
+  tenants: [Tenant!]!
+  """The organization this PortalUser belongs to"""
+  organization: Organization
+  permissions: [String!]!
+  internalReferralProgram: InternalReferralProgramInfo! @deprecated
+  """The full name of this portal user"""
+  name: String
+  """The URL pointing to this portal user's profile picture"""
+  imageUrl: String
+  dateLastSignedIn: RSDate
+  """The role of this user in the current project."""
+  role: PortalUserRole!
+  impactUserId: ID
+  impactUsername: String
+}
+
+type PortalUserList {
+  data: [PortalUser!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""
+The role of a user in a project. There are a number of built in roles:
+ - Full Access: full administrative access to all resources
+ - Program Manager: allowed to modify programs and content
+ - Support: access to participants for support purposes
+ - View Only: read-only access to most resources
+"""
+type PortalUserRole {
+  """Unique role id."""
+  id: ID!
+  """Human-readable role name."""
+  name: String!
+  """Description of the role."""
+  description: String
+  """The list of permissions granted by the role."""
+  permissions: [String!]!
+}
+
+"""A link code for a classic widget preview URL"""
+type PreviewLinkCode implements LinkCode {
+  linkCode: String!
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  supportedLinkDomains: [LinkDomain!]!
+}
+
+"""Result of a user creation preview"""
+type PreviewUserCreationResult {
+  """All the program transactions resulted in the user creation"""
+  programTransactions: [ProgramTransaction!]!
+  """All the rewards that would be earned by the created user"""
+  rewards: [RewardPreview!]!
+}
+
+"""A program installed in a tenant based on a program template"""
+type Program {
+  id: ID!
+  name: String!
+  status: ProgramStatus!
+  """Program template ID"""
+  templateId: ID!
+  """Program template with introspection"""
+  template: ProgramTemplate!
+  rawTemplate: ProgramTemplate! @deprecated
+  """Preview a program introspection with unsaved rules"""
+  introspectionPreview(introspectionPreviewInput: ProgramIntrospectionPreviewInput!): ProgramTemplate!
+  """Preview a program introspection with unsaved rules"""
+  introspectionPreview2(introspectionPreviewInput: ProgramIntrospectionPreviewInput!): ProgramIntrospectionResult!
+  emails: [ProgramEmailConfig!]
+  email(key: String!): ProgramEmailConfig
+  rewards: [ProgramRewardConfig!]
+  reward(key: String!): ProgramRewardConfig
+  widgets: [ProgramWidgetConfig!]
+  widget(key: String!): ProgramWidgetConfig
+  sharing: ProgramSharingConfig
+  """An instance of the values in the Program Template's rules schema"""
+  rules: RSJsonNode
+  analytics: RSJsonNode
+  dateCreated: RSDate!
+  lastActivatedDate: RSDate
+  taskState(key: String! = "default"): ProgramTaskState
+  taskStates: [ProgramTaskState!]
+  rewardsGiven(filter: RewardFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): FlatRewardList!
+  referrals(filter: ReferralFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ReferralList
+  transactionEvents(createdAfter: RSDate, createdBefore: RSDate, metaFilter: RSJsonNode, limit: Int! = 20, offset: Int! = 0): PersistedEventList @deprecated
+  """Get the first 100 TranslatableAssets for this program"""
+  translatableAssets: [TranslatableAsset!]! @deprecated
+  """Get all the TranslatableAssets for this Program"""
+  translatableAssetList(limit: Int! = 20, offset: Int! = 0): TranslatableAssetList!
+  programEmailTransactions(filter: ProgramEmailTransactionFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ProgramEmailTransactionList!
+  validation(key: String!): ProgramValidationResult
+  validations: [ProgramValidationResult!]
+  """Get the JSON schema for program trigger variables"""
+  programTriggerVariablesSchema: ProgramTriggerVariablesSchema!
+  """The draft for this program, if available"""
+  draft: Program
+  """Details of the impact program, if it exists"""
+  impactProgram: ImpactProgram
+}
+
+type ProgramCreateRewardMutation {
+  key: String
+  rewardConfig: ProgramRewardConfig
+  template: ProgramRewardTemplate
+  user: User
+  rewardSource: RewardSourceType
+}
+
+type ProgramDeleteResult {
+  deletedCount: Long!
+}
+
+type ProgramDraftDeleteResult {
+  deletedCount: Long!
+}
+
+"""Config values for a program email type"""
+type ProgramEmailConfig implements TranslatableAsset {
+  key: String!
+  enabled: Boolean!
+  values: RSJsonNode!
+  """be less strict about locale"""
+  preview(values: RSJsonNode, locale: String): EmailPreview!
+  translationInfo: TranslationInfo!
+}
+
+"""A type of email sent by a program. e.g. "VIP Reward Limit Reached Email""""
+type ProgramEmailTemplate {
+  key: String!
+  name: String!
+  description: String!
+  defaults: RSJsonNode!
+}
+
+type ProgramEmailTransaction implements GraphNodeData {
+  id: ID!
+  programId: ID
+  """Program that generated the email"""
+  program: Program
+  """Program email key"""
+  key: String @deprecated
+  """Program email key"""
+  programEmailKey: String
+  """Global email key"""
+  globalEmailKey: String
+  """User receiving the email"""
+  user: User!
+  """Program generated context query for email rendering"""
+  query: String! @deprecated
+  queryVariables: RSJsonNode! @deprecated
+  """The GraphQL request for generating the rendering context"""
+  contextGraphQLRequest: GraphQLRequest
+  """Date the transaction was created"""
+  dateCreated: RSDate!
+  """Date the transaction was queued"""
+  dateQueued: RSDate
+  """Date the email was sent"""
+  dateSent: RSDate
+  dateScheduledFor: RSDate
+  status: EmailTransactionStatus!
+  rewardId: ID
+  reward: FlatReward
+  moderationPreview(moderationInput: ModerationInput!): GraphNodeModerationPreviewList!
+}
+
+type ProgramEmailTransactionDeleteResult {
+  deletedCount: Long!
+}
+
+type ProgramEmailTransactionList {
+  data: [ProgramEmailTransaction!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ProgramEvaluatedAnalyticsData {
+  user: User
+  timestamp: RSDate
+  analyticsKey: String
+  analyticsDedupeId: String
+  programType: GAProgramType
+}
+
+type ProgramExchangeRewardMutation {
+  user: User
+  redeemCreditInput: RedeemCreditInputType
+  rewardInput: RSJsonNode
+  globalRewardKey: String
+  status: RewardStatus
+  repeat: Boolean!
+}
+
+"""Statistical information of a program goal"""
+type ProgramGoal {
+  """The program goal ID"""
+  goalId: String!
+  """The program ID this goal ID is for"""
+  programId: ID
+  """The program this goal ID is for"""
+  program: Program
+  """The number of times this goal has been achieved"""
+  count: Int!
+  """The date this goal was achieved for the first time"""
+  firstDate: RSDate!
+  """The date this goal was achieved for the last time"""
+  lastDate: RSDate!
+  """The number of conversions"""
+  conversionCount: Int!
+  """The template for this program goal"""
+  template: ProgramGoalTemplate!
+}
+
+type ProgramGoalAnalyticsData {
+  user: User
+  timestamp: RSDate
+  analyticsKey: String
+  analyticsDedupeId: String
+  programType: GAProgramType
+}
+
+"""Template for ProgramGoal"""
+type ProgramGoalTemplate {
+  """The goal ID"""
+  goalId: String!
+  """The human readable name"""
+  name: String
+}
+
+type ProgramIntrospectionError {
+  key: String!
+  jsonPointer: JsonPointer
+  description: String
+}
+
+type ProgramIntrospectionResult {
+  template: ProgramTemplate!
+  errors: [ProgramIntrospectionError!]!
+}
+
+type ProgramLinkConfig implements TranslatableAsset {
+  messaging: ProgramMessagingConfig!
+  translationInfo: TranslationInfo!
+}
+
+type ProgramList {
+  data: [Program!]
+  count: Int!
+  totalCount: Long!
+}
+
+type ProgramMessageConfig {
+  shareMedium: ReferralShareMedium!
+  config: RSJsonNode
+}
+
+type ProgramMessagingConfig {
+  messages: [ProgramMessageConfig!]
+  messageLinkOpenGraph: ProgramOpenGraphMetaConfig
+  shareLinkOpenGraph: ProgramOpenGraphMetaConfig
+}
+
+type ProgramModerateGraphNodesMutation {
+  graphNodeType: GraphNodeType
+  moderationInput: ModerationInputView
+  moderationPreview: GraphNodeModerationResultList
+}
+
+type ProgramOpenGraphMetaConfig {
+  title: String
+  description: String
+  image: String
+  source: ProgramOpenGraphSource
+}
+
+type ProgramRedirectUrlConfig {
+  url: String!
+  fallbackUrl: String!
+  """Expiry duration for referral code cookies"""
+  cookieExpiryDuration: IsoDuration!
+  rules: RSJsonNode
+}
+
+type ProgramReferralCodeConfig {
+  fuelTank: Boolean!
+  singleUse: Boolean!
+  codesPerUser: Int!
+  alertCodeCountThreshold: Long!
+}
+
+type ProgramReferralCodeFuelTank implements IsPredefinedReward {
+  predefinedRewardType: PredefinedRewardType!
+  program: Program!
+  customCodes(filter: CustomCodeFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): CustomCodeList!
+}
+
+type ProgramRequirement {
+  key: String!
+  name: String
+  description: String
+  longDescription: String
+  query: String @deprecated
+  queryVariables: RSJsonNode @deprecated
+}
+
+type ProgramRequirementValidationResult {
+  status: ProgramRequirementValidationStatus!
+  message: String!
+  """An optional longer description of the validation result with instructions to fix it, if applicable"""
+  longDescription: String
+}
+
+type ProgramRetractReferralConversionMutation {
+  referralId: ID!
+  referral: Referral
+}
+
+"""Config for a program reward"""
+type ProgramRewardConfig implements IsPredefinedReward & TranslatableAsset {
+  key: String!
+  """The key for the linked GlobalRewardConfig"""
+  globalRewardKey: String
+  """The linked GlobalRewardConfig"""
+  globalRewardConfig: GlobalRewardConfig
+  name: String
+  description: String
+  rewardType: RewardType
+  amount: Int
+  unit: String
+  currency: RSCurrencyCode
+  """The corresponding RewardUnitSettings, if one exists"""
+  rewardUnitSettings: RewardUnitSettings
+  monthsDiscountIsValid: Int @deprecated
+  """The duration between reward creation and reward expiry"""
+  validityDuration: IsoDuration
+  """The duration between reward creation and reward given"""
+  pendingDuration: IsoDuration
+  fuelTankType: FuelTankType
+  fuelTankSyncSetting: FuelTankSyncSetting
+  fuelTankAutoCreateCodePrefix: String
+  integrationId: ID @deprecated
+  integration: TenantIntegration
+  """Integration specific configuration (i.e. external gift card identifiers)"""
+  integrationSettings: RSJsonNode
+  allowsInstantAccess: Boolean!
+  translationInfo: TranslationInfo!
+  """Unique global ID for predefined rewards"""
+  predefinedRewardType: PredefinedRewardType!
+  """The custom codes used for FUELTANK rewards"""
+  customCodes(filter: CustomCodeFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): CustomCodeList!
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """The limits of integration reward values"""
+  valueLimits: RewardValueLimits
+  """The program that has this reward config"""
+  program: Program
+}
+
+type ProgramRewardTemplate {
+  key: String
+  name: String!
+  description: String!
+  isDynamic: Boolean!
+}
+
+type ProgramSendEmailMutation {
+  key: String
+  emailConfig: ProgramEmailConfig
+  template: ProgramEmailTemplate
+  user: User
+  status: EmailTransactionStatus
+}
+
+type ProgramSharingConfig {
+  redirectUrl: ProgramRedirectUrlConfig
+  linkConfig: ProgramLinkConfig
+  referralCodeConfig: ProgramReferralCodeConfig
+}
+
+type ProgramTaskState {
+  key: String!
+  invocationNumber: Long!
+  status: ScheduledTaskStatus!
+}
+
+type ProgramTemplate {
+  """A unique global ID for this program"""
+  id: String!
+  """A human friendly name of the program"""
+  name: String!
+  summary: String!
+  longDescription: String!
+  installGuide: String
+  """An external link to the docs refererence for this program's install guide"""
+  installGuideUrl: String
+  """A list of email types sent by this program template"""
+  emails: [ProgramEmailTemplate!]
+  """A list of named reward types"""
+  rewards: [ProgramRewardTemplate!]
+  """A list of widgets used by this program template"""
+  widgets: [ProgramWidgetTemplate!]
+  """A JSON schema describing how a program should be configured"""
+  rules: RSJsonNode
+  """A JSON UI schema describing how the rules form should look"""
+  rulesUISchema: RSJsonNode
+  """A webtask.io / Auth0 Extend URL to call to execute the code"""
+  url: String
+  """The name of the icon for the program"""
+  icon: String
+  """Program logo"""
+  logo: String @deprecated
+  """Program attribution settings if the program supports attribution"""
+  sharing: ProgramTemplateSharingSettings
+  """Settings related to program trigger rules"""
+  trigger: ProgramTemplateTriggerSettings
+  requirements: [ProgramRequirement!]
+  """Script for migrating program rules"""
+  rulesMigrationScript: String
+  """The template of program goals provided by this program"""
+  goals: [ProgramGoalTemplate!]
+}
+
+type ProgramTemplateSharingSettings {
+  """Whether attribution is enabled or not"""
+  enabled: Boolean!
+}
+
+type ProgramTemplateTriggerSettings {
+  """The list of event keys the program listens to"""
+  userEventKeys: [String!]!
+  """The list of custom field keys the program evaluates on"""
+  customFieldKeys: [String!]!
+}
+
+type ProgramTransaction {
+  id: ID!
+  mutations: [ProgramMutation!]!
+  analytics: [ProgramAnalyticsData!]!
+  program: Program
+}
+
+"""Wrapper type for requesting the trigger variables schema for different trigger types"""
+type ProgramTriggerVariablesSchema {
+  afterUserCreatedOrUpdated: JsonSchema
+  referral: JsonSchema
+  afterUserEventProcessed(userEventKey: String!): JsonSchema
+}
+
+type ProgramValidationResult {
+  key: String!
+  results: [ProgramRequirementValidationResult!]
+  requirement: ProgramRequirement
+}
+
+"""Config values for a program widget type"""
+type ProgramWidgetConfig implements TranslatableAsset & WidgetConfig {
+  key: String!
+  """The config value"""
+  values: RSJsonNode!
+  widgetType: WidgetType!
+  translationInfo: TranslationInfo!
+}
+
+type ProgramWidgetTemplate {
+  key: String
+  name: String!
+  description: String!
+  """
+  Whether this widget is supposed to support instant access. If true, the widget
+can still potentially be configured to be incompatible with instant access.
+  """
+  supportsInstantAccess: Boolean!
+  defaults: RSJsonNode!
+}
+
+"""The operations under Query are operation that are side-effect free."""
+type Query {
+  """The mathematic identity function. Useful for returning input variables."""
+  identityFunction(value: RSJsonNode): RSJsonNode
+  formatCurrentDate(formatPattern: DateTimeFormatPattern!, timeZone: RSTimeZoneId, locale: RSLocale): String!
+  """Lookup a user by its id and accountId"""
+  user(accountId: String!, id: String!): User
+  """
+  List all the users in a tenant.
+ - Can be filtered
+ - Is paginated
+  """
+  users(filter: UserFilterInput, query: String, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): UserList
+  """Lookup a single Account based on ID."""
+  account(accountId: String!): PaymentAccount
+  """Preview a user creation"""
+  previewUserCreation(previewUserCreationInput: PreviewUserCreationInput!): PreviewUserCreationResult!
+  """Lookup a reward by id"""
+  reward(id: ID!): FlatReward
+  """Lookup a list of rewards"""
+  rewards(filter: RewardFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): FlatRewardList!
+  """Lookup a referral by id"""
+  referral(id: ID!): Referral
+  """
+  List all the referrals in a tenant.
+ - Can be filtered
+ - Is paginated
+  """
+  referrals(filter: ReferralFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ReferralList
+  """Get information for current tenant"""
+  tenant: Tenant
+  """Lookup a tenant by its impactBrandId"""
+  tenantByImpactBrandId(impactBrandId: ID!): Tenant
+  """Look up the details of a portal project by id or get the current portal project in scope."""
+  portalProject(id: ID): PortalProject
+  """Look up the settings of the current tenant"""
+  tenantSettings: TenantSettings
+  activeProgramTrigger: ProgramTrigger @deprecated
+  activeProgram: Program @deprecated
+  activeUser: User @deprecated
+  activeReward: FlatReward @deprecated
+  activeFormSubmissionRecord: FormSubmissionRecord @deprecated
+  activeFormInitialDataResult: FormInitialDataResult! @deprecated
+  activeFormValidationResult: FormValidationResult! @deprecated
+  activeUserEvents: [UserEventData!] @deprecated
+  """Get Maxmind geo data for an IP address"""
+  geoData(ip: String!): RSJsonNode
+  """Generate a set of unique SaaSquach IDs for use with rewards, referrals and the Program Engine."""
+  ids(length: Int!): [ID!]!
+  jwks: RSJsonNode!
+  dateTime(epochMilli: RSDate, timeZone: String! = "UTC"): ZonedDateTime!
+  """Lookup the details for a currency"""
+  currency(currencyCode: RSCurrencyCode!): RSCurrency
+  """Lookup all the currencies supported by the system"""
+  currencies(limit: Int! = 20, offset: Int! = 0): RSCurrencyList!
+  """Lookup the details of a country"""
+  country(countryCode: RSCountryCode!): RSCountry
+  """Lookup the details of a country by an Impact country code"""
+  countryByImpactCountryCode(impactCountryCode: String!): RSCountry
+  """Lookup all the countries supported by the system"""
+  countries(limit: Int! = 20, offset: Int! = 0): RSCountryList!
+  """Lookup all the countries supported by Impact payouts"""
+  impactPayoutCountries(limit: Int! = 20, offset: Int! = 0): RSCountryList!
+  """Lookup the details of a language"""
+  language(languageCode: RSLanguageCode!): RSLanguage
+  """Lookup all the languages supported by the system"""
+  languages(limit: Int! = 20, offset: Int! = 0): RSLanguageList!
+  """Lookup the details of a time zone"""
+  timeZone(timeZone: RSTimeZoneId!): RSTimeZone
+  """Lookup all the time zones supported by the system"""
+  timeZones(query: String, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): RSTimeZoneList!
+  """
+  List all programs installed in the current tenant.
+ - Is paginated
+ - Can be filtered
+  """
+  programs(filter: ProgramFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): ProgramList!
+  """Lookup an individual program"""
+  program(id: ID!): Program
+  """Get all the program templates installable for the current tenant"""
+  programTemplates: [ProgramTemplate!]!
+  """Get all the integration templates installable for the current tenant"""
+  integrationTemplates(limit: Int! = 20, offset: Int! = 0): IntegrationTemplateList!
+  """
+  Get the JWT token for an integration.
+Used in the SaaSquatch portal for providing authentication to the integrations connected to an account.
+  """
+  integrationToken(name: String!, service: String): String!
+  """
+  List the custom codes
+ - Is paginated
+ - Can be filtered by their use
+  """
+  customCodes(predefinedRewardType: PredefinedRewardType!, filter: CustomCodeFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): CustomCodeList!
+  """
+  List all of the integrations that can be enabled in a tenant, and details about their connection status.
+ - Is paginated
+  """
+  integrations(type: IntegrationType, limit: Int! = 20, offset: Int! = 0): TenantIntegrationList!
+  integration(service: String!): TenantIntegration
+  """Get the first 100 TranslatableAssets"""
+  translatableAssets: [TranslatableAsset!]! @deprecated
+  """
+  Look up all the translatable assets in a Tenant.
+Useful for internationalization (i18n). This returns a node about things that can be translated,
+and for each can query the Graph connections to retrieve the translated copies for each language.
+  """
+  translatableAssetList(limit: Int! = 20, offset: Int! = 0): TranslatableAssetList!
+  """Look up an individual translation of a translatable asset."""
+  translationInstance(id: TranslationInstanceId!): TranslationInstance
+  """
+  List all the import, export and batch jobs in the tenant.
+Useful for seeing if there are any long-running jobs still active.
+ - Is paginated
+ - Can be filtered
+  """
+  jobs(filter: JobFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): JobList!
+  """
+  Lookup an individual import, export or batch job given it's ID.
+Useful for integrations and data synchronization proceses to poll for the status of a job.
+Can also use the \`job.completed\` webhook.
+  """
+  job(id: ID!): Job
+  jobToken(id: ID!): JobToken!
+  """
+  Lookup a single segment.
+Useful for seeing if a segment is in use, details about it, and showing the segment
+metadata in the user interface.
+  """
+  segment(key: SegmentKey!): Segment
+  """
+  List all segments
+Useful for seeing which segments are in use, and details about their use.
+ - Is paginated
+  """
+  segments(filter: SegmentFilterInput, limit: Int! = 20, offset: Int! = 0): SegmentList!
+  """
+  List of all user metrics.
+Useful for seeing which custom fields are being automatically calculated.
+ - Is paginated
+  """
+  userMetrics(limit: Int! = 20, offset: Int! = 0): UserMetricList!
+  """Get a custom field by key"""
+  customField(key: String!): CustomField
+  """
+  List of all custom fields
+Useful for seeing which custom fields are currently in use, details about them, and showing that in the user interface.
+ - Is paginated
+  """
+  customFields(query: String, limit: Int! = 20, offset: Int! = 0): CustomFieldList!
+  """
+  Same as mutation->logUserEvent, but it doesn't apply the side effects,
+and it returns all the side effects as a preview.
+- Useful for confirming that programs are configured as desired.
+- Useful for pre-validating data to be submitted before manually submitting data.
+  """
+  previewUserEvent(userEventInput: UserEventInput!): UserEventResult!
+  """Given a User ID and Account Id, generates a non-reversible hash for GDPR opt-out tracking."""
+  calculateUserDoNotTrackIdentifierHash(id: String!, accountId: String!): String!
+  """List all users that are in the Do Not Track list, by their hashed non-reversible identifiers."""
+  userDoNotTrackIdentifiers(limit: Int! = 20, offset: Int! = 0): UserDoNotTrackIdentifierList!
+  programEmailTransaction(id: ID): ProgramEmailTransaction
+  """
+  List all emails sent, queued or attempted by a program.
+Useful for auditing if emails were sent, their status.
+ - Is paginated
+ - Can be filtered
+  """
+  programEmailTransactions(filter: ProgramEmailTransactionFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ProgramEmailTransactionList!
+  """
+  List all event types
+Useful for checking which event types are currently in use, and details about those events.
+ - Is paginated
+Note: Only events from the past 2 years will be included
+  """
+  userEvents(filter: UserEventDataFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): UserEventDataList!
+  """List all the event keys that have been seen by this tenant"""
+  userEventKeys(limit: Int! = 20, offset: Int! = 0): UserEventKeyList!
+  """Get a UserEventMeta by key"""
+  userEventMeta(key: String): UserEventMeta
+  """List all the UserEventMetas that have been tracked by this tenant"""
+  userEventMetas(query: String, limit: Int! = 20, offset: Int! = 0): UserEventMetaList!
+  userEventFieldsSchema(key: String!): JsonSchema @deprecated
+  """
+  Preview the moderation a set of graph nodes.
+Useful for fraud management, this lets you preview the side-effects of canceling
+a set of referrals, rewards, user events or any other graph node.
+
+ - Is paginated
+ - Can be filtered
+  """
+  moderateGraphNodes(graphNodeType: GraphNodeType!, filter: RSJsonNode!, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, moderationInput: ModerationInput!): GraphNodeModerationResultList!
+  """
+  Lookup webhook history.
+Useful for auditing webhook delivery failures.
+Note that we only keep track of webhooks for 30 days.
+  """
+  webhooks(filter: WebhookFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): WebhookList!
+  """
+  Lists all the URLs that are currently subscribed to receive events via webhooks
+Useful for managing integrations and their connections. Note that integrations can also
+use managed webhooks to ensure the webhook exists as long as the integration is enabled.
+  """
+  webhookSubscriptions(limit: Int! = 20, offset: Int! = 0): WebhookSubscriptionList!
+  """
+  Lookup one RewardUnitSettings by id.
+Useful for seeing details about a type of reward in use.
+  """
+  rewardUnitSettings(id: RewardUnitSettingsId!): RewardUnitSettings
+  """
+  List all Reward Unit settings.
+Useful for seeing which reward units are in use, details about them, and to show that in the user interface.
+  """
+  rewardUnitSettingsList(limit: Int! = 20, offset: Int! = 0): RewardUnitSettingsList!
+  analyticsKey: String! @deprecated
+  """Lookup one GlobalRewardConfig by key"""
+  globalRewardConfig(key: String!): GlobalRewardConfig
+  """Lookup all the GlobalRewardConfigs"""
+  globalRewardConfigs(limit: Int! = 20, offset: Int! = 0): GlobalRewardConfigList!
+  """Lookup all the IsPredefinedRewards"""
+  predefinedRewards(limit: Int! = 20, offset: Int! = 0, excludeLinkedRewards: Boolean! = false): IsPredefinedRewardList!
+  """Lookup one IsPredefinedReward by predefinedRewardType"""
+  predefinedReward(predefinedRewardType: PredefinedRewardType!): IsPredefinedReward
+  """Lookup all the IsPredefinedRewards that represent fuel tank rewards"""
+  fuelTankPredefinedRewards(limit: Int! = 20, offset: Int! = 0): IsPredefinedRewardList!
+  """Lookup a link code"""
+  linkCode(linkCode: String!): LinkCode
+  """Validate whether a new link code can be created"""
+  validateLinkCode(linkCode: String!): ValidateLinkCodeResult!
+  """Lookup a referral code"""
+  referralCode(referralCode: String!): ReferralCode
+  """Check whether the system will block an email"""
+  isBlockedEmail(email: String!): IsBlockedEmailResult!
+  """Lookup a form by key"""
+  form(key: String!): Form
+  """Lookup all the forms"""
+  forms(limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): FormList!
+  """Validate form data against a form"""
+  validateForm(formValidationInput: FormValidationInput!): FormValidationResult!
+  """Preview the form meta of a potentially unsaved form"""
+  formMetaPreview(formInput: FormInput!): FormMeta!
+  """Lookup a single form submission record by id"""
+  formSubmissionRecord(id: ID!): FormSubmissionRecord
+  """Lookup form submission records for this tenant"""
+  formSubmissionRecords(filter: FormSubmissionRecordFilterInput, sortBy: [RSSortByInput!], timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): FormSubmissionRecordList!
+  """Lookup a GlobalEmailConfig by key"""
+  globalEmailConfig(key: String!): GlobalEmailConfig
+  """Lookup all the GlobalEmailConfigs"""
+  globalEmailConfigs(limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): GlobalEmailConfigList!
+  """Lookup a GlobalWidgetConfig by key"""
+  globalWidgetConfig(key: String!): GlobalWidgetConfig
+  """Lookup all the GlobalWidgetConfigs"""
+  globalWidgetConfigs(limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): GlobalWidgetConfigList!
+  """Render a widget"""
+  renderWidget(user: UserIdInput, widgetType: WidgetType, engagementMedium: UserEngagementMedium, locale: RSLocale): WidgetResponse!
+  """Format the pretty value of an arbitrary reward unit"""
+  formatRewardPrettyValue(value: Int!, unit: String!, locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """Get the user leaderboard by type"""
+  userLeaderboard(type: String!, filter: UserLeaderboardFilterInput): UserLeaderboard!
+  """Access all the user leaderboard types"""
+  userLeaderboards: UserLeaderboards!
+  """Validate a JobInput"""
+  validateJobCreation(jobInput: JobInput!): ValidateJobCreationResult!
+  managedIdentitySession: ManagedIdentitySessionResult
+  """Get the microsite hosting config"""
+  micrositeHostingConfig: MicrositeHostingConfig!
+  """Get the managed identity config"""
+  managedIdentityConfig: ManagedIdentityConfig!
+  """Lookup a microsite layout config by key"""
+  micrositeLayoutConfig(key: String!): MicrositeLayoutConfig
+  """List microsite layout configs"""
+  micrositeLayoutConfigs(limit: Int! = 20, offset: Int! = 0): MicrositeLayoutConfigList!
+  """Lookup a microsite page config by key"""
+  micrositePageConfig(key: String!): MicrositePageConfig
+  """List microsite page configs"""
+  micrositePageConfigs(limit: Int! = 20, offset: Int! = 0): MicrositePageConfigList!
+  """
+  Renders a microsite page by its URL path. The rendered result contains the HTML for the page
+as well as the HTML for all of the templates that it depends on.
+
+The returned HTML is translated into the given locale (if translations exist).
+  """
+  renderMicrositePage(urlPath: String!, locale: RSLocale): RenderMicrositePageResult!
+  """Get a microsite template by its key"""
+  micrositeTemplate(key: String!): MicrositeTemplate
+  """List microsite templates"""
+  micrositeTemplates(limit: Int! = 20, offset: Int! = 0): MicrositeTemplateList!
+  """Get a reward exchange rule by its key"""
+  rewardExchangeRule(key: String!): RewardExchangeRule
+  """List reward exchange rules"""
+  rewardExchangeRules(limit: Int! = 20, offset: Int! = 0): RewardExchangeRuleList!
+  """Preview a visible reward exchange"""
+  previewVisibleRewardExchangeItem(rewardExchangeRuleInput: RewardExchangeRuleInput!): VisibleRewardExchangeItem!
+  """Query the current portal users organization, or provide a organization id"""
+  organization(organizationId: ID!): Organization
+  """Get internal configurations needed by the portal"""
+  squatchPortalConfig: RSJsonNode! @deprecated
+  impactFinanceNetworkSettings(filter: ImpactFinanceNetworkSettingsFilterInput, limit: Int! = 20, offset: Int! = 0): ImpactFinanceNetworkSettingList!
+  impactPartnerInviteUrl(impactProgramId: ID!): String!
+  impactPrograms(limit: Int! = 20, offset: Int! = 0): ImpactProgramList!
+  """Get a portal storage entry by key and optional external program id"""
+  portalStorageEntry(key: ID!, programId: ID): PortalStorageEntry
+  impactEventTypes(limit: Int! = 20, offset: Int! = 0): ImpactEventTypeList!
+  convertEmailHtmlContentToJson(htmlContent: String!): ConvertEmailHtmlContentToJsonResult!
+  convertEmailJsonContentToHtml(jsonContent: RSJsonNode!): ConvertEmailJsonContentToHtmlResult!
+  beefreeServerSideLogin: BeefreeServerSideLoginResult!
+  cloudinaryUploadSignature(paramsToSign: RSJsonNode!): String!
+  enabledFuelTankSyncSettings: [FuelTankSyncSetting!]!
+  cookieUser(cookieId: ID!): CookieUser
+  cookieUsers(limit: Int! = 20, offset: Int! = 0): CookieUserList!
+  """
+  Details about the subject currently accessing the API.
+See the \`Viewer\` type for more details.
+  """
+  viewer: Viewer
+}
+
+"""Static information about a country"""
+type RSCountry {
+  """The ISO 3166-1 Alpha-2 country code"""
+  countryCode: RSCountryCode!
+  """Human-readable country name e.g. "Canada""""
+  displayName(locale: RSLocale): String!
+  """The default locale of this country in the system"""
+  defaultLocale: RSLocale
+  """The Impact country code"""
+  impactCountryCode: String
+}
+
+"""Pagination list for RSCountry"""
+type RSCountryList {
+  data: [RSCountry!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Static information about currencies. See: https://www.geoips.com/en/resources/currencies"""
+type RSCurrency {
+  """3-letter ISO standard currency code e.g. "USD" or "GBP""""
+  currencyCode: RSCurrencyCode!
+  """Human-readable currency name e.g. "US Dollars" or "Euro""""
+  displayName(locale: RSLocale): String!
+  """The display name for the default locale of this currency."""
+  localizedDisplayName: String!
+  """
+  The symbol of this currency for the specified locale.
+For example, for the US Dollar, the symbol is "$" if the specified locale is the US,
+while for other locales it may be "US$".
+If no symbol can be determined, the ISO 4217 currency code is returned.
+  """
+  symbol(locale: RSLocale): String!
+  """
+  The symbol for the default locale of this currency.
+Note that the result may be incorrect for non-circulating currencies.
+  """
+  localizedSymbol: String!
+  """The ISO 4217 numeric code of this currency."""
+  numericCode: Int!
+  """
+  The default number of fraction digits used with this currency.
+For example, the default number of fraction digits for the Euro is 2,
+while for Libyan Dinar it's 3.
+  """
+  fractionDigits: Int!
+  """
+  Human-readable non-plural name of the factional unit. e.g. "Cent" See:
+https://www.geoips.com/en/resources/currencies
+  """
+  fractionalUnit: String
+  """An integer representing the fractional unit to basic unit conversion. Usually 100."""
+  numberToBasic: Int!
+  format(number: Float!, locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  formatFractionalUnit(number: Float!, locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+}
+
+type RSCurrencyList {
+  data: [RSCurrency!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Static information about a language"""
+type RSLanguage {
+  """The ISO 639-1 language code"""
+  languageCode: RSLanguageCode!
+  """Human-readable language name, e.g. "Spanish""""
+  displayName(locale: RSLocale): String!
+}
+
+"""Pagination list for RSLanguage"""
+type RSLanguageList {
+  data: [RSLanguage!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type RSSubject {
+  subjectType: RSSubjectType!
+  subjectId: String!
+  email: String
+  user: User
+  integration: TenantIntegration
+}
+
+"""Static information about a time zone"""
+type RSTimeZone {
+  """The time zone ID, e.g. "America/Vancouver""""
+  id: RSTimeZoneId!
+  """The full human readable display name, e.g. "Pacific Time""""
+  fullDisplayName(locale: RSLocale): String!
+  """Get the amount of daylight savings at the specified time, or null for current time"""
+  daylightSavingsDuration(at: RSDate): IsoDuration!
+  """Get the amount of offset at the specified time, or null for current time"""
+  offsetDuration(at: RSDate): IsoDuration!
+}
+
+type RSTimeZoneList {
+  data: [RSTimeZone!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Access log on who performed an action"""
+type RSUpdatedBy {
+  """The subject that initiated the action (on behalf of the executor)"""
+  initiator: RSSubject
+  """The subject that executed the action"""
+  executor: RSSubject
+}
+
+"""A type matching RedeemCreditInput used as a return type"""
+type RedeemCreditInputType {
+  """The amount to redeem"""
+  amount: Int!
+  """The unit to redeem"""
+  unit: String!
+  """The pretty value of the credit to redeem"""
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+}
+
+"""The result for redeeming credit"""
+type RedeemCreditResult {
+  """The unit redeemed"""
+  unit: String!
+  """The amount of redeemed credit"""
+  creditRedeemed: Int!
+  """The amount of available credit"""
+  creditAvailable: Int!
+}
+
+type Referral implements GraphNodeData {
+  """Id of this referral"""
+  id: ID!
+  """Id of the corresponding program (non-legacy referrals)"""
+  programId: ID
+  program: Program
+  """public meta available on this referral"""
+  publicMeta: RSJsonNode @deprecated
+  """private meta available on this referral"""
+  privateMeta: RSJsonNode @deprecated
+  referredUser: User
+  referrerUser: User
+  """The reward earned for this referral by the referred user"""
+  referredReward: FlatReward @deprecated
+  """The reward earned for this referral by the referrer"""
+  referrerReward: FlatReward @deprecated
+  """The overall moderation status for the referral"""
+  moderationStatus: ReferralModerationStatus
+  """The moderation status of the referred user"""
+  referredModerationStatus: ReferralSideModerationStatus
+  """The moderation status of the referrer user"""
+  referrerModerationStatus: ReferralSideModerationStatus
+  """The date the referral was made"""
+  dateReferralStarted: RSDate
+  """The date the referral converted to paid"""
+  dateReferralPaid: RSDate
+  """The date the referred user stopped payment"""
+  dateReferralEnded: RSDate
+  """The last date the referral was moderated"""
+  dateModerated: RSDate
+  dateUserModified: RSDate
+  dateFraudChecksCompleted: RSDate @deprecated
+  dateConverted: RSDate
+  dateConversionRetracted: RSDate
+  dateModified: RSDate
+  fraudSignals: RSJsonNode @deprecated
+  fraudFlags: [FraudFlag!]!
+  """True if this referral is exempt from fraud moderation"""
+  isFraudExempt: Boolean!
+  """The referral code used for this referral"""
+  referralCodeUsed: String
+  """The share link used for this referral"""
+  shareLinkUsed: String
+  rewards(filter: RewardFilterInput): [FlatReward!]!
+  childNodes(maxDepth: Int! = 5, limit: Int! = 20, offset: Int! = 0): GraphNodeList!
+  moderationPreview(moderationInput: ModerationInput!): GraphNodeModerationPreviewList!
+  """Program goals of the referred user for the current program"""
+  referredProgramGoals: [ProgramGoal!]!
+  """Program goals of the referrer user for the current program"""
+  referrerProgramGoals: [ProgramGoal!]!
+  fraudData: ReferralFraudData
+}
+
+"""A referral code"""
+type ReferralCode {
+  """The referral code string"""
+  code: String!
+  """Whether this referral code is the primary for its program"""
+  isPrimaryForProgram: Boolean!
+  fuelTank: Boolean!
+  singleUse: Boolean!
+  dateUsed: RSDate
+  dateCopied: RSDate
+  """The program for this code"""
+  program: Program
+  programId: ID
+  """The user for this code"""
+  user: User
+  """The share link codes associated with this referral code"""
+  shareLinkCodes(limit: Int! = 20, offset: Int! = 0): ShareLinkCodeList!
+  referrals(filter: ReferralFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ReferralList
+}
+
+type ReferralCodeDeleteResult {
+  deletedCount: Long!
+}
+
+type ReferralCodeList {
+  data: [ReferralCode!]!
+  count: Int!
+  totalCount: Long
+}
+
+type ReferralDeleteResult {
+  deletedCount: Long!
+}
+
+type ReferralFraudData {
+  inputData: ReferralFraudInputData!
+  overallScore: Float!
+  scores: [ReferralFraudTypeScore!]!
+  moderationStatus: ReferralSideModerationStatus
+  autoModerationStatus: ReferralSideModerationStatus
+  manualModerationStatus: ReferralSideModerationStatus
+  dateManuallyModerated: RSDate
+  dateAutoModerated: RSDate
+}
+
+type ReferralFraudInputData {
+  referrerInputData: ReferralFraudUserInputData!
+  referredInputData: ReferralFraudUserInputData!
+}
+
+type ReferralFraudTypeScore {
+  type: FraudType!
+  score: Float!
+  weight: Float!
+}
+
+type ReferralFraudUserInputData {
+  email: String
+  firstName: String
+  lastName: String
+  firstSeenIP: String
+  lastSeenIP: String
+  addresses: [UserAddress!]!
+  hashedCreditCards: [String!]!
+}
+
+type ReferralList {
+  data: [Referral!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type ReferralProgramTrigger implements ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+  referral: Referral!
+  referralEventType: ReferralEventType!
+}
+
+type RefreshMatchedImpactPartnerForUserResult {
+  user: User!
+}
+
+type RejectedCustomCode {
+  code: String
+  rejectReason: String
+}
+
+type RemovePortalUsersFromPortalProjectResult {
+  success: Boolean!
+}
+
+type RenderMicrositePageResult {
+  """The (potentially translated) microsite page config"""
+  micrositePageConfig: MicrositePageConfig!
+  """
+  The list of (potentially translated) microsite layout configs forming the layout ancestry
+of the page
+  """
+  micrositeLayoutConfigs: [MicrositeLayoutConfig!]!
+}
+
+type RequestImpactPublisherEmail2FAResult {
+  success: Boolean!
+}
+
+type RequestUserEmailVerificationResult {
+  success: Boolean!
+}
+
+type RequiredDnsRecord {
+  recordType: String!
+  host: String!
+  data: String!
+  recommendedTtl: Int!
+}
+
+type ResendPortalProjectInviteEmailResult {
+  success: Boolean!
+}
+
+"""A rule that permits users to exchange certain rewards"""
+type RewardExchangeRule implements TranslatableAsset {
+  """The unique key of this RewardExchangeRule"""
+  key: String!
+  """The type of this RewardExchangeRule"""
+  ruleType: RewardExchangeRuleType
+  """The human readable name for end users"""
+  name: String
+  """The human readable name for portal display"""
+  internalName: String
+  """The long description"""
+  description: String
+  """The URL of the thumbnail"""
+  imageUrl: String
+  """
+  A list of country codes where this reward exchange is visible.
+An empty list means this reward exchange is available in all countries.
+  """
+  visibilityCountryCodes: [RSCountryCode!]!
+  """JSONata expression that calculates whether this reward exchange is visible to a user"""
+  visibilityPredicate: JSONata
+  """JSONata expression that calculates whether this reward exchange is available to a user"""
+  availabilityPredicate: JSONata
+  """The arbitrary list order"""
+  listOrder: Int!
+  """The unit of the reward being redeemed"""
+  sourceUnit: String
+  """The unit of the destination reward, applicable to VARIABLE_CREDIT_REWARD"""
+  destinationUnit: String
+  """
+  The key of the destination global reward, applicable to FIXED_GLOBAL_REWARD
+and VARIABLE_GLOBAL_REWARD
+  """
+  globalRewardKey: String
+  """The GlobalRewardConfig object corresponding to the globalRewardKey, if one exists"""
+  globalRewardConfig: GlobalRewardConfig
+  """The RewardUnitSettings for the sourc unit"""
+  sourceRewardUnitSettings: RewardUnitSettings
+  """The RewardUnitSettings for the destination unit, or the global reward config, if one exists"""
+  destinationRewardUnitSettings: RewardUnitSettings
+  """The value of the reward being redeemed for fixed exchanges"""
+  sourceValue: Int
+  """
+  The rate of this reward exchange, applicable to VARIABLE_GLOBAL_REWARD and
+VARIABLE_CREDIT_REWARD
+  """
+  rate: Float
+  """
+  The step of this reward exchange, applicable to VARIABLE_GLOBAL_REWARD and
+VARIABLE_CREDIT_REWARD
+  """
+  step: Int
+  """The min value of the reward being redeemed for variable exchanges"""
+  sourceMinValue: Int
+  """The max value of the reward being redeemed for variable exchanges"""
+  sourceMaxValue: Int
+  """The steps of this reward exchange, if applicable."""
+  steps: [RewardExchangeRuleStep!]!
+  """The date this RewardExchangeRule was created. This field is auto generated."""
+  dateCreated: RSDate!
+  """The date this RewardExchangeRule was last modified. This field is auto generated."""
+  dateModified: RSDate
+  """Translation info of this RewardExchangeRule"""
+  translationInfo: TranslationInfo!
+  """Preview a visible reward exchange"""
+  previewVisibleRewardExchangeItem: VisibleRewardExchangeItem!
+}
+
+type RewardExchangeRuleDeleteResult {
+  deletedCount: Long!
+}
+
+type RewardExchangeRuleList {
+  data: [RewardExchangeRule!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type RewardExchangeRuleStep {
+  sourceValue: Int!
+  globalRewardKey: String!
+}
+
+"""External metadata for a reward intended to be used by external integrations"""
+type RewardMeta {
+  status: RewardMetaStatus!
+  """
+  A message displayed in the portal and widgets, often used by integrations
+(e.g. Credit Applied in Stripe)
+  """
+  message: String
+  """
+  A message that's only shown in the portal for tracking notes on the reward
+reason. Note: end users could still potentially find this.
+  """
+  internalMessage: String
+  integrationService: String
+  integration: TenantIntegration
+  dateModified: RSDate
+  customMeta: RSJsonNode
+}
+
+"""Minimal information of a previewed reward"""
+type RewardPreview {
+  """The type of reward"""
+  type: RewardType!
+  """The value of the reward"""
+  value: Int!
+  """A human-readable formatted string value based on the reward's unit"""
+  prettyValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String!
+  """The unit represented by the value of this reward"""
+  unit: String!
+  """The detailed information about the reward unit"""
+  rewardUnit: RewardUnit!
+  """The source of the reward (i.e. by friend referral, manual, etc)"""
+  rewardSource: RewardSourceType
+  """The id of the program that created this reward"""
+  programId: String
+  """The corresponding reward key in the program that created this reward"""
+  programRewardKey: String
+  """The date the reward is scheduled to be given"""
+  dateScheduledFor: RSDate
+  """The date the reward expires (null if it doesn't expire)"""
+  dateExpires: RSDate
+}
+
+"""A transaction of a single reward redemption or a bulk reward redemption"""
+type RewardRedemptionTransaction {
+  """The redemption ID"""
+  id: ID!
+  """The amount of redeemed credit"""
+  creditRedeemed: Int!
+  """Pretty value of redeemed credit"""
+  prettyRedeemedCredit(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The unit redeemed"""
+  unit: String
+  """The date of the redemption"""
+  dateRedeemed: RSDate!
+  """Rewards that have been redeemed for this redemption"""
+  redeemedRewards(limit: Int! = 20, offset: Int! = 0): FlatRewardList!
+  """Rewards that have been exchanged for this redemption"""
+  exchangedRewards(limit: Int! = 20, offset: Int! = 0): FlatRewardList!
+}
+
+type RewardRedemptionTransactionList {
+  data: [RewardRedemptionTransaction!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type RewardScheduledProgramTrigger implements ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+  reward: FlatReward
+  scheduleKey: String
+}
+
+type RewardUnit {
+  key: String!
+  name: String!
+  currency: RSCurrency
+}
+
+"""Settings for a reward unit"""
+type RewardUnitSettings implements TranslatableAsset {
+  id: RewardUnitSettingsId!
+  """The reward unit represented by this reward unit settings"""
+  rewardUnit: RewardUnit
+  config: RSJsonNode!
+  translationInfo: TranslationInfo!
+  """All the RewardExchangeRules that use this reward unit"""
+  usedByRewardExchangeRules(limit: Int! = 20, offset: Int! = 0): RewardExchangeRuleList!
+  """Get all the Programs that use this reward unit"""
+  usedByPrograms(limit: Int! = 20, offset: Int! = 0): ProgramList!
+  """Get all the integrations that use this reward unit"""
+  usedByIntegrations(limit: Int! = 20, offset: Int! = 0): TenantIntegrationList!
+  """Get all the GlobalRewardConfigs that use this reward unit"""
+  usedByGlobalRewardConfigs(limit: Int! = 20, offset: Int! = 0): GlobalRewardConfigList!
+}
+
+type RewardUnitSettingsDeleteResult {
+  deletedCount: Long!
+}
+
+"""A list of RewardUnitSettings"""
+type RewardUnitSettingsList {
+  data: [RewardUnitSettings!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type RewardValueLimits {
+  minValue: Int
+  maxValue: Int
+  fixedValues: [Int!]
+}
+
+type ScheduledProgramTrigger implements ProgramTrigger {
+  id: ID!
+  type: ProgramTriggerType!
+  time: RSDate!
+  user: User
+  scheduleKey: String
+}
+
+type Segment {
+  key: SegmentKey!
+  name: String
+  status: SegmentStatus
+  dateCreated: RSDate
+  dateModified: RSDate
+  participantsCount: Long!
+}
+
+type SegmentList {
+  data: [Segment!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Detailed information of a segment operation"""
+type SegmentOperationDetails {
+  """The raw SegmentOperation string"""
+  segmentOperation: SegmentOperation!
+  """The type of this segment operation"""
+  type: SegmentOperationType!
+  """The segment inside the segment operation"""
+  segment: Segment
+}
+
+type SendPortalEmailResult {
+  """The subject of the email"""
+  subject: String
+  """The body of the email"""
+  body: String
+}
+
+type SetImpactPublisherWithdrawalSettingsResult {
+  success: Boolean!
+  validationErrors: [ImpactApiValidationError!]!
+}
+
+type SetPortalUserRolesResult {
+  success: Boolean!
+}
+
+"""A link code for a share link"""
+type ShareLinkCode implements LinkCode {
+  linkCode: String!
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  supportedLinkDomains: [LinkDomain!]!
+  referralCode: ReferralCode
+  user: User
+  program: Program
+  """Whether this link code is the primary for its referral code"""
+  isPrimaryForReferralCode: Boolean!
+  """Whether this link code is the primary for its program"""
+  isPrimaryForProgram: Boolean!
+  """Whether this link code is a manually created vanity code"""
+  isVanity: Boolean!
+}
+
+type ShareLinkCodeList {
+  data: [ShareLinkCode!]!
+  count: Int!
+  totalCount: Long
+}
+
+"""A link code for a generic shortened URL"""
+type ShortenedUrlLinkCode implements LinkCode {
+  linkCode: String!
+  shortUrl(shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String!
+  supportedLinkDomains: [LinkDomain!]!
+  """The destination url for this link code"""
+  destinationUrl: String!
+}
+
+type StartImpactSessionResult {
+  success: Boolean!
+}
+
+type SubdomainDomainOwnershipVerification implements DomainOwnershipVerification {
+  method: DomainOwnershipVerificationMethod!
+  apexDomain: Domain
+}
+
+type Tenant implements Viewer {
+  tenantAlias: ID!
+  """The API key for this tenant"""
+  apiKey: String @deprecated
+  """The API keys for this tenant"""
+  apiKeys(limit: Int! = 20, offset: Int! = 0): TenantApiKeyList!
+  isLiveMode: Boolean!
+  emailAddress: String
+  dateCreated: RSDate
+  rateLimitMultiplier: Float
+  settings: TenantSettings
+  theme: TenantTheme
+  clockOffsetMillis: Long
+  clockOffsetDuration: IsoDuration
+  """The portal project this tenant is in"""
+  portalProject: PortalProject!
+  permissions: [String!]!
+  impactBrandId: ID
+  featureFlags: [String!]
+  allowedCurrencies: [RSCurrencyCode!]
+  flavor: SquatchFlavor!
+}
+
+type TenantApiKey {
+  id: ID
+  secret: String!
+}
+
+type TenantApiKeyList {
+  data: [TenantApiKey!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type TenantIntegration {
+  id: ID! @deprecated
+  service: String!
+  name: String!
+  type: IntegrationType
+  enabled: Boolean!
+  """A url pointing to the integration logo"""
+  logo: String
+  """A url pointing to the integration icon"""
+  icon: String
+  config: RSJsonNode
+  """The form handler managed by this integration"""
+  formHandler: FormHandler
+  """The namespace of this integration"""
+  namespace: String
+}
+
+type TenantIntegrationDeleteResult {
+  deletedCount: Long!
+}
+
+type TenantIntegrationList {
+  data: [TenantIntegration!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type TenantSettings {
+  signupPage: String
+  companyName: String
+  hasUtmOnSignupPage: Boolean
+  referredAutoApprove: Boolean
+  referrerAutoApprove: Boolean
+  suspectedFraudModerationState: SuspectedFraudModerationState
+  potentialFraudNotificationFrequency: String @deprecated
+  fraudCheckSettings: FraudCheckSettings
+  fraudRateLimit: Int
+  fraudRateLimitPeriodSeconds: Int @deprecated
+  dailyReferralRewardLimit: Int
+  rewardSettings: RSJsonNode
+  allowReferralInvites: Boolean @deprecated
+  multiProgramEnabled: Boolean
+  """The custom short domain host, e.g. "example.com""""
+  customShortDomain: String @deprecated
+  """The active custom link domain for short links"""
+  primaryLinkDomain: LinkDomain
+  """The backup custom link domains for short links"""
+  secondaryLinkDomains: [LinkDomain!]!
+  """
+  If true, the referralCodes field will create new referral codes for user and set them as
+primary even if the user already has referral codes. Otherwise, the referralCodes field
+will only attempt to create one referral code per program when one doesn't already exist.
+  """
+  allowReferralCodeEditOnUserUpsert: Boolean
+  """Whether enforcing US tax compliance is enabled"""
+  enforceUsTaxCompliance: EnforceTaxComplianceOption
+  """The permission strings for this TenantSettings"""
+  permissions: [String!]!
+  timeZone: RSTimeZoneId
+  hideClassic: Boolean!
+  requireFullAccessForPublishProgramDraft: Boolean!
+  fraudStrictness: FraudStrictness!
+  collectUserBillingDataFromStorefronts: Boolean!
+  billingFraudTypesEnabled: Boolean!
+  impactBrandCurrency: RSCurrencyCode
+  partnerFundsTransferDelayDuration: IsoDuration
+  impactMicrositeSubdomains: [String!]!
+  impactBrandCountryCode: RSCountryCode
+  impactBrandIndirectTaxCountryCode: RSCountryCode
+  cookieUserEnabled: Boolean!
+}
+
+type TenantTheme implements TranslatableAsset {
+  id: ID!
+  variables(locale: String): RSJsonNode
+  variablesSchema: RSJsonNode
+  themeConfig: ThemeConfig
+  translationInfo: TranslationInfo!
+}
+
+type TestWebhookSubscriptionResult {
+  subscription: WebhookSubscription!
+}
+
+type ThemeConfig {
+  vcs: GitConfig
+  themeAssetVersion: String
+  templateFileNames: [String!]
+}
+
+"""The total pending taxable values of all time"""
+type TotalPendingTaxableValue {
+  """The taxable value"""
+  value: Int!
+  """The number of rewards"""
+  count: Int!
+}
+
+type TranslatableAssetList {
+  data: [TranslatableAsset!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Information of a TranslatableAsset"""
+type TranslationInfo {
+  """The unique ID of this TranslatableAsset"""
+  id: TranslatableAssetId!
+  """The TranslatableAsset itself"""
+  translatableAsset: TranslatableAsset!
+  """The program this TranslatableAsset is attached to, if available"""
+  program: Program
+  """The program ID this TranslatableAsset is attached to, if available"""
+  programId: ID
+  """The key of this TranslatableAsset"""
+  translatableAssetKey: String
+  """The original untranslated content"""
+  content: RSJsonNode
+  """All the translations"""
+  translations: [TranslationInstance!]!
+  """All the translated locales"""
+  locales: [RSLocale!]!
+}
+
+"""A translation of a TranslatableAsset"""
+type TranslationInstance {
+  """The unique ID of this TranslationInstance"""
+  id: TranslationInstanceId!
+  """The program this TranslationInstance is attached to, if available"""
+  program: Program
+  """The program ID this TranslationInstance is attached to, if available"""
+  programId: ID
+  """The key of the TranslatableAsset"""
+  translatableAssetKey: String
+  """The locale of the translation"""
+  locale: RSLocale!
+  """The translated content"""
+  content: RSJsonNode!
+  dateCreated: RSDate
+  dateModified: RSDate
+}
+
+type TranslationInstanceDeleteResult {
+  deletedCount: Long!
+}
+
+type TxtRecordDomainOwnershipVerification implements DomainOwnershipVerification {
+  method: DomainOwnershipVerificationMethod!
+  requiredDnsRecord: RequiredDnsRecord!
+}
+
+type User implements Viewer {
+  id: String!
+  accountId: String!
+  firstName: String
+  lastName: String
+  lastInitial: String
+  account: PaymentAccount!
+  referralCode(programId: ID): String
+  referralCodes: RSShallowMap!
+  imageUrl: String
+  email: String
+  emailVerified: Boolean!
+  cookieId: ID
+  paymentProviderId: String @deprecated
+  """The locale of this user"""
+  locale: RSLocale
+  """The country code of the user"""
+  countryCode: RSCountryCode
+  """Whether this user can be referred"""
+  referable: Boolean
+  """key value pair"""
+  customFields: RSJsonNode
+  """Get the metadata of this user's existing custom fields"""
+  customFieldsMetas: [CustomField!]!
+  firstSeenIP: String
+  lastSeenIP: String
+  firstSeenIPLocation: LatLon
+  lastSeenIPLocation: LatLon
+  """Maxmind geo data"""
+  firstSeenGeoData: RSJsonNode
+  """Maxmind geo data"""
+  lastSeenGeoData: RSJsonNode
+  firstSeenUserAgent: String
+  lastSeenUserAgent: String
+  dateCreated: RSDate
+  dateModified: RSDate
+  dateBlocked: RSDate
+  emailHash: String
+  referralSource: String @deprecated
+  """
+  Legacy share links format.
+https://docs.saasquatch.com/api/methods/#get_sharelinks
+  """
+  incompleteShareLinks: RSJsonNode @deprecated
+  """https://docs.saasquatch.com/api/methods/#get_shareurls"""
+  shareLinks(programId: ID, shareMedium: ReferralShareMedium, engagementMedium: UserEngagementMedium, shareMediums: [ReferralShareMedium!]! = [], engagementMediums: [UserEngagementMedium!] = []): RSJsonNode
+  """Share links for up to 10 active programs"""
+  programShareLinks(shareMediums: [ReferralShareMedium!]! = [UNKNOWN], engagementMediums: [UserEngagementMedium!] = [UNKNOWN]): RSJsonNode
+  shareLink(programId: ID, shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN, useCleanLink: Boolean! = false): String
+  messageLink(programId: ID, shareMedium: ReferralShareMedium! = UNKNOWN, engagementMedium: UserEngagementMedium! = UNKNOWN): String
+  shareLinkOpenGraph(programId: ID): RSJsonNode
+  messageLinkOpenGraph(programId: ID): RSJsonNode
+  referredBy: UserReferredByInfo @deprecated
+  referredByReferral(programId: ID): Referral
+  referredByReferrals: [Referral!]!
+  """All the referral codes this user is referred by"""
+  referredByCodes: [String!]!
+  rewards(filter: RewardFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): FlatRewardList!
+  """All the rewards earned by this user that are accessible with instant access"""
+  instantAccessRewards(filter: RewardFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): FlatRewardList!
+  """Get all the RewardRedemptionTransactions for this user"""
+  rewardRedemptionTransactions(limit: Int! = 20, offset: Int! = 0): RewardRedemptionTransactionList!
+  """https://docs.saasquatch.com/api/methods/#list_balances"""
+  rewardBalances(rewardType: RewardType, programId: ID, locale: RSLocale): RSJsonNode @deprecated
+  rewardBalanceDetails(filter: RewardBalanceFilterInput, rewardFilter: RewardFilterInput, programId: ID, locale: RSLocale): [RewardBalance!]!
+  referrals(filter: ReferralFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): ReferralList!
+  """Render a widget for this user"""
+  widget(widgetType: WidgetType, engagementMedium: UserEngagementMedium, locale: RSLocale): WidgetResponse!
+  segments: [SegmentKey!]!
+  fraudFlags: [FraudFlag!]!
+  stats: UserStats
+  """Query user events. Note: Only events from the past 2 years will be included. For all historic events request a user event export."""
+  userEvents(filter: UserEventDataFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): UserEventDataList!
+  programEmailTransactions(filter: ProgramEmailTransactionFilterInput, timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0, sortBy: [RSSortByInput!]): ProgramEmailTransactionList!
+  """Get all the share link codes for this user"""
+  shareLinkCodes(limit: Int! = 20, offset: Int! = 0): ShareLinkCodeList!
+  """Get all the referral codes for this user"""
+  referralCodeList(filter: ReferralCodeFilterInput, limit: Int! = 20, offset: Int! = 0): ReferralCodeList!
+  """Lookup form submission records for this user"""
+  formSubmissionRecords(filter: FormSubmissionRecordFilterInput, sortBy: [RSSortByInput!], timeZone: String, timeZoneOffset: Int, limit: Int! = 20, offset: Int! = 0): FormSubmissionRecordList!
+  """User localization information"""
+  localization: UserLocalization!
+  """The program goals this user has achieved"""
+  programGoals: [ProgramGoal!]!
+  """The US taxable values by year"""
+  usTaxableValues: [AnnualTaxableValue!]!
+  """The total pending US taxable value of all time"""
+  totalPendingUsTaxableValue: TotalPendingTaxableValue!
+  """The date this user submitted the US tax form"""
+  dateUsTaxFormSubmitted: RSDate
+  marketingEmailOptIn: Boolean!
+  marketingEmailOptInDate: RSDate
+  marketingEmailOptOutDate: RSDate
+  """Whether US tax compliance is enforced for this user"""
+  enforceUsTaxCompliance: Boolean!
+  """The rank of this user in a leaderboard, if available"""
+  leaderboardRank(type: String!, filter: UserLeaderboardFilterInput): LeaderboardRank
+  """Access this user's ranks in all user leaderboards"""
+  leaderboardRanks: UserLeaderboardRanks!
+  """Get all the reward exchanges visible to this user"""
+  visibleRewardExchangeItems(limit: Int! = 20, offset: Int! = 0): VisibleRewardExchangeItemList!
+  """The managed identity information for this user, if available"""
+  managedIdentity: ManagedIdentityResult
+  marketingEmailUnsubscribeUrl: String!
+  """Details of attached Impact Partner Account"""
+  impactConnection: ImpactConnection!
+  matchedImpactPartner: MatchedImpactPartner
+  addresses: [UserAddress!]!
+  hashedCreditCards: [String!]!
+  permissions: [String!]!
+}
+
+type UserAddress {
+  address1: String
+  address2: String
+  city: String
+  province: String
+  provinceCode: String
+  postalCode: String
+  countryCode: RSCountryCode
+  country: RSCountry
+  latitude: Float
+  longitude: Float
+}
+
+type UserAggregate {
+  id: String!
+  name: String!
+  """JSON schema"""
+  rules: RSJsonNode
+}
+
+type UserBlockingResult {
+  user: User
+}
+
+type UserDoNotTrackIdentifier {
+  hash: String!
+  dateCreated: RSDate!
+}
+
+type UserDoNotTrackIdentifierDeleteResult {
+  deletedCount: Long!
+}
+
+type UserDoNotTrackIdentifierList {
+  data: [UserDoNotTrackIdentifier!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type UserEventData implements GraphNodeData {
+  id: ID!
+  userId: String!
+  accountId: String!
+  user: User
+  key: String!
+  fields: RSJsonNode
+  dateTriggered: RSDate
+  dateReceived: RSDate
+  dateProcessed: RSDate
+  dateMarkedAsTest: RSDate
+  isRevenueEvent: Boolean!
+  isModification: Boolean!
+  updatedBy: RSUpdatedBy
+  currency: RSCurrencyCode
+  totalAmountPostDiscount: Float
+  originalCurrency: RSCurrencyCode
+  originalTotalAmountPostDiscount: Float
+  moderationPreview(moderationInput: ModerationInput!): GraphNodeModerationPreviewList!
+}
+
+type UserEventDataList {
+  data: [UserEventData!]!
+  count: Int!
+}
+
+type UserEventKeyList {
+  data: [String!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type UserEventMeta {
+  key: String!
+  name: String
+  fields: [String!]!
+  """Get all the UserMetrics that use this event key"""
+  usedByUserMetrics(limit: Int! = 20, offset: Int! = 0): UserMetricList!
+  """Get all the Programs that use this event key"""
+  usedByPrograms(limit: Int! = 20, offset: Int! = 0): ProgramList!
+  """Get the potentially inferred JSON schema for event fields"""
+  fieldsSchema: JsonSchema
+  """The integration that manages this event key"""
+  integration: TenantIntegration
+}
+
+type UserEventMetaList {
+  data: [UserEventMeta!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type UserEventResult {
+  userId: String!
+  accountId: String!
+  user: User
+  events: [UserEventData!]!
+  programTransactions: [ProgramTransaction!]
+}
+
+"""User leaderboard information"""
+type UserLeaderboard {
+  """The top rows of this leaderboard"""
+  rows(limit: Int! = 10): [UserLeaderboardRow!]!
+  """The date this leaderboard was last updated"""
+  dateModified: RSDate
+}
+
+"""Type for accessing all available user leaderboard ranks"""
+type UserLeaderboardRanks {
+  """Leaderboard based on the number of rewards"""
+  rewardCount(filter: RewardLeaderboardFilterInput): LeaderboardRank
+  """
+  Leaderboard based on the sum of reward values.
+Note that the reward values are naively summed regardless of the units.
+  """
+  rewardValueSum(filter: RewardLeaderboardFilterInput): LeaderboardRank
+  """
+  Leaderboard based on the sum of reward values of a single unit.
+Note that the reward values are naively summed regardless of the units.
+  """
+  singleUnitRewardValueSum(unit: String!, filter: RewardLeaderboardFilterInput): LeaderboardRank
+  """Leaderboard based on the number of referrals"""
+  referralCount(filter: ReferralLeaderboardFilterInput): LeaderboardRank
+}
+
+"""One row of a leaderboard"""
+type UserLeaderboardRow {
+  """The value of this row, e.g. the number of referrals"""
+  value: Long!
+  """The formatted value, which may be the reward unit prettyValue"""
+  textValue(locale: RSLocale): String
+  """The first name of the user"""
+  firstName: String
+  """The last initial of the user"""
+  lastInitial: String
+  """The rank of this row in the leaderboard"""
+  rank: LeaderboardRank!
+}
+
+"""Type for accessing all available user leaderboards"""
+type UserLeaderboards {
+  """Leaderboard based on the number of rewards"""
+  rewardCount(filter: RewardLeaderboardFilterInput): UserLeaderboard!
+  """
+  Leaderboard based on the sum of reward values.
+Note that the reward values are naively summed regardless of the units.
+  """
+  rewardValueSum(filter: RewardLeaderboardFilterInput): UserLeaderboard!
+  """
+  Leaderboard based on the sum of reward values of a single unit.
+Note that the reward values are naively summed regardless of the units.
+  """
+  singleUnitRewardValueSum(unit: String!, filter: RewardLeaderboardFilterInput): UserLeaderboard!
+  """Leaderboard based on the number of referrals"""
+  referralCount(filter: ReferralLeaderboardFilterInput): UserLeaderboard!
+}
+
+type UserList {
+  data: [User]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""User localization information"""
+type UserLocalization {
+  """The user's locale. If the user does not have a locale, it's inferred based on its countryCode."""
+  locale: RSLocale
+  """
+  The language of the user based on its locale. If the user does not have a locale,
+it's inferred based on its countryCode.
+  """
+  language: RSLanguage
+  """
+  The country of the user based on its countryCode. If the user does not have a
+countryCode, it's inferred based on its locale.
+  """
+  country: RSCountry
+}
+
+type UserMetric {
+  customFieldKey: String!
+  customField: CustomField!
+  name: String!
+  aggregate: UserAggregate!
+  aggregateRules: RSJsonNode
+  userEvent: UserEventMeta!
+  dateTriggeredWindow: IsoInterval
+  fieldsFilters: [GenericFieldFilter!] @deprecated
+  filter: JSONata
+  """The recalculation job that is currently updating users for this UserMetric, if one exists"""
+  pendingRecalculationJob: Job
+}
+
+type UserMetricDeleteResult {
+  deletedCount: Long!
+}
+
+type UserMetricList {
+  data: [UserMetric!]!
+  count: Int!
+  totalCount: Long!
+}
+
+type UserReferredByInfo {
+  isConverted: Boolean
+  code: String
+  newlyReferred: Boolean
+  referredReward: RSJsonNode
+}
+
+type UserStats {
+  """The last time this user's stats was last refreshed"""
+  dateModified: RSDate
+  """The number of times this user's share links have been clicked across all programs"""
+  traffic: Int
+  """The number of referrals this user has made across all programs"""
+  referrals: Int
+  """The number of converted referrals this user has made across all programs"""
+  conversions: Int
+  """The number of program goals this user has achieved across all programs"""
+  goals: Int
+  """The number of rewards this user has earned across all programs"""
+  rewards: Int
+  """The number of times this user has loaded a widget across all programs"""
+  widgetLoads: Int
+  """The estimated amount of revenue in USD this user has purchased"""
+  revenue: Float
+  """The estimated amount of program revenue in USD this user has generated"""
+  generatedRevenue: Float
+  """The estimated amount of referred revenue in USD this user has influenced"""
+  referredRevenue: Float
+}
+
+"""Result of validateJobCreation"""
+type ValidateJobCreationResult {
+  """A list of errors. Empty when the input is valid."""
+  errors: [String!]!
+  jobCreationErrors: [JobCreationError!]!
+  """The total number of lines read by the validation, or null if the file cannot be read"""
+  totalLinesRead: Int
+}
+
+type ValidateLinkCodeResult {
+  valid: Boolean!
+  invalidReason: LinkCodeInvalidReason
+}
+
+"""A reward exchanges that is visible to a user"""
+type VisibleRewardExchangeItem {
+  """The unique key of the corresponding RewardExchangeRule"""
+  key: String!
+  """The human readable name"""
+  name: String
+  """The long description"""
+  description: String
+  """The URL of the thumbnail"""
+  imageUrl: String
+  """The type of this RewardExchangeRule"""
+  ruleType: RewardExchangeRuleType!
+  """Whether this reward exchange is available to this user"""
+  available: Boolean!
+  """
+  The machine readable code of the reason of this reward exchange being unavailable
+Possibilities are INSUFFICIENT_REDEEMABLE_CREDIT, US_TAX, MISSING_PAYOUT_CONFIGURATION,
+and AVAILABILITY_PREDICATE.
+If the availabilityPredicate of the corresponding RewardExchangeRule returns a
+non-null string, then that will be returned here.
+  """
+  unavailableReasonCode: String
+  """The unit of the reward being redeemed"""
+  sourceUnit: String
+  """The value of the reward being redeemed for fixed exchanges"""
+  sourceValue: Int
+  """Formatted sourceValue"""
+  prettySourceValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The min value of the reward being redeemed for variable exchanges"""
+  sourceMinValue: Int
+  """Formatted sourceMinValue"""
+  prettySourceMinValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The max value of the reward being redeemed for variable exchanges"""
+  sourceMaxValue: Int
+  """Formatted sourceMaxValue"""
+  prettySourceMaxValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The min value of the destination reward for variable exchanges"""
+  destinationMinValue: Int
+  """Formatted destinationMinValue"""
+  prettyDestinationMinValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The max value of the destination reward for variable exchanges"""
+  destinationMaxValue: Int
+  """Formatted destinationMaxValue"""
+  prettyDestinationMaxValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """
+  The key of the destination global reward, applicable to FIXED_GLOBAL_REWARD
+and VARIABLE_GLOBAL_REWARD
+  """
+  globalRewardKey: String
+  """The unit of the destination reward, applicable to VARIABLE_CREDIT_REWARD"""
+  destinationUnit: String
+  """The RewardUnitSettings for the sourc unit"""
+  sourceRewardUnitSettings: RewardUnitSettings
+  """The RewardUnitSettings for the destination unit, or the global reward config, if one exists"""
+  destinationRewardUnitSettings: RewardUnitSettings
+  """
+  The steps of this reward exchange, if applicable. If this reward exchange has
+over 1000 steps, then only the first 1000 will be returned.
+  """
+  steps: [VisibleRewardExchangeItemStep!]!
+}
+
+type VisibleRewardExchangeItemList {
+  data: [VisibleRewardExchangeItem!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""A step of a visible reward exchange"""
+type VisibleRewardExchangeItemStep {
+  """The value of the reward being redeemed"""
+  sourceValue: Int!
+  """Formatted sourceValue"""
+  prettySourceValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The value of the destination reward"""
+  destinationValue: Int
+  """Formatted destinationValue"""
+  prettyDestinationValue(locale: RSLocale, formatType: RewardValueFormatType! = UNIT_FORMATTED): String
+  """The key of the destination global reward, applicable to STEPPED_FIXED_GLOBAL_REWARD."""
+  globalRewardKey: String
+  """The destination global reward config, applicable to STEPPED_FIXED_GLOBAL_REWARD."""
+  globalRewardConfig: GlobalRewardConfig
+  """
+  The rewardInput for exchanging a reward with this step's override destination value,
+applicable to VARIABLE_GLOBAL_REWARD
+  """
+  rewardInput: RSJsonNode
+  """Whether this step is available to the current user"""
+  available: Boolean!
+  """
+  The machine readable code of the reason of this step being unavailable.
+Possibilities are INSUFFICIENT_REDEEMABLE_CREDIT and US_TAX.
+  """
+  unavailableReasonCode: String
+}
+
+"""A webhook with its payload"""
+type Webhook {
+  id: ID!
+  type: WebhookType!
+  dateCreated: RSDate!
+  data: RSJsonNode
+  """Get the delivery attempt logs for this webhook"""
+  subscriptionLog(limit: Int! = 20, offset: Int! = 0): WebhookSubscriptionLogList!
+}
+
+"""The result of one HTTP request attempt to a webhook subscription"""
+type WebhookDeliveryAttempt {
+  """The date this attempt was made"""
+  dateAttempted: RSDate!
+  """The status received from the endpoint. Null if we weren't able to connect."""
+  status: Int
+}
+
+"""A list of WebhookDeliveryAttempts"""
+type WebhookDeliveryAttemptList {
+  data: [WebhookDeliveryAttempt!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""A list of Webhooks"""
+type WebhookList {
+  data: [Webhook!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""A webhook subscription to an endpoint"""
+type WebhookSubscription {
+  """The url of the endpoint that receives events"""
+  endpointUrl: String!
+  """Display name"""
+  name: String
+  source: WebhookSubscriptionSourceType!
+  webhookTypes: [WebhookType!]!
+  """The status of this webhook subscription"""
+  status: WebhookSubscriptionStatus!
+  integration: TenantIntegration
+}
+
+type WebhookSubscriptionDeleteResult {
+  deletedCount: Long!
+}
+
+"""A list of WebhookSubscriptions"""
+type WebhookSubscriptionList {
+  data: [WebhookSubscription!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""Delivery attempt logs for one WebhookSubscription"""
+type WebhookSubscriptionLog {
+  """The url of the endpoint that receives events"""
+  endpointUrl: String!
+  subscription: WebhookSubscription
+  """The list of HTTP request attempts to this webhook subscription"""
+  attempts(limit: Int! = 20, offset: Int! = 0): WebhookDeliveryAttemptList!
+}
+
+"""A list of WebhookSubscriptionLogs"""
+type WebhookSubscriptionLogList {
+  data: [WebhookSubscriptionLog!]!
+  count: Int!
+  totalCount: Long!
+}
+
+"""The status of a WebhookSubscription"""
+type WebhookSubscriptionStatus {
+  """The type of this status"""
+  type: WebhookSubscriptionStatusType!
+  """The message of this status"""
+  message: String
+}
+
+type WidgetResponse {
+  template: String!
+  jsOptions: RSJsonNode
+  user: User
+  brandingConfig: RSJsonNode
+  """The config of this widget, if available"""
+  widgetConfig: WidgetConfig
+}
+
+type ZonedDateTime {
+  offset: String!
+  zone: String!
+  year: Int!
+  monthValue: Int!
+  month: Month!
+  dayOfMonth: Int!
+  dayOfYear: Int!
+  dayOfWeek: DayOfWeek!
+  hour: Int!
+  minute: Int!
+  second: Int!
+  nano: Int!
+  epochMilli: RSDate!
+}
+
+"""A pattern for formatting a date, e.g., "d MMM uuuu""""
+scalar DateTimeFormatPattern
+
+"""A GraphQL query string"""
+scalar GraphQLQueryString
+
+"""An ISO 8601 formatted string duration. e.g. "P3Y6M4DT12H30M5S""""
+scalar IsoDuration
+
+"""An ISO 8601 interval. e.g. "2007-03-01T13:00:00Z/2008-05-11T15:30:00Z"""
+scalar IsoInterval
+
+"""A JSONata expression"""
+scalar JSONata
+
+"""JobType"""
+scalar JobType
+
+"""A JSON Pointer of specification https://datatracker.ietf.org/doc/html/rfc6901"""
+scalar JsonPointer
+
+"""A JSON schema"""
+scalar JsonSchema
+
+"""A 64-bit integer"""
+scalar Long
+
+"""A unique ID for a predefined reward. e.g. "p/program1/r/reward1" or "r/reward2""""
+scalar PredefinedRewardType
+
+"""An ISO 3166-1 Alpha-2 country code. e.g. "CA" for Canada and "ES" for Spain"""
+scalar RSCountryCode
+
+"""A 3-letter ISO 4217 currency code"""
+scalar RSCurrencyCode
+
+"""A timestamp expressed as the number of milliseconds since epoch."""
+scalar RSDate
+
+"""An abitrary JSON node"""
+scalar RSJsonNode
+
+"""An ISO 639-1 language code. e.g. "en" for English and "fr" for French"""
+scalar RSLanguageCode
+
+"""A language-country locale pair separated by an underscore. e.g. "en_US""""
+scalar RSLocale
+
+"""A relative timeframe string based on relative time. e.g. "last_7_days" or "this_year""""
+scalar RSRelativeTimeframe
+
+"""A shallow JSON object"""
+scalar RSShallowMap
+
+"""A time-zone ID, such as America/Vancouver"""
+scalar RSTimeZoneId
+
+"""The id of RewardUnitSettings. e.g. "USD" or "CASH/USD""""
+scalar RewardUnitSettingsId
+
+scalar SegmentKey
+
+scalar SegmentOperation
+
+"""A unique ID for a TranslatableAsset. e.g. "p/program1/r/reward1" or "w/widget1""""
+scalar TranslatableAssetId
+
+"""A unique ID for a TranslationInstance. e.g. "p/program1/r/reward1/en_CA" or "w/widget1/es_ES""""
+scalar TranslationInstanceId
+
+"""The type of a webhook. e.g. "user.created" or "reward.created""""
+scalar WebhookType
+
+"""Operation for adding/deleting WebhookTypes. e.g. "user.created" or "~reward.created""""
+scalar WebhookTypeOperation
+
+"""A unique ID for a widget type. e.g. "p/program1/w/widget1" or "w/widget2""""
+scalar WidgetType
+
+"""Result of a bulk user event request"""
+union BulkUserEventResult = UserEventResult | ApiError
+
+"""The response of a form handler initial data request"""
+union FormHandlerInitialDataResultResponse = FormHandlerInitialDataResult | FormHandlerError
+
+"""The response of a form handler meta request"""
+union FormHandlerMetaResponse = FormHandlerMeta | FormHandlerError
+
+"""The response of a form handler submission request"""
+union FormHandlerSubmissionResponse = FormHandlerSubmissionResult | FormHandlerError
+
+"""The response of a form handler validation request"""
+union FormHandlerValidationResponse = FormHandlerValidationResult | FormHandlerError
+
+"""The recorded response in a FormSubmissionRecord"""
+union FormSubmissionRecordResponse = FormSubmissionRecordResult | FormSubmissionRecordError
+
+union ProgramAnalyticsData = ProgramEvaluatedAnalyticsData | ProgramGoalAnalyticsData
+
+union ProgramMutation = ProgramCreateRewardMutation | ProgramSendEmailMutation | ProgramModerateGraphNodesMutation | ProgramExchangeRewardMutation | ProgramRetractReferralConversionMutation
+
+union UserUpsertResult = User | ApiError

@@ -1,0 +1,803 @@
+openapi: 3.1.0
+info:
+  title: Partner Ads API
+  description: 'Ads are the brand advertisements used to drive actions for a brand
+    and earn payouts. Ads can be purely text (such as just a link), or can consist
+    of some type of creative (e.g. a banner image, video, or audio) with an embedded
+    impact.com tracking link. All ads have a tracking link unique to your partner
+    account that will credit you with an action if a payable event occurs (such as
+    a customer converting).
+
+    '
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+    email: support@impact.com
+servers:
+- url: https://api.impact.com
+tags:
+- name: Ads
+  description: Endpoints for retrieving ads and their associated code or tracking
+    links.
+paths:
+  /Mediapartners/{AccountSID}/Ads:
+    get:
+      operationId: listAds
+      tags:
+      - Ads
+      summary: List Ads
+      description: Returns a list of all ads available to you.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BANNER
+          - TEXT_LINK
+          - COUPON
+        description: Filters ads by type.
+      - name: CampaignId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filters ads by the campaign (brand program) they belong to.
+      - name: DealId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filters ads by the deal associated with them.
+      - name: MobileReady
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: Filters ads by whether they are optimized for mobile devices.
+      - name: UpdatedDateStart
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters for ads updated on or after this date.
+      - name: UpdatedDateEnd
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Filters for ads updated on or before this date.
+      responses:
+        '200':
+          description: A list of ad objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Ads:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ad'
+  /Mediapartners/{AccountSID}/Ads/{Id}:
+    get:
+      operationId: retrieveAd
+      tags:
+      - Ads
+      summary: Retrieve an Ad
+      description: Retrieves the details of an existing ad using its unique ID.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the ad.
+      responses:
+        '200':
+          description: The ad object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+  /Mediapartners/{AccountSID}/Ads/{Id}/Code:
+    get:
+      operationId: retrieveAdCode
+      tags:
+      - Ads
+      summary: Retrieve an Ad's Code
+      description: Retrieves the HTML code of an existing ad, with optional tracking
+        parameters appended to the tracking link.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the ad.
+      - name: subId1
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId1= to the tracking link.
+          Must be URL encoded.
+      - name: subId2
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId2= to the tracking link.
+          Must be URL encoded.
+      - name: subId3
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId3= to the tracking link.
+          Must be URL encoded.
+      - name: sharedId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as sharedId= to the tracking link.
+          Must be URL encoded.
+      - name: landingPage
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+        description: Overrides the ad's landing page URL if the ad allows deep linking.
+          Must be URL encoded.
+      responses:
+        '200':
+          description: The ad's HTML code.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Code:
+                    type: string
+                    description: The ad's HTML code with the tracking link embedded.
+                    example: '<a href="https://example.com/c/1299679/515236/8800"
+                      target="_top" id="515236"><img src="//a.impactradius-go.com/display-ad/8800-515236"
+                      border="0" alt="" width="442" height="114"/></a>'
+                  Uri:
+                    type: string
+                    description: Unique reference to this resource in the impact.com
+                      API.
+                    example: /Mediapartners/<AccountSID>/Ads/123456/Code
+  /Mediapartners/{AccountSID}/Ads/{Id}/IFrameCode:
+    get:
+      operationId: retrieveAdIFrameCode
+      tags:
+      - Ads
+      summary: Retrieve an Ad's IFrame Code
+      description: Retrieves the inline frame (iframe) code for an existing ad, with
+        optional tracking parameters appended to the tracking link.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the ad.
+      - name: subId1
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId1= to the tracking link.
+          Must be URL encoded.
+      - name: subId2
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId2= to the tracking link.
+          Must be URL encoded.
+      - name: subId3
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId3= to the tracking link.
+          Must be URL encoded.
+      - name: sharedId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as sharedId= to the tracking link.
+          Must be URL encoded.
+      - name: landingPage
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+        description: Overrides the ad's landing page URL if the ad allows deep linking.
+          Must be URL encoded.
+      responses:
+        '200':
+          description: The ad's iframe code.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  IFrameCode:
+                    type: string
+                    description: The ad's iframe code with the tracking link embedded.
+                    example: '<iframe id="$iradid" src="//a.impactradius-go.com/gen-ad-code/1299679/515236/8800/"
+                      width="442" height="114" scrolling="no" frameborder="0" marginheight="0"
+                      marginwidth="0"></iframe>'
+                  Uri:
+                    type: string
+                    description: Unique reference to this resource in the impact.com
+                      API.
+                    example: /Mediapartners/<AccountSID>/Ads/123456/IFrameCode
+  /Mediapartners/{AccountSID}/Ads/{Id}/TrackingLink:
+    get:
+      operationId: retrieveAdTrackingLink
+      tags:
+      - Ads
+      summary: Retrieve an Ad's Tracking Link
+      description: Retrieves the tracking link for an existing ad, with optional tracking
+        parameters appended.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the ad.
+      - name: subId1
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId1= to the tracking link.
+      - name: subId2
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId2= to the tracking link.
+      - name: subId3
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as subId3= to the tracking link.
+      - name: sharedId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Appends the submitted value as sharedId= to the tracking link.
+      - name: landingPage
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uri
+        description: Overrides the ad's landing page URL if the ad allows deep linking.
+      responses:
+        '200':
+          description: The ad's tracking link.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TrackingLink:
+                    type: string
+                    format: uri
+                    description: The ad's tracking link, unique to your partner account.
+                    example: https://example.com/c/1299679/515236/8800
+                  Uri:
+                    type: string
+                    description: Unique reference to this resource in the impact.com
+                      API.
+                    example: /Mediapartners/<AccountSID>/Ads/123456/TrackingLink
+components:
+  schemas:
+    Ad:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the ad (the impact.com Ad ID).
+          example: '3061348'
+        Name:
+          type: string
+          description: Display name of the ad.
+          example: Capsule Home Spring Promo
+        Description:
+          type: string
+          description: Additional information about the ad, visible to partners.
+          example: Spring promotion for the Capsule Home product line. Seasonal pricing
+            on minimalist storage solutions.
+        CampaignId:
+          type: integer
+          description: Unique identifier for the brand's program (campaign) that the
+            ad is associated with.
+          example: '27154'
+        CampaignName:
+          type: string
+          description: Display name of the brand's program (campaign) that the ad
+            is associated with.
+          example: Capsule Corp
+        Type:
+          type: string
+          enum:
+          - BANNER
+          - COUPON
+          - TEXT_LINK
+          description: The kind of ad.
+          example: BANNER
+        TrackingLink:
+          type: string
+          format: uri
+          description: The ad's impact.com tracking link, unique to your partner account.
+          example: https://capsulecorp.pxf.io/c/1924609/3061348/27154
+        LandingPageUrl:
+          type: string
+          format: uri
+          description: The URL the tracking link redirects to (the brand's landing
+            page).
+          example: https://www.capsulecorp.holdings/spring
+        AdvertiserId:
+          type: integer
+          description: Unique identifier assigned by impact.com to the brand's advertiser
+            account.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand in impact.com.
+          example: Acme Corporation
+        Code:
+          type: string
+          description: The ad's HTML code with the tracking link embedded. Use the
+            `/Code` endpoint to retrieve this with optional tracking parameters.
+          example: '<a href="https://capsulecorp.pxf.io/c/1924609/3061348/27154"
+            target="_top" id="3061348"><img src="//a.impactradius-go.com/display-ad/27154-3061348"
+            border="0" alt="" width="674" height="678"/></a>'
+        IFrameCode:
+          type: string
+          description: The ad's iframe code. Use the `/IFrameCode` endpoint to retrieve
+            this with optional tracking parameters.
+          example: '<iframe id="iframe_414" src="//a.impactradius-go.com/gen-ad-code/1924609/3061348/27154/"
+            width="674" height="678" scrolling="no" frameborder="0" marginheight="0"
+            marginwidth="0"></iframe>'
+        Width:
+          type: integer
+          description: For image ads, the width of the ad image in pixels.
+          example: '674'
+        Height:
+          type: integer
+          description: For image ads, the height of the ad image in pixels.
+          example: '678'
+        CreativeUrl:
+          type: string
+          description: Direct URL to the ad's creative asset (image, etc.).
+          example: //a.impactradius-go.com/display-ad/27154-3061348
+        Labels:
+          type: string
+          description: Labels assigned to the ad by the brand.
+          example: ''
+        AllowDeepLinking:
+          type: boolean
+          description: Whether the ad allows deep linking. If true, you can override
+            the landing page URL via the landingPage parameter. If false, the landing
+            page cannot be changed.
+          example: 'true'
+        MobileReady:
+          type: boolean
+          description: Whether the ad is optimized for mobile devices.
+          example: 'true'
+        Language:
+          type: string
+          enum:
+          - AFRIKAANS
+          - ARABIC
+          - BULGARIAN
+          - CHINESE
+          - CHINESE_TRADITIONAL
+          - CZECH
+          - DANISH
+          - DUTCH
+          - ENGLISH
+          - ENGLISH_GB
+          - ANGLISH_AU
+          - ENGLISH_CA
+          - ENGLISH_NZ
+          - ENGLISH_ZA
+          - ESTONIAN
+          - FILIPINO
+          - FINISH
+          - FRENCH
+          - FRENCH_CA
+          - GERMAN
+          - HEBREW
+          - HINDI
+          - INDONESIAN
+          - ITALIAN
+          - JAPANESE
+          - KOREAN
+          - LATVIAN
+          - LITHUANIAN
+          - MALAY
+          - MALTESE
+          - NORWEGIAN
+          - PORTUGUESE
+          - PORTUGUESE_BR
+          - POLISH
+          - RUSSIAN
+          - SLOVENIAN
+          - SPANISH
+          - SPANISH_MX
+          - SWEDISH
+          - THAI
+          - TURKISH
+          - VIETNAMESE
+          description: The language the ad is hosted in.
+          example: ENGLISH
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the ad becomes active (ISO 8601). For ads
+            without a start date, this is the date it was added to impact.com.
+          example: '2026-03-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the ad expires (ISO 8601). Empty if the
+            ad has no end date.
+          example: '2026-05-31T23:59:59-07:00'
+        Season:
+          type: string
+          enum:
+          - ANZAC_DAY
+          - AUGUST_CIVIC_HOLIDAY
+          - AUSTRALIA_DAY
+          - BACK_TO_SCHOOL
+          - BLACK_FRIDAY
+          - BOXING_DAY
+          - CANADA_DAY
+          - CYBER_MONDAY
+          - END_OF_FINANCIAL_YEAR
+          - FAMILY_DAY
+          - FATHERS_DAY
+          - GOOD_FRIDAY
+          - HALLOWEEN
+          - HANUKKAH
+          - INDEPENDANCE_DAY
+          - LABOR_DAY
+          - MEMORIAL_DAY
+          - MOTHERS_DAY
+          - NEW_YEAR
+          - PRESIDENTS_DAY
+          - QUEENS_BIRTHDAY
+          - REMEMBRANCE_DAY
+          - SPRING
+          - ST_PATRICKS_DAY
+          - SUMMER
+          - THANKSGIVING
+          - VALENTINES_DAY
+          - VICTORIA_DAY
+          - WAITANGI_DAY
+          - WINTER
+          - OTHER
+          description: The seasonal promotional theme of the ad, if applicable.
+          example: SPRING
+        TopSeller:
+          type: boolean
+          description: Whether the ad promotes a top-selling item.
+          example: 'false'
+        SubjectLines:
+          type: string
+          description: For email ads, the subject line of the email.
+          example: ''
+        FromAddresses:
+          type: string
+          description: For email ads, the sender address of the email.
+          example: ''
+        UnsubscribeLink:
+          type: string
+          format: uri
+          description: For email ads, the unsubscribe link included in the email.
+          example: ''
+        DealId:
+          type: integer
+          description: Unique identifier for the deal associated with the ad.
+          example: '92812'
+        DealName:
+          type: string
+          description: Display name of the deal associated with the ad.
+          example: Capsule Home Spring Sale
+        DealDescription:
+          type: string
+          description: Additional information about the deal associated with the ad.
+          example: 25% off all Capsule Home products for spring.
+        DealState:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          description: The current state of the deal associated with the ad.
+          example: ACTIVE
+        DealType:
+          type: string
+          enum:
+          - GENERAL_SALE
+          - FREE_SHIPPING
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          - BOGO
+          description: How the deal is applied to the items in the ad.
+          example: GENERAL_SALE
+        DealScope:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+          description: The scope of the deal — whether it applies to a specific product,
+            category, or the entire store.
+          example: ENTIRE_STORE
+        DealPublic:
+          type: boolean
+          description: Whether the deal associated with the ad is publicly visible.
+          example: 'true'
+        DealProducts:
+          type: array
+          description: 'If DealScope is PRODUCT, an array of product objects the
+            deal applies to.'
+          items:
+            type: object
+            properties:
+              ProductName:
+                type: string
+                description: Name of the product the deal applies to.
+                example: Capsule Storage Box
+              ProductImageURL:
+                type: string
+                format: uri
+                description: URL to the product's image.
+                example: https://www.capsulecorp.holdings/products/storage.jpg
+              ProductBeforePriceAmount:
+                type: integer
+                description: Product price before the deal is applied.
+                example: 100
+              ProductBeforePriceCurrency:
+                type: string
+                description: ISO 4217 currency code for the before-deal price.
+                example: USD
+              ProductAfterPriceAmount:
+                type: integer
+                description: Product price after the deal is applied.
+                example: 75
+              ProductAfterPriceCurrency:
+                type: string
+                description: ISO 4217 currency code for the after-deal price.
+                example: USD
+        DealCategories:
+          type: string
+          description: 'If DealScope is CATEGORY, a comma-separated list of product
+            categories the deal applies to.'
+          example: ''
+        DiscountType:
+          type: string
+          enum:
+          - FIXED
+          - PERCENT
+          - PERCENT_MAXIMUM
+          - PERCENT_RANGE
+          description: The type of discount applied when the deal is activated.
+          example: PERCENT
+        DiscountAmount:
+          type: number
+          format: decimal
+          description: 'If DiscountType is FIXED, the fixed discount amount.'
+          example: ''
+        DiscountCurrency:
+          type: string
+          description: 'If DiscountType is FIXED, the ISO 4217 currency code for
+            DiscountAmount.'
+          example: ''
+        DiscountPercent:
+          type: number
+          format: float
+          description: 'If DiscountType is PERCENT, the discount percentage.'
+          example: 25
+        DiscountMaximumPercent:
+          type: number
+          format: float
+          description: 'If DiscountType is PERCENT_MAXIMUM, the maximum discount
+            percentage a customer can receive.'
+          example: ''
+        DiscountPercentRangeStart:
+          type: number
+          format: float
+          description: 'If DiscountType is PERCENT_RANGE, the lowest discount percentage
+            a customer can receive.'
+          example: ''
+        DiscountPercentRangeEnd:
+          type: number
+          format: float
+          description: 'If DiscountType is PERCENT_RANGE, the highest discount percentage
+            a customer can receive.'
+          example: ''
+        Gift:
+          type: string
+          description: 'If DealType is GIFT_WITH_PURCHASE, the name of the product
+            to be gifted.'
+          example: ''
+        RebateAmount:
+          type: number
+          format: decimal
+          description: 'If DealType is REBATE, the rebate amount.'
+          example: ''
+        RebateCurrency:
+          type: string
+          description: 'If DealType is REBATE, the ISO 4217 currency code for RebateAmount.'
+          example: ''
+        DealDefaultPromoCode:
+          type: string
+          description: The default promo code for the associated deal.
+          example: SPRING25
+        MinimumPurchaseAmount:
+          type: number
+          format: decimal
+          description: The minimum spend required before the deal is applied.
+          example: 50.00
+        MinimumPurchaseAmountCurrency:
+          type: string
+          description: ISO 4217 currency code for MinimumPurchaseAmount.
+          example: USD
+        MaximumSavingsAmount:
+          type: number
+          format: decimal
+          description: The maximum amount a customer can save when the deal is applied.
+          example: 100.00
+        MaximumSavingsCurrency:
+          type: string
+          description: ISO 4217 currency code for MaximumSavingsAmount.
+          example: USD
+        BogoBuyQuantity:
+          type: integer
+          description: 'If DealType is BOGO, the number of ''buy'' items required
+            to activate the deal.'
+          example: ''
+        BogoBuyScope:
+          type: string
+          enum:
+          - PRODUCT
+          - CATEGORY
+          description: 'If DealType is BOGO, the scope of the ''buy'' items.'
+          example: ''
+        BogoBuyName:
+          type: string
+          description: 'If DealType is BOGO, the name of the ''buy'' item(s).'
+          example: ''
+        BogoBuyImageUrl:
+          type: string
+          format: uri
+          description: 'If DealType is BOGO, the URL to the ''buy'' product''s image.'
+          example: ''
+        BogoGetQuantity:
+          type: integer
+          description: 'If DealType is BOGO, the number of ''get'' items the customer
+            receives a discount on.'
+          example: ''
+        BogoGetScope:
+          type: string
+          enum:
+          - PRODUCT
+          - CATEGORY
+          description: 'If DealType is BOGO, the scope of the ''get'' items.'
+          example: ''
+        BogoGetDiscountType:
+          type: string
+          enum:
+          - FREE
+          - AMOUNT
+          - PERCENT
+          description: 'If DealType is BOGO, the type of discount applied to the
+            ''get'' items.'
+          example: ''
+        BogoGetName:
+          type: string
+          description: 'If DealType is BOGO, the name of the ''get'' item(s).'
+          example: ''
+        BogoGetImageUrl:
+          type: string
+          format: uri
+          description: 'If DealType is BOGO, the URL to the ''get'' product''s image.'
+          example: ''
+        BogoGetDiscountAmount:
+          type: number
+          format: decimal
+          description: 'If BogoGetDiscountType is AMOUNT, the fixed discount amount
+            taken off the ''get'' item''s price.'
+          example: ''
+        BogoGetDiscountCurrency:
+          type: string
+          description: 'If BogoGetDiscountType is AMOUNT, the ISO 4217 currency code
+            for BogoGetDiscountAmount.'
+          example: ''
+        BogoGetDiscountPercent:
+          type: number
+          format: float
+          description: 'If BogoGetDiscountType is PERCENT, the discount percentage
+            taken off the ''get'' item''s price.'
+          example: ''
+        PurchaseLimitQuantity:
+          type: integer
+          description: 'If DealType is BOGO, the maximum quantity of ''buy'' items
+            a customer can purchase at once. A value of 0 means no limit.'
+          example: ''
+        DealStartDate:
+          type: string
+          format: date-time
+          description: The date and time the deal begins (ISO 8601).
+          example: '2026-03-01T00:00:00-08:00'
+        DealEndDate:
+          type: string
+          format: date-time
+          description: The date and time the deal ends (ISO 8601).
+          example: '2026-05-31T23:59:59-07:00'
+        DealDateCreated:
+          type: string
+          format: date-time
+          description: The date and time the deal was created (ISO 8601).
+          example: ''
+        DealDateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the deal was last updated (ISO 8601).
+          example: ''
+        Uri:
+          type: string
+          description: Unique reference to the ad object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Ads/3061348

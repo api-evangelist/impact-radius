@@ -1,0 +1,336 @@
+{
+  "item": [
+    {
+      "id": "0ea9fbed-3d0b-4d9c-835d-fca811d06a20",
+      "name": "Users",
+      "description": {
+        "content": "Endpoints for listing and retrieving partner-account users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d6dd91ce-aacb-47f1-93d2-2ffac767798e",
+          "name": "List all users",
+          "request": {
+            "name": "List all users",
+            "description": {
+              "content": "Lists all users that have access to your partner account, sorted by join date with the first user to join appearing first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "Filter by a URL-encoded string matching `FirstName`, `LastName`, or `Username`."
+                },
+                {
+                  "disabled": false,
+                  "key": "State",
+                  "value": "<string>",
+                  "description": "Filter the list of users by their account state."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28261c1f-28b3-4fa4-bb07-065bfcf002bc",
+              "name": "A list of users that have access to your partner account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "State",
+                      "value": "ACTIVE"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Users\": [\n    {\n      \"Id\": \"I-1139074\",\n      \"FirstName\": \"Hazel\",\n      \"LastName\": \"Nutt\",\n      \"Username\": \"hnutt\",\n      \"State\": \"ACTIVE\",\n      \"Language\": \"en_US\",\n      \"AccessRights\": [\n        {\n          \"Role\": \"Creative Management\",\n          \"Permissions\": [\n            \"RUN_ACTION_AND_PERFORMANCE_REPORTS\",\n            \"RUN_CREATIVE_REPORTS\"\n          ]\n        },\n        {\n          \"Role\": \"Creative Management\",\n          \"Permissions\": [\n            \"MANAGE_DIRECTORY_INFO\",\n            \"WEBSERVICES_INTEGRATION\"\n          ]\n        }\n      ],\n      \"JoinedDate\": \"2020-04-29T16:24:13-07:00\",\n      \"DateLastUpdated\": \"2020-12-09T08:34:06-08:00\",\n      \"LastUpdatedBy\": \"hnutt\",\n      \"CreatedBy\": \"rbanks\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Users/I-1139074\"\n    },\n    {\n      \"Id\": \"I-1139074\",\n      \"FirstName\": \"Hazel\",\n      \"LastName\": \"Nutt\",\n      \"Username\": \"hnutt\",\n      \"State\": \"INVITED\",\n      \"Language\": \"en_US\",\n      \"AccessRights\": [\n        {\n          \"Role\": \"Creative Management\",\n          \"Permissions\": [\n            \"MANAGE_ACCOUNT_INFO\",\n            \"REQUEST_CAP_EXTENSIONS_AND_AGREEMENT_EXCEPTIONS\"\n          ]\n        },\n        {\n          \"Role\": \"Creative Management\",\n          \"Permissions\": [\n            \"MANAGE_ACCOUNT_INFO\",\n            \"APPROVE_CREATIVE_AND_DUB_HOUSE_EXPENSES\"\n          ]\n        }\n      ],\n      \"JoinedDate\": \"2020-04-29T16:24:13-07:00\",\n      \"DateLastUpdated\": \"2020-12-09T08:34:06-08:00\",\n      \"LastUpdatedBy\": \"hnutt\",\n      \"CreatedBy\": \"rbanks\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Users/I-1139074\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bffc7052-c253-4bc1-be24-f64f2b6f597a",
+          "name": "Retrieve a specific user",
+          "request": {
+            "name": "Retrieve a specific user",
+            "description": {
+              "content": "Retrieves a single account user by their unique Id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Users",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the account user, in `I-XXXXXXX` format."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9dd6db9c-7416-4db7-a5e4-2fd6b661ed81",
+              "name": "Successful retrieval of the user object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Users",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the account user, in `I-XXXXXXX` format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"I-1139074\",\n  \"FirstName\": \"Hazel\",\n  \"LastName\": \"Nutt\",\n  \"Username\": \"hnutt\",\n  \"State\": \"INVITED\",\n  \"Language\": \"en_US\",\n  \"AccessRights\": [\n    {\n      \"Role\": \"Creative Management\",\n      \"Permissions\": [\n        \"VIEW_FINANCIALS\",\n        \"EVENT_CALLBACK_INTEGRATION\"\n      ]\n    },\n    {\n      \"Role\": \"Creative Management\",\n      \"Permissions\": [\n        \"EVENT_CALLBACK_INTEGRATION\",\n        \"MANAGE_DIRECTORY_INFO\"\n      ]\n    }\n  ],\n  \"JoinedDate\": \"2020-04-29T16:24:13-07:00\",\n  \"DateLastUpdated\": \"2020-12-09T08:34:06-08:00\",\n  \"LastUpdatedBy\": \"hnutt\",\n  \"CreatedBy\": \"rbanks\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Users/I-1139074\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5296ed3d-147c-4578-8c87-163283cff053",
+              "name": "No user exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Users",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the account user, in `I-XXXXXXX` format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e5e6c239-668c-49d0-afcf-a57ebc8786d7",
+    "name": "Partner Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Users represent the individual people who have access to your impact.com partner account. Each user has a state, a language preference, and a set of access rights — roles grouped with the specific permissions granted under each role.\n\nUse this API to:\n\n1. **List users** to audit who currently has access and at what permission level.\n2. **Retrieve a user** to inspect a single account user's state and access rights.\n\nEach `Id` follows the `I-XXXXXXX` format. The numeric portion is what the Partner Identity Verification API expects when verifying a user.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

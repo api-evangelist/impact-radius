@@ -1,0 +1,2601 @@
+{
+  "item": [
+    {
+      "id": "5ff4057c-e5cf-4d35-8ffc-5def9b3170a6",
+      "name": "Share Links",
+      "description": {
+        "content": "Endpoints for retrieving the share links of a given user. Share links are organised by engagement medium and share medium. For background on how they work, see the Share Links Overview.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "224966c8-bf8e-4914-a8a9-6e19b16df3a1",
+          "name": "Lookup a user's share links",
+          "request": {
+            "name": "Lookup a user's share links",
+            "description": {
+              "content": "**Deprecated.** Use *Lookup a user's share URLs* instead.\n\nReturns a flat object of share links for a user, with one property per share medium (`shareLink`, `facebookShareLink`, `twitterShareLink`, etc.) and nested objects per engagement medium.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "sharelinks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b146b6e4-3b94-44df-96bb-59ace560d20a",
+              "name": "A list of share links",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLink\": \"string\",\n  \"facebookShareLink\": \"string\",\n  \"twitterShareLink\": \"string\",\n  \"emailShareLink\": \"string\",\n  \"mobileShareLink\": \"string\",\n  \"mobileFacebookShareLink\": \"string\",\n  \"mobileTwitterSharelink\": \"string\",\n  \"mobileEmailShareLink\": \"string\",\n  \"EMBED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"POPUP\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"HOSTED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"MOBILE\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"EMAIL\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e567411-f6ba-463a-b26d-3c5219a708d4",
+              "name": "Endpoint deprecated. This endpoint is only available on Classic programs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e1e214e-e90a-4149-815e-f0a412f31a82",
+              "name": "User/Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e87bc4d0-440b-4986-b03e-74a3fa399cdd",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a9946a4-26fe-4b4f-80a0-784398cdb9bf",
+          "name": "Lookup a user's share URLs",
+          "request": {
+            "name": "Lookup a user's share URLs",
+            "description": {
+              "content": "Returns a user's share links, organised by engagement medium and share medium. Use the optional `engagementMedium` and `shareMedium` query parameters to filter the response.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "shareurls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "engagementMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `engagementMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "shareMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `shareMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "programId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the program whose share links to return. Required — the API returns `400` if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6cf47fcd-9a41-4599-8745-7afb7eb6a8a9",
+              "name": "A list of share urls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLinks\": {\n    \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n    \"EMAIL\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"MOBILE\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"EMBED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"POPUP\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"HOSTED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"UNKNOWN\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "941482ba-b3eb-41f9-845f-4cc0395991d7",
+              "name": "Bad request. `programId` is required but was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0766d1d8-201d-43fe-8711-13089c669688",
+              "name": "User/Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "967771b5-8cf6-4ade-9eb2-4fa1c7fa0561",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10ff6761-09c0-4dc4-8bb4-dd5d9cff07ab",
+          "name": "Lookup a user's share URLs (Open Endpoint)",
+          "request": {
+            "name": "Lookup a user's share URLs (Open Endpoint)",
+            "description": {
+              "content": "Same as *Lookup a user's share URLs*, but authenticated with a user JWT instead of an API key. Use this from client-side contexts such as the Mobile and Web SDKs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "shareurls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "engagementMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `engagementMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "shareMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `shareMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "programId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the program whose share links to return. Required — the API returns `400` if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-SaaSquatch-User-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06e040a8-e946-4751-a90e-9b479d559a43",
+              "name": "A list of share urls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLinks\": {\n    \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n    \"EMAIL\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"MOBILE\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"EMBED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"POPUP\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"HOSTED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"UNKNOWN\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9bb5d50-8a15-4f15-b336-58eeecdc5e89",
+              "name": "Bad request. `programId` is required but was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d2ec3cb-66a8-4454-9ef9-782db9eb64a4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9704d3d6-b95d-40a7-bacc-97d8f9d2bd57",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4775bd5e-ce27-44cf-b61a-b1df5605647a",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f69bc03a-5805-4a4a-a485-8184876cf75a",
+      "name": "Classic Only",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ae782bb-23b4-4a0b-b5ef-2cfb0831c0a9",
+          "name": "Lookup a user's share links",
+          "request": {
+            "name": "Lookup a user's share links",
+            "description": {
+              "content": "**Deprecated.** Use *Lookup a user's share URLs* instead.\n\nReturns a flat object of share links for a user, with one property per share medium (`shareLink`, `facebookShareLink`, `twitterShareLink`, etc.) and nested objects per engagement medium.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "sharelinks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cb053ba8-974b-44ee-b1ce-b1b658f9d381",
+              "name": "A list of share links",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLink\": \"string\",\n  \"facebookShareLink\": \"string\",\n  \"twitterShareLink\": \"string\",\n  \"emailShareLink\": \"string\",\n  \"mobileShareLink\": \"string\",\n  \"mobileFacebookShareLink\": \"string\",\n  \"mobileTwitterSharelink\": \"string\",\n  \"mobileEmailShareLink\": \"string\",\n  \"EMBED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"POPUP\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"HOSTED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"MOBILE\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"EMAIL\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fc964f1-fec1-472d-90ba-911e977bdee4",
+              "name": "Endpoint deprecated. This endpoint is only available on Classic programs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bc0f1ca-9fa0-4928-a3e0-d079950c1ace",
+              "name": "User/Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fd72f5f-9ff9-4c29-9875-40080c1064db",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c7743052-61cb-42e7-9d02-a6999b21432c",
+      "name": "Deprecated",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "543398eb-5660-4024-b274-035bc37abb01",
+          "name": "Lookup a user's share links",
+          "request": {
+            "name": "Lookup a user's share links",
+            "description": {
+              "content": "**Deprecated.** Use *Lookup a user's share URLs* instead.\n\nReturns a flat object of share links for a user, with one property per share medium (`shareLink`, `facebookShareLink`, `twitterShareLink`, etc.) and nested objects per engagement medium.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "sharelinks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1e53451-740a-40c2-b862-ab7843f39360",
+              "name": "A list of share links",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLink\": \"string\",\n  \"facebookShareLink\": \"string\",\n  \"twitterShareLink\": \"string\",\n  \"emailShareLink\": \"string\",\n  \"mobileShareLink\": \"string\",\n  \"mobileFacebookShareLink\": \"string\",\n  \"mobileTwitterSharelink\": \"string\",\n  \"mobileEmailShareLink\": \"string\",\n  \"EMBED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"POPUP\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"HOSTED\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"MOBILE\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  },\n  \"EMAIL\": {\n    \"shareLink\": \"string\",\n    \"facebookShareLink\": \"string\",\n    \"twitterShareLink\": \"string\",\n    \"emailShareLink\": \"string\",\n    \"linkedinShareLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "909ce64a-9acd-4cdf-aece-5437bfc41da9",
+              "name": "Endpoint deprecated. This endpoint is only available on Classic programs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73de2b50-7c8f-4cea-b086-b7ad74cdb68d",
+              "name": "User/Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94390132-5e50-41cd-aaf4-5a55355d7918",
+              "name": "Unexpected Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "sharelinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9fe8d696-0bf0-44d3-a642-d324138e9c1b",
+      "name": "Open Endpoint",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3eb5ea88-bba1-4486-9fc0-0fb39aaed4f8",
+          "name": "Lookup a user's share URLs (Open Endpoint)",
+          "request": {
+            "name": "Lookup a user's share URLs (Open Endpoint)",
+            "description": {
+              "content": "Same as *Lookup a user's share URLs*, but authenticated with a user JWT instead of an API key. Use this from client-side contexts such as the Mobile and Web SDKs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":tenant_alias",
+                "open",
+                "account",
+                ":accountId",
+                "user",
+                ":userId",
+                "shareurls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "engagementMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `engagementMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "shareMedium",
+                  "value": "<string>",
+                  "description": "Filters share urls by `shareMedium`."
+                },
+                {
+                  "disabled": false,
+                  "key": "programId",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the program whose share links to return. Required — the API returns `400` if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_alias",
+                  "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The ID of the account to look up"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) Filters share links by `user.id`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-SaaSquatch-User-Token"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "747a5ff4-0bed-4e90-9131-7cba6869eec3",
+              "name": "A list of share urls",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shareLinks\": {\n    \"cleanShareLink\": \"https://share.impact.squatchtesting.com/mzbnEyE\",\n    \"EMAIL\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"MOBILE\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"EMBED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"POPUP\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"HOSTED\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    },\n    \"UNKNOWN\": {\n      \"EMAIL\": \"https://share.impact.squatchtesting.com/mobnEyE\",\n      \"FACEBOOK\": \"https://share.impact.squatchtesting.com/m9bnEyE\",\n      \"PINTEREST\": \"https://share.impact.squatchtesting.com/RzbnEyE\",\n      \"TWITTER\": \"https://share.impact.squatchtesting.com/mMbnEyE\",\n      \"DIRECT\": \"https://share.impact.squatchtesting.com/m5bnEyE\",\n      \"WHATSAPP\": \"https://share.impact.squatchtesting.com/mFbnEyE\",\n      \"LINEMESSENGER\": \"https://share.impact.squatchtesting.com/mDbnEyE\",\n      \"SMS\": \"https://share.impact.squatchtesting.com/mabnEyE\",\n      \"FBMESSENGER\": \"https://share.impact.squatchtesting.com/mhbnEyE\",\n      \"LINKEDIN\": \"https://share.impact.squatchtesting.com/m7bnEyE\",\n      \"UNKNOWN\": \"https://share.impact.squatchtesting.com/mBbnEyE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fadf017a-af9f-4568-9b73-db14a35ac035",
+              "name": "Bad request. `programId` is required but was not provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aaeece7-21f5-4333-9214-5edbef8ecc48",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c565d3ed-7aa3-4b9f-a750-3a82e45ec355",
+              "name": "Endpoint disabled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe4b4d07-f1c1-4cad-83da-7390619c233f",
+              "name": "Account not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":tenant_alias",
+                    "open",
+                    "account",
+                    ":accountId",
+                    "user",
+                    ":userId",
+                    "shareurls"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "engagementMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shareMedium",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "programId",
+                      "value": "47255"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_alias",
+                      "description": "(Required) Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The ID of the account to look up"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) Filters share links by `user.id`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-SaaSquatch-User-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 8197,\n  \"message\": \"string\",\n  \"apiErrorCode\": \"string\",\n  \"rsCode\": \"RS042\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.referralsaasquatch.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "349327c5-6ae1-4eb1-8267-9c970b838fb9",
+    "name": "impact.com API - Share Links",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving a user's share links.",
+      "type": "text/plain"
+    }
+  }
+}

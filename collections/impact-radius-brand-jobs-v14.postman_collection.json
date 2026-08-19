@@ -1,0 +1,711 @@
+{
+  "item": [
+    {
+      "id": "7aa38352-f9f3-43dd-aaed-d2a204b79fc3",
+      "name": "Jobs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e888f05-13f4-4e11-aa26-6399d735ff86",
+          "name": "List All Jobs",
+          "request": {
+            "name": "List All Jobs",
+            "description": {
+              "content": "Returns a list of jobs, which can be filtered by their creation date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CreatedAfter",
+                  "value": "<dateTime>",
+                  "description": "Return jobs scheduled after this date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreatedBefore",
+                  "value": "<dateTime>",
+                  "description": "Return jobs scheduled before this date (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8fd32a3a-ebd7-45f4-b167-2695cabf9b1d",
+              "name": "A list of job objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CreatedAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CreatedBefore",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Jobs\": [\n    {\n      \"Id\": \"d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n      \"Type\": \"ClickExport\",\n      \"ProgramId\": \"3629\",\n      \"CreatedBy\": \"<AccountSID>\",\n      \"CreatedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"StartedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"CompletedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"AbandonedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"CancelledDate\": \"2022-06-07T04:33:50-05:00\",\n      \"FailedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"LastProgressUpdateDate\": \"2022-06-07T04:33:50-05:00\",\n      \"Status\": \"COMPLETED\",\n      \"StatusMessage\": \"Job processing completed successfully.\",\n      \"RecordsProcessed\": 250,\n      \"PercentageComplete\": 100,\n      \"Replayable\": true,\n      \"ResultUri\": \"https://ACNuZyxtEwPGdDCmmdcKtOPcVgn.jdno2fsccVkQK,OcSH9uTdRakQu\"\n    },\n    {\n      \"Id\": \"d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n      \"Type\": \"ClickExport\",\n      \"ProgramId\": \"3629\",\n      \"CreatedBy\": \"<AccountSID>\",\n      \"CreatedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"StartedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"CompletedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"AbandonedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"CancelledDate\": \"2022-06-07T04:33:50-05:00\",\n      \"FailedDate\": \"2022-06-07T04:33:50-05:00\",\n      \"LastProgressUpdateDate\": \"2022-06-07T04:33:50-05:00\",\n      \"Status\": \"COMPLETED\",\n      \"StatusMessage\": \"Job processing completed successfully.\",\n      \"RecordsProcessed\": 250,\n      \"PercentageComplete\": 100,\n      \"Replayable\": true,\n      \"ResultUri\": \"http://cpcFCSh.mpcEzaXKvkgR8+dhBd?\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90893e8c-5716-4224-b209-dc395a5ab8ba",
+          "name": "Get Job Status",
+          "request": {
+            "name": "Get Job Status",
+            "description": {
+              "content": "Returns an object describing the status of the queried job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Jobs",
+                ":JobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "JobId",
+                  "description": "(Required) The unique identifier for the job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7417a33d-f3b0-43d3-b3fd-30d423402904",
+              "name": "A single job object representing the status of the job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n  \"Type\": \"ClickExport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"<AccountSID>\",\n  \"CreatedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"StartedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CompletedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"AbandonedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CancelledDate\": \"2022-06-07T04:33:50-05:00\",\n  \"FailedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"LastProgressUpdateDate\": \"2022-06-07T04:33:50-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"https://vdbJqMIIenyzPqlulrJuPtFsAOVpVLQ.sfuH8FOqJgzuuRxz+cgOilSV7ZSk1AkLA5BWr2f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2488533-cf6d-478c-8eae-3e2533fd13f7",
+          "name": "Download Job Result File",
+          "request": {
+            "name": "Download Job Result File",
+            "description": {
+              "content": "Downloads the result file for a successfully completed job.\n- Returns 200 with the file if completed.\n- Returns 202 with the job status if still processing.\n- Returns 302 to redirect to a temporary signed URL for download (if `Mode` is not 'Stream').",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Jobs",
+                ":JobId",
+                "Download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Mode",
+                  "value": "<string>",
+                  "description": "Set to 'Stream' to get the file directly in the response instead of a redirect."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "JobId",
+                  "description": "(Required) The unique identifier for the job."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea9c9a6a-da35-4da2-a584-e8348fd977bf",
+              "name": "The job result file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3952792c-1d7e-4d20-b388-e16ad4b76c03",
+              "name": "The job is not yet complete. The response body contains the current job status object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n  \"Type\": \"ClickExport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"<AccountSID>\",\n  \"CreatedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"StartedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CompletedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"AbandonedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CancelledDate\": \"2022-06-07T04:33:50-05:00\",\n  \"FailedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"LastProgressUpdateDate\": \"2022-06-07T04:33:50-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"https://vdbJqMIIenyzPqlulrJuPtFsAOVpVLQ.sfuH8FOqJgzuuRxz+cgOilSV7ZSk1AkLA5BWr2f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a91d6a4-f2dc-4666-b716-c32ab2587bee",
+              "name": "Redirect to a temporary signed URL for result file download.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Found",
+              "code": 302,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8be353dc-bf38-419c-ad18-ae630d8675c4",
+          "name": "Replay a Job",
+          "request": {
+            "name": "Replay a Job",
+            "description": {
+              "content": "Re-queues a completed, failed, or cancelled job for processing. This is useful if you expect additional results to be present for your original export window.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Jobs",
+                ":JobId",
+                "Replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "JobId",
+                  "description": "(Required) The unique identifier for the job to be replayed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40a8e110-2d6e-4a6d-b69e-cf13a1db0c0f",
+              "name": "The job was successfully re-queued. The response body contains the new status of the replayed job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job to be replayed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f\",\n  \"Type\": \"ClickExport\",\n  \"ProgramId\": \"3629\",\n  \"CreatedBy\": \"<AccountSID>\",\n  \"CreatedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"StartedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CompletedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"AbandonedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"CancelledDate\": \"2022-06-07T04:33:50-05:00\",\n  \"FailedDate\": \"2022-06-07T04:33:50-05:00\",\n  \"LastProgressUpdateDate\": \"2022-06-07T04:33:50-05:00\",\n  \"Status\": \"COMPLETED\",\n  \"StatusMessage\": \"Job processing completed successfully.\",\n  \"RecordsProcessed\": 250,\n  \"PercentageComplete\": 100,\n  \"Replayable\": true,\n  \"ResultUri\": \"https://vdbJqMIIenyzPqlulrJuPtFsAOVpVLQ.sfuH8FOqJgzuuRxz+cgOilSV7ZSk1AkLA5BWr2f\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea5b3c28-c8ce-4ad1-87cb-45f59dceb273",
+              "name": "Forbidden. The job is not in a replayable state (e.g., it is still running) or is not a replayable type.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Jobs",
+                    ":JobId",
+                    "Replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "JobId",
+                      "description": "(Required) The unique identifier for the job to be replayed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "16faa8f8-1e01-4006-98bb-162439b92ca6",
+    "name": "Brand API - Jobs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing asynchronous data extraction jobs. This allows for scheduling a job to extract data and fetching the results once complete.\nJobs are used by endpoints like ReportExport and ClickExport to handle large data requests without hitting rate limits.",
+      "type": "text/plain"
+    }
+  }
+}

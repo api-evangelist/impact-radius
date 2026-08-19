@@ -1,0 +1,353 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Clicks
+  description: 'API for retrieving and exporting click (or tap) referral events.
+
+
+    - **Clicks**: Retrieve details for a specific click event by its ID.
+
+    - **ClickExport**: Schedule an asynchronous job to export daily click data as
+    a CSV, JSON, or XML file.'
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Clicks/{ClickId}:
+    get:
+      summary: Get Click Details
+      description: Retrieves the details of a specific click event by its ID (`im_ref`).
+        Note that a single ID can be associated with multiple click objects, representing
+        a single consumer journey.
+      operationId: getClickById
+      tags:
+      - Clicks
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign (program) the click belongs to.
+        schema:
+          type: integer
+      - name: ClickId
+        in: path
+        required: true
+        description: The generated click ID (`im_ref`) representing the consumer journey.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A click object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Click'
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/ClickExport:
+    get:
+      summary: Export Clicks Asynchronously
+      description: Schedules a job to export daily clicks. It returns a URI to poll
+        for job status updates and a URI to download the exported file once the job
+        is complete.
+      operationId: exportClicks
+      tags:
+      - ClickExport
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The ID of the program (campaign) to export clicks from.
+        schema:
+          type: integer
+      - name: AdId
+        in: query
+        description: ID of the ad that was clicked. Can be repeated for multiple ads.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: Date
+        in: query
+        description: The date for the clicks to be exported, in 'yyyy-MM-dd' format.
+          Defaults to today. Only dates after April 9, 2024 are supported.
+        schema:
+          type: string
+          format: date
+      - name: MediaId
+        in: query
+        description: The unique ID of the partner. Can be repeated for multiple partners.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: UniqueClick
+        in: query
+        description: Filter for clicks that follow IAB standards for a unique click.
+        schema:
+          type: boolean
+      - name: ResultFormat
+        in: query
+        description: The desired file format for the export.
+        schema:
+          type: string
+          enum:
+          - CSV
+          - XML
+          - JSON
+          default: CSV
+      responses:
+        '200':
+          description: The job has been queued successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f
+                  ResultUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download
+                  ReplayUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Replay
+components:
+  schemas:
+    Click:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: A generated value that represents the consumer journey (im_ref).
+          example: abcdefg1hijkl2mn3opq4rStUvwxyz5a6bcdef7
+        CampaignId:
+          type: integer
+          example: '1000'
+          description: Program (formerly known as campaign ) Id associated with the
+            click.
+        CampaignName:
+          type: string
+          example: Acme Campaign
+          description: Program (formerly known as campaign ) name associated with
+            the click.
+        ProfileId:
+          type: string
+          description: impact.com's unique identifier for a user on a specific device.
+          example: ab12345c-6789-0123-4de5-678f90g123h4
+        IpAddress:
+          type: string
+          description: Hashed IP address of the click source.
+          example: abcdefghijklmnopqrstuvwxyz1234567890
+        EventDate:
+          type: string
+          format: date-time
+          example: '2021-01-25T08:06:24-05:00'
+          description: Date and time this click happened. See ISO 8601 .
+        MediaId:
+          type: integer
+          description: Partner ID that drove the click.
+          example: '10000'
+        MediaName:
+          type: string
+          example: Partner Person
+          description: Partner name that drove the click.
+        AdId:
+          type: integer
+          example: '656565'
+          description: Id of the ad that was clicked.
+        AdName:
+          type: string
+          example: Our Anvils Are Awesome
+          description: Name of the ad that was clicked.
+        AdType:
+          type: string
+          enum:
+          - BANNER
+          - EMAIL
+          - FLASH
+          - TEXT
+          - TEXT_LINK
+          - LONG_SPONSORED_TEXT
+          - XML_SYNDICATION
+          - COUPON
+          - CONTENT
+          - VIDEO
+          - ONLINE_TRACKING_LINK
+          - MEDIA_SOURCE_TRACKING
+          example: BANNER
+          description: Type of the ad that was clicked.
+        ProductSku:
+          type: string
+          description: SKU of the item the ad is marketing.
+          example: '12345'
+        BrandRelated:
+          type: object
+          properties:
+            AdCampaign:
+              type: string
+              example: Summer Sale
+            AdGroup:
+              type: string
+              example: Tennis Equipment
+            Keyword:
+              type: string
+              example: tennis balls
+            MatchType:
+              type: string
+              example: BROAD
+            Channel:
+              type: string
+              example: GOOGLE_SHOPPING
+          description: Your brand's information that is related to the click event.
+        CustomerArea:
+          type: string
+          example: n/a
+          description: Generated from the IpAddress attribute, this is the geographical
+            area from where the customer generated the click. If IpAddress was not
+            tracked, n/a will appear.
+        CustomerCity:
+          type: string
+          example: n/a
+          description: Generated from the IpAddress attribute, this is the city from
+            where the customer generated the click. If IpAddress was not tracked,
+            n/a will appear.
+        CustomerRegion:
+          type: string
+          example: n/a
+          description: Generated from the IpAddress attribute, this is the geographical
+            region from where the customer generated the click. If IpAddress was not
+            tracked, n/a will appear.
+        CustomerCountry:
+          type: string
+          example: US
+          description: Generated from the IpAddress attribute, this is the country
+            from where the customer generated the click. If IpAddress was not tracked,
+            n/a will appear. See ISO 3166-1 alpha-2 .
+        DeviceType:
+          type: string
+          enum:
+          - DESKTOP
+          - PHONE
+          - TABLET
+          - GAME
+          - WATCH
+          - TV
+          - ROBOT
+          - CAR
+          - UNKNOWN
+          example: UNKNOWN
+          description: What device the customer clicked or tapped the ad on.
+        DeviceFamily:
+          type: string
+          example: 'null'
+          description: General group of devices that the attribute DeviceType comes
+            from. Only a sample of all enum values are presented below.
+        Browser:
+          type: string
+          example: 'null'
+          description: Which web browser the customer used when they generated the
+            click. Only a sample of all enum values are presented below.
+        Os:
+          type: string
+          example: 'null'
+          description: Which operating system the customer used when they generated
+            the click. Only a sample of all enum values are presented below.
+        ReferringUrl:
+          type: string
+          format: uri
+          description: The URL that the customer came from when they generated the
+            click.
+          example: https://www.google.com/
+        ReferringDomain:
+          type: string
+          example: NA
+          description: The web domain that the customer came from when they generated
+            the click.
+        LandingPageUrl:
+          type: string
+          format: uri
+          example: http://google.com?irgwc=1
+          description: The URL the customer landed on when they generated the click.
+        SharedId:
+          type: string
+          description: A SharedId that is passed on the tracking link the partner
+            used.
+        UniqueClick:
+          type: boolean
+          example: 'true'
+          description: If the click follows IAB standards for a "unique click."
+        CpcBid:
+          type: string
+          example: '0.0'
+          description: How much the partner will be paid for driving the click.
+        DealName:
+          type: string
+          description: Name of the associated deal.
+        DealType:
+          type: string
+          enum:
+          - BOGO
+          - FREE_SHIPPING
+          - GENERAL_SALE
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          description: Type of the associated deal.
+        DealScope:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+          description: To what extent the deal applies to the click.
+        PartnerRelated:
+          type: object
+          properties:
+            SubId1:
+              type: string
+              example: subid1value
+            SubId2:
+              type: string
+              example: subid2value
+            SubId3:
+              type: string
+              example: subid3value
+          description: A partner's information that is related to the click event.
+        Payout:
+          type: number
+          format: decimal
+          description: Partner's payout for driving the click.
+          example: 5.00
+        TrafficCategory:
+          type: string
+          description: What kind of traffic is generating the click.
+          example: AFFILIATE
+        TrafficSource:
+          type: string
+          description: Referring site (aka Source ) of the traffic generating the
+            click.
+          example: CONTENT
+        BidKeyword:
+          type: string
+          description: If the click was generated from a Paid Search, then this will
+            be the keyword used in that Paid search.
+          example: tennis balls
+        SearchText:
+          type: string
+          description: If the click was generated from a Paid Search, then this will
+            be the search query the customer put into a search engine.
+          example: best tennis balls

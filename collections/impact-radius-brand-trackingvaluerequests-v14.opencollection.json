@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Tracking Value Requests",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracking Value Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Tracking Value Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/TrackingValueRequests",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "MediaPartnerId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "RequestType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of tracking value requests, which can be filtered by campaign, deal, partner, state, and request type."
+        },
+        {
+          "info": {
+            "name": "Get Tracking Value Request Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/TrackingValueRequests/:RequestId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "RequestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the tracking value request."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing tracking value request by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Approve a Tracking Value Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/TrackingValueRequests/:RequestId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "RequestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the request to approve."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Approves a specified tracking value request. Different parameters are required based on the request type."
+        },
+        {
+          "info": {
+            "name": "Reject a Tracking Value Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/TrackingValueRequests/:RequestId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "RequestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the request to reject."
+              }
+            ]
+          },
+          "docs": "Rejects a specified tracking value request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

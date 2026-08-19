@@ -1,0 +1,486 @@
+{
+  "item": [
+    {
+      "id": "e0c43701-9382-4f39-9e1a-2f89ce4e5770",
+      "name": "Promo Codes",
+      "description": {
+        "content": "Endpoints for listing and retrieving brand-issued promo codes available to your partner account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ee3a7999-e856-4c51-a94c-444965c92e51",
+          "name": "List Promo Codes",
+          "request": {
+            "name": "List Promo Codes",
+            "description": {
+              "content": "Returns the promo codes available to your partner account. Supports filtering by program, advertiser, deal, credit rule, match mode, and creation date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "PromoCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SearchString",
+                  "value": "<string>",
+                  "description": "Free-text search across all promo code fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProgramId",
+                  "value": "<string>",
+                  "description": "Filter by one or more program IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProgramId",
+                  "value": "<string>",
+                  "description": "Filter by one or more program IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdvertiserId",
+                  "value": "<string>",
+                  "description": "Filter by one or more advertiser (brand) IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdvertiserId",
+                  "value": "<string>",
+                  "description": "Filter by one or more advertiser (brand) IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<string>",
+                  "description": "Filter by one or more deal IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "DealId",
+                  "value": "<string>",
+                  "description": "Filter by one or more deal IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreditRule",
+                  "value": "<string>",
+                  "description": "Filter by credit policy."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreditRule",
+                  "value": "<string>",
+                  "description": "Filter by credit policy."
+                },
+                {
+                  "disabled": false,
+                  "key": "MatchMode",
+                  "value": "<string>",
+                  "description": "Filter by code matching type."
+                },
+                {
+                  "disabled": false,
+                  "key": "MatchMode",
+                  "value": "<string>",
+                  "description": "Filter by code matching type."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreatedDateStart",
+                  "value": "<dateTime>",
+                  "description": "Return only codes created on or after this date/time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "CreatedDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Return only codes created on or before this date/time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateStart",
+                  "value": "<dateTime>",
+                  "description": "Return only promo codes whose `StartDate` is on or after this date/time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Return only promo codes whose `StartDate` is on or before this date/time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateStart",
+                  "value": "<dateTime>",
+                  "description": "Return only promo codes whose `EndDate` is on or after this date/time (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Return only promo codes whose `EndDate` is on or before this date/time (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6799fa83-19c1-4b0a-b5c6-b4d72730fb9b",
+              "name": "A list of promo code objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "PromoCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SearchString",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ProgramId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ProgramId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdvertiserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdvertiserId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DealId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DealId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "CreditRule",
+                      "value": "INVOLVED"
+                    },
+                    {
+                      "key": "CreditRule",
+                      "value": "INVOLVED"
+                    },
+                    {
+                      "key": "MatchMode",
+                      "value": "LI"
+                    },
+                    {
+                      "key": "MatchMode",
+                      "value": "RE"
+                    },
+                    {
+                      "key": "CreatedDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "CreatedDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PromoCodes\": [\n    {\n      \"Id\": \"8111554\",\n      \"Code\": \"HAZEL10OFF\",\n      \"State\": \"ACTIVE\",\n      \"Program\": {\n        \"Id\": \"21282\",\n        \"Name\": \"Acme's Creator Program\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/21282\",\n        \"LogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/21282/Logo\"\n      },\n      \"Advertiser\": {\n        \"Id\": \"1804207\",\n        \"Name\": \"Acme Corporation\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207\",\n        \"LogoUri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207/Logo\"\n      },\n      \"Deal\": {\n        \"Id\": \"92812\",\n        \"Name\": \"Summer Promotion\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n      },\n      \"MatchMode\": \"RE\",\n      \"CreditRule\": \"ALWAYS\",\n      \"CreatedDate\": \"2023-12-12T03:28:40-08:00\",\n      \"StartDate\": \"2026-01-01T00:00:00-08:00\",\n      \"EndDate\": \"2026-01-31T23:59:59-08:00\",\n      \"Uri\": \"http://ZbuYleVtstSlNskrRVwbd.dxdBR8JB.N\"\n    },\n    {\n      \"Id\": \"8111554\",\n      \"Code\": \"HAZEL10OFF\",\n      \"State\": \"ACTIVE\",\n      \"Program\": {\n        \"Id\": \"21282\",\n        \"Name\": \"Acme's Creator Program\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/21282\",\n        \"LogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/21282/Logo\"\n      },\n      \"Advertiser\": {\n        \"Id\": \"1804207\",\n        \"Name\": \"Acme Corporation\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207\",\n        \"LogoUri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207/Logo\"\n      },\n      \"Deal\": {\n        \"Id\": \"92812\",\n        \"Name\": \"Summer Promotion\",\n        \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n      },\n      \"MatchMode\": \"LI\",\n      \"CreditRule\": \"INVOLVED\",\n      \"CreatedDate\": \"2023-12-12T03:28:40-08:00\",\n      \"StartDate\": \"2026-01-01T00:00:00-08:00\",\n      \"EndDate\": \"2026-01-31T23:59:59-08:00\",\n      \"Uri\": \"http://QBoioQboBMsJxpw.tqdhv5cROw4reFEHYdsmZKvxErnqR-v\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c37e20c6-a9fd-403c-bb47-d886ea07152b",
+          "name": "Retrieve a Promo Code",
+          "request": {
+            "name": "Retrieve a Promo Code",
+            "description": {
+              "content": "Returns the full details of a single promo code by its unique Id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "PromoCodes",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier assigned to the promo code."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7af63d19-1441-46dc-a616-d38bdb65aa06",
+              "name": "A single promo code object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "PromoCodes",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier assigned to the promo code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"8111554\",\n  \"Code\": \"HAZEL10OFF\",\n  \"State\": \"ACTIVE\",\n  \"Program\": {\n    \"Id\": \"21282\",\n    \"Name\": \"Acme's Creator Program\",\n    \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/21282\",\n    \"LogoUri\": \"/Mediapartners/<AccountSID>/Campaigns/21282/Logo\"\n  },\n  \"Advertiser\": {\n    \"Id\": \"1804207\",\n    \"Name\": \"Acme Corporation\",\n    \"Uri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207\",\n    \"LogoUri\": \"/Mediapartners/<AccountSID>/Advertisers/1804207/Logo\"\n  },\n  \"Deal\": {\n    \"Id\": \"92812\",\n    \"Name\": \"Summer Promotion\",\n    \"Uri\": \"/Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812\"\n  },\n  \"MatchMode\": \"RE\",\n  \"CreditRule\": \"INVOLVED\",\n  \"CreatedDate\": \"2023-12-12T03:28:40-08:00\",\n  \"StartDate\": \"2026-01-01T00:00:00-08:00\",\n  \"EndDate\": \"2026-01-31T23:59:59-08:00\",\n  \"Uri\": \"http://IZ.sogjSO9xlDBQ2GuNJfd\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01c23ee2-a9de-4a2e-939f-e78aca43d243",
+              "name": "No promo code exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "PromoCodes",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier assigned to the promo code."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e79f9780-be3e-436d-8d70-d50cc09ba0d3",
+    "name": "Partner Promo Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Promo Codes are discount codes assigned to your partner account by the brands you partner with.\nUse this API to surface available codes to your audience and to track which deals and programs each code belongs to.\n\nTypical workflow:\n\n1. **List Promo Codes** — discover the codes available to your account, optionally filtered by program, advertiser, deal, or date range.\n2. **Retrieve a Promo Code** — get the full details of a specific code by its Id.\n\nEach code links back to its Program, Advertiser, and (optionally) a Deal — use those references to fetch deeper context via the Partner Programs, Account, and Deals APIs.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

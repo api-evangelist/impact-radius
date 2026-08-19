@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Catalogs API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Catalogs",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filters catalogs by the campaign (brand program) they belong to."
+              }
+            ]
+          },
+          "docs": "Returns a list of all product catalogs available to you."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Catalogs/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique impact.com identifier for the catalog."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing catalog using its unique ID."
+        },
+        {
+          "info": {
+            "name": "List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Catalogs/:CatalogId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "The unique impact.com identifier for the catalog."
+              },
+              {
+                "name": "Query",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression to narrow the list of items. Uses a comparison syntax against item attributes (e.g., `CurrentPrice > 50`, `Manufacturer == 'Wayne Enterprises'`)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all items in the specified catalog."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Catalogs/:CatalogId/Items/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "The unique impact.com identifier for the catalog."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the catalog item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific item within a catalog using its unique ID."
+        },
+        {
+          "info": {
+            "name": "Search Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Catalogs/ItemSearch",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Keyword",
+                "value": "Wayne",
+                "type": "query",
+                "description": "Keyword to search for across all catalog item fields (name, description, manufacturer, etc.). If omitted, all items across all catalogs are returned."
+              },
+              {
+                "name": "PageSize",
+                "value": "50",
+                "type": "query",
+                "description": "Number of items to return per page. Defaults to 100."
+              },
+              {
+                "name": "Page",
+                "value": "1",
+                "type": "query",
+                "description": "Page number to retrieve (1-based). Use with `PageSize` to paginate through large result sets."
+              }
+            ]
+          },
+          "docs": "Searches for items across all available catalogs using a keyword. Unlike the per-catalog `/Items` endpoint, this endpoint searches across all catalogs in a single request and returns a paginated list of matching items."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

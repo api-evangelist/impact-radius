@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Deals",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Deals",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filter deals by the ID of the associated campaign."
+              },
+              {
+                "name": "Scope",
+                "value": "",
+                "type": "query",
+                "description": "Filter deals by the extent to which they apply."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filter deals by their current state."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filter deals by what they do."
+              }
+            ]
+          },
+          "docs": "Returns a list of your deals, which can be filtered by CampaignId, Scope, State, and Type."
+        },
+        {
+          "info": {
+            "name": "Create a Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Deals",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new deal with specified attributes and restrictions."
+        },
+        {
+          "info": {
+            "name": "Get Deal Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Deals/:DealId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the deal."
+              }
+            ]
+          },
+          "docs": "Retrieves the object of an existing deal by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Deals/:DealId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the deal to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the specified deal by setting the values of the parameters passed. Any parameters not provided will be left unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete a Deal",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Deals/:DealId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the deal to delete."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a deal. This cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

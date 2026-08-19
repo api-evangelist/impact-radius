@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Tasks",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/Tasks",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the program to retrieve tasks from."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by one or more comma-separated task types. For compliance violations, use COMPLIANCE. Values match the Type field in the Task response."
+              },
+              {
+                "name": "SubtypeName",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by one or more comma-separated subtype names. Requires the Type parameter. For compliance violations, common values are Search, Promo, Social, and Content. Passing an unrecognized subtype returns a validation error."
+              },
+              {
+                "name": "DateCreatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Only return tasks created on or after this date (ISO 8601)."
+              },
+              {
+                "name": "DateCreatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Only return tasks created on or before this date (ISO 8601)."
+              },
+              {
+                "name": "DateLastUpdatedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Only return tasks updated before this date (ISO 8601)."
+              },
+              {
+                "name": "DateLastUpdatedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Only return tasks updated after this date (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of existing, non-archived tasks for a specific program."
+        },
+        {
+          "info": {
+            "name": "Get Task Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/Tasks/:TaskId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "TaskId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the task."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing task by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

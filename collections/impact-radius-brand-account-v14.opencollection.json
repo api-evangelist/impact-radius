@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Account Information",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Company Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of the brand account, determined by the API keys used for authentication."
+        },
+        {
+          "info": {
+            "name": "Update Company Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.\n\nNote: The following parameters cannot be updated via API: Timezone, Currency, RegisteredForIndirectTax, IndirectTaxNumber. The following parameters can only be updated in the platform: Industry, FinancialContact, TechnicalContact, SecurityContact, CommercialContact.\n\nThe corporate address fields (`CorporateAddressLine1`, `CorporateAddressLine2`, `CorporateAddressCity`, `Corpor"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Legal Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Legal Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/LegalEntities",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of legal entities associated with this account."
+        },
+        {
+          "info": {
+            "name": "Get a Single Legal Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/LegalEntities/:LegalEntityId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              },
+              {
+                "name": "LegalEntityId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the legal entity."
+              }
+            ]
+          },
+          "docs": "Retrieves a single legal entity associated with this account by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,98 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Tracking Links
+  description: API for programmatically generating tracking links for partners within a specified program. This can be used to create standard links, deep links, or custom vanity links.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/TrackingLinks:
+    post:
+      summary: Generate a Tracking Link
+      description: Creates a new tracking link for a specified media partner within a program.
+      operationId: createTrackingLink
+      tags:
+      - Tracking Links
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier for the program.
+        schema:
+          type: integer
+      - name: MediaPartnerId
+        in: query
+        required: true
+        description: The unique identifier for the media partner.
+        schema:
+          type: integer
+      requestBody:
+        description: The specifications for the tracking link to be generated.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrackingLinkCreate'
+      responses:
+        '200':
+          description: The tracking link was generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TrackingURL:
+                    type: string
+                    format: uri
+                    description: The generated tracking link URL.
+                    example: https://example.sjv.io/c/123456/98765/101010
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Programs/{ProgramId}/TrackingLinks' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    TrackingLinkCreate:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Regular
+          - Vanity
+          default: Regular
+          description: The type of tracking link to create. 'Vanity' allows for a `CustomPath`.
+        CustomPath:
+          type: string
+          description: A custom path for a 'Vanity' link (e.g., 'MyCustomLink').
+          example: summer-sale
+        AdId:
+          type: integer
+          description: The unique ID of the ad to associate with the link. If omitted, redirects to the program's default landing page.
+          example: 656565
+        DeepLink:
+          type: string
+          format: uri
+          description: A specific URL to redirect the user to, overriding the default.
+          example: https://www.acme.com/products/tennis-balls
+        MediaPartnerPropertyId:
+          type: integer
+          description: The unique ID of the partner's media property where the link will be used.
+          example: 12345
+x-default-client: cURL

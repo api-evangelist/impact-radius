@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Partners",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Partners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/MediaPartners",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more specific partner IDs, provided as a comma-separated list."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to list only partners joined to the specified campaign (program)."
+              },
+              {
+                "name": "GroupId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to list only partners that are part of a specific partner group."
+              },
+              {
+                "name": "Country",
+                "value": "",
+                "type": "query",
+                "description": "Filter to list only partners from a specific country. Possible values: `US`, `UK`, `CANADA`, `AUSTRALIA`, `GERMANY`, `FRANCE`, `AFGHANISTAN`, `ALAND ISLANDS`, `ALBANIA`, `ALGERIA`, `AMERICANSAMOA`, `ANDORRA`, `ANGOLA`, `ANGUILLA`, `ANTARCTICA`, `ANTIGUABARBUDA`, `ARGENTINA`, `ARMENIA`, `ARUBA`, `AUSTRIA`, `AZERBAIJAN`, `BAHAMAS`, `BAHRAIN`, `BANGLADESH`, `BARBADOS`, `BELARUS`, `BELGIUM`, `BELIZE`, `BENIN`, `BERMUDA`, `BHUTAN`, `BOLIVIA`, `BOSNIAHERZEGOVINA`, `BOTSWANA`, `BRAZIL`, `BRITISHINDIANOCEANTERRITORY`, `BRUNEIDARUSSALAM`, `BULGARIA`, `BURKINAFASO`, `BURUNDI`, `CAMBODIA`, `CAMEROON`, `CAPVERDE`, `CAYMANISLANDS`, `CENTRALAFRICANREPUBLIC`, `CHAD`, `CHILE`, `CHINA`, `CHRISTMASISLAND`, `COCOSISLANDS`, `COLOMBIA`, `COMOROS`, `CONGO`, `DEMOCRATICREPUBLICCONGO`, `COOKISLANDS`, `COSTARICA`, `IVORYCOAST`, `CROATIA`, `CUBA`, `CYPRUS`, `CZECHREPUBLIC`, `DENMARK`, `DIJIBOUTI`, `DOMINICA`, `DOMINICANREPUBLIC`, `ECUADOR`, `EGYPT`, `ELSALVADOR`, `EQUATORIALGUINEA`, `ERITREA`, `ESTONIA`, `ETHIOPIA`, `FALKLANDISLANDS`, `FAROEISLANDS`, `FIJI`, `FINLAND`, `FRENCHGUIANA`, `FRENCHPOLYNESIA`, `FRENCHSOUTHERNTERRITORIES`, `GABON`, `GAMBIA`, `GEORGIA`, `GHANA`, `GIBRALTAR`, `GREECE`, `GREENLAND`, `GRENADA`, `GUADELOUPE`, `GUAM`, `GUATEMALA`, `GUERNSEY`, `GUINEA`, `GUINEABISSAU`, `GUYANA`, `HAITI`, `VATICAN`, `HONDURAS`, `HONGKONG`, `HUNGARY`, `ICELAND`, `INDIA`, `INDONESIA`, `IRAN`, `IRAQ`, `IRELAND`, `ISLE OF MAN`, `ISRAEL`, `ITALY`, `JAMAICA`, `JAPAN`, `JERSEY`, `JORDAN`, `KAZAKHSTAN`, `KENYA`, `KIRIBATI`, `SOUTHKOREA`, `KUWAIT`, `KYRGYZSTAN`, `LAOS`, `LATVIA`, `LEBANON`, `LESOTHO`, `LIBERIA`, `LIBYA`, `LICHTENSTEIN`, `LITHUANIA`, `LUXEMBOURG`, `MACAO`, `MACEDONIA`, `MADAGASCAR`, `MALAWI`, `MALAYSIA`, `MALDIVES`, `MALI`, `MALTA`, `MARSHALLISLANDS`, `MARTINIQUE`, `MAURITANIA`, `MAURITIUS`, `MAYOTTE`, `MEXICO`, `MICRONESIA`, `MOLDOVA`, `MONACO`, `MONGOLIA`, `MONTENEGRO`, `MONTSERRAT`, `MOROCCO`, `MOZAMBIQUE`, `MYANMAR`, `NAMIBIA`, `NAURU`, `NEPAL`, `NETHERLANDS`, `NETHERLANDSANTILLES`, `NEWCALEDONIA`, `NEWZEALAND`, `NICARAGUA`, `NIGER`, `NIGERIA`, `NIUE`, `NORFOLKISLAND`, `NORTHKOREA`, `NORTHERNMARIANAISLANDS`, `NORWAY`, `OMAN`, `PAKISTAN`, `PALAU`, `PALESTINIANTERRITORY`, `PANAMA`, `PAPUANEWGUINEA`, `PARAGUAY`, `PERU`, `PHILIPPINES`, `PITCAIRN`, `POLAND`, `PORTUGAL`, `PUERTORICO`, `QATAR`, `REUNION`, `ROMANIA`, `RUSSIA`, `RWANDA`, `SAINTHELENA`, `SAINTKITTSNEVIS`, `SAINTLUCIA`, `SAINTPIERREMIQUELON`, `SAINTVINCENTGRENADINES`, `SAMOA`, `SANMARINO`, `SAOTOME`, `SAUDIARABIA`, `SENEGAL`, `SERBIA`, `YUGOSLAVIA`, `SEYCHELLES`, `SIERRALEONE`, `SINGAPORE`, `SLOVAKIA`, `SLOVENIA`, `SOLOMONISLANDS`, `SOMALIA`, `SOUTHAFRICA`, `SPAIN`, `SRILANKA`, `SUDAN`, `SURINAME`, `SVALBARDJANMAYEN`, `SWAZILAND`, `SWEDEN`, `SWITZERLAND`, `SYRIA`, `TAIWAN`, `TAJIKISTAN`, `TANZANIA`, `THAILAND`, `TIMOR`, `TOGO`, `TOKELAU`, `TONGA`, `TRINIDADTOBAGO`, `TUNISIA`, `TURKEY`, `TURKMENISTAN`, `TURKSCAICOSISLANDS`, `TUVALU`, `UGANDA`, `UKRAINE`, `UAE`, `UNITED STATES MINOR OUTLYING ISLANDS`, `URUGUAY`, `UZBEKISTAN`, `VANUATU`, `VENEZUELA`, `VIETNAM`, `BRITISHVIRGINISLANDS`, `USVIRGINISLANDS`, `WALLISFUTUNA`, `WESTERNSAHARA`, `YEMEN`, `ZAMBIA`, `ZIMBABWE`."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by partners whose DateLastUpdated occurs after this date (ISO 8601)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter by partners whose DateLastUpdated occurs before this date (ISO 8601)."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the state of the partner account."
+              },
+              {
+                "name": "RelationshipState",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the partner's current relationship with your program. Possible values:\n- `ACTIVE` — The partner has an active relationship with you.\n- `INACTIVE` — The partner doesn't have a contractual relationship with you."
+              }
+            ]
+          },
+          "docs": "Returns a list of all your partners, sorted by creation date. The list can be filtered by various parameters such as Campaign, Group, Country, and State."
+        },
+        {
+          "info": {
+            "name": "Create a Direct Partner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/MediaPartners",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new direct partner account, which automatically joins your program with a specified active contract."
+        },
+        {
+          "info": {
+            "name": "Get Partner Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/MediaPartners/:PartnerId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PartnerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the partner."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing partner by their unique ID."
+        },
+        {
+          "info": {
+            "name": "Update Partner Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/MediaPartners/:PartnerId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PartnerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the partner to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "MPValue1",
+                  "value": ""
+                },
+                {
+                  "name": "MPValue2",
+                  "value": ""
+                },
+                {
+                  "name": "MPValue3",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the custom `MPValue{i}` fields for a specified partner. These values can be used in tracking links."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

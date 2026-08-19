@@ -1,0 +1,357 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Product Catalogs",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filter catalogs by the ID of the program (campaign) they belong to."
+              },
+              {
+                "name": "Status",
+                "value": "",
+                "type": "query",
+                "description": "Filter catalogs by their current state of use."
+              }
+            ]
+          },
+          "docs": "Returns a list of all your product catalogs, which can be filtered by CampaignId or Status."
+        },
+        {
+          "info": {
+            "name": "Get Catalog Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing catalog using its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update Catalog Pull Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Programmatically updates a catalog's \"Pull from URL\" settings to automate data synchronization from a remote file."
+        },
+        {
+          "info": {
+            "name": "Upload a Catalog File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Upload",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "data",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a full catalog file via API, overwriting the existing catalog. This avoids updating items record-by-record.\n\n**Prerequisites:**\n- The catalog must already exist.\n- The file must be provided as multipart/form-data (field name `data`), not raw data in the request body.\n- If the catalog uses the Google Merchant Center (GMC) format, the file must be a TXT (tab-delimited) or XML file.\n- If the catalog uses a custom format, the file must be a CSV (comma-delimited) or XML file.\n- The file must "
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              },
+              {
+                "name": "Keyword",
+                "value": "",
+                "type": "query",
+                "description": "Search for a word or phrase across all item attributes."
+              },
+              {
+                "name": "PromotionIds",
+                "value": "",
+                "type": "query",
+                "description": "Use 'null' to find items with no promotions, or '!=null' for items with promotions."
+              },
+              {
+                "name": "Query",
+                "value": "",
+                "type": "query",
+                "description": "Advanced search query using operators like '>', '<', '=', '!=', '~', 'AND', 'OR', 'IN'. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+              },
+              {
+                "name": "SortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort results by a specific attribute (e.g., 'CurrentPrice'). Use SortOrder for direction. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+              }
+            ]
+          },
+          "docs": "Returns a list of items for a specific catalog, with support for keyword search, filtering, and sorting. This endpoint has a paging limit of 20,000 total records."
+        },
+        {
+          "info": {
+            "name": "Create a Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new item within a specified catalog."
+        },
+        {
+          "info": {
+            "name": "Get Catalog Item Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Items/:CatalogItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              },
+              {
+                "name": "CatalogItemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing catalog item by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a Single Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Items/:CatalogItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              },
+              {
+                "name": "CatalogItemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog item."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a single specified catalog item by setting the values of the parameters passed."
+        },
+        {
+          "info": {
+            "name": "Delete a Catalog Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/Items/:CatalogItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              },
+              {
+                "name": "CatalogItemId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog item."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a catalog item. This cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Bulk Update Catalog Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Catalogs/:CatalogId/BulkUpdate",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Your unique account identifier."
+              },
+              {
+                "name": "CatalogId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the catalog."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates multiple catalog items in a single request. The request body must be a JSON array of item objects, with each object containing its CatalogItemId. A maximum of 500 products can be updated per call."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

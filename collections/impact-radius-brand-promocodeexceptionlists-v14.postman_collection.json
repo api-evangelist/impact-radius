@@ -1,0 +1,1135 @@
+{
+  "item": [
+    {
+      "id": "0d29451c-a164-4f39-afce-56dce5f21b5a",
+      "name": "Promo Code Exception Lists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "81daac0e-d6c5-467a-80ea-96cc0f049bb5",
+          "name": "Create a Promo Code Exception List",
+          "request": {
+            "name": "Create a Promo Code Exception List",
+            "description": {
+              "content": "Creates a new, empty list for promo codes that will have exceptional payout rates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of event type IDs to associate with this list."
+                },
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<string>",
+                  "description": "(Required) The program ID this list applies to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) The name for the new exception list."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a99138e-9384-4203-8c10-16f2328e459a",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Comma-separated list of event type IDs to associate with this list.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "18500"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The program ID this list applies to.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name for the new exception list.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "Excluded-Influencer-Codes"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://zkvwklrNUPnGz.ciqugEPSD9C1Wq8t-hz8USR?\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8dc78780-8032-4063-b2be-f9c1e7a29c50",
+          "name": "Get Promo Code Exception List Details",
+          "request": {
+            "name": "Get Promo Code Exception List Details",
+            "description": {
+              "content": "Retrieves the details of an existing promo code exception list by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab6fabd6-53e7-4619-9723-d69356ec0e99",
+              "name": "A single promo code exception list object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"99999\",\n  \"Name\": \"Excluded-Influencer-Codes\",\n  \"State\": \"DEACTIVATED\",\n  \"CampaignId\": \"1000\",\n  \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n  \"DeactivationDate\": \"2026-12-31T23:59:59-08:00\",\n  \"ActionTrackers\": [\n    {\n      \"Id\": \"18500\",\n      \"Name\": \"Online Sale\"\n    },\n    {\n      \"Id\": \"18500\",\n      \"Name\": \"Online Sale\"\n    }\n  ],\n  \"NumberOfItems\": \"50\",\n  \"ItemsUri\": \"https://DPFwvhiMbkqeFaLeeKeCwNaBOI.hgwEBSi9nbtCXWj9Ga2ksrz+nUAioCJid.UG+TRqGUHfQRhW5MaLsL,pXVTyN3CK\",\n  \"Uri\": \"http://bWjWjOYCurvqHfFpiktYpEUeAhE.tjctf+phSs7XPn0zt2jBeF?ranjgtp&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6d646c4-8812-42c5-86b6-343c33fd0924",
+          "name": "Update a Promo Code Exception List",
+          "request": {
+            "name": "Update a Promo Code Exception List",
+            "description": {
+              "content": "Updates the specified promo code exception list's name or associated action trackers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ActionTrackerId",
+                  "value": "<string>",
+                  "description": "A new comma-separated list of event type IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "A new name for the exception list."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ad08d361-b0c5-4555-bc0e-960cf4051581",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A new comma-separated list of event type IDs.",
+                        "type": "text/plain"
+                      },
+                      "key": "ActionTrackerId",
+                      "value": "18500"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A new name for the exception list.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "Excluded-Influencer-Codes"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://zkvwklrNUPnGz.ciqugEPSD9C1Wq8t-hz8USR?\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "76f1ed2f-5055-4910-91a2-e7f966fcb607",
+      "name": "Promo Code Exception List Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bd7b6fff-1836-4036-8681-5a519fd0b5b5",
+          "name": "List Items in a Promo Code Exception List",
+          "request": {
+            "name": "List Items in a Promo Code Exception List",
+            "description": {
+              "content": "Returns a list of all promo code items within a specific exception list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Value",
+                  "value": "<string>",
+                  "description": "Filter items by the 'Value' (the promo code itself)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d45743d-ad0f-41a7-9789-5149b08cc280",
+              "name": "A paginated list of exception list item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Value",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExceptionListItems\": [\n    {\n      \"Id\": \"1001\",\n      \"Value\": \"SUMMER25\",\n      \"Name\": \"Summer 25% Off\",\n      \"MatchMode\": \"EQ\",\n      \"ListId\": \"99999\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"Uri\": \"https://zXBUJSBQexOcP.cbUVGFb0cXLBDFqCNrVkXlvAay1MoF2aGunAqSnpQ08zPHgaapvMM3cxKJrA\"\n    },\n    {\n      \"Id\": \"1001\",\n      \"Value\": \"SUMMER25\",\n      \"Name\": \"Summer 25% Off\",\n      \"MatchMode\": \"REGEX\",\n      \"ListId\": \"99999\",\n      \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n      \"Uri\": \"http://skNVUtjefXFgPDhmTEHUC.reiN6UcR?qc&kohzf=3ThfA&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bed9597-98f4-415f-856a-38c2556afa48",
+          "name": "Create an Item in a Promo Code Exception List",
+          "request": {
+            "name": "Create an Item in a Promo Code Exception List",
+            "description": {
+              "content": "Creates a new promo code item for an exception list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "Value",
+                  "value": "<string>",
+                  "description": "(Required) The promo code value to add to the list."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bcb91e7e-51a8-4466-84ea-674540a8c2b4",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The promo code value to add to the list.",
+                        "type": "text/plain"
+                      },
+                      "key": "Value",
+                      "value": "SUMMER25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://zkvwklrNUPnGz.ciqugEPSD9C1Wq8t-hz8USR?\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "151708fa-6327-4eb7-825b-1ccb959cf015",
+          "name": "Delete All Items from a Promo Code Exception List",
+          "request": {
+            "name": "Delete All Items from a Promo Code Exception List",
+            "description": {
+              "content": "Permanently deletes all items in a promo code exception list. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01871d0c-5bf7-4765-b1d8-5620a0896c78",
+              "name": "The resource was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3e5de76-8645-4b50-a548-2e0f1b959cba",
+          "name": "Get Promo Code Exception List Item Details",
+          "request": {
+            "name": "Get Promo Code Exception List Item Details",
+            "description": {
+              "content": "Retrieves the details of a single item from a promo code exception list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId",
+                "Items",
+                ":ItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ItemId",
+                  "description": "(Required) The unique identifier for the promo code exception list item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "902c7cfb-e426-449b-a9f6-462848ab7f83",
+              "name": "A single exception list item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId",
+                    "Items",
+                    ":ItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ItemId",
+                      "description": "(Required) The unique identifier for the promo code exception list item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"1001\",\n  \"Value\": \"SUMMER25\",\n  \"Name\": \"Summer 25% Off\",\n  \"MatchMode\": \"REGEX\",\n  \"ListId\": \"99999\",\n  \"CreatedDate\": \"2026-01-15T10:00:00-08:00\",\n  \"Uri\": \"http://jTptRTSxWKqPSSqmJRcGYIRdnwVKasD.nqya,?skfgcq=pG&q=Q&wgbs=p&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8861d24-1b7a-4e8d-b160-12317972623a",
+          "name": "Delete a Promo Code Exception List Item",
+          "request": {
+            "name": "Delete a Promo Code Exception List Item",
+            "description": {
+              "content": "Permanently deletes a single item from a promo code exception list. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":ListId",
+                "Items",
+                ":ItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ItemId",
+                  "description": "(Required) The unique identifier for the promo code exception list item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff4d3bc8-8100-4466-a5d5-cb3da0839a0e",
+              "name": "The resource was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":ListId",
+                    "Items",
+                    ":ItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ItemId",
+                      "description": "(Required) The unique identifier for the promo code exception list item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "755b742d-623b-4032-8290-3c0da1a7f9d6",
+    "name": "Brand API - Promo Code Exception Lists",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing Promo Code Exception Lists, which are used to pay partners different rates based on the promo codes associated with actions they drove.",
+      "type": "text/plain"
+    }
+  }
+}

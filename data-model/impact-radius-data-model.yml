@@ -1,0 +1,451 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/ (67 documents, 242 operations, 181 component schemas)
+docs:
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+- https://integrations.impact.com/partner-api-reference/partner-v15
+- https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+description: >-
+  Entity-relationship graph for the impact.com platform, derived mechanically from $ref links and
+  id-reference fields in the harvested OpenAPI documents. Two distinct object graphs live under
+  one brand: the partnership graph on api.impact.com (Campaign/Program at the centre) and the
+  Advocate referral graph on app.referralsaasquatch.com (Tenant/User at the centre). They are
+  joined only at the product level, not by shared identifiers.
+identifiers:
+  style: numeric-and-opaque
+  account_key:
+    name: AccountSID
+    description: >-
+      Path-level tenant key on every api.impact.com route. Doubles as the HTTP Basic username, so
+      identity and addressing are the same value.
+    example_shape: IR + alphanumeric (e.g. IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1)
+  advocate_key:
+    name: tenant_alias
+    description: Path-level tenant key on every app.referralsaasquatch.com/api/v1 route.
+  conventions:
+  - "Partnership graph uses PascalCase foreign keys ending in Id (CampaignId, MediaPartnerId, AdId)."
+  - "Advocate graph uses camelCase foreign keys ending in Id (programId, userId, accountId, referralId)."
+  - "No global URN or type-prefixed id scheme (no `act_`/`cus_` style prefixes) is used anywhere."
+  - >-
+    CampaignId and Program are the same concept under two names — Program.CampaignId is the join,
+    a legacy of the platform's Campaign-era vocabulary.
+graphs:
+- name: partnership
+  host: https://api.impact.com
+  root: Campaign / Program
+  audiences: [brand, partner, agency]
+- name: advocate
+  host: https://app.referralsaasquatch.com/api/v1
+  root: Tenant / Account / User
+  audiences: [brand]
+entities:
+- name: Program
+  aliases: [Campaign]
+  graph: partnership
+  fields: 43
+  key: CampaignId
+  description: >-
+    The partnership program. Nearly every partnership-graph object hangs off CampaignId, making
+    it the required filter on most list operations.
+  operations: [listPrograms, getProgramById, retrieveProgram, retrieveProgramLogo]
+- name: Partner
+  aliases: [MediaPartner, Publisher]
+  graph: partnership
+  fields: 25
+  key: MediaPartnerId
+  operations: [listPartners, createPartner, getPartnerById, updatePartner]
+- name: Contract
+  graph: partnership
+  fields: 20
+  description: >-
+    The commercial agreement binding a Partner to a Program, carrying CampaignTerms, Terms,
+    TemplateTerms and ScheduledTerms. Accept/decline is the partner-application workflow.
+  operations: [listContracts, getContractById, acceptContract, declineContract, retrieveContract]
+- name: Action
+  aliases: [Conversion]
+  graph: partnership
+  fields: 42
+  description: >-
+    The conversion event credited to a partner. The revenue object of the platform — reversal,
+    modification and payout all resolve here.
+  operations: [listActions, getActionById, updateActionOrItems, reverseAction, submitConversion, retrieveAction]
+- name: ActionItem
+  graph: partnership
+  fields: 13
+  description: SKU-level line item within an Action.
+  operations: [listActionItems, getActionItemBySku, retrieveActionItem]
+- name: ActionUpdate
+  graph: partnership
+  fields: 45
+  description: >-
+    Append-only changelog of every modification made to Actions. The audit feed a reconciliation
+    agent should poll rather than diffing Actions itself.
+  operations: [listActionUpdates, getActionUpdateById, retrieveActionUpdate]
+- name: ActionInquiry
+  graph: partnership
+  fields: 26
+  description: A partner-raised dispute about a missing or incorrect Action.
+  operations: [listActionInquiries, createActionInquiry, updateActionInquiry, getActionInquiryById]
+- name: Ad
+  graph: partnership
+  fields: 93
+  operations: [listAds, createAd, getAdById, updateAd, retrieveAd, retrieveAdCode, retrieveAdIFrameCode, retrieveAdTrackingLink]
+- name: Click
+  graph: partnership
+  fields: 36
+  operations: [getClickById, exportClicks, retrieveClick]
+- name: Catalog
+  graph: partnership
+  fields: 20
+  operations: [listCatalogs, getCatalogById, updateCatalogPullSettings, uploadCatalogFile, retrieveCatalog]
+- name: CatalogItem
+  graph: partnership
+  fields: 74
+  operations: [listCatalogItems, createCatalogItem, getCatalogItemById, updateCatalogItem, deleteCatalogItem, bulkUpdateCatalogItems, searchCatalogItems]
+- name: PromoCode
+  graph: partnership
+  fields: 38
+  operations: [listPromoCodes, createPromoCode, getPromoCodeById, expirePromoCode, retrievePromoCode]
+- name: Deal
+  graph: partnership
+  fields: 46
+  operations: [listDeals, createDeal, getDealById, updateDeal, deleteDeal, retrieveDeal]
+- name: Invoice
+  graph: partnership
+  fields: 13
+  description: Recipient-generated invoice with LineItems and DetailedLineItems.
+  operations: [listInvoices, getInvoiceById, downloadInvoicePdf, retrieveInvoice, downloadInvoice]
+- name: Job
+  graph: partnership
+  fields: 17
+  description: >-
+    Async work unit for exports, bulk uploads and long-running reports. The platform's only
+    long-running-operation pattern.
+  operations: [listJobs, getJobById, downloadJobResult, replayJob, retrieveJobStatus, downloadJobResults]
+- name: Report
+  graph: partnership
+  fields: 9
+  operations: [listAllReports, runReport, getReportMetadata, exportReport, listReports, retrieveMetadata, exportReports]
+- name: MediaProperty
+  graph: partnership
+  fields: 20
+  description: A partner's registered site, app or social property, with Followers/Installs metrics.
+  operations: [listMediaProperties, createMediaProperty, retrieveMediaProperty, updateMediaProperty, deleteMediaProperty]
+- name: Store
+  graph: partnership
+  fields: 9
+  operations: [listStores, retrieveStore, listStoreItems]
+- name: ExceptionList
+  graph: partnership
+  fields: 11
+  description: Allow/deny list applied to a Program; PromoCodeExceptionList is the promo-code variant.
+  operations: [listExceptionLists, createExceptionList, getExceptionListById, updateExceptionList, retrieveExceptionList]
+- name: PartnerGroup
+  graph: partnership
+  fields: 4
+  operations: [listPartnerGroups, createPartnerGroup, getPartnerGroupById, updatePartnerGroup, deletePartnerGroup]
+- name: TrackingValueRequest
+  graph: partnership
+  fields: 58
+  description: Partner-submitted request to adjust the tracked value of a conversion; approved or rejected by the brand.
+  operations: [listTrackingValueRequests, getTrackingValueRequestById, approveTrackingValueRequest, rejectTrackingValueRequest]
+- name: RoutingRule
+  graph: partnership
+  fields: 16
+  operations: [listRoutingRules, getRoutingRuleById]
+- name: Task
+  graph: partnership
+  fields: 15
+  description: Workflow item with Comments, Attachments, assignee and a polymorphic Reference.
+  operations: [listTasks, getTaskById]
+- name: Note
+  graph: partnership
+  fields: 10
+  operations: [listNotes, createNote, getNoteById, updateNote, deleteNote]
+- name: Contact
+  graph: partnership
+  fields: 19
+  operations: [listContacts, createContact, getContactById, updateContact, deleteContact, listUnsubscribedContacts, unsubscribeContact]
+- name: CompanyInformation
+  graph: partnership
+  fields: 35
+  description: >-
+    Account profile shared across Brand, Partner and Agency, carrying seven typed contact roles
+    (Commercial, Financial, Security, Technical) and four addresses.
+  operations: [getCompanyInformation, updateCompanyInformation, retrieveCompanyInformation]
+- name: LegalEntity
+  graph: partnership
+  fields: 8
+  operations: [listLegalEntities, getLegalEntity]
+- name: Advertiser
+  graph: partnership
+  fields: 25
+  description: Agency-scope view of a managed brand account.
+  operations: [listAdvertisers, getAdvertiser]
+- name: TaxDocument
+  graph: partnership
+  description: Partner tax compliance documents and identity verification.
+  operations: [retrieveLatestTaxDocument, createTaxDocument, retrieveTaxDocumentById, listAllTaxDocuments, completeTaxDocumentSubmission, createIdentityVerificationSession]
+- name: WithdrawalSettings
+  graph: partnership
+  operations: [retrieveWithdrawalSettings, updateWithdrawalSettings, retrieveRequiredBankingFields]
+- name: Account
+  graph: advocate
+  fields: 4
+  key: accountId
+  description: The Advocate account grouping users; capped at 1,000 users per accountid (error RS013).
+  operations: [upsertAccount, getAccount]
+- name: User
+  graph: advocate
+  fields: 32
+  key: userId
+  description: >-
+    The referral participant (also called Contact, Lead or Participant). Carries custom fields,
+    referral code and share links; PII is retrieved through a distinct operation.
+  operations: [createUser, getUser, getUserPII, listUsers, blockUser, unblockUser, findUserByReferralCode, openUserUpsert, openCreateUser, openGetUser, openDeleteUser, openGetUserByCode]
+- name: Referral
+  graph: advocate
+  fields: 19
+  description: The connection between referrerUser and referredUser, with the referredReward.
+  operations: [listReferrals, getReferral, moderateReferrals, openListReferrals]
+- name: Reward
+  graph: advocate
+  fields: 27
+  description: An issued incentive with redemptions; can be debited or cancelled.
+  operations: [getRewards, lookupReward, debitReward, cancelReward, createReward]
+- name: RewardBalance
+  graph: advocate
+  fields: 12
+  operations: [listRewardBalances, debitRewardBalance]
+- name: Code
+  aliases: [ReferralCode]
+  graph: advocate
+  fields: 5
+  operations: [getCode, openValidateCode, openApplyCode]
+- name: Sharelink
+  graph: advocate
+  fields: 15
+  description: >-
+    Per-engagement-medium share URLs (EMAIL, EMBED, HOSTED, MOBILE, POPUP), each with a legacy
+    and a current representation.
+  operations: [getSharelinks, getShareURLs, openGetShareURLs]
+- name: Export
+  graph: advocate
+  description: Async Advocate data export.
+  operations: [listExports, createExport, getExport, downloadExport]
+- name: Webhook
+  graph: advocate
+  operations: [createWebhook, listWebhooks, deleteWebhook, testWebhook]
+relationships:
+- from: Program
+  to: Advertiser
+  type: belongs_to
+  via: AdvertiserId
+- from: Contract
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: Contract
+  to: Partner
+  type: belongs_to
+  via: PartnerId
+- from: Program
+  to: Contract
+  type: has_many
+  via: CampaignId
+- from: Action
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: Action
+  to: Partner
+  type: belongs_to
+  via: MediaPartnerId
+- from: Action
+  to: Ad
+  type: belongs_to
+  via: AdId
+- from: Action
+  to: ActionItem
+  type: has_many
+  via: SKU line items
+- from: Action
+  to: ActionState
+  type: has_one
+  via: State ($ref)
+- from: ActionUpdate
+  to: Action
+  type: belongs_to
+  via: ActionId
+- from: ActionUpdate
+  to: Contract
+  type: belongs_to
+  via: ContractId
+- from: ActionInquiry
+  to: Action
+  type: belongs_to
+  via: ActionId
+- from: ActionInquiry
+  to: Partner
+  type: belongs_to
+  via: MediaPartnerId
+- from: ActionInquiry
+  to: Comment
+  type: has_many
+  via: Comments ($ref)
+- from: Ad
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: Ad
+  to: Deal
+  type: belongs_to
+  via: DealId
+- from: Click
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: Click
+  to: Ad
+  type: belongs_to
+  via: AdId
+- from: Catalog
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: CatalogItem
+  to: Catalog
+  type: belongs_to
+  via: CatalogId
+- from: CatalogItem
+  to: Promotion
+  type: has_many
+  via: PromotionIds
+- from: PromoCode
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: PromoCode
+  to: Partner
+  type: belongs_to
+  via: AssignedPartnerId
+- from: PromoCode
+  to: Deal
+  type: belongs_to
+  via: DealId
+- from: Deal
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: Deal
+  to: DealProduct
+  type: has_many
+  via: Products ($ref)
+- from: Invoice
+  to: Partner
+  type: belongs_to
+  via: MediaId
+- from: Invoice
+  to: LineItem
+  type: has_many
+  via: LineItems ($ref)
+- from: Invoice
+  to: DetailedLineItem
+  type: has_many
+  via: DetailedLineItems ($ref)
+- from: Job
+  to: Program
+  type: belongs_to
+  via: ProgramId
+- from: ExceptionList
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: TrackingValueRequest
+  to: Program
+  type: belongs_to
+  via: CampaignId
+- from: TrackingValueRequest
+  to: Partner
+  type: belongs_to
+  via: MediaPartnerId
+- from: TrackingValueRequest
+  to: Deal
+  type: belongs_to
+  via: DealId
+- from: Contract
+  to: CampaignTerm
+  type: has_many
+  via: CampaignTerms ($ref)
+- from: CampaignTerm
+  to: EventPayout
+  type: has_many
+  via: EventPayouts ($ref)
+- from: EventPayout
+  to: PayoutGroup
+  type: has_many
+  via: PayoutGroups ($ref)
+- from: CompanyInformation
+  to: Contact
+  type: has_many
+  via: CommercialContact / FinancialContact / SecurityContact / TechnicalContact ($ref)
+- from: CompanyInformation
+  to: Address
+  type: has_many
+  via: BillingAddress / CorporateAddress / ShippingAddress ($ref)
+- from: MediaProperty
+  to: Partner
+  type: belongs_to
+  via: account scope (AccountSID path)
+- from: Task
+  to: User
+  type: has_many
+  via: AssigneeUser / CreatedBy / LastUpdatedBy ($ref)
+- from: User
+  to: Account
+  type: belongs_to
+  via: accountId
+- from: User
+  to: Sharelink
+  type: has_one
+  via: shareLinks ($ref)
+- from: Referral
+  to: User
+  type: has_many
+  via: referrerUser / referredUser ($ref)
+- from: Referral
+  to: Reward
+  type: has_one
+  via: referredReward ($ref)
+- from: Referral
+  to: Program
+  type: belongs_to
+  via: programId
+- from: Reward
+  to: User
+  type: belongs_to
+  via: userId
+- from: Reward
+  to: Referral
+  type: belongs_to
+  via: referralId
+- from: Reward
+  to: Redemption
+  type: has_many
+  via: redemptions ($ref)
+- from: Code
+  to: Program
+  type: belongs_to
+  via: programId
+counts:
+  schemas: 181
+  entities_documented: 40
+  relationships: 49
+  shared_across_families: >-
+    Action, ActionUpdate, ActionInquiry, Ad, Catalog, CatalogItem, Click, Contract, Deal, Invoice,
+    Job, Program, PromoCode, Report and User are all defined in more than one family's specs,
+    with the Partner view generally read-only against the Brand view's read-write.
+notes: >-
+  Derived only from schemas present in openapi/. Field counts are property counts on the named
+  component schema. Nothing here was taken from marketing pages or inferred beyond what a $ref or
+  an *Id field states.

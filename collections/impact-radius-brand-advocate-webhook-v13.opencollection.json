@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Webhook",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/subscription",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              }
+            ]
+          },
+          "docs": "Lists all the URLs that are currently subscribed to receive events via webhooks."
+        },
+        {
+          "info": {
+            "name": "Create a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/subscription",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes a URL to receive events via webhooks."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/subscription/:url",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "path",
+                "description": "The url of the endpoint that will be removed. URL-encode this field."
+              }
+            ]
+          },
+          "docs": "Removes a URL from receiving events via webhooks."
+        },
+        {
+          "info": {
+            "name": "Test a webhook subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/subscription/:url/test",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "path",
+                "description": "The url of the endpoint to send a test message to. URL-encode this field."
+              }
+            ]
+          },
+          "docs": "Sends a test event to the specified webhook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

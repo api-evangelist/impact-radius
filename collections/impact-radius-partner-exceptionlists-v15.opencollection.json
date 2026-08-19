@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Exception Lists API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exception Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ExceptionLists/:ExceptionListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing exception list using its unique ID. The ExceptionListId can be obtained from the Contracts API.\n"
+        },
+        {
+          "info": {
+            "name": "List Exception List Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ExceptionLists/:ExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "ExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the exception list whose items are being retrieved."
+              }
+            ]
+          },
+          "docs": "Returns a list of all items in a specific exception list. Each item defines a product category or SKU value that triggers an alternate commission rate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

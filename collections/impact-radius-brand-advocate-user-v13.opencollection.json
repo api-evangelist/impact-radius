@@ -1,0 +1,494 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - User",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup a user by Referral Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/user",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "referralCode",
+                "value": "",
+                "type": "query",
+                "description": "The `referralCode` of the user you want to retrieve."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Looks up a user based upon their `referralCode` and returns their personal information.\nThis method is useful for retrieving the user when only the Referral Code is available.\n"
+        },
+        {
+          "info": {
+            "name": "Create or Update a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/user",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This method creates or updates a User object by performing an atomic upsert operation.\nThis method will not create or update the Account linked by `accountId`.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Looks up a user based upon their `id` and returns their personal information.\nThis method just returns the details of the user in question, and not all associated properties like Rewards, Balances, or Referrals.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a user PII",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId/pii",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns details of the personally identifiable information stored in the impact.com system for a specific user.\n> 🚧 **Warning!** This method should only be used in connection with data protection and privacy compliance.\n"
+        },
+        {
+          "info": {
+            "name": "Block user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId/block",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Block a user from making successful referrals based upon their user and account `id`."
+        },
+        {
+          "info": {
+            "name": "Unblock user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/account/:accountId/user/:userId/unblock",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Unblock a user based upon their user and account `id`."
+        },
+        {
+          "info": {
+            "name": "List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/users",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "A search query that can be used to filter users by email, name or ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "A limit on the number of results returned."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "When included, offsets the first result returned in the list."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "List all of the users in your Advocate referral programs.\nThis method supports pagination and search queries.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a user (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+              },
+              {
+                "name": "extraFields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.\n"
+        },
+        {
+          "info": {
+            "name": "Create a user and account (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+              },
+              {
+                "name": "extraFields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This method creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n"
+        },
+        {
+          "info": {
+            "name": "User Upsert (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response. Cannot coexist with `extraFields`."
+              },
+              {
+                "name": "extraFields",
+                "value": "",
+                "type": "query",
+                "description": "The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "This method updates/creates a user and an account and returns the user object representing that newly created user/account.\nBecause this call creates a user, it requires either a write token or an API key.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a user (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user."
+              },
+              {
+                "name": "doNotTrack",
+                "value": "",
+                "type": "query",
+                "description": "Do not track this user (this user cannot be re-registered on the same account)."
+              },
+              {
+                "name": "preserveEmptyAccount",
+                "value": "",
+                "type": "query",
+                "description": "Do not delete accounts when all the users in the account are deleted."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).\n"
+        },
+        {
+          "info": {
+            "name": "Get a user by a referral code (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/user",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"`"
+              },
+              {
+                "name": "referralCode",
+                "value": "",
+                "type": "query",
+                "description": "The code with which to lookup the user."
+              }
+            ]
+          },
+          "docs": "Looks up a user based upon their `ReferralCode` and returns their personal information. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and disabled by default.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Users API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Users",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a URL-encoded string matching `FirstName`, `LastName`, or `Username`."
+              },
+              {
+                "name": "State",
+                "value": "",
+                "type": "query",
+                "description": "Filter the list of users by their account state."
+              }
+            ]
+          },
+          "docs": "Lists all users that have access to your partner account, sorted by join date with the first user to join appearing first."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Users/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the account user, in `I-XXXXXXX` format."
+              }
+            ]
+          },
+          "docs": "Retrieves a single account user by their unique Id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

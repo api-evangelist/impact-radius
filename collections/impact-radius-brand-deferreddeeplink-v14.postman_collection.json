@@ -1,0 +1,399 @@
+{
+  "item": [
+    {
+      "id": "b0fcab58-6524-4579-a638-a3c50d91cb83",
+      "name": "Deferred Deep Linking",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4e7621c-6a1f-4fbe-92d2-56fb233ed3b6",
+          "name": "Get Deferred Deep Link Information",
+          "request": {
+            "name": "Get Deferred Deep Link Information",
+            "description": {
+              "content": "Retrieves information about the deferred deep linking event after an app install has occurred. This call is performed when the user first opens the app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "DeferredDeepLink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) Unique identifier for your program (campaign) in impact.com."
+                },
+                {
+                  "disabled": false,
+                  "key": "ImpactAppId",
+                  "value": "<integer>",
+                  "description": "(Required) Unique ID assigned by impact.com to your app (System App ID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EventDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) The date and time the app install happened (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "IpAddress",
+                  "value": "<string>",
+                  "description": "Public IP Address of the device. Optional if the call is made from within the app."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppleIfa",
+                  "value": "<string>",
+                  "description": "Apple's Identifier for Advertising (IDFA). Recommended for iOS."
+                },
+                {
+                  "disabled": false,
+                  "key": "GoogAId",
+                  "value": "<string>",
+                  "description": "Google Advertising Identifier. Recommended for Android."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppInstallRef",
+                  "value": "<string>",
+                  "description": "Install Referrer from the Google Play Store. Recommended for Android."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppPackage",
+                  "value": "<string>",
+                  "description": "Bundle ID or package name of the app (e.g., 'com.android.chrome' or '535886823')."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomProfileId",
+                  "value": "<string>",
+                  "description": "Third-party web tracking cookie or anonymous user ID."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c14018e3-04f0-4172-8ee3-92770362e1d6",
+              "name": "The request was processed successfully. The response will contain deep link information if a match was found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "DeferredDeepLink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program (campaign) in impact.com.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique ID assigned by impact.com to your app (System App ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "ImpactAppId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The date and time the app install happened (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Public IP Address of the device. Optional if the call is made from within the app.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "192.168.1.1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple's Identifier for Advertising (IDFA). Recommended for iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Google Advertising Identifier. Recommended for Android.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Install Referrer from the Google Play Store. Recommended for Android.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppInstallRef",
+                      "value": "utm_source=affiliate&utm_campaign=summer"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Bundle ID or package name of the app (e.g., 'com.android.chrome' or '535886823').",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Third-party web tracking cookie or anonymous user ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"landingPage\": \"https://www.acme.com/products/tennis-balls\",\n  \"clickId\": \"QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0\",\n  \"clickIpAddress\": \"192.168.1.1\",\n  \"connectionIpAddress\": \"192.168.1.2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73fbd5b1-1f81-40b0-b84c-104a1819bde0",
+              "name": "The request was invalid due to missing or malformed parameters. The response will contain an errors object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "DeferredDeepLink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program (campaign) in impact.com.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique ID assigned by impact.com to your app (System App ID).",
+                        "type": "text/plain"
+                      },
+                      "key": "ImpactAppId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The date and time the app install happened (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Public IP Address of the device. Optional if the call is made from within the app.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "192.168.1.1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple's Identifier for Advertising (IDFA). Recommended for iOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Google Advertising Identifier. Recommended for Android.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Install Referrer from the Google Play Store. Recommended for Android.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppInstallRef",
+                      "value": "utm_source=affiliate&utm_campaign=summer"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Bundle ID or package name of the app (e.g., 'com.android.chrome' or '535886823').",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Third-party web tracking cookie or anonymous user ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"ERROR\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"ERROR\",\n      \"message\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"WARNING\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"WARNING\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://trkapi.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b76e613f-e95a-401e-9034-24e414631ecf",
+    "name": "Brand API - Deferred Deep Linking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API provides a method to retrieve deferred deep linking information after a user installs and opens a mobile app for the first time. \nIt is designed to be called from within the app to get the original deep link URL and other attribution data, enabling you to direct the user to the correct content. \nThis endpoint only provides information and does not log a conversion event.",
+      "type": "text/plain"
+    }
+  }
+}

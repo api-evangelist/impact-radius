@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agency API — Jobs Management",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Jobs",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "CreatedAfter",
+                "value": "2026-05-01",
+                "type": "query",
+                "description": "Return only jobs created on or after this date, in `YYYY-MM-DD` format."
+              },
+              {
+                "name": "CreatedBefore",
+                "value": "2026-05-29",
+                "type": "query",
+                "description": "Return only jobs created on or before this date, in `YYYY-MM-DD` format."
+              }
+            ]
+          },
+          "docs": "Returns the jobs scheduled by this agency account. Use the optional date filters to narrow results to a specific window."
+        },
+        {
+          "info": {
+            "name": "Get a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Jobs/:JobId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "JobId",
+                "value": "81258bc5-54cf-4a09-9fbc-eb837637d02f",
+                "type": "path",
+                "description": "The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+              }
+            ]
+          },
+          "docs": "Retrieves the current status and details of a specific job. Use this to poll a job created from another endpoint (such as `GET /ReportExport/{ReportId}`) until it reaches a terminal `Status` (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`)."
+        },
+        {
+          "info": {
+            "name": "Download a job result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Jobs/:JobId/Download",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "JobId",
+                "value": "81258bc5-54cf-4a09-9fbc-eb837637d02f",
+                "type": "path",
+                "description": "The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+              },
+              {
+                "name": "Mode",
+                "value": "Stream",
+                "type": "query",
+                "description": "Set to `Stream` to receive the result file bytes directly in the response body (HTTP `200`) instead of following a `302` redirect to a signed download URL."
+              }
+            ]
+          },
+          "docs": "Downloads the result file produced by a completed job.\n\n## Response behaviour by job state\n\n- **Job complete** — returns the result file. By default, the response is a `302` redirect to a short-lived signed URL on cloud storage; pass `Mode=Stream` to receive the file bytes directly with HTTP `200`.\n- **Job still running** — returns HTTP `202` with the current `Job` object instead of a file. Poll with `GET /Jobs/{JobId}` until the job reaches `COMPLETED`."
+        },
+        {
+          "info": {
+            "name": "Replay a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Jobs/:JobId/Replay",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "JobId",
+                "value": "81258bc5-54cf-4a09-9fbc-eb837637d02f",
+                "type": "path",
+                "description": "The unique job identifier (UUID). Returned in the `QueuedUri` of any endpoint that schedules a job (for example `GET /ReportExport/{ReportId}`)."
+              }
+            ]
+          },
+          "docs": "Re-runs a previously executed job with the same parameters. Useful for jobs in a terminal state (`COMPLETED`, `CANCELLED`, `ERROR`, or `FAILED`) when fresh data is wanted over the same export window.\n\nThe `Job.Replayable` field on the original job indicates whether the job can be replayed. Replaying creates a new job with a new `Id` — the original job is not modified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

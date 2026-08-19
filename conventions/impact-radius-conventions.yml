@@ -1,41 +1,147 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
-source: https://integrations.impact.com/rest-apis/api-quick-start.md
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/pagination.md
+docs:
+- https://integrations.impact.com/rest-apis/api-quick-start.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/authentication.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/pagination.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/versioning.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/status-codes-and-errors.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/rate-limits.md
 description: >-
-  Cross-cutting conventions for the impact.com REST APIs (Brand, Partner, Agency), captured
-  from the developer portal. Grounded in published docs only; where a convention was not
-  documented it is left null rather than assumed.
+  Cross-cutting conventions for the impact.com REST APIs (Brand, Partner, Agency) and the
+  Advocate surface, captured from the developer portal and cross-checked against the 67 OpenAPI
+  documents in openapi/. Where a convention is genuinely not published it is left null rather
+  than assumed.
 authentication:
   style: http-basic
   detail: >-
-    Account SID (username) + Auth Token (password), base64-encoded in the Authorization
-    header. Scoped Tokens provide per-category read/write least-privilege access.
+    Account SID (username) + Auth Token (password), base64-encoded in the Authorization header:
+    `Authorization: Basic base64(AccountSID:AuthToken)`. HTTPS on port 443 is mandatory; plain
+    HTTP fails. Missing or incorrect credentials return 401. Scoped Tokens give per-API-category
+    read/write least privilege; tokens minted before April 2025 are "legacy" and only support
+    read/write or read-only. Advocate additionally accepts a per-user JWT in the
+    X-SaaSquatch-User-Token header for client-side calls.
   ref: authentication/impact-radius-authentication.yml
 base_url:
   pattern: https://api.impact.com/{AccountType}/{AccountSID}/
   account_types: [Advertisers, MediaPartners, Agencies]
+  advocate: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/
+  tracking: https://trkapi.impact.com
 idempotency:
-  supported: null
-  notes: No documented idempotency-key mechanism was found in the developer portal.
-pagination:
-  style: null
+  supported: false
+  header: null
   notes: >-
-    Not explicitly captured from docs in this pass; impact.com report/list endpoints are
-    paginated but the parameter contract was not confirmed verbatim.
+    No idempotency-key header or replay-safe POST contract is documented anywhere in the
+    developer portal, and no such parameter appears in any of the 67 OpenAPI documents. The
+    "Building with LLMs" guidance tells integrators to "implement idempotency patterns where
+    replay is safe" — i.e. the burden is on the client, the API does not provide the primitive.
+    Mutations are made safe instead through natural keys (OrderId on conversions, user_id and
+    accountid on Advocate upserts) and explicit upsert operations (upsertAccount,
+    openUserUpsert).
+  client_side_dedupe_keys:
+  - OrderId (conversion submission)
+  - accountid + user_id (Advocate user upsert)
+pagination:
+  style: page-number
+  request_params:
+  - name: Page
+    description: Page requested; 1-indexed. Defaults to 1.
+  - name: PageSize
+    description: Objects per page. Resource default is used when omitted (commonly 1,000; Actions defaults to 20,000 with a 2,000 minimum).
+  response_fields:
+    '@page': Current page number (starts at 1).
+    '@numpages': Total number of pages.
+    '@pagesize': Entities per page.
+    '@total': Total number of entities in the list.
+    '@start': Zero-indexed position of the first item in this page.
+    '@end': Zero-indexed position of the last item in this page.
+    '@uri': URI of the current page.
+    '@firstpageuri': URI for the first page.
+    '@nextpageuri': URI for the next page.
+    '@previouspageuri': URI for the previous page.
+    '@lastpageuri': URI for the last page.
+  notes: >-
+    Responses are self-navigating — follow @nextpageuri rather than incrementing Page yourself.
+    Some list endpoints impose additional windowing (Actions: StartDate no more than 3 years back,
+    a 45-day maximum range, and an error when total records exceed 10x the page size).
+field_expansion:
+  supported: null
+  notes: No documented expand / sparse-fieldset mechanism was found.
+metadata:
+  supported: true
+  notes: >-
+    Advocate exposes arbitrary customFields on users and rewardMeta on rewards; the Brand API
+    exposes Notes on partners and contracts. There is no generic `metadata` object across the
+    REST surface.
+request_id_tracing:
+  supported: partial
+  notes: >-
+    The API gateway returns a `request_id` field on gateway-level errors (observed on 404
+    responses from api.impact.com). No documented correlation-id request header was found.
 versioning:
-  style: major-version-path
-  ref: lifecycle/impact-radius-lifecycle.yml
-rate_limiting:
-  documented: true
-  detail: >-
-    Per-endpoint daily caps announced (ReportExport 100/day, ClickExport 10/day). Signaling
-    headers not documented in this pass.
+  style: account-pinned major version, overridable per request
+  current:
+    brand: v14
+    partner: v15
+    agency: v3
+    advocate: v1
+  request_override:
+    query_param: IrVersion
+    header: IR-Version
+  release_history:
+    '11': '2022-10-12'
+    '12': '2024-05-06'
+    '13': '2025-03-01'
+    '14': '2026-06-01'
+  breaking_change_definition:
+  - Resources or fields are removed from responses
+  - The meaning (Type) of an attribute changes
+  non_breaking:
+  - New resources added
+  - New fields added to an existing resource
+  notes: >-
+    Every request uses the account's API settings unless IrVersion / IR-Version overrides it,
+    which makes version pinning a per-request decision and safe A/B upgrade testing possible.
   ref: lifecycle/impact-radius-lifecycle.yml
 error_envelope:
-  format: null
-  notes: Error response envelope shape not captured verbatim in this pass.
+  format: vendor
+  rfc9457: false
+  shape:
+    Status: ERROR
+    Message: Human-readable summary
+    Errors: Array of {Field, Message}
+  media_types: [application/json, application/xml]
+  ref: errors/impact-radius-problem-types.yml
+rate_limiting:
+  documented: true
+  headers: [X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset]
+  exhaustion_status: 429
+  detail: >-
+    1,000 requests/hour default, 3,600/hour on /Catalogs, 100/day on /ReportExport, 10/day on
+    /ClickExport. X-RateLimit-Reset is seconds-to-reset, per draft-polli-ratelimit-headers-02.
+  ref: rate-limits/impact-radius-rate-limits.yml
 webhooks:
   supported: true
   ref: asyncapi/impact-radius-advocate-webhooks.yml
 data_formats:
-  notes: REST APIs support JSON and XML representations.
+  request: [application/json, application/x-www-form-urlencoded]
+  response: [application/json, application/xml, text/csv, application/pdf, application/octet-stream]
+  notes: >-
+    REST APIs support JSON and XML representations of the same resources; Accept negotiates.
+    Report and job endpoints additionally return CSV/PDF/binary payloads.
+async_jobs:
+  supported: true
+  pattern: >-
+    Long-running work (report export, click export, catalog upload, bulk import) is submitted as
+    a Job, polled with getJobById / retrieveJobStatus, then collected with downloadJobResult.
+    replayJob re-runs a failed job.
+  operations: [listJobs, getJobById, downloadJobResult, replayJob, retrieveJobStatus, downloadJobResults]
+graphql:
+  endpoint: https://app.referralsaasquatch.com/api/v1/{tenant_alias}/graphql
+  introspection: open
+  ref: graphql/impact-radius-advocate-schema.graphql
+notes: >-
+  Upgraded from the 2026-07-19 pass, which left pagination, error envelope and idempotency null.
+  All four are now resolved from the provider's own reference pages; idempotency is recorded as
+  a documented absence, not an unknown.

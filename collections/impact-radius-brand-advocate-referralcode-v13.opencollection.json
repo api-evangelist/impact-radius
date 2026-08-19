@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "impact.com API - Referral Code",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referral Code",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup a referral code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/code/:code",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "The referral code to look up, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+              }
+            ]
+          },
+          "docs": "**Deprecated.** Use the Open Endpoint *Lookup a referral code* instead.\n\nReturns a referral code along with the referrer's name and the reward the code unlocks.\n"
+        },
+        {
+          "info": {
+            "name": "Lookup a referral code (Open Endpoint)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/code/:referral_code",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "referral_code",
+                "value": "",
+                "type": "path",
+                "description": "The code to be validated, for example `BOBTESTERSON`. Can be a user's primary or non-primary referral code."
+              }
+            ]
+          },
+          "docs": "Returns a referral code along with the referrer's name and the reward the code unlocks. Use this from client-side contexts such as the Mobile and Web SDKs.\n\nThis is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n"
+        },
+        {
+          "info": {
+            "name": "Apply a referral code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.referralsaasquatch.com/api/v1/:tenant_alias/open/code/:code/account/:accountId/user/:userId",
+            "params": [
+              {
+                "name": "tenant_alias",
+                "value": "",
+                "type": "path",
+                "description": "Tenant being referenced. E.g. `\"aboih12h16t\"` or `\"test_abo912126tastastt\"`"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "The referral code to apply to the user's account."
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The account to apply the referral code to. This account will be marked as referred by the owner of the code."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The user to apply the referral code to. This user will be marked as referred by the owner of the code."
+              }
+            ]
+          },
+          "docs": "Applies a referral code to the specified account and user, marking them as referred by the code's owner.\n\nRequires a [write token](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) or an API key. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and is disabled by default. Contact support to enable open endpoints.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

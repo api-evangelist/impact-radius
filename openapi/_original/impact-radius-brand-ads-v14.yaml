@@ -1,0 +1,595 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Ads
+  description: API for managing ads, which represent the creative content used to refer traffic from a partner to one of your properties. This includes creating, retrieving, updating, and listing ads such as banners, text links, and coupons.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/Ads:
+    get:
+      summary: List All Ads
+      description: Lists existing ads, returned by creation date with the most recently created ad appearing first. The list can be filtered by various parameters.
+      operationId: listAds
+      tags:
+      - Ads
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        schema:
+          type: string
+        description: Filter ads by a specific campaign (program) ID.
+      - name: Type
+        in: query
+        schema:
+          type: string
+          enum:
+          - BANNER
+          - TEXT_LINK
+          - COUPON
+        description: Filter ads by their type.
+      - name: DealId
+        in: query
+        schema:
+          type: string
+        description: Filter ads associated with a specific deal ID.
+      - name: MobileReady
+        in: query
+        schema:
+          type: boolean
+        description: Filter ads based on whether they are optimized for mobile.
+      - name: DateCreatedStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Start of the date range for when ads were created.
+      - name: DateCreatedEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: End of the date range for when ads were created.
+      - name: DateLastUpdatedStart
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: Start of the date range for when ads were last updated.
+      - name: DateLastUpdatedEnd
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: End of the date range for when ads were last updated.
+      responses:
+        '200':
+          description: A paginated list of ad objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '@page':
+                    type: string
+                  Ads:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ad'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Ads' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    post:
+      summary: Create an Ad
+      description: Creates a new Banner, Coupon, or Text Link ad. Use `multipart/form-data` if uploading a creative file, otherwise use `application/x-www-form-urlencoded`.
+      operationId: createAd
+      tags:
+      - Ads
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The details of the ad to create.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdCreateUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdCreateUpdate'
+      responses:
+        '200':
+          description: The ad was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/{AccountSID}/Ads/600000
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Ads' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/Ads/{AdId}:
+    get:
+      summary: Get Ad Details
+      description: Retrieves the details of an existing ad by its unique impact.com Ad ID.
+      operationId: getAdById
+      tags:
+      - Ads
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: AdId
+        in: path
+        required: true
+        description: The unique identifier for the ad.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An ad object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Ads/{AdId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    put:
+      summary: Update an Ad
+      description: Updates an existing ad, including its creative file if needed. Use `multipart/form-data` if uploading a creative file.
+      operationId: updateAd
+      tags:
+      - Ads
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: AdId
+        in: path
+        required: true
+        description: The unique identifier for the ad to update.
+        schema:
+          type: string
+      requestBody:
+        description: The ad properties to update.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AdCreateUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AdCreateUpdate'
+      responses:
+        '200':
+          description: The ad was updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/{AccountSID}/Ads/892081
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/Ads/{AdId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Ad:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique impact.com identifier for the ad.
+          example: '892081'
+        Name:
+          type: string
+          example: Summer Sale 2020 250x250
+        Description:
+          type: string
+          example: Our best deals this summer creative.
+        CampaignId:
+          type: string
+          example: '1000'
+        CampaignName:
+          type: string
+          example: Acme Campaign
+        AdType:
+          type: string
+          description: The type of ad creative.
+          enum:
+          - BANNER
+          - TEXT_LINK
+          - COUPON
+          example: BANNER
+        LandingPage:
+          type: string
+          format: uri
+          example: http://www.test.com/6234652
+        MobileFallbacks:
+          type: object
+          properties:
+            Android:
+              type: string
+              description: The SystemAppId of the Android mobile app.
+            IOS:
+              type: string
+              description: The SystemAppId of the iOS mobile app.
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the ad was created.
+          example: '2024-02-29T22:03:35-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time when the ad was last updated.
+          example: '2024-02-29T22:03:35-08:00'
+        CustomAdServingUrl:
+          type: string
+          format: uri
+          example: ''
+        IabAdUnit:
+          type: string
+          description: The IAB ad unit size classification.
+          example: CUSTOM
+        ThirdPartyServableAdCreativeHeight:
+          type: string
+          example: '250'
+        ThirdPartyServableAdCreativeWidth:
+          type: string
+          example: '250'
+        BannerAlternativeTag:
+          type: string
+          example: summersale
+        LinkText:
+          type: string
+          example: ''
+        CouponLinkName:
+          type: string
+        GetHtmlCodeType:
+          type: string
+          description: The format of the HTML code generated for the ad.
+          enum:
+          - HTML_AND_IFRAME
+          - IFRAME_ONLY
+          example: HTML_AND_IFRAME
+        Labels:
+          type: string
+          description: Comma-separated key terms.
+          example: sale,US
+        AllowDeepLinking:
+          type: string
+          description: Whether the ad supports deep linking to mobile app content.
+          example: 'true'
+        Language:
+          type: string
+          example: ENGLISH
+          description: 'The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.'
+        LimitedTimeStartDate:
+          type: string
+          format: date-time
+          description: The start date of a limited-time promotion associated with this ad.
+          example: '2020-09-16T17:01:28-07:00'
+        LimitedTimeEndDate:
+          type: string
+          format: date-time
+          description: The end date of a limited-time promotion associated with this ad.
+          example: ''
+        RestrictedMediaPartners:
+          type: array
+          description: List of partner IDs that are restricted from using this ad.
+          items:
+            type: string
+        RestrictedMediaPartnerGroups:
+          type: array
+          description: List of partner group names that are restricted from using this ad.
+          items:
+            type: string
+        Season:
+          type: string
+          description: 'The seasonal theme associated with the ad. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.'
+          example: SUMMER
+        Uri:
+          type: string
+          format: uri-reference
+          description: The URI of this ad resource.
+          example: /Advertisers/{AccountSID}/Ads/892081
+        DealId:
+          type: string
+          description: The unique identifier of the deal associated with this ad.
+          example: '85433'
+        DealName:
+          type: string
+          description: The name of the deal associated with this ad.
+          example: Summer Sale 2020
+        AdCodeTemplate:
+          type: string
+        CouponAllowCustomPromoCode:
+          type: string
+        CustomisationCharge:
+          type: string
+        MobileReady:
+          type: string
+          description: Whether the ad is optimized for mobile devices.
+        PhoneTracking:
+          type: string
+          description: Whether phone call tracking is enabled for the ad.
+        PromoCodeTracking:
+          type: string
+          description: Whether promo code tracking is enabled for the ad.
+        TopSeller:
+          type: string
+          description: Whether the ad is marked as a top seller.
+        DealDescription:
+          type: string
+        DealState:
+          type: string
+        DealType:
+          type: string
+        DealScope:
+          type: string
+        DealProducts:
+          type: array
+          items:
+            type: string
+        DealCategories:
+          type: string
+        DiscountType:
+          type: string
+        DiscountAmount:
+          type: string
+        DiscountCurrency:
+          type: string
+        DiscountPercent:
+          type: string
+        DiscountMaximumPercent:
+          type: string
+        DiscountPercentRangeStart:
+          type: string
+        DiscountPercentRangeEnd:
+          type: string
+        Gift:
+          type: string
+        RebateAmount:
+          type: string
+        RebateCurrency:
+          type: string
+        DealDefaultPromoCode:
+          type: string
+        MinimumPurchaseAmount:
+          type: string
+        MinimumPurchaseAmountCurrency:
+          type: string
+        MaximumSavingsAmount:
+          type: string
+        MaximumSavingsCurrency:
+          type: string
+        BogoBuyQuantity:
+          type: string
+        BogoBuyScope:
+          type: string
+        BogoBuyName:
+          type: string
+        BogoBuyImageUrl:
+          type: string
+        BogoGetQuantity:
+          type: string
+        BogoGetScope:
+          type: string
+        BogoGetDiscountType:
+          type: string
+        BogoGetName:
+          type: string
+        BogoGetImageUrl:
+          type: string
+        BogoGetDiscountAmount:
+          type: string
+        BogoGetDiscountCurrency:
+          type: string
+        BogoGetDiscountPercent:
+          type: string
+        PurchaseLimitQuantity:
+          type: string
+        DealStartDate:
+          type: string
+          format: date-time
+        DealEndDate:
+          type: string
+          format: date-time
+        SynchAdsPromoCodes:
+          type: string
+        DealRestrictedMediaPartners:
+          type: array
+          items:
+            type: string
+        DealRestrictedMediaPartnerGroups:
+          type: array
+          items:
+            type: string
+    AdCreateUpdate:
+      type: object
+      description: Schema for creating and updating an Ad. Some fields are conditionally required based on AdType.
+      required:
+      - Name
+      - CampaignId
+      - AdType
+      - Language
+      properties:
+        Name:
+          type: string
+          example: Summer Sale 2020 250x250
+        CampaignId:
+          type: string
+          example: '1000'
+        AdType:
+          type: string
+          enum:
+          - BANNER
+          - TEXT_LINK
+          - COUPON
+          example: BANNER
+        Language:
+          type: string
+          example: ENGLISH
+          description: 'The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.'
+        Description:
+          type: string
+          example: Our best deals this summer creative.
+        LandingPage:
+          type: string
+          format: uri
+          example: http://www.test.com/6234652
+        CustomAdServingUrl:
+          type: string
+          format: uri
+          description: Required for BANNER if not using AdCodeTemplate or BannerCreativeFile.
+        AdCodeTemplate:
+          type: string
+          description: Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile.
+        BannerCreativeFile:
+          type: string
+          format: binary
+          description: Creative file for a BANNER ad. Use multipart/form-data.
+        CouponLinkName:
+          type: string
+          description: Required for COUPON ad type.
+        CouponAllowCustomPromoCode:
+          type: boolean
+          description: Whether the ad allows partners to use a custom promo code (instead of the default coupon code).
+          example: false
+        CustomisationCharge:
+          type: number
+          format: decimal
+          description: The charge applied when partners customise this ad.
+          example: 0.0
+        LinkText:
+          type: string
+          description: Required for TEXT_LINK ad type.
+        IabAdUnit:
+          type: string
+          example: CUSTOM
+        ThirdPartyServableAdCreativeHeight:
+          type: string
+          example: '250'
+        ThirdPartyServableAdCreativeWidth:
+          type: string
+          example: '250'
+        BannerAlternativeTag:
+          type: string
+          description: Only for BANNER ad type.
+          example: summersale
+        GetHtmlCodeType:
+          type: string
+          enum:
+          - HTML_AND_IFRAME
+          - IFRAME_ONLY
+          example: HTML_AND_IFRAME
+        Labels:
+          type: string
+          example: sale,US
+        AllowDeepLinking:
+          type: string
+          example: 'true'
+        LimitedTimeStartDate:
+          type: string
+          format: date-time
+          example: '2026-09-16T17:01:28-07:00'
+        LimitedTimeEndDate:
+          type: string
+          format: date-time
+          example: '2026-12-31T23:59:59-07:00'
+        TargetMediaPartners:
+          type: array
+          items:
+            type: string
+          description: Array of partner IDs to restrict the ad to.
+        TargetMediaPartnerGroups:
+          type: array
+          items:
+            type: string
+          description: Array of partner group IDs to restrict the ad to.
+        MobileFallbacks:
+          type: object
+          properties:
+            Android:
+              type: string
+            IOS:
+              type: string
+        Season:
+          type: string
+          example: SUMMER
+          description: 'If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.'
+        MobileReady:
+          type: string
+          description: Whether the ad is optimized for mobile devices.
+          example: 'true'
+        PhoneTracking:
+          type: string
+          description: Whether phone call tracking is enabled for the ad.
+          example: 'false'
+        PromoCodeTracking:
+          type: string
+          description: Whether promo code tracking is enabled for the ad.
+          example: 'false'
+        TopSeller:
+          type: string
+          description: Whether the ad is marked as a top seller.
+          example: 'false'
+        DealId:
+          type: string
+          description: The ID of the deal to associate with this ad.
+x-default-client: cURL

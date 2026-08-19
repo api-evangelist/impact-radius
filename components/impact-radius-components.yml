@@ -1,0 +1,96 @@
+generated: '2026-08-13'
+method: searched
+source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/advocate-installation-scripts.md
+docs:
+- https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/advocate-installation-scripts.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/implement-with-utt-for-advocate.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/share-links-for-advocate.md
+- https://integrations.impact.com/integration-guides/for-brands/advocate/build-a-custom-advocate-experience-with-graphql.md
+description: >-
+  Client-side and embeddable surfaces impact.com ships, distinct from the server SDKs in
+  packages/. Almost all of them belong to Advocate: a browser SDK that mounts referral widgets,
+  a web-component library those widgets are built from, hosted microsites, and the tracking tags
+  that instrument a brand's own site.
+families:
+- name: Advocate widgets
+  kind: embedded-ui
+  loader: squatch-js
+  detail: >-
+    Referral widgets rendered into a brand's own page by the Advocate JavaScript SDK. The widget
+    is addressed as a widgetType path and mounted with an engagementMedium.
+  widget_types:
+  - "p/{programId}/w/referrerWidget"
+  - "p/{programId}/w/websiteReferralWidget"
+  engagement_mediums: [POPUP, EMBED]
+  source: >-
+    Values captured verbatim from the published Advocate error reference (RS036 enumerates the
+    valid widgetType values, RS037 the valid engagementMedium values).
+  secure_mode: >-
+    When Secure Mode is enabled the widget call must carry a signed JWT or checksum with the
+    Account SID in the JWT header (errors RS005 / RS006 / RS032).
+- name: Web-component library
+  kind: component-library
+  detail: >-
+    The Advocate widget surface is built from published web components — a design library
+    (mint-components), a logic layer (bedrock-components) and a boilerplate for writing your own
+    (component-boilerplate). Distributed on npm under @saasquatch and developed in the public
+    saasquatch/program-tools repository.
+  packages:
+  - "@saasquatch/mint-components"
+  - "@saasquatch/bedrock-components"
+  - "@saasquatch/component-boilerplate"
+  repo: https://github.com/saasquatch/program-tools
+  ref: packages/impact-radius-packages.yml
+- name: Hosted microsites
+  kind: hosted-surface
+  detail: >-
+    Advocate can host the participant-facing referral experience itself, with configurable page
+    and layout configs, templates, custom domains, and a managed-identity login (email/password
+    or Google). Configured entirely through the Advocate GraphQL API, not through REST.
+  graphql_surface:
+    queries: [micrositeHostingConfig, micrositeLayoutConfig, micrositeLayoutConfigs, micrositePageConfig, micrositePageConfigs, micrositeTemplate, micrositeTemplates, renderMicrositePage, managedIdentityConfig]
+    mutations: [autoSetupMicrosite, destroyMicrosite, createMicrositePageConfig, updateMicrositePageConfig, deleteMicrositePageConfig, createMicrositeLayoutConfig, setMicrositeHostingConfig, setManagedIdentityConfig, registerManagedIdentityWithEmailAndPassword, authenticateManagedIdentityWithEmailAndPassword, authenticateManagedIdentityWithGoogle]
+  ref: graphql/impact-radius-advocate-schema.graphql
+- name: Forms
+  kind: embedded-ui
+  detail: >-
+    Advocate hosts participant-facing forms with server-side validation and submission records,
+    driven from GraphQL (form, forms, validateForm, formMetaPreview, submitForm,
+    formSubmissionRecords).
+  ref: graphql/impact-radius-advocate-schema.graphql
+- name: Share links
+  kind: hosted-surface
+  detail: >-
+    Per-medium share URLs (EMAIL, EMBED, HOSTED, MOBILE, POPUP) generated for each participant,
+    optionally served from the brand's own custom short domain. Retrieved via getSharelinks /
+    getShareURLs / openGetShareURLs, or from the shareLinks field on User.
+  source: https://integrations.impact.com/integration-guides/for-brands/advocate/share-links-for-advocate.md
+- name: Tracking tags
+  kind: script
+  detail: >-
+    Site instrumentation rather than UI. Advocate installation scripts (standard and advanced),
+    the Universal Tracking Tag (UTT), tracking cookies, and a Google Tag Manager template. These
+    are copy-paste snippets from the account UI; no pinned CDN URL is published in the docs.
+  pages:
+  - https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/advocate-installation-scripts.md
+  - https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/advanced-advocate-installation-scripts.md
+  - https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/implement-with-utt-for-advocate.md
+  - https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-tracking-integrations/integrate-google-tag-manager-with-advocate.md
+- name: Mobile widget hosts
+  kind: embedded-ui
+  detail: >-
+    The iOS and Android SDKs are explicitly widget hosts — they load the same Advocate widgets
+    inside a WKWebView (iOS) or WebView (Android) alongside the REST calls, rather than rendering
+    native UI.
+  ref: packages/impact-radius-packages.yml
+partnership_surface:
+  note: >-
+    The Brand/Partner/Agency partnership APIs ship no embeddable UI components. The closest
+    equivalents are server-rendered ad assets returned by the API — retrieveAdCode and
+    retrieveAdIFrameCode return HTML/iframe snippets a publisher pastes into their own page, and
+    RoutingRule.Interstitial configures an impact.com-hosted interstitial page.
+  operations: [retrieveAdCode, retrieveAdIFrameCode, retrieveAdTrackingLink]
+notes: >-
+  Grouped from the provider's own documentation plus the introspected GraphQL schema and the
+  published npm packages. No component, widget type or engagement medium here was invented; the
+  enumerated values are quoted from impact.com's error reference.

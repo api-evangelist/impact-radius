@@ -1,0 +1,1102 @@
+{
+  "item": [
+    {
+      "id": "1b906a9b-69f3-43f8-8cd0-8a6d758f3dfc",
+      "name": "Media Properties",
+      "description": {
+        "content": "Endpoints for listing, creating, retrieving, updating, and deleting partner media properties.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6811f0fc-f8f8-42d9-a697-9cda50c6984f",
+          "name": "List media properties",
+          "request": {
+            "name": "List media properties",
+            "description": {
+              "content": "Lists all media properties for your account. This request should never return an error.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "MediaProperties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "617187e6-9cf7-4a85-b3b0-fa3487d3fefd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "MediaProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MediaProperties\": [\n    {\n      \"Id\": \"4622773\",\n      \"Name\": \"Hazel Nutt's Instagram\",\n      \"Thumbnail\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773/Thumbnail\",\n      \"Description\": \"Hazel Nutt's official Instagram account covering lifestyle and wellness.\",\n      \"Tags\": \"lifestyle,wellness,beauty\",\n      \"RevenueModel\": [\n        \"PAY_PER_SALE\"\n      ],\n      \"Url\": \"https://www.instagram.com/hazelnuttofficial\",\n      \"Type\": \"SOCIAL\",\n      \"MonthlyUniqueVisitors\": \"\",\n      \"AlexaRating\": \"\",\n      \"QuantcastRating\": \"\",\n      \"OwnershipVerified\": \"true\",\n      \"MobilePlatform\": \"ANDROID\",\n      \"AppStoreRating\": \"\",\n      \"Installs\": \"HUNDRED_THOUSAND_PLUS\",\n      \"Price\": \"\",\n      \"SocialPlatform\": \"INSTAGRAM\",\n      \"Followers\": \"HUNDRED_THOUSAND_PLUS\",\n      \"Handle\": \"@hazelnuttofficial\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773\"\n    },\n    {\n      \"Id\": \"4622773\",\n      \"Name\": \"Hazel Nutt's Instagram\",\n      \"Thumbnail\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773/Thumbnail\",\n      \"Description\": \"Hazel Nutt's official Instagram account covering lifestyle and wellness.\",\n      \"Tags\": \"lifestyle,wellness,beauty\",\n      \"RevenueModel\": [\n        \"PAY_PER_SALE\"\n      ],\n      \"Url\": \"https://www.instagram.com/hazelnuttofficial\",\n      \"Type\": \"SOCIAL\",\n      \"MonthlyUniqueVisitors\": \"\",\n      \"AlexaRating\": \"\",\n      \"QuantcastRating\": \"\",\n      \"OwnershipVerified\": \"true\",\n      \"MobilePlatform\": \"ANDROID\",\n      \"AppStoreRating\": \"\",\n      \"Installs\": \"THOUSAND_PLUS\",\n      \"Price\": \"\",\n      \"SocialPlatform\": \"INSTAGRAM\",\n      \"Followers\": \"HUNDRED_THOUSAND_PLUS\",\n      \"Handle\": \"@hazelnuttofficial\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8827a775-304c-4b67-9f07-e7dc05fd9e5f",
+          "name": "Create a media property",
+          "request": {
+            "name": "Create a media property",
+            "description": {
+              "content": "Creates a new media property object. New media properties need to be verified by impact.com \nbefore they are fully approved.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "MediaProperties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "Name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The name of the media property."
+                },
+                {
+                  "key": "Type",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "Url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The URL to this media property."
+                },
+                {
+                  "key": "MobilePlatform",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "AppStoreRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Required only for mobile. Approximate rating (1-5)."
+                },
+                {
+                  "key": "Installs",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "SocialPlatform",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "Followers",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "Thumbnail",
+                  "type": "file",
+                  "description": "A thumbnail image for your media property."
+                },
+                {
+                  "key": "Description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A description of the media property and its audience."
+                },
+                {
+                  "key": "Tags",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Comma-separated tags used to categorize this media property."
+                },
+                {
+                  "key": "RevenueModel",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "The monetization model(s) used by this media property."
+                },
+                {
+                  "key": "MonthlyUniqueVisitors",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Estimated monthly unique visitors. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "AlexaRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Alexa global traffic rank for this media property. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "QuantcastRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Quantcast audience measurement rating. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "Price",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "The price of the app in the app store. Applies to MOBILE type properties."
+                },
+                {
+                  "key": "Handle",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The social media handle or username for this property. Applies to SOCIAL type properties."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e476db3-0e50-4737-b601-0cc90ba3fe7b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "MediaProperties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The name of the media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "Type",
+                      "value": "WEBSITE",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The URL to this media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "MobilePlatform",
+                      "value": "ANDROID",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Required only for mobile. Approximate rating (1-5).",
+                        "type": "text/plain"
+                      },
+                      "key": "AppStoreRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Installs",
+                      "value": "HUNDRED_MILLION_PLUS",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "SocialPlatform",
+                      "value": "FACEBOOK",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Followers",
+                      "value": "HUNDRED_THOUSAND_PLUS",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A thumbnail image for your media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Thumbnail",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A description of the media property and its audience.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Comma-separated tags used to categorize this media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Tags",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The monetization model(s) used by this media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "RevenueModel",
+                      "value": "[\"PAY_PER_INQUIRY\",\"PAY_PER_SALE\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Estimated monthly unique visitors. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "MonthlyUniqueVisitors",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Alexa global traffic rank for this media property. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "AlexaRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Quantcast audience measurement rating. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "QuantcastRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The price of the app in the app store. Applies to MOBILE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "Price",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The social media handle or username for this property. Applies to SOCIAL type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "Handle",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e60290a5-2e88-4bb6-90f9-262ed9d1b5c9",
+          "name": "Retrieve a media property",
+          "request": {
+            "name": "Retrieve a media property",
+            "description": {
+              "content": "Retrieves a media property for the specified Id value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "MediaProperties",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the media property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6c71afe-5e71-4d24-baa5-8ab1c0cd4b19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "MediaProperties",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the media property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"4622773\",\n  \"Name\": \"Hazel Nutt's Instagram\",\n  \"Thumbnail\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773/Thumbnail\",\n  \"Description\": \"Hazel Nutt's official Instagram account covering lifestyle and wellness.\",\n  \"Tags\": \"lifestyle,wellness,beauty\",\n  \"RevenueModel\": [\n    \"PAY_PER_SALE\"\n  ],\n  \"Url\": \"https://www.instagram.com/hazelnuttofficial\",\n  \"Type\": \"SOCIAL\",\n  \"MonthlyUniqueVisitors\": \"\",\n  \"AlexaRating\": \"\",\n  \"QuantcastRating\": \"\",\n  \"OwnershipVerified\": \"true\",\n  \"MobilePlatform\": \"ANDROID\",\n  \"AppStoreRating\": \"\",\n  \"Installs\": \"HUNDRED_PLUS\",\n  \"Price\": \"\",\n  \"SocialPlatform\": \"INSTAGRAM\",\n  \"Followers\": \"HUNDRED_THOUSAND_PLUS\",\n  \"Handle\": \"@hazelnuttofficial\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fe9f45f-e990-43ce-afc8-cd70201e52b8",
+          "name": "Update a media property",
+          "request": {
+            "name": "Update a media property",
+            "description": {
+              "content": "Updates the specified media property's attributes. Any parameter not provided will leave the \ncorresponding attribute unchanged. Submitted values overwrite existing values entirely.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "MediaProperties",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the media property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "Name",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Display name of the media property."
+                },
+                {
+                  "key": "Thumbnail",
+                  "type": "file",
+                  "description": "Thumbnail image for the media property, as a binary upload."
+                },
+                {
+                  "key": "Description",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "A description of the media property and its audience."
+                },
+                {
+                  "key": "Tags",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Comma-separated tags used to categorize this media property."
+                },
+                {
+                  "key": "RevenueModel",
+                  "value": "[\"<string>\",\"<string>\"]",
+                  "type": "text",
+                  "description": "The monetization model(s) used by this media property."
+                },
+                {
+                  "key": "Url",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The URL of the media property."
+                },
+                {
+                  "key": "MonthlyUniqueVisitors",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Estimated monthly unique visitors. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "AlexaRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Alexa global traffic rank for this media property. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "QuantcastRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "Quantcast audience measurement rating. Applies to WEBSITE type properties."
+                },
+                {
+                  "key": "MobilePlatform",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "AppStoreRating",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "App store rating out of 5. Applies to MOBILE type properties."
+                },
+                {
+                  "key": "Price",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "The price of the app in the app store. Applies to MOBILE type properties."
+                },
+                {
+                  "key": "Installs",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "SocialPlatform",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "Followers",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "Handle",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The social media handle or username for this property. Applies to SOCIAL type properties."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "642c3028-8536-4afd-bf47-1d1e89fd1040",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "MediaProperties",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the media property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Display name of the media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Thumbnail image for the media property, as a binary upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "Thumbnail",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "A description of the media property and its audience.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Comma-separated tags used to categorize this media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Tags",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The monetization model(s) used by this media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "RevenueModel",
+                      "value": "[\"PAY_PER_INSTALL\",\"PAY_PER_SALE\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The URL of the media property.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Estimated monthly unique visitors. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "MonthlyUniqueVisitors",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Alexa global traffic rank for this media property. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "AlexaRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Quantcast audience measurement rating. Applies to WEBSITE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "QuantcastRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "MobilePlatform",
+                      "value": "IOS",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "App store rating out of 5. Applies to MOBILE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppStoreRating",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The price of the app in the app store. Applies to MOBILE type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "Price",
+                      "value": "<integer>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Installs",
+                      "value": "HUNDRED_THOUSAND_PLUS",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "SocialPlatform",
+                      "value": "LINKEDIN",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "Followers",
+                      "value": "HUNDRED_THOUSAND_PLUS",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The social media handle or username for this property. Applies to SOCIAL type properties.",
+                        "type": "text/plain"
+                      },
+                      "key": "Handle",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/MediaProperties/4622773\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56c99a01-be32-4695-8a55-09fd29292073",
+          "name": "Delete a media property",
+          "request": {
+            "name": "Delete a media property",
+            "description": {
+              "content": "Permanently deletes the specified media property. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "MediaProperties",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) Unique identifier for the media property."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95c08f5d-8770-4b81-8f57-142df3f0acdd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "MediaProperties",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) Unique identifier for the media property."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5c179842-5bd3-4675-8863-acb607fc517a",
+    "name": "Partner Media Properties API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Media Properties describe the locations (e.g., websites, social media, and mobile apps) where you place advertisements \nand tracking links to drive traffic to brands. This API allows you to create, retrieve, update, list, and delete \nmedia properties associated with your partner account.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

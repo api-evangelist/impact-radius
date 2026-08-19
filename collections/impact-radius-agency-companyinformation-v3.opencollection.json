@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agency API — Company Information",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get company information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              }
+            ]
+          },
+          "docs": "Returns your agency's company profile, including registered addresses, contact people, tax details, and platform preferences."
+        },
+        {
+          "info": {
+            "name": "Update company information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Agencies/:AccountSID/CompanyInformation",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates your agency's company profile. Send only the fields you want to change — omitted fields keep their existing values.\n\nReturns a status confirmation and the resource URI on success. To see the updated values, follow up with a `GET` request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

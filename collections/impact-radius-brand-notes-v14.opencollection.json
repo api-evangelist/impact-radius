@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Notes",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Notes for a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Notes",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign to retrieve notes from."
+              },
+              {
+                "name": "MediaId",
+                "value": "",
+                "type": "query",
+                "description": "Filter notes for a specific partner account ID."
+              },
+              {
+                "name": "StartDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter for notes created on or after this date (ISO 8601)."
+              },
+              {
+                "name": "EndDate",
+                "value": "",
+                "type": "query",
+                "description": "Filter for notes created on or before this date (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Returns a list of notes for a specific campaign, sorted chronologically by creation date. The list can be filtered by partner (MediaId) and a date range."
+        },
+        {
+          "info": {
+            "name": "Create a Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Notes",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign this note belongs to."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Creates a new note for a specific partner. A note must contain either text content or an attachment."
+        },
+        {
+          "info": {
+            "name": "Get Note Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Notes/:NoteId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "NoteId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the note."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing note by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Notes/:NoteId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "NoteId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the note to update."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Updates the specified note by setting the values of the parameters passed. Any parameters not provided will be left unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete a Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Notes/:NoteId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "NoteId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the note to delete."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a note. This cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

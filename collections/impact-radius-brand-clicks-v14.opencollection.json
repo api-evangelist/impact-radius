@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Clicks",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clicks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Click Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Clicks/:ClickId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign (program) the click belongs to."
+              },
+              {
+                "name": "ClickId",
+                "value": "",
+                "type": "path",
+                "description": "The generated click ID (`im_ref`) representing the consumer journey."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific click event by its ID (`im_ref`). Note that a single ID can be associated with multiple click objects, representing a single consumer journey."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ClickExport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Clicks Asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Programs/:ProgramId/ClickExport",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the program (campaign) to export clicks from."
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "query",
+                "description": "ID of the ad that was clicked. Can be repeated for multiple ads."
+              },
+              {
+                "name": "Date",
+                "value": "",
+                "type": "query",
+                "description": "The date for the clicks to be exported, in 'yyyy-MM-dd' format. Defaults to today. Only dates after April 9, 2024 are supported."
+              },
+              {
+                "name": "MediaId",
+                "value": "",
+                "type": "query",
+                "description": "The unique ID of the partner. Can be repeated for multiple partners."
+              },
+              {
+                "name": "UniqueClick",
+                "value": "",
+                "type": "query",
+                "description": "Filter for clicks that follow IAB standards for a unique click."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "The desired file format for the export."
+              }
+            ]
+          },
+          "docs": "Schedules a job to export daily clicks. It returns a URI to poll for job status updates and a URI to download the exported file once the job is complete."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

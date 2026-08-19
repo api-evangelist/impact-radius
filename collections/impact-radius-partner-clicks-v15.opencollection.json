@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Clicks API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clicks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a Click",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Clicks/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the click (also known as `im_ref` or `irclickid`)."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing click using its unique ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ClickExport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export Clicks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ClickExport",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "ProgramId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to clicks for a specific Program (formerly known as Campaign). Repeat the parameter to include multiple Programs."
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to clicks on a specific ad. Repeat the parameter to include multiple ads."
+              },
+              {
+                "name": "Date",
+                "value": "",
+                "type": "query",
+                "description": "Click date to export in `yyyy-MM-dd` format. Defaults to today if omitted."
+              },
+              {
+                "name": "SubId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to clicks that include the specified Sub ID value. Repeat the parameter to include multiple Sub IDs."
+              },
+              {
+                "name": "UniqueClick",
+                "value": "",
+                "type": "query",
+                "description": "Set to `TRUE` to return only clicks that meet the IAB standards for a unique click. See the IAB Click Measurement Guidelines for details."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "Format for the exported result file."
+              }
+            ]
+          },
+          "docs": "Schedules a background job to asynchronously export clicks. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.\n\n**Migration note:** If you're migrating from the `Clicks` endpoint to `ClickExport`, note that the result object uses `ProgramId` and `ProgramName` in place of the previous `CampaignId` and `CampaignName`.\n\nSee the impact.com rate-limit documentation for this"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

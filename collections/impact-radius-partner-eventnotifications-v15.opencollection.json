@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Event Notifications API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Receive an event notification (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-server.example.com/your-configured-path",
+            "params": [
+              {
+                "name": "campaign_id",
+                "value": "10306",
+                "type": "query",
+                "description": "Unique identifier of the brand program the event belongs to."
+              },
+              {
+                "name": "action_id",
+                "value": "1234567890",
+                "type": "query",
+                "description": "Unique identifier of the tracked action."
+              },
+              {
+                "name": "status",
+                "value": "APPROVED",
+                "type": "query",
+                "description": "Status of the action at the time of notification (e.g., `APPROVED`, `PENDING`, `REVERSED`)."
+              },
+              {
+                "name": "payout",
+                "value": "5.00",
+                "type": "query",
+                "description": "Commission amount paid to the partner for this action, as a decimal string."
+              }
+            ]
+          },
+          "docs": "impact.com sends a GET request to your configured URL with event data as query-string parameters. This delivery mode is typically used for simple pixel-style integrations.\n\nThe query parameters present depend on the URL template you configure in your impact.com Event Notifications settings.\n"
+        },
+        {
+          "info": {
+            "name": "Receive an event notification (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-server.example.com/your-configured-path",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "impact.com sends a POST request with a JSON body to your configured URL when an event occurs. Your server should return a `2xx` response to acknowledge successful receipt.\n\nThe fields included in the payload are determined by the URL template / body template you configure in impact.com. The schema below shows the most common fields.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

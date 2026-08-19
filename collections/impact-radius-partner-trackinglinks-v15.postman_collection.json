@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "5177af3d-a73b-4d46-9986-40aa35da4f27",
+      "name": "Tracking Links",
+      "description": {
+        "content": "Endpoint for generating partner tracking links for a brand's program.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f99e2537-7ca2-47bb-a7f5-1ed892fa7baa",
+          "name": "Create a tracking link",
+          "request": {
+            "name": "Create a tracking link",
+            "description": {
+              "content": "Generates a new tracking link for the specified program. Up to **5,000 vanity links** can exist on an account — exceeding that limit returns a 403 Forbidden response.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "TrackingLinks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Type",
+                  "value": "Regular",
+                  "description": "The type of tracking link to generate.\n\n- `Regular`: System-generated short link.\n- `Vanity`: Branded link with a custom path (requires `CustomPath`).\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomPath",
+                  "value": "<string>",
+                  "description": "Custom path that follows the tracking domain (e.g., `SummerSale` produces `https://example.sjv.io/SummerSale`). Required when `Type=Vanity`. If omitted on a vanity link, a random path is generated."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdId",
+                  "value": "<string>",
+                  "description": "Unique identifier of an ad to deep-link into (see the Partner Ads API). If omitted, the tracking link redirects to the brand's default landing page."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeepLink",
+                  "value": "<uri>",
+                  "description": "The exact destination URL the tracking link should redirect to after attribution. Use this to send clicks to a specific product page instead of the brand's default landing page."
+                },
+                {
+                  "disabled": false,
+                  "key": "MediaPartnerPropertyId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the media property (website, social profile, or app) where the link will be used. See the Partner Media Properties API."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId1",
+                  "value": "<string>",
+                  "description": "Sub-affiliate identifier surfaced as a column in partner performance reports. Use to segment traffic by your own categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId2",
+                  "value": "<string>",
+                  "description": "Additional sub-affiliate identifier surfaced as a column in partner performance reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "subId3",
+                  "value": "<string>",
+                  "description": "Additional sub-affiliate identifier surfaced as a column in partner performance reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedId",
+                  "value": "<string>",
+                  "description": "Shared identifier surfaced as a column in partner performance reports."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ProgramId",
+                  "description": "(Required) Unique identifier for the brand program the tracking link is for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a44f968-a08d-4178-af17-1c716c35b20f",
+              "name": "OK — returns the generated tracking link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "TrackingLinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Type",
+                      "value": "Regular"
+                    },
+                    {
+                      "key": "CustomPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DeepLink",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "MediaPartnerPropertyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sharedId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ProgramId",
+                      "description": "(Required) Unique identifier for the brand program the tracking link is for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TrackingURL\": \"https://example.sjv.io/c/123456/98765/101010\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f35d764-2c44-4144-a9d6-8d5877807313",
+              "name": "Forbidden — returned when the 5,000 vanity link limit is reached or when a referenced resource (e.g., `MediaPartnerPropertyId`) does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "TrackingLinks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Type",
+                      "value": "Regular"
+                    },
+                    {
+                      "key": "CustomPath",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "AdId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DeepLink",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "MediaPartnerPropertyId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId2",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subId3",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sharedId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ProgramId",
+                      "description": "(Required) Unique identifier for the brand program the tracking link is for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timestamp\": 1663261677313,\n  \"status\": \"FORBIDDEN\",\n  \"error\": \"Forbidden\",\n  \"message\": \"The property ID '123456' does not exist.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "14858f84-277f-4dc5-83d6-2b41181f9e0a",
+    "name": "Partner Tracking Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Tracking Links are the attributed URLs you place in front of your audience to earn commissions on clicks and conversions. Each tracking link belongs to a single brand program and routes traffic through impact.com so the resulting click can be credited back to your partner account.\n\nUse this API to generate links on demand — for example, when surfacing a deal in an article, embedding a product link in a newsletter, or rendering a vanity URL on a landing page.\n\nTypical workflow:\n\n1. **Pick a program** from the Partner Account API.\n2. (Optional) **Pick an ad** from the Partner Ads API to deep-link into a specific creative; otherwise the link points at the brand's default landing page.\n3. (Optional) **Pick a media property** from the Partner Media Properties API so the link is attributed to the surface where it will be used.\n4. **Call this endpoint** with any optional `subId` / `sharedId` values you want to surface in reports.\n\nUse `Type=Regular` (the default) for system-generated short links, or `Type=Vanity` with `CustomPath` for branded URLs like `https://example.sjv.io/SummerSale`.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,960 @@
+{
+  "item": [
+    {
+      "id": "88f60bdc-fe50-4ce2-ad6e-4dbec95c49d5",
+      "name": "Contracts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e1ff3b2-afb7-4269-8ed6-404ba7c21174",
+          "name": "List All Contracts",
+          "request": {
+            "name": "List All Contracts",
+            "description": {
+              "content": "Returns a list of your contracts for a specific campaign, with options for filtering. If no status is specified, only ACTIVE contracts are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts updated before a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "DateLastUpdatedAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts updated after a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that start before a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StartDateAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that start after a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateBefore",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that end before a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EndDateAfter",
+                  "value": "<dateTime>",
+                  "description": "Return contracts that end after a specific date and time (ISO-8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "PartnerId",
+                  "value": "<integer>",
+                  "description": "Return contracts for a specific partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "Signatory",
+                  "value": "<string>",
+                  "description": "Return contracts with a particular brand or partner signatory."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>",
+                  "description": "Return contracts with a specific status. Defaults to ACTIVE if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "TemplateId",
+                  "value": "<integer>",
+                  "description": "Return contracts sourced from a specific Template Terms ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d946167-963f-48db-81b9-cf83ac185615",
+              "name": "A paginated list of contract objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DateLastUpdatedBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "DateLastUpdatedAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "StartDateAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "EndDateAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "PartnerId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Signatory",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "TemplateId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Contracts\": [\n    {\n      \"Id\": \"S-7777777\",\n      \"PartnerId\": 10000,\n      \"PartnerValue1\": \"\",\n      \"Status\": \"ACTIVE\",\n      \"StartDate\": \"2021-01-20T00:00:00-08:00\",\n      \"EndDate\": \"1960-07-03T00:42:32.133Z\",\n      \"BrandSignatory\": \"Justin Case\",\n      \"BrandSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n      \"PartnerSignatory\": \"Partner Person\",\n      \"PartnerSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n      \"DateCreated\": \"2021-01-19T23:51:01-08:00\",\n      \"DateLastUpdated\": \"2021-01-19T23:51:01-08:00\",\n      \"TemplateTerms\": {\n        \"TemplateId\": 99999,\n        \"VersionId\": 6,\n        \"Name\": \"ACME Public Terms\",\n        \"Labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"Currency\": \"USD\",\n        \"EventPayouts\": [\n          {\n            \"EventTypeId\": 18500,\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayout\": 10,\n            \"DefaultPayoutRate\": 15,\n            \"PayoutLevel\": \"ITEM\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"EventTypeId\": 18500,\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayout\": 10,\n            \"DefaultPayoutRate\": 15,\n            \"PayoutLevel\": \"ITEM\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"PromotionalTerms\": [\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n            \"TermsPdfUri\": \"https://hIkkePLBvdTCXkxexQkyup.ffe8gA183aYz8OqXqAU4wkQNmRQ7EKibStZq-QwxXU.uWj1+LeFt3xDumqB0WqF.gmYN\"\n          },\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n            \"TermsPdfUri\": \"https://IXg.uwkiYlBVyAai7hcixk?yaepotp&\"\n          }\n        ]\n      },\n      \"ScheduledTerms\": [\n        {\n          \"Status\": \"ACTIVE\",\n          \"Name\": \"Black Friday Special Rates\",\n          \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n          \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n          \"Repeat\": {\n            \"Days\": [\n              \"2005-12-06\",\n              \"1952-04-28\"\n            ],\n            \"StartTime\": \"09:00:00\",\n            \"EndTime\": \"17:00:00\"\n          },\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Status\": \"ACTIVE\",\n          \"Name\": \"Black Friday Special Rates\",\n          \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n          \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n          \"Repeat\": {\n            \"Days\": [\n              \"1980-10-10\",\n              \"2007-01-14\"\n            ],\n            \"StartTime\": \"09:00:00\",\n            \"EndTime\": \"17:00:00\"\n          },\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"CampaignTerms\": [\n        {\n          \"Name\": \"Product Boost Campaign 1\",\n          \"Id\": \"1234\",\n          \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n          \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Name\": \"Product Boost Campaign 1\",\n          \"Id\": \"1234\",\n          \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n          \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"HasCampaignTerms\": true,\n      \"PdfUri\": \"http://PXBoXuzk.obspBNfs-rJGtO1--0nf,PRxHC5lvguMI\",\n      \"Uri\": \"http://iNzwiwOXpOpqU.kptrifuLq3ZkT7L?rguxctq&iw&\"\n    },\n    {\n      \"Id\": \"S-7777777\",\n      \"PartnerId\": 10000,\n      \"PartnerValue1\": \"\",\n      \"Status\": \"ACTIVE\",\n      \"StartDate\": \"2021-01-20T00:00:00-08:00\",\n      \"EndDate\": \"2007-12-10T23:56:15.776Z\",\n      \"BrandSignatory\": \"Justin Case\",\n      \"BrandSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n      \"PartnerSignatory\": \"Partner Person\",\n      \"PartnerSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n      \"DateCreated\": \"2021-01-19T23:51:01-08:00\",\n      \"DateLastUpdated\": \"2021-01-19T23:51:01-08:00\",\n      \"TemplateTerms\": {\n        \"TemplateId\": 99999,\n        \"VersionId\": 6,\n        \"Name\": \"ACME Public Terms\",\n        \"Labels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"Currency\": \"USD\",\n        \"EventPayouts\": [\n          {\n            \"EventTypeId\": 18500,\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayout\": 10,\n            \"DefaultPayoutRate\": 15,\n            \"PayoutLevel\": \"ITEM\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"EventTypeId\": 18500,\n            \"EventTypeName\": \"Online Sale\",\n            \"EventCategory\": \"SALE\",\n            \"DefaultPayout\": 10,\n            \"DefaultPayoutRate\": 15,\n            \"PayoutLevel\": \"ITEM\",\n            \"PayoutGroups\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"PromotionalTerms\": [\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n            \"TermsPdfUri\": \"https://TaHDnQDPOukELYfAVwkwPSZtFwDcbV.siodqOWKNYKBNcFJLUR4jSoFXQQLBbwkrWoIzzoKjAoWel\"\n          },\n          {\n            \"TermsName\": \"Custom Terms\",\n            \"TermsType\": \"CUSTOM\",\n            \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n            \"TermsPdfUri\": \"http://LKrmxpDbAjcSuCMX.rpO7ZOOMQdgjvA.NaP4NLGGZiCD5tkuTwm,qS+WS\"\n          }\n        ]\n      },\n      \"ScheduledTerms\": [\n        {\n          \"Status\": \"ACTIVE\",\n          \"Name\": \"Black Friday Special Rates\",\n          \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n          \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n          \"Repeat\": {\n            \"Days\": [\n              \"2015-07-04\",\n              \"1976-09-12\"\n            ],\n            \"StartTime\": \"09:00:00\",\n            \"EndTime\": \"17:00:00\"\n          },\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Status\": \"ACTIVE\",\n          \"Name\": \"Black Friday Special Rates\",\n          \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n          \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n          \"Repeat\": {\n            \"Days\": [\n              \"1952-03-12\",\n              \"1950-01-23\"\n            ],\n            \"StartTime\": \"09:00:00\",\n            \"EndTime\": \"17:00:00\"\n          },\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"CampaignTerms\": [\n        {\n          \"Name\": \"Product Boost Campaign 1\",\n          \"Id\": \"1234\",\n          \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n          \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"Name\": \"Product Boost Campaign 1\",\n          \"Id\": \"1234\",\n          \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n          \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n          \"EventPayouts\": [\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"EventTypeId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventTypeName\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"EventCategory\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"DefaultPayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutLevel\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutGroups\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"HasCampaignTerms\": true,\n      \"PdfUri\": \"http://xvzZNqzpGPFPPAmtSWLNLX.ntdkb0bcR+rZRjU-vBAe4Rd562LlzmTzcwUqNJDD2De0\",\n      \"Uri\": \"https://iNu.dacw9MPGrMAs2qxq.TwWZuYEev,kx1Lb5sn,qCnlLyqWlVW?pponms=Ccd3&b&zyto&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c56451ea-88ce-4c58-a35d-dc3d56c55869",
+          "name": "Get Contract Details",
+          "request": {
+            "name": "Get Contract Details",
+            "description": {
+              "content": "Retrieves the object of an existing contract, including details on any associated Creator, Performance, or Product Boost campaigns.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Campaigns",
+                ":CampaignId",
+                "Contracts",
+                ":ContractId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CampaignId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ContractId",
+                  "description": "(Required) The unique identifier for the contract."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a2edb952-9e0e-4f76-bd7c-7e24f4c406c0",
+              "name": "A single contract object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Campaigns",
+                    ":CampaignId",
+                    "Contracts",
+                    ":ContractId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CampaignId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ContractId",
+                      "description": "(Required) The unique identifier for the contract."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"S-7777777\",\n  \"PartnerId\": 10000,\n  \"PartnerValue1\": \"\",\n  \"Status\": \"ACTIVE\",\n  \"StartDate\": \"2021-01-20T00:00:00-08:00\",\n  \"EndDate\": \"1979-07-26T15:59:50.134Z\",\n  \"BrandSignatory\": \"Justin Case\",\n  \"BrandSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n  \"PartnerSignatory\": \"Partner Person\",\n  \"PartnerSignatoryDate\": \"2021-01-19T23:51:01-08:00\",\n  \"DateCreated\": \"2021-01-19T23:51:01-08:00\",\n  \"DateLastUpdated\": \"2021-01-19T23:51:01-08:00\",\n  \"TemplateTerms\": {\n    \"TemplateId\": 99999,\n    \"VersionId\": 6,\n    \"Name\": \"ACME Public Terms\",\n    \"Labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"Currency\": \"USD\",\n    \"EventPayouts\": [\n      {\n        \"EventTypeId\": 18500,\n        \"EventTypeName\": \"Online Sale\",\n        \"EventCategory\": \"SALE\",\n        \"DefaultPayout\": 10,\n        \"DefaultPayoutRate\": 15,\n        \"PayoutLevel\": \"ITEM\",\n        \"PayoutGroups\": [\n          {\n            \"Id\": \"ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78\",\n            \"Rank\": 1,\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Payout\": 1,\n            \"PayoutRate\": 15,\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"Id\": \"ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78\",\n            \"Rank\": 1,\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Payout\": 1,\n            \"PayoutRate\": 15,\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"EventTypeId\": 18500,\n        \"EventTypeName\": \"Online Sale\",\n        \"EventCategory\": \"SALE\",\n        \"DefaultPayout\": 10,\n        \"DefaultPayoutRate\": 15,\n        \"PayoutLevel\": \"ITEM\",\n        \"PayoutGroups\": [\n          {\n            \"Id\": \"ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78\",\n            \"Rank\": 1,\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Payout\": 1,\n            \"PayoutRate\": 15,\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"Id\": \"ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78\",\n            \"Rank\": 1,\n            \"Rules\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Payout\": 1,\n            \"PayoutRate\": 15,\n            \"Limits\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"Tiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    ],\n    \"PromotionalTerms\": [\n      {\n        \"TermsName\": \"Custom Terms\",\n        \"TermsType\": \"CUSTOM\",\n        \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n        \"TermsPdfUri\": \"https://YhJWBcWvCnsWXPuZUUfEVfzGBNWwQrP.ijaVlYkGwQTNauYDrhA6jOVwYGpoHCliN\"\n      },\n      {\n        \"TermsName\": \"Custom Terms\",\n        \"TermsType\": \"CUSTOM\",\n        \"TermsContent\": \"<p>Custom promotional terms content.</p>\",\n        \"TermsPdfUri\": \"http://NVeQDGYDuDNNPxJZntpaLpPgv.wtipb.sQlr2KZcej?n=6a6Fp&\"\n      }\n    ]\n  },\n  \"ScheduledTerms\": [\n    {\n      \"Status\": \"ACTIVE\",\n      \"Name\": \"Black Friday Special Rates\",\n      \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n      \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n      \"Repeat\": {\n        \"Days\": [\n          \"2001-08-23\",\n          \"1997-09-30\"\n        ],\n        \"StartTime\": \"09:00:00\",\n        \"EndTime\": \"17:00:00\"\n      },\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"Status\": \"ACTIVE\",\n      \"Name\": \"Black Friday Special Rates\",\n      \"StartDate\": \"2026-11-27T00:00:00-08:00\",\n      \"EndDate\": \"2026-11-30T23:59:59-08:00\",\n      \"Repeat\": {\n        \"Days\": [\n          \"1985-06-21\",\n          \"2024-09-26\"\n        ],\n        \"StartTime\": \"09:00:00\",\n        \"EndTime\": \"17:00:00\"\n      },\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"CampaignTerms\": [\n    {\n      \"Name\": \"Product Boost Campaign 1\",\n      \"Id\": \"1234\",\n      \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n      \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"Name\": \"Product Boost Campaign 1\",\n      \"Id\": \"1234\",\n      \"StartDate\": \"2025-03-28T00:00:00-07:00\",\n      \"EndDate\": \"2025-03-29T00:00:00-07:00\",\n      \"EventPayouts\": [\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"EventTypeId\": 18500,\n          \"EventTypeName\": \"Online Sale\",\n          \"EventCategory\": \"SALE\",\n          \"DefaultPayout\": 10,\n          \"DefaultPayoutRate\": 15,\n          \"PayoutLevel\": \"ITEM\",\n          \"PayoutGroups\": [\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"Id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rank\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Rules\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Payout\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"PayoutRate\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Limits\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"Tiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"HasCampaignTerms\": true,\n  \"PdfUri\": \"http://SAvKwVm.wiveMuI8td-UGzDPIGrnuGV,7SU7reAWnWjuhMJ6gCSEyisDT?\",\n  \"Uri\": \"http://svNLyeGLhIAi.hlfajyFss-UBAW38dsSe-V-I?qxs&rozaer&c&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66d31e8c-4b9d-4d1c-99bf-7ec3cd77252d",
+          "name": "Accept a Pending Contract",
+          "request": {
+            "name": "Accept a Pending Contract",
+            "description": {
+              "content": "Accepts a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently waiting to be actioned, filter your contract list with the `Status=PENDING` parameter.\n\n## Decision precedence and conflict handling\n\nYou can accept a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.\n\n### The \"first-in\" rule\n\n- **Finality**: Once you accept a contract proposal through any channel, that decision is final.\n- **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "Contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) The unique identifier of the program the contract belongs to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": \"<string>\",\n  \"groupId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e47c4002-ddae-4739-a96a-9886d444c4ef",
+              "name": "The contract was successfully accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e41502c-b966-4a77-8d03-748a90f50160",
+              "name": "Bad request. The `contractId` may be missing or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "931625d8-b225-436c-ba1c-d30cc68b8d4f",
+              "name": "Contract or program not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19a6a5fc-6de4-45bc-a55e-09930454d395",
+              "name": "A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf14c1af-09b3-4a07-9271-b07bb36dbbc7",
+          "name": "Decline a Pending Contract",
+          "request": {
+            "name": "Decline a Pending Contract",
+            "description": {
+              "content": "Declines a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently awaiting action, filter your contract list with the `Status=PENDING` parameter.\n\n## Decision precedence and conflict handling\n\nYou can decline a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.\n\n### The \"first-in\" rule\n\n- **Finality**: Once you decline a contract proposal through any channel, that decision is final.\n- **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Programs",
+                ":ProgramId",
+                "Contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your account SID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ProgramId",
+                  "description": "(Required) The unique identifier of the program the contract belongs to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contractId\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"groupId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f093709-c9d2-4ee8-b28c-e7d6ab3a0239",
+              "name": "The contract was successfully declined.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"reason\": \"Incompatible Content\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb8d86f-a8a8-4b35-9e68-d099431f5231",
+              "name": "Bad request. The `contractId` may be missing or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"reason\": \"Incompatible Content\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5711c3eb-b701-4d04-a1fd-a7552cf0125a",
+              "name": "Contract or program not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"reason\": \"Incompatible Content\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9397950-5a81-44b7-946a-1aeeca518e84",
+              "name": "A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Programs",
+                    ":ProgramId",
+                    "Contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your account SID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ProgramId",
+                      "description": "(Required) The unique identifier of the program the contract belongs to."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contractId\": \"P-25070000\",\n  \"reason\": \"Incompatible Content\",\n  \"groupId\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9b0f0162-7889-400a-bbb4-2bd106b80d2d",
+    "name": "Brand API - Contracts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving contracts, which define the business relationship and payout rules between you and a partner.",
+      "type": "text/plain"
+    }
+  }
+}

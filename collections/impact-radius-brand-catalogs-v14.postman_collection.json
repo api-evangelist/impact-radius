@@ -1,0 +1,2474 @@
+{
+  "item": [
+    {
+      "id": "56f9a7f8-901f-48b2-a76d-f2fe05d1e5d4",
+      "name": "Catalogs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e64888eb-2414-4693-9122-04d82cd33e41",
+          "name": "List All Catalogs",
+          "request": {
+            "name": "List All Catalogs",
+            "description": {
+              "content": "Returns a list of all your product catalogs, which can be filtered by CampaignId or Status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filter catalogs by the ID of the program (campaign) they belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "Status",
+                  "value": "<string>",
+                  "description": "Filter catalogs by their current state of use."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b395dde0-eded-4eee-98e1-9fdfabfbc0b1",
+              "name": "A paginated list of catalog objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "Status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Catalogs\": [\n    {\n      \"Id\": \"99999\",\n      \"Name\": \"Acme Sports Catalog\",\n      \"Filename\": \"acme_sports.csv\",\n      \"AdvertiserId\": 1000,\n      \"CampaignId\": 1000,\n      \"Status\": \"ACTIVE\",\n      \"NumberOfItems\": 1000,\n      \"DateLastUpdated\": \"2026-01-15T10:00:00-08:00\",\n      \"Currency\": \"USD\",\n      \"ServiceAreas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"UploadMethod\": \"IR_SFTP\",\n      \"ShoppingCart\": {\n        \"ShoppingCartType\": \"SHOPIFY\",\n        \"BaseUrl\": \"https://acme.example.com\",\n        \"CollectionIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"CollectionTitles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ItemsUri\": \"https://aLqkzcompstAoLqRSA.gurp03KEG-X.Hi3u8Vq+d7\",\n      \"Uri\": \"https://BgqBYinyIGwgxYURtMQxALQ.mhbvX6t2SWvil-VeHfB11Dkh.wFfFqlAJ+cejrMXnsHnIws\"\n    },\n    {\n      \"Id\": \"99999\",\n      \"Name\": \"Acme Sports Catalog\",\n      \"Filename\": \"acme_sports.csv\",\n      \"AdvertiserId\": 1000,\n      \"CampaignId\": 1000,\n      \"Status\": \"ACTIVE\",\n      \"NumberOfItems\": 1000,\n      \"DateLastUpdated\": \"2026-01-15T10:00:00-08:00\",\n      \"Currency\": \"USD\",\n      \"ServiceAreas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"UploadMethod\": \"IR_SFTP\",\n      \"ShoppingCart\": {\n        \"ShoppingCartType\": \"SHOPIFY\",\n        \"BaseUrl\": \"https://acme.example.com\",\n        \"CollectionIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"CollectionTitles\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ItemsUri\": \"https://ftzUseepOGbawu.disJB0oTw8ccce.0JVMuQfocHM6MjmjwF1FE27S-ojeG33W-tgKey9FwNkzeHEk5o.0.F+VMX2t?vy&zb=2f&rgjyo=lWh&\",\n      \"Uri\": \"http://YjHFOVxzEMc.ghyIa4amTMp0sDZQkkCCHp1sttySP4ROHDDShY6Qjp0pbukgEcO4+MEE9WOc3RdRX.8dx-hyshT+76G,IME\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "313b47b3-546f-4f81-8145-52535c90f31c",
+          "name": "Get Catalog Details",
+          "request": {
+            "name": "Get Catalog Details",
+            "description": {
+              "content": "Retrieves the details of an existing catalog using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04d8baff-e380-4ae5-a961-e40f8fc3568b",
+              "name": "A single catalog object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"99999\",\n  \"Name\": \"Acme Sports Catalog\",\n  \"Filename\": \"acme_sports.csv\",\n  \"AdvertiserId\": 1000,\n  \"CampaignId\": 1000,\n  \"Status\": \"ACTIVE\",\n  \"NumberOfItems\": 1000,\n  \"DateLastUpdated\": \"2026-01-15T10:00:00-08:00\",\n  \"Currency\": \"USD\",\n  \"ServiceAreas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"UploadMethod\": \"IR_SFTP\",\n  \"ShoppingCart\": {\n    \"ShoppingCartType\": \"SHOPIFY\",\n    \"BaseUrl\": \"https://acme.example.com\",\n    \"CollectionIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"CollectionTitles\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"ItemsUri\": \"http://SLBiilFmyBOOfo.frywCION-XJFcsDPGFhJ+BFzJLkhy9OPcMzFnYQx3Sqp1F?qnh&aynq=b1aA&\",\n  \"Uri\": \"http://RnDqKujYlyO.plmsKcCk2TxePQtuxJt9EtsYEirgqdHtBDnAUQtI9CTpqf+Ym,nQe37?cp&fgpqv&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4976192-ca39-4352-8691-cd66f4167485",
+          "name": "Update Catalog Pull Settings",
+          "request": {
+            "name": "Update Catalog Pull Settings",
+            "description": {
+              "content": "Programmatically updates a catalog's \"Pull from URL\" settings to automate data synchronization from a remote file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"uploadType\": \"<string>\",\n  \"pullFromUrlSettings\": {\n    \"address\": \"<string>\",\n    \"fileName\": \"<string>\",\n    \"pullFrequency\": \"<string>\",\n    \"pullTime\": \"<string>\",\n    \"timeZone\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31773b46-60a2-4791-b7e3-3303b711b68d",
+              "name": "The full catalog object with the updated fields.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"uploadType\": \"<string>\",\n  \"pullFromUrlSettings\": {\n    \"address\": \"<string>\",\n    \"fileName\": \"<string>\",\n    \"pullFrequency\": \"<string>\",\n    \"pullTime\": \"<string>\",\n    \"timeZone\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"99999\",\n  \"Name\": \"Acme Sports Catalog\",\n  \"Filename\": \"acme_sports.csv\",\n  \"AdvertiserId\": 1000,\n  \"CampaignId\": 1000,\n  \"Status\": \"ACTIVE\",\n  \"NumberOfItems\": 1000,\n  \"DateLastUpdated\": \"2026-01-15T10:00:00-08:00\",\n  \"Currency\": \"USD\",\n  \"ServiceAreas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"UploadMethod\": \"IR_SFTP\",\n  \"ShoppingCart\": {\n    \"ShoppingCartType\": \"SHOPIFY\",\n    \"BaseUrl\": \"https://acme.example.com\",\n    \"CollectionIds\": [\n      \"string\",\n      \"string\"\n    ],\n    \"CollectionTitles\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"ItemsUri\": \"http://SLBiilFmyBOOfo.frywCION-XJFcsDPGFhJ+BFzJLkhy9OPcMzFnYQx3Sqp1F?qnh&aynq=b1aA&\",\n  \"Uri\": \"http://RnDqKujYlyO.plmsKcCk2TxePQtuxJt9EtsYEirgqdHtBDnAUQtI9CTpqf+Ym,nQe37?cp&fgpqv&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4fb7ef2-c463-4a7f-9aa1-ce2508c05666",
+          "name": "Upload a Catalog File",
+          "request": {
+            "name": "Upload a Catalog File",
+            "description": {
+              "content": "Uploads a full catalog file via API, overwriting the existing catalog. This avoids updating items record-by-record.\n\n**Prerequisites:**\n- The catalog must already exist.\n- The file must be provided as multipart/form-data (field name `data`), not raw data in the request body.\n- If the catalog uses the Google Merchant Center (GMC) format, the file must be a TXT (tab-delimited) or XML file.\n- If the catalog uses a custom format, the file must be a CSV (comma-delimited) or XML file.\n- The file must be less than 1GB in size.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "data",
+                  "type": "file",
+                  "description": "The catalog file to upload."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d732faba-f1bd-49ee-b771-d2ab038cfd10",
+              "name": "The file was uploaded successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "The catalog file to upload.",
+                        "type": "text/plain"
+                      },
+                      "key": "data",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "85a7f516-0967-41a3-80d6-f07d72647cdb",
+      "name": "Catalog Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab0f8e2d-23ab-48b2-844f-dbbfed4914eb",
+          "name": "List Catalog Items",
+          "request": {
+            "name": "List Catalog Items",
+            "description": {
+              "content": "Returns a list of items for a specific catalog, with support for keyword search, filtering, and sorting. This endpoint has a paging limit of 20,000 total records.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Keyword",
+                  "value": "<string>",
+                  "description": "Search for a word or phrase across all item attributes."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromotionIds",
+                  "value": "<string>",
+                  "description": "Use 'null' to find items with no promotions, or '!=null' for items with promotions."
+                },
+                {
+                  "disabled": false,
+                  "key": "Query",
+                  "value": "<string>",
+                  "description": "Advanced search query using operators like '>', '<', '=', '!=', '~', 'AND', 'OR', 'IN'. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+                },
+                {
+                  "disabled": false,
+                  "key": "SortBy",
+                  "value": "<string>",
+                  "description": "Sort results by a specific attribute (e.g., 'CurrentPrice'). Use SortOrder for direction. Eligible fields: `CatalogItemId`, `Name`, `Description`, `Labels`, `Manufacturer`, `CurrentPrice`, `StockAvailability`, `Gtin`, `Category`, `DiscountPercentage`, `Gender`, `Color`, `Size`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a21cb271-999c-4e6b-b50f-701129a2eb0c",
+              "name": "A paginated list of catalog item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Keyword",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "PromotionIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "SortBy",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"CatalogItemId\": \"ABC123\",\n      \"Name\": \"Acme Tennis Balls (One Dozen)\",\n      \"Description\": \"High-performance tennis balls.\",\n      \"Multipack\": \"1\",\n      \"Bullets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Manufacturer\": \"Acme\",\n      \"Url\": \"https://acme.example.com/product/12345\",\n      \"MobileUrl\": \"https://m.acme.example.com/product/12345\",\n      \"ImageUrl\": \"https://acme.example.com/images/12345.jpg\",\n      \"AdditionalImageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"PromotionIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"CurrentPrice\": 29.99,\n      \"OriginalPrice\": 39.99,\n      \"DiscountPercentage\": 25,\n      \"ManufacturingCost\": 7372.22667239211,\n      \"Currency\": \"string\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"1983-11-07\",\n      \"LaunchDate\": \"1982-06-27T04:38:41.829Z\",\n      \"ExpirationDate\": \"2011-06-02T03:04:32.087Z\",\n      \"Gtin\": \"string\",\n      \"GtinType\": \"JAN\",\n      \"Asin\": \"string\",\n      \"Mpn\": \"string\",\n      \"ShippingRate\": 9436.66540481611,\n      \"ShippingWeight\": 6563.755968136095,\n      \"ShippingWeightUnit\": \"lb\",\n      \"ShippingLength\": 610.769457524597,\n      \"ShippingWidth\": 5930.856053257767,\n      \"ShippingHeight\": 618.5661925076114,\n      \"ShippingLengthUnit\": \"cm\",\n      \"ShippingLabel\": \"string\",\n      \"Category\": \"string\",\n      \"OriginalFormatCategory\": \"string\",\n      \"OriginalFormatCategoryId\": \"string\",\n      \"ParentName\": \"string\",\n      \"ParentSku\": \"string\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"string\",\n      \"Colors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Material\": \"string\",\n      \"Pattern\": \"string\",\n      \"Size\": \"string\",\n      \"SizeUnit\": \"string\",\n      \"Weight\": 6204.150296888099,\n      \"WeightUnit\": \"mg\",\n      \"Condition\": \"OEM\",\n      \"AgeGroup\": \"Newborn\",\n      \"AgeRangeMin\": 6679,\n      \"AgeRangeMax\": 6532,\n      \"AgeRangeUnit\": \"Months\",\n      \"Gender\": \"Male\",\n      \"Adult\": true,\n      \"ProductBid\": \"string\",\n      \"Inventory\": 8485,\n      \"Text1\": \"string\",\n      \"Text2\": \"string\",\n      \"Text3\": \"string\",\n      \"Numeric1\": 2509.3019665872316,\n      \"Numeric2\": 966.1827708164972,\n      \"Numeric3\": 2105.9669582978113,\n      \"Money1\": \"string\",\n      \"Money2\": \"string\",\n      \"Money3\": \"string\",\n      \"Uri\": \"http://fNNYycvzM.laoSnz8dZUiY-9Iq,lzJ\"\n    },\n    {\n      \"CatalogItemId\": \"ABC123\",\n      \"Name\": \"Acme Tennis Balls (One Dozen)\",\n      \"Description\": \"High-performance tennis balls.\",\n      \"Multipack\": \"1\",\n      \"Bullets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Manufacturer\": \"Acme\",\n      \"Url\": \"https://acme.example.com/product/12345\",\n      \"MobileUrl\": \"https://m.acme.example.com/product/12345\",\n      \"ImageUrl\": \"https://acme.example.com/images/12345.jpg\",\n      \"AdditionalImageUrls\": [\n        \"string\",\n        \"string\"\n      ],\n      \"PromotionIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"CurrentPrice\": 29.99,\n      \"OriginalPrice\": 39.99,\n      \"DiscountPercentage\": 25,\n      \"ManufacturingCost\": 4247.740866801269,\n      \"Currency\": \"string\",\n      \"StockAvailability\": \"PreOrder\",\n      \"EstimatedShipDate\": \"1947-08-15\",\n      \"LaunchDate\": \"1963-01-20T08:50:24.879Z\",\n      \"ExpirationDate\": \"1984-09-29T14:18:42.843Z\",\n      \"Gtin\": \"string\",\n      \"GtinType\": \"ISBN\",\n      \"Asin\": \"string\",\n      \"Mpn\": \"string\",\n      \"ShippingRate\": 7226.600685780443,\n      \"ShippingWeight\": 8224.784204820042,\n      \"ShippingWeightUnit\": \"g\",\n      \"ShippingLength\": 4214.714695427659,\n      \"ShippingWidth\": 7300.8777162027945,\n      \"ShippingHeight\": 1328.8147564845276,\n      \"ShippingLengthUnit\": \"in\",\n      \"ShippingLabel\": \"string\",\n      \"Category\": \"string\",\n      \"OriginalFormatCategory\": \"string\",\n      \"OriginalFormatCategoryId\": \"string\",\n      \"ParentName\": \"string\",\n      \"ParentSku\": \"string\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"string\",\n      \"Colors\": [\n        \"string\",\n        \"string\"\n      ],\n      \"Material\": \"string\",\n      \"Pattern\": \"string\",\n      \"Size\": \"string\",\n      \"SizeUnit\": \"string\",\n      \"Weight\": 5781.087839989707,\n      \"WeightUnit\": \"g\",\n      \"Condition\": \"OpenBox\",\n      \"AgeGroup\": \"Kids\",\n      \"AgeRangeMin\": 4630,\n      \"AgeRangeMax\": 6535,\n      \"AgeRangeUnit\": \"Months\",\n      \"Gender\": \"Male\",\n      \"Adult\": false,\n      \"ProductBid\": \"string\",\n      \"Inventory\": 3821,\n      \"Text1\": \"string\",\n      \"Text2\": \"string\",\n      \"Text3\": \"string\",\n      \"Numeric1\": 7214.346085863021,\n      \"Numeric2\": 34.263214457561645,\n      \"Numeric3\": 318.7799570025818,\n      \"Money1\": \"string\",\n      \"Money2\": \"string\",\n      \"Money3\": \"string\",\n      \"Uri\": \"http://Oc.kwrpYGmUBFD25MmOcPAnESQ+eFNcxGqNjDXhYpQEIcVkD2NeKw6q?rwymgj=qJDcp&\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64d77f38-b01b-482a-bc9f-0f42b08f42c9",
+          "name": "Create a Catalog Item",
+          "request": {
+            "name": "Create a Catalog Item",
+            "description": {
+              "content": "Creates a new item within a specified catalog.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e55ab610-35d9-445d-9c8a-30db18afb3a8",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"CatalogItemId\": \"ABC123\",\n  \"Name\": \"Acme Tennis Balls (One Dozen)\",\n  \"Url\": \"https://acme.example.com/product/12345\",\n  \"Description\": \"High-performance tennis balls.\",\n  \"Multipack\": \"1\",\n  \"Bullets\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Manufacturer\": \"Acme\",\n  \"MobileUrl\": \"https://m.acme.example.com/product/12345\",\n  \"ImageUrl\": \"https://acme.example.com/images/12345.jpg\",\n  \"AdditionalImageUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"PromotionIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"CurrentPrice\": 29.99,\n  \"OriginalPrice\": 39.99,\n  \"DiscountPercentage\": 25,\n  \"ManufacturingCost\": 6810.045110458929,\n  \"Currency\": \"string\",\n  \"StockAvailability\": \"LimitedAvailability\",\n  \"EstimatedShipDate\": \"1949-09-06\",\n  \"LaunchDate\": \"1972-07-30T15:04:27.002Z\",\n  \"ExpirationDate\": \"1948-11-26T09:42:37.690Z\",\n  \"Gtin\": \"string\",\n  \"GtinType\": \"EAN\",\n  \"Asin\": \"string\",\n  \"Mpn\": \"string\",\n  \"ShippingRate\": 7582.037850533765,\n  \"ShippingWeight\": 2801.754828318508,\n  \"ShippingWeightUnit\": \"oz\",\n  \"ShippingLength\": 8686.702992933413,\n  \"ShippingWidth\": 1708.1413574462067,\n  \"ShippingHeight\": 5008.7907103288035,\n  \"ShippingLengthUnit\": \"in\",\n  \"ShippingLabel\": \"string\",\n  \"Category\": \"string\",\n  \"OriginalFormatCategory\": \"string\",\n  \"OriginalFormatCategoryId\": \"string\",\n  \"ParentName\": \"string\",\n  \"ParentSku\": \"string\",\n  \"IsParent\": true,\n  \"ItemGroupId\": \"string\",\n  \"Colors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Material\": \"string\",\n  \"Pattern\": \"string\",\n  \"Size\": \"string\",\n  \"SizeUnit\": \"string\",\n  \"Weight\": 779.1496441659984,\n  \"WeightUnit\": \"g\",\n  \"Condition\": \"OpenBox\",\n  \"AgeGroup\": \"Toddler\",\n  \"AgeRangeMin\": 4453,\n  \"AgeRangeMax\": 5547,\n  \"AgeRangeUnit\": \"Years\",\n  \"Gender\": \"Male\",\n  \"Adult\": false,\n  \"ProductBid\": \"string\",\n  \"Inventory\": 8775,\n  \"Text1\": \"string\",\n  \"Text2\": \"string\",\n  \"Text3\": \"string\",\n  \"Numeric1\": 3684.824630940098,\n  \"Numeric2\": 4695.466445374961,\n  \"Numeric3\": 6998.841691376249,\n  \"Money1\": \"string\",\n  \"Money2\": \"string\",\n  \"Money3\": \"string\",\n  \"Uri\": \"https://hxwIjXUYerMHlZoofWqirUlh.oewGYZXLW9\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://PXrvBNCwiOOgnPTCUSMYLIHpnsy.fbtwZgsCn.am3vqEjdQRoTNSBa3usOCCtXK,XkXMEkur-agjCwHFsgsXEhCDKDgR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8edae12b-0786-4605-96da-2043c1cffc29",
+          "name": "Get Catalog Item Details",
+          "request": {
+            "name": "Get Catalog Item Details",
+            "description": {
+              "content": "Retrieves the details of an existing catalog item by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items",
+                ":CatalogItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CatalogItemId",
+                  "description": "(Required) Unique identifier for the catalog item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93fac016-b59f-4bf1-9662-3b742a0627b1",
+              "name": "A single catalog item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items",
+                    ":CatalogItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CatalogItemId",
+                      "description": "(Required) Unique identifier for the catalog item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CatalogItemId\": \"ABC123\",\n  \"Name\": \"Acme Tennis Balls (One Dozen)\",\n  \"Description\": \"High-performance tennis balls.\",\n  \"Multipack\": \"1\",\n  \"Bullets\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Labels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Manufacturer\": \"Acme\",\n  \"Url\": \"https://acme.example.com/product/12345\",\n  \"MobileUrl\": \"https://m.acme.example.com/product/12345\",\n  \"ImageUrl\": \"https://acme.example.com/images/12345.jpg\",\n  \"AdditionalImageUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"PromotionIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"CurrentPrice\": 29.99,\n  \"OriginalPrice\": 39.99,\n  \"DiscountPercentage\": 25,\n  \"ManufacturingCost\": 5163.642656897692,\n  \"Currency\": \"string\",\n  \"StockAvailability\": \"BackOrder\",\n  \"EstimatedShipDate\": \"1970-01-14\",\n  \"LaunchDate\": \"1951-01-09T21:51:46.024Z\",\n  \"ExpirationDate\": \"1986-01-07T02:34:50.720Z\",\n  \"Gtin\": \"string\",\n  \"GtinType\": \"ISBN\",\n  \"Asin\": \"string\",\n  \"Mpn\": \"string\",\n  \"ShippingRate\": 3734.307307521617,\n  \"ShippingWeight\": 3121.0478803871324,\n  \"ShippingWeightUnit\": \"oz\",\n  \"ShippingLength\": 5915.134979031837,\n  \"ShippingWidth\": 8448.350530757902,\n  \"ShippingHeight\": 5101.194531103826,\n  \"ShippingLengthUnit\": \"in\",\n  \"ShippingLabel\": \"string\",\n  \"Category\": \"string\",\n  \"OriginalFormatCategory\": \"string\",\n  \"OriginalFormatCategoryId\": \"string\",\n  \"ParentName\": \"string\",\n  \"ParentSku\": \"string\",\n  \"IsParent\": false,\n  \"ItemGroupId\": \"string\",\n  \"Colors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"Material\": \"string\",\n  \"Pattern\": \"string\",\n  \"Size\": \"string\",\n  \"SizeUnit\": \"string\",\n  \"Weight\": 9619.167419010262,\n  \"WeightUnit\": \"g\",\n  \"Condition\": \"OpenBox\",\n  \"AgeGroup\": \"Newborn\",\n  \"AgeRangeMin\": 5878,\n  \"AgeRangeMax\": 2478,\n  \"AgeRangeUnit\": \"Months\",\n  \"Gender\": \"Male\",\n  \"Adult\": false,\n  \"ProductBid\": \"string\",\n  \"Inventory\": 5180,\n  \"Text1\": \"string\",\n  \"Text2\": \"string\",\n  \"Text3\": \"string\",\n  \"Numeric1\": 8582.460147708805,\n  \"Numeric2\": 748.5131451776616,\n  \"Numeric3\": 1411.1951102238852,\n  \"Money1\": \"string\",\n  \"Money2\": \"string\",\n  \"Money3\": \"string\",\n  \"Uri\": \"http://AEAdfloWoSyQXmzcdFvmr.jrjhTCy.WoY-J-tzY4fOM3+PvRfIjylm8wiqTz3j9WbZ2ua\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee3ecccd-bc9c-48ba-bb6c-db5cdd0add6b",
+          "name": "Update a Single Catalog Item",
+          "request": {
+            "name": "Update a Single Catalog Item",
+            "description": {
+              "content": "Updates a single specified catalog item by setting the values of the parameters passed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items",
+                ":CatalogItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CatalogItemId",
+                  "description": "(Required) Unique identifier for the catalog item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CatalogItemId",
+                  "value": "<string>",
+                  "description": "Unique identifier for the catalog item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "Name of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Description",
+                  "value": "<string>",
+                  "description": "Description of the item — information about what it is or what it does."
+                },
+                {
+                  "disabled": false,
+                  "key": "Multipack",
+                  "value": "<string>",
+                  "description": "Whether the item represents a merchant-defined multi-pack (`YES`/`NO`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Bullets",
+                  "value": "<string>",
+                  "description": "Short bullet descriptions of the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "Bullets",
+                  "value": "<string>",
+                  "description": "Short bullet descriptions of the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "Labels",
+                  "value": "<string>",
+                  "description": "Key terms to help partners find the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Labels",
+                  "value": "<string>",
+                  "description": "Key terms to help partners find the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Manufacturer",
+                  "value": "<string>",
+                  "description": "The person or group that makes the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Url",
+                  "value": "<uri>",
+                  "description": "URL that leads to the item's online store listing."
+                },
+                {
+                  "disabled": false,
+                  "key": "MobileUrl",
+                  "value": "<uri>",
+                  "description": "URI that points directly to the item's mobile listing."
+                },
+                {
+                  "disabled": false,
+                  "key": "ImageUrl",
+                  "value": "<uri>",
+                  "description": "URL that leads to the item's image."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdditionalImageUrls",
+                  "value": "<string>",
+                  "description": "List of additional image URLs for the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "AdditionalImageUrls",
+                  "value": "<string>",
+                  "description": "List of additional image URLs for the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromotionIds",
+                  "value": "<string>",
+                  "description": "List of promotion Ids that identify the item as part of a promotion."
+                },
+                {
+                  "disabled": false,
+                  "key": "PromotionIds",
+                  "value": "<string>",
+                  "description": "List of promotion Ids that identify the item as part of a promotion."
+                },
+                {
+                  "disabled": false,
+                  "key": "CurrentPrice",
+                  "value": "<decimal>",
+                  "description": "Current consumer price of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "OriginalPrice",
+                  "value": "<decimal>",
+                  "description": "Original consumer price of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "DiscountPercentage",
+                  "value": "<integer>",
+                  "description": "Percent discount a consumer can get when they purchase the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "ManufacturingCost",
+                  "value": "<decimal>",
+                  "description": "Cost to produce the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Currency",
+                  "value": "<string>",
+                  "description": "Currency in which the item's price is listed (ISO 4217)."
+                },
+                {
+                  "disabled": false,
+                  "key": "StockAvailability",
+                  "value": "<string>",
+                  "description": "Status of the product's backstock (`InStock`, `OutOfStock`, `BackOrder`, `PreOrder`, `LimitedAvailability`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "EstimatedShipDate",
+                  "value": "<date>",
+                  "description": "Date the item will begin shipping (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LaunchDate",
+                  "value": "<dateTime>",
+                  "description": "Date the item becomes (or became) available (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ExpirationDate",
+                  "value": "<dateTime>",
+                  "description": "Date the item will be removed from the catalog (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Gtin",
+                  "value": "<string>",
+                  "description": "Global Trade Item Number."
+                },
+                {
+                  "disabled": false,
+                  "key": "GtinType",
+                  "value": "<string>",
+                  "description": "Type of GTIN number the item uses (`EAN`, `UPC`, `ISBN`, `JAN`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Asin",
+                  "value": "<string>",
+                  "description": "Item's Amazon Standard Identification Number."
+                },
+                {
+                  "disabled": false,
+                  "key": "Mpn",
+                  "value": "<string>",
+                  "description": "Manufacturing Part Number."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingRate",
+                  "value": "<decimal>",
+                  "description": "Standard rate to ship the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingWeight",
+                  "value": "<decimal>",
+                  "description": "Weight of the shipping parcel."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingWeightUnit",
+                  "value": "<string>",
+                  "description": "Unit for the shipping parcel's weight (`lb`, `oz`, `g`, `kg`, `mg`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingLength",
+                  "value": "<decimal>",
+                  "description": "Length of the shipping parcel."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingWidth",
+                  "value": "<decimal>",
+                  "description": "Width of the shipping parcel."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingHeight",
+                  "value": "<decimal>",
+                  "description": "Height of the shipping parcel."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingLengthUnit",
+                  "value": "<string>",
+                  "description": "Unit for the shipping parcel's dimensions (`in`, `cm`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "ShippingLabel",
+                  "value": "<string>",
+                  "description": "Label of the shipping parcel."
+                },
+                {
+                  "disabled": false,
+                  "key": "Category",
+                  "value": "<string>",
+                  "description": "Group or kind of products with which the item is associated."
+                },
+                {
+                  "disabled": false,
+                  "key": "OriginalFormatCategory",
+                  "value": "<string>",
+                  "description": "Category breadcrumb used to locate the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "OriginalFormatCategoryId",
+                  "value": "<string>",
+                  "description": "Id of the category the item is in."
+                },
+                {
+                  "disabled": false,
+                  "key": "ParentName",
+                  "value": "<string>",
+                  "description": "If the item has a parent item, the parent item's name."
+                },
+                {
+                  "disabled": false,
+                  "key": "ParentSku",
+                  "value": "<string>",
+                  "description": "If the item has a parent item, the parent item's SKU."
+                },
+                {
+                  "disabled": false,
+                  "key": "IsParent",
+                  "value": "<boolean>",
+                  "description": "Whether this item represents a bundle of items."
+                },
+                {
+                  "disabled": false,
+                  "key": "ItemGroupId",
+                  "value": "<string>",
+                  "description": "Groups product variants that only differ by attributes like size, color, pattern, age group, or gender."
+                },
+                {
+                  "disabled": false,
+                  "key": "Colors",
+                  "value": "<string>",
+                  "description": "Primary colors of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Colors",
+                  "value": "<string>",
+                  "description": "Primary colors of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Material",
+                  "value": "<string>",
+                  "description": "Primary material of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Pattern",
+                  "value": "<string>",
+                  "description": "Pattern of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "Size",
+                  "value": "<string>",
+                  "description": "Numerical size of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "SizeUnit",
+                  "value": "<string>",
+                  "description": "Item's size unit of measurement (e.g., `Inches`, `Centimeters`, `Pounds`, `Kilograms`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Weight",
+                  "value": "<decimal>",
+                  "description": "Weight of the item."
+                },
+                {
+                  "disabled": false,
+                  "key": "WeightUnit",
+                  "value": "<string>",
+                  "description": "Item's weight unit of measurement (`lb`, `oz`, `g`, `kg`, `mg`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Condition",
+                  "value": "<string>",
+                  "description": "Condition the item is in when sold (`New`, `Used`, `Refurbished`, `OEM`, `OpenBox`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "AgeGroup",
+                  "value": "<string>",
+                  "description": "Age group the item targets (`Newborn`, `Infant`, `Toddler`, `Kids`, `Adult`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "AgeRangeMin",
+                  "value": "<integer>",
+                  "description": "Minimum age for whom the item is intended."
+                },
+                {
+                  "disabled": false,
+                  "key": "AgeRangeMax",
+                  "value": "<integer>",
+                  "description": "Maximum age for whom the item is intended."
+                },
+                {
+                  "disabled": false,
+                  "key": "AgeRangeUnit",
+                  "value": "<string>",
+                  "description": "Unit of the age range (`Months`, `Years`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Gender",
+                  "value": "<string>",
+                  "description": "Gender for whom the item is intended (`Male`, `Female`, `Unisex`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Adult",
+                  "value": "<boolean>",
+                  "description": "Whether the item is only intended for adults."
+                },
+                {
+                  "disabled": false,
+                  "key": "ProductBid",
+                  "value": "<string>",
+                  "description": "How much the partner will be paid for driving a conversion on the product."
+                },
+                {
+                  "disabled": false,
+                  "key": "Inventory",
+                  "value": "<integer>",
+                  "description": "Item's inventory count."
+                },
+                {
+                  "disabled": false,
+                  "key": "Text1",
+                  "value": "<string>",
+                  "description": "General text field that accepts any text data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Text2",
+                  "value": "<string>",
+                  "description": "General text field that accepts any text data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Text3",
+                  "value": "<string>",
+                  "description": "General text field that accepts any text data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric1",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric2",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Numeric3",
+                  "value": "<decimal>",
+                  "description": "General numeral field that accepts any numeric data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money1",
+                  "value": "<string>",
+                  "description": "General numeral field that accepts any money or financial data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money2",
+                  "value": "<string>",
+                  "description": "General numeral field that accepts any money or financial data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Money3",
+                  "value": "<string>",
+                  "description": "General numeral field that accepts any money or financial data you want to send. Appears in your reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "Uri",
+                  "value": "<uri-reference>",
+                  "description": "URI that points directly to this catalog item."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d9db6f24-6d8c-4f3d-b291-616eed22be33",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items",
+                    ":CatalogItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CatalogItemId",
+                      "description": "(Required) Unique identifier for the catalog item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unique identifier for the catalog item.",
+                        "type": "text/plain"
+                      },
+                      "key": "CatalogItemId",
+                      "value": "ABC123"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Name",
+                      "value": "Acme Tennis Balls (One Dozen)"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the item — information about what it is or what it does.",
+                        "type": "text/plain"
+                      },
+                      "key": "Description",
+                      "value": "High-performance tennis balls."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the item represents a merchant-defined multi-pack (`YES`/`NO`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Multipack",
+                      "value": "1"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Short bullet descriptions of the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "Bullets",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Short bullet descriptions of the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "Bullets",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Key terms to help partners find the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Key terms to help partners find the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Labels",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The person or group that makes the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Manufacturer",
+                      "value": "Acme"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL that leads to the item's online store listing.",
+                        "type": "text/plain"
+                      },
+                      "key": "Url",
+                      "value": "https://acme.example.com/product/12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URI that points directly to the item's mobile listing.",
+                        "type": "text/plain"
+                      },
+                      "key": "MobileUrl",
+                      "value": "https://m.acme.example.com/product/12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL that leads to the item's image.",
+                        "type": "text/plain"
+                      },
+                      "key": "ImageUrl",
+                      "value": "https://acme.example.com/images/12345.jpg"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of additional image URLs for the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdditionalImageUrls",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of additional image URLs for the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "AdditionalImageUrls",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of promotion Ids that identify the item as part of a promotion.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromotionIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of promotion Ids that identify the item as part of a promotion.",
+                        "type": "text/plain"
+                      },
+                      "key": "PromotionIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Current consumer price of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "CurrentPrice",
+                      "value": "29.99"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Original consumer price of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "OriginalPrice",
+                      "value": "39.99"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Percent discount a consumer can get when they purchase the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "DiscountPercentage",
+                      "value": "25"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Cost to produce the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ManufacturingCost",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Currency in which the item's price is listed (ISO 4217).",
+                        "type": "text/plain"
+                      },
+                      "key": "Currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Status of the product's backstock (`InStock`, `OutOfStock`, `BackOrder`, `PreOrder`, `LimitedAvailability`).",
+                        "type": "text/plain"
+                      },
+                      "key": "StockAvailability",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Date the item will begin shipping (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "EstimatedShipDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Date the item becomes (or became) available (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "LaunchDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Date the item will be removed from the catalog (ISO 8601).",
+                        "type": "text/plain"
+                      },
+                      "key": "ExpirationDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Global Trade Item Number.",
+                        "type": "text/plain"
+                      },
+                      "key": "Gtin",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of GTIN number the item uses (`EAN`, `UPC`, `ISBN`, `JAN`).",
+                        "type": "text/plain"
+                      },
+                      "key": "GtinType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Item's Amazon Standard Identification Number.",
+                        "type": "text/plain"
+                      },
+                      "key": "Asin",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Manufacturing Part Number.",
+                        "type": "text/plain"
+                      },
+                      "key": "Mpn",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Standard rate to ship the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingRate",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Weight of the shipping parcel.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingWeight",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unit for the shipping parcel's weight (`lb`, `oz`, `g`, `kg`, `mg`).",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingWeightUnit",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Length of the shipping parcel.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingLength",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Width of the shipping parcel.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingWidth",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Height of the shipping parcel.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingHeight",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unit for the shipping parcel's dimensions (`in`, `cm`).",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingLengthUnit",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label of the shipping parcel.",
+                        "type": "text/plain"
+                      },
+                      "key": "ShippingLabel",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Group or kind of products with which the item is associated.",
+                        "type": "text/plain"
+                      },
+                      "key": "Category",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Category breadcrumb used to locate the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "OriginalFormatCategory",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Id of the category the item is in.",
+                        "type": "text/plain"
+                      },
+                      "key": "OriginalFormatCategoryId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the item has a parent item, the parent item's name.",
+                        "type": "text/plain"
+                      },
+                      "key": "ParentName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "If the item has a parent item, the parent item's SKU.",
+                        "type": "text/plain"
+                      },
+                      "key": "ParentSku",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether this item represents a bundle of items.",
+                        "type": "text/plain"
+                      },
+                      "key": "IsParent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Groups product variants that only differ by attributes like size, color, pattern, age group, or gender.",
+                        "type": "text/plain"
+                      },
+                      "key": "ItemGroupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary colors of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Colors",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary colors of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Colors",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Primary material of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Material",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Pattern of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Pattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Numerical size of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Size",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Item's size unit of measurement (e.g., `Inches`, `Centimeters`, `Pounds`, `Kilograms`).",
+                        "type": "text/plain"
+                      },
+                      "key": "SizeUnit",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Weight of the item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Weight",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Item's weight unit of measurement (`lb`, `oz`, `g`, `kg`, `mg`).",
+                        "type": "text/plain"
+                      },
+                      "key": "WeightUnit",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Condition the item is in when sold (`New`, `Used`, `Refurbished`, `OEM`, `OpenBox`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Condition",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Age group the item targets (`Newborn`, `Infant`, `Toddler`, `Kids`, `Adult`).",
+                        "type": "text/plain"
+                      },
+                      "key": "AgeGroup",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Minimum age for whom the item is intended.",
+                        "type": "text/plain"
+                      },
+                      "key": "AgeRangeMin",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum age for whom the item is intended.",
+                        "type": "text/plain"
+                      },
+                      "key": "AgeRangeMax",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Unit of the age range (`Months`, `Years`).",
+                        "type": "text/plain"
+                      },
+                      "key": "AgeRangeUnit",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Gender for whom the item is intended (`Male`, `Female`, `Unisex`).",
+                        "type": "text/plain"
+                      },
+                      "key": "Gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the item is only intended for adults.",
+                        "type": "text/plain"
+                      },
+                      "key": "Adult",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "How much the partner will be paid for driving a conversion on the product.",
+                        "type": "text/plain"
+                      },
+                      "key": "ProductBid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Item's inventory count.",
+                        "type": "text/plain"
+                      },
+                      "key": "Inventory",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General text field that accepts any text data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Text1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General text field that accepts any text data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Text2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General text field that accepts any text data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Text3",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric1",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric2",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any numeric data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Numeric3",
+                      "value": "<decimal>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any money or financial data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money1",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any money or financial data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money2",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "General numeral field that accepts any money or financial data you want to send. Appears in your reports.",
+                        "type": "text/plain"
+                      },
+                      "key": "Money3",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URI that points directly to this catalog item.",
+                        "type": "text/plain"
+                      },
+                      "key": "Uri",
+                      "value": "<uri-reference>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://PXrvBNCwiOOgnPTCUSMYLIHpnsy.fbtwZgsCn.am3vqEjdQRoTNSBa3usOCCtXK,XkXMEkur-agjCwHFsgsXEhCDKDgR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f757789c-14bf-4608-8dd1-9aeaaef9b733",
+          "name": "Delete a Catalog Item",
+          "request": {
+            "name": "Delete a Catalog Item",
+            "description": {
+              "content": "Permanently deletes a catalog item. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items",
+                ":CatalogItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CatalogItemId",
+                  "description": "(Required) Unique identifier for the catalog item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44f64e5c-2a2c-4cd2-8478-af36af5efcfb",
+              "name": "The item was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items",
+                    ":CatalogItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CatalogItemId",
+                      "description": "(Required) Unique identifier for the catalog item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"DELETED\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09653675-040c-4b7e-956c-b8f9f4520b1d",
+          "name": "Bulk Update Catalog Items",
+          "request": {
+            "name": "Bulk Update Catalog Items",
+            "description": {
+              "content": "Updates multiple catalog items in a single request. The request body must be a JSON array of item objects, with each object containing its CatalogItemId. A maximum of 500 products can be updated per call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "BulkUpdate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Your unique account identifier."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "CatalogId",
+                  "description": "(Required) Unique identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"CatalogItemId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Description\": \"<string>\",\n    \"Multipack\": \"<string>\",\n    \"Bullets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Labels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Manufacturer\": \"<string>\",\n    \"Url\": \"<uri>\",\n    \"MobileUrl\": \"<uri>\",\n    \"ImageUrl\": \"<uri>\",\n    \"AdditionalImageUrls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"PromotionIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"CurrentPrice\": \"<decimal>\",\n    \"OriginalPrice\": \"<decimal>\",\n    \"DiscountPercentage\": \"<integer>\",\n    \"ManufacturingCost\": \"<decimal>\",\n    \"Currency\": \"<string>\",\n    \"StockAvailability\": \"<string>\",\n    \"EstimatedShipDate\": \"<date>\",\n    \"LaunchDate\": \"<dateTime>\",\n    \"ExpirationDate\": \"<dateTime>\",\n    \"Gtin\": \"<string>\",\n    \"GtinType\": \"<string>\",\n    \"Asin\": \"<string>\",\n    \"Mpn\": \"<string>\",\n    \"ShippingRate\": \"<decimal>\",\n    \"ShippingWeight\": \"<decimal>\",\n    \"ShippingWeightUnit\": \"<string>\",\n    \"ShippingLength\": \"<decimal>\",\n    \"ShippingWidth\": \"<decimal>\",\n    \"ShippingHeight\": \"<decimal>\",\n    \"ShippingLengthUnit\": \"<string>\",\n    \"ShippingLabel\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"OriginalFormatCategory\": \"<string>\",\n    \"OriginalFormatCategoryId\": \"<string>\",\n    \"ParentName\": \"<string>\",\n    \"ParentSku\": \"<string>\",\n    \"IsParent\": \"<boolean>\",\n    \"ItemGroupId\": \"<string>\",\n    \"Colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Material\": \"<string>\",\n    \"Pattern\": \"<string>\",\n    \"Size\": \"<string>\",\n    \"SizeUnit\": \"<string>\",\n    \"Weight\": \"<decimal>\",\n    \"WeightUnit\": \"<string>\",\n    \"Condition\": \"<string>\",\n    \"AgeGroup\": \"<string>\",\n    \"AgeRangeMin\": \"<integer>\",\n    \"AgeRangeMax\": \"<integer>\",\n    \"AgeRangeUnit\": \"<string>\",\n    \"Gender\": \"<string>\",\n    \"Adult\": \"<boolean>\",\n    \"ProductBid\": \"<string>\",\n    \"Inventory\": \"<integer>\",\n    \"Text1\": \"<string>\",\n    \"Text2\": \"<string>\",\n    \"Text3\": \"<string>\",\n    \"Numeric1\": \"<decimal>\",\n    \"Numeric2\": \"<decimal>\",\n    \"Numeric3\": \"<decimal>\",\n    \"Money1\": \"<string>\",\n    \"Money2\": \"<string>\",\n    \"Money3\": \"<string>\",\n    \"Uri\": \"<uri-reference>\"\n  },\n  {\n    \"CatalogItemId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Description\": \"<string>\",\n    \"Multipack\": \"<string>\",\n    \"Bullets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Labels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Manufacturer\": \"<string>\",\n    \"Url\": \"<uri>\",\n    \"MobileUrl\": \"<uri>\",\n    \"ImageUrl\": \"<uri>\",\n    \"AdditionalImageUrls\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"PromotionIds\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"CurrentPrice\": \"<decimal>\",\n    \"OriginalPrice\": \"<decimal>\",\n    \"DiscountPercentage\": \"<integer>\",\n    \"ManufacturingCost\": \"<decimal>\",\n    \"Currency\": \"<string>\",\n    \"StockAvailability\": \"<string>\",\n    \"EstimatedShipDate\": \"<date>\",\n    \"LaunchDate\": \"<dateTime>\",\n    \"ExpirationDate\": \"<dateTime>\",\n    \"Gtin\": \"<string>\",\n    \"GtinType\": \"<string>\",\n    \"Asin\": \"<string>\",\n    \"Mpn\": \"<string>\",\n    \"ShippingRate\": \"<decimal>\",\n    \"ShippingWeight\": \"<decimal>\",\n    \"ShippingWeightUnit\": \"<string>\",\n    \"ShippingLength\": \"<decimal>\",\n    \"ShippingWidth\": \"<decimal>\",\n    \"ShippingHeight\": \"<decimal>\",\n    \"ShippingLengthUnit\": \"<string>\",\n    \"ShippingLabel\": \"<string>\",\n    \"Category\": \"<string>\",\n    \"OriginalFormatCategory\": \"<string>\",\n    \"OriginalFormatCategoryId\": \"<string>\",\n    \"ParentName\": \"<string>\",\n    \"ParentSku\": \"<string>\",\n    \"IsParent\": \"<boolean>\",\n    \"ItemGroupId\": \"<string>\",\n    \"Colors\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"Material\": \"<string>\",\n    \"Pattern\": \"<string>\",\n    \"Size\": \"<string>\",\n    \"SizeUnit\": \"<string>\",\n    \"Weight\": \"<decimal>\",\n    \"WeightUnit\": \"<string>\",\n    \"Condition\": \"<string>\",\n    \"AgeGroup\": \"<string>\",\n    \"AgeRangeMin\": \"<integer>\",\n    \"AgeRangeMax\": \"<integer>\",\n    \"AgeRangeUnit\": \"<string>\",\n    \"Gender\": \"<string>\",\n    \"Adult\": \"<boolean>\",\n    \"ProductBid\": \"<string>\",\n    \"Inventory\": \"<integer>\",\n    \"Text1\": \"<string>\",\n    \"Text2\": \"<string>\",\n    \"Text3\": \"<string>\",\n    \"Numeric1\": \"<decimal>\",\n    \"Numeric2\": \"<decimal>\",\n    \"Numeric3\": \"<decimal>\",\n    \"Money1\": \"<string>\",\n    \"Money2\": \"<string>\",\n    \"Money3\": \"<string>\",\n    \"Uri\": \"<uri-reference>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af5c89fa-407e-47a3-b056-3ddafc499fb7",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "BulkUpdate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Your unique account identifier."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "CatalogId",
+                      "description": "(Required) Unique identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"CatalogItemId\": \"12345\",\n    \"Name\": \"Anvil\"\n  },\n  {\n    \"CatalogItemId\": \"67890\",\n    \"CurrentPrice\": \"50.00\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://PXrvBNCwiOOgnPTCUSMYLIHpnsy.fbtwZgsCn.am3vqEjdQRoTNSBa3usOCCtXK,XkXMEkur-agjCwHFsgsXEhCDKDgR\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "55c4720f-b064-4498-a58c-090b8f1daf00",
+    "name": "Brand API - Product Catalogs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing Product Catalogs and their items. This allows for programmatic updates to catalog settings, file uploads, and CRUD operations on individual items.\nNote: Creating and deleting the catalogs themselves must be done in the impact.com web app.",
+      "type": "text/plain"
+    }
+  }
+}

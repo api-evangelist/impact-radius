@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Tax Documents API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the latest tax document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/TaxDocument",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Returns the most recently saved tax document for the partner account."
+        },
+        {
+          "info": {
+            "name": "Create a tax document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/TaxDocument",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "DocType",
+                  "value": ""
+                },
+                {
+                  "name": "Id",
+                  "value": ""
+                },
+                {
+                  "name": "ReturnUrl",
+                  "value": ""
+                },
+                {
+                  "name": "Provider",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Initiates a new tax document submission. Returns an iframe URL the partner opens to fill in and sign the form. All parameters except `Provider` apply to DocuSign only.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific tax document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/TaxDocument/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the tax document."
+              }
+            ]
+          },
+          "docs": "Returns a specific tax document by its unique Id."
+        },
+        {
+          "info": {
+            "name": "List all tax documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/TaxDocuments",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Returns every tax document submitted for the partner account."
+        },
+        {
+          "info": {
+            "name": "Complete tax document submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/TaxDocument/Complete",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "event",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Records the outcome of a tax document submission collected via the Comply Exchange iframe. Call this immediately after the user finalizes submission in the iframe so the document is recorded as submitted in impact.com. DocuSign signals completion via the `ReturnUrl` callback supplied at Create time instead.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

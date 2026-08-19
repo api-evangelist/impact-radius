@@ -1,0 +1,576 @@
+openapi: 3.1.0
+info:
+  title: Partner Stores API
+  version: '15'
+  description: |
+    A Store is a curated collection of products from a brand's catalog, grouped for promotion to your audience. Each store contains one or more **Groups**, and each group contains catalog **Items** (products).
+
+    Use this API to:
+
+    1. **List Stores** — see which brand storefronts are available to you.
+    2. **Retrieve a Store** — get its details plus the curated groups inside it.
+    3. **List items in a group** — fetch the products in a specific group, including price, stock, and tracking URLs you can surface to your audience.
+
+    For richer item-level operations and search across an entire catalog, see the Partner Catalogs API.
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Stores
+  description: Endpoints for browsing partner storefronts, their groups, and the catalog items inside them.
+paths:
+  /Mediapartners/{AccountSID}/Stores:
+    get:
+      summary: List all stores
+      description: Returns a list of all stores available to your partner account.
+      operationId: listStores
+      tags:
+      - Stores
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      responses:
+        '200':
+          description: An array of stores.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Stores:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Store'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: application/json'
+  /Mediapartners/{AccountSID}/Stores/{Id}:
+    get:
+      summary: Retrieve a store
+      description: Retrieves a store's details, including its curated groups.
+      operationId: retrieveStore
+      tags:
+      - Stores
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: Unique identifier for the store.
+        schema:
+          type: string
+      - name: ShowAutoCreatedGroups
+        in: query
+        required: false
+        description: When `TRUE` (the default), the response includes groups that impact.com auto-generated for the storefront. Set to `FALSE` to return only brand-curated groups.
+        schema:
+          type: string
+          enum:
+          - 'TRUE'
+          - 'FALSE'
+          default: 'TRUE'
+      responses:
+        '200':
+          description: A store object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '404':
+          description: No store exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores/{Id}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: application/json'
+  /Mediapartners/{AccountSID}/Stores/{Id}/Group/{GroupId}/Items:
+    get:
+      summary: List items in a store group
+      description: Returns the catalog items belonging to the given store and group, sorted by most recently created.
+      operationId: listStoreItems
+      tags:
+      - Stores
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: Unique identifier for the store containing the group.
+        schema:
+          type: string
+      - name: GroupId
+        in: path
+        required: true
+        description: Unique identifier for the group whose items you want to list.
+        schema:
+          type: string
+      - name: Query
+        in: query
+        required: false
+        description: 'Narrows the list by attribute (e.g., `CurrentPrice > 10.00`).'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An array of catalog item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CatalogItem'
+        '404':
+          description: No store or group exists with the supplied Ids.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Mediapartners/{AccountSID}/Stores/{Id}/Group/{GroupId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: application/json'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    Store:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the store (also the brand's Campaign ID).
+          example: '10306'
+        Name:
+          type: string
+          description: Display name of the store as shown on the brand's storefront.
+          example: Hazel's Wellness Picks
+        NumberOfGroups:
+          type: string
+          description: Number of curated groups in this store.
+          example: '1'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the store was last updated (ISO 8601).
+          example: '2025-06-20T08:03:12-07:00'
+        StoreUri:
+          type: string
+          description: Web URL to view this store in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-partner-storefront-flow.ihtml?storefrontId=10306
+        StoreAvatar:
+          type: string
+          description: Public CDN URL of the brand's logo for this store. May be empty.
+          example: https://cdn2.impact.com/display-logo-via-campaign/10306.png
+        StoreBanner:
+          type: string
+          description: Public CDN URL of the storefront banner image. May be empty.
+          example: https://product.impact.com/productservices/apps/assets/banner/MTAzMDZfRnJpIEp1biAyMCAxNTowMzoxMSBVVEMgMjAyNQ==.JPG
+        Uri:
+          type: string
+          description: API resource path for this store.
+          example: /Mediapartners/<AccountSID>/Stores/10306
+        Groups:
+          type: array
+          description: The curated groups contained in this store.
+          items:
+            $ref: '#/components/schemas/StoreGroup'
+    StoreGroup:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the group within the store.
+          example: '817'
+        Name:
+          type: string
+          description: Display name of the group.
+          example: Professional Equipment
+        NumberOfProducts:
+          type: string
+          description: Number of products in this group.
+          example: '17'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the group was last updated (ISO 8601).
+          example: '2025-06-20T08:01:43-07:00'
+        StartDate:
+          type: string
+          format: date-time
+          description: Date and time from which this group is active (ISO 8601). Empty for groups with no scheduled start.
+          example: ''
+        EndDate:
+          type: string
+          format: date-time
+          description: Date and time at which this group ends (ISO 8601). Empty for groups with no scheduled end.
+          example: ''
+        Status:
+          type: string
+          enum:
+          - ACTIVE
+          - DISABLED
+          description: Current state of the group.
+          example: ACTIVE
+        CatalogId:
+          type: string
+          description: Unique identifier for the brand catalog that contains the items in this group.
+          example: '24836'
+        Uri:
+          type: string
+          description: Web URL to view the products in this group in the impact.com interface.
+          example: https://member.impactradius.com/secure/mediapartner/ads/view-products-flow.ihtml#/partnerproducts/campaignId=10306&ProductGroups=817
+        ItemsUri:
+          type: string
+          description: API resource path to list the items in this group.
+          example: /Mediapartners/<AccountSID>/Stores/10306/Group/817/Items
+        GroupProductPreview:
+          type: string
+          description: Optional preview image representing the group's products. May be empty.
+          example: ''
+    CatalogItem:
+      type: object
+      description: A product within a store group. For richer item operations and full-catalog search, see the Partner Catalogs API at `Uri`.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for this catalog item. Composed of the catalog ID and the brand's `CatalogItemId`.
+          example: product_24836_APP-0016
+        CatalogId:
+          type: string
+          description: Unique identifier for the brand catalog that contains this item.
+          example: '24836'
+        CampaignId:
+          type: string
+          description: Unique identifier for the brand's program (campaign).
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the brand's program.
+          example: Wayne Enterprises
+        CatalogItemId:
+          type: string
+          description: The brand's own SKU or product identifier for this item.
+          example: APP-0016
+        Name:
+          type: string
+          description: Product name.
+          example: Wayne Reactive Armor Vest
+        Description:
+          type: string
+          description: Product description supplied by the brand.
+          example: Wayne Reactive Armor Vest by Wayne Enterprises.
+        MultiPack:
+          type: string
+          description: Multi-pack quantity if the item is sold in packs. Empty for single-unit products.
+          example: ''
+        Bullets:
+          type: array
+          description: Short bullet points highlighting product features.
+          items:
+            type: string
+        Labels:
+          type: array
+          description: Tags or labels applied to the product (e.g., "Bestseller", "New Arrival").
+          items:
+            type: string
+        Manufacturer:
+          type: string
+          description: Name of the manufacturer.
+          example: Wayne Enterprises
+        Url:
+          type: string
+          description: Tracking URL to the product's landing page. Clicks through this URL are attributed to your partner account.
+          example: https://example.sjv.io/c/1924609/3061936/10306?prodsku=APP-0016
+        MobileUrl:
+          type: string
+          description: Optional mobile-specific tracking URL.
+          example: ''
+        ImageUrl:
+          type: string
+          description: Primary product image URL.
+          example: https://wayne.limited/images/armorvest.jpg
+        ProductBid:
+          type: string
+          description: Brand's bid for this product, used in product-bidding programs. Empty if not applicable.
+          example: ''
+        AdditionalImageUrls:
+          type: array
+          description: Additional product image URLs beyond the primary `ImageUrl`.
+          items:
+            type: string
+        Promotions:
+          type: array
+          description: Active promotions that apply to this product. See the Partner Promotions API for details.
+          items:
+            type: string
+        CurrentPrice:
+          type: string
+          description: Current selling price as a decimal string.
+          example: '719.10'
+        OriginalPrice:
+          type: string
+          description: Original (pre-discount) price as a decimal string.
+          example: '799.00'
+        DiscountPercentage:
+          type: string
+          description: Discount applied as a percentage. Empty when no discount is active.
+          example: '10'
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for prices.
+          example: USD
+        StockAvailability:
+          type: string
+          enum:
+          - InStock
+          - OutofStock
+          - BackOrder
+          - PreOrder
+          - LimitedAvailability
+          description: Current stock status of the product.
+          example: InStock
+        EstimatedShipDate:
+          type: string
+          description: Estimated ship date for backorder/preorder items (ISO 8601). Empty when not applicable.
+          example: ''
+        LaunchDate:
+          type: string
+          description: Date the product became available (ISO 8601). Empty when not specified.
+          example: ''
+        ExpirationDate:
+          type: string
+          description: Date the product is no longer available (ISO 8601). Empty when not specified.
+          example: ''
+        Gtin:
+          type: string
+          description: Global Trade Item Number for the product.
+          example: '7774561230001'
+        GtinType:
+          type: string
+          description: 'Type of GTIN (e.g., `EAN`, `UPC`, `ISBN`).'
+          example: EAN
+        Asin:
+          type: string
+          description: Amazon Standard Identification Number, if applicable.
+          example: ''
+        Mpn:
+          type: string
+          description: Manufacturer Part Number.
+          example: ARM-VST-01
+        ShippingRate:
+          type: string
+          description: Shipping rate for the product. Empty when shipping is calculated separately.
+          example: ''
+        ShippingWeight:
+          type: string
+          description: Shipping weight value.
+          example: ''
+        ShippingWeightUnit:
+          type: string
+          enum:
+          - lb
+          - oz
+          - g
+          - kg
+          - mg
+          description: Unit for `ShippingWeight`.
+          example: ''
+        ShippingLength:
+          type: string
+          description: Shipping package length.
+          example: ''
+        ShippingWidth:
+          type: string
+          description: Shipping package width.
+          example: ''
+        ShippingHeight:
+          type: string
+          description: Shipping package height.
+          example: ''
+        ShippingLengthUnit:
+          type: string
+          description: Unit for shipping dimensions.
+          example: ''
+        ShippingLabel:
+          type: string
+          description: Custom shipping label or category.
+          example: ''
+        Category:
+          type: string
+          description: Standardised Google product category path.
+          example: Apparel & Accessories > Clothing > Outerwear
+        SubCategory:
+          type: string
+          description: Optional brand-defined sub-category.
+          example: ''
+        AdvertiserFormatCategories:
+          type: array
+          description: Brand-formatted category paths for the item.
+          items:
+            type: string
+        OriginalFormatCategory:
+          type: string
+          description: Original category path as supplied by the brand.
+          example: Apparel & Accessories > Clothing > Outerwear
+        OriginalFormatCategoryId:
+          type: string
+          description: Original category identifier as supplied by the brand.
+          example: ''
+        ParentName:
+          type: string
+          description: Display name of the parent product (for variant items).
+          example: ''
+        ParentSku:
+          type: string
+          description: SKU of the parent product (for variant items).
+          example: ''
+        IsParent:
+          type: boolean
+          description: Indicates whether this item is itself a parent product with child variants.
+          example: false
+        ItemGroupId:
+          type: string
+          description: Identifier grouping product variants under a common parent.
+          example: ''
+        Colors:
+          type: array
+          description: Available colors for this product.
+          items:
+            type: string
+        Material:
+          type: string
+          description: Material the product is made of.
+          example: ''
+        Pattern:
+          type: string
+          description: Pattern or print on the product.
+          example: ''
+        Size:
+          type: string
+          description: Product size.
+          example: ''
+        SizeUnit:
+          type: string
+          description: Unit for `Size`.
+          example: ''
+        Weight:
+          type: string
+          description: Product weight value.
+          example: ''
+        WeightUnit:
+          type: string
+          description: Unit for `Weight`.
+          example: ''
+        Condition:
+          type: string
+          enum:
+          - New
+          - Used
+          - Refurbished
+          - OEM
+          - OpenBox
+          description: Product condition.
+          example: New
+        AgeGroup:
+          type: string
+          description: Intended age group for the product.
+          example: ''
+        AgeRangeMin:
+          type: string
+          description: Minimum age in the intended age range.
+          example: '0'
+        AgeRangeMax:
+          type: string
+          description: Maximum age in the intended age range.
+          example: '0'
+        AgeRangeUnit:
+          type: string
+          description: Unit for the age range.
+          example: ''
+        Gender:
+          type: string
+          enum:
+          - Male
+          - Female
+          - Unisex
+          - ''
+          description: Intended gender for the product.
+          example: ''
+        Adult:
+          type: string
+          description: Indicates whether the product is adult-only. Empty when not flagged.
+          example: ''
+        Text1:
+          type: string
+          description: Brand-defined custom text attribute slot 1.
+          example: ''
+        Text2:
+          type: string
+          description: Brand-defined custom text attribute slot 2.
+          example: ''
+        Text3:
+          type: string
+          description: Brand-defined custom text attribute slot 3.
+          example: ''
+        Numeric1:
+          type: string
+          description: Brand-defined custom numeric attribute slot 1.
+          example: ''
+        Numeric2:
+          type: string
+          description: Brand-defined custom numeric attribute slot 2.
+          example: ''
+        Numeric3:
+          type: string
+          description: Brand-defined custom numeric attribute slot 3.
+          example: ''
+        Money1:
+          type: string
+          description: Brand-defined custom money attribute slot 1.
+          example: ''
+        Money2:
+          type: string
+          description: Brand-defined custom money attribute slot 2.
+          example: ''
+        Money3:
+          type: string
+          description: Brand-defined custom money attribute slot 3.
+          example: ''
+        Uri:
+          type: string
+          description: API resource path to this item in the Partner Catalogs API.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016
+x-default-client: cURL

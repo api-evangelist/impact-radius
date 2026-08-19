@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Contacts",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contacts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "AccountId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a contact's partner account ID."
+              },
+              {
+                "name": "Title",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a contact's title (must be URL-encoded)."
+              }
+            ]
+          },
+          "docs": "Returns a list of your contacts for a specific campaign, with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create a Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contacts",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new contact associated with one or more partner accounts. Use `multipart/form-data` for profile image uploads."
+        },
+        {
+          "info": {
+            "name": "Get Contact Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contacts/:ContactId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ContactId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the contact (e.g., '2750' or 'M1369520')."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing contact by their unique impact.com Contact ID."
+        },
+        {
+          "info": {
+            "name": "Update a Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contacts/:ContactId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ContactId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the specified contact.\n- **User-created contacts** (`\"Editable\": \"true\"`) can have any parameter updated.\n- **System-created contacts** (`\"Editable\": \"false\"`) can only have `Title` and `Labels` updated."
+        },
+        {
+          "info": {
+            "name": "Delete a Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/Contacts/:ContactId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ContactId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a user-created contact. This cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

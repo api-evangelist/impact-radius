@@ -1,0 +1,608 @@
+{
+  "item": [
+    {
+      "id": "2471093a-8ad0-4b98-8e20-ab1a9f405b52",
+      "name": "Catalogs",
+      "description": {
+        "content": "Endpoints for retrieving brand product catalogs and their items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e1f0d1c5-3523-498b-994e-248b1e90ee92",
+          "name": "List Catalogs",
+          "request": {
+            "name": "List Catalogs",
+            "description": {
+              "content": "Returns a list of all product catalogs available to you.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Catalogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "Filters catalogs by the campaign (brand program) they belong to."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "440500cf-c1ad-4293-9be9-e89a175acfd3",
+              "name": "A list of catalog objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Catalogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CampaignId",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Catalogs\": [\n    {\n      \"Id\": \"24836\",\n      \"Name\": \"Wayne Enterprises Official Catalog\",\n      \"Language\": \"English (United States)\",\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"AdvertiserLocation\": \"United States\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"NumberOfItems\": \"20\",\n      \"DateLastUpdated\": \"2022-09-02T01:37:15-07:00\",\n      \"Locations\": [\n        \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\",\n        \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz\"\n      ],\n      \"Currency\": \"USD\",\n      \"ServiceAreas\": \"\",\n      \"FTPLocations\": [\n        \"ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\"\n      ],\n      \"ItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836\"\n    },\n    {\n      \"Id\": \"24836\",\n      \"Name\": \"Wayne Enterprises Official Catalog\",\n      \"Language\": \"English (United States)\",\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Acme Corporation\",\n      \"AdvertiserLocation\": \"United States\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"NumberOfItems\": \"20\",\n      \"DateLastUpdated\": \"2022-09-02T01:37:15-07:00\",\n      \"Locations\": [\n        \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\",\n        \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz\"\n      ],\n      \"Currency\": \"USD\",\n      \"ServiceAreas\": \"\",\n      \"FTPLocations\": [\n        \"ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\"\n      ],\n      \"ItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb6a4eb2-5f1a-4887-853e-512c7fa85813",
+          "name": "Retrieve a Catalog",
+          "request": {
+            "name": "Retrieve a Catalog",
+            "description": {
+              "content": "Retrieves the details of an existing catalog using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Catalogs",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique impact.com identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3f878cb-e1b1-4172-af8c-ea583675c940",
+              "name": "The catalog object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique impact.com identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"24836\",\n  \"Name\": \"Wayne Enterprises Official Catalog\",\n  \"Language\": \"English (United States)\",\n  \"AdvertiserId\": \"1804207\",\n  \"AdvertiserName\": \"Acme Corporation\",\n  \"AdvertiserLocation\": \"United States\",\n  \"CampaignId\": \"10306\",\n  \"CampaignName\": \"Wayne Enterprises\",\n  \"NumberOfItems\": \"20\",\n  \"DateLastUpdated\": \"2022-09-02T01:37:15-07:00\",\n  \"Locations\": [\n    \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\",\n    \"/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz\"\n  ],\n  \"Currency\": \"USD\",\n  \"ServiceAreas\": \"\",\n  \"FTPLocations\": [\n    \"ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz\"\n  ],\n  \"ItemsUri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4ebaeee-44b1-4ab2-ba2a-3c43bda77731",
+          "name": "List Catalog Items",
+          "request": {
+            "name": "List Catalog Items",
+            "description": {
+              "content": "Returns a list of all items in the specified catalog.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Query",
+                  "value": "<string>",
+                  "description": "Filter expression to narrow the list of items. Uses a comparison syntax against item attributes (e.g., `CurrentPrice > 50`, `Manufacturer == 'Wayne Enterprises'`)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CatalogId",
+                  "description": "(Required) The unique impact.com identifier for the catalog."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfb0a8a5-a47f-4096-b84e-aff9c2392b1f",
+              "name": "A list of catalog item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CatalogId",
+                      "description": "(Required) The unique impact.com identifier for the catalog."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"http://HnbDEJKAfPhrZC.nvpvyWw.M0+Rbxpu7vIzinAGO1VPYNhTML5WrdiUcLfXvnMrRaVXNkBKPPSUuIADbUlBJCb\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"Promotions\": [\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        },\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        }\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"1966-01-01T01:58:12.907Z\",\n      \"LaunchDate\": \"1998-02-19T19:55:44.957Z\",\n      \"ExpirationDate\": \"1992-07-24T06:57:35.088Z\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"5.99\",\n      \"ShippingWeight\": \"2.0\",\n      \"ShippingWeightUnit\": \"lb\",\n      \"ShippingLength\": \"12\",\n      \"ShippingWidth\": \"10\",\n      \"ShippingHeight\": \"3\",\n      \"ShippingLengthUnit\": \"in\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"Tactical Outerwear\",\n      \"AdvertiserFormatCategories\": [\n        \"Apparel > Uniforms > Tactical\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"424\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"Black\"\n      ],\n      \"Material\": \"Reactive composite\",\n      \"Pattern\": \"Solid\",\n      \"Size\": \"L\",\n      \"SizeUnit\": \"US\",\n      \"Weight\": \"1.8\",\n      \"WeightUnit\": \"lb\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"adult\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"years\",\n      \"Gender\": \"Unisex\",\n      \"Adult\": \"\",\n      \"Text1\": \"Wayne certified\",\n      \"Text2\": \"Active threat resistant\",\n      \"Text3\": \"NIJ Level IIIA\",\n      \"Numeric1\": \"4.7\",\n      \"Numeric2\": \"127\",\n      \"Numeric3\": \"5\",\n      \"Money1\": \"79.90\",\n      \"Money2\": \"0.00\",\n      \"Money3\": \"0.00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    },\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"https://t.qpmESg2O\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"Promotions\": [\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        },\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        }\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"1989-07-24T02:04:33.225Z\",\n      \"LaunchDate\": \"1994-02-04T05:28:13.195Z\",\n      \"ExpirationDate\": \"1987-12-25T12:30:09.416Z\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"5.99\",\n      \"ShippingWeight\": \"2.0\",\n      \"ShippingWeightUnit\": \"lb\",\n      \"ShippingLength\": \"12\",\n      \"ShippingWidth\": \"10\",\n      \"ShippingHeight\": \"3\",\n      \"ShippingLengthUnit\": \"in\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"Tactical Outerwear\",\n      \"AdvertiserFormatCategories\": [\n        \"Apparel > Uniforms > Tactical\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"424\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"Black\"\n      ],\n      \"Material\": \"Reactive composite\",\n      \"Pattern\": \"Solid\",\n      \"Size\": \"L\",\n      \"SizeUnit\": \"US\",\n      \"Weight\": \"1.8\",\n      \"WeightUnit\": \"lb\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"adult\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"years\",\n      \"Gender\": \"Unisex\",\n      \"Adult\": \"\",\n      \"Text1\": \"Wayne certified\",\n      \"Text2\": \"Active threat resistant\",\n      \"Text3\": \"NIJ Level IIIA\",\n      \"Numeric1\": \"4.7\",\n      \"Numeric2\": \"127\",\n      \"Numeric3\": \"5\",\n      \"Money1\": \"79.90\",\n      \"Money2\": \"0.00\",\n      \"Money3\": \"0.00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5942375-8815-415e-9bf6-9856a54b9698",
+          "name": "Retrieve a Catalog Item",
+          "request": {
+            "name": "Retrieve a Catalog Item",
+            "description": {
+              "content": "Retrieves the details of a specific item within a catalog using its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Catalogs",
+                ":CatalogId",
+                "Items",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "CatalogId",
+                  "description": "(Required) The unique impact.com identifier for the catalog."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The unique identifier for the catalog item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b17c303-3091-47e8-b1a9-7b1da206ae63",
+              "name": "The catalog item object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Catalogs",
+                    ":CatalogId",
+                    "Items",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "CatalogId",
+                      "description": "(Required) The unique impact.com identifier for the catalog."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The unique identifier for the catalog item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"product_24836_APP-0016\",\n  \"CatalogId\": \"24836\",\n  \"CampaignId\": \"10306\",\n  \"CampaignName\": \"Wayne Enterprises\",\n  \"CatalogItemId\": \"APP-0016\",\n  \"Name\": \"Wayne Reactive Armor Vest\",\n  \"Description\": \"Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.\",\n  \"MultiPack\": \"\",\n  \"Manufacturer\": \"Wayne Enterprises\",\n  \"Url\": \"https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n  \"MobileUrl\": \"http://xaiA.vqvkIN+EWtATLI1d\",\n  \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n  \"ProductBid\": \"\",\n  \"Promotions\": [\n    {\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Wayne Enterprises\",\n      \"PromotionFileId\": \"4521003\",\n      \"PromotionIds\": \"7891234\",\n      \"PromotionTitle\": \"10% Off All Tactical Gear\",\n      \"GenericRedemptionCode\": \"WAYNE10\",\n      \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n    },\n    {\n      \"AdvertiserId\": \"1804207\",\n      \"AdvertiserName\": \"Wayne Enterprises\",\n      \"PromotionFileId\": \"4521003\",\n      \"PromotionIds\": \"7891234\",\n      \"PromotionTitle\": \"10% Off All Tactical Gear\",\n      \"GenericRedemptionCode\": \"WAYNE10\",\n      \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n    }\n  ],\n  \"CurrentPrice\": \"719.10\",\n  \"OriginalPrice\": \"799.00\",\n  \"DiscountPercentage\": \"10\",\n  \"Currency\": \"USD\",\n  \"StockAvailability\": \"InStock\",\n  \"EstimatedShipDate\": \"2025-12-29T23:20:24.181Z\",\n  \"LaunchDate\": \"1976-08-29T15:05:42.607Z\",\n  \"ExpirationDate\": \"2005-09-03T23:27:45.793Z\",\n  \"Gtin\": \"7774561230001\",\n  \"GtinType\": \"EAN\",\n  \"Asin\": \"\",\n  \"Mpn\": \"ARM-VST-01\",\n  \"ShippingRate\": \"5.99\",\n  \"ShippingWeight\": \"2.0\",\n  \"ShippingWeightUnit\": \"lb\",\n  \"ShippingLength\": \"12\",\n  \"ShippingWidth\": \"10\",\n  \"ShippingHeight\": \"3\",\n  \"ShippingLengthUnit\": \"in\",\n  \"ShippingLabel\": \"\",\n  \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n  \"SubCategory\": \"Tactical Outerwear\",\n  \"AdvertiserFormatCategories\": [\n    \"Apparel > Uniforms > Tactical\"\n  ],\n  \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n  \"OriginalFormatCategoryId\": \"424\",\n  \"ParentName\": \"\",\n  \"ParentSku\": \"\",\n  \"IsParent\": false,\n  \"ItemGroupId\": \"\",\n  \"Colors\": [\n    \"Black\"\n  ],\n  \"Material\": \"Reactive composite\",\n  \"Pattern\": \"Solid\",\n  \"Size\": \"L\",\n  \"SizeUnit\": \"US\",\n  \"Weight\": \"1.8\",\n  \"WeightUnit\": \"lb\",\n  \"Condition\": \"New\",\n  \"AgeGroup\": \"adult\",\n  \"AgeRangeMin\": \"0\",\n  \"AgeRangeMax\": \"0\",\n  \"AgeRangeUnit\": \"years\",\n  \"Gender\": \"Unisex\",\n  \"Adult\": \"\",\n  \"Text1\": \"Wayne certified\",\n  \"Text2\": \"Active threat resistant\",\n  \"Text3\": \"NIJ Level IIIA\",\n  \"Numeric1\": \"4.7\",\n  \"Numeric2\": \"127\",\n  \"Numeric3\": \"5\",\n  \"Money1\": \"79.90\",\n  \"Money2\": \"0.00\",\n  \"Money3\": \"0.00\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73c73647-677d-4440-9b38-b8587242d1ed",
+          "name": "Search Catalog Items",
+          "request": {
+            "name": "Search Catalog Items",
+            "description": {
+              "content": "Searches for items across all available catalogs using a keyword. Unlike the per-catalog `/Items` endpoint, this endpoint searches across all catalogs in a single request and returns a paginated list of matching items.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Catalogs",
+                "ItemSearch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Keyword",
+                  "value": "<string>",
+                  "description": "Keyword to search for across all catalog item fields (name, description, manufacturer, etc.). If omitted, all items across all catalogs are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "PageSize",
+                  "value": "<integer>",
+                  "description": "Number of items to return per page. Defaults to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "Page",
+                  "value": "<integer>",
+                  "description": "Page number to retrieve (1-based). Use with `PageSize` to paginate through large result sets."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8924161b-98dd-46b1-bbd6-d03cab33d6fa",
+              "name": "A paginated list of catalog item objects matching the search.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Catalogs",
+                    "ItemSearch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Keyword",
+                      "value": "Wayne"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "50"
+                    },
+                    {
+                      "key": "Page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"http://HnbDEJKAfPhrZC.nvpvyWw.M0+Rbxpu7vIzinAGO1VPYNhTML5WrdiUcLfXvnMrRaVXNkBKPPSUuIADbUlBJCb\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"Promotions\": [\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        },\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        }\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"1966-01-01T01:58:12.907Z\",\n      \"LaunchDate\": \"1998-02-19T19:55:44.957Z\",\n      \"ExpirationDate\": \"1992-07-24T06:57:35.088Z\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"5.99\",\n      \"ShippingWeight\": \"2.0\",\n      \"ShippingWeightUnit\": \"lb\",\n      \"ShippingLength\": \"12\",\n      \"ShippingWidth\": \"10\",\n      \"ShippingHeight\": \"3\",\n      \"ShippingLengthUnit\": \"in\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"Tactical Outerwear\",\n      \"AdvertiserFormatCategories\": [\n        \"Apparel > Uniforms > Tactical\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"424\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"Black\"\n      ],\n      \"Material\": \"Reactive composite\",\n      \"Pattern\": \"Solid\",\n      \"Size\": \"L\",\n      \"SizeUnit\": \"US\",\n      \"Weight\": \"1.8\",\n      \"WeightUnit\": \"lb\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"adult\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"years\",\n      \"Gender\": \"Unisex\",\n      \"Adult\": \"\",\n      \"Text1\": \"Wayne certified\",\n      \"Text2\": \"Active threat resistant\",\n      \"Text3\": \"NIJ Level IIIA\",\n      \"Numeric1\": \"4.7\",\n      \"Numeric2\": \"127\",\n      \"Numeric3\": \"5\",\n      \"Money1\": \"79.90\",\n      \"Money2\": \"0.00\",\n      \"Money3\": \"0.00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    },\n    {\n      \"Id\": \"product_24836_APP-0016\",\n      \"CatalogId\": \"24836\",\n      \"CampaignId\": \"10306\",\n      \"CampaignName\": \"Wayne Enterprises\",\n      \"CatalogItemId\": \"APP-0016\",\n      \"Name\": \"Wayne Reactive Armor Vest\",\n      \"Description\": \"Wayne Reactive Armor Vest (Product Code APP-0016) by Wayne Enterprises.\",\n      \"MultiPack\": \"\",\n      \"Manufacturer\": \"Wayne Enterprises\",\n      \"Url\": \"https://example.pxf.io/c/1924609/3061936/10306?prodsku=APP-0016\",\n      \"MobileUrl\": \"https://t.qpmESg2O\",\n      \"ImageUrl\": \"https://wayne.limited/images/armorvest.jpg\",\n      \"ProductBid\": \"\",\n      \"Promotions\": [\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        },\n        {\n          \"AdvertiserId\": \"1804207\",\n          \"AdvertiserName\": \"Wayne Enterprises\",\n          \"PromotionFileId\": \"4521003\",\n          \"PromotionIds\": \"7891234\",\n          \"PromotionTitle\": \"10% Off All Tactical Gear\",\n          \"GenericRedemptionCode\": \"WAYNE10\",\n          \"PromotionEffectiveDates\": \"2025-01-01/2025-12-31\",\n          \"Uri\": \"/Mediapartners/<AccountSID>/Promotions/7891234\"\n        }\n      ],\n      \"CurrentPrice\": \"719.10\",\n      \"OriginalPrice\": \"799.00\",\n      \"DiscountPercentage\": \"10\",\n      \"Currency\": \"USD\",\n      \"StockAvailability\": \"InStock\",\n      \"EstimatedShipDate\": \"1989-07-24T02:04:33.225Z\",\n      \"LaunchDate\": \"1994-02-04T05:28:13.195Z\",\n      \"ExpirationDate\": \"1987-12-25T12:30:09.416Z\",\n      \"Gtin\": \"7774561230001\",\n      \"GtinType\": \"EAN\",\n      \"Asin\": \"\",\n      \"Mpn\": \"ARM-VST-01\",\n      \"ShippingRate\": \"5.99\",\n      \"ShippingWeight\": \"2.0\",\n      \"ShippingWeightUnit\": \"lb\",\n      \"ShippingLength\": \"12\",\n      \"ShippingWidth\": \"10\",\n      \"ShippingHeight\": \"3\",\n      \"ShippingLengthUnit\": \"in\",\n      \"ShippingLabel\": \"\",\n      \"Category\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"SubCategory\": \"Tactical Outerwear\",\n      \"AdvertiserFormatCategories\": [\n        \"Apparel > Uniforms > Tactical\"\n      ],\n      \"OriginalFormatCategory\": \"Apparel & Accessories > Clothing > Outerwear\",\n      \"OriginalFormatCategoryId\": \"424\",\n      \"ParentName\": \"\",\n      \"ParentSku\": \"\",\n      \"IsParent\": false,\n      \"ItemGroupId\": \"\",\n      \"Colors\": [\n        \"Black\"\n      ],\n      \"Material\": \"Reactive composite\",\n      \"Pattern\": \"Solid\",\n      \"Size\": \"L\",\n      \"SizeUnit\": \"US\",\n      \"Weight\": \"1.8\",\n      \"WeightUnit\": \"lb\",\n      \"Condition\": \"New\",\n      \"AgeGroup\": \"adult\",\n      \"AgeRangeMin\": \"0\",\n      \"AgeRangeMax\": \"0\",\n      \"AgeRangeUnit\": \"years\",\n      \"Gender\": \"Unisex\",\n      \"Adult\": \"\",\n      \"Text1\": \"Wayne certified\",\n      \"Text2\": \"Active threat resistant\",\n      \"Text3\": \"NIJ Level IIIA\",\n      \"Numeric1\": \"4.7\",\n      \"Numeric2\": \"127\",\n      \"Numeric3\": \"5\",\n      \"Money1\": \"79.90\",\n      \"Money2\": \"0.00\",\n      \"Money3\": \"0.00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "da1dddda-7c3a-4f11-9153-eeb5739d1b84",
+    "name": "Partner Catalogs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Catalogs are product feeds provided by brands that contain item-level details such as pricing, images, descriptions, and availability. Partners can use catalogs to build dynamic product listings and deep-link directly to specific products.\n\n\nContact Support:\n Name: impact.com Developer Support\n Email: support@impact.com",
+      "type": "text/plain"
+    }
+  }
+}

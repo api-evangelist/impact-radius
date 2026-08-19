@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Phone Numbers",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Phone Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Phone Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PhoneNumbers",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more specific Phone Number IDs, provided as a comma-separated list."
+              },
+              {
+                "name": "LastDateAssigned",
+                "value": "",
+                "type": "query",
+                "description": "Filter for numbers last assigned on a specific date (ISO 8601)."
+              },
+              {
+                "name": "LastDateReleased",
+                "value": "",
+                "type": "query",
+                "description": "Filter for numbers last released on a specific date (ISO 8601)."
+              },
+              {
+                "name": "Number",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more specific phone numbers, provided as a comma-separated list."
+              }
+            ]
+          },
+          "docs": "Returns a list of available phone numbers for your account, with options for filtering."
+        },
+        {
+          "info": {
+            "name": "Get Phone Number Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PhoneNumbers/:PhoneNumberId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "PhoneNumberId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the phone number."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific phone number by its unique ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

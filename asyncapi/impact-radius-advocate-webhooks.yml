@@ -1,40 +1,96 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
 spec_type: Webhooks
 source: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs.md
 docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/api-webhooks-for-advocate-programs.md
 security_docs: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/webhook-security-for-advocate-programs.md
+asyncapi_published: false
 description: >-
-  impact.com Advocate programs support webhooks. Brands register endpoint URLs that receive
-  HTTP POST callbacks carrying an event object whenever a subscribed event occurs. Subscriptions
-  are managed via API (create, list, delete, test). Multiple endpoints may subscribe; duplicate
-  URLs collapse to a single subscription. Failed deliveries are retried hourly for up to 72
-  attempts (~3 days); delivery order and timing are not guaranteed. A separate webhook-security
-  guide documents payload verification.
-transport: http-post
-events:
-- topic: user.created
-  description: New user registration.
-- topic: user.reward.balance.changed
-  description: Reward balance updates.
-- topic: coupon.created
-  description: New referral code created.
-- topic: reward.created
-  description: New reward issued.
-- topic: referral.started
-  description: Referral connection established.
-- topic: referral.converted
-  description: Referral conversion completed.
-- topic: export.created
-  description: Data export queued.
-- topic: export.completed
-  description: Export ready for download.
-- topic: test
-  description: Subscription testing event.
-retry_policy:
-  interval: hourly
-  max_attempts: 72
-  window: ~72 hours
+  impact.com runs two separate, unrelated event surfaces. Advocate publishes a proper webhook
+  subscription API with a named event catalog and a stated retry policy. The partnership APIs
+  publish Event Notifications (also called postbacks), which are template-driven HTTP callbacks
+  configured in the account UI rather than subscribed to over an API. Neither is described by an
+  AsyncAPI document.
+surfaces:
+- name: Advocate webhooks
+  host: https://app.referralsaasquatch.com/api/v1
+  transport: http-post
+  subscription: api-managed
+  spec: openapi/impact-radius-brand-advocate-webhook-v13.yml
+  operations: [createWebhook, listWebhooks, deleteWebhook, testWebhook]
+  graphql_equivalent:
+    queries: [webhooks, webhookSubscriptions]
+    mutations: [upsertWebhookSubscription, deleteWebhookSubscription, testWebhookSubscription]
+    ref: graphql/impact-radius-advocate-schema.graphql
+  detail: >-
+    Brands register endpoint URLs that receive HTTP POST callbacks carrying an event object
+    whenever a subscribed event occurs. Multiple endpoints may subscribe; duplicate URLs collapse
+    to a single subscription.
+  events:
+  - topic: user.created
+    description: New user registration.
+  - topic: user.reward.balance.changed
+    description: Reward balance updates.
+  - topic: coupon.created
+    description: New referral code created.
+  - topic: reward.created
+    description: New reward issued.
+  - topic: referral.started
+    description: Referral connection established.
+  - topic: referral.converted
+    description: Referral conversion completed.
+  - topic: export.created
+    description: Data export queued.
+  - topic: export.completed
+    description: Export ready for download.
+  - topic: test
+    description: Subscription testing event, fired by testWebhook / testWebhookSubscription.
+  retry_policy:
+    interval: hourly
+    max_attempts: 72
+    window: ~72 hours
+    ordering: not guaranteed
+    timing: not guaranteed
+  consumer_guidance: >-
+    Because delivery is retried up to 72 times and is neither ordered nor timely, a receiver must
+    be idempotent and must reconcile by resource id rather than by arrival order. There is no
+    server-side idempotency key to lean on.
+  verification:
+    documented: true
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api/webhook-security-for-advocate-programs.md
+- name: Partner Event Notifications
+  aliases: [postbacks]
+  host: partner-configured URL
+  transport: http-post + http-get
+  subscription: ui-configured
+  spec: openapi/impact-radius-partner-eventnotifications-v15.yml
+  detail: >-
+    An inbound integration with no subscription endpoint: the partner configures a notification
+    URL in their impact.com account and impact.com fires requests at it. Placeholder tokens
+    ({CampaignId}, {ActionId}, {Status}, {Payout}) are substituted into either the URL (GET
+    delivery) or the JSON body (POST delivery) at fire time, so the payload shape is chosen by the
+    consumer rather than fixed by the provider. The published spec documents the request
+    impact.com sends, not an endpoint you call — its servers[] entry is
+    https://your-server.example.com by design.
+  operations: [receiveEventNotificationPost, receiveEventNotificationGet]
+  acknowledgement: Return 2xx. Non-2xx responses are retried by impact.com.
+  events:
+    note: >-
+      No fixed topic catalog is published — events are described narratively as "actions tracked,
+      clicks credited, status changes, and so on", with the actual set determined by the
+      notification configuration in the account. Recorded as an honest absence rather than a
+      guessed list.
+- name: Brand postbacks
+  spec: null
+  docs:
+  - https://integrations.impact.com/brand-api-reference/reference/webhooks.md
+  - https://integrations.impact.com/brand-api-reference/reference/webhooks/enable-postbacks.md
+  - https://integrations.impact.com/brand-api-reference/reference/webhooks/set-up-postbacks-for-partners.md
+  detail: >-
+    The Brand reference documents enabling postbacks and setting them up for partners. Same
+    UI-configured, template-driven mechanism as the partner side.
 notes: >-
-  Provider documents webhooks but does not publish an AsyncAPI document; captured as a webhook
-  catalog (type Webhooks). Advocate also exposes a GraphQL API for custom experiences.
+  Provider documents webhooks but publishes no AsyncAPI document, so this is captured as a webhook
+  catalog (type Webhooks). Upgraded from the 2026-07-19 pass with the partner Event Notifications
+  surface, the brand postback pages and the GraphQL subscription-management equivalents; the
+  Advocate event list and retry policy are unchanged and still verbatim from the provider.

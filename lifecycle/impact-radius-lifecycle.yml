@@ -1,28 +1,84 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: searched
-source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
+source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/versioning.md
+docs:
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/versioning.md
+- https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
 versioning:
-  scheme: major-version-path
+  scheme: account-pinned major version, overridable per request
   current:
-    brand: v13
+    brand: v14
     partner: v15
     agency: v3
+    advocate: v1
+  release_history:
+  - version: '11'
+    released: '2022-10-12'
+  - version: '12'
+    released: '2024-05-06'
+  - version: '13'
+    released: '2025-03-01'
+  - version: '14'
+    released: '2026-06-01'
+  override:
+    query_param: IrVersion
+    header: IR-Version
+  breaking_change_definition:
+  - Resources or fields are removed from responses
+  - The meaning (Type) of an attribute changes
+  non_breaking:
+  - New resources added to the API
+  - New fields added to an existing resource
   notes: >-
-    Each API is versioned as a distinct major reference set (Brand v11/v12/v13, Partner
-    v14/v15, Agency v2/v3). Older major versions remain documented alongside the current one.
+    Each API is versioned as a distinct major reference set. Brand v11, v12, v13 and v14 all
+    remain published side by side; Partner keeps v14 and v15; Agency keeps v2 and v3. The
+    account's API settings pin a default version, and any single request may override it with
+    IrVersion / IR-Version — which makes A/B testing a version upgrade a supported, documented
+    practice rather than a cutover.
+  supported_versions:
+    brand: [v11, v12, v13, v14]
+    partner: [v14, v15]
+    agency: [v2, v3]
 deprecation:
-  policy_url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/changelog.md
-  examples:
-  - The legacy Reports API is being retired in favor of ReportExport; migration recommended
-    before 2025-09-01.
-  notes: >-
+  policy_published: true
+  policy_url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/readme/versioning.md
+  mechanism: >-
     Deprecations are announced through the per-version changelog pages with migration guidance
-    and dates. No dedicated RFC 8594 Sunset/Deprecation header policy page was found.
+    and dates, and old major versions stay documented and callable after a new one ships.
+  rfc8594_sunset_header: false
+  examples:
+  - item: Legacy Reports API
+    replacement: ReportExport
+    migrate_by: '2025-09-01'
+    source: https://integrations.impact.com/brand-api-reference/brand-api-reference-v13/reference/report-export/migrate-to-reportexport.md
+  - item: Legacy access tokens (minted before April 2025)
+    replacement: Scoped Tokens with per-category read/write permissions
+    migrate_by: null
+    source: https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key.md
+    note: Legacy tokens continue to work but offer only read/write or read-only, no scope control.
+  spec_deprecations:
+    count: 0
+    note: >-
+      No operation in the 67 harvested OpenAPI documents carries `deprecated: true`; deprecation
+      is communicated editorially in the changelog rather than in the machine-readable contract.
+  notes: >-
+    No dedicated RFC 8594 Sunset/Deprecation response-header policy page was found, and no
+    Sunset or Deprecation header is declared anywhere in the specs.
 status_page: https://status.impact.com/
 sla:
   url: null
   notes: No public uptime SLA document located.
 rate_limits:
-  notes: >-
-    Announced in the Brand v13 changelog — ReportExport capped at 100 requests/day and
-    ClickExport at 10 requests/day.
+  ref: rate-limits/impact-radius-rate-limits.yml
+  summary: 1,000 req/hour default, 3,600/hour on /Catalogs, 100/day ReportExport, 10/day ClickExport.
+mcp_lifecycle:
+  stage: open-beta
+  source: https://integrations.impact.com/ai-solutions/mcp-quick-start/mcp.impact.com-faq.md
+  note: >-
+    mcp.impact.com/mcp is described as an Open Beta with an "initial tools" set and a stated
+    intent to add "certified tools"; agents should expect the tool list to change.
+notes: >-
+  Upgraded from the 2026-07-19 pass, which recorded Brand v13 as current. Brand v14 shipped
+  2026-06-01 and its full reference set (29 OpenAPI documents) is live at
+  https://integrations.impact.com/brand-api-reference/brand-api-reference-v14 — note the site's
+  own llms.txt index had not yet been regenerated to include it on 2026-08-13.

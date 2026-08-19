@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Promo Codes
+  description: API for managing promo codes, which are used to track partner involvement in your program. This includes creating, retrieving, and expiring promo codes.
+  version: v14
+servers:
+- url: https://api.impact.com
+paths:
+  /Advertisers/{AccountSID}/PromoCodes:
+    get:
+      summary: List All Promo Codes
+      description: Returns a list of your promo codes, which can be filtered.
+      operationId: listPromoCodes
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        schema:
+          type: integer
+      - name: Code
+        in: query
+        schema:
+          type: string
+      - name: StartDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: State
+        in: query
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+      responses:
+        '200':
+          description: A paginated list of promo code objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PromoCodes:
+                    type: array
+                    description: The list of promo code objects.
+                    items:
+                      $ref: '#/components/schemas/PromoCode'
+    post:
+      summary: Create a Promo Code
+      description: Creates a new promo code and assigns it to a partner.
+      operationId: createPromoCode
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PromoCodeCreate'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+  /Advertisers/{AccountSID}/PromoCodes/{PromoCodeId}:
+    get:
+      summary: Get Promo Code Details
+      description: Retrieves the details of a single promo code by its unique ID.
+      operationId: getPromoCodeById
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: PromoCodeId
+        in: path
+        required: true
+        description: The unique identifier for the promo code.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single promo code object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCode'
+    delete:
+      summary: Expire a Promo Code
+      description: Expires a promo code, which deactivates it. The code is not permanently deleted.
+      operationId: expirePromoCode
+      tags:
+      - Promo Codes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: PromoCodeId
+        in: path
+        required: true
+        description: The unique identifier for the promo code to expire.
+        schema:
+          type: integer
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+components:
+  schemas:
+    PromoCode:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the promo code.
+          example: 12345
+        Code:
+          type: string
+          description: The promo code value.
+          example: SUMMER25
+        Type:
+          type: string
+          description: LI for Exact match, RE for Regex.
+          enum:
+          - LI
+          - RE
+        CreditPolicy:
+          type: string
+          description: How credit is awarded for actions involving this code.
+          enum:
+          - ALWAYS
+          - INVOLVED
+          - WINNER
+        CampaignId:
+          type: integer
+          description: The unique identifier of the program this promo code applies to.
+          example: 1000
+        CampaignName:
+          type: string
+          description: The display name of the program.
+          example: Acme Campaign
+        AssignedPartnerId:
+          type: integer
+          description: The unique identifier of the partner this promo code is assigned to.
+          example: 2552842
+        AssignedPartnerName:
+          type: string
+          description: The display name of the assigned partner.
+          example: Wile E. Coyote Facebook
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the promo code was created.
+          example: '2026-01-15T10:00:00-08:00'
+        StartDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the promo code becomes active.
+          example: '2026-06-01T00:00:00-07:00'
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the promo code expires.
+          example: '2026-08-31T23:59:59-07:00'
+        State:
+          type: string
+          description: The current state of the promo code.
+          enum:
+          - ACTIVE
+          - INACTIVE
+        DealId:
+          type: integer
+          nullable: true
+          description: The unique identifier of the Deal this promo code is linked to, if any.
+          example: 3
+        DealName:
+          type: string
+          nullable: true
+          description: The display name of the linked Deal.
+          example: AcmeDeal3
+        DealState:
+          type: string
+          nullable: true
+          description: The state of the linked Deal.
+          example: ACTIVE
+        DealType:
+          type: string
+          nullable: true
+          description: The type of the linked Deal.
+          example: GENERAL_SALE
+        DealScope:
+          type: string
+          nullable: true
+          description: The scope of the linked Deal.
+          example: PRODUCT
+        DealStartDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The start date of the linked Deal.
+          example: '2026-06-01T00:00:00-07:00'
+        DealEndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The end date of the linked Deal.
+          example: '2026-08-31T23:59:59-07:00'
+        DiscountType:
+          type: string
+          nullable: true
+          description: How the discount is calculated.
+          example: FIXED
+        DiscountAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The flat discount amount, when DiscountType is FIXED.
+          example: 5.0
+        DiscountCurrency:
+          type: string
+          nullable: true
+          description: Three-letter ISO 4217 currency code for the discount.
+          example: USD
+        DiscountPercent:
+          type: number
+          format: float
+          nullable: true
+          description: The discount percentage, when DiscountType is PERCENT.
+          example: 10
+        MinimumPurchaseAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The minimum order amount required for the deal to apply.
+          example: 50.0
+        MaximumSavingsAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The maximum total savings the deal can apply to a single order.
+          example: 20.0
+        PurchaseLimitQuantity:
+          type: integer
+          description: Maximum number of times the deal can be applied per order.
+          example: 1
+        BogoBuyQuantity:
+          type: integer
+          description: Quantity the customer must buy in a BOGO deal.
+          example: 0
+        BogoBuyName:
+          type: string
+          nullable: true
+          description: Name of the item the customer must buy in a BOGO deal.
+          example: ''
+        BogoGetQuantity:
+          type: integer
+          description: Quantity the customer receives in a BOGO deal.
+        BogoGetName:
+          type: string
+          nullable: true
+          description: Name of the item the customer receives in a BOGO deal.
+        BogoGetDiscountType:
+          type: string
+          nullable: true
+          description: How the discount on the "get" item is calculated in a BOGO deal.
+        SynchAdsPromoCodes:
+          type: boolean
+          description: Whether to synchronize promo codes with ads.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this promo code in the impact.com API.
+          example: /Advertisers/<AccountSID>/PromoCodes/7777777
+    PromoCodeCreate:
+      type: object
+      required:
+      - AssignedPartnerId
+      - CampaignId
+      - CreditPolicy
+      - Code
+      - Type
+      properties:
+        AssignedPartnerId:
+          type: integer
+          description: The partner account ID this promo code is assigned to.
+        CampaignId:
+          type: integer
+          description: The program ID this promo code applies to.
+        CreditPolicy:
+          type: string
+          description: How credit is awarded for actions involving this code.
+          enum:
+          - ALWAYS
+          - INVOLVED
+          - WINNER
+        Code:
+          type: string
+          description: The promo code value.
+        Type:
+          type: string
+          description: LI for Exact match, RE for Regex.
+          enum:
+          - LI
+          - RE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the promo code becomes active.
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the promo code expires.
+        DealId:
+          type: integer
+          description: The unique identifier of a Deal to link this promo code to.
+        DealName:
+          type: string
+          description: The display name of the linked Deal.
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected promo code.

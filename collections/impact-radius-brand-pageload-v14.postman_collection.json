@@ -1,0 +1,610 @@
+{
+  "item": [
+    {
+      "id": "907aa37c-49ff-4dc6-a5c7-df9c28dd869f",
+      "name": "Page Load",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f7e711a0-c1f0-4fd1-ab9d-aadea2cb465f",
+          "name": "Track a Page Load or App Open",
+          "request": {
+            "name": "Track a Page Load or App Open",
+            "description": {
+              "content": "Tracks a page load or app open event. This endpoint is used to attribute credit for a conversion that results from a partner driving traffic. It does not require authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "PageLoad"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CampaignId",
+                  "value": "<integer>",
+                  "description": "(Required) Unique identifier for your program."
+                },
+                {
+                  "disabled": false,
+                  "key": "EventDate",
+                  "value": "<dateTime>",
+                  "description": "(Required) Timestamp of the event (ISO 8601) or the string 'NOW'."
+                },
+                {
+                  "disabled": false,
+                  "key": "PageUrl",
+                  "value": "<uri>",
+                  "description": "(Required) **Required.** Destination URL that is intercepted by the app.\n\n- If the app open occurs from an impact.com tracking link, send the full tracking link (e.g., `https://mysite.pxf.io/c/1234567/12345/1234?sharedid=abcd`).\n- If the app is opened directly (e.g., not redirected from a URL), do not send any value.\n- If the app open occurs from a non-Impact URL, send the actual URL with `https:` (e.g., `https://www.example.com?name=value`).\n- If the app open occurs using a custom URI scheme, send the full URI (e.g., `app://view?sharedid=abcd`).\n\n**Tip:** When testing clicks and events, append `?impacttest=1` to your `PageUrl`."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomProfileId",
+                  "value": "<string>",
+                  "description": "(Required) Your unique identifier for an anonymous visitor. If CustomProfileId is not provided, please provide at least one of the following identifiers: GoogAId, AndroidId, AppleIfa, AppleIfv, ClickId, or CustomerId."
+                },
+                {
+                  "disabled": false,
+                  "key": "PropertyId",
+                  "value": "<integer>",
+                  "description": "**Required for mobile/app opens.** For mobile app opens, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppleIfa",
+                  "value": "<string>",
+                  "description": "**Required for iOS app opens.** Apple ID for Advertising (IDFA) associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for iOS in-app conversions."
+                },
+                {
+                  "disabled": false,
+                  "key": "GoogAId",
+                  "value": "<string>",
+                  "description": "**Required for Android app opens.** Google Advertising ID associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for Android in-app conversions."
+                },
+                {
+                  "disabled": false,
+                  "key": "ReferringUrl",
+                  "value": "<uri>",
+                  "description": "URL of the website where the click originated."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerId",
+                  "value": "<string>",
+                  "description": "Your unique, non-PII identifier for the customer."
+                },
+                {
+                  "disabled": false,
+                  "key": "CustomerEmail",
+                  "value": "<string>",
+                  "description": "Customer's email, either plaintext or SHA1 hashed."
+                },
+                {
+                  "disabled": false,
+                  "key": "TrackingConsent",
+                  "value": "<boolean>",
+                  "description": "Indicates if the user has consented to tracking."
+                },
+                {
+                  "disabled": false,
+                  "key": "UserAgent",
+                  "value": "<string>",
+                  "description": "User agent of the customer's browser."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppleIfv",
+                  "value": "<string>",
+                  "description": "Apple ID for Vendors."
+                },
+                {
+                  "disabled": false,
+                  "key": "IpAddress",
+                  "value": "<string>",
+                  "description": "Customer's IP address."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppName",
+                  "value": "<string>",
+                  "description": "Name of the mobile app. Only for mobile events."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppPackage",
+                  "value": "<string>",
+                  "description": "Package name for the mobile app the user installed. Only for mobile events."
+                },
+                {
+                  "disabled": false,
+                  "key": "AppVer",
+                  "value": "<string>",
+                  "description": "Version of the mobile app. Only for mobile events."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeviceMfr",
+                  "value": "<string>",
+                  "description": "Mobile device's manufacturer. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format."
+                },
+                {
+                  "disabled": false,
+                  "key": "DeviceModel",
+                  "value": "<string>",
+                  "description": "Mobile device's model. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19e2f53a-7480-4ccc-b427-cc31c6feb013",
+              "name": "The request was successfully processed. The response will contain a clickId and potentially a landingPage URL or session information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PageLoad"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Timestamp of the event (ISO 8601) or the string 'NOW'.",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) **Required.** Destination URL that is intercepted by the app.\n\n- If the app open occurs from an impact.com tracking link, send the full tracking link (e.g., `https://mysite.pxf.io/c/1234567/12345/1234?sharedid=abcd`).\n- If the app is opened directly (e.g., not redirected from a URL), do not send any value.\n- If the app open occurs from a non-Impact URL, send the actual URL with `https:` (e.g., `https://www.example.com?name=value`).\n- If the app open occurs using a custom URI scheme, send the full URI (e.g., `app://view?sharedid=abcd`).\n\n**Tip:** When testing clicks and events, append `?impacttest=1` to your `PageUrl`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PageUrl",
+                      "value": "https://www.acme.com/products/tennis-balls"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your unique identifier for an anonymous visitor. If CustomProfileId is not provided, please provide at least one of the following identifiers: GoogAId, AndroidId, AppleIfa, AppleIfv, ClickId, or CustomerId.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for mobile/app opens.** For mobile app opens, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps.",
+                        "type": "text/plain"
+                      },
+                      "key": "PropertyId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for iOS app opens.** Apple ID for Advertising (IDFA) associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for iOS in-app conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for Android app opens.** Google Advertising ID associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for Android in-app conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL of the website where the click originated.",
+                        "type": "text/plain"
+                      },
+                      "key": "ReferringUrl",
+                      "value": "https://www.google.com/"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique, non-PII identifier for the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerId",
+                      "value": "BCZ2WVSH674563PDPYOTM3AXDQ"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's email, either plaintext or SHA1 hashed.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerEmail",
+                      "value": "customer@gmail.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the user has consented to tracking.",
+                        "type": "text/plain"
+                      },
+                      "key": "TrackingConsent",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User agent of the customer's browser.",
+                        "type": "text/plain"
+                      },
+                      "key": "UserAgent",
+                      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Vendors.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfv",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's IP address.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "72.194.216.61"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the mobile app. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppName",
+                      "value": "Acme App"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Package name for the mobile app the user installed. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Version of the mobile app. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppVer",
+                      "value": "1.2.3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's manufacturer. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceMfr",
+                      "value": "Apple"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's model. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceModel",
+                      "value": "iPhone 15"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"landingPage\": \"https://www.mysite.com/products/145324\",\n  \"clickId\": \"0c22384eN-3765c5f900c2878068a0631b\",\n  \"sessionStart\": \"2026-09-10T22:55:32-08:00\",\n  \"warnings\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"WARNING\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"ERROR\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef0fa9a5-2833-4bfd-855e-18f79e5870fb",
+              "name": "Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "PageLoad"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Unique identifier for your program.",
+                        "type": "text/plain"
+                      },
+                      "key": "CampaignId",
+                      "value": "1000"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Timestamp of the event (ISO 8601) or the string 'NOW'.",
+                        "type": "text/plain"
+                      },
+                      "key": "EventDate",
+                      "value": "2026-09-10T22:55:32-08:00"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) **Required.** Destination URL that is intercepted by the app.\n\n- If the app open occurs from an impact.com tracking link, send the full tracking link (e.g., `https://mysite.pxf.io/c/1234567/12345/1234?sharedid=abcd`).\n- If the app is opened directly (e.g., not redirected from a URL), do not send any value.\n- If the app open occurs from a non-Impact URL, send the actual URL with `https:` (e.g., `https://www.example.com?name=value`).\n- If the app open occurs using a custom URI scheme, send the full URI (e.g., `app://view?sharedid=abcd`).\n\n**Tip:** When testing clicks and events, append `?impacttest=1` to your `PageUrl`.",
+                        "type": "text/plain"
+                      },
+                      "key": "PageUrl",
+                      "value": "https://www.acme.com/products/tennis-balls"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Your unique identifier for an anonymous visitor. If CustomProfileId is not provided, please provide at least one of the following identifiers: GoogAId, AndroidId, AppleIfa, AppleIfv, ClickId, or CustomerId.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomProfileId",
+                      "value": "a1b2c3d4e5f6"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for mobile/app opens.** For mobile app opens, this value is the \"System App ID\" of your app in impact.com. Found in Settings → Mobile Apps.",
+                        "type": "text/plain"
+                      },
+                      "key": "PropertyId",
+                      "value": "12345"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for iOS app opens.** Apple ID for Advertising (IDFA) associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for iOS in-app conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfa",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "**Required for Android app opens.** Google Advertising ID associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for Android in-app conversions.",
+                        "type": "text/plain"
+                      },
+                      "key": "GoogAId",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL of the website where the click originated.",
+                        "type": "text/plain"
+                      },
+                      "key": "ReferringUrl",
+                      "value": "https://www.google.com/"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Your unique, non-PII identifier for the customer.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerId",
+                      "value": "BCZ2WVSH674563PDPYOTM3AXDQ"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's email, either plaintext or SHA1 hashed.",
+                        "type": "text/plain"
+                      },
+                      "key": "CustomerEmail",
+                      "value": "customer@gmail.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Indicates if the user has consented to tracking.",
+                        "type": "text/plain"
+                      },
+                      "key": "TrackingConsent",
+                      "value": "true"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "User agent of the customer's browser.",
+                        "type": "text/plain"
+                      },
+                      "key": "UserAgent",
+                      "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Apple ID for Vendors.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppleIfv",
+                      "value": "38400000-8cf0-11bd-b23e-10b96e40000d"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Customer's IP address.",
+                        "type": "text/plain"
+                      },
+                      "key": "IpAddress",
+                      "value": "72.194.216.61"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the mobile app. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppName",
+                      "value": "Acme App"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Package name for the mobile app the user installed. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppPackage",
+                      "value": "com.acme.app"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Version of the mobile app. Only for mobile events.",
+                        "type": "text/plain"
+                      },
+                      "key": "AppVer",
+                      "value": "1.2.3"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's manufacturer. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceMfr",
+                      "value": "Apple"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Mobile device's model. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.",
+                        "type": "text/plain"
+                      },
+                      "key": "DeviceModel",
+                      "value": "iPhone 15"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"ERROR\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"WARNING\",\n      \"message\": \"string\"\n    }\n  ],\n  \"warnings\": [\n    {\n      \"field\": \"string\",\n      \"level\": \"WARNING\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"level\": \"ERROR\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://trkapi.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9eb7822f-f11e-4689-99b8-33a674987891",
+    "name": "Brand API - Page Load",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This API provides an endpoint for tracking page load and app open events, which can be used to attribute credit for a conversion that results from a partner driving traffic.",
+      "type": "text/plain"
+    }
+  }
+}

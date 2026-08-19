@@ -1,0 +1,702 @@
+{
+  "item": [
+    {
+      "id": "93919657-a59c-4b3c-b6cf-ae4a5c8588f7",
+      "name": "Company Information",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77598377-82bd-42f8-b11c-091e66b3a97b",
+          "name": "Get Company Information",
+          "request": {
+            "name": "Get Company Information",
+            "description": {
+              "content": "Retrieves the details of the brand account, determined by the API keys used for authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) The unique identifier for the account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d46fe43b-93a0-44f3-8f85-63588c0612d5",
+              "name": "An object containing the account's company information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) The unique identifier for the account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"CompanyName\": \"Acme Corporation\",\n  \"Industry\": {\n    \"IndustryId\": \"833\",\n    \"IndustryName\": \"Miscellaneous Retail Stores, Not Elsewhere Classified\"\n  },\n  \"Website\": \"https://www.example.com\",\n  \"PrimaryPhoneNumber\": \"1235550100\",\n  \"PrimaryPhoneNumberCountry\": \"US\",\n  \"SecondaryPhoneNumber\": \"3215550100\",\n  \"SecondaryPhoneNumberCountry\": \"US\",\n  \"MinimumContactRating\": \"1\",\n  \"Timezone\": \"(GMT -08:00) Pacific Time (US & Canada); Tijuana\",\n  \"Currency\": \"USD\",\n  \"RegisteredForIndirectTax\": \"true\",\n  \"IndirectTaxNumber\": \"123456789\",\n  \"OrganizationType\": \"CORP\",\n  \"EinSsnForeignTaxId\": \"12-3456789\",\n  \"CorporateAddress\": {\n    \"AddressLine1\": \"1640 Riverside Dr.\",\n    \"AddressLine2\": \"Suite 400\",\n    \"City\": \"Hill Valley\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90210\",\n    \"Country\": \"US\"\n  },\n  \"BillingAddress\": {\n    \"AddressLine1\": \"1640 Riverside Dr.\",\n    \"AddressLine2\": \"Suite 400\",\n    \"City\": \"Hill Valley\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90210\",\n    \"Country\": \"US\"\n  },\n  \"FinancialContact\": {\n    \"UserId\": \"1234567\",\n    \"Name\": \"Road Runner\",\n    \"Email\": \"finance@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"2065550133\",\n    \"CellPhoneNumberCountry\": \"US\"\n  },\n  \"TechnicalContact\": {\n    \"UserId\": \"1234567\",\n    \"Name\": \"Road Runner\",\n    \"Email\": \"finance@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"2065550133\",\n    \"CellPhoneNumberCountry\": \"US\"\n  },\n  \"CommercialContact\": {\n    \"UserId\": \"1234567\",\n    \"Name\": \"Road Runner\",\n    \"Email\": \"finance@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"2065550133\",\n    \"CellPhoneNumberCountry\": \"US\"\n  },\n  \"SecurityContact\": {\n    \"UserId\": \"1234567\",\n    \"Name\": \"Road Runner\",\n    \"Email\": \"finance@example.com\",\n    \"WorkPhoneNumber\": \"2065550100\",\n    \"WorkPhoneNumberCountry\": \"US\",\n    \"CellPhoneNumber\": \"2065550133\",\n    \"CellPhoneNumberCountry\": \"US\"\n  },\n  \"Uri\": \"http://ymrrrLOhMGSoS.azlkMvaJRAqtK,tNulvF.DDSx,urCbZ2ATgsdFNgK3ZxBppsV6zh\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "091c0433-a4fe-44f0-bcd8-fcf7a31dbd1c",
+          "name": "Update Company Information",
+          "request": {
+            "name": "Update Company Information",
+            "description": {
+              "content": "Updates the account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.\n\nNote: The following parameters cannot be updated via API: Timezone, Currency, RegisteredForIndirectTax, IndirectTaxNumber. The following parameters can only be updated in the platform: Industry, FinancialContact, TechnicalContact, SecurityContact, CommercialContact.\n\nThe corporate address fields (`CorporateAddressLine1`, `CorporateAddressLine2`, `CorporateAddressCity`, `CorporateAddressPostalCode`, `CorporateAddressCountry`) update the corporate address. The billing address fields (`BillingAddressLine1`, `BillingAddressLine2`, `BillingAddressCity`, `BillingAddressPostalCode`, `BillingAddressCountry`) update the billing address. These are returned as nested `CorporateAddress` and `BillingAddress` objects by the GET endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "CompanyInformation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) The unique identifier for the account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "CompanyName",
+                  "value": "<string>",
+                  "description": "The name used for the account."
+                },
+                {
+                  "disabled": false,
+                  "key": "Website",
+                  "value": "<uri>",
+                  "description": "The official company website URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPhoneNumber",
+                  "value": "<string>",
+                  "description": "The primary domestic contact number."
+                },
+                {
+                  "disabled": false,
+                  "key": "PrimaryPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided)."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecondaryPhoneNumber",
+                  "value": "<string>",
+                  "description": "A secondary domestic contact phone number."
+                },
+                {
+                  "disabled": false,
+                  "key": "SecondaryPhoneNumberCountry",
+                  "value": "<string>",
+                  "description": "Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided)."
+                },
+                {
+                  "disabled": false,
+                  "key": "OrganizationType",
+                  "value": "<string>",
+                  "description": "Organization type for the account. Available options will vary depending on the country that the business is registered in."
+                },
+                {
+                  "disabled": false,
+                  "key": "EinSsnForeignTaxId",
+                  "value": "<string>",
+                  "description": "EIN, SSN, or foreign Tax ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressLine1",
+                  "value": "<string>",
+                  "description": "Address line 1 for the corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressLine2",
+                  "value": "<string>",
+                  "description": "Address line 2 for the corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressCity",
+                  "value": "<string>",
+                  "description": "City for the corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressPostalCode",
+                  "value": "<string>",
+                  "description": "Postal code for the corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "CorporateAddressCountry",
+                  "value": "<string>",
+                  "description": "Two-letter country code for the corporate address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressLine1",
+                  "value": "<string>",
+                  "description": "Address line 1 for the billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressLine2",
+                  "value": "<string>",
+                  "description": "Address line 2 for the billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressCity",
+                  "value": "<string>",
+                  "description": "City for the billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressPostalCode",
+                  "value": "<string>",
+                  "description": "Postal code for the billing address."
+                },
+                {
+                  "disabled": false,
+                  "key": "BillingAddressCountry",
+                  "value": "<string>",
+                  "description": "Two-letter country code for the billing address."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2200710c-99ee-4671-b3aa-4b62ef59b9cd",
+              "name": "The request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "CompanyInformation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) The unique identifier for the account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name used for the account.",
+                        "type": "text/plain"
+                      },
+                      "key": "CompanyName",
+                      "value": "Acme Corporation"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The official company website URL.",
+                        "type": "text/plain"
+                      },
+                      "key": "Website",
+                      "value": "https://www.example.com"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The primary domestic contact number.",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPhoneNumber",
+                      "value": "1235550100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided).",
+                        "type": "text/plain"
+                      },
+                      "key": "PrimaryPhoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A secondary domestic contact phone number.",
+                        "type": "text/plain"
+                      },
+                      "key": "SecondaryPhoneNumber",
+                      "value": "3215550100"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided).",
+                        "type": "text/plain"
+                      },
+                      "key": "SecondaryPhoneNumberCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Organization type for the account. Available options will vary depending on the country that the business is registered in.",
+                        "type": "text/plain"
+                      },
+                      "key": "OrganizationType",
+                      "value": "CORP"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "EIN, SSN, or foreign Tax ID.",
+                        "type": "text/plain"
+                      },
+                      "key": "EinSsnForeignTaxId",
+                      "value": "12-3456789"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Address line 1 for the corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressLine1",
+                      "value": "1640 Riverside Dr."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Address line 2 for the corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressLine2",
+                      "value": "Suite 400"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City for the corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressCity",
+                      "value": "Hill Valley"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal code for the corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressPostalCode",
+                      "value": "90210"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter country code for the corporate address.",
+                        "type": "text/plain"
+                      },
+                      "key": "CorporateAddressCountry",
+                      "value": "US"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Address line 1 for the billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressLine1",
+                      "value": "112 1/2 Beacon St."
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Address line 2 for the billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressLine2",
+                      "value": "Floor 2"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "City for the billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressCity",
+                      "value": "Boston"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Postal code for the billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressPostalCode",
+                      "value": "02116"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Two-letter country code for the billing address.",
+                        "type": "text/plain"
+                      },
+                      "key": "BillingAddressCountry",
+                      "value": "US"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"OK\",\n  \"Uri\": \"https://sfSyFPvFgvKWjwfwE.tanyDREUy+n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dd8c91ef-0c5f-419e-8e77-3f25cb75ed0a",
+      "name": "Legal Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bd16bc2c-7b75-45bf-a443-11431c82256f",
+          "name": "List Legal Entities",
+          "request": {
+            "name": "List Legal Entities",
+            "description": {
+              "content": "Retrieves a list of legal entities associated with this account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "LegalEntities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) The unique identifier for the account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "118e5e6e-2d5f-49b4-aa3f-73fce9a0c784",
+              "name": "A paginated list of legal entity objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "LegalEntities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) The unique identifier for the account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LegalEntities\": [\n    {\n      \"Id\": \"12345\",\n      \"Name\": \"Acme Corporation Legal Entity\",\n      \"RegisteredForIndirectTax\": \"false\",\n      \"IndirectTaxNumber\": \"123456789\",\n      \"OrganizationType\": \"CORP\",\n      \"BillingAddress\": {\n        \"AddressLine1\": \"1640 Riverside Dr.\",\n        \"AddressLine2\": \"Suite 400\",\n        \"City\": \"Hill Valley\",\n        \"State\": \"CALIFORNIA\",\n        \"PostalCode\": \"90210\",\n        \"Country\": \"US\"\n      },\n      \"Uri\": \"http://KJtZMGYTdXGuSIEWrLfIKtlMyfUHTqdt.vksX6rDMsGIx1wfLJAtYEqBiu5S.NxEotXzL9ZJu-H2I1Pd?mylmd&\",\n      \"EinSsnForeignTaxId\": \"12-3456789\"\n    },\n    {\n      \"Id\": \"12345\",\n      \"Name\": \"Acme Corporation Legal Entity\",\n      \"RegisteredForIndirectTax\": \"false\",\n      \"IndirectTaxNumber\": \"123456789\",\n      \"OrganizationType\": \"CORP\",\n      \"BillingAddress\": {\n        \"AddressLine1\": \"1640 Riverside Dr.\",\n        \"AddressLine2\": \"Suite 400\",\n        \"City\": \"Hill Valley\",\n        \"State\": \"CALIFORNIA\",\n        \"PostalCode\": \"90210\",\n        \"Country\": \"US\"\n      },\n      \"Uri\": \"http://TeOqjlKwjPJErmCCSSUoNwTQCycNuHGLx.rzgNEOhr32xXk8zch1A2c.\",\n      \"EinSsnForeignTaxId\": \"12-3456789\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77b9aaf8-e691-410a-94f8-8ae0f86c5eaa",
+          "name": "Get a Single Legal Entity",
+          "request": {
+            "name": "Get a Single Legal Entity",
+            "description": {
+              "content": "Retrieves a single legal entity associated with this account by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "LegalEntities",
+                ":LegalEntityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) The unique identifier for the account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "LegalEntityId",
+                  "description": "(Required) The unique identifier for the legal entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fdb6dc9-f637-4f51-bc6e-ab9db2bf42b0",
+              "name": "A single legal entity object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "LegalEntities",
+                    ":LegalEntityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) The unique identifier for the account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "LegalEntityId",
+                      "description": "(Required) The unique identifier for the legal entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"12345\",\n  \"Name\": \"Acme Corporation Legal Entity\",\n  \"RegisteredForIndirectTax\": \"false\",\n  \"IndirectTaxNumber\": \"123456789\",\n  \"OrganizationType\": \"CORP\",\n  \"BillingAddress\": {\n    \"AddressLine1\": \"1640 Riverside Dr.\",\n    \"AddressLine2\": \"Suite 400\",\n    \"City\": \"Hill Valley\",\n    \"State\": \"CALIFORNIA\",\n    \"PostalCode\": \"90210\",\n    \"Country\": \"US\"\n  },\n  \"Uri\": \"http://syMAsIze.ufPvWp+NqxEFCexhVG.4SqwytDZ5S+68e9L-h6iH+.59BQD5rLgPGel\",\n  \"EinSsnForeignTaxId\": \"12-3456789\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4e468f70-1eab-408a-84ab-5ae1d347cc22",
+    "name": "Brand API - Account Information",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing brand account information.\n\nThis specification includes two main resources:\n- **CompanyInformation**: Contains general metadata about the company, such as name, website, and contacts. Supports retrieving and updating this information.\n- **LegalEntities**: Contains information specific to any legal entities associated with the account, such as payment and tax details.",
+      "type": "text/plain"
+    }
+  }
+}

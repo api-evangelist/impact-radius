@@ -1,0 +1,420 @@
+openapi: 3.1.0
+info:
+  title: Agency API — Compliance Content
+  version: "3.0"
+
+servers:
+  - url: https://api.impact.com
+    description: Production
+
+tags:
+  - name: Compliance Content
+    description: Submit content for impact.com compliance monitoring and retrieve job status and results.
+
+paths:
+  /Agencies/{AccountSID}/Compliance/Content:
+    post:
+      operationId: createComplianceContent
+      summary: Create compliance content submission
+      description: |-
+        Submits one or more content items for compliance monitoring. Content is processed asynchronously — the response returns immediately with a `QueuedUri` pointing to the job's status endpoint.
+
+        Use the returned URI (or extract the submission `Id` from its tail) to poll the job with the **Get compliance submission status** endpoint. Once the status is `COMPLETED`, retrieve the per-item results from the **Get compliance submission results** endpoint.
+
+        Accepts either `application/json` (recommended; supports batch submissions via the `Contents` array) or `application/x-www-form-urlencoded` (single item only).
+      tags:
+        - Compliance Content
+      parameters:
+        - name: AccountSID
+          in: path
+          required: true
+          description: Your Agency Account SID.
+          schema:
+            type: string
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComplianceSubmissionRequest"
+            example:
+              Context:
+                Type: PAGE
+                Source: CONTENT_API
+              Contents:
+                - AdvertiserId: 1048291
+                  CampaignId: 12345
+                  Url: "https://www.partner-site.example.com/review/product-x"
+                  Type: PAGE
+                  Reason: "Quarterly compliance audit"
+                  Source: CONTENT_API
+                  PartnerId: 67890
+                  Language: en
+                  PaidLink: false
+                  Monitored: true
+                  Cadence: true
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ComplianceContent"
+      responses:
+        "202":
+          description: Submission accepted and queued for processing.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Confirmation status. Returns `QUEUED` on a successful submission.
+                    enum:
+                      - QUEUED
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    description: |-
+                      The relative URI of the submission job. Use this (or its trailing `Id`) to poll the job with the **Get compliance submission status** endpoint.
+                    example: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/content_api_1603459292102"
+              example:
+                Status: QUEUED
+                QueuedUri: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/content_api_1603459292102"
+        "400":
+          description: Validation error. The request body is missing required fields or contains invalid values.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                Status: ERROR
+                Message: "Validation Errors"
+                Errors:
+                  Error:
+                    Field: Context
+                    Message: "Context is an expected field"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+
+  /Agencies/{AccountSID}/Compliance/Content/ComplianceAPISubmissions/{Id}:
+    get:
+      operationId: getComplianceSubmissionStatus
+      summary: Get compliance submission status
+      description: |-
+        Retrieves the current processing status of a compliance content submission job.
+
+        Once the `Status` value reaches `COMPLETED`, the per-item results can be retrieved using the **Get compliance submission results** endpoint at the URI returned in `ResponseUri`.
+      tags:
+        - Compliance Content
+      parameters:
+        - name: AccountSID
+          in: path
+          required: true
+          description: Your Agency Account SID.
+          schema:
+            type: string
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+        - name: Id
+          in: path
+          required: true
+          description: The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`).
+          schema:
+            type: string
+          example: content_api_1603459292102
+      responses:
+        "200":
+          description: The current status of the submission.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmissionStatus"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "404":
+          description: Submission not found. Verify the `Id` belongs to a submission made by this agency.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                Status: ERROR
+                Message: "The requested resource was not found"
+
+  /Agencies/{AccountSID}/Compliance/Content/ComplianceAPISubmissions/Response/{Id}:
+    get:
+      operationId: getComplianceSubmissionResults
+      summary: Get compliance submission results
+      description: |-
+        Retrieves the per-item compliance results of a completed submission. Call this only when the job's `Status` (from the **Get compliance submission status** endpoint) is `COMPLETED`.
+
+        The relative URI is also returned as the `ResponseUri` field in the status response.
+      tags:
+        - Compliance Content
+      parameters:
+        - name: AccountSID
+          in: path
+          required: true
+          description: Your Agency Account SID.
+          schema:
+            type: string
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+        - name: Id
+          in: path
+          required: true
+          description: The submission ID returned in the `QueuedUri` of the create response.
+          schema:
+            type: string
+          example: content_api_1603459292102
+      responses:
+        "200":
+          description: Per-item processing results for the submission.
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "404":
+          description: Submission not found.
+
+components:
+  schemas:
+    ComplianceSubmissionRequest:
+      type: object
+      description: |-
+        A batch compliance content submission. The `Context` block describes the source and content type for the whole batch; `Contents` is the array of individual items to monitor.
+      required:
+        - Context
+        - Contents
+      properties:
+        Context:
+          type: object
+          description: Describes the context of this submission batch.
+          required:
+            - Type
+            - Source
+          properties:
+            Type:
+              type: string
+              description: The type of content being submitted. Only `PAGE` is currently supported.
+              enum:
+                - PAGE
+              default: PAGE
+              example: PAGE
+            Source:
+              type: string
+              description: The source system submitting the content. Only `CONTENT_API` is currently supported.
+              enum:
+                - CONTENT_API
+              default: CONTENT_API
+              example: CONTENT_API
+        Contents:
+          type: array
+          description: One or more content items to submit for monitoring.
+          items:
+            $ref: "#/components/schemas/ComplianceContent"
+
+    ComplianceContent:
+      type: object
+      description: A single content item submitted for compliance monitoring.
+      required:
+        - AdvertiserId
+        - CampaignId
+        - Url
+        - Type
+        - Reason
+        - Source
+      properties:
+        AdvertiserId:
+          type: integer
+          description: The unique numeric identifier of the advertiser account that owns the program this content is associated with.
+          example: 1048291
+        CampaignId:
+          type: integer
+          description: The unique numeric identifier of the program (campaign) this content is part of.
+          example: 12345
+        Url:
+          type: string
+          format: uri
+          description: The full URL of the content page being submitted for review.
+          example: "https://www.partner-site.example.com/review/product-x"
+        Type:
+          type: string
+          description: The type of compliance content being submitted. Only `PAGE` is currently supported.
+          enum:
+            - PAGE
+          example: PAGE
+        Reason:
+          type: string
+          description: A free-text description of why this content is being submitted for compliance review. Useful for audit trails.
+          example: "Quarterly compliance audit"
+        Source:
+          type: string
+          description: The source system submitting the content. Only `CONTENT_API` is currently supported.
+          enum:
+            - CONTENT_API
+          example: CONTENT_API
+        PartnerId:
+          type: integer
+          description: The numeric ID of the partner publishing the content. **Required** if the program has "Partner ID Required" enabled in its compliance settings.
+          example: 67890
+        ContentLabels:
+          type: string
+          description: A comma-separated list of labels for categorizing the content (e.g., `"product-review,paid"`). Free-form values defined by the agency.
+          example: "product-review,paid"
+        Products:
+          type: string
+          description: A comma-separated list of product SKUs that this content refers to.
+          example: "SKU-100,SKU-200"
+        Keywords:
+          type: array
+          description: |-
+            Keywords associated with the content. Each keyword has its own approval status and monitoring function — useful for tracking compliance against specific terms.
+          items:
+            $ref: "#/components/schemas/Keyword"
+        Language:
+          type: string
+          description: The language of the content as an ISO 639-1 two-letter code (e.g., `en`, `fr`, `es`).
+          example: en
+        PaidLink:
+          type: boolean
+          description: Whether this content is a paid (sponsored) link. Defaults to `false`.
+          example: false
+        Monitored:
+          type: boolean
+          description: Whether to enroll this content in impact.com's ongoing Compliance Monitoring service. Defaults to `false`.
+          example: true
+        Cadence:
+          type: boolean
+          description: Whether to apply cadence rules (re-checking on a schedule) to this content within Compliance Monitoring. Only effective when `Monitored` is `true`.
+          example: true
+
+    Keyword:
+      type: object
+      description: A keyword tracked against a content submission.
+      required:
+        - Name
+        - Status
+        - Function
+      properties:
+        Name:
+          type: string
+          description: The keyword text to track within the content.
+          example: discount
+        Status:
+          type: string
+          description: |-
+            The approval status of this keyword for the content.
+
+            | Value | Description |
+            |---|---|
+            | `APPROVED` | The keyword is approved for use in this content. |
+            | `NOT_APPROVED` | The keyword is not approved for use in this content. |
+          enum:
+            - APPROVED
+            - NOT_APPROVED
+          example: APPROVED
+        Function:
+          type: string
+          description: |-
+            The monitoring function applied to this keyword.
+
+            | Value | Description |
+            |---|---|
+            | `MONITORED` | Monitor the keyword for compliance violations. |
+            | `NOT_MONITORED` | Do not monitor the keyword. |
+            | `CHANGE_DETECTION` | Trigger an alert when the keyword is added or removed. |
+            | `DISCOVERY` | Discover and report new instances of the keyword across content. |
+          enum:
+            - MONITORED
+            - NOT_MONITORED
+            - CHANGE_DETECTION
+            - DISCOVERY
+          example: MONITORED
+
+    SubmissionStatus:
+      type: object
+      description: The processing status of a compliance content submission job.
+      properties:
+        JobId:
+          type: string
+          description: The unique identifier of the submission job. Matches the `Id` path parameter.
+          example: content_api_1603459292102
+        Status:
+          type: string
+          description: |-
+            The current processing status of the job.
+
+            | Value | Description |
+            |---|---|
+            | `QUEUED` | The submission has been received and is awaiting processing. |
+            | `RUNNING` | The submission is being processed. |
+            | `COMPLETED` | Processing has finished — per-item results can be retrieved. |
+          enum:
+            - QUEUED
+            - RUNNING
+            - COMPLETED
+          example: COMPLETED
+        Source:
+          type: string
+          description: The source system that submitted the content. Only `CONTENT_API` is currently supported.
+          enum:
+            - CONTENT_API
+          example: CONTENT_API
+        Type:
+          type: string
+          description: The type of compliance content in this submission. Only `PAGE` is currently supported.
+          enum:
+            - PAGE
+          example: PAGE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the job started processing, in ISO 8601 format.
+          example: "2026-01-15T09:22:11Z"
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the job finished processing, in ISO 8601 format. Empty until the job reaches `COMPLETED`.
+          example: "2026-01-15T09:23:47Z"
+        Success:
+          type: integer
+          description: The count of content items in the submission that were processed successfully.
+          example: 8
+        PartialSuccess:
+          type: integer
+          description: The count of content items that were processed but reported warnings or non-fatal issues.
+          example: 1
+        Error:
+          type: integer
+          description: The count of content items that failed processing.
+          example: 1
+        ResponseUri:
+          type: string
+          description: The relative URI from which the full per-item results can be retrieved. Available once `Status` is `COMPLETED`.
+          example: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/Response/content_api_1603459292102"
+
+    ErrorResponse:
+      type: object
+      description: Standard error response format for the Compliance Content API.
+      properties:
+        Status:
+          type: string
+          description: Error status. Returns `ERROR` for failed requests.
+          enum:
+            - ERROR
+          example: ERROR
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: "Validation Errors"
+        Errors:
+          type: object
+          description: Detailed validation errors. Present when the request body fails validation.
+          properties:
+            Error:
+              type: object
+              properties:
+                Field:
+                  type: string
+                  description: The name of the field that failed validation.
+                  example: Context
+                Message:
+                  type: string
+                  description: A description of why the field failed validation.
+                  example: "Context is an expected field"

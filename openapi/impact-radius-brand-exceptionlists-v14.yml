@@ -1,0 +1,619 @@
+openapi: 3.1.0
+info:
+  title: Brand API - Exception Lists
+  description: API for managing Exception Lists, which are used to pay partners different rates based on the category or SKU of products in a conversion. This includes managing the lists and their individual items.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+paths:
+  /Advertisers/{AccountSID}/ExceptionLists:
+    get:
+      summary: List Exception Lists
+      description: Returns a list of your exception lists, which can be filtered by campaign, state, or type.
+      operationId: listExceptionLists
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        description: Filter by the program ID the list applies to.
+        schema:
+          type: integer
+      - name: State
+        in: query
+        description: Filter lists by their current state.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+      - name: Type
+        in: query
+        description: Filter lists by whether they apply to CATEGORY or SKU.
+        schema:
+          type: string
+          enum:
+          - CATEGORY
+          - SKU
+      responses:
+        '200':
+          description: A paginated list of exception list objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ExceptionLists:
+                    type: array
+                    description: The list of exception list objects.
+                    items:
+                      $ref: '#/components/schemas/ExceptionList'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    post:
+      summary: Create an Exception List
+      description: Creates a new, empty exception list for a specific campaign and type.
+      operationId: createExceptionList
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExceptionListCreate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}:
+    get:
+      summary: Get Exception List Details
+      description: Retrieves the details of an existing exception list by its unique ID.
+      operationId: getExceptionListById
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single exception list object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionList'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    put:
+      summary: Update an Exception List
+      description: Updates the specified exception list's name, type, or associated action trackers.
+      operationId: updateExceptionList
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list to update.
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExceptionListUpdate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PUT \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items:
+    get:
+      summary: List Items in an Exception List
+      description: Returns a list of all items within a specific exception list.
+      operationId: listExceptionListItems
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      - name: Value
+        in: query
+        description: Filter items by their 'Value' (the specific SKU or Category).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of exception list item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ExceptionListItems:
+                    type: array
+                    description: The list of items in this exception list.
+                    items:
+                      $ref: '#/components/schemas/ExceptionListItem'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    post:
+      summary: Create Items in an Exception List
+      description: Creates one or more new items for an exception list, either via form parameters for a single item or by uploading a file for multiple items.
+      operationId: createExceptionListItems
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExceptionListItemCreateForm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExceptionListItemCreateFile'
+        description: "To create a single item, send `Value` (and optionally `Name`) as `application/x-www-form-urlencoded`.\n\nTo bulk-upload items from a `.csv` or `.xlsx` file, switch the content type to `multipart/form-data` and send the `File` parameter."
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/x-www-form-urlencoded' \
+            --header 'Accept: */*'
+    patch:
+      summary: Replace All Items in an Exception List
+      description: Replaces all items within an existing exception list by uploading a new .CSV or .XLSX file.
+      operationId: replaceExceptionListItems
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - File
+              properties:
+                File:
+                  type: string
+                  format: binary
+                  description: A .CSV or .XLSX file containing the new items.
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request PATCH \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    delete:
+      summary: Delete All Items from an Exception List
+      description: Permanently deletes all items in an exception list. This cannot be undone.
+      operationId: deleteAllExceptionListItems
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: All items were deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the resource was deleted.
+                    example: DELETED
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request DELETE \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+  /Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items/{ItemId}:
+    get:
+      summary: Get Exception List Item Details
+      description: Retrieves the details of a single item from an exception list.
+      operationId: getExceptionListItemById
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: ItemId
+        in: path
+        required: true
+        description: The unique identifier for the exception list item.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single exception list item object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionListItem'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items/{ItemId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+    delete:
+      summary: Delete an Exception List Item
+      description: Permanently deletes a single item from an exception list. This cannot be undone.
+      operationId: deleteExceptionListItem
+      tags:
+      - Exception List Items
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: ItemId
+        in: path
+        required: true
+        description: The unique identifier for the exception list item.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The item was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the resource was deleted.
+                    example: DELETED
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request DELETE \
+            --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items/{ItemId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+  schemas:
+    ExceptionList:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the exception list.
+          example: 99999
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        State:
+          type: string
+          description: The current state of the exception list.
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
+        Type:
+          type: string
+          description: Whether the list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the list was created.
+          example: '2026-01-15T10:00:00-08:00'
+        DeactivationDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the list was deactivated, if applicable.
+          example: '2026-12-31T23:59:59-08:00'
+        ActionTrackers:
+          type: array
+          description: The action trackers (event types) this list applies to.
+          items:
+            type: object
+            properties:
+              Id:
+                type: integer
+                description: The unique identifier for the action tracker.
+                example: 18500
+              Name:
+                type: string
+                description: The display name of the action tracker.
+                example: Online Sale
+        NumberOfItems:
+          type: integer
+          description: The total number of items in the list.
+          example: 50
+        ItemsUri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the items collection for this list.
+          example: /Advertisers/<AccountSID>/ExceptionLists/99999/Items
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this exception list in the impact.com API.
+          example: /Advertisers/<AccountSID>/ExceptionLists/12345
+    ExceptionListItem:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the exception list item.
+          example: 1001
+        Value:
+          type: string
+          description: The CATEGORY or SKU value.
+          example: CA
+        Name:
+          type: string
+          description: Display name for the item.
+          example: California
+        MatchMode:
+          type: string
+          description: How the value is matched against incoming actions.
+          enum:
+          - EQ
+          - REGEX
+        ListId:
+          type: integer
+          description: The unique identifier of the parent exception list.
+          example: 99999
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the item was created.
+          example: '2026-01-15T10:00:00-08:00'
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this item in the impact.com API.
+          example: /Advertisers/<AccountSID>/ExceptionLists/99999/Items/1001
+    ExceptionListCreate:
+      type: object
+      required:
+      - ActionTrackerId
+      - CampaignId
+      - Name
+      - Type
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+    ExceptionListUpdate:
+      type: object
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+    ExceptionListItemCreateForm:
+      type: object
+      required:
+      - Value
+      properties:
+        Value:
+          type: string
+          description: The CATEGORY or SKU value.
+          example: CA
+        Name:
+          type: string
+          description: Display name for contracting purposes.
+          example: California
+        Upsert:
+          type: boolean
+          default: false
+          description: If true, updates an existing item with the same 'Value'.
+          example: true
+    ExceptionListItemCreateFile:
+      type: object
+      required:
+      - File
+      properties:
+        File:
+          type: string
+          format: binary
+          description: A .CSV or .XLSX file containing the items to be added.
+        Upsert:
+          type: boolean
+          default: false
+          description: If true, updates existing items where 'Value' matches.
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
+x-default-client: cURL

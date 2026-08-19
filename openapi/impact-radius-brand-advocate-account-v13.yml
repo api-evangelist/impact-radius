@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: impact.com REST API - Account
+  description: An account is the lowest-level structure in your programs used to organize participants.
+  version: 3.1.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+  description: Production Server
+paths:
+  /{tenant_alias}/accountsync:
+    post:
+      deprecated: true
+      summary: Create or Update an account
+      operationId: upsertAccount
+      tags:
+      - Account
+      description: |
+        Use this method to update impact.com when the status of an account changes or when a new account is created.
+        This call is only available on a classic program.
+      security:
+      - APIKey: []
+      parameters:
+      - name: tenant_alias
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Tenant being referenced.
+      requestBody:
+        description: Account details to be created or updated.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+      responses:
+        '200':
+          description: Account created or updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '403':
+          description: Endpoint is deprecated and not available on non-classic programs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --request POST \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/accountsync' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Content-Type: application/json' \
+            --header 'Accept: */*'
+  /{tenant_alias}/account/{accountId}:
+    get:
+      deprecated: true
+      summary: Lookup an account
+      operationId: getAccount
+      tags:
+      - Account
+      description: |
+        Looks up an Account based upon `id` and returns the stored account information.
+        This call is only available on a classic program.
+      security:
+      - APIKey: []
+      parameters:
+      - name: tenant_alias
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The `id` of the account to look up.
+      responses:
+        '200':
+          description: Account found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '403':
+          description: Endpoint is deprecated and not available on non-classic programs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account NOT found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-codeSamples:
+      - lang: cURL
+        source: |-
+          curl -L \
+            --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/account/{accountId}' \
+            --user '{AccountSID}:{AuthToken}' \
+            --header 'Accept: */*'
+components:
+  schemas:
+    Account:
+      required:
+      - id
+      - subscription
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the account.
+          example: abc123
+        subscription:
+          $ref: '#/components/schemas/AccountSubscription'
+        referral:
+          $ref: '#/components/schemas/AccountReferral'
+        currency:
+          type: string
+          example: USD
+          description: ISO 4217 standard currency code (e.g. `USD`, `EUR`).
+    AccountSubscription:
+      required:
+      - status
+      properties:
+        status:
+          type: string
+          example: PAID
+          enum:
+          - PAID
+          - TRIAL
+          - FREE
+          - CANCELLED
+        billingIntervalType:
+          type: string
+          example: MONTH
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - QUARTER
+          - SEMI_ANNUAL
+          - YEAR
+        billingIntervalValue:
+          type: integer
+          example: 1
+        value:
+          type: number
+          format: double
+          example: 49.99
+    AccountReferral:
+      properties:
+        code:
+          type: string
+          example: BOBTESTERSON
+    Error:
+      properties:
+        statusCode:
+          type: integer
+          format: int32
+          example: 404
+          description: The HTTP status code of the error.
+        message:
+          type: string
+          description: The human-readable description of what went wrong. Use this to help you debug.
+        apiErrorCode:
+          type: string
+          description: A machine-readable error code.
+        rsCode:
+          type: string
+          nullable: true
+          description: A secondary machine-readable error code.
+          example: RS042
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+x-default-client: cURL

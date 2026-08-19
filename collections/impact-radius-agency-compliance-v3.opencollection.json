@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agency API — Compliance Content",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compliance Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create compliance content submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Compliance/Content",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits one or more content items for compliance monitoring. Content is processed asynchronously — the response returns immediately with a `QueuedUri` pointing to the job's status endpoint.\n\nUse the returned URI (or extract the submission `Id` from its tail) to poll the job with the **Get compliance submission status** endpoint. Once the status is `COMPLETED`, retrieve the per-item results from the **Get compliance submission results** endpoint.\n\nAccepts either `application/json` (recommended; s"
+        },
+        {
+          "info": {
+            "name": "Get compliance submission status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Compliance/Content/ComplianceAPISubmissions/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "Id",
+                "value": "content_api_1603459292102",
+                "type": "path",
+                "description": "The submission ID returned in the `QueuedUri` of the create response (e.g., `content_api_1603459292102`)."
+              }
+            ]
+          },
+          "docs": "Retrieves the current processing status of a compliance content submission job.\n\nOnce the `Status` value reaches `COMPLETED`, the per-item results can be retrieved using the **Get compliance submission results** endpoint at the URI returned in `ResponseUri`."
+        },
+        {
+          "info": {
+            "name": "Get compliance submission results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Compliance/Content/ComplianceAPISubmissions/Response/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "Id",
+                "value": "content_api_1603459292102",
+                "type": "path",
+                "description": "The submission ID returned in the `QueuedUri` of the create response."
+              }
+            ]
+          },
+          "docs": "Retrieves the per-item compliance results of a completed submission. Call this only when the job's `Status` (from the **Get compliance submission status** endpoint) is `COMPLETED`.\n\nThe relative URI is also returned as the `ResponseUri` field in the status response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

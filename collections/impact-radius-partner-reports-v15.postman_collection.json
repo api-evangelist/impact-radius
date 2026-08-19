@@ -1,0 +1,788 @@
+{
+  "item": [
+    {
+      "id": "3ea9b610-eaf5-4de8-be5a-2db8df5e62de",
+      "name": "Reports",
+      "description": {
+        "content": "List available reports, fetch their metadata, and run them synchronously.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99834932-6b79-4733-a5f6-46624d6bff2c",
+          "name": "List all available reports",
+          "request": {
+            "name": "List all available reports",
+            "description": {
+              "content": "Retrieves a list of all available reports. Only reports with `ApiAccessible: true` can be run programmatically — the rest are UI-only and return a `RunUri` pointing to the impact.com web app.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d437b4ec-a492-47fa-9cb3-04dc6585a591",
+              "name": "A list of report objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Reports\": [\n    {\n      \"Name\": \"Action Listing\",\n      \"Id\": \"mp_action_listing_fast\",\n      \"Category\": \"Listing\",\n      \"Description\": \"Displays data for each individual action that has been credited to you.\",\n      \"ApiAccessible\": true,\n      \"ApiRunUri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast\",\n      \"DeferredApiRunUri\": \"/Mediapartners/<AccountSID>/ReportExport/mp_action_listing_fast\",\n      \"MetaDataUri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData\",\n      \"RunUri\": \"/secure/mediapartner/report/viewReport.report?id=17698\"\n    },\n    {\n      \"Name\": \"Action Listing\",\n      \"Id\": \"mp_action_listing_fast\",\n      \"Category\": \"Listing\",\n      \"Description\": \"Displays data for each individual action that has been credited to you.\",\n      \"ApiAccessible\": true,\n      \"ApiRunUri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast\",\n      \"DeferredApiRunUri\": \"/Mediapartners/<AccountSID>/ReportExport/mp_action_listing_fast\",\n      \"MetaDataUri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData\",\n      \"RunUri\": \"/secure/mediapartner/report/viewReport.report?id=17698\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e18a82bb-68c7-4a36-b4fe-d819adfda03a",
+          "name": "Run a report (Legacy)",
+          "request": {
+            "name": "Run a report (Legacy)",
+            "description": {
+              "content": "Runs a report synchronously and returns the records inline. Page size is fixed at 20,000 rows — for larger datasets use the Report Export endpoint instead.\n\nCall `/Reports/{Id}/MetaData` first to learn which filters the report accepts and which columns it returns. The `Records` array contains one object per row with column names matching the metadata `Attributes`.\n\n**Note:** Starting September 1, 2025, this endpoint enforces stricter page limits. For production workloads against datasets that may exceed 20,000 rows, use Report Export.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Reports",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SUBAID",
+                  "value": "<string>",
+                  "description": "Program ID to scope the report to a single brand. Omit to include all programs you partner with."
+                },
+                {
+                  "disabled": false,
+                  "key": "START_DATE",
+                  "value": "<date>",
+                  "description": "(Required) Start date for the report's date range, in `YYYY-MM-DD` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "END_DATE",
+                  "value": "<date>",
+                  "description": "(Required) End date for the report's date range, in `YYYY-MM-DD` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "RQueryIDx",
+                  "value": "0",
+                  "description": "For reports that return multiple result tables, selects which table to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d696269-3b47-49c7-b821-6e38665075d0",
+              "name": "Report results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Reports",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "START_DATE",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "END_DATE",
+                      "value": "2026-01-31"
+                    },
+                    {
+                      "key": "RQueryIDx",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Records\": [\n    {\n      \"key_0\": 3219,\n      \"key_1\": 5517\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 6792\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e23677e-3601-45d7-b4d3-3670ad56ace5",
+              "name": "No report exists with the supplied Id, or the report is not API accessible.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Reports",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "START_DATE",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "END_DATE",
+                      "value": "2026-01-31"
+                    },
+                    {
+                      "key": "RQueryIDx",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19c6f2ee-a327-45de-8856-18a3c91507b3",
+          "name": "Retrieve report metadata",
+          "request": {
+            "name": "Retrieve report metadata",
+            "description": {
+              "content": "Returns the dynamic documentation for a report — the filters it accepts and the attributes (columns) it returns. Call this before running a report to learn its exact contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "Reports",
+                ":Id",
+                "MetaData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da20e6a5-5faa-4931-ae28-2af05195137c",
+              "name": "Report metadata details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Reports",
+                    ":Id",
+                    "MetaData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Name\": \"Action Listing\",\n  \"Id\": \"mp_action_listing_fast\",\n  \"Description\": \"Displays data for each individual action that has been credited to you.\",\n  \"Filters\": [\n    {\n      \"Name\": \"START_DATE\",\n      \"DataType\": \"String\",\n      \"Format\": \"\"\n    },\n    {\n      \"Name\": \"START_DATE\",\n      \"DataType\": \"String\",\n      \"Format\": \"\"\n    }\n  ],\n  \"Attributes\": [\n    {\n      \"Name\": \"action_id\",\n      \"DataType\": \"String\",\n      \"Description\": \"Unique value assigned to each action\"\n    },\n    {\n      \"Name\": \"action_id\",\n      \"DataType\": \"String\",\n      \"Description\": \"Unique value assigned to each action\"\n    }\n  ],\n  \"RunUri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "774ab4ec-2a7c-49f7-a436-d554a0faba6a",
+              "name": "No report exists with the supplied Id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "Reports",
+                    ":Id",
+                    "MetaData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6af0a32e-7285-43a0-9807-ba003a1b6e43",
+      "name": "Report Export",
+      "description": {
+        "content": "Schedule an asynchronous report export and poll for results via the Partner Jobs API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "99fc5808-af97-43e0-91dd-691a24dfe73e",
+          "name": "Export a report (asynchronous)",
+          "request": {
+            "name": "Export a report (asynchronous)",
+            "description": {
+              "content": "Schedules a background job to export a report. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.\n\nUse this endpoint instead of Run Report for any dataset that may exceed 20,000 rows.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "ReportExport",
+                ":Id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "SUBAID",
+                  "value": "<string>",
+                  "description": "Program ID to scope the report to a single brand. Omit to include all programs you partner with."
+                },
+                {
+                  "disabled": false,
+                  "key": "START_DATE",
+                  "value": "<date>",
+                  "description": "(Required) Start date for the report's date range, in `YYYY-MM-DD` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "END_DATE",
+                  "value": "<date>",
+                  "description": "(Required) End date for the report's date range, in `YYYY-MM-DD` format."
+                },
+                {
+                  "disabled": false,
+                  "key": "ResultFormat",
+                  "value": "CSV",
+                  "description": "Format for the exported result file."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "Id",
+                  "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08bcf162-b698-467a-8e9c-5a48efa8237f",
+              "name": "Job successfully queued.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ReportExport",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "START_DATE",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "END_DATE",
+                      "value": "2026-01-31"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "CSV"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"QUEUED\",\n  \"QueuedUri\": \"/Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9\",\n  \"ResultUri\": \"/Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9/Download\",\n  \"ReplayUri\": \"/Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9/Replay\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d60ec10-4936-4623-978c-90d8890f11f2",
+              "name": "No report exists with the supplied Id, or the report is not API accessible.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "ReportExport",
+                    ":Id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "SUBAID",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "START_DATE",
+                      "value": "2026-01-01"
+                    },
+                    {
+                      "key": "END_DATE",
+                      "value": "2026-01-31"
+                    },
+                    {
+                      "key": "ResultFormat",
+                      "value": "CSV"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "Id",
+                      "description": "(Required) The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ef2382f9-24ba-486b-8ef2-dc17924d1fe3",
+    "name": "Partner Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reports API gives you programmatic access to the same reports available in the impact.com UI. Use it to pull performance, listing, finance, and compliance data directly into your own tools.\n\nTypical workflow:\n\n1. **List Reports** to find a report. Only reports with `ApiAccessible: true` can be run via the API.\n2. **Retrieve report metadata** to see the filters that report accepts and the columns it returns.\n3. **Run the report** synchronously for small datasets (up to 20,000 rows), or\n4. **Export the report** asynchronously for large datasets — this queues a background job that you poll via the Partner Jobs API.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

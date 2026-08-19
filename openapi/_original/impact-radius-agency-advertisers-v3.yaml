@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: Agency API — Advertisers
+  version: "3.0"
+
+servers:
+  - url: https://api.impact.com
+    description: Production
+
+tags:
+  - name: Advertisers
+    description: Advertiser accounts managed by this agency.
+
+paths:
+  /Agencies/{AccountSID}/Advertisers:
+    get:
+      operationId: listAdvertisers
+      summary: List all advertisers
+      description: |-
+        Returns a list of all advertisers associated with your agency account.
+
+        Each result includes full account details — contact information, billing setup, organization details, and a pre-authenticated `RestAccountURL` for making direct API calls to each advertiser's account.
+      tags:
+        - Advertisers
+      parameters:
+        - name: AccountSID
+          in: path
+          required: true
+          description: Your Agency Account SID.
+          schema:
+            type: string
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+      responses:
+        "200":
+          description: A list of advertisers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Advertiser"
+              example:
+                - Id: "1048291"
+                  Name: "Nutt & Co. Outdoors"
+                  Description: "Premium outdoor gear and adventure accessories."
+                  State: "ACTIVE"
+                  Website: "www.nuttandco.com"
+                  AddressLine1: "100 Commerce Drive"
+                  AddressLine2: "Suite 200"
+                  City: "Austin"
+                  CountryState: "TX"
+                  PostalCode: "78701"
+                  Country: "US"
+                  IndirectTaxJurisdiction: ""
+                  VatRegistered: "false"
+                  OrganizationType: "CORP"
+                  TaxId: "XXXXX4832"
+                  IndirectTaxNumber: ""
+                  Timezone: "America/Chicago"
+                  Currency: "USD"
+                  PhoneNumber: "15125550191"
+                  DateCreated: "2021-03-15T09:22:11-07:00"
+                  FinancialSetup: "BILLED_BY_IR"
+                  AgencyOfRecord: "true"
+                  AccountManager: "Carrie Oakey"
+                  RestAccountURL: "IRxxxxxxxxxxxxxxxxx1:xxxxxxxxxxxxxxxxxxxxxxxx@api.impactradius.com/Advertisers/IRxxxxxxxxxxxxxxxxx1"
+                  Uri: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Advertisers/1048291"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+
+  /Agencies/{AccountSID}/Advertisers/{AdvertiserId}:
+    get:
+      operationId: getAdvertiser
+      summary: Get an advertiser
+      description: Returns the full details of a single advertiser account by its numeric ID.
+      tags:
+        - Advertisers
+      parameters:
+        - name: AccountSID
+          in: path
+          required: true
+          description: Your Agency Account SID.
+          schema:
+            type: string
+          example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+        - name: AdvertiserId
+          in: path
+          required: true
+          description: The numeric ID of the advertiser to retrieve. Use the `Id` field from the List Advertisers response.
+          schema:
+            type: string
+          example: "1048291"
+      responses:
+        "200":
+          description: The advertiser object.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertiser"
+              example:
+                Id: "1048291"
+                Name: "Nutt & Co. Outdoors"
+                Description: "Premium outdoor gear and adventure accessories."
+                State: "ACTIVE"
+                Website: "www.nuttandco.com"
+                AddressLine1: "100 Commerce Drive"
+                AddressLine2: "Suite 200"
+                City: "Austin"
+                CountryState: "TX"
+                PostalCode: "78701"
+                Country: "US"
+                IndirectTaxJurisdiction: ""
+                VatRegistered: "false"
+                OrganizationType: "CORP"
+                TaxId: "XXXXX4832"
+                IndirectTaxNumber: ""
+                Timezone: "America/Chicago"
+                Currency: "USD"
+                PhoneNumber: "15125550191"
+                DateCreated: "2021-03-15T09:22:11-07:00"
+                FinancialSetup: "BILLED_BY_IR"
+                AgencyOfRecord: "true"
+                AccountManager: "Carrie Oakey"
+                RestAccountURL: "IRxxxxxxxxxxxxxxxxx1:xxxxxxxxxxxxxxxxxxxxxxxx@api.impactradius.com/Advertisers/IRxxxxxxxxxxxxxxxxx1"
+                Uri: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Advertisers/1048291"
+        "401":
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+        "404":
+          description: Advertiser not found. Verify that the AdvertiserId belongs to an advertiser managed by this agency.
+
+components:
+  schemas:
+    Advertiser:
+      type: object
+      description: An advertiser account managed through your agency.
+      properties:
+        Id:
+          type: string
+          description: The unique numeric identifier for the advertiser account.
+          example: "1048291"
+        Name:
+          type: string
+          description: The advertiser's business or brand name as registered on impact.com.
+          example: "Nutt & Co. Outdoors"
+        Description:
+          type: string
+          description: A free-text description of the advertiser. May be an empty string if none has been set.
+          example: "Premium outdoor gear and adventure accessories."
+        State:
+          type: string
+          description: |-
+            The current status of the advertiser account.
+
+            | Value | Description |
+            |---|---|
+            | `ACTIVE` | Account is active and in good standing. |
+            | `DELINQUENT` | Account has overdue payments or billing issues. |
+          enum:
+            - ACTIVE
+            - DELINQUENT
+          example: ACTIVE
+        Website:
+          type: string
+          description: The advertiser's primary website URL.
+          example: "www.nuttandco.com"
+        AddressLine1:
+          type: string
+          description: First line of the advertiser's registered business address.
+          example: "100 Commerce Drive"
+        AddressLine2:
+          type: string
+          description: Second line of the address (suite, floor, unit, etc.). May be an empty string if not provided.
+          example: "Suite 200"
+        City:
+          type: string
+          description: City of the advertiser's registered business address.
+          example: "Austin"
+        CountryState:
+          type: string
+          description: State, province, or region associated with the advertiser's address. May return `OTHER` for non-standard jurisdictions, or an empty string if not provided.
+          example: "TX"
+        PostalCode:
+          type: string
+          description: ZIP or postal code of the advertiser's registered business address.
+          example: "78701"
+        Country:
+          type: string
+          description: Country of the advertiser's registered business address (e.g., `US`, `SOUTHAFRICA`).
+          example: "US"
+        IndirectTaxJurisdiction:
+          type: string
+          description: The tax jurisdiction used to calculate indirect taxes (e.g., GST, VAT) for this advertiser. May be an empty string if indirect taxes do not apply.
+          example: ""
+        VatRegistered:
+          type: string
+          description: Indicates whether the advertiser is registered for VAT. Returns `"true"` or `"false"` as a string value.
+          enum:
+            - "true"
+            - "false"
+          example: "false"
+        OrganizationType:
+          type: string
+          description: |-
+            The legal organization type of the advertiser.
+
+            | Value | Description |
+            |---|---|
+            | `CORP` | Corporation or limited company. |
+            | `NONP_GOV` | Non-profit organization or government entity. |
+            | `OTHER` | Any other organization type. |
+          enum:
+            - CORP
+            - NONP_GOV
+            - OTHER
+          example: CORP
+        TaxId:
+          type: string
+          description: The advertiser's tax identification number. For security, only the last four digits are returned and the rest are masked (e.g., `XXXXX4832`). Returns an empty string if no tax ID has been provided.
+          example: "XXXXX4832"
+        IndirectTaxNumber:
+          type: string
+          description: The advertiser's indirect tax registration number (e.g., a GST, HST, or EU VAT number). Returns an empty string if not applicable.
+          example: ""
+        Timezone:
+          type: string
+          description: The advertiser's default timezone in IANA format. Used for scheduling and date-based reporting.
+          example: "America/Chicago"
+        Currency:
+          type: string
+          description: The advertiser's billing currency in ISO 4217 format.
+          example: "USD"
+        PhoneNumber:
+          type: string
+          description: The advertiser's primary contact phone number. Digits only — no spaces, dashes, or other formatting characters.
+          example: "15125550191"
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time when the advertiser account was created on impact.com, in ISO 8601 format with UTC offset.
+          example: "2021-03-15T09:22:11-07:00"
+        FinancialSetup:
+          type: string
+          description: |-
+            How the advertiser is billed for impact.com platform fees.
+
+            | Value | Description |
+            |---|---|
+            | `BILLED_BY_IR` | The advertiser is billed directly by impact.com. |
+          enum:
+            - BILLED_BY_IR
+          example: BILLED_BY_IR
+        AgencyOfRecord:
+          type: string
+          description: |-
+            Indicates whether the authenticated agency is the designated **Agency of Record (AoR)** for this advertiser. An Agency of Record has full management authority over the advertiser's account. Returns `"true"` or `"false"` as a string value.
+          enum:
+            - "true"
+            - "false"
+          example: "true"
+        RestAccountURL:
+          type: string
+          description: |-
+            A pre-authenticated URL for making API calls directly to this advertiser's account. The URL embeds the advertiser's Account SID and Auth Token in the format `SID:AuthToken@api.impactradius.com/Advertisers/SID`, using the legacy `api.impactradius.com` domain.
+
+            > **Security note:** Treat this value as a secret. It grants full API access to the advertiser's account. Never log it or expose it in client-side code.
+          example: "IRxxxxxxxxxxxxxxxxx1:xxxxxxxxxxxxxxxxxxxxxxxx@api.impactradius.com/Advertisers/IRxxxxxxxxxxxxxxxxx1"
+        Uri:
+          type: string
+          description: The relative URI for this advertiser resource within the Agency API. Append to `https://api.impact.com` to form the full resource URL.
+          example: "/Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Advertisers/1048291"
+        AccountManager:
+          type: string
+          description: The full name of the impact.com account manager assigned to this advertiser. **Only present in the response when an account manager has been assigned** — the field will be absent if no manager is assigned.
+          example: "Carrie Oakey"

@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Ads",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Ads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Ads",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "query",
+                "description": "Filter ads by a specific campaign (program) ID."
+              },
+              {
+                "name": "Type",
+                "value": "",
+                "type": "query",
+                "description": "Filter ads by their type."
+              },
+              {
+                "name": "DealId",
+                "value": "",
+                "type": "query",
+                "description": "Filter ads associated with a specific deal ID."
+              },
+              {
+                "name": "MobileReady",
+                "value": "",
+                "type": "query",
+                "description": "Filter ads based on whether they are optimized for mobile."
+              },
+              {
+                "name": "DateCreatedStart",
+                "value": "",
+                "type": "query",
+                "description": "Start of the date range for when ads were created."
+              },
+              {
+                "name": "DateCreatedEnd",
+                "value": "",
+                "type": "query",
+                "description": "End of the date range for when ads were created."
+              },
+              {
+                "name": "DateLastUpdatedStart",
+                "value": "",
+                "type": "query",
+                "description": "Start of the date range for when ads were last updated."
+              },
+              {
+                "name": "DateLastUpdatedEnd",
+                "value": "",
+                "type": "query",
+                "description": "End of the date range for when ads were last updated."
+              }
+            ]
+          },
+          "docs": "Lists existing ads, returned by creation date with the most recently created ad appearing first. The list can be filtered by various parameters."
+        },
+        {
+          "info": {
+            "name": "Create an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Ads",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new Banner, Coupon, or Text Link ad. Use `multipart/form-data` if uploading a creative file, otherwise use `application/x-www-form-urlencoded`."
+        },
+        {
+          "info": {
+            "name": "Get Ad Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Ads/:AdId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the ad."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing ad by its unique impact.com Ad ID."
+        },
+        {
+          "info": {
+            "name": "Update an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Ads/:AdId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "AdId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the ad to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates an existing ad, including its creative file if needed. Use `multipart/form-data` if uploading a creative file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

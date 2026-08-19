@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Promo Code Exception Lists",
+    "version": "v14"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Code Exception Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "ActionTrackerId",
+                  "value": ""
+                },
+                {
+                  "name": "CampaignId",
+                  "value": ""
+                },
+                {
+                  "name": "Name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new, empty list for promo codes that will have exceptional payout rates."
+        },
+        {
+          "info": {
+            "name": "Get Promo Code Exception List Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing promo code exception list by its unique ID."
+        },
+        {
+          "info": {
+            "name": "Update a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "ActionTrackerId",
+                  "value": ""
+                },
+                {
+                  "name": "Name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the specified promo code exception list's name or associated action trackers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Promo Code Exception List Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Items in a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              },
+              {
+                "name": "Value",
+                "value": "",
+                "type": "query",
+                "description": "Filter items by the 'Value' (the promo code itself)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all promo code items within a specific exception list."
+        },
+        {
+          "info": {
+            "name": "Create an Item in a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Value",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new promo code item for an exception list."
+        },
+        {
+          "info": {
+            "name": "Delete All Items from a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              }
+            ]
+          },
+          "docs": "Permanently deletes all items in a promo code exception list. This cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get Promo Code Exception List Item Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId/Items/:ItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              },
+              {
+                "name": "ItemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list item."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single item from a promo code exception list."
+        },
+        {
+          "info": {
+            "name": "Delete a Promo Code Exception List Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/PromoCodeExceptionLists/:ListId/Items/:ItemId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "ListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              },
+              {
+                "name": "ItemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list item."
+              }
+            ]
+          },
+          "docs": "Permanently deletes a single item from a promo code exception list. This cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

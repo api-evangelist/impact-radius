@@ -1,0 +1,299 @@
+{
+  "item": [
+    {
+      "id": "b3dabd22-f71e-42e7-b95a-8c40c6be4e05",
+      "name": "Phone Numbers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c36f1cca-7531-43a8-acb6-d0bb68faf5d9",
+          "name": "List All Phone Numbers",
+          "request": {
+            "name": "List All Phone Numbers",
+            "description": {
+              "content": "Returns a list of available phone numbers for your account, with options for filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PhoneNumbers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Id",
+                  "value": "<string>",
+                  "description": "Filter by one or more specific Phone Number IDs, provided as a comma-separated list."
+                },
+                {
+                  "disabled": false,
+                  "key": "LastDateAssigned",
+                  "value": "<dateTime>",
+                  "description": "Filter for numbers last assigned on a specific date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "LastDateReleased",
+                  "value": "<dateTime>",
+                  "description": "Filter for numbers last released on a specific date (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "Number",
+                  "value": "<string>",
+                  "description": "Filter by one or more specific phone numbers, provided as a comma-separated list."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0321fcda-544b-40bd-a395-e9b3e7e75857",
+              "name": "A paginated list of phone number objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PhoneNumbers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "LastDateAssigned",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "LastDateReleased",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "Number",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PhoneNumbers\": [\n    {\n      \"Id\": 12345,\n      \"Country\": \"US\",\n      \"Number\": \"8051234567\",\n      \"InternationalNumber\": \"+1 805 123 4567\",\n      \"DateCreated\": \"2026-01-15T10:00:00-08:00\",\n      \"LastDateAssigned\": \"2026-02-01T10:00:00-08:00\",\n      \"LastDateReleased\": \"2026-03-15T10:00:00-08:00\",\n      \"Uri\": \"https://SkKmJGkIzUkhjxBAjCpmmLaa.fhbYiRYR-LbmwniiWguJJ3M8xFd.u7+1HvYJ4UdR0JL3wc+V0pOf4Y+9NMLLrdJnUzReiwG?ylrb=6xRif&imqutlh&be=kb&\"\n    },\n    {\n      \"Id\": 12345,\n      \"Country\": \"US\",\n      \"Number\": \"8051234567\",\n      \"InternationalNumber\": \"+1 805 123 4567\",\n      \"DateCreated\": \"2026-01-15T10:00:00-08:00\",\n      \"LastDateAssigned\": \"2026-02-01T10:00:00-08:00\",\n      \"LastDateReleased\": \"2026-03-15T10:00:00-08:00\",\n      \"Uri\": \"http://EeXOBFfAiOudat.xnfcq98kkMIgg1ukwCYhUpWp3qM7I,q-hjEdhU-wWJM9xxsxQl,p6OW.vBi9SLO\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89616e45-4150-402b-b4d0-37fac61cc4ab",
+          "name": "Get Phone Number Details",
+          "request": {
+            "name": "Get Phone Number Details",
+            "description": {
+              "content": "Retrieves the details of a specific phone number by its unique ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Advertisers",
+                ":AccountSID",
+                "PhoneNumbers",
+                ":PhoneNumberId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "PhoneNumberId",
+                  "description": "(Required) The unique identifier for the phone number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5205ce5c-0814-4a80-80d1-a3b79d8efc84",
+              "name": "A single phone number object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Advertisers",
+                    ":AccountSID",
+                    "PhoneNumbers",
+                    ":PhoneNumberId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "PhoneNumberId",
+                      "description": "(Required) The unique identifier for the phone number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": 12345,\n  \"Country\": \"US\",\n  \"Number\": \"8051234567\",\n  \"InternationalNumber\": \"+1 805 123 4567\",\n  \"DateCreated\": \"2026-01-15T10:00:00-08:00\",\n  \"LastDateAssigned\": \"2026-02-01T10:00:00-08:00\",\n  \"LastDateReleased\": \"2026-03-15T10:00:00-08:00\",\n  \"Uri\": \"https://YOqSbhGvjRuNeVaw.tgwmlZ6,GhESrkGf8eVpNG+tC352Xd?nhtzzc=GV&\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "982095e0-e544-4590-8fbc-f5bfbf25783b",
+    "name": "Brand API - Phone Numbers",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving phone numbers available to your impact.com brand account for use with impact.com's native call tracking solution.",
+      "type": "text/plain"
+    }
+  }
+}

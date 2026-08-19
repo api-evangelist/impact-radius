@@ -1,0 +1,71 @@
+generated: '2026-08-13'
+method: searched
+source: https://impact.com/security-and-privacy/
+docs:
+- https://impact.com/security-and-privacy/
+- https://impact.responsibledisclosure.com/hc/en-us
+description: >-
+  impact.com does not run a dedicated trust-center portal (trust.impact.com resolves to the
+  marketing homepage, not a trust page), but it publishes a named security-and-privacy page that
+  lists third-party certifications, compliance processes and security controls. That page is the
+  trust surface of record.
+portal:
+  url: https://impact.com/security-and-privacy/
+  dedicated_trust_center: false
+  evidence:
+  - url: https://trust.impact.com/
+    status: 200
+    note: >-
+      Returns the impact.com marketing homepage ("One platform. All partnerships."), not a trust
+      center. Recorded as a soft hit, i.e. not a trust document.
+  - url: https://impact.com/security-and-privacy/
+    status: 200
+certifications:
+- name: SOC 1 Type II
+  scope: Internal controls over financial reporting
+  status: certified
+  report_available: not stated
+  source: https://impact.com/security-and-privacy/
+- name: ISO/IEC 27001:2022
+  scope: Information security management system
+  status: certified
+  report_available: not stated
+  source: https://impact.com/security-and-privacy/
+- name: PCI-DSS Level 4
+  scope: Payment card data as a Level 4 Merchant
+  status: certified
+  maintenance: Annual SAQ completion
+  source: https://impact.com/security-and-privacy/
+regulatory:
+- name: GDPR
+  posture: >-
+    States compliant processing, data minimisation on a stated legal basis, no sale of personal
+    data, sharing limited to essential sub-processors, and full data-subject rights (access,
+    rectification, erasure, objection) via compliance@impact.com.
+  contact: compliance@impact.com
+  source: https://impact.com/security-and-privacy/
+compliance_processes:
+- Consent and opt-out management with customizable forms and participant-controlled unsubscribe
+- Right to be forgotten — deletion requests propagate to sub-processors, raised through the support portal
+- Data portability — users can access and view all information associated with their profile
+security_controls:
+- name: Recurring penetration testing
+  detail: >-
+    Independent third-party penetration testing of web applications, mobile apps (Android/iOS)
+    and the underlying APIs.
+- name: Data encryption at rest
+- name: Application security
+- name: Data networking and security
+- name: Restricted access and authorization
+- name: Company security
+not_claimed:
+  note: >-
+    Recorded explicitly so no reader infers them: no SOC 2 report, no HIPAA, no FedRAMP and no
+    ISO 27017/27018 claim appears on the published page, and no certification report is offered
+    for download or under NDA request.
+vulnerability_disclosure:
+  ref: security/impact-radius-vulnerability-disclosure.yml
+  program: https://impact.responsibledisclosure.com/hc/en-us
+notes: >-
+  Certification names, scopes and maintenance language captured verbatim from the provider's own
+  page. Nothing was inferred from the absence of a trust portal.

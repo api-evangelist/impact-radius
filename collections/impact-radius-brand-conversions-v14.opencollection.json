@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Conversions",
+    "version": "v13"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a Conversion Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Conversions",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Submits a conversion event for tracking and attribution.\n\n  **Additional required parameters** not captured in the `required` list below:\n  - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).\n  - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).\n\n  **Note on conditional requirements:** Many p"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

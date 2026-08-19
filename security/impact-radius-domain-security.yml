@@ -1,4 +1,4 @@
-generated: '2026-07-19'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -11,13 +11,13 @@ hosts:
 - host: integrations.impact.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep  3 05:54:36 2026 GMT
+  cert_expires: Nov  1 15:33:03 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 - host: api.impact.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 12 11:58:48 2026 GMT
+  cert_expires: Nov 10 18:52:38 2026 GMT
   hsts: true
   hsts_max_age: 31536000
 domains:

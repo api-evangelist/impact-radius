@@ -1,0 +1,296 @@
+{
+  "item": [
+    {
+      "id": "e3fef5d8-4f0d-4074-8589-07e93dcde630",
+      "name": "Event Notifications",
+      "description": {
+        "content": "Inbound webhook payloads that impact.com sends to a partner-configured URL when events occur.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "247182fd-7b6b-4271-a5cc-f5af23167657",
+          "name": "Receive an event notification (POST)",
+          "request": {
+            "name": "Receive an event notification (POST)",
+            "description": {
+              "content": "impact.com sends a POST request with a JSON body to your configured URL when an event occurs. Your server should return a `2xx` response to acknowledge successful receipt.\n\nThe fields included in the payload are determined by the URL template / body template you configure in impact.com. The schema below shows the most common fields.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "your-configured-path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"action_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"payout\": \"<string>\",\n  \"items\": [\n    {\n      \"sku\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"amt\": \"<string>\"\n    },\n    {\n      \"sku\": \"<string>\",\n      \"qty\": \"<string>\",\n      \"amt\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a91941b2-09d5-4db1-bb86-ca43664900f4",
+              "name": "Your server has acknowledged the notification successfully. impact.com will not retry.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your-configured-path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"10306\",\n  \"action_id\": \"1234567890\",\n  \"status\": \"APPROVED\",\n  \"payout\": \"5.00\",\n  \"items\": [\n    {\n      \"sku\": \"APP-0016\",\n      \"qty\": \"1\",\n      \"amt\": \"719.10\"\n    },\n    {\n      \"sku\": \"APP-0016\",\n      \"qty\": \"1\",\n      \"amt\": \"719.10\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbbcb893-9d6d-4c86-b1b6-181216caacc0",
+              "name": "Accepted — same effect as 200 from impact.com's perspective.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your-configured-path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"campaign_id\": \"10306\",\n  \"action_id\": \"1234567890\",\n  \"status\": \"APPROVED\",\n  \"payout\": \"5.00\",\n  \"items\": [\n    {\n      \"sku\": \"APP-0016\",\n      \"qty\": \"1\",\n      \"amt\": \"719.10\"\n    },\n    {\n      \"sku\": \"APP-0016\",\n      \"qty\": \"1\",\n      \"amt\": \"719.10\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6777595d-8c90-4cd3-b973-ba5bd01bb744",
+          "name": "Receive an event notification (GET)",
+          "request": {
+            "name": "Receive an event notification (GET)",
+            "description": {
+              "content": "impact.com sends a GET request to your configured URL with event data as query-string parameters. This delivery mode is typically used for simple pixel-style integrations.\n\nThe query parameters present depend on the URL template you configure in your impact.com Event Notifications settings.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "your-configured-path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "campaign_id",
+                  "value": "<string>",
+                  "description": "Unique identifier of the brand program the event belongs to."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_id",
+                  "value": "<string>",
+                  "description": "Unique identifier of the tracked action."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the action at the time of notification (e.g., `APPROVED`, `PENDING`, `REVERSED`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "payout",
+                  "value": "<string>",
+                  "description": "Commission amount paid to the partner for this action, as a decimal string."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d68bf72e-80b9-4956-8b3d-a6e3cc82c3c4",
+              "name": "Your server has acknowledged the notification successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your-configured-path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaign_id",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "action_id",
+                      "value": "1234567890"
+                    },
+                    {
+                      "key": "status",
+                      "value": "APPROVED"
+                    },
+                    {
+                      "key": "payout",
+                      "value": "5.00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1114ad88-14d6-425a-96c4-bcc1c72fea0f",
+              "name": "Accepted — same effect as 200 from impact.com's perspective.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your-configured-path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaign_id",
+                      "value": "10306"
+                    },
+                    {
+                      "key": "action_id",
+                      "value": "1234567890"
+                    },
+                    {
+                      "key": "status",
+                      "value": "APPROVED"
+                    },
+                    {
+                      "key": "payout",
+                      "value": "5.00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://your-server.example.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e32879ae-fdb4-425f-a738-362e13939800",
+    "name": "Partner Event Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Event Notifications (also known as webhooks or postbacks) are HTTP requests that **impact.com sends to your server** in real time when relevant events occur — actions tracked, clicks credited, status changes, and so on.\n\nThis is an **inbound** integration: you configure a URL in your impact.com account, and impact.com fires HTTP requests at that URL when events happen. You don't call any impact.com endpoint to receive notifications.\n\n**How it works:**\n\n1. In your impact.com partner account, configure an Event Notification URL.\n2. Use placeholder tokens like `{CampaignId}`, `{ActionId}`, `{Status}`, `{Payout}` in either the URL (for GET delivery) or the JSON request body (for POST delivery). impact.com substitutes the real values at fire time.\n3. impact.com calls your URL whenever a matching event occurs.\n4. Your server returns a `2xx` response to acknowledge receipt. Non-`2xx` responses are retried by impact.com.\n\nThis spec documents the **shape of the request impact.com sends to your server** — it is not an endpoint you call.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

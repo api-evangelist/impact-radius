@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Promo Code Exception Lists API",
+    "version": "15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Promo Code Exception Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a Promo Code Exception List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/PromoCodeExceptionLists/:PromoCodeExceptionListId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "PromoCodeExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.\n"
+        },
+        {
+          "info": {
+            "name": "List Promo Code Exception List Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/PromoCodeExceptionLists/:PromoCodeExceptionListId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "PromoCodeExceptionListId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the promo code exception list whose items are being retrieved."
+              }
+            ]
+          },
+          "docs": "Returns a list of all items in a specific promo code exception list. Each item defines a promo code value that triggers an alternate commission rate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

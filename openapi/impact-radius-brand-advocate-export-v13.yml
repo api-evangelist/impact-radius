@@ -1,0 +1,334 @@
+openapi: 3.1.0
+info:
+  title: impact.com API - Export
+  description: API for creating and downloading bulk data exports.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+tags:
+- name: Export
+  description: |
+    Endpoints for working with bulk data exports: create a new export, look up the status of an existing export, download a completed export, and list recent exports.
+paths:
+  /{tenant_alias}/export/history/list:
+    get:
+      summary: List Exports
+      description: Returns a paginated list of exports in the tenant. Useful for finding a recent export when you don't have its `id`.
+      operationId: listExports
+      tags:
+      - Export
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: A limit on the maximum number of results to return, defaults to `10`.
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        description: The row number of the first result to return, defaults to `0`.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: List of Exports found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportList'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/export:
+    post:
+      summary: Create an Export
+      description: |
+        Creates an asynchronous export request. The export is queued and processed in the background; the response returns the export's `id` and an initial `status` of `PENDING`.
+
+        Store the returned `id` so you can look up the export's status or download it once complete. For details on the export lifecycle and how to detect completion, see the Export Overview.
+      operationId: createExport
+      tags:
+      - Export
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details of the export to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportStub'
+      responses:
+        '201':
+          description: Export created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Export'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/export/{exportId}:
+    get:
+      summary: Lookup an Export
+      description: Returns the current state of an export, including its `status`. Use this to poll for completion before attempting to download.
+      operationId: getExport
+      tags:
+      - Export
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: exportId
+        in: path
+        description: The `id` of the export to look up.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Export found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Export'
+        '404':
+          description: Export NOT found
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/export/{exportId}/download:
+    get:
+      summary: Download an Export
+      description: Downloads a completed export file. The export's `status` must be `COMPLETED`; use the lookup endpoint to confirm before calling this.
+      operationId: downloadExport
+      tags:
+      - Export
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: exportId
+        in: path
+        description: The `id` of the export to download.
+        required: true
+        schema:
+          type: string
+      responses:
+        '303':
+          description: Redirect to the export file. Follow the `Location` header to download the CSV from the storage provider. Ensure your HTTP client is configured to follow redirects (e.g. `curl -L`).
+          headers:
+            Location:
+              description: Signed URL to the export file on the storage provider. The URL expires after a short period.
+              schema:
+                type: string
+                format: uri
+                example: https://storage.googleapis.com/tenant-files.ssqt.io/exports/aboih12h16t/abc123export.csv
+        '200':
+          description: Export file returned after following the redirect.
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: '#/components/responses/GeneralError'
+components:
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method of security only in server-to-server interactions.
+  schemas:
+    ExportStub:
+      description: Request body for creating a new export.
+      required:
+      - type
+      properties:
+        type:
+          description: The type of Export that's being requested.
+          type: string
+          example: USER
+          enum:
+          - USER
+          - USER_REFERRAL
+          - REFERRAL
+          - USER_REWARD_BALANCE
+          - REWARD_BALANCE
+          - REWARD
+        format:
+          description: The format of the Export
+          type: string
+          default: CSV
+          example: CSV
+          enum:
+          - CSV
+          - XLSX
+        name:
+          description: A user-friendly name for this report. Useful for keeping track of which report is which.
+          type: string
+          example: Monthly user export
+        requester:
+          description: Detail on the service or user that requested this report. Defaults to `"API"` when not provided.
+          type: string
+          default: API
+          example: API
+        params:
+          description: Filter parameters for limiting the records returned. Multiple parameters are combined with a logical AND.
+          type: object
+          nullable: true
+          properties:
+            createdSince:
+              description: Filters for results **created since this date**. Works with `USER`, `USER_REFERRAL`, `REFERRAL`, `USER_REWARD_BALANCE`, `REWARD_BALANCE`.
+              type: integer
+              format: int64
+            createdBefore:
+              description: Filters for results **created before this date**. Works with `USER`, `USER_REFERRAL`, `REFERRAL`, `USER_REWARD_BALANCE`, `REWARD_BALANCE`.
+              type: integer
+              format: int64
+            updatedSince:
+              description: Filters for results **updated since this date**. Works with `USER`, `USER_REFERRAL`, `REFERRAL`.
+              type: integer
+              format: int64
+            updatedBefore:
+              description: Filters for results **updated before this date**. Works with `USER`, `USER_REFERRAL`, `REFERRAL`.
+              type: integer
+              format: int64
+            createdOrUpdatedSince:
+              description: Filters for results **created or updated since this date**. Useful for incremental exports into a data warehouse. Works with `USER`, `USER_REFERRAL`, `REFERRAL`.
+              type: integer
+              format: int64
+            createdOrUpdatedBefore:
+              description: Filters for results **created or updated before this date**. Useful for incremental exports into a data warehouse. Works with `USER`, `USER_REFERRAL`, `REFERRAL`.
+              type: integer
+              format: int64
+            programId:
+              description: The ID of the program that each user's share links and referral code should be populated from. Works with `USER`, `USER_REFERRAL`, `REFERRAL`.
+              type: string
+            filter:
+              description: A filter defining which rewards to export. See GraphQL `RewardFilterInput`. Works with `REWARD`.
+              type: object
+            at:
+              description: Optional timestamp for exporting the rewards' states at a specific point in time. Works with `REWARD`.
+              type: integer
+              format: int64
+            fields:
+              description: Settings for which fields are included in the export.
+              type: object
+              properties:
+                includeUserStatsFields:
+                  description: Whether user stats fields should be included. Works with `USER`.
+                  type: boolean
+                  default: false
+                includeUserFields:
+                  description: Whether user fields should be included. Works with `REWARD`.
+                  type: boolean
+                  default: false
+                includeReferralFields:
+                  description: Whether referral fields should be included. Works with `REWARD`.
+                  type: boolean
+                  default: false
+    Export:
+      description: An export record. Includes the original request fields plus the export's `id`, `status`, and timestamps.
+      allOf:
+      - $ref: '#/components/schemas/ExportStub'
+      - properties:
+          id:
+            description: A unique ID used to track the export. Use this to look up the export's status or download it.
+            type: string
+            readOnly: true
+            example: abc123export
+          mailtoEmail:
+            description: Email address to notify when the export completes. Null if not set.
+            type: string
+            nullable: true
+            readOnly: true
+            example: bob.testerson@example.com
+          status:
+            description: The current state of the export. `PENDING` while queued or running, `COMPLETED` when ready to download, `ABORTED` on unrecoverable error, and `EXPIRED` once the file is no longer available.
+            type: string
+            readOnly: true
+            example: COMPLETED
+            enum:
+            - PENDING
+            - COMPLETED
+            - ABORTED
+            - EXPIRED
+          dateCreated:
+            description: Unix timestamp (milliseconds) when the export was requested. Never changes.
+            type: integer
+            format: int64
+            readOnly: true
+            example: 1779871222634
+          dateCompleted:
+            description: Unix timestamp (milliseconds) when the export finished processing and `status` became `COMPLETED`.
+            type: integer
+            format: int64
+            nullable: true
+            readOnly: true
+            example: 1779871250427
+          dateExpires:
+            description: Unix timestamp (milliseconds) when the export will expire and no longer be downloadable.
+            type: integer
+            format: int64
+            nullable: true
+            readOnly: true
+            example: 1782290450427
+    ExportList:
+      description: A paginated list of Export objects.
+      properties:
+        data:
+          type: array
+          description: The exports returned in this page.
+          items:
+            $ref: '#/components/schemas/Export'
+        count:
+          type: integer
+          description: The number of results in this page. See `totalCount` for the total available.
+          example: 2
+        totalCount:
+          type: integer
+          description: The total number of results available across all pages.
+          example: 2
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          nullable: true
+          example: RS042
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+x-default-client: cURL

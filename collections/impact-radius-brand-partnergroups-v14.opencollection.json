@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Brand API - Partner Groups",
+    "version": "v14"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Partner Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/MediaPartnerGroups",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign to retrieve partner groups from."
+              }
+            ]
+          },
+          "docs": "Returns a list of all partner groups for a specific campaign."
+        },
+        {
+          "info": {
+            "name": "Create a Partner Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/MediaPartnerGroups",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign where the group will be created."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Name",
+                  "value": ""
+                },
+                {
+                  "name": "MediaPartners",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Creates a new partner group and optionally adds partners to it."
+        },
+        {
+          "info": {
+            "name": "Get Partner Group Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/MediaPartnerGroups/:PartnerGroupId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign the group belongs to."
+              },
+              {
+                "name": "PartnerGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the partner group."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single partner group, including a list of its member partners."
+        },
+        {
+          "info": {
+            "name": "Update a Partner Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/MediaPartnerGroups/:PartnerGroupId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign the group belongs to."
+              },
+              {
+                "name": "PartnerGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the partner group to update."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "Name",
+                  "value": ""
+                },
+                {
+                  "name": "MediaPartnersAdd",
+                  "value": ""
+                },
+                {
+                  "name": "MediaPartnersRemove",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates a partner group by renaming it, adding partners, or removing partners."
+        },
+        {
+          "info": {
+            "name": "Delete a Partner Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.impact.com/Advertisers/:AccountSID/Campaigns/:CampaignId/MediaPartnerGroups/:PartnerGroupId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the account."
+              },
+              {
+                "name": "CampaignId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the campaign the group belongs to."
+              },
+              {
+                "name": "PartnerGroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the partner group to delete."
+              }
+            ]
+          },
+          "docs": "Deletes a partner group. Partners will no longer be associated with the deleted group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

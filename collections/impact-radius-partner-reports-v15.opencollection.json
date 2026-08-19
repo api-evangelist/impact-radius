@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Reports API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Reports",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all available reports. Only reports with `ApiAccessible: true` can be run programmatically — the rest are UI-only and return a `RunUri` pointing to the impact.com web app."
+        },
+        {
+          "info": {
+            "name": "Run a report (Legacy)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Reports/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+              },
+              {
+                "name": "SUBAID",
+                "value": "10306",
+                "type": "query",
+                "description": "Program ID to scope the report to a single brand. Omit to include all programs you partner with."
+              },
+              {
+                "name": "START_DATE",
+                "value": "2026-01-01",
+                "type": "query",
+                "description": "Start date for the report's date range, in `YYYY-MM-DD` format."
+              },
+              {
+                "name": "END_DATE",
+                "value": "2026-01-31",
+                "type": "query",
+                "description": "End date for the report's date range, in `YYYY-MM-DD` format."
+              },
+              {
+                "name": "RQueryIDx",
+                "value": "",
+                "type": "query",
+                "description": "For reports that return multiple result tables, selects which table to return."
+              }
+            ]
+          },
+          "docs": "Runs a report synchronously and returns the records inline. Page size is fixed at 20,000 rows — for larger datasets use the Report Export endpoint instead.\n\nCall `/Reports/{Id}/MetaData` first to learn which filters the report accepts and which columns it returns. The `Records` array contains one object per row with column names matching the metadata `Attributes`.\n\n**Note:** Starting September 1, 2025, this endpoint enforces stricter page limits. For production workloads against datasets that ma"
+        },
+        {
+          "info": {
+            "name": "Retrieve report metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Reports/:Id/MetaData",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+              }
+            ]
+          },
+          "docs": "Returns the dynamic documentation for a report — the filters it accepts and the attributes (columns) it returns. Call this before running a report to learn its exact contract."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Report Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export a report (asynchronous)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/ReportExport/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports."
+              },
+              {
+                "name": "SUBAID",
+                "value": "10306",
+                "type": "query",
+                "description": "Program ID to scope the report to a single brand. Omit to include all programs you partner with."
+              },
+              {
+                "name": "START_DATE",
+                "value": "2026-01-01",
+                "type": "query",
+                "description": "Start date for the report's date range, in `YYYY-MM-DD` format."
+              },
+              {
+                "name": "END_DATE",
+                "value": "2026-01-31",
+                "type": "query",
+                "description": "End date for the report's date range, in `YYYY-MM-DD` format."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "",
+                "type": "query",
+                "description": "Format for the exported result file."
+              }
+            ]
+          },
+          "docs": "Schedules a background job to export a report. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.\n\nUse this endpoint instead of Run Report for any dataset that may exceed 20,000 rows.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

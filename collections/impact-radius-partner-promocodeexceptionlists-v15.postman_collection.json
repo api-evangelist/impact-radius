@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "a508c560-c63a-42ee-b2b1-ce3509becf0e",
+      "name": "Promo Code Exception Lists",
+      "description": {
+        "content": "Endpoints for retrieving promo code exception list details and items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0dc91f5c-63e6-4347-a3ae-f863aa0c81bb",
+          "name": "Retrieve a Promo Code Exception List",
+          "request": {
+            "name": "Retrieve a Promo Code Exception List",
+            "description": {
+              "content": "Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":PromoCodeExceptionListId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PromoCodeExceptionListId",
+                  "description": "(Required) The unique identifier for the promo code exception list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea92599e-9d11-4303-8c0b-11536e2caf68",
+              "name": "The promo code exception list object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":PromoCodeExceptionListId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PromoCodeExceptionListId",
+                      "description": "(Required) The unique identifier for the promo code exception list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Id\": \"6001\",\n  \"Name\": \"VIP Partner Promo Exclusions\",\n  \"State\": \"ACTIVE\",\n  \"CampaignId\": \"10306\",\n  \"CreatedDate\": \"2024-03-10T09:00:00-08:00\",\n  \"DeactivationDate\": \"1947-11-09T18:26:59.889Z\",\n  \"NumberOfItems\": 5,\n  \"ItemsUri\": \"/Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001/Items\",\n  \"Uri\": \"/Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c56bf190-a2ef-4a2c-bb24-0ae184c77017",
+          "name": "List Promo Code Exception List Items",
+          "request": {
+            "name": "List Promo Code Exception List Items",
+            "description": {
+              "content": "Returns a list of all items in a specific promo code exception list. Each item defines a promo code value that triggers an alternate commission rate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Mediapartners",
+                ":AccountSID",
+                "PromoCodeExceptionLists",
+                ":PromoCodeExceptionListId",
+                "Items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "AccountSID",
+                  "description": "(Required) Unique identifier for the partner account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "PromoCodeExceptionListId",
+                  "description": "(Required) The unique identifier for the promo code exception list whose items are being retrieved."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55238e11-b2dc-4767-af88-e72c60dd6aa1",
+              "name": "A list of promo code exception list item objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Mediapartners",
+                    ":AccountSID",
+                    "PromoCodeExceptionLists",
+                    ":PromoCodeExceptionListId",
+                    "Items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "AccountSID",
+                      "description": "(Required) Unique identifier for the partner account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "PromoCodeExceptionListId",
+                      "description": "(Required) The unique identifier for the promo code exception list whose items are being retrieved."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PromoCodeExceptionListItems\": [\n    {\n      \"Id\": \"1\",\n      \"ListId\": \"6001\",\n      \"Name\": \"Summer Sale Code\",\n      \"Value\": \"SUMMER2026\",\n      \"MatchMode\": \"EQ\",\n      \"CreatedDate\": \"2024-03-10T09:00:00-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001/Items/1\"\n    },\n    {\n      \"Id\": \"1\",\n      \"ListId\": \"6001\",\n      \"Name\": \"Summer Sale Code\",\n      \"Value\": \"SUMMER2026\",\n      \"MatchMode\": \"EQ\",\n      \"CreatedDate\": \"2024-03-10T09:00:00-08:00\",\n      \"Uri\": \"/Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001/Items/1\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.impact.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60447a09-f706-47da-a5d9-40ad78fb13ee",
+    "name": "Partner Promo Code Exception Lists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A promo code exception list allows a brand to pay different commission rates based on the promo code associated with a tracked action. Promo code exception lists are linked to contracts — retrieve the PromoCodeExceptionListId from the Contracts API, then use these endpoints to retrieve the list details and its items.\n\n\nContact Support:\n Name: impact.com Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

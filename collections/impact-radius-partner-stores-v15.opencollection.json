@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partner Stores API",
+    "version": "15"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stores",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Stores",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              }
+            ]
+          },
+          "docs": "Returns a list of all stores available to your partner account."
+        },
+        {
+          "info": {
+            "name": "Retrieve a store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Stores/:Id",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the store."
+              },
+              {
+                "name": "ShowAutoCreatedGroups",
+                "value": "",
+                "type": "query",
+                "description": "When `TRUE` (the default), the response includes groups that impact.com auto-generated for the storefront. Set to `FALSE` to return only brand-curated groups."
+              }
+            ]
+          },
+          "docs": "Retrieves a store's details, including its curated groups."
+        },
+        {
+          "info": {
+            "name": "List items in a store group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Mediapartners/:AccountSID/Stores/:Id/Group/:GroupId/Items",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the partner account."
+              },
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the store containing the group."
+              },
+              {
+                "name": "GroupId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the group whose items you want to list."
+              },
+              {
+                "name": "Query",
+                "value": "",
+                "type": "query",
+                "description": "Narrows the list by attribute (e.g., `CurrentPrice > 10.00`)."
+              }
+            ]
+          },
+          "docs": "Returns the catalog items belonging to the given store and group, sorted by most recently created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

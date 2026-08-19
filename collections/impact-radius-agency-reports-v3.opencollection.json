@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Agency API — Reports",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ReportExport",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Export a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/ReportExport/:ReportId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "ReportId",
+                "value": "agency_action_listing",
+                "type": "path",
+                "description": "The unique ID of the report to export. Use `GET /Reports` to list all reports and find each report's `Id`."
+              },
+              {
+                "name": "ResultFormat",
+                "value": "CSV",
+                "type": "query",
+                "description": "The file format the exported report should be returned in."
+              },
+              {
+                "name": "START_DATE",
+                "value": "2026-05-01",
+                "type": "query",
+                "description": "The start date (inclusive) for the report data, in `YYYY-MM-DD` format. Required by most reports — check the report's `MetaData` to confirm."
+              },
+              {
+                "name": "END_DATE",
+                "value": "2026-05-29",
+                "type": "query",
+                "description": "The end date (inclusive) for the report data, in `YYYY-MM-DD` format. Required by most reports — check the report's `MetaData` to confirm."
+              },
+              {
+                "name": "SUBAID",
+                "value": "12345",
+                "type": "query",
+                "description": "A program (campaign) ID to refine the report to data from a single program. Required for some reports."
+              }
+            ]
+          },
+          "docs": "Schedules a report to be exported asynchronously through impact.com's Jobs system. Returns immediately with the initial job status and three URIs to interact with the job.\n\nUse the returned `QueuedUri` to poll job status, `ResultUri` to download the result file once the job has completed, and `ReplayUri` to re-run the same job.\n\n## Available query parameters\n\n- `ResultFormat` — output file format (universal).\n- Report-specific filters — every report accepts its own set of filter parameters (`STA"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports (Legacy)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Reports",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              }
+            ]
+          },
+          "docs": "Returns the full catalog of reports available to your agency. Each report record indicates whether it is runnable via the API and exposes the URIs to run it synchronously (`ApiRunUri`), export it asynchronously (`DeferredApiRunUri`), or fetch its metadata (`MetaDataUri`)."
+        },
+        {
+          "info": {
+            "name": "Run a report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Reports/:ReportId",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "ReportId",
+                "value": "agency_action_listing",
+                "type": "path",
+                "description": "The unique ID of the report to run."
+              },
+              {
+                "name": "START_DATE",
+                "value": "2026-05-01",
+                "type": "query",
+                "description": "The start date (inclusive) for the report data, in `YYYY-MM-DD` format. Required by most reports."
+              },
+              {
+                "name": "END_DATE",
+                "value": "2026-05-29",
+                "type": "query",
+                "description": "The end date (inclusive) for the report data, in `YYYY-MM-DD` format. Required by most reports."
+              },
+              {
+                "name": "SUBAID",
+                "value": "",
+                "type": "query",
+                "description": "A program (campaign) ID to refine the report."
+              },
+              {
+                "name": "RQueryIDx",
+                "value": "",
+                "type": "query",
+                "description": "For reports with multiple result tables, selects which table to return (0-indexed)."
+              }
+            ]
+          },
+          "docs": "Runs a report and returns the records synchronously.\n\n> **Legacy endpoint.** This endpoint has pagination limits and may be rate-limited or capped on result size. For large datasets, use `GET /ReportExport/{ReportId}` instead, which schedules an asynchronous job and produces a downloadable result file.\n\n## Page size is fixed\n\nAs of October 2023, `/Reports` enforces a fixed `PageSize` of **20,000 records** per response. Any `PageSize` value you pass is silently overridden. For larger datasets, us"
+        },
+        {
+          "info": {
+            "name": "Get report metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.impact.com/Agencies/:AccountSID/Reports/:ReportId/MetaData",
+            "params": [
+              {
+                "name": "AccountSID",
+                "value": "IRq8mWJybvoQ1020978kbj7am8zzM2dBL1",
+                "type": "path",
+                "description": "Your Agency Account SID."
+              },
+              {
+                "name": "ReportId",
+                "value": "agency_action_listing",
+                "type": "path",
+                "description": "The unique ID of the report whose metadata to retrieve."
+              }
+            ]
+          },
+          "docs": "Returns the metadata for a single report — its filters (input parameters) and attributes (output columns). Use this to discover which query parameters a report accepts before running or exporting it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
