@@ -43,6 +43,17 @@ tags:
 - Influencer Marketing
 - Referral Marketing
 - Attribution
+- MarTech
+- Advocate
+- Creator Economy
+- E-Commerce
+tags_raw:
+- Company
+- Partnership Management
+- Affiliate Marketing
+- Influencer Marketing
+- Referral Marketing
+- Attribution
 - Martech
 - Advocate
 - Creator Economy
@@ -134,6 +145,12 @@ apis:
   humanURL: https://integrations.impact.com/partner-api-reference/partner-v15
   baseURL: https://api.impact.com/MediaPartners/
   tags:
+  - Partner
+  - Publishers
+  - Commissions
+  - Tracking Links
+  - Payouts
+  tags_raw:
   - Partner
   - Publisher
   - Commissions
@@ -230,6 +247,12 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
   baseURL: https://app.referralsaasquatch.com/api/v1/
   tags:
+  - Advocate
+  - Referral Marketing
+  - Rewards
+  - GraphQL
+  - Webhook
+  tags_raw:
   - Advocate
   - Referral Marketing
   - Rewards
