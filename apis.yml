@@ -59,240 +59,1938 @@ tags_raw:
 - Creator Economy
 - E-Commerce
 apis:
-- name: impact.com Brand API
-  description: REST API for brands/advertisers to manage programs, partner recruitment and contracts,
-    product catalogs, conversions and action reconciliation, promo codes, deals, reporting and payouts
-    across affiliate and partnership programs. Current version v14 (released 2026-06-01); v13, v12 and
-    v11 remain documented and callable.
+- aid: impact-radius:impact-radius-account-api
+  name: Impact Radius Account API
+  description: The Account API from Impact Radius — 2 operation(s) for account.
   humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   baseURL: https://api.impact.com/Advertisers/
   tags:
-  - Brand
-  - Advertiser
-  - Partnerships
-  - Reporting
-  - Conversions
-  - Catalogs
+  - Account
   properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-account-api-openapi.yml
   - type: APIReference
     url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   - type: ChangeLog
-    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
-  - type: Overlay
-    url: overlays/impact-radius-brand-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-account-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-actioninquiries-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-actions-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-ads-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-calldata-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-catalogs-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-clicks-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-contacts-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-contracts-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-conversions-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-deals-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-deferreddeeplink-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-exceptionlists-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-invoices-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-jobs-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-notes-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-pageload-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-partnergroups-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-partners-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-phonenumbers-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-programs-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-promocodeexceptionlists-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-promocodes-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-reports-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-routingrules-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-submissions-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-tasks-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-trackinglinks-v14.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-brand-trackingvaluerequests-v14.yml
-- name: impact.com Partner API
-  description: REST API for media partners/publishers to access programs and contracts, ads and tracking
-    links, product catalogs and stores, promo codes and promotions, actions and commissions, invoices,
-    tax documents and withdrawal settings, plus inbound Event Notifications. Current version v15.
-  humanURL: https://integrations.impact.com/partner-api-reference/partner-v15
-  baseURL: https://api.impact.com/MediaPartners/
-  tags:
-  - Partner
-  - Publishers
-  - Commissions
-  - Tracking Links
-  - Payouts
-  tags_raw:
-  - Partner
-  - Publisher
-  - Commissions
-  - Tracking Links
-  - Payouts
-  properties:
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
   - type: APIReference
     url: https://integrations.impact.com/partner-api-reference/partner-v15
   - type: ChangeLog
     url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
-  - type: Overlay
-    url: overlays/impact-radius-partner-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-account-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-actioninquiries-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-actions-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-ads-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-campaigns-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-catalogs-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-clicks-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-contracts-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-deals-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-eventnotifications-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-exceptionlists-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-identityverification-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-invoices-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-jobs-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-mediaproperties-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-promo-codes-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-promocodeexceptionlists-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-promotions-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-reports-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-stores-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-taxdocument-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-trackinglinks-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-users-v15.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-partner-withdrawalsettings-v15.yml
-- name: impact.com Agency API
-  description: REST API for agencies managing multiple client brand accounts — advertiser roster, company
-    information, compliance content submission and results, consolidated reporting, and job management.
-    Current version v3.
-  humanURL: https://integrations.impact.com/agency-v3
-  baseURL: https://api.impact.com/Agencies/
-  tags:
-  - Agency
-  - Multi-client
-  - Compliance
-  - Reporting
-  properties:
   - type: APIReference
     url: https://integrations.impact.com/agency-v3
   - type: ChangeLog
     url: https://integrations.impact.com/agency-v3/readme/changelog.md
-  - type: Overlay
-    url: overlays/impact-radius-agency-overlay.yaml
-  - type: OpenAPI
-    url: openapi/impact-radius-agency-advertisers-v3.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-agency-companyinformation-v3.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-agency-compliance-v3.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-agency-jobs-v3.yml
-  - type: OpenAPI
-    url: openapi/impact-radius-agency-reports-v3.yml
-- name: impact.com Advocate API
-  description: REST and GraphQL APIs for Advocate customer-referral programs — participants and accounts,
-    referral codes and share links, referrals, rewards and reward balances, data exports and webhook subscriptions.
-    Served from app.referralsaasquatch.com because Advocate is the productised Referral SaaSquatch acquisition;
-    impact.com publishes that host in its own Advocate REST and GraphQL guides.
-  humanURL: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
-  baseURL: https://app.referralsaasquatch.com/api/v1/
-  tags:
-  - Advocate
-  - Referral Marketing
-  - Rewards
-  - GraphQL
-  - Webhook
-  tags_raw:
-  - Advocate
-  - Referral Marketing
-  - Rewards
-  - GraphQL
-  - Webhooks
-  properties:
   - type: APIReference
     url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
   - type: Documentation
     url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
   - type: GraphQL
     url: graphql/impact-radius-advocate-schema.graphql
-  - type: Overlay
-    url: overlays/impact-radius-advocate-overlay.yaml
   - type: Webhooks
     url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-accounts-api
+  name: Impact Radius Accounts API
+  description: Endpoints for managing partner company account information.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Accounts
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-account-v13.yml
+    url: openapi/impact-radius-accounts-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-action-inquiries-api
+  name: Impact Radius Action Inquiries API
+  description: The Action Inquiries API from Impact Radius — 4 operation(s) for action inquiries.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Action Inquiries
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-export-v13.yml
+    url: openapi/impact-radius-action-inquiries-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-action-updates-api
+  name: Impact Radius Action Updates API
+  description: The Action Updates API from Impact Radius — 2 operation(s) for action updates.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Action Updates
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-referral-v13.yml
+    url: openapi/impact-radius-action-updates-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-actions-api
+  name: Impact Radius Actions API
+  description: The Actions API from Impact Radius — 10 operation(s) for actions.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Actions
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-referralcode-v13.yml
+    url: openapi/impact-radius-actions-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-ads-api
+  name: Impact Radius Ads API
+  description: The Ads API from Impact Radius — 7 operation(s) for ads.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Ads
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-reward-v13.yml
+    url: openapi/impact-radius-ads-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-advertisers-api
+  name: Impact Radius Advertisers API
+  description: Advertiser accounts managed by this agency.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Advertisers
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-rewardbalance-v13.yml
+    url: openapi/impact-radius-advertisers-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-api-submissions-api
+  name: Impact Radius API Submissions API
+  description: The API Submissions API from Impact Radius — 2 operation(s) for api submissions.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - API Submissions
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-sharelinks-v13.yml
+    url: openapi/impact-radius-api-submissions-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-call-data-api
+  name: Impact Radius Call Data API
+  description: The Call Data API from Impact Radius — 1 operation(s) for call data.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Call Data
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-user-v13.yml
+    url: openapi/impact-radius-call-data-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-catalog-items-api
+  name: Impact Radius Catalog Items API
+  description: The Catalog Items API from Impact Radius — 3 operation(s) for catalog items.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Catalog Items
+  properties:
   - type: OpenAPI
-    url: openapi/impact-radius-brand-advocate-webhook-v13.yml
+    url: openapi/impact-radius-catalog-items-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-catalogs-api
+  name: Impact Radius Catalogs API
+  description: The Catalogs API from Impact Radius — 8 operation(s) for catalogs.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-catalogs-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-clickexport-api
+  name: Impact Radius Click Export API
+  description: The ClickExport API from Impact Radius — 2 operation(s) for clickexport.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - ClickExport
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-clickexport-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-clicks-api
+  name: Impact Radius Clicks API
+  description: The Clicks API from Impact Radius — 2 operation(s) for clicks.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Clicks
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-clicks-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-company-information-api
+  name: Impact Radius Company Information API
+  description: Your agency's company profile, addresses, and key contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Company Information
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-company-information-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-compliance-content-api
+  name: Impact Radius Compliance Content API
+  description: Submit content for impact.com compliance monitoring and retrieve job status and results.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Compliance Content
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-compliance-content-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-contacts-api
+  name: Impact Radius Contacts API
+  description: The Contacts API from Impact Radius — 2 operation(s) for contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-contacts-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-contracts-api
+  name: Impact Radius Contracts API
+  description: The Contracts API from Impact Radius — 5 operation(s) for contracts.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-contracts-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-conversions-api
+  name: Impact Radius Conversions API
+  description: The Conversions API from Impact Radius — 1 operation(s) for conversions.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Conversions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-conversions-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-deals-api
+  name: Impact Radius Deals API
+  description: The Deals API from Impact Radius — 4 operation(s) for deals.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Deals
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-deals-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-deferred-deep-linking-api
+  name: Impact Radius Deferred Deep Linking API
+  description: >-
+    The Deferred Deep Linking API from Impact Radius — 1 operation(s) for deferred deep linking.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Deferred Deep Linking
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-deferred-deep-linking-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-event-notifications-api
+  name: Impact Radius Event Notifications API
+  description: >-
+    Inbound webhook payloads that impact.com sends to a partner-configured URL when events occur.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Event Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-event-notifications-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-exception-list-items-api
+  name: Impact Radius Exception List Items API
+  description: >-
+    The Exception List Items API from Impact Radius — 2 operation(s) for exception list items.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Exception List Items
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-exception-list-items-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-exception-lists-api
+  name: Impact Radius Exception Lists API
+  description: The Exception Lists API from Impact Radius — 4 operation(s) for exception lists.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Exception Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-exception-lists-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-export-api
+  name: Impact Radius Export API
+  description: >-
+    Endpoints for working with bulk data exports: create a new export, look up the status of an existing
+    export, download a completed export, and list recent exports.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Export
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-export-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-ftp-submissions-api
+  name: Impact Radius FTP Submissions API
+  description: The FTP Submissions API from Impact Radius — 3 operation(s) for ftp submissions.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - FTP Submissions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-ftp-submissions-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-identity-verification-api
+  name: Impact Radius Identity Verification API
+  description: Endpoint for creating and resuming identity verification sessions.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Identity Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-identity-verification-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-invoices-api
+  name: Impact Radius Invoices API
+  description: The Invoices API from Impact Radius — 6 operation(s) for invoices.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-invoices-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-jobs-api
+  name: Impact Radius Jobs API
+  description: Schedule, monitor, replay, and download large-scale asynchronous jobs.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-jobs-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-legal-entities-api
+  name: Impact Radius Legal Entities API
+  description: The Legal Entities API from Impact Radius — 2 operation(s) for legal entities.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Legal Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-legal-entities-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-media-properties-api
+  name: Impact Radius Media Properties API
+  description: >-
+    Endpoints for listing, creating, retrieving, updating, and deleting partner media properties.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Media Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-media-properties-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-notes-api
+  name: Impact Radius Notes API
+  description: The Notes API from Impact Radius — 2 operation(s) for notes.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-notes-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-open-endpoint-api
+  name: Impact Radius Open Endpoint API
+  description: >-
+    Special methods designed for Client-facing applications like the Mobile and Javascript SDKs.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Open Endpoint
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-open-endpoint-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-page-load-api
+  name: Impact Radius Page Load API
+  description: The Page Load API from Impact Radius — 1 operation(s) for page load.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Page Load
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-page-load-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-partner-groups-api
+  name: Impact Radius Partner Groups API
+  description: The Partner Groups API from Impact Radius — 2 operation(s) for partner groups.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Partner Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-partner-groups-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-partners-api
+  name: Impact Radius Partners API
+  description: The Partners API from Impact Radius — 2 operation(s) for partners.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-partners-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-phone-numbers-api
+  name: Impact Radius Phone Numbers API
+  description: The Phone Numbers API from Impact Radius — 2 operation(s) for phone numbers.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Phone Numbers
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-phone-numbers-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-programs-api
+  name: Impact Radius Programs API
+  description: The Programs API from Impact Radius — 5 operation(s) for programs.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Programs
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-programs-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-promo-code-exception-list-items-api
+  name: Impact Radius Promo Code Exception List Items API
+  description: >-
+    The Promo Code Exception List Items API from Impact Radius — 2 operation(s) for promo code exception
+    list items.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Promo Code Exception List Items
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-promo-code-exception-list-items-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-promo-code-exception-lists-api
+  name: Impact Radius Promo Code Exception Lists API
+  description: >-
+    The Promo Code Exception Lists API from Impact Radius — 4 operation(s) for promo code exception lists.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Promo Code Exception Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-promo-code-exception-lists-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-promo-codes-api
+  name: Impact Radius Promo Codes API
+  description: The Promo Codes API from Impact Radius — 4 operation(s) for promo codes.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Promo Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-promo-codes-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-promotions-api
+  name: Impact Radius Promotions API
+  description: Endpoints for listing and retrieving brand promotions available to your partner account.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Promotions
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-promotions-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-referral-api
+  name: Impact Radius Referral API
+  description: A Referral tracks who has referred whom.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Referral
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-referral-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-referral-code-api
+  name: Impact Radius Referral Code API
+  description: >-
+    Endpoints for working with referral codes: look up a code and its associated reward, or apply a code
+    to a referred account. For background on what referral codes are, see the Referral Code Overview.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Referral Code
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-referral-code-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-report-export-api
+  name: Impact Radius Report Export API
+  description: The Report Export API from Impact Radius — 2 operation(s) for report export.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Report Export
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-report-export-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-reportexport-api
+  name: Impact Radius Report Export API
+  description: >-
+    Asynchronously export reports through impact.com's Jobs system. Recommended for all report downloads.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - ReportExport
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-reportexport-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-reports-api
+  name: Impact Radius Reports API
+  description: List available reports, fetch their metadata, and run them synchronously.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-reports-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-reports-legacy-api
+  name: Impact Radius Reports (Legacy) API
+  description: >-
+    Legacy synchronous reports endpoint. Subject to pagination limits — prefer `ReportExport` for large
+    datasets.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Reports (Legacy)
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-reports-legacy-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-reward-api
+  name: Impact Radius Reward API
+  description: >-
+    A Reward keeps track of a prize, discount or credit that someone has received.
+
+    All reward types other than gift card integrated rewards can be cancelled using the impact.com API,
+    or through the impact.com Admin portal, if they have not already been redeemed.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Reward
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-reward-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-reward-balance-api
+  name: Impact Radius Reward Balance API
+  description: Reward Balances summarizes the Rewards in someone's account.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Reward Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-reward-balance-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-routing-rules-api
+  name: Impact Radius Routing Rules API
+  description: The Routing Rules API from Impact Radius — 2 operation(s) for routing rules.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Routing Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-routing-rules-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-share-links-api
+  name: Impact Radius Share Links API
+  description: >-
+    Endpoints for retrieving the share links of a given user. Share links are organised by engagement
+    medium and share medium. For background on how they work, see the Share Links Overview.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Share Links
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-share-links-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-stores-api
+  name: Impact Radius Stores API
+  description: >-
+    Endpoints for browsing partner storefronts, their groups, and the catalog items inside them.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-stores-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-tasks-api
+  name: Impact Radius Tasks API
+  description: The Tasks API from Impact Radius — 2 operation(s) for tasks.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-tasks-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-tax-documents-api
+  name: Impact Radius Tax Documents API
+  description: Endpoints for creating, completing, and retrieving partner tax documents.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Tax Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-tax-documents-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-tracking-links-api
+  name: Impact Radius Tracking Links API
+  description: The Tracking Links API from Impact Radius — 2 operation(s) for tracking links.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Tracking Links
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-tracking-links-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-tracking-value-requests-api
+  name: Impact Radius Tracking Value Requests API
+  description: >-
+    The Tracking Value Requests API from Impact Radius — 2 operation(s) for tracking value requests.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Tracking Value Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-tracking-value-requests-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-unsubscribed-contacts-api
+  name: Impact Radius Unsubscribed Contacts API
+  description: >-
+    The Unsubscribed Contacts API from Impact Radius — 1 operation(s) for unsubscribed contacts.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Unsubscribed Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-unsubscribed-contacts-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-user-api
+  name: Impact Radius User API
+  description: API for managing users, including creation, lookup, and blocking.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-user-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-users-api
+  name: Impact Radius Users API
+  description: Endpoints for listing and retrieving partner-account users.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-users-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-webhook-api
+  name: Impact Radius Webhook API
+  description: >-
+    Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs,
+    remove existing ones, and send a test event to verify a subscription.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-webhook-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
+- aid: impact-radius:impact-radius-withdrawal-settings-api
+  name: Impact Radius Withdrawal Settings API
+  description: >-
+    Endpoints for retrieving and updating your bank account, PayPal, and payment scheduling settings.
+  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  baseURL: https://api.impact.com/Advertisers/
+  tags:
+  - Withdrawal Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/impact-radius-withdrawal-settings-api-openapi.yml
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
+  - type: ChangeLog
+    url: >-
+      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/partner-api-reference/partner-v15
+  - type: ChangeLog
+    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/agency-v3
+  - type: ChangeLog
+    url: https://integrations.impact.com/agency-v3/readme/changelog.md
+  - type: APIReference
+    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
+  - type: Documentation
+    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
+  - type: GraphQL
+    url: graphql/impact-radius-advocate-schema.graphql
+  - type: Webhooks
+    url: asyncapi/impact-radius-advocate-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/impact-radius-brand-overlay.yaml
+- type: Overlay
+  url: overlays/impact-radius-partner-overlay.yaml
+- type: Overlay
+  url: overlays/impact-radius-agency-overlay.yaml
+- type: Overlay
+  url: overlays/impact-radius-advocate-overlay.yaml
 - type: Website
   url: https://impact.com/
 - type: DeveloperPortal
