@@ -1995,6 +1995,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/impact-radius-capability-edges.yml
+  name: Impact Radius Business Capability Map
 - type: Overlay
   url: overlays/impact-radius-brand-overlay.yaml
 - type: Overlay
