@@ -3,7 +3,7 @@ provider: Impact Radius
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Media, Entertainment & Telecom Content
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,82 +11,28 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 8
+edge_count: 2
 edges:
 - tag: Partners
   spec_file: impact-radius-partners-api-openapi.yml
   capability_id: BC-410.60
   capability_id_l1: BC-410
   capability_name: Channel Sales Management
-  confidence: 0.85
-  evidence: API for managing partner accounts in your program. This includes viewing partner information,
-    updating certain attributes, and creating new direct partner accounts.
-  reason: Lifecycle management of affiliate/media partner accounts — indirect channel sales management.
-- tag: Promotions
-  spec_file: impact-radius-promotions-api-openapi.yml
-  capability_id: BC-440.30
-  capability_id_l1: BC-440
-  capability_name: Discount & Promotion Management
-  confidence: 0.8
-  evidence: discover limited-time offers from the brands you partner with — sales, coupon codes, seasonal
-    campaigns — and surface them to your audience
-  reason: Retrieval of promotional offers (sales, coupon codes, seasonal campaigns) for distribution —
-    promotion management.
-- tag: Webhook
-  spec_file: impact-radius-webhook-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
-  confidence: 0.8
-  evidence: createWebhook  Create a webhook subscription ... testWebhook  Test a webhook subscription
-  reason: Lifecycle of outbound webhook/event subscriptions exposed to integrators maps directly to the
-    named Webhook & Event Subscription Management capability.
-- tag: Page Load
-  spec_file: impact-radius-page-load-api-openapi.yml
-  capability_id: BC-400.60
-  capability_id_l1: BC-400
-  capability_name: Digital Marketing Management
   confidence: 0.75
-  evidence: tracking page load and app open events, which can be used to attribute credit for a conversion
-    that results from a partner driving traffic
-  reason: Marketing attribution tracking of web/app traffic driven by partners — digital marketing measurement,
-    not product telemetry for a SaaS product.
-- tag: Ads
-  spec_file: impact-radius-ads-api-openapi.yml
-  capability_id: BC-400.60
-  capability_id_l1: BC-400
-  capability_name: Digital Marketing Management
-  confidence: 0.7
-  evidence: POST /Advertisers/{AccountSID}/Ads createAd "Create an Ad"; GET .../Ads/{Id}/TrackingLink
-    "Retrieve an Ad's Tracking Link"
-  reason: Operations manage advertising creatives and their served code/iframe/tracking links for an affiliate
-    program — digital advertising asset management, i.e. digital marketing execution rather than any IT
-    or product capability.
-- tag: Open Endpoint
-  spec_file: impact-radius-open-endpoint-api-openapi.yml
-  capability_id: BC-420.10
-  capability_id_l1: BC-420
-  capability_name: Customer Data Management
-  confidence: 0.7
-  evidence: Users are the people in your program. In other places a User might also be called a Contact,
-    Lead or Participant... Referral code, Share links, Custom fields
-  reason: CRUD/upsert of program participant records (contacts) including referral codes — customer/participant
-    master data management. Tag name 'Open Endpoint' is technical but the operations manage user records.
-- tag: Partner Groups
-  spec_file: impact-radius-partner-groups-api-openapi.yml
-  capability_id: BC-410.60
-  capability_id_l1: BC-410
-  capability_name: Channel Sales Management
-  confidence: 0.7
-  evidence: API for managing Media Partner Groups, which are private, custom groups used to organize and
-    label partners within your account.
-  reason: Organising and segmenting media/affiliate partners is part of indirect channel partner management.
+  evidence: '"API for managing partner accounts in your program. This includes viewing partner information,
+    updating certain attributes, and creating new direct partner accounts."; POST /Advertisers/{AccountSID}/MediaPartners
+    "Create a Direct Partner"'
+  reason: Lifecycle management of affiliate/media partner accounts in a brand's partnership program —
+    administration of indirect channel partners. Some overlap with supplier onboarding since partners
+    are paid, but the affiliate context makes channel sales the better fit.
 - tag: Users
   spec_file: impact-radius-users-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
   confidence: 0.7
-  evidence: List users to audit who currently has access and at what permission level
-  reason: Operations expose account users, states and access rights (roles/permissions) for access auditing
-    — identity and access administration, not a customer-facing business object.
+  evidence: '"Users represent the individual people who have access to your impact.com partner account.
+    Each user has a state, a language preference, and a set of access rights — roles grouped with the
+    specific permissions granted under each role" ... schema "AccessRight"'
+  reason: Auditing who has account access and at what permission level is identity and access management,
+    not customer data. Read-only surface limits confidence somewhat.
