@@ -1,0 +1,1203 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Contracts API
+  version: '1.0'
+  description: 'Operations tagged Contracts across 2 of this provider''s published API definitions: impact-radius-brand-contracts-v14.yml, impact-radius-partner-contracts-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Contracts
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contracts:
+    get:
+      summary: List All Contracts
+      description: Returns a list of your contracts for a specific campaign, with options for filtering. If no status is specified, only ACTIVE contracts are returned.
+      operationId: listContracts
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1000
+      - name: DateLastUpdatedBefore
+        in: query
+        description: Return contracts updated before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdatedAfter
+        in: query
+        description: Return contracts updated after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateBefore
+        in: query
+        description: Return contracts that start before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: StartDateAfter
+        in: query
+        description: Return contracts that start after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateBefore
+        in: query
+        description: Return contracts that end before a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDateAfter
+        in: query
+        description: Return contracts that end after a specific date and time (ISO-8601).
+        schema:
+          type: string
+          format: date-time
+      - name: PartnerId
+        in: query
+        description: Return contracts for a specific partner.
+        schema:
+          type: integer
+      - name: Signatory
+        in: query
+        description: Return contracts with a particular brand or partner signatory.
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Return contracts with a specific status. Defaults to ACTIVE if not specified.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - DECLINED
+          - EXPIRED
+          - PENDING
+          - UPCOMING
+      - name: TemplateId
+        in: query
+        description: Return contracts sourced from a specific Template Terms ID.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A paginated list of contract objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Contracts:
+                    type: array
+                    description: The list of contract objects.
+                    items:
+                      $ref: '#/components/schemas/Contract'
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contracts/{ContractId}:
+    get:
+      summary: Get Contract Details
+      description: Retrieves the object of an existing contract, including details on any associated Creator, Performance, or Product Boost campaigns.
+      operationId: getContractById
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 1000
+      - name: ContractId
+        in: path
+        required: true
+        description: The unique identifier for the contract.
+        schema:
+          type: string
+          example: S-7777777
+      responses:
+        '200':
+          description: A single contract object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/Contracts:
+    post:
+      summary: Accept a Pending Contract
+      description: 'Accepts a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently waiting to be actioned, filter your contract list with the `Status=PENDING` parameter.
+
+
+        ## Decision precedence and conflict handling
+
+
+        You can accept a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.
+
+
+        ### The "first-in" rule
+
+
+        - **Finality**: Once you accept a contract proposal through any channel, that decision is final.
+
+        - **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.
+
+        '
+      operationId: acceptContract
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your account SID.
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier of the program the contract belongs to.
+        schema:
+          type: integer
+          example: 8575
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptContractRequest'
+            example:
+              contractId: P-25070000
+              groupId: '1234'
+      responses:
+        '200':
+          description: The contract was successfully accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractDecisionResponse'
+              example:
+                Status: OK
+        '400':
+          description: Bad request. The `contractId` may be missing or malformed.
+        '404':
+          description: Contract or program not found.
+        '409':
+          description: A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.
+    delete:
+      summary: Decline a Pending Contract
+      description: 'Declines a pending partner contract proposal. Use this endpoint by passing the program and contract IDs. To identify contracts currently awaiting action, filter your contract list with the `Status=PENDING` parameter.
+
+
+        ## Decision precedence and conflict handling
+
+
+        You can decline a contract proposal using multiple channels — the Applications UI, automated workflows, or impact ai — while an API request is in flight.
+
+
+        ### The "first-in" rule
+
+
+        - **Finality**: Once you decline a contract proposal through any channel, that decision is final.
+
+        - **Conflict resolution**: If multiple determinations are submitted for the same `contractId`, the system honors the first determination received based on the server timestamp. All subsequent or conflicting submissions are ignored.
+
+        '
+      operationId: declineContract
+      tags:
+      - Contracts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your account SID.
+        schema:
+          type: string
+          example: IRATkFHXxJ27tnkWnkS3
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier of the program the contract belongs to.
+        schema:
+          type: integer
+          example: 8575
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineContractRequest'
+            example:
+              contractId: P-25070000
+              reason: Incompatible Content
+              groupId: '1234'
+      responses:
+        '200':
+          description: The contract was successfully declined.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractDecisionResponse'
+              example:
+                Status: OK
+        '400':
+          description: Bad request. The `contractId` may be missing or malformed.
+        '404':
+          description: Contract or program not found.
+        '409':
+          description: A decision for this contract has already been recorded. The first-in rule applies — the original determination is honored.
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Contracts:
+    get:
+      operationId: listContracts
+      tags:
+      - Contracts
+      summary: List Contracts
+      description: Returns a list of all contracts associated with your partner account.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Filters contracts by the campaign they belong to.
+      - name: Status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - DECLINED
+          - EXPIRED
+          - PENDING
+          - UPCOMING
+        description: Return contracts with a specific status. If omitted, only contracts where Status is ACTIVE are returned.
+      - name: Signatory
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Return contracts with a particular signatory. Matches against both BrandSignatory and PartnerSignatory.
+      - name: DateLastUpdatedBefore
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts last updated before a specific date and time (ISO 8601).
+      - name: DateLastUpdatedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts last updated after a specific date and time (ISO 8601).
+      - name: StartDateBefore
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts that start before a specific date and time (ISO 8601).
+      - name: StartDateAfter
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts that start after a specific date and time (ISO 8601).
+      - name: EndDateBefore
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts that end before a specific date and time (ISO 8601).
+      - name: EndDateAfter
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return contracts that end after a specific date and time (ISO 8601).
+      responses:
+        '200':
+          description: A list of contract objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Contracts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contract_2'
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Contracts/{Id}:
+    get:
+      operationId: retrieveContract
+      tags:
+      - Contracts
+      summary: Retrieve a Contract
+      description: '''Retrieves the full details of an existing contract using its unique
+
+
+        **Note:** To retrieve `ScheduledTerms` and `CampaignTerms` objects, either upgrade your API version to the latest or append `?IrVersion=15` to your cURL request.
+
+        ID, including complete campaign-level term overrides. The `PdfUri` field in
+
+        the response can be used to download a PDF copy of the contract.''
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the contract.
+      responses:
+        '200':
+          description: The contract object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract_2'
+    servers:
+    - url: https://api.impact.com
+components:
+  schemas:
+    AcceptContractRequest:
+      type: object
+      required:
+      - contractId
+      properties:
+        contractId:
+          type: string
+          description: The unique identifier of the pending contract to accept.
+          example: P-25070000
+        groupId:
+          type: string
+          description: 'The unique identifier of the partner group to which the accepted partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    EventPayout:
+      type: object
+      properties:
+        EventTypeId:
+          type: integer
+          description: Unique identifier for the event type.
+          example: 18500
+        EventTypeName:
+          type: string
+          description: Display name of the event type.
+          example: Online Sale
+        EventCategory:
+          type: string
+          description: Category of the event (e.g., SALE, LEAD, CLICK).
+          example: SALE
+        DefaultPayout:
+          type: number
+          format: decimal
+          description: Default flat payout amount for the event.
+          example: 10.0
+        DefaultPayoutRate:
+          type: number
+          format: decimal
+          description: Default percentage payout rate for the event.
+          example: 15
+        PayoutLevel:
+          type: string
+          description: Whether payout is calculated per item, order, click, or call.
+          enum:
+          - ITEM
+          - ORDER
+          - CLICK
+          - CALL
+          example: ITEM
+        PayoutGroups:
+          type: array
+          description: Conditional payout groups for this event type.
+          items:
+            $ref: '#/components/schemas/PayoutGroup'
+    PromotionalTerm:
+      type: object
+      properties:
+        TermsName:
+          type: string
+          description: The display name of the promotional term.
+          example: Custom Terms
+        TermsType:
+          type: string
+          description: Category of promotional term.
+          enum:
+          - CUSTOM
+          - EMAIL
+          - COPYWRITING
+          - PAID_SEARCH
+          - SEO
+          - TRADEMARK
+          - APPROVAL
+          example: CUSTOM
+        TermsContent:
+          type: string
+          description: The text content of the promotional term.
+          example: <p>Custom promotional terms content.</p>
+        TermsPdfUri:
+          type: string
+          format: uri-reference
+          nullable: true
+          description: The URI to a PDF version of the promotional terms, if available.
+    PayoutGroup:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: ab12c3d4-5e6f-7g89-01h2-345ijk6lmn78
+          description: Select the option that best describes how you use impact.com
+        Rank:
+          type: integer
+          example: 1
+        Rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+        Payout:
+          type: number
+          format: decimal
+          example: 1.0
+        PayoutRate:
+          type: integer
+          example: 15
+        Limits:
+          type: array
+          items:
+            type: object
+        Tiers:
+          type: array
+          items:
+            type: object
+    CampaignTerm:
+      type: object
+      properties:
+        Name:
+          type: string
+          example: Product Boost Campaign 1
+        Id:
+          type: string
+          example: '1234'
+          description: Select the option that best describes how you use impact.com
+        StartDate:
+          type: string
+          format: date-time
+          example: '2025-03-28T00:00:00-07:00'
+        EndDate:
+          type: string
+          format: date-time
+          example: '2025-03-29T00:00:00-07:00'
+        EventPayouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventPayout'
+    TemplateTerms:
+      type: object
+      properties:
+        TemplateId:
+          type: integer
+          description: Unique identifier for the template terms.
+          example: 99999
+        VersionId:
+          type: integer
+          description: Version number of the template terms.
+          example: 6
+        Name:
+          type: string
+          description: Display name for the template terms.
+          example: ACME Public Terms
+        Labels:
+          type: array
+          description: Labels assigned to these template terms.
+          items:
+            type: string
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for payouts.
+          example: USD
+        EventPayouts:
+          type: array
+          description: Payout configurations per event type.
+          items:
+            $ref: '#/components/schemas/EventPayout'
+        PromotionalTerms:
+          type: array
+          description: Additional promotional terms attached to the contract.
+          items:
+            $ref: '#/components/schemas/PromotionalTerm'
+    Rule:
+      type: object
+      properties:
+        Variable:
+          type: string
+          example: CUSTOMER_COUNTRY
+        Operator:
+          type: string
+          example: IS
+        Values:
+          type: array
+          items:
+            type: string
+    DeclineContractRequest:
+      type: object
+      required:
+      - contractId
+      properties:
+        contractId:
+          type: string
+          description: The unique identifier of the pending contract to decline.
+          example: P-25070000
+        reason:
+          type: string
+          description: A human-readable explanation for why the contract proposal was declined.
+          example: Incompatible Content
+        groupId:
+          type: string
+          description: 'The unique identifier of the partner group to which the declined partner will be added. Provide multiple IDs as a comma-separated string if adding to more than one group.
+
+            '
+          example: '1234'
+    Contract:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the contract.
+          example: S-7777777
+        PartnerId:
+          type: integer
+          description: The unique identifier of the partner the contract is with.
+          example: 10000
+        PartnerValue1:
+          type: string
+          description: A custom value associated with the partner.
+          example: ''
+        Status:
+          type: string
+          description: The current status of the contract.
+          enum:
+          - ACTIVE
+          - EXPIRED
+          example: ACTIVE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the contract becomes active.
+          example: '2021-01-20T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the contract expires. Null for open-ended contracts.
+          example: ''
+        BrandSignatory:
+          type: string
+          description: The name of the brand representative who signed the contract.
+          example: Justin Case
+        BrandSignatoryDate:
+          type: string
+          format: date-time
+          description: The date and time the brand signed the contract.
+          example: '2021-01-19T23:51:01-08:00'
+        PartnerSignatory:
+          type: string
+          description: The name of the partner representative who signed the contract.
+          example: Partner Person
+        PartnerSignatoryDate:
+          type: string
+          format: date-time
+          description: The date and time the partner signed the contract.
+          example: '2021-01-19T23:51:01-08:00'
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time the contract was created.
+          example: '2021-01-19T23:51:01-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the contract was last updated.
+          example: '2021-01-19T23:51:01-08:00'
+        TemplateTerms:
+          $ref: '#/components/schemas/TemplateTerms'
+          description: The template terms underlying this contract.
+        ScheduledTerms:
+          type: array
+          description: Time-bounded scheduled term overrides for this contract.
+          items:
+            $ref: '#/components/schemas/ScheduledTerm'
+        CampaignTerms:
+          type: array
+          description: Additional terms specific to creator, performance, or product boost campaigns.
+          items:
+            $ref: '#/components/schemas/CampaignTerm'
+        HasCampaignTerms:
+          type: boolean
+          description: Indicates whether the contract has associated campaign terms.
+          example: true
+        PdfUri:
+          type: string
+          format: uri-reference
+          description: The URI to download the contract as a PDF.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contracts/S-7777777/Download
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this contract in the impact.com API.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contracts/S-7777777
+    ContractDecisionResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the decision was successfully recorded.
+          enum:
+          - OK
+          example: OK
+    ScheduledTerm:
+      type: object
+      properties:
+        Status:
+          type: string
+          enum:
+          - ACTIVE
+          - PENDING
+          - UPCOMING
+          - DECLINED
+          - EXPIRED
+          example: ACTIVE
+        Name:
+          type: string
+          example: Black Friday Special Rates
+        StartDate:
+          type: string
+          format: date-time
+          example: '2026-11-27T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          example: '2026-11-30T23:59:59-08:00'
+        Repeat:
+          type: object
+          properties:
+            Days:
+              type: array
+              items:
+                type: string
+                format: date
+            StartTime:
+              type: string
+              format: time
+              example: 09:00:00
+            EndTime:
+              type: string
+              format: time
+              example: 61200
+        EventPayouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventPayout'
+    PayoutScheduling:
+      type: object
+      description: Rules governing when a locked action is scheduled for payout.
+      properties:
+        Basis:
+          type: string
+          description: The basis for the payout schedule (e.g., LOCKED, CLEARED).
+          example: LOCKED
+        Period:
+          type: string
+          description: The payout period frequency (e.g., END_OF_DAY, END_OF_WEEK, END_OF_MONTH).
+          example: END_OF_DAY
+    EventPayout_2:
+      type: object
+      description: Payout rules for a specific tracked event type.
+      properties:
+        EventTypeId:
+          type: string
+          description: Unique identifier for the event type (action tracker).
+          example: '18503'
+        EventTypeName:
+          type: string
+          description: Display name of the event type.
+          example: Online Sale
+        EventCategory:
+          type: string
+          description: Category of the event (e.g., SALE, LEAD, CLICK).
+          example: SALE
+        DefaultPayoutRate:
+          type: string
+          description: The default payout rate applied when no adjustment rules are matched.
+          example: '0'
+        PayoutLevel:
+          type: string
+          description: Whether the payout is calculated at the order level or per item (e.g., ORDER, ITEM).
+          example: ITEM
+        DefaultPayout:
+          type: string
+          format: decimal
+          description: Default payout amount for events of this type, before any adjustments.
+        PayoutGroups:
+          type: array
+          description: Conditional payout groups that apply different rates based on rule matches. Returned only when ?IrVersion=15 or later is used.
+          items:
+            $ref: '#/components/schemas/PayoutGroup_2'
+        PayoutRestrictions:
+          type: array
+          description: Conditional restrictions that prevent payout when their rules match.
+          items:
+            $ref: '#/components/schemas/PayoutRestriction'
+        Limits:
+          type: array
+          description: Payout caps that limit how much the partner can earn for this event type within a period.
+          items:
+            $ref: '#/components/schemas/Limit'
+        PayoutAdjustments:
+          type: array
+          description: Conditional rules that adjust the default payout rate up or down.
+          items:
+            $ref: '#/components/schemas/PayoutAdjustment'
+        PerformanceBonus:
+          $ref: '#/components/schemas/PerformanceBonus'
+          description: Tiered bonus payout that activates when a revenue or action threshold is reached.
+        Locking:
+          $ref: '#/components/schemas/Locking'
+          description: Rules governing when an action locks and can no longer be modified.
+        PayoutScheduling:
+          $ref: '#/components/schemas/PayoutScheduling'
+          description: Rules governing when a locked action is scheduled for payout.
+        CreditPolicy:
+          type: string
+          description: Attribution policy determining which partner receives credit for the conversion (e.g., LAST_REFERRER, FIRST_REFERRER).
+          example: LAST_REFERRER
+        ValidReferrals:
+          type: array
+          description: The referral types and attribution windows that qualify for credit.
+          items:
+            $ref: '#/components/schemas/ValidReferral'
+    CampaignTermEventPayout:
+      type: object
+      description: Payout rules for a specific event type within a campaign term.
+      properties:
+        EventTypeId:
+          type: string
+          description: Unique identifier for the event type this payout applies to.
+          example: '18503'
+        PayoutLevel:
+          type: string
+          description: Whether the payout is calculated at the order level or per item (e.g., ORDER, ITEM).
+          example: ITEM
+        PayoutGroups:
+          type: array
+          description: Ordered groups of item-matching rules and their associated payout rates.
+          items:
+            $ref: '#/components/schemas/PayoutGroup_2'
+    PayoutAdjustment:
+      type: object
+      description: A conditional rule that adjusts the default payout rate.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the payout adjustment rule.
+          example: 8c281c2e-f61e-4b11-a9f9-9be38c79fe9e
+        Rules:
+          type: array
+          description: Conditions that must be met for this adjustment to apply.
+          items:
+            $ref: '#/components/schemas/Rule_2'
+        Direction:
+          type: string
+          description: Whether this adjustment increases or decreases the payout (INCREASE, DECREASE).
+          example: INCREASE
+        Rate:
+          type: string
+          description: The adjustment rate applied to the payout when conditions are met.
+          example: '0'
+    SpecialTerm:
+      type: object
+      description: A special term or condition appended to the contract.
+      properties:
+        TermsName:
+          type: string
+          description: Display name of the special term.
+          example: Custom Terms
+        TermsType:
+          type: string
+          description: The type of special term (e.g., CUSTOM, PROMOTIONAL_RESTRICTION).
+          example: CUSTOM
+        TermsContent:
+          type: string
+          description: The full text or HTML content of the special term.
+          example: <p>Custom terms and conditions content.</p>
+    PerformanceBonus:
+      type: object
+      description: Tiered bonus payout that activates when a revenue or action threshold is reached.
+      properties:
+        Type:
+          type: string
+          description: The type of performance bonus (e.g., SUBSEQUENT_ACTIONS, ALL_ACTIONS).
+          example: SUBSEQUENT_ACTIONS
+        Basis:
+          type: string
+          description: The metric used to measure performance (e.g., REVENUE, ACTIONS).
+          example: REVENUE
+        Period:
+          type: string
+          description: The time period over which performance is measured (e.g., CALENDAR_MONTH, CALENDAR_YEAR).
+          example: CALENDAR_MONTH
+        Tiers:
+          type: array
+          description: The threshold tiers and their associated bonus payout rates.
+          items:
+            $ref: '#/components/schemas/PerformanceBonusTier'
+    PayoutGroup_2:
+      type: object
+      description: A ranked group of item-matching rules with an associated payout rate.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the payout group.
+          example: 94bc1ae3-5f77-4e63-a862-3bbcf7f085dd
+        Rank:
+          type: string
+          description: The priority rank of this group. Lower ranks are evaluated first.
+          example: '1'
+        Rules:
+          type: array
+          description: Item-matching conditions that must be met for this group's payout to apply.
+          items:
+            $ref: '#/components/schemas/Rule_2'
+        PayoutRate:
+          type: string
+          description: Percentage payout rate applied when the group matches.
+          example: '15'
+        Payout:
+          type: string
+          format: decimal
+          description: Fixed payout amount applied when the group matches. Either PayoutRate or Payout is returned, not both.
+          example: '0.10'
+        Limits:
+          type: array
+          description: Payout caps that limit this group's earnings within a period.
+          items:
+            $ref: '#/components/schemas/Limit'
+    PerformanceBonusTier:
+      type: object
+      description: A single threshold tier within a performance bonus structure.
+      properties:
+        RevenueThreshold:
+          type: string
+          description: The revenue amount that must be reached to unlock this tier's bonus rate.
+          example: '1000000.00'
+        PayoutRate:
+          type: string
+          description: The bonus payout rate applied once the revenue threshold is reached.
+          example: '0'
+    CampaignTerm_2:
+      type: object
+      description: A campaign-level payout term override applied on top of the base contract terms.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the campaign term.
+          example: '3578'
+        Name:
+          type: string
+          description: Display name of the campaign term.
+          example: ForgeMaster Anvils at Acme SuperCenter - Product Boost
+        StartDate:
+          type: string
+          format: date-time
+          description: Date and time the campaign term becomes effective (ISO 8601).
+          example: '2025-08-16T00:00:00-07:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: Date and time the campaign term expires (ISO 8601).
+          example: '2029-08-31T23:59:59-07:00'
+        EventPayouts:
+          type: array
+          description: Item-level payout rules applied by this campaign term.
+          items:
+            $ref: '#/components/schemas/CampaignTermEventPayout'
+    Terms:
+      type: object
+      description: The payout terms defined in the contract.
+      properties:
+        TemplateTermName:
+          type: string
+          description: Display name of the payout template these terms are based on.
+          example: ScheduledTerms Test
+        Currency:
+          type: string
+          description: ISO 4217 currency code for payouts under this contract.
+          example: USD
+        TemplateId:
+          type: string
+          description: Unique identifier of the contract template the terms are based on.
+        VersionId:
+          type: string
+          description: Version identifier of the contract template revision used.
+        Name:
+          type: string
+          description: Display name of the terms.
+        Labels:
+          type: array
+          description: Brand-applied labels grouping the contract by traits like commission tier.
+          items:
+            type: string
+        EventPayouts:
+          type: array
+          description: Payout rules for each tracked event type.
+          items:
+            $ref: '#/components/schemas/EventPayout_2'
+        SpecialTermsList:
+          type: array
+          description: Any special terms or conditions appended to the contract.
+          items:
+            $ref: '#/components/schemas/SpecialTerm'
+        ChangeNotificationPeriod:
+          type: string
+          description: Number of days advance notice required before the brand can modify the contract terms.
+          example: '0'
+        ReturnPolicy:
+          type: string
+          description: The return policy applied to this contract (e.g., ALWAYS_OK, NO_RETURNS).
+          example: ALWAYS_OK
+        MaxReturnPercentage:
+          type: string
+          description: The maximum percentage of actions that can be reversed as returns.
+          example: '100'
+        CustomCreativePayer:
+          type: string
+          description: Who pays for custom creative assets (e.g., ADVERTISER, PUBLISHER).
+          example: ADVERTISER
+        ActionLimit:
+          type: string
+          description: Maximum number of actions allowed before payouts cap, per ActionLimitPeriod.
+        ActionLimitPeriod:
+          type: string
+          description: Period over which ActionLimit is measured (e.g., DAY, WEEK, MONTH).
+        SpendLimit:
+          type: string
+          format: decimal
+          description: Maximum spend allowed before payouts cap, per SpendLimitPeriod.
+        SpendLimitPeriod:
+          type: string
+          description: Period over which SpendLimit is measured (e.g., DAY, WEEK, MONTH).
+        MinEarningPerClick:
+          type: string
+          format: decimal
+          description: Minimum earnings per click guaranteed by the contract.
+        ContractStartSlottingFee:
+          type: string
+          format: decimal
+          description: Slotting fee paid at the start of the contract.
+    Rule_2:
+      type: object
+      description: A single condition within a payout adjustment or payout group.
+      properties:
+        Variable:
+          type: string
+          description: The attribute being evaluated (e.g., DERIVED_BROWSER, CUSTOMER_STATUS, ITEM_SKU, ITEM_CATEGORY).
+          example: CUSTOMER_STATUS
+        Operator:
+          type: string
+          description: The comparison operator (e.g., IS, IS_NOT, CONTAINS).
+          example: IS
+        Values:
+          type: array
+          description: The values to compare against.
+          items:
+            type: string
+          example:
+          - EXISTING
+    Contract_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the contract.
+          example: S-37085294
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign this contract is associated with.
+          example: '10306'
+        Status:
+          type: string
+          description: The current status of the contract (e.g., ACTIVE, PENDING, EXPIRED, TERMINATED).
+          example: ACTIVE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the contract becomes effective (ISO 8601).
+          example: '2026-03-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the contract expires (ISO 8601). Empty if the contract has no end date.
+          example: ''
+        BrandSignatory:
+          type: string
+          description: Name of the brand representative who signed the contract.
+          example: Robin Banks
+        BrandSignatoryDate:
+          type: string
+          format: date-time
+          description: Date and time the brand signatory signed the contract (ISO 8601).
+          example: '2026-02-28T23:51:22-08:00'
+        PartnerSignatory:
+          type: string
+          description: Name of the partner representative who signed the contract.
+          example: Carrie Oakey
+        PartnerSignatoryDate:
+          type: string
+          format: date-time
+          description: Date and time the partner signatory signed the contract (ISO 8601).
+          example: '2026-02-28T23:51:22-08:00'
+        DateCreated:
+          type: string
+          format: date-time
+          description: Date and time the contract was created (ISO 8601).
+          example: '2026-02-28T23:51:22-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the contract was last updated (ISO 8601).
+          example: '2026-02-28T23:51:22-08:00'
+        Terms:
+          $ref: '#/components/schemas/Terms'
+          description: The payout terms defined in this contract.
+        HasCampaignTerms:
+          type: boolean
+          description: Whether this contract includes campaign-level term overrides. Returned by List Contracts. Use Retrieve a Contract to get the full CampaignTerms details.
+          example: true
+        CampaignTerms:
+          type: array
+          description: Campaign-level payout term overrides applied on top of the base contract terms. Returned by Retrieve a Contract only.
+          items:
+            $ref: '#/components/schemas/CampaignTerm_2'
+        PdfUri:
+          type: string
+          description: API resource path for downloading a PDF copy of the contract.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Contracts/S-37085294/Download
+        Uri:
+          type: string
+          description: Unique reference to the contract object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Contracts/S-37085294
+    Locking:
+      type: object
+      description: Rules governing when an action locks and can no longer be modified.
+      properties:
+        Basis:
+          type: string
+          description: The basis for the locking schedule (e.g., TRACKED, CLEARED).
+          example: TRACKED
+        Period:
+          type: string
+          description: The unit of the locking period (e.g., MONTH, DAY).
+          example: MONTH
+        MonthOffset:
+          type: string
+          description: Number of months after the basis date before locking occurs.
+          example: '1'
+        DayOffset:
+          type: string
+          description: Number of days after the month offset before locking occurs.
+          example: '0'
+    Limit:
+      type: object
+      description: A cap on payouts within a period.
+      properties:
+        Type:
+          type: string
+          description: What is being limited (e.g., ACTION, PAYOUT).
+        Value:
+          type: string
+          description: The numeric limit value.
+        LimitBy:
+          type: string
+          description: Dimension the limit applies to (e.g., CUSTOMER, ITEM).
+        Period:
+          type: string
+          description: Time period over which the limit resets (e.g., DAY, MONTH).
+        WeekendOverrideValue:
+          type: string
+          description: Override value applied on weekends.
+    ValidReferral:
+      type: object
+      description: A referral type and attribution window that qualifies for conversion credit.
+      properties:
+        Type:
+          type: string
+          description: The type of referral that qualifies (e.g., CLICKS, IMPRESSIONS).
+          example: CLICKS
+        Window:
+          type: string
+          description: The length of the attribution window.
+          example: '30'
+        WindowUnit:
+          type: string
+          description: The unit of the attribution window (e.g., DAY, HOUR).
+          example: DAY
+    PayoutRestriction:
+      type: object
+      description: A rule that prevents payout for an action when its conditions match.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of this payout restriction.
+        Rules:
+          type: array
+          description: Conditions that must all match for the restriction to apply.
+          items:
+            $ref: '#/components/schemas/Rule_2'
+        ZeroPayoutHideReport:
+          type: string
+          description: Whether to hide the action from reports when payout is zero due to this restriction.
+x-refined-from:
+- impact-radius-brand-contracts-v14.yml
+- impact-radius-partner-contracts-v15.yml

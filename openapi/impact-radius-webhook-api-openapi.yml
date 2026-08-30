@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: impact.com Webhook API
+  description: API for managing Webhook subscriptions.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+tags:
+- name: Webhook
+  description: 'Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs, remove existing ones, and send a test event to verify a subscription.
+
+    '
+paths:
+  /{tenant_alias}/subscription:
+    post:
+      summary: Create a webhook subscription
+      description: Subscribes a URL to receive events via webhooks.
+      operationId: createWebhook
+      tags:
+      - Webhook
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details of the endpoint to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookEndpoint'
+      responses:
+        '201':
+          description: Webhook endpoint created
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/subscription' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    get:
+      summary: List webhook subscriptions
+      description: Lists all the URLs that are currently subscribed to receive events via webhooks.
+      operationId: listWebhooks
+      tags:
+      - Webhook
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of endpoints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookEndpoint'
+              example:
+              - endpointUrl: https://example.com/hook
+                name: Zapier
+                source: MANUAL
+                webhookTypes:
+                - '*'
+              - endpointUrl: https://another.example.com/hook
+                name: Example
+                source: MANUAL
+                webhookTypes:
+                - '*'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/subscription' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/subscription/{url}:
+    delete:
+      summary: Delete a webhook subscription
+      description: Removes a URL from receiving events via webhooks.
+      operationId: deleteWebhook
+      tags:
+      - Webhook
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: url
+        in: path
+        description: The url of the endpoint that will be removed. URL-encode this field.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Endpoint deleted
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request DELETE \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/subscription/{url}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/subscription/{url}/test:
+    post:
+      summary: Test a webhook subscription
+      description: Sends a test event to the specified webhook.
+      operationId: testWebhook
+      tags:
+      - Webhook
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: url
+        in: path
+        description: The url of the endpoint to send a test message to. URL-encode this field.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Test message sent
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/subscription/{url}/test' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          nullable: true
+          example: RS042
+    WebhookEndpoint:
+      description: An endpoint to receive events
+      properties:
+        endpointUrl:
+          type: string
+          example: http://app.example.com/endpoint/sqtch
+          description: The url of the endpoint that receives events.
+        name:
+          type: string
+          example: Zapier
+          description: Optional name of the endpoint that receives events.
+        source:
+          type: string
+          readOnly: true
+          description: How the subscription was created. Always `MANUAL` for subscriptions created via the API.
+          example: MANUAL
+        webhookTypes:
+          type: array
+          description: The event types this endpoint is subscribed to. `["*"]` means all event types.
+          items:
+            type: string
+          example:
+          - '*'
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method of security only in server-to-server interactions.
+x-default-client: cURL

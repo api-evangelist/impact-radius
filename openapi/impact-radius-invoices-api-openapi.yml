@@ -1,0 +1,547 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Invoices API
+  version: '1.0'
+  description: 'Operations tagged Invoices across 2 of this provider''s published API definitions: impact-radius-brand-invoices-v14.yml, impact-radius-partner-invoices-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Invoices
+paths:
+  /Advertisers/{AccountSID}/Invoices:
+    get:
+      summary: List Invoices
+      description: Returns a list of partner invoices, sorted with the most recent appearing first. The list can be filtered by a creation date range.
+      operationId: listInvoices
+      tags:
+      - Invoices
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: StartDate
+        in: query
+        description: Filters to show invoices created on or after the specified date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: Filters to show invoices created on or before the specified date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A list of invoice objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Invoices:
+                    type: array
+                    description: The list of invoice objects.
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Invoices' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Invoices/{InvoiceId}:
+    get:
+      summary: Get Invoice Details
+      description: Retrieves the details of a single partner invoice by its unique ID.
+      operationId: getInvoiceById
+      tags:
+      - Invoices
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: InvoiceId
+        in: path
+        required: true
+        description: The unique identifier for the invoice.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single invoice object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Invoices/{InvoiceId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Invoices/{InvoiceId}/Download:
+    get:
+      summary: Download Invoice PDF
+      description: Returns the specified partner invoice as a downloadable PDF file.
+      operationId: downloadInvoicePdf
+      tags:
+      - Invoices
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: InvoiceId
+        in: path
+        required: true
+        description: The unique identifier for the invoice.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The invoice in PDF format.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Invoices/{InvoiceId}/Download' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Invoices:
+    get:
+      operationId: listInvoices
+      tags:
+      - Invoices
+      summary: List invoices
+      description: "Returns a list of invoices. The transactions are returned in sorted order, with the most recent transactions appearing first. \nParameters can be used to create a date range to only list invoices that were created within the range.\n"
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: StartDate
+        in: query
+        required: false
+        description: ISO 8601 format that filters the list to only show invoices created on or after this date.
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        required: false
+        description: ISO 8601 format that filters the list to only show invoices created on or before this date.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice_2'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Invoices' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Invoices/{Id}:
+    get:
+      operationId: retrieveInvoice
+      tags:
+      - Invoices
+      summary: Retrieve a specific invoice
+      description: This request allows you to retrieve an invoice from both impact.com's invoicing methods.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: Unique identifier for the invoice object.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_2'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Invoices/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Invoices/{Id}/Download:
+    get:
+      operationId: downloadInvoice
+      tags:
+      - Invoices
+      summary: Download an invoice
+      description: Returns the specified invoice as a downloaded file in PDF format.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the invoice.
+      responses:
+        '200':
+          description: PDF file of the invoice.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Invoices/{Id}/Download' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+components:
+  schemas:
+    DetailedLineItem:
+      type: object
+      properties:
+        AccountId:
+          type: integer
+          description: The unique identifier for the partner account.
+          example: 1299679
+        Name:
+          type: string
+          description: The display name of the partner account.
+          example: ACME Online
+        ProgramId:
+          type: integer
+          description: The unique identifier of the program.
+          example: 1000
+        ProgramName:
+          type: string
+          description: The display name of the program.
+          example: ACME Online
+        EventMonthYear:
+          type: string
+          description: The month and year (MYYYY) the events occurred.
+          example: '92018'
+        ActionAmount:
+          type: number
+          format: decimal
+          description: The amount owed for actions in this period.
+          example: 65.0
+        OtherAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: Other amounts owed in this period, if any.
+          example: 0.0
+        TotalAmount:
+          type: number
+          format: decimal
+          description: The total amount for this detailed line item.
+          example: 65.0
+    LineItem:
+      type: object
+      properties:
+        CampaignId:
+          type: integer
+          description: The unique identifier of the campaign for this line item.
+          example: 1000
+        CampaignName:
+          type: string
+          description: The display name of the campaign.
+          example: Acme Online
+        Description:
+          type: string
+          description: The type of charge for this line item.
+          enum:
+          - MEDIA_PAYOUT
+          - BONUS
+          example: MEDIA_PAYOUT
+        EventMonthYear:
+          type: string
+          description: The month and year (MYYYY) the events occurred.
+          example: '92018'
+        Actions:
+          type: integer
+          description: The number of actions covered by this line item.
+          example: 13
+        NetItemAmount:
+          type: number
+          format: decimal
+          description: The net amount for this line item before VAT.
+          example: 65.0
+        VatItemAmount:
+          type: number
+          format: decimal
+          description: The VAT amount for this line item.
+          example: 0.0
+        TotalItemAmount:
+          type: number
+          format: decimal
+          description: The total amount for this line item (net + VAT).
+          example: 65.0
+        Status:
+          type: string
+          description: The payment status of this line item.
+          enum:
+          - PENDING
+          - PAID
+          - OVERDUE
+          example: PAID
+        DueDate:
+          type: string
+          format: date-time
+          description: The date and time payment is due.
+          example: '2018-10-16T00:00:00-04:00'
+        PaidDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the line item was paid, if applicable.
+          example: '2018-10-16T00:35:47-04:00'
+    Invoice:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the invoice.
+          example: 1299679-33
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the invoice was created.
+          example: '2018-11-02T11:43:30-04:00'
+        MediaId:
+          type: integer
+          description: The unique identifier for the partner the invoice is for.
+          example: 1299679
+        MediaName:
+          type: string
+          description: The display name of the partner the invoice is for.
+          example: RoadRunner
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the invoice amounts.
+          example: USD
+        TotalAmount:
+          type: number
+          format: decimal
+          description: The total amount owed on the invoice.
+          example: 65.0
+        TotalVatAmount:
+          type: number
+          format: decimal
+          description: The total VAT amount on the invoice.
+          example: 0.0
+        LineItems:
+          type: array
+          description: Summary line items for the invoice grouped by campaign and description.
+          items:
+            $ref: '#/components/schemas/LineItem'
+        DetailedLineItems:
+          type: array
+          description: Detailed line items for the invoice with program-level breakdown.
+          items:
+            $ref: '#/components/schemas/DetailedLineItem'
+        PDF:
+          type: string
+          format: uri-reference
+          description: The URI to download the PDF for the invoice.
+          example: /Advertisers/<AccountSID>/Invoices/1924609-1/Download
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this invoice in the impact.com API.
+          example: /Advertisers/<AccountSID>/Invoices/1924609-1
+    DetailedLineItem_2:
+      type: object
+      properties:
+        AccountId:
+          type: integer
+          description: Unique identifier of the partner account associated with this payout.
+          example: 1804207
+        Name:
+          type: string
+          description: Display name of the partner account associated with this payout.
+          example: Acme Corporation
+        ProgramId:
+          type: string
+          description: Unique identifier for the program associated with this payout.
+          example: '10306'
+        ProgramName:
+          type: string
+          description: Display name of the program associated with this payout.
+          example: Wayne Enterprises
+        EventMonthYear:
+          type: string
+          description: Month (M or MM) and YYYY of when the events occurred (e.g., 42021).
+          example: '12021'
+        ActionAmount:
+          type: string
+          format: decimal
+          description: Amount attributable to tracked actions. May be empty if not applicable.
+          example: '48.00'
+        OtherAmount:
+          type: string
+          format: decimal
+          description: Amount attributable to non-action payouts such as bonuses.
+          example: '2.00'
+        TotalAmount:
+          type: string
+          format: decimal
+          description: Total payout amount for this detailed line item.
+          example: '50.00'
+    LineItem_2:
+      type: object
+      properties:
+        CampaignId:
+          type: string
+          description: Unique identifier for the program associated with this line item.
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the program associated with this line item.
+          example: Wayne Enterprises
+        Description:
+          type: string
+          enum:
+          - MEDIA_PAYOUT
+          - BONUS
+          description: The type of payout. MEDIA_PAYOUT is a standard commission payout; BONUS is for meeting program requirements.
+          example: MEDIA_PAYOUT
+        EventMonthYear:
+          type: string
+          description: Month (M or MM) and YYYY of when the events occurred (e.g., 42021).
+          example: '12021'
+        Actions:
+          type: string
+          description: The number of actions that relate to the payout. May be empty if not applicable.
+          example: '5'
+        NetItemAmount:
+          type: string
+          format: decimal
+          description: Net payout amount for this line item before VAT.
+          example: '50.00'
+        VatItemAmount:
+          type: string
+          format: decimal
+          description: VAT amount applied to this line item. May be empty if not applicable.
+          example: '0.00'
+        TotalItemAmount:
+          type: string
+          format: decimal
+          description: Total payout amount for this line item including VAT.
+          example: '50.00'
+        Status:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - OVERDUE
+          description: Payment status of this line item.
+          example: OVERDUE
+        DueDate:
+          type: string
+          format: date-time
+          description: Date and time payment is due for this line item (ISO 8601).
+          example: '2021-02-05T17:51:35-08:00'
+        PaidDate:
+          type: string
+          format: date-time
+          description: Date and time this line item was paid (ISO 8601). Empty if not yet paid.
+          example: '2024-10-01T00:00:00-07:00'
+    Invoice_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the invoice object.
+          example: 1924609-1
+        CreatedDate:
+          type: string
+          format: date-time
+          description: ISO 8601 format of the date and time when the invoice was created.
+          example: '2024-09-02T07:37:12-07:00'
+        RecipientId:
+          type: integer
+          description: Unique identifier of the recipient of the invoice.
+          example: 1804207
+        RecipientName:
+          type: string
+          description: The display name of the recipient of the invoice.
+          example: Acme Corporation
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code.
+          example: USD
+        TotalAmount:
+          type: string
+          format: decimal
+          description: The total amount due to the partner in the invoice.
+          example: '50.00'
+        TotalVatAmount:
+          type: string
+          format: decimal
+          description: Value-added tax applied to the invoice, if any exists.
+          example: '0.00'
+        LineItems:
+          type: array
+          description: List of line items summarising each payout component in the invoice.
+          items:
+            $ref: '#/components/schemas/LineItem_2'
+        DetailedLineItems:
+          type: array
+          description: Detailed breakdown of payout amounts per program within the invoice.
+          items:
+            $ref: '#/components/schemas/DetailedLineItem_2'
+        PDF:
+          type: string
+          description: API resource path to download the invoice as a PDF.
+          example: /Mediapartners/<AccountSID>/Invoices/1924609-1/Download
+        Uri:
+          type: string
+          description: Unique reference to this invoice in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Invoices/1924609-1
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-invoices-v14.yml
+- impact-radius-partner-invoices-v15.yml

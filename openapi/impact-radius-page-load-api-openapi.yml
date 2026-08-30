@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: Brand Page Load API
+  description: This API provides an endpoint for tracking page load and app open events, which can be used to attribute credit for a conversion that results from a partner driving traffic.
+  version: v14
+servers:
+- url: https://trkapi.impact.com
+  description: Tracking API Server
+tags:
+- name: Page Load
+paths:
+  /PageLoad:
+    post:
+      summary: Track a Page Load or App Open
+      description: Tracks a page load or app open event. This endpoint is used to attribute credit for a conversion that results from a partner driving traffic. It does not require authentication.
+      operationId: trackPageLoad
+      tags:
+      - Page Load
+      requestBody:
+        description: The details of the page load or app open event.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PageLoadRequest'
+      responses:
+        '200':
+          description: The request was successfully processed. The response will contain a clickId and potentially a landingPage URL or session information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageLoadResponse'
+        '400':
+          description: Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PageLoadRequest:
+      type: object
+      required:
+      - CampaignId
+      - EventDate
+      - PageUrl
+      - CustomProfileId
+      properties:
+        CampaignId:
+          type: integer
+          description: Unique identifier for your program.
+          example: 1000
+        PageUrl:
+          type: string
+          format: uri
+          description: '**Required.** Destination URL that is intercepted by the app.
+
+
+            - If the app open occurs from an impact.com tracking link, send the full tracking link (e.g., `https://mysite.pxf.io/c/1234567/12345/1234?sharedid=abcd`).
+
+            - If the app is opened directly (e.g., not redirected from a URL), do not send any value.
+
+            - If the app open occurs from a non-Impact URL, send the actual URL with `https:` (e.g., `https://www.example.com?name=value`).
+
+            - If the app open occurs using a custom URI scheme, send the full URI (e.g., `app://view?sharedid=abcd`).
+
+
+            **Tip:** When testing clicks and events, append `?impacttest=1` to your `PageUrl`.'
+          example: https://www.acme.com/products/tennis-balls
+        PropertyId:
+          type: integer
+          description: '**Required for mobile/app opens.** For mobile app opens, this value is the "System App ID" of your app in impact.com. Found in Settings → Mobile Apps.'
+          example: 12345
+        AppleIfa:
+          type: string
+          description: '**Required for iOS app opens.** Apple ID for Advertising (IDFA) associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for iOS in-app conversions.'
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+        GoogAId:
+          type: string
+          description: '**Required for Android app opens.** Google Advertising ID associated with the mobile device the customer converted on. Used for attribution purposes. Typically only available for Android in-app conversions.'
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+        EventDate:
+          type: string
+          format: date-time
+          description: Timestamp of the event (ISO 8601) or the string 'NOW'.
+          example: '2026-09-10T22:55:32-08:00'
+        ReferringUrl:
+          type: string
+          format: uri
+          description: URL of the website where the click originated.
+          example: https://www.google.com/
+        CustomProfileId:
+          type: string
+          description: 'Your unique identifier for an anonymous visitor. If CustomProfileId is not provided, please provide at least one of the following identifiers: GoogAId, AndroidId, AppleIfa, AppleIfv, ClickId, or CustomerId.'
+          example: a1b2c3d4e5f6
+        CustomerId:
+          type: string
+          description: Your unique, non-PII identifier for the customer.
+          example: BCZ2WVSH674563PDPYOTM3AXDQ
+        CustomerEmail:
+          type: string
+          description: Customer's email, either plaintext or SHA1 hashed.
+          example: customer@gmail.com
+        TrackingConsent:
+          type: boolean
+          description: Indicates if the user has consented to tracking.
+          example: true
+        UserAgent:
+          type: string
+          description: User agent of the customer's browser.
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+        AppleIfv:
+          type: string
+          description: Apple ID for Vendors.
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+        IpAddress:
+          type: string
+          description: Customer's IP address.
+          example: 72.194.216.61
+        AppName:
+          type: string
+          description: Name of the mobile app. Only for mobile events.
+          example: Acme App
+        AppPackage:
+          type: string
+          description: Package name for the mobile app the user installed. Only for mobile events.
+          example: com.acme.app
+        AppVer:
+          type: string
+          description: Version of the mobile app. Only for mobile events.
+          example: 1.2.3
+        DeviceMfr:
+          type: string
+          description: Mobile device's manufacturer. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.
+          example: Apple
+        DeviceModel:
+          type: string
+          description: Mobile device's model. impact.com expects this to be passed in a specific format—refer to the code below that needs to be included in your mobile app to capture the value in the appropriate format.
+          example: iPhone 15
+    ErrorResponse:
+      type: object
+      description: Describes errors and warnings found in the request.
+      properties:
+        errors:
+          type: array
+          description: Errors that prevented the request from succeeding.
+          items:
+            $ref: '#/components/schemas/Error'
+        warnings:
+          type: array
+          description: Non-fatal warnings about the request.
+          items:
+            $ref: '#/components/schemas/Warning'
+    Error:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The parameter that caused the error.
+        level:
+          type: string
+          description: The severity level of the message.
+          enum:
+          - WARNING
+          - ERROR
+        message:
+          type: string
+          description: A description of the error.
+    PageLoadResponse:
+      type: object
+      properties:
+        landingPage:
+          type: string
+          format: uri
+          description: The destination landing page URL. Present only when PageUrl is a gateway tracking link.
+          example: https://www.mysite.com/products/145324
+        clickId:
+          type: string
+          description: Unique click ID generated by impact.com.
+          example: 0c22384eN-3765c5f900c2878068a0631b
+        sessionStart:
+          type: string
+          format: date-time
+          description: The time when the user session started.
+          example: '2026-09-10T22:55:32-08:00'
+        warnings:
+          type: array
+          description: Non-fatal warnings about the request.
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The parameter that caused the warning.
+        level:
+          type: string
+          description: The severity level of the message.
+          enum:
+          - WARNING
+          - ERROR
+        message:
+          type: string
+          description: A description of the warning.

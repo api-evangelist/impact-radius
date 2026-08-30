@@ -1,0 +1,230 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Tracking Links API
+  version: '1.0'
+  description: 'Operations tagged Tracking Links across 2 of this provider''s published API definitions: impact-radius-brand-trackinglinks-v14.yml, impact-radius-partner-trackinglinks-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+tags:
+- name: Tracking Links
+paths:
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/TrackingLinks:
+    post:
+      summary: Generate a Tracking Link
+      description: Creates a new tracking link for a specified media partner within a program.
+      operationId: createTrackingLink
+      tags:
+      - Tracking Links
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The unique identifier for the program.
+        schema:
+          type: integer
+      - name: MediaPartnerId
+        in: query
+        required: true
+        description: The unique identifier for the media partner.
+        schema:
+          type: integer
+      requestBody:
+        description: The specifications for the tracking link to be generated.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrackingLinkCreate'
+      responses:
+        '200':
+          description: The tracking link was generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TrackingURL:
+                    type: string
+                    format: uri
+                    description: The generated tracking link URL.
+                    example: https://example.sjv.io/c/123456/98765/101010
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Programs/{ProgramId}/TrackingLinks' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Programs/{ProgramId}/TrackingLinks:
+    post:
+      operationId: createTrackingLink
+      tags:
+      - Tracking Links
+      summary: Create a tracking link
+      description: 'Generates a new tracking link for the specified program. Up to **5,000 vanity links** can exist on an account — exceeding that limit returns a 403 Forbidden response.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: ProgramId
+        in: path
+        required: true
+        description: Unique identifier for the brand program the tracking link is for.
+        schema:
+          type: string
+      - name: Type
+        in: query
+        required: false
+        description: 'The type of tracking link to generate.
+
+
+          - `Regular`: System-generated short link.
+
+          - `Vanity`: Branded link with a custom path (requires `CustomPath`).
+
+          '
+        schema:
+          type: string
+          enum:
+          - Regular
+          - Vanity
+          default: Regular
+      - name: CustomPath
+        in: query
+        required: false
+        description: Custom path that follows the tracking domain (e.g., `SummerSale` produces `https://example.sjv.io/SummerSale`). Required when `Type=Vanity`. If omitted on a vanity link, a random path is generated.
+        schema:
+          type: string
+      - name: AdId
+        in: query
+        required: false
+        description: Unique identifier of an ad to deep-link into (see the Partner Ads API). If omitted, the tracking link redirects to the brand's default landing page.
+        schema:
+          type: string
+      - name: DeepLink
+        in: query
+        required: false
+        description: The exact destination URL the tracking link should redirect to after attribution. Use this to send clicks to a specific product page instead of the brand's default landing page.
+        schema:
+          type: string
+          format: uri
+      - name: MediaPartnerPropertyId
+        in: query
+        required: false
+        description: Unique identifier of the media property (website, social profile, or app) where the link will be used. See the Partner Media Properties API.
+        schema:
+          type: string
+      - name: subId1
+        in: query
+        required: false
+        description: Sub-affiliate identifier surfaced as a column in partner performance reports. Use to segment traffic by your own categories.
+        schema:
+          type: string
+      - name: subId2
+        in: query
+        required: false
+        description: Additional sub-affiliate identifier surfaced as a column in partner performance reports.
+        schema:
+          type: string
+      - name: subId3
+        in: query
+        required: false
+        description: Additional sub-affiliate identifier surfaced as a column in partner performance reports.
+        schema:
+          type: string
+      - name: sharedId
+        in: query
+        required: false
+        description: Shared identifier surfaced as a column in partner performance reports.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK — returns the generated tracking link.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TrackingURL:
+                    type: string
+                    format: uri
+                    description: The generated tracking link. The path format is `/c/{partner-id}/{ad-id}/{program-id}` for regular links, or `/{CustomPath}` for vanity links.
+                    example: https://example.sjv.io/c/123456/98765/101010
+        '403':
+          description: Forbidden — returned when the 5,000 vanity link limit is reached or when a referenced resource (e.g., `MediaPartnerPropertyId`) does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: integer
+                    description: Unix epoch time in milliseconds when the error was returned.
+                  status:
+                    type: string
+                    description: HTTP status name.
+                  error:
+                    type: string
+                    description: Short error label.
+                  message:
+                    type: string
+                    description: Human-readable explanation of the error.
+                example:
+                  timestamp: 1663261677313
+                  status: FORBIDDEN
+                  error: Forbidden
+                  message: The property ID '123456' does not exist.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Programs/{ProgramId}/TrackingLinks' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+      description: Production server
+components:
+  schemas:
+    TrackingLinkCreate:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Regular
+          - Vanity
+          default: Regular
+          description: The type of tracking link to create. 'Vanity' allows for a `CustomPath`.
+        CustomPath:
+          type: string
+          description: A custom path for a 'Vanity' link (e.g., 'MyCustomLink').
+          example: summer-sale
+        AdId:
+          type: integer
+          description: The unique ID of the ad to associate with the link. If omitted, redirects to the program's default landing page.
+          example: 656565
+        DeepLink:
+          type: string
+          format: uri
+          description: A specific URL to redirect the user to, overriding the default.
+          example: https://www.acme.com/products/tennis-balls
+        MediaPartnerPropertyId:
+          type: integer
+          description: The unique ID of the partner's media property where the link will be used.
+          example: 12345
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-trackinglinks-v14.yml
+- impact-radius-partner-trackinglinks-v15.yml

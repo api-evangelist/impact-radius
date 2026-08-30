@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Partner Identity Verification API
+  description: 'The Identity Verification endpoint creates or resumes an identity verification session and returns a URL that can be used to launch the hosted verification flow. Use this endpoint to verify your identity before accessing features that require identity confirmation.
+
+    '
+  version: '15'
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+tags:
+- name: Identity Verification
+  description: Endpoint for creating and resuming identity verification sessions.
+paths:
+  /Mediapartners/{AccountSID}/IdentityVerification/Session:
+    post:
+      operationId: createIdentityVerificationSession
+      tags:
+      - Identity Verification
+      summary: Create or Resume an Identity Verification Session
+      description: 'Creates a new identity verification session or resumes an existing one. Returns a URL that can be used to launch the hosted verification flow. If a session is already in progress for the specified user, the existing session details are returned so verification can resume from where it left off.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - UserId
+              properties:
+                UserId:
+                  type: integer
+                  description: The unique numeric identifier of the impact.com user to verify. This is the numeric portion of the user's ID (e.g. for user `I-5402850`, pass `5402850`).
+                  example: 5402850
+                CallbackUrl:
+                  type: string
+                  description: The URL to redirect the user to after the verification session completes. If omitted, the user is redirected to the impact.com platform.
+                  example: https://example.com/verification/callback
+      responses:
+        '200':
+          description: The identity verification session object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityVerificationSession'
+        '400':
+          description: Validation error or the supplied UserId is not accessible for the partner account.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Error status indicator.
+                    example: ERROR
+                  Message:
+                    type: string
+                    description: Human-readable error message.
+                    example: Validation Errors
+                  Errors:
+                    description: Validation error details. Returned as an object when validation fails or an empty array when the user lookup fails.
+                    oneOf:
+                    - type: object
+                      properties:
+                        Error:
+                          type: object
+                          properties:
+                            Field:
+                              type: string
+                              description: The request field that failed validation.
+                              example: UserId
+                            Message:
+                              type: string
+                              description: Validation failure detail for the field.
+                              example: Invalid value [null] for parameter [UserId]
+                    - type: array
+                      items:
+                        type: object
+              examples:
+                ValidationError:
+                  summary: Validation error (missing or invalid field)
+                  value:
+                    Status: ERROR
+                    Message: Validation Errors
+                    Errors:
+                      Error:
+                        Field: UserId
+                        Message: Invalid value [null] for parameter [UserId]
+                UserNotAccessible:
+                  summary: UserId is not accessible for the account
+                  value:
+                    Status: ERROR
+                    Message: UserId [99999999] is not accessible for account [1924609]
+                    Errors: []
+        '401':
+          description: Unauthorized — invalid authentication credentials.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    description: HTTP status code.
+                    example: 401
+                  title:
+                    type: string
+                    description: Short error label.
+                    example: Unauthorized
+              example:
+                status: 401
+                title: Unauthorized
+components:
+  schemas:
+    IdentityVerificationSession:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: The status of the API response (e.g., OK).
+          example: OK
+        Uri:
+          type: string
+          description: API resource path for this identity verification session.
+          example: /Mediapartners/<AccountSID>/IdentityVerification/Session/48944
+        id:
+          type: string
+          description: The unique identifier for this identity verification session.
+          example: '48944'
+        sessionId:
+          type: string
+          description: A UUID that uniquely identifies the verification session with the identity verification provider.
+          example: d9d96e4e-1b79-45b5-bfb4-44864b896aa6
+        sessionUrl:
+          type: string
+          description: The URL to redirect the user to in order to complete the identity verification flow.
+          example: https://verification.impact.com/v/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.EXAMPLE_TOKEN
+        memberId:
+          type: string
+          description: The numeric portion of the impact.com user ID associated with this session.
+          example: '5402850'

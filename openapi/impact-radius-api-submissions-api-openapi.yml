@@ -1,0 +1,142 @@
+openapi: 3.2.0
+info:
+  title: Brand API - Submissions API Submissions API
+  description: API for checking the status of records submitted to impact.com via API or FTP. This allows you to see if submissions were received and view metadata and any processing errors.
+  version: v14
+servers:
+- url: https://api.impact.com
+tags:
+- name: API Submissions
+paths:
+  /Advertisers/{AccountSID}/APISubmissions:
+    get:
+      summary: List All API Submissions
+      description: Returns a list of your API submissions. Note that impact.com does not recommend using this endpoint due to typically large response sizes and long call times.
+      operationId: listApiSubmissions
+      tags:
+      - API Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of API submission objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  APISubmission:
+                    type: array
+                    description: The list of API submission objects.
+                    items:
+                      $ref: '#/components/schemas/ApiSubmission'
+  /Advertisers/{AccountSID}/APISubmissions/{BatchId}:
+    get:
+      summary: Get API Submission Details
+      description: Retrieves information about a specific record that was submitted via the API, including its processing status and any errors.
+      operationId: getApiSubmissionById
+      tags:
+      - API Submissions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: BatchId
+        in: path
+        required: true
+        description: The unique batch ID of the API submission.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single API submission object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiSubmission'
+components:
+  schemas:
+    ApiSubmission:
+      type: object
+      properties:
+        BatchId:
+          type: string
+          description: Id of the API submission.
+          example: A-b1234c56-7d89-0e12-3f4g-5h6ij7k8901l
+        AccountId:
+          type: integer
+          description: Id of the brand account that submitted the API submission.
+          example: 10001
+        SubmissionDate:
+          type: string
+          format: date-time
+          description: Date and time the API submission was submitted (ISO 8601).
+          example: '2020-09-10T09:50:12-07:00'
+        CampaignId:
+          type: integer
+          description: Id of the program (formerly known as campaign) to which the record was submitted.
+          example: 1000
+        ActionTrackerId:
+          type: integer
+          description: Id of the action tracker (event type) the record applies to.
+          example: 4000
+        MediaPartnerId:
+          type: integer
+          description: Id of the partner (formerly known as media partner) that drove the record submitted via API.
+          example: 10000
+        EventCode:
+          type: string
+          description: Configurable string code identifying the event type, if used instead of EventTypeId.
+          example: ACME_SALE
+        OrderId:
+          type: string
+          nullable: true
+          example: '1234567890123'
+          description: If the record submitted is a conversion, this is the unique Id associated with that conversion.
+        Payload:
+          type: string
+          example: CampaignId=1000&EventTypeId=4000&EventDate=2024-08-01T23:55:24-08:00&OrderId=1234567890123&ClickId=SKhRQaSXwxyOUQ%253AwUx0Mo36FUkiXxtxVUQTEzY0&CustomerId=BCZ2WVSH674563PDPYOTM3AXDQ&OrderPromoCode=10OFF-FORGE&CustomerStatus=NEW&CustomerPostCode=93107&CurrencyCode=USD&OrderDiscount=5&IpAddress=12.345.678.90&ItemSku1=12345&ItemName1=Anvil&ItemCategory1=Anvils&ItemQuantity1=2&ItemPrice1=10&ItemSku2=55555&ItemName2=Hammer&ItemCategory2=Hammers&ItemQuantity2=1&ItemPrice2=6.99
+          description: Information about the tracking data itself that was submitted to impact.com via an API call.
+        Type:
+          type: string
+          enum:
+          - Conversion
+          - Modification
+          - Reversal
+          example: Conversion
+          description: Type of record submitted.
+        Status:
+          type: string
+          enum:
+          - Queued
+          - In Progress
+          - Complete
+          example: Complete
+          description: Status of the API submission. Will always begin as Queued .
+        CompletionDate:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2020-09-10T10:11:15-07:00'
+          description: Date and time that the submission finished processing. Will be empty if the submission is not finished processing. See ISO 8601 .
+        ErrorType:
+          type: string
+          nullable: true
+          example: Contract Error
+          description: Errors encountered during the submission process. Will be empty if no errors were encountered. Some common values are listed below.
+        ErrorReason:
+          type: string
+          nullable: true
+          example: CONTRACT_NOT_FOUND RESTRICTED_PROMOCODE
+          description: List of error explanations to help describe the ErrorType .
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/APISubmissions/A-f6675c69-4a69-4c04-8a1d-3f2eb7a6754e
+          description: API submission's direct URI to view only one specific API submission.

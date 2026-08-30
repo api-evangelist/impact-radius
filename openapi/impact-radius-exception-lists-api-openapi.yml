@@ -1,0 +1,447 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Exception Lists API
+  version: '1.0'
+  description: 'Operations tagged Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-exceptionlists-v14.yml, impact-radius-partner-exceptionlists-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Exception Lists
+paths:
+  /Advertisers/{AccountSID}/ExceptionLists:
+    get:
+      summary: List Exception Lists
+      description: Returns a list of your exception lists, which can be filtered by campaign, state, or type.
+      operationId: listExceptionLists
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        description: Filter by the program ID the list applies to.
+        schema:
+          type: integer
+      - name: State
+        in: query
+        description: Filter lists by their current state.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+      - name: Type
+        in: query
+        description: Filter lists by whether they apply to CATEGORY or SKU.
+        schema:
+          type: string
+          enum:
+          - CATEGORY
+          - SKU
+      responses:
+        '200':
+          description: A paginated list of exception list objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ExceptionLists:
+                    type: array
+                    description: The list of exception list objects.
+                    items:
+                      $ref: '#/components/schemas/ExceptionList'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    post:
+      summary: Create an Exception List
+      description: Creates a new, empty exception list for a specific campaign and type.
+      operationId: createExceptionList
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExceptionListCreate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}:
+    get:
+      summary: Get Exception List Details
+      description: Retrieves the details of an existing exception list by its unique ID.
+      operationId: getExceptionListById
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single exception list object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionList'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    put:
+      summary: Update an Exception List
+      description: Updates the specified exception list's name, type, or associated action trackers.
+      operationId: updateExceptionList
+      tags:
+      - Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ExceptionListId
+        in: path
+        required: true
+        description: The unique identifier for the exception list to update.
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ExceptionListUpdate'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/ExceptionLists/{ExceptionListId}:
+    get:
+      operationId: retrieveExceptionList
+      tags:
+      - Exception Lists
+      summary: Retrieve an Exception List
+      description: 'Retrieves the details of an existing exception list using its unique ID. The ExceptionListId can be obtained from the Contracts API.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: ExceptionListId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the exception list.
+      responses:
+        '200':
+          description: The exception list object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionList_2'
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/ExceptionLists/{ExceptionListId}/Items:
+    get:
+      operationId: listExceptionListItems
+      tags:
+      - Exception Lists
+      summary: List Exception List Items
+      description: Returns a list of all items in a specific exception list. Each item defines a product category or SKU value that triggers an alternate commission rate.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: ExceptionListId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the exception list whose items are being retrieved.
+      responses:
+        '200':
+          description: A list of exception list item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ExceptionListItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ExceptionListItem'
+    servers:
+    - url: https://api.impact.com
+components:
+  schemas:
+    ExceptionListCreate:
+      type: object
+      required:
+      - ActionTrackerId
+      - CampaignId
+      - Name
+      - Type
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+    ExceptionList:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the exception list.
+          example: 99999
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        State:
+          type: string
+          description: The current state of the exception list.
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
+        Type:
+          type: string
+          description: Whether the list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the list was created.
+          example: '2026-01-15T10:00:00-08:00'
+        DeactivationDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the list was deactivated, if applicable.
+          example: '2026-12-31T23:59:59-08:00'
+        ActionTrackers:
+          type: array
+          description: The action trackers (event types) this list applies to.
+          items:
+            type: object
+            properties:
+              Id:
+                type: integer
+                description: The unique identifier for the action tracker.
+                example: 18500
+              Name:
+                type: string
+                description: The display name of the action tracker.
+                example: Online Sale
+        NumberOfItems:
+          type: integer
+          description: The total number of items in the list.
+          example: 50
+        ItemsUri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the items collection for this list.
+          example: /Advertisers/<AccountSID>/ExceptionLists/99999/Items
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this exception list in the impact.com API.
+          example: /Advertisers/<AccountSID>/ExceptionLists/12345
+    ExceptionListUpdate:
+      type: object
+      properties:
+        ActionTrackerId:
+          type: string
+          description: Comma-separated list of event type IDs.
+          example: '18500'
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: USA-State-CA-Exclusions
+        Type:
+          type: string
+          description: Whether this list applies to CATEGORY or SKU.
+          enum:
+          - CATEGORY
+          - SKU
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
+    ExceptionList_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the exception list.
+          example: '5001'
+        Name:
+          type: string
+          description: Display name of the exception list.
+          example: Wayne Tech SKU Exclusions
+        State:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+          description: The current state of the exception list.
+          example: ACTIVE
+        CampaignId:
+          type: string
+          description: Unique identifier for the program this exception list applies to.
+          example: '10306'
+        Type:
+          type: string
+          enum:
+          - CATEGORY
+          - SKU
+          description: The matching basis for this exception list. CATEGORY matches against the conversion's product category value; SKU matches against the conversion's SKU or ProductId value.
+          example: SKU
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time the exception list was created (ISO 8601).
+          example: '2024-01-15T10:30:00-08:00'
+        DeactivationDate:
+          type: string
+          format: date-time
+          description: Date and time the exception list was deactivated (ISO 8601). Empty if the list is still active.
+          example: ''
+        NumberOfItems:
+          type: integer
+          description: The number of items in the exception list.
+          example: 12
+        ItemsUri:
+          type: string
+          description: API resource path for retrieving the items in this exception list.
+          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items
+        Uri:
+          type: string
+          description: Unique reference to the exception list object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ExceptionLists/5001
+    ExceptionListItem:
+      type: object
+      description: An item within an exception list that defines a specific category or SKU value triggering an alternate commission rate.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the exception list item.
+          example: '1'
+        ListId:
+          type: string
+          description: Unique identifier for the parent exception list.
+          example: '5001'
+        Name:
+          type: string
+          description: Display name of the exception list item.
+          example: Batsuit SKU
+        Value:
+          type: string
+          description: The category or SKU value that this item matches against, depending on the parent exception list's Type.
+          example: BS-KVL-01
+        MatchMode:
+          type: string
+          enum:
+          - EQ
+          - REGEX
+          description: The matching methodology used to evaluate the value. EQ matches exactly; REGEX matches using a regular expression.
+          example: EQ
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time this item was added to the exception list (ISO 8601).
+          example: '2024-01-15T10:30:00-08:00'
+        Uri:
+          type: string
+          description: Unique reference to the exception list item in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-exceptionlists-v14.yml
+- impact-radius-partner-exceptionlists-v15.yml

@@ -1,0 +1,152 @@
+openapi: 3.2.0
+info:
+  title: Brand API - Account Information Legal Entities API
+  description: 'API for managing brand account information.
+
+
+    This specification includes two main resources:
+
+    - **CompanyInformation**: Contains general metadata about the company, such as name, website, and contacts. Supports retrieving and updating this information.
+
+    - **LegalEntities**: Contains information specific to any legal entities associated with the account, such as payment and tax details.'
+  version: v14
+servers:
+- url: https://api.impact.com
+tags:
+- name: Legal Entities
+paths:
+  /Advertisers/{AccountSID}/LegalEntities:
+    get:
+      summary: List Legal Entities
+      description: Retrieves a list of legal entities associated with this account.
+      operationId: listLegalEntities
+      tags:
+      - Legal Entities
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of legal entity objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  LegalEntities:
+                    type: array
+                    description: The legal entities associated with this account.
+                    items:
+                      $ref: '#/components/schemas/LegalEntity'
+  /Advertisers/{AccountSID}/LegalEntities/{LegalEntityId}:
+    get:
+      summary: Get a Single Legal Entity
+      description: Retrieves a single legal entity associated with this account by its unique ID.
+      operationId: getLegalEntity
+      tags:
+      - Legal Entities
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      - name: LegalEntityId
+        in: path
+        required: true
+        description: The unique identifier for the legal entity.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single legal entity object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LegalEntity'
+components:
+  schemas:
+    LegalEntity:
+      type: object
+      description: Stores legal entity information like payment and tax details.
+      properties:
+        Id:
+          type: string
+          description: Unique impact.com identifier for the legal entity.
+          example: '12345'
+        Name:
+          type: string
+          description: The full name of the legal entity.
+          example: Acme Corporation Legal Entity
+        RegisteredForIndirectTax:
+          type: string
+          description: Whether the entity is registered for indirect tax.
+          example: 'false'
+        IndirectTaxNumber:
+          type: string
+          description: The tax number associated with VAT, GST, or HST registration.
+          example: '123456789'
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+          description: The billing address for the account.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this object in the impact.com API.
+          example: /Advertisers/<AccountSID>/LegalEntities/12345
+        EinSsnForeignTaxId:
+          type: string
+          description: The Employer Identification Number, Social Security Number, or a foreign Tax ID.
+          example: 12-3456789
+    Address:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP

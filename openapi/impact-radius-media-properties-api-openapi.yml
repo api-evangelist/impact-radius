@@ -1,0 +1,401 @@
+openapi: 3.2.0
+info:
+  title: Partner Media Properties API
+  version: '15'
+  description: "Media Properties describe the locations (e.g., websites, social media, and mobile apps) where you place advertisements \nand tracking links to drive traffic to brands. This API allows you to create, retrieve, update, list, and delete \nmedia properties associated with your partner account.\n"
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Media Properties
+  description: Endpoints for listing, creating, retrieving, updating, and deleting partner media properties.
+paths:
+  /Mediapartners/{AccountSID}/MediaProperties:
+    parameters:
+    - name: AccountSID
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the partner account.
+    get:
+      operationId: listMediaProperties
+      tags:
+      - Media Properties
+      summary: List media properties
+      description: Lists all media properties for your account. This request should never return an error.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MediaProperties:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MediaProperty'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    post:
+      operationId: createMediaProperty
+      tags:
+      - Media Properties
+      summary: Create a media property
+      description: "Creates a new media property object. New media properties need to be verified by impact.com \nbefore they are fully approved.\n"
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - Name
+              - Type
+              - Url
+              properties:
+                Name:
+                  type: string
+                  description: The name of the media property.
+                Type:
+                  $ref: '#/components/schemas/PropertyType'
+                Url:
+                  type: string
+                  description: The URL to this media property.
+                MobilePlatform:
+                  $ref: '#/components/schemas/MobilePlatform'
+                AppStoreRating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                  description: Required only for mobile. Approximate rating (1-5).
+                Installs:
+                  $ref: '#/components/schemas/InstallsFollowers'
+                SocialPlatform:
+                  $ref: '#/components/schemas/SocialPlatform'
+                Followers:
+                  $ref: '#/components/schemas/InstallsFollowers'
+                Thumbnail:
+                  type: string
+                  format: binary
+                  description: A thumbnail image for your media property.
+                Description:
+                  type: string
+                  description: A description of the media property and its audience.
+                Tags:
+                  type: string
+                  description: Comma-separated tags used to categorize this media property.
+                RevenueModel:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RevenueModel'
+                  description: The monetization model(s) used by this media property.
+                MonthlyUniqueVisitors:
+                  type: integer
+                  description: Estimated monthly unique visitors. Applies to WEBSITE type properties.
+                AlexaRating:
+                  type: integer
+                  description: Alexa global traffic rank for this media property. Applies to WEBSITE type properties.
+                QuantcastRating:
+                  type: integer
+                  description: Quantcast audience measurement rating. Applies to WEBSITE type properties.
+                Price:
+                  type: integer
+                  description: The price of the app in the app store. Applies to MOBILE type properties.
+                Handle:
+                  type: string
+                  description: The social media handle or username for this property. Applies to SOCIAL type properties.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    example: /Mediapartners/<AccountSID>/MediaProperties/4622773
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/MediaProperties/{Id}:
+    parameters:
+    - name: AccountSID
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the partner account.
+    - name: Id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Unique identifier for the media property.
+    get:
+      operationId: retrieveMediaProperty
+      tags:
+      - Media Properties
+      summary: Retrieve a media property
+      description: Retrieves a media property for the specified Id value.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaProperty'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    put:
+      operationId: updateMediaProperty
+      tags:
+      - Media Properties
+      summary: Update a media property
+      description: "Updates the specified media property's attributes. Any parameter not provided will leave the \ncorresponding attribute unchanged. Submitted values overwrite existing values entirely.\n"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                Name:
+                  type: string
+                  description: Display name of the media property.
+                Thumbnail:
+                  type: string
+                  format: binary
+                  description: Thumbnail image for the media property, as a binary upload.
+                Description:
+                  type: string
+                  description: A description of the media property and its audience.
+                Tags:
+                  type: string
+                  description: Comma-separated tags used to categorize this media property.
+                RevenueModel:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RevenueModel'
+                  description: The monetization model(s) used by this media property.
+                Url:
+                  type: string
+                  description: The URL of the media property.
+                MonthlyUniqueVisitors:
+                  type: integer
+                  description: Estimated monthly unique visitors. Applies to WEBSITE type properties.
+                AlexaRating:
+                  type: integer
+                  description: Alexa global traffic rank for this media property. Applies to WEBSITE type properties.
+                QuantcastRating:
+                  type: integer
+                  description: Quantcast audience measurement rating. Applies to WEBSITE type properties.
+                MobilePlatform:
+                  $ref: '#/components/schemas/MobilePlatform'
+                AppStoreRating:
+                  type: integer
+                  description: App store rating out of 5. Applies to MOBILE type properties.
+                Price:
+                  type: integer
+                  description: The price of the app in the app store. Applies to MOBILE type properties.
+                Installs:
+                  $ref: '#/components/schemas/InstallsFollowers'
+                SocialPlatform:
+                  $ref: '#/components/schemas/SocialPlatform'
+                Followers:
+                  $ref: '#/components/schemas/InstallsFollowers'
+                Handle:
+                  type: string
+                  description: The social media handle or username for this property. Applies to SOCIAL type properties.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: OK
+                  Uri:
+                    type: string
+                    example: /Mediapartners/<AccountSID>/MediaProperties/4622773
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    delete:
+      operationId: deleteMediaProperty
+      tags:
+      - Media Properties
+      summary: Delete a media property
+      description: Permanently deletes the specified media property. This action cannot be undone.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: DELETED
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    MediaProperty:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the media property.
+          example: '4622773'
+        Name:
+          type: string
+          description: Display name of the media property.
+          example: Hazel Nutt's Instagram
+        Thumbnail:
+          type: string
+          description: API resource path to the thumbnail image for this media property, if one has been uploaded.
+          example: /Mediapartners/<AccountSID>/MediaProperties/4622773/Thumbnail
+        Description:
+          type: string
+          description: A description of the media property and its audience.
+          example: Hazel Nutt's official Instagram account covering lifestyle and wellness.
+        Tags:
+          type: string
+          description: Comma-separated tags used to categorize this media property.
+          example: lifestyle,wellness,beauty
+        RevenueModel:
+          type: array
+          description: The monetization model(s) used by this media property.
+          items:
+            $ref: '#/components/schemas/RevenueModel'
+          example:
+          - PAY_PER_SALE
+        Url:
+          type: string
+          description: The URL of the media property.
+          example: https://www.instagram.com/hazelnuttofficial
+        Type:
+          $ref: '#/components/schemas/PropertyType'
+          description: The type of media property.
+          example: SOCIAL
+        MonthlyUniqueVisitors:
+          type: string
+          description: Estimated monthly unique visitors. Applies to WEBSITE type properties.
+          example: ''
+        AlexaRating:
+          type: string
+          description: Alexa global traffic rank for this media property. Applies to WEBSITE type properties.
+          example: ''
+        QuantcastRating:
+          type: string
+          description: Quantcast audience measurement rating. Applies to WEBSITE type properties.
+          example: ''
+        OwnershipVerified:
+          type: string
+          description: Indicates whether ownership of this media property has been verified by impact.com.
+          example: 'true'
+        MobilePlatform:
+          $ref: '#/components/schemas/MobilePlatform'
+          description: The mobile platform this app is published on. Applies to MOBILE type properties.
+        AppStoreRating:
+          type: string
+          description: App store rating out of 5. Applies to MOBILE type properties.
+          example: ''
+        Installs:
+          $ref: '#/components/schemas/InstallsFollowers'
+          description: Estimated number of installs. Applies to MOBILE type properties.
+        Price:
+          type: string
+          description: The price of the app in the app store. Applies to MOBILE type properties.
+          example: ''
+        SocialPlatform:
+          $ref: '#/components/schemas/SocialPlatform'
+          description: The social media platform this property is on. Applies to SOCIAL type properties.
+          example: INSTAGRAM
+        Followers:
+          $ref: '#/components/schemas/InstallsFollowers'
+          description: Estimated number of followers or subscribers. Applies to SOCIAL type properties.
+          example: HUNDRED_THOUSAND_PLUS
+        Handle:
+          type: string
+          description: The social media handle or username for this property. Applies to SOCIAL type properties.
+          example: '@hazelnuttofficial'
+        Uri:
+          type: string
+          description: Unique reference to this media property in the impact.com API.
+          example: /Mediapartners/<AccountSID>/MediaProperties/4622773
+    MobilePlatform:
+      type: string
+      description: The mobile operating system platform the app is published on.
+      enum:
+      - IOS
+      - ANDROID
+    InstallsFollowers:
+      type: string
+      description: Tiered count buckets for app installs (MOBILE) or social followers (SOCIAL).
+      enum:
+      - HUNDRED_PLUS
+      - THOUSAND_PLUS
+      - TEN_THOUSAND_PLUS
+      - HUNDRED_THOUSAND_PLUS
+      - MILLION_PLUS
+      - TEN_MILLION_PLUS
+      - HUNDRED_MILLION_PLUS
+    RevenueModel:
+      type: string
+      description: The monetization model used by a media property.
+      enum:
+      - PAY_PER_LEAD
+      - PAY_PER_INQUIRY
+      - PAY_PER_SALE
+      - PAY_PER_CLICK
+      - PAY_PER_INSTALL
+    SocialPlatform:
+      type: string
+      description: The social media platform the property is on.
+      enum:
+      - INSTAGRAM
+      - YOUTUBE
+      - X/TWITTER
+      - FACEBOOK
+      - PINTEREST
+      - TWITCH
+      - TIKTOK
+      - LINKEDIN
+      - WECHAT
+      - WEIBO
+    PropertyType:
+      type: string
+      description: The type of media property — website, mobile app, or social media account.
+      enum:
+      - WEBSITE
+      - MOBILE
+      - SOCIAL
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-default-client: cURL

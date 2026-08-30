@@ -1,0 +1,215 @@
+openapi: 3.2.0
+info:
+  title: Partner Users API
+  version: '15'
+  description: 'Users represent the individual people who have access to your impact.com partner account. Each user has a state, a language preference, and a set of access rights — roles grouped with the specific permissions granted under each role.
+
+
+    Use this API to:
+
+
+    1. **List users** to audit who currently has access and at what permission level.
+
+    2. **Retrieve a user** to inspect a single account user''s state and access rights.
+
+
+    Each `Id` follows the `I-XXXXXXX` format. The numeric portion is what the Partner Identity Verification API expects when verifying a user.
+
+    '
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Users
+  description: Endpoints for listing and retrieving partner-account users.
+paths:
+  /Mediapartners/{AccountSID}/Users:
+    get:
+      operationId: listUsers
+      tags:
+      - Users
+      summary: List all users
+      description: Lists all users that have access to your partner account, sorted by join date with the first user to join appearing first.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Name
+        in: query
+        required: false
+        description: Filter by a URL-encoded string matching `FirstName`, `LastName`, or `Username`.
+        schema:
+          type: string
+      - name: State
+        in: query
+        required: false
+        description: Filter the list of users by their account state.
+        schema:
+          $ref: '#/components/schemas/UserState'
+      responses:
+        '200':
+          description: A list of users that have access to your partner account.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Users' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+  /Mediapartners/{AccountSID}/Users/{Id}:
+    get:
+      operationId: retrieveUser
+      tags:
+      - Users
+      summary: Retrieve a specific user
+      description: Retrieves a single account user by their unique Id.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: Unique identifier for the account user, in `I-XXXXXXX` format.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of the user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: No user exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Users/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+components:
+  schemas:
+    AccessRight:
+      type: object
+      properties:
+        Role:
+          type: string
+          enum:
+          - Advertiser Management
+          - Finance
+          - Technical
+          - Creative Management
+          - Account Administration
+          description: The functional area the granted permissions apply to.
+          example: Creative Management
+        Permissions:
+          type: array
+          description: The specific permissions granted to the user under this role.
+          items:
+            type: string
+            enum:
+            - MANAGE_DIRECTORY_INFO
+            - RUN_USAGE_REPORTS
+            - MANAGE_ACCOUNT_INFO
+            - MANAGE_PUBLISHER_PACKAGES
+            - MESSAGING
+            - NEGOTIATE_AGREEMENTS
+            - REQUEST_CAP_EXTENSIONS_AND_AGREEMENT_EXCEPTIONS
+            - SEND_MARKETING_MSG_TO_BRAND
+            - VIEW_BRAND_INFO
+            - APPLY_TO_CAMPAIGN
+            - RUN_ACTION_AND_PERFORMANCE_REPORTS
+            - REQUEST_CUSTOM_ADS
+            - APPROVE_CREATIVE_AND_DUB_HOUSE_EXPENSES
+            - MANAGE_CREATIVES
+            - RUN_CREATIVE_REPORTS
+            - GET_AD_HTML
+            - VIEW_FINANCIALS
+            - MANAGE_FINANCIAL_SETTINGS
+            - RUN_FINANCIAL_TRANSACTION_REPORTS
+            - WEBSERVICES_INTEGRATION
+            - EVENT_CALLBACK_INTEGRATION
+            - RUN_TECHNICAL_REPORTS
+            - TRACKER_AND_BRAND_URL_INTEGRATIONS
+            - ITEM_LIST_INTEGRATIONS
+    UserState:
+      type: string
+      enum:
+      - ACTIVE
+      - PENDING
+      - INVITED
+      description: The account state of the user.
+    User:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the account user, in `I-XXXXXXX` format. The numeric portion is what the Partner Identity Verification API expects.
+          example: I-1139074
+        FirstName:
+          type: string
+          description: The user's first name.
+          example: Hazel
+        LastName:
+          type: string
+          description: The user's last name.
+          example: Nutt
+        Username:
+          type: string
+          description: The user's impact.com login username.
+          example: hnutt
+        State:
+          $ref: '#/components/schemas/UserState'
+        Language:
+          type: string
+          description: The user's account language preference (locale code).
+          example: en_US
+        AccessRights:
+          type: array
+          description: Roles and the specific permissions granted under each role.
+          items:
+            $ref: '#/components/schemas/AccessRight'
+        JoinedDate:
+          type: string
+          format: date-time
+          description: Date and time the user joined the partner account (ISO 8601).
+          example: '2020-04-29T16:24:13-07:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the user's information was last updated (ISO 8601).
+          example: '2020-12-09T08:34:06-08:00'
+        LastUpdatedBy:
+          type: string
+          description: Username of the user that last updated this account user.
+          example: hnutt
+        CreatedBy:
+          type: string
+          description: Username of the user that created this account user.
+          example: rbanks
+        Uri:
+          type: string
+          description: API resource path for this user.
+          example: /Mediapartners/<AccountSID>/Users/I-1139074
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-default-client: cURL

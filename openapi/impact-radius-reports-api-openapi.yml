@@ -1,0 +1,299 @@
+openapi: 3.2.0
+info:
+  title: Partner Reports API
+  version: '15'
+  description: 'The Reports API gives you programmatic access to the same reports available in the impact.com UI. Use it to pull performance, listing, finance, and compliance data directly into your own tools.
+
+
+    Typical workflow:
+
+
+    1. **List Reports** to find a report. Only reports with `ApiAccessible: true` can be run via the API.
+
+    2. **Retrieve report metadata** to see the filters that report accepts and the columns it returns.
+
+    3. **Run the report** synchronously for small datasets (up to 20,000 rows), or
+
+    4. **Export the report** asynchronously for large datasets — this queues a background job that you poll via the Partner Jobs API.
+
+    '
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Reports
+  description: List available reports, fetch their metadata, and run them synchronously.
+paths:
+  /Mediapartners/{AccountSID}/Reports:
+    get:
+      operationId: listReports
+      tags:
+      - Reports
+      summary: List all available reports
+      description: 'Retrieves a list of all available reports. Only reports with `ApiAccessible: true` can be run programmatically — the rest are UI-only and return a `RunUri` pointing to the impact.com web app.'
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      responses:
+        '200':
+          description: A list of report objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Report'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Reports' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/Reports/{Id}:
+    get:
+      operationId: runReport
+      tags:
+      - Reports
+      summary: Run a report (Legacy)
+      description: 'Runs a report synchronously and returns the records inline. Page size is fixed at 20,000 rows — for larger datasets use the Report Export endpoint instead.
+
+
+        Call `/Reports/{Id}/MetaData` first to learn which filters the report accepts and which columns it returns. The `Records` array contains one object per row with column names matching the metadata `Attributes`.
+
+
+        **Note:** Starting September 1, 2025, this endpoint enforces stricter page limits. For production workloads against datasets that may exceed 20,000 rows, use Report Export.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports.
+        schema:
+          type: string
+      - name: SUBAID
+        in: query
+        required: false
+        description: Program ID to scope the report to a single brand. Omit to include all programs you partner with.
+        schema:
+          type: string
+        example: '10306'
+      - name: START_DATE
+        in: query
+        required: true
+        description: Start date for the report's date range, in `YYYY-MM-DD` format.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-01'
+      - name: END_DATE
+        in: query
+        required: true
+        description: End date for the report's date range, in `YYYY-MM-DD` format.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-31'
+      - name: RQueryIDx
+        in: query
+        required: false
+        description: For reports that return multiple result tables, selects which table to return.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: Report results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Records:
+                    type: array
+                    description: One object per row. Keys match the column names returned by the report's MetaData `Attributes`.
+                    items:
+                      type: object
+                      additionalProperties: true
+        '404':
+          description: No report exists with the supplied Id, or the report is not API accessible.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Reports/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/Reports/{Id}/MetaData:
+    get:
+      operationId: retrieveMetadata
+      tags:
+      - Reports
+      summary: Retrieve report metadata
+      description: Returns the dynamic documentation for a report — the filters it accepts and the attributes (columns) it returns. Call this before running a report to learn its exact contract.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports.
+      responses:
+        '200':
+          description: Report metadata details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportMetadata'
+        '404':
+          description: No report exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Reports/{Id}/MetaData' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    ReportMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Display name of the report.
+          example: Action Listing
+        Id:
+          type: string
+          description: The report handle.
+          example: mp_action_listing_fast
+        Description:
+          type: string
+          description: A short description of what the report contains.
+          example: Displays data for each individual action that has been credited to you.
+        Filters:
+          type: array
+          description: The filters this report accepts as query parameters when run.
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+        Attributes:
+          type: array
+          description: The columns this report returns. Each row in a Run Report response contains one key per attribute.
+          items:
+            $ref: '#/components/schemas/ReportAttribute'
+        RunUri:
+          type: string
+          description: API resource path to run this report.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
+        Uri:
+          type: string
+          description: Unique reference to this report's metadata in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
+    ReportAttribute:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The column name as it appears in each record returned by Run Report.
+          example: action_id
+        DataType:
+          type: string
+          description: Data type of values in this column.
+          example: String
+        Description:
+          type: string
+          description: A short description of what this column represents.
+          example: Unique value assigned to each action
+    ReportFilter:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The filter's name. Use this as the query parameter when running the report.
+          example: START_DATE
+        DataType:
+          type: string
+          enum:
+          - Boolean
+          - Date (yyyy-MM-dd'T'HH:mm:ssZZ)
+          - Decimal
+          - Integer
+          - String
+          description: Data type the filter accepts.
+          example: String
+        Format:
+          type: string
+          description: Additional format hint for the filter, if any.
+          example: ''
+    Report:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Display name of the report.
+          example: Action Listing
+        Id:
+          type: string
+          description: The report handle used in the path of all other Report endpoints.
+          example: mp_action_listing_fast
+        Category:
+          type: string
+          enum:
+          - Admin
+          - Beta
+          - Compliance
+          - Cross-Program
+          - Custom
+          - Finance
+          - Insights
+          - Listing
+          - Operations
+          - Performance
+          description: Category that groups related reports in the impact.com UI. May be empty for some reports.
+          example: Listing
+        Description:
+          type: string
+          description: A short description of what the report contains.
+          example: Displays data for each individual action that has been credited to you.
+        ApiAccessible:
+          type: boolean
+          description: When `true`, this report can be run via the API at `ApiRunUri` and exported via `DeferredApiRunUri`. When `false`, the report is UI-only and `RunUri` contains the impact.com web app link.
+          example: true
+        ApiRunUri:
+          type: string
+          description: API resource path to run this report synchronously. Present only when `ApiAccessible` is `true`.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
+        DeferredApiRunUri:
+          type: string
+          description: API resource path to export this report asynchronously. Present only when `ApiAccessible` is `true`.
+          example: /Mediapartners/<AccountSID>/ReportExport/mp_action_listing_fast
+        MetaDataUri:
+          type: string
+          description: API resource path to retrieve this report's metadata. Present only when `ApiAccessible` is `true`.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
+        RunUri:
+          type: string
+          description: Link to view the report in the impact.com web app. Present only when `ApiAccessible` is `false`.
+          example: /secure/mediapartner/report/viewReport.report?id=17698
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-default-client: cURL

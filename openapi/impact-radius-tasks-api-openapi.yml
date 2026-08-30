@@ -1,0 +1,291 @@
+openapi: 3.2.0
+info:
+  title: Brand Tasks API
+  description: API for retrieving tasks, which are assignments for partners or other members in your impact.com account.
+  version: v14
+servers:
+- url: https://api.impact.com
+tags:
+- name: Tasks
+paths:
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/Tasks:
+    get:
+      summary: List All Tasks
+      description: Returns a list of existing, non-archived tasks for a specific program.
+      operationId: listTasks
+      tags:
+      - Tasks
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The ID of the program to retrieve tasks from.
+        schema:
+          type: integer
+      - name: Type
+        in: query
+        description: Filter tasks by one or more comma-separated task types. For compliance violations, use COMPLIANCE. Values match the Type field in the Task response.
+        schema:
+          type: string
+          example: COMPLIANCE
+      - name: SubtypeName
+        in: query
+        description: Filter tasks by one or more comma-separated subtype names. Requires the Type parameter. For compliance violations, common values are Search, Promo, Social, and Content. Passing an unrecognized subtype returns a validation error.
+        schema:
+          type: string
+          example: Content
+      - name: DateCreatedAfter
+        in: query
+        description: Only return tasks created on or after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateCreatedBefore
+        in: query
+        description: Only return tasks created on or before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdatedBefore
+        in: query
+        description: Only return tasks updated before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: DateLastUpdatedAfter
+        in: query
+        description: Only return tasks updated after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A paginated list of task objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Tasks:
+                    type: array
+                    description: The list of task objects.
+                    items:
+                      $ref: '#/components/schemas/Task'
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/Tasks/{TaskId}:
+    get:
+      summary: Get Task Details
+      description: Retrieves the details of an existing task by its unique ID.
+      operationId: getTaskById
+      tags:
+      - Tasks
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: TaskId
+        in: path
+        required: true
+        description: The unique identifier for the task.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single task object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+components:
+  schemas:
+    Attachment:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the attachment.
+          example: task_1223456_988957a0-e0ed-4f16-984b-f5a9259e6be7
+        Filename:
+          type: string
+          description: Original filename of the attachment.
+          example: acme_reward_card_details.pdf
+        Location:
+          type: string
+          format: uri
+          description: URL to download the attachment.
+          example: https://cdn.example.com/task_123456_988957a0-e0ed-4f16-984b-f5a9259e6be7.pdf
+    TaskDetails:
+      type: object
+      properties:
+        Summary:
+          type: string
+          example: Acme Rewards Card Update
+        Description:
+          type: string
+          example: The Acme Rewards Card APR has changed, please update your ads to reflect this new value.
+        Urgent:
+          type: boolean
+          example: true
+        State:
+          type: string
+          enum:
+          - NEW
+          - INPROGRESS
+          - DUPLICATE
+          - INVALID
+          - BLOCKED
+          - COMPLETED
+          - APPROVED
+          example: INPROGRESS
+        Type:
+          type: string
+          enum:
+          - COMPLIANCE
+          - TECHNICAL
+          - GENERAL
+          - CREATIVE
+          - FINANCE
+          - CONTRACTS
+          - ANALYTICS
+          - MONITORING
+          example: COMPLIANCE
+        SubtypeId:
+          type: string
+          nullable: true
+          example: '275'
+        SubtypeName:
+          type: string
+          nullable: true
+          example: Content
+        ResolutionId:
+          type: string
+          nullable: true
+          example: ''
+        ResolutionName:
+          type: string
+          nullable: true
+          example: ''
+    User:
+      type: object
+      properties:
+        Username:
+          type: string
+          description: The user's username.
+          example: Wile E. Coyote
+        EmailAddress:
+          type: string
+          format: email
+          description: The user's email address.
+          example: wilecoyote@example.com
+    Task:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '3562529'
+        Reference:
+          $ref: '#/components/schemas/TaskReference'
+          description: Identifies the partner by ID and custom values.
+        Details:
+          $ref: '#/components/schemas/TaskDetails'
+          description: Title of the request.
+        Attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Details about each attachment.
+        DueDate:
+          type: string
+          format: date-time
+          example: 2021-08-31T04:00:00.000+0000
+          description: Date and time at which the task is due. Displayed in ISO 8601 format.
+        AssigneeUser:
+          $ref: '#/components/schemas/User'
+          description: Name of the user of the partner account that the task is assigned to.
+        AssigneeAccount:
+          type: string
+          example: Acme Partners
+          description: Name of the partner account that the task is assigned to.
+        TotalActions:
+          type: integer
+          description: Total number of actions that have been recorded for this task.
+          example: 0
+        Actions:
+          type: array
+          description: Describes actions that have occurred on this task.
+          items: {}
+        TotalComments:
+          type: integer
+          description: Total number of comments that have been recorded for this task.
+          example: 1
+        Comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+          description: Details about each comment on this task.
+        DateCreated:
+          type: string
+          format: date-time
+          description: The date and time the task was created.
+          example: 2021-08-18T16:47:21.000+0000
+        DateLastUpdated:
+          type: string
+          format: date-time
+          example: 2021-08-18T22:45:42.000+0000
+          description: The date and time the task was last updated.
+        CreatedBy:
+          $ref: '#/components/schemas/User'
+          description: Name of the user that created the task.
+        LastUpdatedBy:
+          $ref: '#/components/schemas/User'
+          description: Name of the user that last updated the task.
+    TaskReference:
+      type: object
+      properties:
+        PartnerId:
+          type: integer
+          description: Unique identifier of the partner this task is about.
+          example: 2552842
+        PartnerValue1:
+          type: string
+          description: Custom partner tracking value 1.
+          example: vip
+        PartnerValue2:
+          type: string
+          description: Custom partner tracking value 2.
+          example: north-america
+        PartnerValue3:
+          type: string
+          description: Custom partner tracking value 3.
+          example: tennis
+    Comment:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: Unique identifier for the comment.
+          example: 98765
+        Comment:
+          type: string
+          description: The comment text.
+          example: I've updated our home page with the latest ads, see attached screenshot.
+        Commenter:
+          type: string
+          description: Name of the user who posted the comment.
+          example: Wile E. Coyote
+        Attachments:
+          type: array
+          description: Details about each attachment on the comment.
+          items:
+            $ref: '#/components/schemas/Attachment'

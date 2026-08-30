@@ -1,0 +1,791 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Programs API
+  version: '1.0'
+  description: 'Operations tagged Programs across 2 of this provider''s published API definitions: impact-radius-brand-programs-v14.yml, impact-radius-partner-campaigns-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Programs
+paths:
+  /Advertisers/{AccountSID}/Campaigns:
+    get:
+      summary: List All Programs
+      description: Returns a list of all programs for your account, sorted by Program ID.
+      operationId: listPrograms
+      tags:
+      - Programs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Name
+        in: query
+        description: Filter by program name.
+        schema:
+          type: string
+      - name: State
+        in: query
+        description: Filter by program state.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - AWAITING_REVIEW
+          - CANCELLED
+          - CLOSED
+          - DEACTIVATED
+          - DELINQUENT
+          - REJECTED
+          - SETUP
+          - SETUP_COMPLETE
+      responses:
+        '200':
+          description: A paginated list of program objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Campaigns:
+                    type: array
+                    description: The list of program objects.
+                    items:
+                      $ref: '#/components/schemas/Program'
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}:
+    get:
+      summary: Get Program Details
+      description: Retrieves the details of an existing program by its unique ID.
+      operationId: getProgramById
+      tags:
+      - Programs
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The unique identifier for the program (campaign).
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single program object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Program'
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Campaigns:
+    get:
+      operationId: listPrograms
+      tags:
+      - Programs
+      summary: List all joined programs
+      description: Returns the list of programs you have signed up for.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: InsertionOrderStatus
+        in: query
+        description: Filter the result to programs whose contract has the specified status.
+        required: false
+        schema:
+          type: string
+          enum:
+          - Active
+          - Expired
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Campaigns:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Program_2'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+      description: Production server
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}:
+    get:
+      operationId: retrieveProgram
+      tags:
+      - Programs
+      summary: Retrieve a program
+      description: Returns the details of a single program you've joined.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        description: Unique identifier for the program.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Program_2'
+        '404':
+          description: No program exists with the supplied CampaignId, or you haven't joined it.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns/{CampaignId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+      description: Production server
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Logo:
+    get:
+      operationId: retrieveProgramLogo
+      tags:
+      - Programs
+      summary: Retrieve program logo
+      description: 'Returns the program''s logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        description: Unique identifier for the program.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Binary data of the requested logo.
+          content:
+            image/gif:
+              schema:
+                type: string
+                format: binary
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: No logo exists for this program.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Logo' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: image/png'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+      description: Production server
+components:
+  schemas:
+    Program:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the program.
+        Name:
+          type: string
+          description: The display name of the program.
+        State:
+          type: string
+          description: The current state of the program.
+          enum:
+          - ACTIVE
+          - AWAITING_REVIEW
+          - CANCELLED
+          - CLOSED
+          - DEACTIVATED
+          - DELINQUENT
+          - REJECTED
+          - SETUP
+          - SETUP_COMPLETE
+        Type:
+          type: string
+          description: The classification of the program. This indicates the business model or category the program falls under (e.g., Affiliate, Retail Media, etc.).
+          enum:
+          - Seller
+          - Retail Media Seller
+          - Performance
+          - Advocate
+          - Creator
+          - Retail Media
+          example: Performance
+        Categories:
+          type: object
+          description: The program's category classifications.
+          properties:
+            PrimaryCategory:
+              type: string
+              description: The program's primary category.
+            PrimarySubCategories:
+              type: array
+              description: Subcategories under the primary category.
+              items:
+                type: string
+            AdditionalCategory:
+              type: string
+              nullable: true
+              description: An additional category for the program, if any.
+            AdditionalSubCategories:
+              type: array
+              description: Subcategories under the additional category.
+              items:
+                type: string
+        ShortDescription:
+          type: string
+          description: A short description of the program.
+        LongDescription:
+          type: string
+          description: A long description of the program.
+        ListInMarketplace:
+          type: boolean
+          description: Whether the program is listed in the impact.com partner marketplace.
+        DisplayServicingAgency:
+          type: boolean
+          description: Whether the servicing agency is displayed publicly.
+        Rating:
+          type: integer
+          description: The program's rating.
+        SearchKeywords:
+          type: string
+          description: Keywords used to surface the program in marketplace search.
+        ShippingRegions:
+          type: array
+          description: Regions where the brand ships.
+          items:
+            type: string
+        Resources:
+          type: object
+          description: Links to brand-provided resources.
+          properties:
+            CompanyHomepage:
+              type: string
+              format: uri
+              description: The company homepage URL.
+            ExampleLandingPage:
+              type: string
+              format: uri
+              description: An example landing page URL.
+            InformationPage:
+              type: string
+              format: uri
+              description: An information page URL.
+            AdditionalRelatedLinks:
+              type: array
+              description: Additional links related to the program.
+              items:
+                type: object
+                properties:
+                  LinkType:
+                    type: string
+                    description: The type of link.
+                    enum:
+                    - URL
+                    - PDF
+                  LinkDisplayName:
+                    type: string
+                    description: Display name for the link.
+                  LinkUrl:
+                    type: string
+                    format: uri
+                    description: The URL of the link.
+        CompanyContacts:
+          type: array
+          description: Company contacts for the program.
+          items:
+            type: object
+            properties:
+              FirstName:
+                type: string
+                description: The contact's first name.
+              LastName:
+                type: string
+                description: The contact's last name.
+              EmailAddress:
+                type: string
+                format: email
+                description: The contact's email address.
+              PhoneNumber:
+                type: string
+                description: The contact's phone number.
+        GiftCardPayouts:
+          type: boolean
+          description: Whether gift card payouts are enabled.
+        TrademarkBidding:
+          type: boolean
+          description: Whether partners are allowed to bid on the brand's trademark terms.
+        ThirdPartyImpressionPixel:
+          type: string
+          description: A third-party impression tracking pixel.
+        MobileReadyAds:
+          type: boolean
+          description: Whether the program supports mobile-ready ads.
+        DisplayFutureAds:
+          type: boolean
+          description: Whether to display ads that aren't yet active.
+        PromoCodeTracking:
+          type: boolean
+          description: Whether promo code tracking is enabled.
+        TrackingDomain:
+          type: string
+          description: The tracking domain used for this program.
+        SiteDefinition:
+          type: string
+          description: The site definition for the program.
+        ImpressionTracking:
+          type: boolean
+          description: Whether impression tracking is enabled.
+        ViewThroughCrediting:
+          type: boolean
+          description: Whether view-through crediting is enabled.
+        IdentityMatching:
+          type: string
+          description: The identity matching strategy.
+          enum:
+          - NONE
+          - ACCOUNT
+          - IR_CONSORTIUM
+        HasStandDownPolicy:
+          type: boolean
+          description: Whether the program has a stand-down policy in place.
+        GatewayTrackingSettings:
+          type: object
+          description: Settings for gateway tracking.
+          properties:
+            DefaultLandingPage:
+              type: string
+              format: uri
+              description: The default landing page URL.
+            MediaPartnerTrackingTemplate:
+              type: string
+              description: Tracking template applied to media partner links.
+            CampaignTrackingTemplate:
+              type: string
+              description: Tracking template applied to campaign links.
+            SSLSupport:
+              type: boolean
+              description: Whether SSL is supported for tracking links.
+            DeepLinking:
+              type: boolean
+              description: Whether deep linking is enabled.
+            DeepLinkDomains:
+              type: string
+              description: Comma-separated list of domains for deep linking.
+            ThirdPartyGatewayUrl:
+              type: string
+              format: uri
+              description: A third-party gateway URL for tracking.
+            ThirdPartyGatewayQueryStringParameters:
+              type: string
+              description: Query string parameters for the third-party gateway.
+            UniqueClickWindowLength:
+              type: string
+              description: The length of the unique click window.
+              enum:
+              - 1m
+              - 5m
+              - 15m
+              - 30m
+              - 1h
+              - 6h
+              - 12h
+              - 24h
+            UniqueClickWindowType:
+              type: string
+              description: Whether the unique click window is fixed or rolling.
+              enum:
+              - FIXED
+              - ROLLING
+        DirectTrackingSettings:
+          type: object
+          description: Settings for direct tracking.
+          properties:
+            UnidentifiedName:
+              type: string
+              description: Name used for unidentified traffic.
+            SessionWindowLength:
+              type: integer
+              description: The session window length.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this program in the impact.com API.
+          example: /Advertisers/<AccountSID>/Campaigns/1000
+    CountryCode:
+      type: string
+      description: ISO-style country/region code used by impact.com for shipping regions.
+      enum:
+      - US
+      - UK
+      - CANADA
+      - AUSTRALIA
+      - GERMANY
+      - FRANCE
+      - AFGHANISTAN
+      - ALBANIA
+      - ALGERIA
+      - AMERICANSAMOA
+      - ANDORRA
+      - ANGOLA
+      - ANGUILLA
+      - ANTARCTICA
+      - ANTIGUABARBUDA
+      - ARGENTINA
+      - ARMENIA
+      - ARUBA
+      - AUSTRIA
+      - AZERBAIJAN
+      - BAHAMAS
+      - BAHRAIN
+      - BANGLADESH
+      - BARBADOS
+      - BELARUS
+      - BELGIUM
+      - BELIZE
+      - BENIN
+      - BERMUDA
+      - BHUTAN
+      - BOLIVIA
+      - BOSNIAHERZEGOVINA
+      - BOTSWANA
+      - BRAZIL
+      - BRITISHINDIANOCEANTERRITORY
+      - BRUNEIDARUSSALAM
+      - BULGARIA
+      - BURKINAFASO
+      - BURUNDI
+      - CAMBODIA
+      - CAMEROON
+      - CAPVERDE
+      - CAYMANISLANDS
+      - CENTRALAFRICANREPUBLIC
+      - CHAD
+      - CHILE
+      - CHINA
+      - CHRISTMASISLAND
+      - COCOSISLANDS
+      - COLOMBIA
+      - COMOROS
+      - CONGO
+      - DEMOCRATICREPUBLICCONGO
+      - COOKISLANDS
+      - COSTARICA
+      - IVORYCOAST
+      - CROATIA
+      - CUBA
+      - CYPRUS
+      - CZECHREPUBLIC
+      - DENMARK
+      - DIJIBOUTI
+      - DOMINICA
+      - DOMINICANREPUBLIC
+      - ECUADOR
+      - EGYPT
+      - ELSALVADOR
+      - EQUATORIALGUINEA
+      - ERITREA
+      - ESTONIA
+      - ETHIOPIA
+      - FALKLANDISLANDS
+      - FAROEISLANDS
+      - FIJI
+      - FINLAND
+      - FRENCHGUIANA
+      - FRENCHPOLYNESIA
+      - FRENCHSOUTHERNTERRITORIES
+      - GABON
+      - GAMBIA
+      - GEORGIA
+      - GHANA
+      - GIBRALTAR
+      - GREECE
+      - GREENLAND
+      - GRENADA
+      - GUADELOUPE
+      - GUAM
+      - GUATEMALA
+      - GUERNSEY
+      - GUINEA
+      - GUINEABISSAU
+      - GUYANA
+      - HAITI
+      - VATICAN
+      - HONDURAS
+      - HONGKONG
+      - HUNGARY
+      - ICELAND
+      - INDIA
+      - INDONESIA
+      - IRAN
+      - IRAQ
+      - IRELAND
+      - ISRAEL
+      - ITALY
+      - JAMAICA
+      - JAPAN
+      - JORDAN
+      - KAZAKHSTAN
+      - KENYA
+      - KIRIBATI
+      - SOUTHKOREA
+      - KUWAIT
+      - KYRGYZSTAN
+      - LAOS
+      - LATVIA
+      - LEBANON
+      - LESOTHO
+      - LIBERIA
+      - LIBYA
+      - LICHTENSTEIN
+      - LITHUANIA
+      - LUXEMBOURG
+      - MACAO
+      - MACEDONIA
+      - MADAGASCAR
+      - MALAWI
+      - MALAYSIA
+      - MALDIVES
+      - MALI
+      - MALTA
+      - MARSHALLISLANDS
+      - MARTINIQUE
+      - MAURITANIA
+      - MAURITIUS
+      - MAYOTTE
+      - MEXICO
+      - MICRONESIA
+      - MOLDOVA
+      - MONACO
+      - MONGOLIA
+      - MONTENEGRO
+      - MONTSERRAT
+      - MOROCCO
+      - MOZAMBIQUE
+      - MYANMAR
+      - NAMIBIA
+      - NAURU
+      - NEPAL
+      - NETHERLANDS
+      - NETHERLANDSANTILLES
+      - NEWCALEDONIA
+      - NEWZEALAND
+      - NICARAGUA
+      - NIGER
+      - NIGERIA
+      - NIUE
+      - NORFOLKISLAND
+      - NORTHKOREA
+      - NORTHERNMARIANAISLANDS
+      - NORWAY
+      - OMAN
+      - PAKISTAN
+      - PALAU
+      - PALESTINIANTERRITORY
+      - PANAMA
+      - PAPUANEWGUINEA
+      - PARAGUAY
+      - PERU
+      - PHILIPPINES
+      - PITCAIRN
+      - POLAND
+      - PORTUGAL
+      - PUERTORICO
+      - QATAR
+      - REUNION
+      - ROMANIA
+      - RUSSIA
+      - RWANDA
+      - SAINTHELENA
+      - SAINTKITTSNEVIS
+      - SAINTLUCIA
+      - SAINTPIERREMIQUELON
+      - SAINTVINCENTGRENADINES
+      - SAMOA
+      - SANMARINO
+      - SAOTOME
+      - SAUDIARABIA
+      - SENEGAL
+      - YOGOSLAVIA
+      - SEYCHELLES
+      - SIERRALEONE
+      - SINGAPORE
+      - SLOVAKIA
+      - SLOVENIA
+      - SOLOMONISLANDS
+      - SOMALIA
+      - SOUTHAFRICA
+      - SPAIN
+      - SRILANKA
+      - SUDAN
+      - SURINAME
+      - SVALBARDJANMAYEN
+      - SWAZILAND
+      - SWEDEN
+      - SWITZERLAND
+      - SYRIA
+      - TAIWAN
+      - TAJIKISTAN
+      - TANZANIA
+      - THAILAND
+      - TIMOR
+      - TOGO
+      - TOKELAU
+      - TONGA
+      - TRINIDADTOBAGO
+      - TUNISIA
+      - TURKEY
+      - TURKMENISTAN
+      - TURKSCAICOSISLANDS
+      - TUVALU
+      - UGANDA
+      - UKRAINE
+      - UAE
+      - URUGUAY
+      - UZBEKISTAN
+      - VANUATU
+      - VENEZUELA
+      - VIETNAM
+      - BRITISHVIRGINISLANDS
+      - USVIRGINISLANDS
+      - WALLISFUTUNA
+      - WESTERNSAHARA
+      - YEMEN
+      - ZAMBIA
+      - ZIMBABWE
+    Program_2:
+      type: object
+      properties:
+        AdvertiserId:
+          type: string
+          description: Unique identifier of the brand (advertiser) running this program.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand.
+          example: Acme Corporation
+        AdvertiserUrl:
+          type: string
+          description: URL of the brand's main website.
+          example: https://www.acmecorporation.io
+        CampaignId:
+          type: string
+          description: Unique identifier of the program (the URL path still uses "Campaigns" for backwards compatibility).
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the program.
+          example: Wayne Enterprises
+        CampaignUrl:
+          type: string
+          description: URL of the program's landing site.
+          example: http://www.wayne.limited
+        CampaignDescription:
+          type: string
+          description: Description of the program supplied by the brand.
+          example: Wayne Enterprises delivers innovative automotive tech and premium sports equipment.
+        ShippingRegions:
+          type: array
+          description: Country/region codes where the brand ships physical products.
+          items:
+            $ref: '#/components/schemas/CountryCode'
+          example:
+          - SOUTHAFRICA
+          - UK
+          - US
+        CampaignLogoUri:
+          type: string
+          description: API resource path to retrieve the program's logo image.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Logo
+        PublicTermsUri:
+          type: string
+          description: API resource path to the public terms in the program's contract.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms
+        ContractStatus:
+          type: string
+          enum:
+          - Active
+          - Expired
+          description: Current state of your contract with this program.
+          example: Active
+        ContractUri:
+          type: string
+          description: API resource path to your active contract with this program (see the Partner Contracts API).
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active
+        TrackingLink:
+          type: string
+          description: A ready-to-use tracking link for this program. Generate additional links via the Partner Tracking Links API.
+          example: https://example.sjv.io/c/1924609/650971/10306
+        HasStandDownPolicy:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether the brand enforces a stand-down policy (rules around bidding restrictions or trademark use).
+          example: 'true'
+        AllowsDeeplinking:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether deep linking is enabled for this program.
+          example: 'true'
+        DeeplinkDomains:
+          type: array
+          description: Domains the brand permits deep linking to. Wildcards (e.g., `*.impact.com`) include all subdomains.
+          items:
+            type: string
+          example:
+          - impact.com
+          - '*.impact.com'
+        Uri:
+          type: string
+          description: API resource path for this program.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-programs-v14.yml
+- impact-radius-partner-campaigns-v15.yml

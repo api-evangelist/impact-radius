@@ -1,0 +1,196 @@
+openapi: 3.2.0
+info:
+  title: Brand API - Programs Unsubscribed Contacts API
+  description: API for managing your programs (campaigns) on impact.com. This includes retrieving program details and managing unsubscribed contacts from your outreach communications.
+  version: v14
+servers:
+- url: https://api.impact.com
+tags:
+- name: Unsubscribed Contacts
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/UnsubscribedContacts:
+    get:
+      summary: List Unsubscribed Contacts
+      description: Retrieves a paginated list of all contacts who have unsubscribed from a specific program's Outreach communications.
+      operationId: listUnsubscribedContacts
+      tags:
+      - Unsubscribed Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The unique identifier for the program.
+        schema:
+          type: integer
+      - name: PartnerId
+        in: query
+        description: Filter by partner ID.
+        schema:
+          type: integer
+      - name: UserEmail
+        in: query
+        description: Filter by a specific user email.
+        schema:
+          type: string
+          format: email
+      - name: Page
+        in: query
+        description: The page number to retrieve, starting at 0.
+        schema:
+          type: integer
+          default: 0
+      - name: PageSize
+        in: query
+        description: The number of items per page. Maximum is 1000.
+        schema:
+          type: integer
+          default: 20
+          maximum: 1000
+      responses:
+        '200':
+          description: A paginated list of unsubscribed contacts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsubscribedContactsResponse'
+    post:
+      summary: Unsubscribe a Contact
+      description: Unsubscribes a contact from a specific program's Outreach communications on behalf of a partner.
+      operationId: unsubscribeContact
+      tags:
+      - Unsubscribed Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The unique identifier for the program.
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - PartnerId
+              - UserEmail
+              properties:
+                PartnerId:
+                  type: integer
+                  description: The unique identifier for the Partner associated with the contact.
+                UserEmail:
+                  type: string
+                  format: email
+                  description: The email address of the contact to unsubscribe.
+      responses:
+        '200':
+          description: A confirmation object indicating success.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+components:
+  schemas:
+    UnsubscribedContact:
+      type: object
+      properties:
+        UserEmail:
+          type: string
+          format: email
+          description: The email address of the unsubscribed contact.
+          example: partnerA@mail.com
+        PartnerId:
+          type: integer
+          description: The unique identifier of the partner associated with the contact.
+          example: 1234
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the unsubscribe was created.
+          example: '2026-02-05T12:13:08Z'
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the unsubscribe was last updated.
+          example: '2026-02-05T12:13:08Z'
+    UnsubscribedContactsResponse:
+      type: object
+      properties:
+        Page:
+          type: integer
+          description: The current page number. Starts at 0.
+          example: 0
+        NumPages:
+          type: integer
+          description: The total number of pages available.
+          example: 1
+        PageSize:
+          type: integer
+          description: The number of items per page. The maximum is 1000.
+          example: 20
+        Total:
+          type: integer
+          description: The total number of unsubscribed contact records.
+          example: 1
+        Start:
+          type: integer
+          description: The index of the first item on the current page.
+          example: 0
+        End:
+          type: integer
+          description: The index of the last item on the current page.
+          example: 1
+        Uri:
+          type: string
+          format: uri-reference
+          description: The URI for the current page of results.
+          example: /UnsubscribedContacts?page=0&size=20
+        FirstPageUri:
+          type: string
+          format: uri-reference
+          description: The URI for the first page of results.
+          example: /UnsubscribedContacts?page=0&size=20
+        PreviousPageUri:
+          type: string
+          format: uri-reference
+          nullable: true
+          description: The URI for the previous page of results, if any.
+          example: ''
+        NextPageUri:
+          type: string
+          format: uri-reference
+          nullable: true
+          description: The URI for the next page of results, if any.
+          example: ''
+        LastPageUri:
+          type: string
+          format: uri-reference
+          description: The URI for the last page of results.
+          example: /UnsubscribedContacts?page=0&size=20
+        Results:
+          type: array
+          description: The list of unsubscribed contact objects on this page.
+          items:
+            $ref: '#/components/schemas/UnsubscribedContact'
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.

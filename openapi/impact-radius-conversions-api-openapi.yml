@@ -1,0 +1,1161 @@
+openapi: 3.2.0
+info:
+  title: Brand Conversions API
+  description: API for submitting conversion events (e.g., sales, leads, subscriptions) to be reported on and potentially attributed to partners. Once a conversion is attributed, it becomes an Action.
+  version: v13
+  x-gitbook-description-document:
+    object: document
+    data:
+      schemaVersion: 9
+    nodes:
+    - object: block
+      type: paragraph
+      isVoid: false
+      data: {}
+      nodes:
+      - object: text
+        leaves:
+        - object: leaf
+          text: API for submitting conversion events (e.g., sales, leads, subscriptions) to be reported on and potentially attributed to partners. Once a conversion is attributed, it becomes an Action.
+          marks: []
+        key: 7zYgC8SpW1H1
+      key: sebstG3tAJKY
+    key: Yt0l4mTVois2
+  x-gitbook-description-html: <p>API for submitting conversion events (e.g., sales, leads, subscriptions) to be reported on and potentially attributed to partners. Once a conversion is attributed, it becomes an Action.</p>
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+tags:
+- name: Conversions
+paths:
+  /Advertisers/{AccountSID}/Conversions:
+    post:
+      summary: Submit a Conversion Event
+      description: "Submits a conversion event for tracking and attribution.\n\n  **Additional required parameters** not captured in the `required` list below:\n  - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).\n  - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).\n\n  **Note on conditional requirements:** Many parameters listed below as *optional* are conditionally required based on what else you submit. For example:\n  - Item-level fields (`ItemSku[i]`, `ItemQuantity[i]`, `ItemPrice[i]`, `ItemSubTotal[i]`, etc.) become required when reporting at the item level.\n  - `CurrencyCode` is required when monetary fields are provided.\n  - Mobile-app fields (`AppleIfa`, `GoogAId`, `AppPackage`, `AppInstallRef`, `PropertyId`) are required for mobile-app install attribution.\n  - Call-tracking fields (`PhoneNumber`, `CallerId`, `CountryCode`) are required for call-tracking conversions.\n\nIt is highly recommended to provide as much data as possible for accurate attribution and payout calculation."
+      operationId: submitConversion
+      tags:
+      - Conversions
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: 'The details of the conversion event.
+
+
+          **Additional required parameters** not captured in the `required` list below:
+
+          - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).
+
+          - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).
+
+
+          **Note on conditional requirements:** Many parameters listed below as *optional* are conditionally required based on what else you submit. For example:
+
+          - Item-level fields (`ItemSku[i]`, `ItemQuantity[i]`, `ItemPrice[i]`, `ItemSubTotal[i]`, etc.) become required when reporting at the item level.
+
+          - `CurrencyCode` is required when monetary fields are provided.
+
+          - Mobile-app fields (`AppleIfa`, `GoogAId`, `AppPackage`, `AppInstallRef`, `PropertyId`) are required for mobile-app install attribution.
+
+          - Call-tracking fields (`PhoneNumber`, `CallerId`, `CountryCode`) are required for call-tracking conversions.
+
+
+          See each field''s description for specific conditional requirements.'
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ConversionPayload'
+        x-gitbook-description-html: '<p>The details of the conversion event.</p>
+
+          <p><strong>Additional required parameters</strong> not captured in the <code>required</code> list below:</p>
+
+          <ul>
+
+          <li>One of <code>ActionTrackerId</code>, <code>EventTypeId</code>, or <code>EventTypeCode</code> is required (event identifier).</li>
+
+          <li>One of <code>ClickId</code>, <code>CustomerId</code>, <code>CustomProfileId</code>, <code>CustomClickId</code>, <code>PromoCode</code>, <code>MediaId</code>/<code>MediaPartnerId</code>, <code>UniqueUrl</code>, <code>CallerId</code>, <code>GoogAId</code>, <code>AndroidId</code>, <code>AppleIfa</code>, or <code>AppleIfv</code> is required (attribution key).</li>
+
+          </ul>
+
+          <p><strong>Note on conditional requirements:</strong> Many parameters listed below as <em>optional</em> are conditionally required based on what else you submit. For example:</p>
+
+          <ul>
+
+          <li>Item-level fields (<code>ItemSku[i]</code>, <code>ItemQuantity[i]</code>, <code>ItemPrice[i]</code>, <code>ItemSubTotal[i]</code>, etc.) become required when reporting at the item level.</li>
+
+          <li><code>CurrencyCode</code> is required when monetary fields are provided.</li>
+
+          <li>Mobile-app fields (<code>AppleIfa</code>, <code>GoogAId</code>, <code>AppPackage</code>, <code>AppInstallRef</code>, <code>PropertyId</code>) are required for mobile-app install attribution.</li>
+
+          <li>Call-tracking fields (<code>PhoneNumber</code>, <code>CallerId</code>, <code>CountryCode</code>) are required for call-tracking conversions.</li>
+
+          </ul>
+
+          <p>See each field''s description for specific conditional requirements.</p>'
+      responses:
+        '200':
+          description: The conversion event has been successfully queued for processing.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the conversion was successfully queued.
+                    example: QUEUED
+                    x-gitbook-description-html: <p>Indicates whether the conversion was successfully queued.</p>
+                  QueuedUri:
+                    type: string
+                    format: uri-reference
+                    description: The unique reference to the queued submission.
+                    example: /Advertisers/<AccountSID>/APISubmissions/<SubmissionID>
+                    x-gitbook-description-html: <p>The unique reference to the queued submission.</p>
+          x-gitbook-description-html: <p>The conversion event has been successfully queued for processing.</p>
+        '400':
+          description: Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the request failed.
+                    example: ERROR
+                    x-gitbook-description-html: <p>Indicates that the request failed.</p>
+                  errors:
+                    type: array
+                    description: One or more validation errors describing what was wrong with the request.
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                          description: The name of the field that caused the error.
+                          x-gitbook-description-html: <p>The name of the field that caused the error.</p>
+                        level:
+                          type: string
+                          description: The severity of the error.
+                          x-gitbook-description-html: <p>The severity of the error.</p>
+                        message:
+                          type: string
+                          description: A human-readable error message.
+                          x-gitbook-description-html: <p>A human-readable error message.</p>
+                    x-gitbook-description-html: <p>One or more validation errors describing what was wrong with the request.</p>
+          x-gitbook-description-html: <p>Bad Request. The request was invalid, likely due to missing required fields or incorrect data formats.</p>
+      x-gitbook-description-document:
+        object: document
+        data:
+          schemaVersion: 9
+        nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+          - object: text
+            leaves:
+            - object: leaf
+              text: Submits a conversion event for tracking and attribution.
+              marks: []
+            key: Sk2wLPNc13Fy
+          key: weOWuO1Kv5BG
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+          - object: text
+            leaves:
+            - object: leaf
+              text: Additional required parameters
+              marks:
+              - object: mark
+                type: bold
+                data: {}
+            - object: leaf
+              text: ' not captured in the '
+              marks: []
+            - object: leaf
+              text: required
+              marks:
+              - object: mark
+                type: code
+                data: {}
+            - object: leaf
+              text: ' list below:'
+              marks: []
+            key: 153k9r5YHCDa
+          key: 0GoHohmU8k3Z
+        - object: block
+          type: list-unordered
+          isVoid: false
+          data: {}
+          nodes:
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: 'One of '
+                  marks: []
+                - object: leaf
+                  text: ActionTrackerId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: EventTypeId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', or '
+                  marks: []
+                - object: leaf
+                  text: EventTypeCode
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ' is required (event identifier).'
+                  marks: []
+                key: 7wLpZi54K2ep
+              key: vhB0gR9sA212
+            key: Y4s0qblxEaZB
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: 'One of '
+                  marks: []
+                - object: leaf
+                  text: ClickId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CustomerId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CustomProfileId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CustomClickId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: PromoCode
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: MediaId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: /
+                  marks: []
+                - object: leaf
+                  text: MediaPartnerId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: UniqueUrl
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CallerId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: GoogAId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: AndroidId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: AppleIfa
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', or '
+                  marks: []
+                - object: leaf
+                  text: AppleIfv
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ' is required (attribution key).'
+                  marks: []
+                key: PuCbo6uG8cPV
+              key: NrgO7xPyUpAm
+            key: qAx9iEEbjMDu
+          key: QTSkAyC6Qqf6
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+          - object: text
+            leaves:
+            - object: leaf
+              text: 'Note on conditional requirements:'
+              marks:
+              - object: mark
+                type: bold
+                data: {}
+            - object: leaf
+              text: ' Many parameters listed below as '
+              marks: []
+            - object: leaf
+              text: optional
+              marks:
+              - object: mark
+                type: italic
+                data: {}
+            - object: leaf
+              text: ' are conditionally required based on what else you submit. For example:'
+              marks: []
+            key: qRngOBdTPQuJ
+          key: AcbLTS1mKH4d
+        - object: block
+          type: list-unordered
+          isVoid: false
+          data: {}
+          nodes:
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: Item-level fields (
+                  marks: []
+                - object: leaf
+                  text: ItemSku[i]
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: ItemQuantity[i]
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: ItemPrice[i]
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: ItemSubTotal[i]
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', etc.) become required when reporting at the item level.'
+                  marks: []
+                key: Z1pvXaAKaT9K
+              key: uVdhcRkJCOws
+            key: vxgNodPramts
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: CurrencyCode
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ' is required when monetary fields are provided.'
+                  marks: []
+                key: 6efLb2oUtXRN
+              key: EU3d6tAGVctM
+            key: IsXAECx060eu
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: Mobile-app fields (
+                  marks: []
+                - object: leaf
+                  text: AppleIfa
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: GoogAId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: AppPackage
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: AppInstallRef
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: PropertyId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ) are required for mobile-app install attribution.
+                  marks: []
+                key: GLOxqAaNxH6s
+              key: Uh2aKstRIFGP
+            key: FrE6ugfcdnmW
+          - object: block
+            type: list-item
+            isVoid: false
+            data: {}
+            nodes:
+            - object: block
+              type: paragraph
+              isVoid: false
+              data: {}
+              nodes:
+              - object: text
+                leaves:
+                - object: leaf
+                  text: Call-tracking fields (
+                  marks: []
+                - object: leaf
+                  text: PhoneNumber
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CallerId
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ', '
+                  marks: []
+                - object: leaf
+                  text: CountryCode
+                  marks:
+                  - object: mark
+                    type: code
+                    data: {}
+                - object: leaf
+                  text: ) are required for call-tracking conversions.
+                  marks: []
+                key: By0M4OwLiYz6
+              key: 5PdcCbVMZS82
+            key: TPspyvYXOSs0
+          key: GmuknIzzykOR
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+          - object: text
+            leaves:
+            - object: leaf
+              text: It is highly recommended to provide as much data as possible for accurate attribution and payout calculation.
+              marks: []
+            key: BUBQ6SPqiIrx
+          key: pzNkQBxNggQ6
+        key: 710FKJsgf9GS
+      x-gitbook-description-html: <p>Submits a conversion event for tracking and attribution.</p><p><strong>Additional required parameters</strong> not captured in the <code>required</code> list below:</p><ul><li>One of <code>ActionTrackerId</code>, <code>EventTypeId</code>, or <code>EventTypeCode</code> is required (event identifier).</li><li>One of <code>ClickId</code>, <code>CustomerId</code>, <code>CustomProfileId</code>, <code>CustomClickId</code>, <code>PromoCode</code>, <code>MediaId</code>/<code>MediaPartnerId</code>, <code>UniqueUrl</code>, <code>CallerId</code>, <code>GoogAId</code>, <code>AndroidId</code>, <code>AppleIfa</code>, or <code>AppleIfv</code> is required (attribution key).</li></ul><p><strong>Note on conditional requirements:</strong> Many parameters listed below as <em>optional</em> are conditionally required based on what else you submit. For example:</p><ul><li>Item-level fields (<code>ItemSku[i]</code>, <code>ItemQuantity[i]</code>, <code>ItemPrice[i]</code>, <code>ItemSubTotal[i]</code>, etc.) become required when reporting at the item level.</li><li><code>CurrencyCode</code> is required when monetary fields are provided.</li><li>Mobile-app fields (<code>AppleIfa</code>, <code>GoogAId</code>, <code>AppPackage</code>, <code>AppInstallRef</code>, <code>PropertyId</code>) are required for mobile-app install attribution.</li><li>Call-tracking fields (<code>PhoneNumber</code>, <code>CallerId</code>, <code>CountryCode</code>) are required for call-tracking conversions.</li></ul><p>It is highly recommended to provide as much data as possible for accurate attribution and payout calculation.</p>
+components:
+  schemas:
+    ConversionPayload:
+      type: object
+      required:
+      - CampaignId
+      - EventDate
+      - OrderId
+      properties:
+        EventTypeId:
+          type: integer
+          description: Unique identifier for the event type (action tracker).
+          example: 8180
+          x-tags:
+          - Event ID
+          x-gitbook-description-html: <p>Unique identifier for the event type (action tracker).</p>
+        EventTypeCode:
+          type: string
+          description: Configurable string code for the event type.
+          example: ACME_SALE
+          x-tags:
+          - Event ID
+          x-gitbook-description-html: <p>Configurable string code for the event type.</p>
+        ClickId:
+          type: string
+          description: Unique identifier of a referring click.
+          example: QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Unique identifier of a referring click.</p>
+        CustomerId:
+          type: string
+          description: Your unique, non-PII identifier for the customer.
+          example: BCZ2WVSH674563PDPYOTM3AXDQ
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Your unique, non-PII identifier for the customer.</p>
+        CustomProfileId:
+          type: string
+          description: Unique identifier for a visitor on your website.
+          example: a1b2c3d4e5f6
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Unique identifier for a visitor on your website.</p>
+        OrderPromoCode:
+          type: string
+          description: Promo code used for the order. Used for attribution if assigned to a specific partner.
+          example: 10OFF-ROCKET
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Promo code used for the order. Used for attribution if assigned to a specific partner.</p>
+        UniqueUrl:
+          type: string
+          format: uri
+          description: Unique URL of a partner that referred the conversion.
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Unique URL of a partner that referred the conversion.</p>
+        GoogAId:
+          type: string
+          description: Google Advertising ID.
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Google Advertising ID.</p>
+        AppleIfa:
+          type: string
+          description: Apple ID for Advertising (IDFA).
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Apple ID for Advertising (IDFA).</p>
+        AppleIfv:
+          type: string
+          description: Apple ID for Vendors (IDFV).
+          example: 38400000-8cf0-11bd-b23e-10b96e40000d
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Apple ID for Vendors (IDFV).</p>
+        MediaId:
+          type: integer
+          description: Force attribution to a specific partner ID. Interchangeable with `MediaPartnerId` — provide either one, not both. Use with caution.
+          example: 10000
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Force attribution to a specific partner ID. Interchangeable with <code>MediaPartnerId</code> — provide either one, not both. Use with caution.</p>
+        MediaPartnerId:
+          type: integer
+          description: Force attribution to a specific partner ID. Interchangeable with `MediaId` — provide either one, not both. Use with caution.
+          example: 10000
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Force attribution to a specific partner ID. Interchangeable with <code>MediaId</code> — provide either one, not both. Use with caution.</p>
+        SubId1:
+          type: string
+          maxLength: 255
+          description: Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.
+          example: subid1value
+          x-gitbook-description-html: <p>Only used if you are specifying the <code>MediaId</code>/<code>MediaPartnerId</code> directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.</p>
+        SubId2:
+          type: string
+          maxLength: 255
+          description: Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text fields typically used by partners to segment their traffic.
+          example: subid2value
+          x-gitbook-description-html: <p>Only used if you are specifying the <code>MediaId</code>/<code>MediaPartnerId</code> directly and have no other means to tie this conversion to a click or impression. Custom text fields typically used by partners to segment their traffic.</p>
+        SubId3:
+          type: string
+          maxLength: 255
+          description: Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.
+          example: subid3value
+          x-gitbook-description-html: <p>Only used if you are specifying the <code>MediaId</code>/<code>MediaPartnerId</code> directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to segment their traffic.</p>
+        SharedId:
+          type: string
+          maxLength: 255
+          description: Only used if you are specifying the MediaId/MediaPartnerId directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to share traffic segments with the brands they work with.
+          example: sharedidvalue
+          x-gitbook-description-html: <p>Only used if you are specifying the <code>MediaId</code>/<code>MediaPartnerId</code> directly and have no other means to tie this conversion to a click or impression. Custom text field typically used by partners to share traffic segments with the brands they work with.</p>
+        PhoneNumber:
+          type: string
+          description: Phone number called for call tracking conversions.
+          example: '8051234567'
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Phone number called for call tracking conversions.</p>
+        CallerId:
+          type: string
+          description: Unique identifier of the customer in call tracking conversions.
+          example: '8051234567'
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Unique identifier of the customer in call tracking conversions.</p>
+        CountryCode:
+          type: string
+          description: Primarily used for conversions over the phone, this is the ISO 3166-1 alpha-2 two-letter country code of the number called by the customer.
+          example: US
+          x-gitbook-description-html: <p>Primarily used for conversions over the phone, this is the ISO 3166-1 alpha-2 two-letter country code of the number called by the customer.</p>
+        IpAddress:
+          type: string
+          description: Customer's IP address. Used for fraud detection and install attribution.
+          example: 72.194.216.61
+          x-tags:
+          - Attribution key
+          x-gitbook-description-html: <p>Customer's IP address. Used for fraud detection and install attribution.</p>
+        EventDate:
+          type: string
+          format: date-time
+          description: Timestamp of when the conversion occurred (ISO 8601).
+          example: '2023-02-15T22:55:32-08:00'
+          x-gitbook-description-html: <p>Timestamp of when the conversion occurred (ISO 8601).</p>
+        CampaignId:
+          type: integer
+          description: Unique identifier for your program/campaign.
+          example: 3641
+          x-gitbook-description-html: <p>Unique identifier for your program/campaign.</p>
+        OrderId:
+          type: string
+          description: Your unique identifier for the order.
+          example: '9217374917471'
+          x-gitbook-description-html: <p>Your unique identifier for the order.</p>
+        CustomerEmail:
+          type: string
+          description: Customer's email, must be sent as a SHA1 or SHA256 hash. Plaintext emails are not accepted.
+          example: 4db6c86b5d02c22ab6c5e1b1a0b82a7b5d4ef068
+          x-gitbook-description-html: <p>Customer's email, must be sent as a SHA1 or SHA256 hash. Plaintext emails are not accepted.</p>
+        CustomerStatus:
+          type: string
+          description: Status of the customer, such as NEW or EXISTING. Before being passed, values must be configured in the Customer Status Mapping section when editing an event type, found in the event type settings section of the platform.
+          example: NEW
+          x-gitbook-description-html: <p>Status of the customer, such as NEW or EXISTING. Before being passed, values must be configured in the Customer Status Mapping section when editing an event type, found in the event type settings section of the platform.</p>
+        CustomerCity:
+          type: string
+          description: City of the customer, such as Santa Barbara.
+          example: Santa Barbara
+          x-gitbook-description-html: <p>City of the customer, such as Santa Barbara.</p>
+        CustomerPostCode:
+          type: string
+          description: Postal (or "ZIP") code of the customer, such as 93101.
+          example: '93101'
+          x-gitbook-description-html: <p>Postal (or "ZIP") code of the customer, such as 93101.</p>
+        CustomerCountry:
+          type: string
+          description: Country of the customer, such as USA.
+          example: USA
+          x-gitbook-description-html: <p>Country of the customer, such as USA.</p>
+        CustomerRegion:
+          type: string
+          description: Region of the customer, such as AMER.
+          example: AMER
+          x-gitbook-description-html: <p>Region of the customer, such as AMER.</p>
+        OrderDiscount:
+          type: number
+          format: decimal
+          example: 5
+          description: For sales, this is the discount applied to the order overall. Amount is automatically subtracted from the order total on processing. If item amounts are used, this discount will be subtracted proportionally from each item amount sent in. Note that typically you will want to exclude shipping discounts from this field.
+          x-gitbook-description-html: <p>For sales, this is the discount applied to the order overall. Amount is automatically subtracted from the order total on processing. If item amounts are used, this discount will be subtracted proportionally from each item amount sent in. Note that typically you will want to exclude shipping discounts from this field.</p>
+        OrderSubTotalPostDiscount:
+          type: number
+          format: decimal
+          description: Used when reporting conversions at the order-level (i.e., no item reporting). The subtotal of the order after discounts, taxes, shipping, and any other costs. If you're submitting item-level data, this value should not be submitted.
+          example: 95
+          x-gitbook-description-html: <p>Used when reporting conversions at the order-level (i.e., no item reporting). The subtotal of the order after discounts, taxes, shipping, and any other costs. If you're submitting item-level data, this value should not be submitted.</p>
+        OrderShipping:
+          type: number
+          format: decimal
+          description: Primarily used for retail sales. This is the cost of shipping for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.
+          example: 5
+          x-gitbook-description-html: <p>Primarily used for retail sales. This is the cost of shipping for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.</p>
+        OrderTax:
+          type: number
+          format: decimal
+          description: Primarily used for retail sales. This is the cost of tax for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.
+          example: 8
+          x-gitbook-description-html: <p>Primarily used for retail sales. This is the cost of tax for this conversion. Note that the total sale amount used for payout purposes will not include shipping costs.</p>
+        OrderMargin:
+          type: number
+          format: decimal
+          description: Primarily used for retail sales. This is the total margin made on the conversion (revenue less costs). Typically this is provided either at an item level through the ItemMargin field or through the product catalog.
+          example: 30
+          x-gitbook-description-html: <p>Primarily used for retail sales. This is the total margin made on the conversion (revenue less costs). Typically this is provided either at an item level through the ItemMargin field or through the product catalog.</p>
+        OrderDiscountRate:
+          type: number
+          format: decimal
+          description: The discount rate (%) applied to the order.
+          example: 10
+          x-gitbook-description-html: <p>The discount rate (%) applied to the order.</p>
+        PaymentType:
+          type: string
+          description: This method of payment used for this conversion (e.g. Credit).
+          example: CREDIT_CARD
+          x-gitbook-description-html: <p>This method of payment used for this conversion (e.g. Credit).</p>
+        GiftPurchase:
+          type: boolean
+          description: If you're tracking gift purchases, you can submit true to mark the order in the conversion as a gift purchase. Submit false if the order isn't a gift purchase.
+          example: false
+          x-gitbook-description-html: <p>If you're tracking gift purchases, you can submit true to mark the order in the conversion as a gift purchase. Submit false if the order isn't a gift purchase.</p>
+        CurrencyCode:
+          type: string
+          description: 3-character ISO 4217 currency code of the purchase.
+          example: USD
+          x-gitbook-description-html: <p>3-character ISO 4217 currency code of the purchase.</p>
+        Amount:
+          type: number
+          format: decimal
+          description: This is the total order sale amount made on an item or order level of the conversion.
+          example: 123
+          x-gitbook-description-html: <p>This is the total order sale amount made on an item or order level of the conversion.</p>
+        ItemSku[i]:
+          type: string
+          description: SKU for the item (e.g., ItemSku1, ItemSku2).
+          x-gitbook-description-html: <p>SKU for the item (e.g., ItemSku1, ItemSku2).</p>
+        ItemPromoCode[i]:
+          type: string
+          description: Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes setup for particular partners.
+          example: 10OFF-ACME
+          x-gitbook-description-html: <p>Promotional code applied to the item for the order. Note that this parameter does not work with unique tracking codes setup for particular partners.</p>
+        ItemName[i]:
+          type: string
+          description: The name for the product referenced. Can also be automatically appended through uploading a product catalog.
+          x-gitbook-description-html: <p>The name for the product referenced. Can also be automatically appended through uploading a product catalog.</p>
+        ItemCategory[i]:
+          type: string
+          description: Category of the item.
+          x-gitbook-description-html: <p>Category of the item.</p>
+        ItemSubCategory[i]:
+          type: string
+          description: If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded.
+          example: Tennis
+          x-gitbook-description-html: <p>If applicable, the subcategory for the product referenced at the item level. Can also be automatically pulled if a product catalog has been uploaded.</p>
+        ItemMpn[i]:
+          type: string
+          description: Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.
+          example: ACME-MPN-101
+          x-gitbook-description-html: <p>Manufacturer part number (MPN) for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.</p>
+        ItemBrand[i]:
+          type: string
+          description: Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.
+          example: Acme
+          x-gitbook-description-html: <p>Brand name for the product referenced. Can also be automatically pulled if a product catalog has been uploaded.</p>
+        ItemQuantity[i]:
+          type: integer
+          description: Number of units for this line item.
+          x-gitbook-description-html: <p>Number of units for this line item.</p>
+        ItemPrice[i]:
+          type: number
+          format: decimal
+          description: Unit price for the item. Do not send if ItemSubTotal[i] is passed.
+          x-gitbook-description-html: <p>Unit price for the item. Do not send if ItemSubTotal[i] is passed.</p>
+        ItemSubTotal[i]:
+          type: number
+          format: decimal
+          description: Total price for the line item. Do not send if ItemPrice[i] is passed.
+          x-gitbook-description-html: <p>Total price for the line item. Do not send if ItemPrice[i] is passed.</p>
+        ItemDiscount[i]:
+          type: number
+          format: decimal
+          description: Discount applied to each item purchased of this type (not to the entire line item).
+          x-gitbook-description-html: <p>Discount applied to each item purchased of this type (not to the entire line item).</p>
+        ItemDiscountRate[i]:
+          type: number
+          format: decimal
+          description: The discount rate (%) applied to each item purchased.
+          example: 10
+          x-gitbook-description-html: <p>The discount rate (%) applied to each item purchased.</p>
+        ItemTotalDiscount[i]:
+          type: number
+          format: decimal
+          description: Discount applied to this line item (not just for each product of this type). Note that this amount is automatically subtracted from the ItemSubTotal to determine the final sale amount for payout and reporting purposes.
+          x-gitbook-description-html: <p>Discount applied to this line item (not just for each product of this type). Note that this amount is automatically subtracted from the ItemSubTotal to determine the final sale amount for payout and reporting purposes.</p>
+        ItemDeliveryType[i]:
+          type: string
+          description: Type of delivery method specified for this item (e.g. INSTORE).
+          example: INSTORE
+          x-gitbook-description-html: <p>Type of delivery method specified for this item (e.g. INSTORE).</p>
+        ItemText[i]_1 to ItemText[i]_50:
+          type: string
+          maxLength: 64
+          description: You can associate up to 50 custom text fields with each line item using the ItemText{i}_[x] parameter syntax, where {i} is the line item index and [x] is the custom text parameter index (1 to 50). For example, ItemText1_1 is custom text parameter 1 for line item 1, and ItemText2_40 is custom text parameter 40 for line item 2. Appears in your reports.
+          example: itemtext1_2=Blue (Custom text parameter 2 for line item 1)
+        ItemNumeric[i]_1 to ItemNumeric[i]_10:
+          type: number
+          format: decimal
+          description: General numeral field associated with a specific line item, using the ItemNumeric{i}_[x] parameter syntax, where {i} is the line item index and [x] is the numeric parameter index (1 to 10). Appears in your reports.
+          example: 100.5
+        ItemDate[i]_1 to ItemDate[i]_10:
+          type: string
+          format: date-time
+          description: General date and time field (ISO 8601 format) associated with a specific line item, using the ItemDate{i}_[x] parameter syntax, where {i} is the line item index and [x] is the date parameter index (1 to 10). Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+        ItemMoney[i]_1 to ItemMoney[i]_3:
+          type: number
+          format: decimal
+          description: General monetary field associated with a specific line item, using the ItemMoney{i}_[x] parameter syntax, where {i} is the line item index and [x] is the money parameter index (1 to 3). Appears in your reports.
+          example: 50
+        UserAgent:
+          type: string
+          description: User agent of the customer, used to provide device reporting.
+          example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
+          x-gitbook-description-html: <p>User agent of the customer, used to provide device reporting.</p>
+        DeviceMfr:
+          type: string
+          description: Mobile device's manufacturer. Pass `android.os.Build.MANUFACTURER` on Android or `"Apple"` on iOS.
+          example: Apple
+          x-gitbook-description-html: <p>Mobile device's manufacturer. Pass <code>android.os.Build.MANUFACTURER</code> on Android or <code>"Apple"</code> on iOS.</p>
+        DeviceModel:
+          type: string
+          description: Mobile device's model. Pass `android.os.Build.MODEL` on Android or the value from `systemInfo.machine` on iOS.
+          example: iPhone 15
+          x-gitbook-description-html: <p>Mobile device's model. Pass <code>android.os.Build.MODEL</code> on Android or the value from <code>systemInfo.machine</code> on iOS.</p>
+        PropertyId:
+          type: integer
+          description: For mobile app conversions, this value is the "System App ID" of your app in impact.com. Found in Settings → Mobile Apps.
+          example: 12345
+          x-gitbook-description-html: <p>For mobile app conversions, this value is the "System App ID" of your app in impact.com. Found in Settings → Mobile Apps.</p>
+        AppPackage:
+          type: string
+          description: Package name for the mobile app the user installed. Only for mobile conversions. Note that this is also picked up through the PropertyId field.
+          example: com.acme.app
+          x-gitbook-description-html: <p>Package name for the mobile app the user installed. Only for mobile conversions. Note that this is also picked up through the PropertyId field.</p>
+        AppInstallRef:
+          type: string
+          description: Only for Android conversions. Install referrer passed from the Google Play Store when the app is installed. Usually, the value passed from impact.com tracking links will be ClickId={clickidvalue}.
+          example: ClickId=QiiWXOVnrQ3SQHl24jQjyxBGUkmzfJ3i1VHrWM0
+          x-gitbook-description-html: <p>Only for Android conversions. Install referrer passed from the Google Play Store when the app is installed. Usually, the value passed from impact.com tracking links will be ClickId={clickidvalue}.</p>
+        AppVer:
+          type: string
+          description: Version of the mobile app. Only for mobile conversions.
+          example: 1.2.3
+          x-gitbook-description-html: <p>Version of the mobile app. Only for mobile conversions.</p>
+        LocationId:
+          type: string
+          description: Primarily used for accommodations, this is the unique identifier for the location specified in this conversion.
+          example: LOC-12345
+          x-gitbook-description-html: <p>Primarily used for accommodations, this is the unique identifier for the location specified in this conversion.</p>
+        LocationName:
+          type: string
+          description: Primarily used for accommodations, this is the name for the location specified in this conversion.
+          example: Acme Resort Santa Barbara
+          x-gitbook-description-html: <p>Primarily used for accommodations, this is the name for the location specified in this conversion.</p>
+        LocationType:
+          type: string
+          description: Primarily used for accommodations, this is the category for the location specified in this conversion.
+          example: HOTEL
+          x-gitbook-description-html: <p>Primarily used for accommodations, this is the category for the location specified in this conversion.</p>
+        TrackingConsent:
+          type: boolean
+          description: Indicates whether the user has provided consent to be tracked at the moment of the request. Derived from your consent management platform or through frameworks like Apple's ATT (App Tracking Transparency) available on iOS.
+          example: true
+          x-gitbook-description-html: <p>Indicates whether the user has provided consent to be tracked at the moment of the request. Derived from your consent management platform or through frameworks like Apple's ATT (App Tracking Transparency) available on iOS.</p>
+        Note:
+          type: string
+          description: General field used to pass information for event-level reporting purposes.
+          example: Customer confirmed delivery.
+          maxLength: 255
+          x-gitbook-description-html: <p>General field used to pass information for event-level reporting purposes.</p>
+        DispositionCode:
+          type: string
+          description: If you have a custom disposition code configured in event type settings, you can submit that value as a default disposition for the action that results from this conversion.
+          example: DEFAULT
+          x-gitbook-description-html: <p>If you have a custom disposition code configured in event type settings, you can submit that value as a default disposition for the action that results from this conversion.</p>
+        Text1–Text50:
+          type: string
+          maxLength: 64
+          description: General text field that accepts strings of any text data you want to send. Appears in your reports. There are 50 of these fields, from Text1 to Text50.
+          example: text1value
+          x-gitbook-description-html: <p>General text field that accepts strings of any text data you want to send. Appears in your reports. There are 50 of these fields, from Text1 to Text50.</p>
+        Numeric1:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 100.5
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric2:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 20
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric3:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 30
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric4:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 40
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric5:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 50
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric6:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 60
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric7:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 70
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric8:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 80
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric9:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 90
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Numeric10:
+          type: number
+          format: decimal
+          description: General numeral field that accepts any numeric data you want to send. Appears in your reports.
+          example: 100
+          x-gitbook-description-html: <p>General numeral field that accepts any numeric data you want to send. Appears in your reports.</p>
+        Money1:
+          type: number
+          format: decimal
+          description: General money field that accepts any monetary numeric data you want to send. Appears in your reports.
+          example: 50
+          x-gitbook-description-html: <p>General money field that accepts any monetary numeric data you want to send. Appears in your reports.</p>
+        Money2:
+          type: number
+          format: decimal
+          description: General money field that accepts any monetary numeric data you want to send. Appears in your reports.
+          example: 50
+          x-gitbook-description-html: <p>General money field that accepts any monetary numeric data you want to send. Appears in your reports.</p>
+        Money3:
+          type: number
+          format: decimal
+          description: General money field that accepts any monetary numeric data you want to send. Appears in your reports.
+          example: 75
+          x-gitbook-description-html: <p>General money field that accepts any monetary numeric data you want to send. Appears in your reports.</p>
+        Date1:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date2:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date3:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date4:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date5:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date6:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date7:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date8:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date9:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+        Date10:
+          type: string
+          format: date-time
+          description: General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.
+          example: '2026-09-10T22:55:32-08:00'
+          x-gitbook-description-html: <p>General field that accepts a date and time in ISO 8601 format you want to send. Appears in your reports.</p>
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

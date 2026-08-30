@@ -1,0 +1,384 @@
+openapi: 3.2.0
+info:
+  title: impact.com Share Links API
+  description: API for retrieving a user's share links.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+- UserJWT: []
+tags:
+- name: Share Links
+  description: 'Endpoints for retrieving the share links of a given user. Share links are organised by engagement medium and share medium. For background on how they work, see the Share Links Overview.
+
+    '
+paths:
+  /{tenant_alias}/account/{accountId}/user/{userId}/sharelinks:
+    get:
+      summary: Lookup a user's share links
+      description: '**Deprecated.** Use *Lookup a user''s share URLs* instead.
+
+
+        Returns a flat object of share links for a user, with one property per share medium (`shareLink`, `facebookShareLink`, `twitterShareLink`, etc.) and nested objects per engagement medium.
+
+        '
+      operationId: getSharelinks
+      deprecated: true
+      tags:
+      - Share Links
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/UserId'
+      security:
+      - APIKey: []
+      responses:
+        '200':
+          description: A list of share links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sharelink'
+        '403':
+          description: Endpoint deprecated. This endpoint is only available on Classic programs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User/Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/account/{accountId}/user/{userId}/shareurls:
+    get:
+      summary: Lookup a user's share URLs
+      description: 'Returns a user''s share links, organised by engagement medium and share medium. Use the optional `engagementMedium` and `shareMedium` query parameters to filter the response.
+
+        '
+      operationId: getShareURLs
+      tags:
+      - Share Links
+      security:
+      - APIKey: []
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/EngagementMedium'
+      - $ref: '#/components/parameters/ShareMedium'
+      - $ref: '#/components/parameters/ProgramId'
+      responses:
+        '200':
+          description: A list of share urls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shareurls'
+        '400':
+          description: Bad request. `programId` is required but was not provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: User/Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+  /{tenant_alias}/open/account/{accountId}/user/{userId}/shareurls:
+    get:
+      summary: Lookup a user's share URLs (Open Endpoint)
+      description: 'Same as *Lookup a user''s share URLs*, but authenticated with a user JWT instead of an API key. Use this from client-side contexts such as the Mobile and Web SDKs.
+
+        '
+      operationId: openGetShareURLs
+      tags:
+      - Share Links
+      security:
+      - UserJWT: []
+      parameters:
+      - $ref: '#/components/parameters/TenantAlias'
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/EngagementMedium'
+      - $ref: '#/components/parameters/ShareMedium'
+      - $ref: '#/components/parameters/ProgramId'
+      responses:
+        '200':
+          description: A list of share urls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shareurls'
+        '400':
+          description: Bad request. `programId` is required but was not provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Endpoint disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Shareurls:
+      description: A user's share links, organised by engagement medium and share medium.
+      type: object
+      properties:
+        shareLinks:
+          type: object
+          properties:
+            cleanShareLink:
+              type: string
+              format: uri
+              description: The clean (unencoded) share link for the program's primary link. If the program uses a vanity link, this is the unencoded form; otherwise it's the `UNKNOWN` engagement medium and `UNKNOWN` share medium link.
+              example: https://share.impact.squatchtesting.com/mzbnEyE
+            EMAIL:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            MOBILE:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            EMBED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            POPUP:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            HOSTED:
+              $ref: '#/components/schemas/ShareMediumLinks'
+            UNKNOWN:
+              $ref: '#/components/schemas/ShareMediumLinks'
+    ShareMediumLinks:
+      description: A user's share links for a single engagement medium, with one entry per share medium.
+      type: object
+      properties:
+        EMAIL:
+          type: string
+          format: uri
+          description: Share link for the Email share medium.
+          example: https://share.impact.squatchtesting.com/mobnEyE
+        FACEBOOK:
+          type: string
+          format: uri
+          description: Share link for the Facebook share medium.
+          example: https://share.impact.squatchtesting.com/m9bnEyE
+        PINTEREST:
+          type: string
+          format: uri
+          description: Share link for the Pinterest share medium.
+          example: https://share.impact.squatchtesting.com/RzbnEyE
+        TWITTER:
+          type: string
+          format: uri
+          description: Share link for the Twitter share medium.
+          example: https://share.impact.squatchtesting.com/mMbnEyE
+        DIRECT:
+          type: string
+          format: uri
+          description: Share link for the Direct share medium.
+          example: https://share.impact.squatchtesting.com/m5bnEyE
+        WHATSAPP:
+          type: string
+          format: uri
+          description: Share link for the WhatsApp share medium.
+          example: https://share.impact.squatchtesting.com/mFbnEyE
+        LINEMESSENGER:
+          type: string
+          format: uri
+          description: Share link for the Line Messenger share medium.
+          example: https://share.impact.squatchtesting.com/mDbnEyE
+        SMS:
+          type: string
+          format: uri
+          description: Share link for the SMS share medium.
+          example: https://share.impact.squatchtesting.com/mabnEyE
+        FBMESSENGER:
+          type: string
+          format: uri
+          description: Share link for the Facebook Messenger share medium.
+          example: https://share.impact.squatchtesting.com/mhbnEyE
+        LINKEDIN:
+          type: string
+          format: uri
+          description: Share link for the LinkedIn share medium.
+          example: https://share.impact.squatchtesting.com/m7bnEyE
+        UNKNOWN:
+          type: string
+          format: uri
+          description: Share link for an unknown share medium.
+          example: https://share.impact.squatchtesting.com/mBbnEyE
+    LegacyEngagementLinks:
+      description: A user's share links for a single engagement medium (legacy flat-property format).
+      type: object
+      properties:
+        shareLink:
+          type: string
+          description: The unique share link the user can refer their friends with. Contains the referral code and a source tag for analytics.
+        facebookShareLink:
+          type: string
+          description: The share link for Facebook.
+        twitterShareLink:
+          type: string
+          description: The share link for Twitter.
+        emailShareLink:
+          type: string
+          description: The share link for Email.
+        linkedinShareLink:
+          type: string
+          description: The share link for LinkedIn.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          nullable: true
+          example: RS042
+    Sharelink:
+      description: '**Deprecated** flat-format share link response. Returned by the deprecated *Lookup a user''s share links* endpoint. New integrations should use the `Shareurls` schema.
+
+        '
+      type: object
+      properties:
+        shareLink:
+          type: string
+          description: The unique share link the user can refer their friends with.
+        facebookShareLink:
+          type: string
+          description: The share link for Facebook.
+        twitterShareLink:
+          type: string
+          description: The share link for Twitter.
+        emailShareLink:
+          type: string
+          description: The share link for Email.
+        mobileShareLink:
+          type: string
+          description: The share link for mobile devices.
+        mobileFacebookShareLink:
+          type: string
+          description: The share link for Facebook on mobile devices.
+        mobileTwitterSharelink:
+          type: string
+          description: The share link for Twitter on mobile devices.
+        mobileEmailShareLink:
+          type: string
+          description: The share link for Email on mobile devices.
+        EMBED:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        POPUP:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        HOSTED:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        MOBILE:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+        EMAIL:
+          $ref: '#/components/schemas/LegacyEngagementLinks'
+  parameters:
+    TenantAlias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+      required: true
+      schema:
+        type: string
+    AccountId:
+      name: accountId
+      in: path
+      description: The ID of the account to look up
+      required: true
+      schema:
+        type: string
+    ShareMedium:
+      name: shareMedium
+      in: query
+      description: Filters share urls by `shareMedium`.
+      schema:
+        type: string
+        enum:
+        - EMAIL
+        - FACEBOOK
+        - TWITTER
+        - PINTEREST
+        - WHATSAPP
+        - LINEMESSENGER
+        - FBMESSENGER
+        - SMS
+        - LINKEDIN
+        - DIRECT
+        - UNKNOWN
+    ProgramId:
+      name: programId
+      in: query
+      description: The ID of the program whose share links to return. Required — the API returns `400` if omitted.
+      required: true
+      schema:
+        type: string
+        example: '47255'
+    EngagementMedium:
+      name: engagementMedium
+      in: query
+      description: Filters share urls by `engagementMedium`.
+      schema:
+        type: string
+        enum:
+        - EMBED
+        - POPUP
+        - HOSTED
+        - MOBILE
+        - EMAIL
+        - UNKNOWN
+    UserId:
+      name: userId
+      in: path
+      description: Filters share links by `user.id`.
+      required: true
+      schema:
+        type: string
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method only in server-to-server interactions.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: A JWT for a given user. Used by the Mobile and Web SDKs and other client-side contexts via Open Endpoints.
+x-default-client: cURL

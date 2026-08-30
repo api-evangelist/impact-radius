@@ -1,0 +1,317 @@
+openapi: 3.2.0
+info:
+  title: Partner Tax Documents API
+  version: '15'
+  description: 'Tax Documents capture the IRS tax form (W9, W8BEN, W8BENE) that impact.com requires from partners
+
+    before payouts can be issued. Documents are collected through a hosted signing flow provided by
+
+    DocuSign or Comply Exchange.
+
+
+    Typical workflow:
+
+
+    1. **Create a tax document** (POST `/TaxDocument`) — returns an iframe URL that the partner opens to fill in and sign the form.
+
+    2. **Complete** (POST `/TaxDocument/Complete`) — called after the user finalizes submission in the Comply Exchange iframe so the system records the outcome. DocuSign uses the `ReturnUrl` callback instead.
+
+    3. **Retrieve** the latest document (GET `/TaxDocument`), a specific document by Id (GET `/TaxDocument/{Id}`), or the full list (GET `/TaxDocuments`) to track status.
+
+    '
+  contact:
+    name: impact.com Developer Support
+    url: https://app.impact.com/secure/help/contact-support.ihtml
+servers:
+- url: https://api.impact.com
+  description: Production server
+security:
+- basicAuth: []
+tags:
+- name: Tax Documents
+  description: Endpoints for creating, completing, and retrieving partner tax documents.
+paths:
+  /Mediapartners/{AccountSID}/TaxDocument:
+    get:
+      summary: Retrieve the latest tax document
+      description: Returns the most recently saved tax document for the partner account.
+      operationId: retrieveLatestTaxDocument
+      tags:
+      - Tax Documents
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxDocument'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocument' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    post:
+      summary: Create a tax document
+      description: 'Initiates a new tax document submission. Returns an iframe URL the partner opens to fill in and sign the form. All parameters except `Provider` apply to DocuSign only.
+
+        '
+      operationId: createTaxDocument
+      tags:
+      - Tax Documents
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                DocType:
+                  type: string
+                  enum:
+                  - W9
+                  - W8BEN
+                  - W8BENE
+                  description: The IRS tax form type to collect.
+                Id:
+                  type: string
+                  description: The ID of the account user. Defaults to the first user on the account when omitted.
+                ReturnUrl:
+                  type: string
+                  description: Absolute URL DocuSign uses as the callback after signing.
+                Provider:
+                  type: string
+                  enum:
+                  - COMPLY_EXCHANGE
+                  - DOCUSIGN
+                  description: Required when collecting via Comply Exchange. Defaults to DOCUSIGN.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Outcome status returned by the provider.
+                    example: OK
+                  Uri:
+                    type: string
+                    description: API resource path for this tax document.
+                    example: /Mediapartners/<AccountSID>/TaxDocuments/224289
+                  Email:
+                    type: string
+                    description: Email address of the user the document was created for.
+                    example: hazelnutt@example.com
+                  Id:
+                    type: string
+                    description: Unique identifier for the newly created tax document.
+                    example: '224289'
+                  UserId:
+                    type: string
+                    description: ID of the account user the document was created for.
+                    example: '12345'
+                  Url:
+                    type: string
+                    description: Iframe URL the partner opens to sign the tax document.
+                    example: https://demo.docusign.net/Signing/StartInSession.aspx?t=example
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocument' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/TaxDocument/{Id}:
+    get:
+      summary: Retrieve a specific tax document
+      description: Returns a specific tax document by its unique Id.
+      operationId: retrieveTaxDocumentById
+      tags:
+      - Tax Documents
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: Unique identifier of the tax document.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxDocument'
+        '404':
+          description: No tax document exists with the supplied Id.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocument/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/TaxDocuments:
+    get:
+      summary: List all tax documents
+      description: Returns every tax document submitted for the partner account.
+      operationId: listAllTaxDocuments
+      tags:
+      - Tax Documents
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  TaxDocuments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaxDocument'
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocuments' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /Mediapartners/{AccountSID}/TaxDocument/Complete:
+    post:
+      summary: Complete tax document submission
+      description: 'Records the outcome of a tax document submission collected via the Comply Exchange iframe. Call this immediately after the user finalizes submission in the iframe so the document is recorded as submitted in impact.com. DocuSign signals completion via the `ReturnUrl` callback supplied at Create time instead.
+
+        '
+      operationId: completeTaxDocumentSubmission
+      tags:
+      - Tax Documents
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - id
+              - event
+              properties:
+                id:
+                  type: string
+                  description: The Id of the tax document being submitted.
+                event:
+                  type: string
+                  enum:
+                  - Complete
+                  description: The lifecycle event being signalled. Always `Complete`.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Outcome status of the completion call.
+                    example: OK
+                  Uri:
+                    type: string
+                    description: API resource path for the completed tax document.
+                    example: /Mediapartners/<AccountSID>/TaxDocuments/224289
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocument/Complete' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    TaxDocument:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the tax document.
+          example: '224289'
+        UserId:
+          type: string
+          description: ID of the account user the document belongs to.
+          example: '12345'
+        Email:
+          type: string
+          description: Email address of the user the document belongs to.
+          example: hazelnutt@example.com
+        Status:
+          type: string
+          enum:
+          - NEW
+          - NOT_VERIFIED
+          - ACTIVE
+          - INACTIVE
+          description: Current status of the tax document.
+          example: NEW
+        EnvelopeId:
+          type: string
+          description: Unique identifier of the DocuSign envelope (DocuSign provider only).
+          example: 47b6c24d-f313-4343-9252-7e477f8a267c
+        Type:
+          type: string
+          nullable: true
+          enum:
+          - W9
+          - W8BEN
+          - W8BENE
+          description: The IRS tax form type. Empty until the user selects a form in the iframe.
+          example: W9
+        SubmitDate:
+          type: string
+          format: date-time
+          description: Date and time the tax document was submitted (ISO 8601).
+          example: '2024-02-23T04:32:47-08:00'
+        UpdateDate:
+          type: string
+          format: date-time
+          description: Date and time the tax document was last updated (ISO 8601).
+          example: '2024-02-23T04:32:47-08:00'
+        Provider:
+          type: string
+          enum:
+          - DOCUSIGN
+          - COMPLY_EXCHANGE
+          description: The provider that collected the tax document.
+          example: DOCUSIGN
+        Uri:
+          type: string
+          description: API resource path for this tax document.
+          example: /Mediapartners/<AccountSID>/TaxDocuments/224289
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-default-client: cURL

@@ -1,0 +1,389 @@
+openapi: 3.2.0
+info:
+  title: Brand Contacts API
+  description: API for managing the contact list of people associated with partner accounts in your program. This includes creating, retrieving, updating, and deleting contacts.
+  version: v14
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+tags:
+- name: Contacts
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts:
+    get:
+      summary: List All Contacts
+      description: Returns a list of your contacts for a specific campaign, with optional filtering.
+      operationId: listContacts
+      tags:
+      - Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: AccountId
+        in: query
+        description: Filter by a contact's partner account ID.
+        schema:
+          type: string
+      - name: Title
+        in: query
+        description: Filter by a contact's title (must be URL-encoded).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of contact objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Contacts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Contact'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    post:
+      summary: Create a Contact
+      description: Creates a new contact associated with one or more partner accounts. Use `multipart/form-data` for profile image uploads.
+      operationId: createContact
+      tags:
+      - Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactCreate'
+      responses:
+        '200':
+          description: The contact was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts/{ContactId}:
+    get:
+      summary: Get Contact Details
+      description: Retrieves the details of an existing contact by their unique impact.com Contact ID.
+      operationId: getContactById
+      tags:
+      - Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: ContactId
+        in: path
+        required: true
+        description: The unique identifier for the contact (e.g., '2750' or 'M1369520').
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single contact object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts/{ContactId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    put:
+      summary: Update a Contact
+      description: 'Updates the specified contact.
+
+        - **User-created contacts** (`"Editable": "true"`) can have any parameter updated.
+
+        - **System-created contacts** (`"Editable": "false"`) can only have `Title` and `Labels` updated.'
+      operationId: updateContact
+      tags:
+      - Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: ContactId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactUpdate'
+      responses:
+        '200':
+          description: The contact was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts/{ContactId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+    delete:
+      summary: Delete a Contact
+      description: Permanently deletes a user-created contact. This cannot be undone.
+      operationId: deleteContact
+      tags:
+      - Contacts
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: ContactId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The contact was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: DELETED
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/Campaigns/{CampaignId}/Contacts/{ContactId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    ContactCreate:
+      type: object
+      required:
+      - FirstName
+      - LastName
+      - EmailAddress
+      - Accounts
+      properties:
+        FirstName:
+          type: string
+          example: Wile
+        LastName:
+          type: string
+          example: Coyote
+        EmailAddress:
+          type: string
+          format: email
+          example: wile.coyote@example.com
+        Accounts:
+          type: string
+          description: A comma-separated string of partner account IDs.
+          example: 12345,67890
+        Title:
+          type: string
+          example: Marketing Manager
+        ProfileImageUrl:
+          type: string
+          format: uri
+          description: URL of an image file. Cannot be used with `ProfileImageFile`.
+          example: https://example.com/profile.jpg
+        ProfileImageFile:
+          type: string
+          format: binary
+          description: An image file to upload. Use `multipart/form-data`.
+        WorkPhoneNumber:
+          type: string
+          description: Requires `WorkPhoneNumberCountry`.
+          example: '8051234567'
+        WorkPhoneNumberCountry:
+          type: string
+          example: US
+        CellphoneNumber:
+          type: string
+          description: Requires `CellphoneNumberCountry`.
+          example: '8059876543'
+        CellphoneNumberCountry:
+          type: string
+          example: US
+        Labels:
+          type: string
+          description: A comma-separated string of labels.
+          example: VIP,Tier1
+    ContactUpdate:
+      type: object
+      properties:
+        FirstName:
+          type: string
+          example: Wile
+        LastName:
+          type: string
+          example: Coyote
+        EmailAddress:
+          type: string
+          format: email
+          example: wile.coyote@example.com
+        Title:
+          type: string
+          example: Marketing Manager
+        ProfileImageUrl:
+          type: string
+          format: uri
+          example: https://example.com/profile.jpg
+        ProfileImageFile:
+          type: string
+          format: binary
+        WorkPhoneNumber:
+          type: string
+          example: '8051234567'
+          description: The contact's work phone number. Requires `WorkPhoneNumberCountry` if updated.
+        WorkPhoneNumberCountry:
+          type: string
+          example: US
+          description: Two-letter ISO 3166-1 alpha-2 country code. Required when `WorkPhoneNumber` is updated.
+        CellphoneNumber:
+          type: string
+          example: '8059876543'
+          description: The contact's cellphone number. Requires `CellphoneNumberCountry` if updated.
+        CellphoneNumberCountry:
+          type: string
+          example: US
+          description: Two-letter ISO 3166-1 alpha-2 country code. Required when `CellphoneNumber` is updated.
+        LabelsAdd:
+          type: string
+          description: A comma-separated string of labels to add.
+          example: VIP
+        LabelsRemove:
+          type: string
+          description: A comma-separated string of labels to remove.
+          example: Tier2
+        AccountsAdd:
+          type: string
+          description: A comma-separated string of partner account IDs to add.
+          example: '12345'
+        AccountsRemove:
+          type: string
+          description: A comma-separated string of partner account IDs to remove.
+          example: '67890'
+    Contact:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique Contact ID. System-created contacts are prefixed with 'M'.
+          example: '2750'
+        FirstName:
+          type: string
+          example: Wile
+        LastName:
+          type: string
+          example: Coyote
+        EmailAddress:
+          type: string
+          format: email
+          example: wile.coyote@example.com
+        Title:
+          type: string
+          nullable: true
+          example: ''
+        ProfileImage:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contacts/2750/ProfileImage
+        WorkPhoneNumberCountry:
+          type: string
+          example: US
+        WorkPhoneNumber:
+          type: string
+          example: '8051234567'
+        CellphoneNumberCountry:
+          type: string
+          example: US
+        CellphoneNumber:
+          type: string
+          example: '8059876543'
+        Editable:
+          type: boolean
+          description: Indicates if the contact is user-created and fully editable (`true`) or system-created and partially editable (`false`).
+          example: false
+        Labels:
+          type: array
+          items:
+            type: string
+        Accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+              Name:
+                type: string
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contacts/2750
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Contacts/2750
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-default-client: cURL

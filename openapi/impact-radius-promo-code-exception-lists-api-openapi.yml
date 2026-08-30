@@ -1,0 +1,362 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Promo Code Exception Lists API
+  version: '1.0'
+  description: 'Operations tagged Promo Code Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-promocodeexceptionlists-v14.yml, impact-radius-partner-promocodeexceptionlists-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Promo Code Exception Lists
+paths:
+  /Advertisers/{AccountSID}/PromoCodeExceptionLists:
+    post:
+      summary: Create a Promo Code Exception List
+      description: Creates a new, empty list for promo codes that will have exceptional payout rates.
+      operationId: createPromoCodeExceptionList
+      tags:
+      - Promo Code Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - ActionTrackerId
+              - CampaignId
+              - Name
+              properties:
+                ActionTrackerId:
+                  type: string
+                  description: Comma-separated list of event type IDs to associate with this list.
+                  example: '18500'
+                CampaignId:
+                  type: string
+                  description: The program ID this list applies to.
+                  example: '1000'
+                Name:
+                  type: string
+                  description: The name for the new exception list.
+                  example: Excluded-Influencer-Codes
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/PromoCodeExceptionLists' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/PromoCodeExceptionLists/{ListId}:
+    get:
+      summary: Get Promo Code Exception List Details
+      description: Retrieves the details of an existing promo code exception list by its unique ID.
+      operationId: getPromoCodeExceptionListById
+      tags:
+      - Promo Code Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ListId
+        in: path
+        required: true
+        description: The unique identifier for the promo code exception list.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A single promo code exception list object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodeExceptionList'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/PromoCodeExceptionLists/{ListId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    put:
+      summary: Update a Promo Code Exception List
+      description: Updates the specified promo code exception list's name or associated action trackers.
+      operationId: updatePromoCodeExceptionList
+      tags:
+      - Promo Code Exception Lists
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ListId
+        in: path
+        required: true
+        description: The unique identifier for the promo code exception list.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ActionTrackerId:
+                  type: string
+                  description: A new comma-separated list of event type IDs.
+                  example: '18500'
+                Name:
+                  type: string
+                  description: A new name for the exception list.
+                  example: Excluded-Influencer-Codes
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessUriResponse'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request PUT \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/PromoCodeExceptionLists/{ListId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/x-www-form-urlencoded' \\\n  --header 'Accept: */*'"
+      security:
+      - basicAuth: []
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/PromoCodeExceptionLists/{PromoCodeExceptionListId}:
+    get:
+      operationId: retrievePromoCodeExceptionList
+      tags:
+      - Promo Code Exception Lists
+      summary: Retrieve a Promo Code Exception List
+      description: 'Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: PromoCodeExceptionListId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the promo code exception list.
+      responses:
+        '200':
+          description: The promo code exception list object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoCodeExceptionList_2'
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/PromoCodeExceptionLists/{PromoCodeExceptionListId}/Items:
+    get:
+      operationId: listPromoCodeExceptionListItems
+      tags:
+      - Promo Code Exception Lists
+      summary: List Promo Code Exception List Items
+      description: Returns a list of all items in a specific promo code exception list. Each item defines a promo code value that triggers an alternate commission rate.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: PromoCodeExceptionListId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the promo code exception list whose items are being retrieved.
+      responses:
+        '200':
+          description: A list of promo code exception list item objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  PromoCodeExceptionListItems:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PromoCodeExceptionListItem'
+    servers:
+    - url: https://api.impact.com
+components:
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected resource.
+  schemas:
+    PromoCodeExceptionList:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the promo code exception list.
+          example: '99999'
+        Name:
+          type: string
+          description: The display name for the exception list.
+          example: Excluded-Influencer-Codes
+        State:
+          type: string
+          description: The current state of the exception list.
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+        CampaignId:
+          type: string
+          description: The program ID the list applies to.
+          example: '1000'
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the list was created.
+          example: '2026-01-15T10:00:00-08:00'
+        DeactivationDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the list was deactivated, if applicable.
+          example: '2026-12-31T23:59:59-08:00'
+        ActionTrackers:
+          type: array
+          description: The action trackers (event types) this list applies to.
+          items:
+            type: object
+            properties:
+              Id:
+                type: string
+                description: The unique identifier for the action tracker.
+                example: '18500'
+              Name:
+                type: string
+                description: The display name of the action tracker.
+                example: Online Sale
+        NumberOfItems:
+          type: string
+          description: The total number of items in the list.
+          example: '50'
+        ItemsUri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the items collection for this list.
+          example: /Advertisers/<AccountSID>/PromoCodeExceptionLists/99999/Items
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this exception list in the impact.com API.
+          example: /Advertisers/{AccountSID}/PromoCodeExceptionLists/12345
+    PromoCodeExceptionListItem:
+      type: object
+      description: An item within a promo code exception list that defines a specific promo code value triggering an alternate commission rate.
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the promo code exception list item.
+          example: '1'
+        ListId:
+          type: string
+          description: Unique identifier for the parent promo code exception list.
+          example: '6001'
+        Name:
+          type: string
+          description: Display name of the promo code exception list item.
+          example: Summer Sale Code
+        Value:
+          type: string
+          description: The promo code value this item matches against.
+          example: SUMMER2026
+        MatchMode:
+          type: string
+          enum:
+          - EQ
+          - REGEX
+          description: The matching methodology used to evaluate the promo code value. EQ matches exactly; REGEX matches using a regular expression.
+          example: EQ
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time this item was added to the promo code exception list (ISO 8601).
+          example: '2024-03-10T09:00:00-08:00'
+        Uri:
+          type: string
+          description: Unique reference to the promo code exception list item in the impact.com API.
+          example: /Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001/Items/1
+    PromoCodeExceptionList_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the promo code exception list.
+          example: '6001'
+        Name:
+          type: string
+          description: Display name of the promo code exception list.
+          example: VIP Partner Promo Exclusions
+        State:
+          type: string
+          enum:
+          - ACTIVE
+          - CLOSED
+          - DEACTIVATED
+          description: The current state of the promo code exception list.
+          example: ACTIVE
+        CampaignId:
+          type: string
+          description: Unique identifier for the program this promo code exception list applies to.
+          example: '10306'
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time the promo code exception list was created (ISO 8601).
+          example: '2024-03-10T09:00:00-08:00'
+        DeactivationDate:
+          type: string
+          format: date-time
+          description: Date and time the promo code exception list was deactivated (ISO 8601). Empty if the list is still active.
+          example: ''
+        NumberOfItems:
+          type: integer
+          description: The number of items in the promo code exception list.
+          example: 5
+        ItemsUri:
+          type: string
+          description: API resource path for retrieving the items in this promo code exception list.
+          example: /Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001/Items
+        Uri:
+          type: string
+          description: Unique reference to the promo code exception list object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/PromoCodeExceptionLists/6001
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-promocodeexceptionlists-v14.yml
+- impact-radius-partner-promocodeexceptionlists-v15.yml

@@ -1,0 +1,189 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Report Export API
+  version: '1.0'
+  description: 'Operations tagged Report Export across 2 of this provider''s published API definitions: impact-radius-brand-reports-v14.yml, impact-radius-partner-reports-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+security:
+- basicAuth: []
+tags:
+- name: Report Export
+paths:
+  /Advertisers/{AccountSID}/ReportExport/{ReportId_or_Handle}:
+    get:
+      summary: Export a Report Asynchronously
+      description: Schedules a job to export a report. The response contains URIs to poll for job status and to download the result file.
+      operationId: exportReport
+      tags:
+      - Report Export
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ReportId_or_Handle
+        in: path
+        required: true
+        description: The unique ID or handle for the report (e.g., '4222' or 'adv_click_data_pm_only').
+        schema:
+          type: string
+      - name: SUBAID
+        in: query
+        description: Program ID to refine the report. Required for most reports.
+        schema:
+          type: integer
+      - name: StartDate
+        in: query
+        description: Start date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports.
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: End date for the report data as an ISO 8601 date-time (YYYY-MM-DDThh:mm:ssZ), e.g. 2026-01-15T00:00:00Z. Required for most reports.
+        schema:
+          type: string
+          format: date-time
+      - name: CONV_CURRENCY
+        in: query
+        description: Specify the report's currency (e.g., USD).
+        schema:
+          type: string
+      - name: ResultFormat
+        in: query
+        description: The file format for the exported report.
+        schema:
+          type: string
+          enum:
+          - CSV
+          - JSON
+          - XML
+          default: CSV
+      responses:
+        '200':
+          description: The job has been queued successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the job was queued successfully.
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    format: uri-reference
+                    description: The URI to poll for the job's status.
+                  ResultUri:
+                    type: string
+                    format: uri-reference
+                    description: The URI to download the result file once the job completes.
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ReportExport/{ReportId_or_Handle}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/ReportExport/{Id}:
+    get:
+      operationId: exportReports
+      tags:
+      - Report Export
+      summary: Export a report (asynchronous)
+      description: 'Schedules a background job to export a report. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.
+
+
+        Use this endpoint instead of Run Report for any dataset that may exceed 20,000 rows.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: Id
+        in: path
+        required: true
+        description: The report handle (e.g., `mp_action_listing_fast`). Get this from the `Id` field returned by List Reports.
+        schema:
+          type: string
+      - name: SUBAID
+        in: query
+        required: false
+        description: Program ID to scope the report to a single brand. Omit to include all programs you partner with.
+        schema:
+          type: string
+        example: '10306'
+      - name: START_DATE
+        in: query
+        required: true
+        description: Start date for the report's date range, in `YYYY-MM-DD` format.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-01'
+      - name: END_DATE
+        in: query
+        required: true
+        description: End date for the report's date range, in `YYYY-MM-DD` format.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-31'
+      - name: ResultFormat
+        in: query
+        required: false
+        description: Format for the exported result file.
+        schema:
+          type: string
+          enum:
+          - CSV
+          - JSON
+          - XML
+          default: CSV
+      responses:
+        '200':
+          description: Job successfully queued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: The initial status of the queued export job.
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    description: API resource path for polling the job's status via the Partner Jobs API.
+                    example: /Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9
+                  ResultUri:
+                    type: string
+                    description: API resource path to download the result file once the job has completed.
+                    example: /Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9/Download
+                  ReplayUri:
+                    type: string
+                    description: API resource path to replay the export job once it has completed, failed, or been cancelled.
+                    example: /Mediapartners/<AccountSID>/Jobs/18edc7d5-034d-4d95-b88f-cd351635ebd9/Replay
+        '404':
+          description: No report exists with the supplied Id, or the report is not API accessible.
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/ReportExport/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    servers:
+    - url: https://api.impact.com
+      description: Production server
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+x-refined-from:
+- impact-radius-brand-reports-v14.yml
+- impact-radius-partner-reports-v15.yml

@@ -1,0 +1,652 @@
+openapi: 3.2.0
+info:
+  title: impact.com Reward API
+  description: API for managing and looking up rewards.
+  version: 1.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+security:
+- APIKey: []
+- UserJWT: []
+tags:
+- name: Reward
+  description: 'A Reward keeps track of a prize, discount or credit that someone has received.
+
+    All reward types other than gift card integrated rewards can be cancelled using the impact.com API, or through the impact.com Admin portal, if they have not already been redeemed.
+
+    '
+paths:
+  /{tenant_alias}/reward:
+    get:
+      summary: List an account's rewards
+      description: Looks up a list of single rewards.
+      operationId: getRewards
+      tags:
+      - Reward
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: query
+        description: The ID of the account to look up
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: query
+        description: Filters rewards by `user.id`.
+        schema:
+          type: string
+      - name: rewardTypeFilter
+        in: query
+        description: Filters rewards by `type`.
+        schema:
+          type: string
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+      responses:
+        '200':
+          description: A list of rewards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardList'
+              example:
+              - id: 582142aae4b05442a5fa01a5
+                type: CREDIT
+                dateGiven: 1478574762838
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: CENTS
+                discountPercent: null
+                name: Dollar Credit
+                description: null
+                assignedCredit: 2500
+                redeemedCredit: 0
+                redemptions:
+                - id: 5462600de4b09b1c41238f2f
+                  dateRedeemed: 1415733261275
+                  quantityRedeemed: 2000
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+              - id: 5462600de4b09b1c41108f2e
+                type: PCT_DISCOUNT
+                dateGiven: 1415733261275
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: '%'
+                discountPercent: 20
+                name: null
+                description: null
+                assignedCredit: null
+                redeemedCredit: null
+                redemptions: null
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+              - id: 12345678e4b1234aff143be5
+                type: FUELTANK
+                dateGiven: 1497907329060
+                dateExpires: null
+                dateCancelled: null
+                accountId: abc_122
+                userId: abc_122
+                cancellable: true
+                rewardSource: FRIEND_SIGNUP
+                fuelTankCode: CODE8
+                unit: CENTS
+                amount: 1000
+                fueltankType: CREDIT
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/reward' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/reward/{id}:
+    get:
+      summary: Lookup a single reward
+      description: 'Used to lookup an individual reward using the ID of the reward. Works with: `CREDIT`, `PCT_DISCOUNT`, and `FUELTANK`.'
+      operationId: lookupReward
+      tags:
+      - Reward
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the specific reward to lookup
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reward information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              example:
+                id: 582142aae4b05442a5fa01a5
+                type: CREDIT
+                dateGiven: 1478574762838
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: CENTS
+                discountPercent: null
+                name: Dollar Credit
+                description: null
+                assignedCredit: 2500
+                redeemedCredit: 0
+                redemptions:
+                - id: 5462600de4b09b1c41238f2f
+                  dateRedeemed: 1415733261275
+                  quantityRedeemed: 2000
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+        '404':
+          description: Reward not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/reward/{id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/credit/{id}/redeem:
+    post:
+      summary: Redeem a single reward
+      description: 'Used to redeem an individual credit earned from a referral program. Works with: `CREDIT`.'
+      operationId: debitReward
+      tags:
+      - Reward
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the specific reward to be redeemed
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details of the debit
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RewardDebitRequest'
+      responses:
+        '200':
+          description: Reward debitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardDebitResponse'
+              example:
+                creditRedeemed: 200
+                creditAvailable: 1800
+                unit: cents
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/credit/{id}/redeem' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/reward/{id}/cancel:
+    post:
+      summary: Cancel a single reward
+      description: 'Used to cancel an individual reward earned from a referral program. Works with: `CREDIT`, `PCT_DISCOUNT`, and `FUELTANK`.'
+      operationId: cancelReward
+      tags:
+      - Reward
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        description: The ID of the specific reward to be cancelled.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reward cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              example:
+                id: 582142aae4b05442a5fa01a5
+                type: CREDIT
+                dateGiven: 1478574762838
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: CENTS
+                discountPercent: null
+                name: Dollar Credit
+                description: null
+                assignedCredit: 2500
+                redeemedCredit: 0
+                redemptions:
+                - id: 5462600de4b09b1c41238f2f
+                  dateRedeemed: 1415733261275
+                  quantityRedeemed: 2000
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+        '400':
+          description: Reward is not cancellable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Reward does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/reward/{id}/cancel' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/rewards/account/{accountId}/user/{userId}:
+    post:
+      summary: Create a single reward
+      description: 'Used to create a reward for a specified user. Note that the reward will only be redeemed automatically if the default program supports automatic redemption for the provided reward type (see the [install guides](https://integrations.impact.com/impact-brand/reference/tango-card-software-integration) for more on automatic redemption).
+
+        '
+      operationId: createReward
+      tags:
+      - Reward
+      parameters:
+      - name: tenant_alias
+        in: path
+        description: Tenant being referenced. E.g. `"aboih12h16t"` or `"test_abo912126tastastt"`
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: The ID of the user that will be given the reward.
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: path
+        description: The ID of the account that will be given the reward.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Details of the reward to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewReward'
+      responses:
+        '201':
+          description: Reward created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reward'
+              example:
+              - id: 582142aae4b05442a5fa01a5
+                type: CREDIT
+                dateGiven: 1478574762838
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: CENTS
+                discountPercent: null
+                name: Dollar Credit
+                description: null
+                assignedCredit: 2500
+                redeemedCredit: 0
+                redemptions:
+                - id: 5462600de4b09b1c41238f2f
+                  dateRedeemed: 1415733261275
+                  quantityRedeemed: 2000
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+              - id: 5462600de4b09b1c41108f2e
+                type: PCT_DISCOUNT
+                dateGiven: 1415733261275
+                dateExpires: null
+                dateCancelled: null
+                dateScheduledFor: null
+                accountId: '613611'
+                userId: '876343'
+                cancellable: true
+                rewardSource: REFERRED
+                unit: '%'
+                discountPercent: 20
+                name: null
+                description: null
+                assignedCredit: null
+                redeemedCredit: null
+                redemptions: null
+                currency: null
+                amount: null
+                fuelTankCode: null
+                fueltankType: null
+              - id: 12345678e4b1234aff143be5
+                type: FUELTANK
+                dateGiven: 1497907329060
+                dateExpires: null
+                dateCancelled: null
+                accountId: abc_122
+                userId: abc_122
+                cancellable: true
+                rewardSource: FRIEND_SIGNUP
+                fuelTankCode: CODE8
+                unit: CENTS
+                amount: 1000
+                fueltankType: CREDIT
+        default:
+          $ref: '#/components/responses/GeneralError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/rewards/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  schemas:
+    NewReward:
+      description: Details of a new reward to create.
+      properties:
+        type:
+          type: string
+          description: The type of reward.
+          example: PCT_DISCOUNT
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+        dateExpires:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when this reward is set to expire.
+          example: 1471028988000
+        dateScheduledFor:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the reward is scheduled to become available.
+        cancellable:
+          type: boolean
+          description: If a reward is cancellable then it may be revoked. If it has been cancelled then dateCancelled will be non-null.
+          example: true
+        unit:
+          type: string
+          description: 'An identifier for the unit of the reward. E.g. `''credit-in-cents''`, `''freemb''`, `''giftcard20''`, `''tshirt''`, `''freemonth''` or `''%''`. Works with: `CREDIT`'
+        discountPercent:
+          type: integer
+          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
+          example: 15
+        assignedCredit:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `CREDIT`'
+        currency:
+          type: string
+          description: 'For programs that require a currency. Works with: `CREDIT`'
+        fuelTankType:
+          type: string
+          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`'
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+        fuelTankCode:
+          type: string
+          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`.'
+        amount:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+    Reward:
+      title: Reward
+      description: Rewards are used by impact.com to track the credits, discounts, gift cards and other prizes that a User earns.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for this reward
+          example: 6a1702d0eb067e53ef6493bc
+        uniqueId:
+          type: string
+          nullable: true
+          description: A secondary unique identifier for this reward.
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the reward record was created.
+          example: 1779892944095
+        programId:
+          type: string
+          nullable: true
+          description: The ID of the program this reward belongs to. Null if not associated with a specific program.
+        programRewardKey:
+          type: string
+          nullable: true
+          description: The program-level key identifying the reward configuration.
+        globalRewardKey:
+          type: string
+          nullable: true
+          description: The global key identifying the reward configuration.
+        referralId:
+          type: string
+          nullable: true
+          description: The ID of the referral that triggered this reward. Null if the reward was created manually.
+        type:
+          type: string
+          description: The type of reward.
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+          - FUELTANK
+        dateGiven:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when this reward was earned.
+        dateExpires:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when this reward expires. Null if the reward does not expire.
+        dateCancelled:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the reward was cancelled. Null if it has never been cancelled.
+        dateScheduledFor:
+          type: integer
+          format: int64
+          nullable: true
+          description: Unix timestamp (milliseconds) when the reward is scheduled to become available. Null if available immediately.
+        cancellable:
+          type: boolean
+          description: If a reward is cancellable then it may be revoked. If it has been cancelled then `dateCancelled` will be non-null.
+        rewardSource:
+          type: string
+          description: The type of the source of the reward.
+          enum:
+          - FRIEND_SIGNUP
+          - REFERRED
+          - MANUAL
+        unit:
+          type: string
+          description: An identifier for the unit of the reward. E.g. `'credit-in-cents'`, `'freemb'`, `'giftcard20'`, `'tshirt'`, `'freemonth'` or `'%'`
+        discountPercent:
+          type: integer
+          description: 'The percent discount. E.g. 10 means 10% Works with: `PCT_DISCOUNT`'
+        name:
+          type: string
+          description: The human-readable name of the reward.
+        description:
+          type: string
+          description: 'The human-readable description of the reward. Works with: `INTEGRATION`'
+        assignedCredit:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `CREDIT`'
+        redeemedCredit:
+          type: integer
+          description: 'The redeemed quantity of the reward. Works with: `CREDIT`'
+        redemptions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Redemption'
+        currency:
+          type: string
+          description: 'For programs that require a currency. Works with: `CREDIT`'
+        amount:
+          type: integer
+          description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+        fuelTankCode:
+          type: string
+          description: 'The fueltank code associated with this reward. Works with: `FUELTANK`'
+        fueltankType:
+          type: string
+          description: 'The type of reward associated with this fueltank code. Works with: `FUELTANK`.'
+          enum:
+          - PCT_DISCOUNT
+          - CREDIT
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
+    Redemption:
+      title: A redemption object
+      description: Details about when a quantity of a reward was redeemed from the impact.com system.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for this redemption
+          example: 5462600de4b09b1c41238f2f
+        dateRedeemed:
+          type: integer
+          description: Timestamp of when this redemption took place.
+          example: 1415733261275
+        quantityRedeemed:
+          type: integer
+          description: the amount of the reward that was redeemed.
+      example:
+        id: 5462600de4b09b1c41238f2f
+        dateRedeemed: 1415733261275
+        quantityRedeemed: 2000
+    RewardDebitRequest:
+      description: A request to debit a single reward
+      required:
+      - amount
+      - unit
+      properties:
+        amount:
+          type: integer
+          example: 200
+          description: The amount of credit to be debitted.
+        unit:
+          type: string
+          description: The type of credit to be debitted. E.g. "free-months" or "cents"
+          example: cents
+    RewardList:
+      type: array
+      description: A list of Reward objects.
+      items:
+        $ref: '#/components/schemas/Reward'
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 1800
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method of security only in server-to-server interactions.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: Authorize your requests using a JWT (JSON Web Token) for a given user. Useful for client-server authorization, such as the Mobile and Web SDKs. Used in Open Endpoints.
+      x-scopes:
+      - read
+      - write
+x-default-client: cURL

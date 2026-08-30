@@ -1,0 +1,715 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Company Information API
+  version: '1.0'
+  description: 'Operations tagged Company Information across 2 of this provider''s published API definitions: impact-radius-agency-companyinformation-v3.yml, impact-radius-brand-account-v14.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+  description: Production
+tags:
+- name: Company Information
+  description: Your agency's company profile, addresses, and key contacts.
+paths:
+  /Agencies/{AccountSID}/CompanyInformation:
+    get:
+      operationId: getCompanyInformation
+      summary: Get company information
+      description: Returns your agency's company profile, including registered addresses, contact people, tax details, and platform preferences.
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your Agency Account SID.
+        schema:
+          type: string
+        example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+      responses:
+        '200':
+          description: Your agency's company information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyInformation'
+              example:
+                CompanyName: Nutt & Co. Agency
+                Website: https://www.nuttandco-agency.com
+                PrimaryPhoneNumber: '15125550191'
+                PrimaryPhoneNumberCountry: US
+                SecondaryPhoneNumber: ''
+                SecondaryPhoneNumberCountry: ''
+                MinimumContactRating: '3'
+                Timezone: (GMT -06:00) Central Time (US & Canada)
+                Currency: USD
+                RegisteredForIndirectTax: 'false'
+                IndirectTaxNumber: ''
+                OrganizationType: CORP
+                EinSsnForeignTaxId: XXXXX4832
+                CorporateAddress:
+                  AddressLine1: 100 Commerce Drive
+                  AddressLine2: Suite 200
+                  City: Austin
+                  State: TX
+                  PostalCode: '78701'
+                  Country: US
+                BillingAddress:
+                  AddressLine1: 100 Commerce Drive
+                  AddressLine2: Suite 200
+                  City: Austin
+                  State: TX
+                  PostalCode: '78701'
+                  Country: US
+                FinancialContact:
+                  UserId: '5402850'
+                  Name: Carrie Oakey
+                  Email: carrie.oakey@nuttandco-agency.com
+                  WorkPhoneNumber: '15125550191'
+                  WorkPhoneNumberCountry: US
+                  CellPhoneNumber: '15125550192'
+                  CellPhoneNumberCountry: US
+                TechnicalContact:
+                  UserId: '5402851'
+                  Name: Noah Lott
+                  Email: noah.lott@nuttandco-agency.com
+                  WorkPhoneNumber: '15125550193'
+                  WorkPhoneNumberCountry: US
+                  CellPhoneNumber: ''
+                  CellPhoneNumberCountry: ''
+                SecurityContact:
+                  UserId: '5402852'
+                  Name: Robin Banks
+                  Email: robin.banks@nuttandco-agency.com
+                  WorkPhoneNumber: '15125550194'
+                  WorkPhoneNumberCountry: US
+                  CellPhoneNumber: ''
+                  CellPhoneNumberCountry: ''
+                CommercialContact:
+                  UserId: '5402853'
+                  Name: Hazel Nutt
+                  Email: hazel.nutt@nuttandco-agency.com
+                  WorkPhoneNumber: '15125550195'
+                  WorkPhoneNumberCountry: US
+                  CellPhoneNumber: ''
+                  CellPhoneNumberCountry: ''
+                Uri: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation
+        '401':
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+    put:
+      operationId: updateCompanyInformation
+      summary: Update company information
+      description: 'Updates your agency''s company profile. Send only the fields you want to change — omitted fields keep their existing values.
+
+
+        Returns a status confirmation and the resource URI on success. To see the updated values, follow up with a `GET` request.'
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: Your Agency Account SID.
+        schema:
+          type: string
+        example: IRq8mWJybvoQ1020978kbj7am8zzM2dBL1
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyInformationUpdate'
+            example:
+              CompanyName: Nutt & Co. Agency
+              Website: https://www.nuttandco-agency.com
+              PrimaryPhoneNumber: '15125550191'
+              PrimaryPhoneNumberCountry: US
+              MinimumContactRating: '3'
+              CorporateAddress:
+                AddressLine1: 100 Commerce Drive
+                AddressLine2: Suite 200
+                City: Austin
+                State: TX
+                PostalCode: '78701'
+                Country: US
+      responses:
+        '200':
+          description: Update confirmed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Confirmation status. Returns `OK` on success.
+                    example: OK
+                  Uri:
+                    type: string
+                    description: The resource URI for the updated company information.
+                    example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation/
+              example:
+                Status: OK
+                Uri: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation/
+        '400':
+          description: Invalid request body. Check field formats and values.
+        '401':
+          description: Unauthorized. Check that your Account SID and Auth Token are correct.
+    servers:
+    - url: https://api.impact.com
+      description: Production
+  /Advertisers/{AccountSID}/CompanyInformation:
+    get:
+      summary: Get Company Information
+      description: Retrieves the details of the brand account, determined by the API keys used for authentication.
+      operationId: getCompanyInformation
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: An object containing the account's company information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanyInformation_2'
+    put:
+      summary: Update Company Information
+      description: 'Updates the account by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+
+        Note: The following parameters cannot be updated via API: Timezone, Currency, RegisteredForIndirectTax, IndirectTaxNumber. The following parameters can only be updated in the platform: Industry, FinancialContact, TechnicalContact, SecurityContact, CommercialContact.
+
+
+        The corporate address fields (`CorporateAddressLine1`, `CorporateAddressLine2`, `CorporateAddressCity`, `CorporateAddressPostalCode`, `CorporateAddressCountry`) update the corporate address. The billing address fields (`BillingAddressLine1`, `BillingAddressLine2`, `BillingAddressCity`, `BillingAddressPostalCode`, `BillingAddressCountry`) update the billing address. These are returned as nested `CorporateAddress` and `BillingAddress` objects by the GET endpoint.'
+      operationId: updateCompanyInformation
+      tags:
+      - Company Information
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        description: The unique identifier for the account.
+        schema:
+          type: string
+      requestBody:
+        description: The fields to update.
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CompanyInformationUpdate_2'
+      responses:
+        '200':
+          description: The request was successful.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates whether the update was successful.
+                    example: OK
+                  Uri:
+                    type: string
+                    format: uri-reference
+                    description: The unique reference to the updated resource.
+                    example: /Advertisers/<AccountSID>/CompanyInformation
+    servers:
+    - url: https://api.impact.com
+components:
+  schemas:
+    Address:
+      type: object
+      description: A physical address on the agency's account.
+      properties:
+        AddressLine1:
+          type: string
+          description: First line of the street address.
+          example: 100 Commerce Drive
+        AddressLine2:
+          type: string
+          description: Second line of the address (suite, floor, unit, etc.). May be an empty string if not provided.
+          example: Suite 200
+        City:
+          type: string
+          description: City or municipality.
+          example: Austin
+        State:
+          type: string
+          description: State, province, or region. May be empty for countries that do not subdivide this way.
+          example: TX
+        PostalCode:
+          type: string
+          description: ZIP or postal code.
+          example: '78701'
+        Country:
+          type: string
+          description: Country code, using impact.com's format (e.g., `US`, `SOUTHAFRICA`). May differ from ISO 3166.
+          example: US
+    Contact:
+      type: object
+      description: An agency employee assigned to a key contact role.
+      properties:
+        UserId:
+          type: string
+          description: 'The impact.com numeric user ID of the assigned employee. Empty if no contact has been assigned to this role.
+
+
+            To resolve to a full user record, use the Users endpoint.'
+          example: '5402850'
+        Name:
+          type: string
+          description: The contact's full display name. Empty if no contact is assigned.
+          example: Carrie Oakey
+        Email:
+          type: string
+          format: email
+          description: The contact's email address. Empty if no contact is assigned.
+          example: carrie.oakey@nuttandco-agency.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number. Digits only. Empty if not set.
+          example: '15125550191'
+        WorkPhoneNumberCountry:
+          type: string
+          description: The country associated with the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's mobile phone number. Digits only. Empty if not set.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: The country associated with the cell phone number.
+          example: ''
+    CompanyInformationUpdate:
+      type: object
+      description: 'Partial company information update. All fields are optional — omitted fields keep their existing values.
+
+
+        Nested objects (addresses, contacts) may also be updated partially; you do not need to provide every sub-field.'
+      properties:
+        CompanyName:
+          type: string
+          description: The agency's registered business name.
+          example: Nutt & Co. Agency
+        Website:
+          type: string
+          description: The agency's primary website URL.
+          example: https://www.nuttandco-agency.com
+        PrimaryPhoneNumber:
+          type: string
+          description: The agency's primary contact phone number. Digits only.
+          example: '15125550191'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: The country associated with the primary phone number.
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: An optional secondary contact phone number. Digits only.
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: The country associated with the secondary phone number.
+        MinimumContactRating:
+          type: string
+          description: Minimum contact rating as a numeric string (`"1"`–`"5"`).
+          example: '3'
+        Timezone:
+          type: string
+          description: The agency's default timezone in impact.com's display format.
+        Currency:
+          type: string
+          description: The agency's default billing currency (ISO 4217).
+        RegisteredForIndirectTax:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: Whether the agency is registered for indirect taxes. Boolean as string.
+        IndirectTaxNumber:
+          type: string
+          description: The agency's indirect tax registration number.
+        OrganizationType:
+          type: string
+          enum:
+          - CORP
+          - NONP_GOV
+          - OTHER
+          description: The agency's legal organization type.
+        EinSsnForeignTaxId:
+          type: string
+          description: The agency's master tax identification number (EIN, SSN, or foreign equivalent).
+        CorporateAddress:
+          $ref: '#/components/schemas/Address'
+        BillingAddress:
+          $ref: '#/components/schemas/Address'
+        FinancialContact:
+          $ref: '#/components/schemas/Contact'
+        TechnicalContact:
+          $ref: '#/components/schemas/Contact'
+        SecurityContact:
+          $ref: '#/components/schemas/Contact'
+        CommercialContact:
+          $ref: '#/components/schemas/Contact'
+    CompanyInformation:
+      type: object
+      description: Your agency's company profile.
+      properties:
+        CompanyName:
+          type: string
+          description: The agency's registered business name as it appears on impact.com.
+          example: Nutt & Co. Agency
+        Website:
+          type: string
+          description: The agency's primary website URL.
+          example: https://www.nuttandco-agency.com
+        PrimaryPhoneNumber:
+          type: string
+          description: The agency's primary contact phone number. Digits only — no spaces, dashes, or other formatting characters.
+          example: '15125550191'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: The country associated with the primary phone number (e.g., `US`, `SOUTHAFRICA`). Uses impact.com country codes, which may differ from ISO 3166.
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: An optional secondary contact phone number. Digits only. Empty if not set.
+          example: ''
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: The country associated with the secondary phone number. Empty if `SecondaryPhoneNumber` is not set.
+          example: ''
+        MinimumContactRating:
+          type: string
+          description: The minimum impact.com contact rating required for partner outreach to your agency, returned as a numeric string from `"1"` (lowest) to `"5"` (highest). Used to filter inbound partner contact requests by quality.
+          example: '3'
+        Timezone:
+          type: string
+          description: 'The agency''s default timezone, in impact.com''s display format (e.g., `"(GMT -06:00) Central Time (US & Canada)"`).
+
+
+            > **Note:** This field uses a custom display string, not an IANA timezone identifier. The leading `(GMT ±HH:MM)` offset reflects standard time and does not automatically adjust for daylight saving.'
+          example: (GMT -06:00) Central Time (US & Canada)
+        Currency:
+          type: string
+          description: The agency's default billing currency in ISO 4217 format.
+          example: USD
+        RegisteredForIndirectTax:
+          type: string
+          description: Indicates whether the agency is registered for indirect taxes (e.g., VAT, GST). Returns `"true"` or `"false"` as a string value.
+          enum:
+          - 'true'
+          - 'false'
+          example: 'false'
+        IndirectTaxNumber:
+          type: string
+          description: The agency's indirect tax registration number (e.g., a VAT, GST, or HST number). Empty if `RegisteredForIndirectTax` is `"false"`.
+          example: ''
+        OrganizationType:
+          type: string
+          description: 'The agency''s legal organization type.
+
+
+            | Value | Description |
+
+            |---|---|
+
+            | `CORP` | Corporation or limited company. |
+
+            | `NONP_GOV` | Non-profit organization or government entity. |
+
+            | `OTHER` | Any other organization type. |'
+          enum:
+          - CORP
+          - NONP_GOV
+          - OTHER
+          example: CORP
+        EinSsnForeignTaxId:
+          type: string
+          description: 'The agency''s master tax identification number. Accepts a US EIN (Employer Identification Number), US SSN (Social Security Number), or a foreign tax equivalent depending on the agency''s jurisdiction.
+
+
+            For security, only the last four digits are returned and the rest are masked (e.g., `XXXXX4832`). Returns an empty string if no tax ID has been provided.'
+          example: XXXXX4832
+        CorporateAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The agency's registered corporate (legal) address.
+        BillingAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address used for billing and invoicing. May be the same as the corporate address.
+        FinancialContact:
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+          description: The agency employee responsible for finance, billing, and payment matters.
+        TechnicalContact:
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+          description: The agency employee responsible for integration, API access, and technical issues.
+        SecurityContact:
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+          description: The agency employee responsible for security incidents, audits, and compliance.
+        CommercialContact:
+          allOf:
+          - $ref: '#/components/schemas/Contact'
+          description: The agency employee responsible for commercial, partnership, and account matters.
+        Uri:
+          type: string
+          description: The relative URI for this resource within the Agency API.
+          example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/CompanyInformation
+    Contact_2:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: Unique impact.com member account ID for the user.
+          example: '1234567'
+        Name:
+          type: string
+          description: The contact's full name.
+          example: Road Runner
+        Email:
+          type: string
+          format: email
+          description: The contact's email address.
+          example: finance@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The contact's work phone number.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The contact's cell phone number.
+          example: '2065550133'
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the cell phone number.
+          example: US
+    Address_2:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+    Industry:
+      type: object
+      properties:
+        IndustryId:
+          type: string
+          description: Unique identifier for the selected industry.
+          example: '833'
+        IndustryName:
+          type: string
+          description: The display name for the selected industry.
+          example: Miscellaneous Retail Stores, Not Elsewhere Classified
+    CompanyInformationUpdate_2:
+      type: object
+      description: Fields available for updating company information.
+      properties:
+        CompanyName:
+          type: string
+          description: The name used for the account.
+          example: Acme Corporation
+        Website:
+          type: string
+          format: uri
+          description: The official company website URL.
+          example: https://www.example.com
+        PrimaryPhoneNumber:
+          type: string
+          description: The primary domestic contact number.
+          example: '1235550100'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the primary phone number (required if PrimaryPhoneNumber is provided).
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: A secondary domestic contact phone number.
+          example: '3215550100'
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: Two-letter country code for the secondary phone number (required if SecondaryPhoneNumber is provided).
+          example: US
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: EIN, SSN, or foreign Tax ID.
+          example: 12-3456789
+        CorporateAddressLine1:
+          type: string
+          description: Address line 1 for the corporate address.
+          example: 1640 Riverside Dr.
+        CorporateAddressLine2:
+          type: string
+          description: Address line 2 for the corporate address.
+          example: Suite 400
+        CorporateAddressCity:
+          type: string
+          description: City for the corporate address.
+          example: Hill Valley
+        CorporateAddressPostalCode:
+          type: string
+          description: Postal code for the corporate address.
+          example: '90210'
+        CorporateAddressCountry:
+          type: string
+          description: Two-letter country code for the corporate address.
+          example: US
+        BillingAddressLine1:
+          type: string
+          description: Address line 1 for the billing address.
+          example: 112 1/2 Beacon St.
+        BillingAddressLine2:
+          type: string
+          description: Address line 2 for the billing address.
+          example: Floor 2
+        BillingAddressCity:
+          type: string
+          description: City for the billing address.
+          example: Boston
+        BillingAddressPostalCode:
+          type: string
+          description: Postal code for the billing address.
+          example: '02116'
+        BillingAddressCountry:
+          type: string
+          description: Two-letter country code for the billing address.
+          example: US
+    CompanyInformation_2:
+      type: object
+      properties:
+        CompanyName:
+          type: string
+          description: Brand name for the account; usually the legal name of the company.
+          example: Acme Corporation
+        Industry:
+          $ref: '#/components/schemas/Industry'
+          description: The industry that the account most closely associates with.
+        Website:
+          type: string
+          format: uri
+          description: Official website URL for the brand or company.
+          example: https://www.example.com
+        PrimaryPhoneNumber:
+          type: string
+          description: Primary domestic contact number for the account.
+          example: '1235550100'
+        PrimaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+        SecondaryPhoneNumber:
+          type: string
+          description: A secondary domestic contact phone number for the account.
+          example: '3215550100'
+        SecondaryPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
+        MinimumContactRating:
+          type: string
+          description: Minimum star rating (1-5) a partner must have to see contact information.
+          example: '1'
+        Timezone:
+          type: string
+          description: Timezone used for the account.
+          example: (GMT -08:00) Pacific Time (US & Canada); Tijuana
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 code for the account's default currency.
+          example: USD
+        RegisteredForIndirectTax:
+          type: string
+          description: Whether the account is registered for indirect tax.
+          example: 'true'
+        IndirectTaxNumber:
+          type: string
+          description: Unique identifier used for VAT, GST, or HST registration.
+          example: '123456789'
+        OrganizationType:
+          $ref: '#/components/schemas/OrganizationType'
+          description: Organization type for the account. Available options will vary depending on the country that the business is registered in.
+        EinSsnForeignTaxId:
+          type: string
+          description: Employer Identification Number, Social Security Number, or a foreign Tax ID.
+          example: 12-3456789
+        CorporateAddress:
+          $ref: '#/components/schemas/Address_2'
+          description: The primary address for the account.
+        BillingAddress:
+          $ref: '#/components/schemas/Address_2'
+          description: The billing address for the account.
+        FinancialContact:
+          $ref: '#/components/schemas/Contact_2'
+          description: A financial contact for the account (e.g., CFO).
+        TechnicalContact:
+          $ref: '#/components/schemas/Contact_2'
+          description: A technical contact for the account (e.g., CTO).
+        CommercialContact:
+          $ref: '#/components/schemas/Contact_2'
+          description: A commercial or marketing contact for the account (e.g., CMO).
+        SecurityContact:
+          $ref: '#/components/schemas/Contact_2'
+          description: This person is your company's point of contact for compliance and security policy matters.
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this object in the impact.com API.
+          example: /Advertisers/<AccountSID>/CompanyInformation
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP
+x-refined-from:
+- impact-radius-agency-companyinformation-v3.yml
+- impact-radius-brand-account-v14.yml

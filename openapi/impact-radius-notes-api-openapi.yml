@@ -1,0 +1,311 @@
+openapi: 3.2.0
+info:
+  title: Brand Notes API
+  description: API for managing internal notes about partners. These notes are visible to users within your impact.com account but not to partners.
+  version: v14
+servers:
+- url: https://api.impact.com
+tags:
+- name: Notes
+paths:
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Notes:
+    get:
+      summary: List All Notes for a Campaign
+      description: Returns a list of notes for a specific campaign, sorted chronologically by creation date. The list can be filtered by partner (MediaId) and a date range.
+      operationId: listNotes
+      tags:
+      - Notes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign to retrieve notes from.
+        schema:
+          type: integer
+      - name: MediaId
+        in: query
+        description: Filter notes for a specific partner account ID.
+        schema:
+          type: integer
+      - name: StartDate
+        in: query
+        description: Filter for notes created on or after this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      - name: EndDate
+        in: query
+        description: Filter for notes created on or before this date (ISO 8601).
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A paginated list of note objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Notes:
+                    type: array
+                    description: The list of note objects.
+                    items:
+                      $ref: '#/components/schemas/Note'
+    post:
+      summary: Create a Note
+      description: Creates a new note for a specific partner. A note must contain either text content or an attachment.
+      operationId: createNote
+      tags:
+      - Notes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        description: The ID of the campaign this note belongs to.
+        schema:
+          type: integer
+      requestBody:
+        description: The note content and/or attachment.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NoteCreate'
+      responses:
+        '200':
+          description: The note was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+  /Advertisers/{AccountSID}/Campaigns/{CampaignId}/Notes/{NoteId}:
+    get:
+      summary: Get Note Details
+      description: Retrieves the details of an existing note by its unique ID.
+      operationId: getNoteById
+      tags:
+      - Notes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: NoteId
+        in: path
+        required: true
+        description: The unique identifier for the note.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single note object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+    put:
+      summary: Update a Note
+      description: Updates the specified note by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+      operationId: updateNote
+      tags:
+      - Notes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: NoteId
+        in: path
+        required: true
+        description: The unique identifier for the note to update.
+        schema:
+          type: integer
+      requestBody:
+        description: The note properties to update.
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/NoteUpdate'
+      responses:
+        '200':
+          description: The note was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+    delete:
+      summary: Delete a Note
+      description: Permanently deletes a note. This cannot be undone.
+      operationId: deleteNote
+      tags:
+      - Notes
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: NoteId
+        in: path
+        required: true
+        description: The unique identifier for the note to delete.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The note was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the note was deleted.
+                    example: DELETED
+components:
+  schemas:
+    NoteCreate:
+      type: object
+      required:
+      - MediaId
+      properties:
+        MediaId:
+          type: integer
+          description: The partner account ID this note is for.
+          example: 10000
+        Content:
+          type: string
+          description: The plaintext content of the note. Optional if an Attachment is provided.
+          example: Following up on this partner.
+        Attachment:
+          type: string
+          format: binary
+          description: An image file to upload as an attachment. Optional if Content is provided.
+        Type:
+          type: string
+          description: The interaction type for this note.
+          enum:
+          - EMAIL
+          - IM
+          - NONE
+          - PHONE
+          default: NONE
+    NoteUpdate:
+      type: object
+      properties:
+        Content:
+          type: string
+          description: The new plaintext content for the note.
+          example: Updated note content.
+        Type:
+          type: string
+          description: The interaction type for this note.
+          enum:
+          - EMAIL
+          - IM
+          - NONE
+          - PHONE
+        AttachmentsAdd:
+          type: string
+          format: binary
+          description: An image file to add as a new attachment.
+        AttachmentsRemove:
+          type: string
+          description: The filename (e.g., 'crm_7654321_...') of the attachment to remove.
+          example: 1,2
+    Note:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the note.
+          example: 123456
+        MediaId:
+          type: integer
+          description: The unique identifier of the partner this note is about.
+          example: 10000
+        MediaName:
+          type: string
+          description: The display name of the partner this note is about.
+          example: Acme Partner
+        Creator:
+          type: string
+          description: The name of the user who created the note.
+          example: Brand Man
+        CreationDate:
+          type: string
+          format: date-time
+          description: The date and time the note was created.
+          example: '2020-09-10T10:51:23-07:00'
+        ModificationDate:
+          type: string
+          format: date-time
+          description: The date and time the note was last modified.
+          example: '2020-10-21T14:51:42-07:00'
+        Content:
+          type: string
+          description: The plaintext content of the note.
+          example: Meep Meep
+        Type:
+          type: string
+          description: The interaction type for this note.
+          enum:
+          - EMAIL
+          - IM
+          - NONE
+          - PHONE
+          example: NONE
+        Attachments:
+          type: array
+          description: URIs of file attachments associated with the note.
+          items:
+            type: string
+            format: uri-reference
+            example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750/Attachments/1
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this note in the impact.com API.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/123456
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected note.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750

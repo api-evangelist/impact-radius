@@ -1,0 +1,1061 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Deals API
+  version: '1.0'
+  description: 'Operations tagged Deals across 2 of this provider''s published API definitions: impact-radius-brand-deals-v14.yml, impact-radius-partner-deals-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: Deals
+paths:
+  /Advertisers/{AccountSID}/Deals:
+    get:
+      summary: List All Deals
+      description: Returns a list of your deals, which can be filtered by CampaignId, Scope, State, and Type.
+      operationId: listDeals
+      tags:
+      - Deals
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: CampaignId
+        in: query
+        description: Filter deals by the ID of the associated campaign.
+        schema:
+          type: integer
+      - name: Scope
+        in: query
+        description: Filter deals by the extent to which they apply.
+        schema:
+          type: string
+          enum:
+          - PRODUCT
+          - CATEGORY
+          - ENTIRE_STORE
+      - name: State
+        in: query
+        description: Filter deals by their current state.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+      - name: Type
+        in: query
+        description: Filter deals by what they do.
+        schema:
+          type: string
+          enum:
+          - GENERAL_SALE
+          - FREE_SHIPPING
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          - BOGO
+      responses:
+        '200':
+          description: A paginated list of deal objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Deals:
+                    type: array
+                    description: The list of deal objects.
+                    items:
+                      $ref: '#/components/schemas/Deal'
+    post:
+      summary: Create a Deal
+      description: Creates a new deal with specified attributes and restrictions.
+      operationId: createDeal
+      tags:
+      - Deals
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The details of the deal to create.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealCreate'
+      responses:
+        '200':
+          description: The deal was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+    servers:
+    - url: https://api.impact.com
+  /Advertisers/{AccountSID}/Deals/{DealId}:
+    get:
+      summary: Get Deal Details
+      description: Retrieves the object of an existing deal by its unique ID.
+      operationId: getDealById
+      tags:
+      - Deals
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: DealId
+        in: path
+        required: true
+        description: The unique identifier for the deal.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A single deal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deal'
+    put:
+      summary: Update a Deal
+      description: Updates the specified deal by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+      operationId: updateDeal
+      tags:
+      - Deals
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: DealId
+        in: path
+        required: true
+        description: The unique identifier for the deal to update.
+        schema:
+          type: integer
+      requestBody:
+        description: The deal properties to update.
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DealUpdate'
+      responses:
+        '200':
+          description: The deal was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessUriResponse'
+    delete:
+      summary: Delete a Deal
+      description: Permanently deletes a deal. This cannot be undone.
+      operationId: deleteDeal
+      tags:
+      - Deals
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: DealId
+        in: path
+        required: true
+        description: The unique identifier for the deal to delete.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The deal was deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Indicates that the deal was deleted.
+                    example: DELETED
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Deals:
+    get:
+      operationId: listDeals
+      tags:
+      - Deals
+      summary: List Deals
+      description: Returns a list of all deals associated with a specific campaign.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the campaign whose deals are being retrieved.
+      - name: Scope
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+        description: Filters deals by the scope of products they apply to.
+      - name: State
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+        description: Filters deals by their current state.
+      - name: Type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - BOGO
+          - FREE_SHIPPING
+          - GENERAL_SALE
+          - GIFT_WITH_PURCHASE
+          - REBATE
+        description: Filters deals by their promotional type.
+      responses:
+        '200':
+          description: A list of deal objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Deals:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Deal_2'
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/Campaigns/{CampaignId}/Deals/{Id}:
+    get:
+      operationId: retrieveDeal
+      tags:
+      - Deals
+      summary: Retrieve a Deal
+      description: Retrieves the full details of an existing deal using its unique ID.
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: CampaignId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the campaign whose deals are being retrieved.
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier for the deal.
+      responses:
+        '200':
+          description: The deal object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deal_2'
+    servers:
+    - url: https://api.impact.com
+components:
+  schemas:
+    Deal:
+      type: object
+      properties:
+        Id:
+          type: integer
+          description: The unique identifier for the deal.
+          example: 3
+        Name:
+          type: string
+          description: The display name of the deal.
+          example: AcmeDeal3
+        Description:
+          type: string
+          nullable: true
+          description: A description of the deal that may be shown to partners.
+          example: ''
+        CampaignId:
+          type: integer
+          description: The unique identifier of the campaign the deal belongs to.
+          example: 10000
+        State:
+          type: string
+          description: The current state of the deal.
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          example: ACTIVE
+        Type:
+          type: string
+          description: The type of deal — what it offers.
+          enum:
+          - GENERAL_SALE
+          - FREE_SHIPPING
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          - BOGO
+          example: GENERAL_SALE
+        Scope:
+          type: string
+          description: What the deal applies to.
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+          example: PRODUCT
+        Products:
+          type: array
+          description: The products this deal applies to, when Scope is PRODUCT.
+          items:
+            type: object
+            properties:
+              ProductName:
+                type: string
+                description: The name of the product.
+              ProductImageUrl:
+                type: string
+                format: uri-reference
+                description: URL of the product image.
+              ProductBeforePriceAmount:
+                type: number
+                format: decimal
+                description: The product's price before the deal is applied.
+              ProductBeforePriceCurrency:
+                type: string
+                description: Three-letter ISO 4217 currency code for the before-price amount.
+              ProductAfterPriceAmount:
+                type: number
+                format: decimal
+                description: The product's price after the deal is applied.
+              ProductAfterPriceCurrency:
+                type: string
+                description: Three-letter ISO 4217 currency code for the after-price amount.
+        Categories:
+          type: string
+          nullable: true
+          description: Comma-separated list of categories the deal applies to, when Scope is CATEGORY.
+          example: ''
+        DiscountType:
+          type: string
+          description: How the discount is calculated.
+          enum:
+          - FIXED
+          - PERCENT
+          - PERCENT_RANGE
+          - PERCENT_MAXIMUM
+          nullable: true
+          example: FIXED
+        DiscountAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The flat discount amount, when DiscountType is FIXED.
+          example: 5.0
+        DiscountCurrency:
+          type: string
+          nullable: true
+          description: Three-letter ISO 4217 currency code for the discount amount.
+          example: USD
+        MinimumPurchaseAmount:
+          type: number
+          format: decimal
+          description: Minimum amount the consumer needs to spend for the deal to apply.
+        MinimumPurchaseAmountCurrency:
+          type: string
+          description: Currency of the deal's minimum purchase amount (ISO 4217).
+        MaximumSavingsAmount:
+          type: number
+          format: decimal
+          description: Maximum amount a consumer can save when the deal applies.
+        MaximumSavingsCurrency:
+          type: string
+          description: Currency of the deal's maximum savings (ISO 4217).
+        DiscountPercent:
+          type: number
+          format: float
+          nullable: true
+          description: The discount percentage, when DiscountType is PERCENT.
+          example: 10
+        DiscountMaximumPercent:
+          type: number
+          format: float
+          nullable: true
+          description: The maximum discount percentage, when DiscountType is PERCENT_MAXIMUM.
+          example: 25
+        DiscountPercentRangeStart:
+          type: number
+          format: float
+          nullable: true
+          description: The lower bound of the discount range, when DiscountType is PERCENT_RANGE.
+          example: 5
+        DiscountPercentRangeEnd:
+          type: number
+          format: float
+          nullable: true
+          description: The upper bound of the discount range, when DiscountType is PERCENT_RANGE.
+          example: 25
+        Gift:
+          type: string
+          nullable: true
+          description: The gift offered, when Type is GIFT_WITH_PURCHASE.
+          example: ''
+        RebateAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The rebate amount, when Type is REBATE.
+          example: 0.0
+        RebateCurrency:
+          type: string
+          nullable: true
+          description: Three-letter ISO 4217 currency code for the rebate amount.
+          example: ''
+        DefaultPromoCode:
+          type: string
+          nullable: true
+          description: The default promo code partners can promote for this deal.
+          example: APlusAnvils
+        StartDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the deal becomes active.
+          example: ''
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the deal expires.
+          example: ''
+        SynchAdsPromoCodes:
+          type: boolean
+          description: Whether to synchronize promo codes with ads.
+          example: false
+        RestrictedMediaPartners:
+          type: array
+          description: Partner IDs that are restricted from promoting this deal.
+          items:
+            type: string
+        RestrictedMediaPartnerGroups:
+          type: array
+          description: Partner group IDs that are restricted from promoting this deal.
+          items:
+            type: string
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this deal in the impact.com API.
+          example: /Advertisers/<AccountSID>/Deals/00003
+        BogoBuyQuantity:
+          type: integer
+          description: Quantity the customer must buy in a BOGO deal.
+          example: 0
+        BogoBuyScope:
+          type: string
+          nullable: true
+          description: Whether the "buy" requirement is a specific product or category.
+          enum:
+          - PRODUCT
+          - CATEGORY
+          example: ''
+        BogoBuyName:
+          type: string
+          nullable: true
+          description: Name of the item the customer must buy in a BOGO deal.
+          example: ''
+        BogoBuyImageUrl:
+          type: string
+          format: uri
+          description: If `Type` is `BOGO`, the "buy" product image URL.
+        BogoGetQuantity:
+          type: integer
+          description: Quantity the customer receives in a BOGO deal.
+          example: 0
+        BogoGetScope:
+          type: string
+          nullable: true
+          description: Whether the "get" item is a specific product or category in a BOGO deal.
+          enum:
+          - PRODUCT
+          - CATEGORY
+          example: ''
+        BogoGetName:
+          type: string
+          nullable: true
+          description: Name of the item the customer receives in a BOGO deal.
+          example: ''
+        BogoGetImageUrl:
+          type: string
+          format: uri
+          description: If `Type` is `BOGO`, the "get" product image URL.
+        BogoGetDiscountType:
+          type: string
+          nullable: true
+          description: How the discount on the "get" item is calculated in a BOGO deal.
+          enum:
+          - FREE
+          - AMOUNT
+          - PERCENT
+          example: ''
+        BogoGetDiscountAmount:
+          type: number
+          format: decimal
+          nullable: true
+          description: The flat discount amount on the "get" item in a BOGO deal.
+          example: 0.0
+        BogoGetDiscountCurrency:
+          type: string
+          nullable: true
+          description: Three-letter ISO 4217 currency code for the BOGO get discount amount.
+          example: ''
+        BogoGetDiscountPercent:
+          type: number
+          format: float
+          nullable: true
+          description: The discount percentage on the "get" item in a BOGO deal.
+          example: 0
+        PurchaseLimitQuantity:
+          type: integer
+          description: Maximum number of times the deal can be applied per order.
+          example: 0
+    DealCreate:
+      type: object
+      required:
+      - CampaignId
+      - Name
+      - Scope
+      - Type
+      properties:
+        CampaignId:
+          type: integer
+          description: The unique identifier of the campaign the deal belongs to.
+          example: 10000
+        Name:
+          type: string
+          description: The display name of the deal.
+          example: AcmeDeal3
+        Scope:
+          type: string
+          description: What the deal applies to.
+          enum:
+          - PRODUCT
+          - CATEGORY
+          - ENTIRE_STORE
+          example: PRODUCT
+        Type:
+          type: string
+          description: The type of deal.
+          enum:
+          - BOGO
+          - GENERAL_SALE
+          - FREE_SHIPPING
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          example: GENERAL_SALE
+        Description:
+          type: string
+          description: A description of the deal that may be shown to partners.
+          example: 10% off Acme tennis balls
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the deal becomes active.
+          example: '2026-01-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the deal expires.
+          example: '2026-12-31T23:59:59-08:00'
+        SynchAdsPromoCodes:
+          type: boolean
+          description: Whether to synchronize promo codes with ads.
+          default: false
+          example: false
+        ProductName:
+          type: string
+          description: Required if Scope is PRODUCT.
+        Categories:
+          type: string
+          description: Required if Scope is CATEGORY.
+        RestrictedMediaPartners:
+          type: string
+          description: Comma-separated list of Partner IDs.
+        RestrictedMediaPartnerGroups:
+          type: string
+          description: Comma-separated list of Partner Group IDs.
+        DefaultPromoCode:
+          type: string
+          description: The default promo code partners can promote for this deal.
+          example: APlusAnvils
+        DiscountType:
+          type: string
+          description: How the discount is calculated.
+          enum:
+          - FIXED
+          - PERCENT
+          - PERCENT_RANGE
+          - PERCENT_MAXIMUM
+          example: FIXED
+        DiscountAmount:
+          type: number
+          format: decimal
+          description: The flat discount amount, when DiscountType is FIXED.
+          example: 5.0
+        DiscountCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the discount amount.
+          example: USD
+        DiscountPercent:
+          type: number
+          format: float
+          description: The discount percentage, when DiscountType is PERCENT.
+          example: 10
+        Gift:
+          type: string
+          description: The gift offered, when Type is GIFT_WITH_PURCHASE.
+        RebateAmount:
+          type: number
+          format: decimal
+          description: The rebate amount, when Type is REBATE.
+          example: 0.0
+        RebateCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the rebate amount.
+          example: USD
+        BogoBuyName:
+          type: string
+          description: Name of the item the customer must buy in a BOGO deal.
+        BogoBuyQuantity:
+          type: integer
+          description: Quantity the customer must buy in a BOGO deal.
+          example: 0
+        BogoBuyScope:
+          type: string
+          description: Whether the "buy" requirement is a specific product or category.
+          enum:
+          - PRODUCT
+          - CATEGORY
+          example: PRODUCT
+        BogoGetName:
+          type: string
+          description: Name of the item the customer receives in a BOGO deal.
+        BogoGetQuantity:
+          type: integer
+          description: Quantity the customer receives in a BOGO deal.
+        BogoGetScope:
+          type: string
+          description: Whether the "get" item is a specific product or category.
+          enum:
+          - PRODUCT
+          - CATEGORY
+        BogoGetDiscountType:
+          type: string
+          description: How the discount on the "get" item is calculated.
+          enum:
+          - FREE
+          - AMOUNT
+          - PERCENT
+        BogoGetDiscountAmount:
+          type: number
+          format: decimal
+          description: The flat discount amount on the "get" item.
+        BogoGetDiscountPercent:
+          type: number
+          format: float
+          description: The discount percentage on the "get" item.
+    DealUpdate:
+      type: object
+      description: 'Fields available for updating an existing deal. All fields are optional; only provided fields are updated.
+
+
+        **Note:** The following fields appear on the deal object but **cannot be updated via API** — they are managed in the impact.com platform: `Seasonal`, `DealType`, `DefaultPromoCode`, `MinimumPurchaseAmount`, `MaximumSavingsAmount`, `LimitedTimeDeal`, `RestrictedMediaPartners`, `RestrictedMediaPartnerGroups`.'
+      properties:
+        Description:
+          type: string
+          description: A description of the deal that may be shown to partners.
+          example: Updated description.
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the deal becomes active.
+          example: '2026-01-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the deal expires.
+          example: '2026-12-31T23:59:59-08:00'
+        Name:
+          type: string
+          description: The display name of the deal.
+          example: AcmeDeal3
+        SynchAdsPromoCodes:
+          type: boolean
+          description: Whether to synchronize promo codes with ads.
+          example: false
+        DealScope:
+          type: string
+          description: 'To what extent the deal applies to the store. Enum values: `PRODUCT`, `CATEGORY`, `ENTIRE_STORE`.'
+        DiscountType:
+          type: string
+          description: 'What kind of discount a consumer receives. Use only if `DealType=GENERAL_SALE`. Enum values: `FIXED`, `PERCENT`, `PERCENT_RANGE`, `PERCENT_MAXIMUM`.'
+        DiscountAmount:
+          type: number
+          format: decimal
+          description: Deal's discount amount. Required when `DiscountType=FIXED`.
+        DiscountPercent:
+          type: number
+          format: float
+          description: Deal's discount percent. Required when `DiscountType=PERCENT`.
+        DiscountPercentRangeStart:
+          type: number
+          format: float
+          description: Beginning of the discount range. Required when `DiscountType=PERCENT_RANGE`.
+        DiscountPercentRangeEnd:
+          type: number
+          format: float
+          description: End of the discount range. Required when `DiscountType=PERCENT_RANGE`.
+        DiscountMaximumPercent:
+          type: number
+          format: float
+          description: Maximum discount percent. Required when `DiscountType=PERCENT_MAXIMUM`.
+        Gift:
+          type: string
+          description: Name of the gift that comes with a purchase. Required when `DealType=GIFT_WITH_PURCHASE`.
+        RebateAmount:
+          type: number
+          format: decimal
+          description: Purchase rebate amount. Required when `DealType=REBATE`.
+        BogoBuyName:
+          type: string
+          description: Name of the "buy" product. Required when `DealType=BOGO`.
+        BogoBuyQuantity:
+          type: integer
+          description: '"Buy" product quantity available. Required when `DealType=BOGO`.'
+        BogoBuyScope:
+          type: string
+          description: '"Buy" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`.'
+        BogoBuyImageFileName:
+          type: string
+          description: URL to the "buy" product's image. Used when `DealType=BOGO`.
+        BogoGetName:
+          type: string
+          description: '"Get" product name. Required when `DealType=BOGO`.'
+        BogoGetQuantity:
+          type: integer
+          description: '"Get" product quantity available. Required when `DealType=BOGO`.'
+        BogoGetScope:
+          type: string
+          description: '"Get" product scope. Required when `DealType=BOGO`. Enum values: `PRODUCT`, `CATEGORY`.'
+        BogoGetDiscountType:
+          type: string
+          description: '"Get" product discount type. Required when `DealType=BOGO`. Enum values: `FREE`, `AMOUNT`, `PERCENT`.'
+        BogoGetDiscountAmount:
+          type: number
+          format: decimal
+          description: '"Get" product discount amount. Required when `DealType=BOGO` and `BogoGetDiscountType=AMOUNT`.'
+        BogoGetDiscountPercent:
+          type: number
+          format: float
+          description: '"Get" product discount percentage. Required when `DealType=BOGO` and `BogoGetDiscountType=PERCENT`.'
+        BogoGetImageFileName:
+          type: string
+          description: URL to the "get" product's image. Used when `DealType=BOGO`.
+        ProductName:
+          type: string
+          description: Product's name. Required when `DealScope=PRODUCT`.
+        ProductFileName:
+          type: string
+          description: Product's image file name. Used when `DealScope=PRODUCT`.
+        RegularPrice:
+          type: number
+          format: decimal
+          description: Product's original price. Used when `DealScope=PRODUCT`.
+        DealPrice:
+          type: number
+          format: decimal
+          description: Product's deal price. Used when `DealScope=PRODUCT`.
+        PurchaseLimitQuantity:
+          type: integer
+          description: Maximum quantity of "buy" product purchasable in one transaction. Enter `0` for no limit. Used when `DealScope=PRODUCT`.
+        Categories:
+          type: string
+          description: Comma-separated list of deal categories. Used when `DealScope=CATEGORY`.
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected deal.
+    DealProduct:
+      type: object
+      description: A product associated with a deal when Scope is PRODUCT.
+      properties:
+        ProductName:
+          type: string
+          description: Display name of the product.
+          example: Gotham Grapnel Kit
+        ProductImageUrl:
+          type: string
+          description: URL of the product image.
+          example: /display-deal-productimage/92805.gif
+        ProductBeforePriceAmount:
+          type: string
+          description: The original price of the product before the deal discount.
+          example: '50.00'
+        ProductBeforePriceCurrency:
+          type: string
+          description: ISO 4217 currency code for the before-deal price.
+          example: USD
+        ProductAfterPriceAmount:
+          type: string
+          description: The discounted price of the product after the deal is applied.
+          example: '49.00'
+        ProductAfterPriceCurrency:
+          type: string
+          description: ISO 4217 currency code for the after-deal price.
+          example: USD
+    Deal_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the deal.
+          example: '92812'
+        Name:
+          type: string
+          description: Display name of the deal.
+          example: Gotham Supply Crate
+        Description:
+          type: string
+          description: A short description of the deal shown to partners.
+          example: Every mission needs a little extra. Unlock a mystery item with your order.
+        Public:
+          type: boolean
+          description: Whether the deal is publicly visible to all partners. If false, the deal is exclusive to specific partners.
+          example: true
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign this deal belongs to.
+          example: '10306'
+        State:
+          type: string
+          enum:
+          - ACTIVE
+          - EXPIRED
+          - PENDING
+          description: The current state of the deal.
+          example: ACTIVE
+        Type:
+          type: string
+          enum:
+          - BOGO
+          - FREE_SHIPPING
+          - GENERAL_SALE
+          - GIFT_WITH_PURCHASE
+          - REBATE
+          description: The type of promotional offer.
+          example: GENERAL_SALE
+        Scope:
+          type: string
+          enum:
+          - CATEGORY
+          - ENTIRE_STORE
+          - PRODUCT
+          description: The scope of products the deal applies to. Not returned for BOGO deals.
+          example: ENTIRE_STORE
+        Products:
+          type: array
+          description: Products associated with the deal. Populated when Scope is PRODUCT.
+          items:
+            $ref: '#/components/schemas/DealProduct'
+        Categories:
+          type: array
+          description: Product categories associated with the deal. Populated when Scope is CATEGORY.
+          items:
+            type: string
+          example: []
+        DiscountType:
+          type: string
+          enum:
+          - FIXED
+          - PERCENT
+          - PERCENT_RANGE
+          - PERCENT_MAXIMUM
+          description: The method used to calculate the discount amount.
+          example: PERCENT
+        DiscountAmount:
+          type: string
+          description: The fixed discount amount. Populated when DiscountType is FIXED.
+          example: ''
+        DiscountCurrency:
+          type: string
+          description: ISO 4217 currency code for the fixed discount amount.
+          example: ''
+        DiscountPercent:
+          type: string
+          description: The percentage discount. Populated when DiscountType is PERCENT.
+          example: '99'
+        DiscountMaximumPercent:
+          type: string
+          description: The maximum percentage discount. Populated when DiscountType is PERCENT_MAXIMUM.
+          example: ''
+        DiscountPercentRangeStart:
+          type: string
+          description: The lower bound of a percentage discount range. Populated when DiscountType is PERCENT_RANGE.
+          example: ''
+        DiscountPercentRangeEnd:
+          type: string
+          description: The upper bound of a percentage discount range. Populated when DiscountType is PERCENT_RANGE.
+          example: ''
+        Gift:
+          type: string
+          description: Description of the gift item. Populated for GIFT_WITH_PURCHASE deals.
+          example: ''
+        RebateAmount:
+          type: string
+          description: The rebate amount. Populated for REBATE deals.
+          example: ''
+        RebateCurrency:
+          type: string
+          description: ISO 4217 currency code for the rebate amount.
+          example: ''
+        DefaultPromoCode:
+          type: string
+          description: The default promo code associated with this deal, if any.
+          example: Percent Discount Deal Test
+        MinimumPurchaseAmount:
+          type: string
+          description: The minimum purchase amount required to qualify for the deal.
+          example: ''
+        MinimumPurchaseAmountCurrency:
+          type: string
+          description: ISO 4217 currency code for the minimum purchase amount.
+          example: ''
+        MaximumSavingsAmount:
+          type: string
+          description: The maximum savings a customer can receive from this deal.
+          example: ''
+        MaximumSavingsCurrency:
+          type: string
+          description: ISO 4217 currency code for the maximum savings amount.
+          example: ''
+        BogoBuyQuantity:
+          type: string
+          description: The quantity the customer must buy to trigger the BOGO offer.
+          example: '0'
+        BogoBuyScope:
+          type: string
+          description: The scope of products the customer must buy to qualify for the BOGO offer (e.g., PRODUCT, CATEGORY, ENTIRE_STORE).
+          example: ''
+        BogoBuyName:
+          type: string
+          description: Display name of the product or category the customer must buy.
+          example: ''
+        BogoBuyImageUrl:
+          type: string
+          description: URL of the image for the buy-side product in a BOGO offer.
+          example: ''
+        BogoGetQuantity:
+          type: string
+          description: The quantity of the free or discounted product the customer receives in a BOGO offer.
+          example: '0'
+        BogoGetScope:
+          type: string
+          description: The scope of products the customer receives in a BOGO offer (e.g., PRODUCT, CATEGORY, ENTIRE_STORE).
+          example: ''
+        BogoGetDiscountType:
+          type: string
+          enum:
+          - FREE
+          - AMOUNT
+          - PERCENT
+          description: The type of discount applied to the received product in a BOGO offer.
+          example: ''
+        BogoGetName:
+          type: string
+          description: Display name of the product or category the customer receives in a BOGO offer.
+          example: ''
+        BogoGetImageUrl:
+          type: string
+          description: URL of the image for the get-side product in a BOGO offer.
+          example: ''
+        BogoGetDiscountAmount:
+          type: string
+          description: The discount amount applied to the received product. Populated when BogoGetDiscountType is AMOUNT.
+          example: ''
+        BogoGetDiscountCurrency:
+          type: string
+          description: ISO 4217 currency code for the BogoGetDiscountAmount.
+          example: ''
+        BogoGetDiscountPercent:
+          type: string
+          description: The discount percentage applied to the received product. Populated when BogoGetDiscountType is PERCENT.
+          example: ''
+        PurchaseLimitQuantity:
+          type: string
+          description: The maximum number of times a customer can use this deal. Zero means unlimited.
+          example: '0'
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the deal becomes active (ISO 8601). Empty if the deal has no start date.
+          example: ''
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the deal expires (ISO 8601). Empty if the deal has no end date.
+          example: ''
+        DateCreated:
+          type: string
+          format: date-time
+          description: Date and time the deal was created (ISO 8601).
+          example: '2020-12-11T11:08:42-08:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: Date and time the deal was last updated (ISO 8601).
+          example: '2025-12-10T16:04:28-08:00'
+        Uri:
+          type: string
+          description: Unique reference to the deal object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Deals/92812
+x-refined-from:
+- impact-radius-brand-deals-v14.yml
+- impact-radius-partner-deals-v15.yml

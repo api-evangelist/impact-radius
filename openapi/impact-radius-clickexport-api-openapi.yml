@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Impact Radius Click Export API
+  version: '1.0'
+  description: 'Operations tagged ClickExport across 2 of this provider''s published API definitions: impact-radius-brand-clicks-v14.yml, impact-radius-partner-clicks-v15.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.impact.com
+tags:
+- name: ClickExport
+paths:
+  /Advertisers/{AccountSID}/Programs/{ProgramId}/ClickExport:
+    get:
+      summary: Export Clicks Asynchronously
+      description: Schedules a job to export daily clicks. It returns a URI to poll for job status updates and a URI to download the exported file once the job is complete.
+      operationId: exportClicks
+      tags:
+      - ClickExport
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: ProgramId
+        in: path
+        required: true
+        description: The ID of the program (campaign) to export clicks from.
+        schema:
+          type: integer
+      - name: AdId
+        in: query
+        description: ID of the ad that was clicked. Can be repeated for multiple ads.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: Date
+        in: query
+        description: The date for the clicks to be exported, in 'yyyy-MM-dd' format. Defaults to today. Only dates after April 9, 2024 are supported.
+        schema:
+          type: string
+          format: date
+      - name: MediaId
+        in: query
+        description: The unique ID of the partner. Can be repeated for multiple partners.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: UniqueClick
+        in: query
+        description: Filter for clicks that follow IAB standards for a unique click.
+        schema:
+          type: boolean
+      - name: ResultFormat
+        in: query
+        description: The desired file format for the export.
+        schema:
+          type: string
+          enum:
+          - CSV
+          - XML
+          - JSON
+          default: CSV
+      responses:
+        '200':
+          description: The job has been queued successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f
+                  ResultUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download
+                  ReplayUri:
+                    type: string
+                    format: uri-reference
+                    example: /Advertisers/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Replay
+    servers:
+    - url: https://api.impact.com
+  /Mediapartners/{AccountSID}/ClickExport:
+    get:
+      operationId: exportClicks
+      tags:
+      - ClickExport
+      summary: Export Clicks
+      description: 'Schedules a background job to asynchronously export clicks. Returns immediately with a `QueuedUri` pointing to the Partner Jobs API — poll that endpoint to track progress, then download the result from `ResultUri` once the job is complete.
+
+
+        **Migration note:** If you''re migrating from the `Clicks` endpoint to `ClickExport`, note that the result object uses `ProgramId` and `ProgramName` in place of the previous `CampaignId` and `CampaignName`.
+
+
+        See the impact.com rate-limit documentation for this endpoint''s request limits.
+
+        '
+      parameters:
+      - name: AccountSID
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the partner account.
+      - name: ProgramId
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter to clicks for a specific Program (formerly known as Campaign). Repeat the parameter to include multiple Programs.
+      - name: AdId
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter to clicks on a specific ad. Repeat the parameter to include multiple ads.
+      - name: Date
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Click date to export in `yyyy-MM-dd` format. Defaults to today if omitted.
+      - name: SubId
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter to clicks that include the specified Sub ID value. Repeat the parameter to include multiple Sub IDs.
+      - name: UniqueClick
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - 'TRUE'
+          - 'FALSE'
+        description: Set to `TRUE` to return only clicks that meet the IAB standards for a unique click. See the IAB Click Measurement Guidelines for details.
+      - name: ResultFormat
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - CSV
+          - JSON
+          - XML
+          default: CSV
+        description: Format for the exported result file.
+      responses:
+        '200':
+          description: Job successfully queued.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Status:
+                    type: string
+                    description: Initial status of the queued export job.
+                    example: QUEUED
+                  QueuedUri:
+                    type: string
+                    description: API resource path for polling the job's status via the Partner Jobs API.
+                    example: /Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f
+                  ResultUri:
+                    type: string
+                    description: API resource path to download the result file once the job has completed.
+                    example: /Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Download
+                  ReplayUri:
+                    type: string
+                    description: API resource path to replay the export job once it has completed, failed, or been cancelled.
+                    example: /Mediapartners/<AccountSID>/Jobs/d8807a9f-a5ee-4e3f-ad2b-3dfd19d1915f/Replay
+      x-codeSamples:
+      - lang: Shell
+        label: curl
+        source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/ClickExport?Date=2026-01-15&ResultFormat=JSON' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: application/json'"
+    servers:
+    - url: https://api.impact.com
+x-refined-from:
+- impact-radius-brand-clicks-v14.yml
+- impact-radius-partner-clicks-v15.yml

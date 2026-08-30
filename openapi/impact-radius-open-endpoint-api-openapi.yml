@@ -1,0 +1,507 @@
+openapi: 3.2.0
+info:
+  title: impact.com API - User Open Endpoint API
+  description: 'Users are the people in your program. In other places a User might also be called a Contact, Lead or Participant. Users are each mapped to one specific account.
+
+    The following information is controlled at the user level: First and last name, Email address, Referral code, Share links, Custom fields.
+
+    '
+  version: 2.0.0
+servers:
+- url: https://app.referralsaasquatch.com/api/v1
+  description: Production Server
+security:
+- basicAuth: []
+tags:
+- name: Open Endpoint
+  description: Special methods designed for Client-facing applications like the Mobile and Javascript SDKs.
+paths:
+  /{tenant_alias}/open/account/{accountId}/user/{userId}:
+    get:
+      summary: Lookup a user (Open Endpoint)
+      operationId: openGetUser
+      tags:
+      - Open Endpoint
+      description: 'This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.
+
+        '
+      security:
+      - APIKey: []
+      - UserJWT: []
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/extraFields'
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenUser'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+    put:
+      summary: User Upsert (Open Endpoint)
+      operationId: openUserUpsert
+      tags:
+      - Open Endpoint
+      description: 'This method updates/creates a user and an account and returns the user object representing that newly created user/account.
+
+        Because this call creates a user, it requires either a write token or an API key.
+
+        '
+      security:
+      - APIKey: []
+      - UserJWT: []
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/extraFields'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenUserUpsert'
+      responses:
+        '200':
+          description: Information about the upserted user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenUser'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request PUT \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/json' \\\n  --header 'Accept: */*'"
+    post:
+      summary: Create a user and account (Open Endpoint)
+      operationId: openCreateUser
+      tags:
+      - Open Endpoint
+      description: 'This method creates a user and an account and returns the user object representing that newly created user/account.
+
+        Because this call creates a user, it requires either a write token or an API key.
+
+        '
+      security:
+      - APIKey: []
+      - UserJWT: []
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/userId'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/extraFields'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenUserUpsert'
+      responses:
+        '201':
+          description: Information about the newly created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenUser'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Content-Type: application/json' \\\n  --header 'Accept: */*'"
+    delete:
+      summary: Delete a user (Open Endpoint)
+      operationId: openDeleteUser
+      tags:
+      - Open Endpoint
+      description: 'Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).
+
+        '
+      security:
+      - APIKey: []
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/userId'
+      - name: doNotTrack
+        in: query
+        description: Do not track this user (this user cannot be re-registered on the same account).
+        schema:
+          type: boolean
+      - name: preserveEmptyAccount
+        in: query
+        description: Do not delete accounts when all the users in the account are deleted.
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: User successfully deleted
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --request DELETE \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+  /{tenant_alias}/open/user:
+    get:
+      summary: Get a user by a referral code (Open Endpoint)
+      operationId: openGetUserByCode
+      tags:
+      - Open Endpoint
+      security: []
+      description: 'Looks up a user based upon their `ReferralCode` and returns their personal information. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and disabled by default.
+
+        '
+      parameters:
+      - $ref: '#/components/parameters/tenant_alias'
+      - name: referralCode
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The code with which to lookup the user.
+      responses:
+        '200':
+          description: Found user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserByCode'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      x-codeSamples:
+      - lang: cURL
+        source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/user' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
+components:
+  responses:
+    ForbiddenError:
+      description: Forbidden/Endpoint Disabled
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    extraFields:
+      name: extraFields
+      in: query
+      schema:
+        type: string
+      description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
+      style: form
+      explode: false
+    accountId:
+      name: accountId
+      in: path
+      description: The ID of the account.
+      required: true
+      schema:
+        type: string
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
+      required: true
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      schema:
+        type: string
+      description: The fields to be included in the response. Cannot coexist with `extraFields`.
+      style: form
+      explode: false
+    userId:
+      name: userId
+      in: path
+      description: The ID of the user.
+      required: true
+      schema:
+        type: string
+  schemas:
+    UserByCode:
+      description: Minimal user information returned when looking up a user by referral code from the open endpoint.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastInitial:
+          type: string
+          description: The first initial of the user's last name.
+          example: T
+        referralCode:
+          type: string
+          description: The user's primary referral code.
+          example: CFMVQHNUEU2AWWDO
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
+    OpenUserUpsert:
+      title: A Open User object for Upsert/Create
+      description: An object describing an individual user submitted to an open endpoint when you want to create or update a user.
+      required:
+      - id
+      - accountId
+      properties:
+        id:
+          type: string
+          description: The unique identifier provided for this user. Use the user's email as their user Id.
+          example: bob.testerson@example.com
+        accountId:
+          type: string
+          description: The unique identifier of the account. Value must match `id`. Use the user's email as their account Id.
+          example: bob.testerson@example.com
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastName:
+          type: string
+          description: The user's last name.
+          example: Testerson
+        email:
+          type: string
+          format: email
+          description: The email address provided for the user.
+          example: bob.testerson@example.com
+        referable:
+          type: boolean
+          description: Flag to determine whether a user is able to be referred.
+        referralCodes:
+          type: object
+          additionalProperties:
+            type: string
+          description: The primary custom referral codes for different programs, mapping `programId` to `code`.
+        locale:
+          type: string
+          description: The user's locale, used for Internationalization (e.g., `en_US`).
+          example: en_US
+        countryCode:
+          type: string
+          description: The user's ISO 3166-1 Alpha-2 country code (e.g., `US`).
+          example: US
+        dateUsTaxFormSubmitted:
+          type: integer
+          format: int64
+          description: The timestamp of when a user's W-9 tax form was submitted.
+        referredByCodes:
+          type: array
+          items:
+            type: string
+          description: An array of referral codes used to refer this account.
+        cookies:
+          type: string
+          description: The Base64URL encoded attribution cookie values.
+          example: eyJjb29raWVJZCI6ImFiYzEyMyJ9
+        segments:
+          type: array
+          items:
+            type: string
+          description: A list of operations for adding and removing a user from segments (e.g., `["segment1", "~segment2"]`).
+        shareLinks:
+          type: object
+          additionalProperties:
+            type: string
+          description: The primary custom shareLinks for different programs, mapping `programId` to `sharelink`.
+        customFields:
+          type: object
+          additionalProperties: true
+          description: An object containing the custom fields for this user.
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
+    ProgramShareLink:
+      description: A map of program IDs to share link sets for that program.
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          cleanShareLink:
+            type: string
+            format: uri
+            description: The clean (unencoded) primary share link for this program.
+            example: https://share.impact.squatchtesting.com/mzbnEyE
+          UNKNOWN:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMAIL:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          MOBILE:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMBED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          POPUP:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          HOSTED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+    OpenUser:
+      description: A user object returned by open endpoints. Includes program share links and custom fields.
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          example: abc123
+        accountId:
+          type: string
+          description: The unique identifier of the account the user belongs to.
+          example: abc123
+        firstName:
+          type: string
+          description: The user's first name.
+          example: Bob
+        lastName:
+          type: string
+          description: The user's last name.
+          example: Testerson
+        email:
+          type: string
+          format: email
+          description: The user's email address.
+          example: bob.testerson@example.com
+        imageUrl:
+          type: string
+          description: URL of the user's profile image.
+          example: ''
+        cookieId:
+          type: string
+          nullable: true
+          description: The cookie ID associated with this user.
+          example: abc123cookie
+        locale:
+          type: string
+          nullable: true
+          description: The user's locale (e.g. `en_US`).
+          example: en_US
+        countryCode:
+          type: string
+          nullable: true
+          description: The user's ISO 3166-1 Alpha-2 country code (e.g. `US`).
+          example: US
+        referable:
+          type: boolean
+          description: Whether this user can be referred by another user.
+          example: true
+        firstSeenIP:
+          type: string
+          nullable: true
+          description: The IP address the user was first seen from.
+          example: 203.0.113.42
+        lastSeenIP:
+          type: string
+          nullable: true
+          description: The IP address the user was last seen from.
+          example: 203.0.113.42
+        dateCreated:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) when the user was created.
+          example: 1774386824964
+        referralCodes:
+          type: object
+          additionalProperties:
+            type: string
+          description: A map of program IDs to the user's referral code for that program.
+          example:
+            '47255': BOBTESTERSON
+        programShareLinks:
+          $ref: '#/components/schemas/ProgramShareLink'
+        customFields:
+          type: object
+          additionalProperties: true
+          description: Custom fields for this user.
+        segments:
+          type: array
+          items:
+            type: string
+          description: The segments this user belongs to.
+        referredByCodes:
+          type: array
+          items:
+            type: string
+          description: Referral codes used to refer this user.
+          example:
+          - NCC8IQ4ADTVDQAOA
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Use your AccountSID as the username and AuthToken as the password.
+    APIKey:
+      type: http
+      scheme: basic
+      description: Authorize your requests using a tenant's API Key. Use this method only in server-to-server interactions.
+    UserJWT:
+      type: apiKey
+      in: header
+      name: X-SaaSquatch-User-Token
+      description: A JWT for a given user. Used by the Mobile and Web SDKs and other client-side contexts via Open Endpoints.
+x-default-client: cURL
