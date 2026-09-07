@@ -2109,3 +2109,5 @@ x-enrichment:
   status: enriched
   artifacts_added: 156
   pass: local-v1
+x-parent: impact
+x-relationship: product
