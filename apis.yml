@@ -1455,38 +1455,6 @@ apis:
     url: graphql/impact-radius-advocate-schema.graphql
   - type: Webhooks
     url: asyncapi/impact-radius-advocate-webhooks.yml
-- aid: impact-radius:impact-radius-reportexport-api
-  name: Impact Radius Report Export API
-  description: >-
-    Asynchronously export reports through impact.com's Jobs system. Recommended for all report downloads.
-  humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
-  baseURL: https://api.impact.com/Advertisers/
-  tags:
-  - ReportExport
-  properties:
-  - type: OpenAPI
-    url: openapi/impact-radius-reportexport-api-openapi.yml
-  - type: APIReference
-    url: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
-  - type: ChangeLog
-    url: >-
-      https://integrations.impact.com/brand-api-reference/brand-api-reference-v14/readme/changelog.md
-  - type: APIReference
-    url: https://integrations.impact.com/partner-api-reference/partner-v15
-  - type: ChangeLog
-    url: https://integrations.impact.com/partner-api-reference/partner-v15/readme/changelog.md
-  - type: APIReference
-    url: https://integrations.impact.com/agency-v3
-  - type: ChangeLog
-    url: https://integrations.impact.com/agency-v3/readme/changelog.md
-  - type: APIReference
-    url: https://integrations.impact.com/brand-api-reference/advocate-api-reference-v1
-  - type: Documentation
-    url: https://integrations.impact.com/integration-guides/for-brands/advocate/advocate-api.md
-  - type: GraphQL
-    url: graphql/impact-radius-advocate-schema.graphql
-  - type: Webhooks
-    url: asyncapi/impact-radius-advocate-webhooks.yml
 - aid: impact-radius:impact-radius-reports-api
   name: Impact Radius Reports API
   description: List available reports, fetch their metadata, and run them synchronously.
