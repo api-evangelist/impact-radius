@@ -391,6 +391,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   baseURL: https://api.impact.com/Advertisers/
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -608,6 +610,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   baseURL: https://api.impact.com/Advertisers/
   tags:
+  - Conversion
+  tags_raw:
   - Conversions
   properties:
   - type: OpenAPI
@@ -1364,6 +1368,8 @@ apis:
   humanURL: https://integrations.impact.com/brand-api-reference/brand-api-reference-v14
   baseURL: https://api.impact.com/Advertisers/
   tags:
+  - Referrals
+  tags_raw:
   - Referral
   properties:
   - type: OpenAPI
