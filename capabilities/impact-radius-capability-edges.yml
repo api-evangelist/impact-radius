@@ -11,8 +11,18 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 2
+edge_count: 4
 edges:
+- tag: Webhook
+  spec_file: impact-radius-webhook-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: createWebhook  Create a webhook subscription ... testWebhook  Test a webhook subscription
+  reason: Lifecycle of outbound webhook/event subscriptions exposed to integrators maps directly to the
+    named Webhook & Event Subscription Management capability.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Partners
   spec_file: impact-radius-partners-api-openapi.yml
   capability_id: BC-410.60
@@ -25,6 +35,18 @@ edges:
   reason: Lifecycle management of affiliate/media partner accounts in a brand's partnership program —
     administration of indirect channel partners. Some overlap with supplier onboarding since partners
     are paid, but the affiliate context makes channel sales the better fit.
+- tag: Ads
+  spec_file: impact-radius-ads-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /Advertisers/{AccountSID}/Ads createAd "Create an Ad"; GET .../Ads/{Id}/TrackingLink
+    "Retrieve an Ad's Tracking Link"
+  reason: Operations manage advertising creatives and their served code/iframe/tracking links for an affiliate
+    program — digital advertising asset management, i.e. digital marketing execution rather than any IT
+    or product capability.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Users
   spec_file: impact-radius-users-api-openapi.yml
   capability_id: BC-620.20
