@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Catalogs API
   version: '1.0'
-  description: 'Operations tagged Catalogs across 2 of this provider''s published API definitions: impact-radius-brand-catalogs-v14.yml, impact-radius-partner-catalogs-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Catalogs across 2 of this provider''s published API definitions: impact-radius-brand-catalogs-v14.yaml, impact-radius-partner-catalogs-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -516,81 +516,6 @@ components:
           format: uri-reference
           example: /Advertisers/<AccountSID>/Actions/1000.4636.401482/Items/12345
           description: Direct URI to this catalog.
-    Catalog_2:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the catalog.
-          example: '24836'
-        Name:
-          type: string
-          description: Display name of the catalog.
-          example: Wayne Enterprises Official Catalog
-        Language:
-          type: string
-          description: Language of the catalog content.
-          example: English (United States)
-        AdvertiserId:
-          type: string
-          description: Unique identifier for the brand's advertiser account.
-          example: '1804207'
-        AdvertiserName:
-          type: string
-          description: Display name of the brand.
-          example: Acme Corporation
-        AdvertiserLocation:
-          type: string
-          description: Geographic location of the advertiser.
-          example: United States
-        CampaignId:
-          type: string
-          description: Unique identifier for the campaign (brand program) associated with the catalog.
-          example: '10306'
-        CampaignName:
-          type: string
-          description: Display name of the campaign associated with the catalog.
-          example: Wayne Enterprises
-        NumberOfItems:
-          type: string
-          description: The number of items currently in the catalog.
-          example: '20'
-        DateLastUpdated:
-          type: string
-          format: date-time
-          description: The date and time the catalog was last updated (ISO 8601).
-          example: '2022-09-02T01:37:15-07:00'
-        Locations:
-          type: array
-          description: Download paths for catalog files.
-          items:
-            type: string
-          example:
-          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
-          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz
-        Currency:
-          type: string
-          description: ISO 4217 currency code for the catalog's pricing.
-          example: USD
-        ServiceAreas:
-          type: string
-          description: Geographic regions the catalog serves.
-          example: ''
-        FTPLocations:
-          type: array
-          description: FTP access paths for catalog files. Includes authentication credentials — handle securely.
-          items:
-            type: string
-          example:
-          - ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
-        ItemsUri:
-          type: string
-          description: API resource path for the catalog's items.
-          example: /Mediapartners/<AccountSID>/Catalogs/24836/Items
-        Uri:
-          type: string
-          description: Unique reference to the catalog object in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Catalogs/24836
     Item:
       type: object
       properties:
@@ -927,11 +852,86 @@ components:
           type: string
           description: Unique reference to the catalog item in the impact.com API.
           example: /Mediapartners/<AccountSID>/Catalogs/24836/Items/product_24836_APP-0016
+    Catalog_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the catalog.
+          example: '24836'
+        Name:
+          type: string
+          description: Display name of the catalog.
+          example: Wayne Enterprises Official Catalog
+        Language:
+          type: string
+          description: Language of the catalog content.
+          example: English (United States)
+        AdvertiserId:
+          type: string
+          description: Unique identifier for the brand's advertiser account.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand.
+          example: Acme Corporation
+        AdvertiserLocation:
+          type: string
+          description: Geographic location of the advertiser.
+          example: United States
+        CampaignId:
+          type: string
+          description: Unique identifier for the campaign (brand program) associated with the catalog.
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the campaign associated with the catalog.
+          example: Wayne Enterprises
+        NumberOfItems:
+          type: string
+          description: The number of items currently in the catalog.
+          example: '20'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          description: The date and time the catalog was last updated (ISO 8601).
+          example: '2022-09-02T01:37:15-07:00'
+        Locations:
+          type: array
+          description: Download paths for catalog files.
+          items:
+            type: string
+          example:
+          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
+          - /Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_IR.txt.gz
+        Currency:
+          type: string
+          description: ISO 4217 currency code for the catalog's pricing.
+          example: USD
+        ServiceAreas:
+          type: string
+          description: Geographic regions the catalog serves.
+          example: ''
+        FTPLocations:
+          type: array
+          description: FTP access paths for catalog files. Includes authentication credentials — handle securely.
+          items:
+            type: string
+          example:
+          - ftp://ps-ftp_<AccountSID>:<FTPPassword>@products.impact.com/Wayne-Enterprises/Wayne-Enterprises-Official-Catalog_GOOGLE_TXT.txt.gz
+        ItemsUri:
+          type: string
+          description: API resource path for the catalog's items.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836/Items
+        Uri:
+          type: string
+          description: Unique reference to the catalog object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Catalogs/24836
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-catalogs-v14.yml
-- impact-radius-partner-catalogs-v15.yml
+- impact-radius-brand-catalogs-v14.yaml
+- impact-radius-partner-catalogs-v15.yaml

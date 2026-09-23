@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Invoices API
   version: '1.0'
-  description: 'Operations tagged Invoices across 2 of this provider''s published API definitions: impact-radius-brand-invoices-v14.yml, impact-radius-partner-invoices-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Invoices across 2 of this provider''s published API definitions: impact-radius-brand-invoices-v14.yaml, impact-radius-partner-invoices-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -126,7 +126,9 @@ paths:
       tags:
       - Invoices
       summary: List invoices
-      description: "Returns a list of invoices. The transactions are returned in sorted order, with the most recent transactions appearing first. \nParameters can be used to create a date range to only list invoices that were created within the range.\n"
+      description: 'Returns a list of invoices. The transactions are returned in sorted order, with the most recent transactions appearing first.
+
+        Parameters can be used to create a date range to only list invoices that were created within the range.'
       parameters:
       - name: AccountSID
         in: path
@@ -274,6 +276,60 @@ components:
           format: decimal
           description: The total amount for this detailed line item.
           example: 65.0
+    Invoice:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: The unique identifier for the invoice.
+          example: 1299679-33
+        CreatedDate:
+          type: string
+          format: date-time
+          description: The date and time the invoice was created.
+          example: '2018-11-02T11:43:30-04:00'
+        MediaId:
+          type: integer
+          description: The unique identifier for the partner the invoice is for.
+          example: 1299679
+        MediaName:
+          type: string
+          description: The display name of the partner the invoice is for.
+          example: RoadRunner
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the invoice amounts.
+          example: USD
+        TotalAmount:
+          type: number
+          format: decimal
+          description: The total amount owed on the invoice.
+          example: 65.0
+        TotalVatAmount:
+          type: number
+          format: decimal
+          description: The total VAT amount on the invoice.
+          example: 0.0
+        LineItems:
+          type: array
+          description: Summary line items for the invoice grouped by campaign and description.
+          items:
+            $ref: '#/components/schemas/LineItem'
+        DetailedLineItems:
+          type: array
+          description: Detailed line items for the invoice with program-level breakdown.
+          items:
+            $ref: '#/components/schemas/DetailedLineItem'
+        PDF:
+          type: string
+          format: uri-reference
+          description: The URI to download the PDF for the invoice.
+          example: /Advertisers/<AccountSID>/Invoices/1924609-1/Download
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to this invoice in the impact.com API.
+          example: /Advertisers/<AccountSID>/Invoices/1924609-1
     LineItem:
       type: object
       properties:
@@ -334,60 +390,6 @@ components:
           nullable: true
           description: The date and time the line item was paid, if applicable.
           example: '2018-10-16T00:35:47-04:00'
-    Invoice:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: The unique identifier for the invoice.
-          example: 1299679-33
-        CreatedDate:
-          type: string
-          format: date-time
-          description: The date and time the invoice was created.
-          example: '2018-11-02T11:43:30-04:00'
-        MediaId:
-          type: integer
-          description: The unique identifier for the partner the invoice is for.
-          example: 1299679
-        MediaName:
-          type: string
-          description: The display name of the partner the invoice is for.
-          example: RoadRunner
-        Currency:
-          type: string
-          description: Three-letter ISO 4217 currency code for the invoice amounts.
-          example: USD
-        TotalAmount:
-          type: number
-          format: decimal
-          description: The total amount owed on the invoice.
-          example: 65.0
-        TotalVatAmount:
-          type: number
-          format: decimal
-          description: The total VAT amount on the invoice.
-          example: 0.0
-        LineItems:
-          type: array
-          description: Summary line items for the invoice grouped by campaign and description.
-          items:
-            $ref: '#/components/schemas/LineItem'
-        DetailedLineItems:
-          type: array
-          description: Detailed line items for the invoice with program-level breakdown.
-          items:
-            $ref: '#/components/schemas/DetailedLineItem'
-        PDF:
-          type: string
-          format: uri-reference
-          description: The URI to download the PDF for the invoice.
-          example: /Advertisers/<AccountSID>/Invoices/1924609-1/Download
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to this invoice in the impact.com API.
-          example: /Advertisers/<AccountSID>/Invoices/1924609-1
     DetailedLineItem_2:
       type: object
       properties:
@@ -426,6 +428,58 @@ components:
           format: decimal
           description: Total payout amount for this detailed line item.
           example: '50.00'
+    Invoice_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the invoice object.
+          example: 1924609-1
+        CreatedDate:
+          type: string
+          format: date-time
+          description: ISO 8601 format of the date and time when the invoice was created.
+          example: '2024-09-02T07:37:12-07:00'
+        RecipientId:
+          type: integer
+          description: Unique identifier of the recipient of the invoice.
+          example: 1804207
+        RecipientName:
+          type: string
+          description: The display name of the recipient of the invoice.
+          example: Acme Corporation
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 currency code.
+          example: USD
+        TotalAmount:
+          type: string
+          format: decimal
+          description: The total amount due to the partner in the invoice.
+          example: '50.00'
+        TotalVatAmount:
+          type: string
+          format: decimal
+          description: Value-added tax applied to the invoice, if any exists.
+          example: '0.00'
+        LineItems:
+          type: array
+          description: List of line items summarising each payout component in the invoice.
+          items:
+            $ref: '#/components/schemas/LineItem_2'
+        DetailedLineItems:
+          type: array
+          description: Detailed breakdown of payout amounts per program within the invoice.
+          items:
+            $ref: '#/components/schemas/DetailedLineItem_2'
+        PDF:
+          type: string
+          description: API resource path to download the invoice as a PDF.
+          example: /Mediapartners/<AccountSID>/Invoices/1924609-1/Download
+        Uri:
+          type: string
+          description: Unique reference to this invoice in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Invoices/1924609-1
     LineItem_2:
       type: object
       properties:
@@ -485,63 +539,11 @@ components:
           format: date-time
           description: Date and time this line item was paid (ISO 8601). Empty if not yet paid.
           example: '2024-10-01T00:00:00-07:00'
-    Invoice_2:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the invoice object.
-          example: 1924609-1
-        CreatedDate:
-          type: string
-          format: date-time
-          description: ISO 8601 format of the date and time when the invoice was created.
-          example: '2024-09-02T07:37:12-07:00'
-        RecipientId:
-          type: integer
-          description: Unique identifier of the recipient of the invoice.
-          example: 1804207
-        RecipientName:
-          type: string
-          description: The display name of the recipient of the invoice.
-          example: Acme Corporation
-        Currency:
-          type: string
-          description: Three-letter ISO 4217 currency code.
-          example: USD
-        TotalAmount:
-          type: string
-          format: decimal
-          description: The total amount due to the partner in the invoice.
-          example: '50.00'
-        TotalVatAmount:
-          type: string
-          format: decimal
-          description: Value-added tax applied to the invoice, if any exists.
-          example: '0.00'
-        LineItems:
-          type: array
-          description: List of line items summarising each payout component in the invoice.
-          items:
-            $ref: '#/components/schemas/LineItem_2'
-        DetailedLineItems:
-          type: array
-          description: Detailed breakdown of payout amounts per program within the invoice.
-          items:
-            $ref: '#/components/schemas/DetailedLineItem_2'
-        PDF:
-          type: string
-          description: API resource path to download the invoice as a PDF.
-          example: /Mediapartners/<AccountSID>/Invoices/1924609-1/Download
-        Uri:
-          type: string
-          description: Unique reference to this invoice in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Invoices/1924609-1
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-invoices-v14.yml
-- impact-radius-partner-invoices-v15.yml
+- impact-radius-brand-invoices-v14.yaml
+- impact-radius-partner-invoices-v15.yaml

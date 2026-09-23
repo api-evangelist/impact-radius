@@ -2,7 +2,11 @@ openapi: 3.2.0
 info:
   title: Partner Media Properties API
   version: '15'
-  description: "Media Properties describe the locations (e.g., websites, social media, and mobile apps) where you place advertisements \nand tracking links to drive traffic to brands. This API allows you to create, retrieve, update, list, and delete \nmedia properties associated with your partner account.\n"
+  description: 'Media Properties describe the locations (e.g., websites, social media, and mobile apps) where you place advertisements
+
+    and tracking links to drive traffic to brands. This API allows you to create, retrieve, update, list, and delete
+
+    media properties associated with your partner account.'
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -50,7 +54,9 @@ paths:
       tags:
       - Media Properties
       summary: Create a media property
-      description: "Creates a new media property object. New media properties need to be verified by impact.com \nbefore they are fully approved.\n"
+      description: 'Creates a new media property object. New media properties need to be verified by impact.com
+
+        before they are fully approved.'
       requestBody:
         required: true
         content:
@@ -167,7 +173,9 @@ paths:
       tags:
       - Media Properties
       summary: Update a media property
-      description: "Updates the specified media property's attributes. Any parameter not provided will leave the \ncorresponding attribute unchanged. Submitted values overwrite existing values entirely.\n"
+      description: 'Updates the specified media property''s attributes. Any parameter not provided will leave the
+
+        corresponding attribute unchanged. Submitted values overwrite existing values entirely.'
       requestBody:
         content:
           multipart/form-data:
@@ -262,6 +270,30 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/MediaProperties/{Id}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    PropertyType:
+      type: string
+      description: The type of media property — website, mobile app, or social media account.
+      enum:
+      - WEBSITE
+      - MOBILE
+      - SOCIAL
+    MobilePlatform:
+      type: string
+      description: The mobile operating system platform the app is published on.
+      enum:
+      - IOS
+      - ANDROID
+    InstallsFollowers:
+      type: string
+      description: Tiered count buckets for app installs (MOBILE) or social followers (SOCIAL).
+      enum:
+      - HUNDRED_PLUS
+      - THOUSAND_PLUS
+      - TEN_THOUSAND_PLUS
+      - HUNDRED_THOUSAND_PLUS
+      - MILLION_PLUS
+      - TEN_MILLION_PLUS
+      - HUNDRED_MILLION_PLUS
     MediaProperty:
       type: object
       properties:
@@ -346,32 +378,6 @@ components:
           type: string
           description: Unique reference to this media property in the impact.com API.
           example: /Mediapartners/<AccountSID>/MediaProperties/4622773
-    MobilePlatform:
-      type: string
-      description: The mobile operating system platform the app is published on.
-      enum:
-      - IOS
-      - ANDROID
-    InstallsFollowers:
-      type: string
-      description: Tiered count buckets for app installs (MOBILE) or social followers (SOCIAL).
-      enum:
-      - HUNDRED_PLUS
-      - THOUSAND_PLUS
-      - TEN_THOUSAND_PLUS
-      - HUNDRED_THOUSAND_PLUS
-      - MILLION_PLUS
-      - TEN_MILLION_PLUS
-      - HUNDRED_MILLION_PLUS
-    RevenueModel:
-      type: string
-      description: The monetization model used by a media property.
-      enum:
-      - PAY_PER_LEAD
-      - PAY_PER_INQUIRY
-      - PAY_PER_SALE
-      - PAY_PER_CLICK
-      - PAY_PER_INSTALL
     SocialPlatform:
       type: string
       description: The social media platform the property is on.
@@ -386,13 +392,15 @@ components:
       - LINKEDIN
       - WECHAT
       - WEIBO
-    PropertyType:
+    RevenueModel:
       type: string
-      description: The type of media property — website, mobile app, or social media account.
+      description: The monetization model used by a media property.
       enum:
-      - WEBSITE
-      - MOBILE
-      - SOCIAL
+      - PAY_PER_LEAD
+      - PAY_PER_INQUIRY
+      - PAY_PER_SALE
+      - PAY_PER_CLICK
+      - PAY_PER_INSTALL
   securitySchemes:
     basicAuth:
       type: http

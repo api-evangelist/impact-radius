@@ -12,9 +12,7 @@ tags:
 - name: Reward
   description: 'A Reward keeps track of a prize, discount or credit that someone has received.
 
-    All reward types other than gift card integrated rewards can be cancelled using the impact.com API, or through the impact.com Admin portal, if they have not already been redeemed.
-
-    '
+    All reward types other than gift card integrated rewards can be cancelled using the impact.com API, or through the impact.com Admin portal, if they have not already been redeemed.'
 paths:
   /{tenant_alias}/reward:
     get:
@@ -299,9 +297,7 @@ paths:
   /{tenant_alias}/rewards/account/{accountId}/user/{userId}:
     post:
       summary: Create a single reward
-      description: 'Used to create a reward for a specified user. Note that the reward will only be redeemed automatically if the default program supports automatic redemption for the provided reward type (see the [install guides](https://integrations.impact.com/impact-brand/reference/tango-card-software-integration) for more on automatic redemption).
-
-        '
+      description: Used to create a reward for a specified user. Note that the reward will only be redeemed automatically if the default program supports automatic redemption for the provided reward type (see the install guides for more on automatic redemption).
       operationId: createReward
       tags:
       - Reward
@@ -404,6 +400,45 @@ paths:
         source: "curl -L \\\n  --request POST \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/rewards/account/{accountId}/user/{userId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    Redemption:
+      title: A redemption object
+      description: Details about when a quantity of a reward was redeemed from the impact.com system.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for this redemption
+          example: 5462600de4b09b1c41238f2f
+        dateRedeemed:
+          type: integer
+          description: Timestamp of when this redemption took place.
+          example: 1415733261275
+        quantityRedeemed:
+          type: integer
+          description: the amount of the reward that was redeemed.
+      example:
+        id: 5462600de4b09b1c41238f2f
+        dateRedeemed: 1415733261275
+        quantityRedeemed: 2000
+    RewardList:
+      type: array
+      description: A list of Reward objects.
+      items:
+        $ref: '#/components/schemas/Reward'
+    RewardDebitResponse:
+      description: Details about a successful Reward Balance Debit transaction.
+      properties:
+        creditRedeemed:
+          type: integer
+          example: 200
+          description: The amount of credit that was just debitted.
+        creditAvailable:
+          type: integer
+          example: 1800
+          description: The remaining credit in this account of the same unit type.
+        unit:
+          type: string
+          example: cents
+          description: The type of credit that was just debitted.
     NewReward:
       description: Details of a new reward to create.
       properties:
@@ -453,6 +488,37 @@ components:
         amount:
           type: integer
           description: 'The earned quantity of the reward. Works with: `FUELTANK`'
+    RewardDebitRequest:
+      description: A request to debit a single reward
+      required:
+      - amount
+      - unit
+      properties:
+        amount:
+          type: integer
+          example: 200
+          description: The amount of credit to be debitted.
+        unit:
+          type: string
+          description: The type of credit to be debitted. E.g. "free-months" or "cents"
+          example: cents
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code
+          type: string
+          example: RS042
     Reward:
       title: Reward
       description: Rewards are used by impact.com to track the credits, discounts, gift cards and other prizes that a User earns.
@@ -559,76 +625,6 @@ components:
           enum:
           - PCT_DISCOUNT
           - CREDIT
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code
-          type: string
-          example: RS042
-    Redemption:
-      title: A redemption object
-      description: Details about when a quantity of a reward was redeemed from the impact.com system.
-      properties:
-        id:
-          type: string
-          description: The unique identifier for this redemption
-          example: 5462600de4b09b1c41238f2f
-        dateRedeemed:
-          type: integer
-          description: Timestamp of when this redemption took place.
-          example: 1415733261275
-        quantityRedeemed:
-          type: integer
-          description: the amount of the reward that was redeemed.
-      example:
-        id: 5462600de4b09b1c41238f2f
-        dateRedeemed: 1415733261275
-        quantityRedeemed: 2000
-    RewardDebitRequest:
-      description: A request to debit a single reward
-      required:
-      - amount
-      - unit
-      properties:
-        amount:
-          type: integer
-          example: 200
-          description: The amount of credit to be debitted.
-        unit:
-          type: string
-          description: The type of credit to be debitted. E.g. "free-months" or "cents"
-          example: cents
-    RewardList:
-      type: array
-      description: A list of Reward objects.
-      items:
-        $ref: '#/components/schemas/Reward'
-    RewardDebitResponse:
-      description: Details about a successful Reward Balance Debit transaction.
-      properties:
-        creditRedeemed:
-          type: integer
-          example: 200
-          description: The amount of credit that was just debitted.
-        creditAvailable:
-          type: integer
-          example: 1800
-          description: The remaining credit in this account of the same unit type.
-        unit:
-          type: string
-          example: cents
-          description: The type of credit that was just debitted.
   responses:
     GeneralError:
       description: Unexpected Error

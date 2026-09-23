@@ -169,6 +169,100 @@ paths:
           description: Submission not found.
 components:
   schemas:
+    SubmissionStatus:
+      type: object
+      description: The processing status of a compliance content submission job.
+      properties:
+        JobId:
+          type: string
+          description: The unique identifier of the submission job. Matches the `Id` path parameter.
+          example: content_api_1603459292102
+        Status:
+          type: string
+          description: 'The current processing status of the job.
+
+
+            | Value | Description |
+
+            |---|---|
+
+            | `QUEUED` | The submission has been received and is awaiting processing. |
+
+            | `RUNNING` | The submission is being processed. |
+
+            | `COMPLETED` | Processing has finished — per-item results can be retrieved. |'
+          enum:
+          - QUEUED
+          - RUNNING
+          - COMPLETED
+          example: COMPLETED
+        Source:
+          type: string
+          description: The source system that submitted the content. Only `CONTENT_API` is currently supported.
+          enum:
+          - CONTENT_API
+          example: CONTENT_API
+        Type:
+          type: string
+          description: The type of compliance content in this submission. Only `PAGE` is currently supported.
+          enum:
+          - PAGE
+          example: PAGE
+        StartDate:
+          type: string
+          format: date-time
+          description: The date and time the job started processing, in ISO 8601 format.
+          example: '2026-01-15T09:22:11Z'
+        EndDate:
+          type: string
+          format: date-time
+          description: The date and time the job finished processing, in ISO 8601 format. Empty until the job reaches `COMPLETED`.
+          example: '2026-01-15T09:23:47Z'
+        Success:
+          type: integer
+          description: The count of content items in the submission that were processed successfully.
+          example: 8
+        PartialSuccess:
+          type: integer
+          description: The count of content items that were processed but reported warnings or non-fatal issues.
+          example: 1
+        Error:
+          type: integer
+          description: The count of content items that failed processing.
+          example: 1
+        ResponseUri:
+          type: string
+          description: The relative URI from which the full per-item results can be retrieved. Available once `Status` is `COMPLETED`.
+          example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/Response/content_api_1603459292102
+    ErrorResponse:
+      type: object
+      description: Standard error response format for the Compliance Content API.
+      properties:
+        Status:
+          type: string
+          description: Error status. Returns `ERROR` for failed requests.
+          enum:
+          - ERROR
+          example: ERROR
+        Message:
+          type: string
+          description: A human-readable description of the error.
+          example: Validation Errors
+        Errors:
+          type: object
+          description: Detailed validation errors. Present when the request body fails validation.
+          properties:
+            Error:
+              type: object
+              properties:
+                Field:
+                  type: string
+                  description: The name of the field that failed validation.
+                  example: Context
+                Message:
+                  type: string
+                  description: A description of why the field failed validation.
+                  example: Context is an expected field
     ComplianceContent:
       type: object
       description: A single content item submitted for compliance monitoring.
@@ -275,100 +369,6 @@ components:
           description: One or more content items to submit for monitoring.
           items:
             $ref: '#/components/schemas/ComplianceContent'
-    ErrorResponse:
-      type: object
-      description: Standard error response format for the Compliance Content API.
-      properties:
-        Status:
-          type: string
-          description: Error status. Returns `ERROR` for failed requests.
-          enum:
-          - ERROR
-          example: ERROR
-        Message:
-          type: string
-          description: A human-readable description of the error.
-          example: Validation Errors
-        Errors:
-          type: object
-          description: Detailed validation errors. Present when the request body fails validation.
-          properties:
-            Error:
-              type: object
-              properties:
-                Field:
-                  type: string
-                  description: The name of the field that failed validation.
-                  example: Context
-                Message:
-                  type: string
-                  description: A description of why the field failed validation.
-                  example: Context is an expected field
-    SubmissionStatus:
-      type: object
-      description: The processing status of a compliance content submission job.
-      properties:
-        JobId:
-          type: string
-          description: The unique identifier of the submission job. Matches the `Id` path parameter.
-          example: content_api_1603459292102
-        Status:
-          type: string
-          description: 'The current processing status of the job.
-
-
-            | Value | Description |
-
-            |---|---|
-
-            | `QUEUED` | The submission has been received and is awaiting processing. |
-
-            | `RUNNING` | The submission is being processed. |
-
-            | `COMPLETED` | Processing has finished — per-item results can be retrieved. |'
-          enum:
-          - QUEUED
-          - RUNNING
-          - COMPLETED
-          example: COMPLETED
-        Source:
-          type: string
-          description: The source system that submitted the content. Only `CONTENT_API` is currently supported.
-          enum:
-          - CONTENT_API
-          example: CONTENT_API
-        Type:
-          type: string
-          description: The type of compliance content in this submission. Only `PAGE` is currently supported.
-          enum:
-          - PAGE
-          example: PAGE
-        StartDate:
-          type: string
-          format: date-time
-          description: The date and time the job started processing, in ISO 8601 format.
-          example: '2026-01-15T09:22:11Z'
-        EndDate:
-          type: string
-          format: date-time
-          description: The date and time the job finished processing, in ISO 8601 format. Empty until the job reaches `COMPLETED`.
-          example: '2026-01-15T09:23:47Z'
-        Success:
-          type: integer
-          description: The count of content items in the submission that were processed successfully.
-          example: 8
-        PartialSuccess:
-          type: integer
-          description: The count of content items that were processed but reported warnings or non-fatal issues.
-          example: 1
-        Error:
-          type: integer
-          description: The count of content items that failed processing.
-          example: 1
-        ResponseUri:
-          type: string
-          description: The relative URI from which the full per-item results can be retrieved. Available once `Status` is `COMPLETED`.
-          example: /Agencies/IRq8mWJybvoQ1020978kbj7am8zzM2dBL1/Compliance/Content/ComplianceAPISubmissions/Response/content_api_1603459292102
     Keyword:
       type: object
       description: A keyword tracked against a content submission.

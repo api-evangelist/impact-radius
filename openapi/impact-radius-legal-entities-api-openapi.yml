@@ -71,6 +71,50 @@ paths:
                 $ref: '#/components/schemas/LegalEntity'
 components:
   schemas:
+    OrganizationType:
+      type: string
+      description: Organization type for the account.
+      enum:
+      - NONP_GOV
+      - CORP
+      - SOLE_IND
+      - LLC_LLP_LLS
+      - TRUST
+      - SOLE_TRD
+      - PARTNERS
+      - LLC
+      - LLP
+      - COMPANY
+      - GOVERNMENT
+      - OTHER
+      example: CORP
+    Address:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+          description: Address line 1 (address number, street name)
+          example: 1640 Riverside Dr.
+        AddressLine2:
+          type: string
+          description: Address line 2 (building, unit, suite, etc. number)
+          example: Suite 400
+        City:
+          type: string
+          description: City, district, suburb, town, or village
+          example: Hill Valley
+        State:
+          type: string
+          description: State or territory
+          example: CALIFORNIA
+        PostalCode:
+          type: string
+          description: ZIP or postal code
+          example: '90210'
+        Country:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code.
+          example: US
     LegalEntity:
       type: object
       description: Stores legal entity information like payment and tax details.
@@ -106,47 +150,3 @@ components:
           type: string
           description: The Employer Identification Number, Social Security Number, or a foreign Tax ID.
           example: 12-3456789
-    Address:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-          description: Address line 1 (address number, street name)
-          example: 1640 Riverside Dr.
-        AddressLine2:
-          type: string
-          description: Address line 2 (building, unit, suite, etc. number)
-          example: Suite 400
-        City:
-          type: string
-          description: City, district, suburb, town, or village
-          example: Hill Valley
-        State:
-          type: string
-          description: State or territory
-          example: CALIFORNIA
-        PostalCode:
-          type: string
-          description: ZIP or postal code
-          example: '90210'
-        Country:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code.
-          example: US
-    OrganizationType:
-      type: string
-      description: Organization type for the account.
-      enum:
-      - NONP_GOV
-      - CORP
-      - SOLE_IND
-      - LLC_LLP_LLS
-      - TRUST
-      - SOLE_TRD
-      - PARTNERS
-      - LLC
-      - LLP
-      - COMPANY
-      - GOVERNMENT
-      - OTHER
-      example: CORP

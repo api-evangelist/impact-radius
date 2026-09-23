@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Action Inquiries API
   version: '1.0'
-  description: 'Operations tagged Action Inquiries across 2 of this provider''s published API definitions: impact-radius-brand-actioninquiries-v14.yml, impact-radius-partner-actioninquiries-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Action Inquiries across 2 of this provider''s published API definitions: impact-radius-brand-actioninquiries-v14.yaml, impact-radius-partner-actioninquiries-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -534,26 +534,22 @@ components:
           type: string
           format: uri-reference
           example: /Advertisers/<AccountSid>/ActionInquiries/778987
-    RejectReason:
-      type: string
-      description: The reason provided by the brand for declining the inquiry.
-      enum:
-      - This transaction has been tracked successfully
-      - Another marketing channel was credited with the sale
-      - Another marketing channel was credited with the sale, due to a voucher/discount code used
-      - Did not meet terms and conditions set by merchant
-      - Transaction not completed - Order cancelled, changed, or returned
-      - Transaction cannot be traced
-      - Transaction not fully completed online
-      - Enquiry does not provide complete information required for evaluation
-      - Other
-    InquiryType:
-      type: string
-      description: The type of inquiry being raised.
-      enum:
-      - UNTRACKED
-      - INCORRECT
-      - DECLINED
+    Comment:
+      type: object
+      properties:
+        User:
+          type: string
+          description: The name or identifier of the user who posted the comment.
+          example: Carrie Oakey
+        Comment:
+          type: string
+          description: The content of the comment.
+          example: Please approve!
+        Date:
+          type: string
+          format: date-time
+          description: The date and time the comment was posted.
+          example: '2026-05-25T11:35:38-07:00'
     ActionInquiry_2:
       type: object
       properties:
@@ -668,22 +664,26 @@ components:
       - VALID
       - DECLINED
       - INCOMPLETE
-    Comment:
-      type: object
-      properties:
-        User:
-          type: string
-          description: The name or identifier of the user who posted the comment.
-          example: Carrie Oakey
-        Comment:
-          type: string
-          description: The content of the comment.
-          example: Please approve!
-        Date:
-          type: string
-          format: date-time
-          description: The date and time the comment was posted.
-          example: '2026-05-25T11:35:38-07:00'
+    RejectReason:
+      type: string
+      description: The reason provided by the brand for declining the inquiry.
+      enum:
+      - This transaction has been tracked successfully
+      - Another marketing channel was credited with the sale
+      - Another marketing channel was credited with the sale, due to a voucher/discount code used
+      - Did not meet terms and conditions set by merchant
+      - Transaction not completed - Order cancelled, changed, or returned
+      - Transaction cannot be traced
+      - Transaction not fully completed online
+      - Enquiry does not provide complete information required for evaluation
+      - Other
+    InquiryType:
+      type: string
+      description: The type of inquiry being raised.
+      enum:
+      - UNTRACKED
+      - INCORRECT
+      - DECLINED
   parameters:
     AccountSID:
       name: AccountSID
@@ -693,5 +693,5 @@ components:
         type: string
       description: Unique identifier for the account.
 x-refined-from:
-- impact-radius-brand-actioninquiries-v14.yml
-- impact-radius-partner-actioninquiries-v15.yml
+- impact-radius-brand-actioninquiries-v14.yaml
+- impact-radius-partner-actioninquiries-v15.yaml

@@ -11,9 +11,7 @@ info:
 
     direct link to the products it covers in the Catalogs API. Use this endpoint to power deal
 
-    pages, coupon directories, browser extensions, and newsletter content.
-
-    '
+    pages, coupon directories, browser extensions, and newsletter content.'
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -59,9 +57,7 @@ paths:
   /Mediapartners/{AccountSID}/Promotions/{Id}:
     get:
       summary: Retrieve a promotion
-      description: 'Retrieves the details of a single promotion. Pass the value of `PromotionIds` (from a List Promotions response) as the path `Id`.
-
-        '
+      description: Retrieves the details of a single promotion. Pass the value of `PromotionIds` (from a List Promotions response) as the path `Id`.
       operationId: retrievePromotion
       tags:
       - Promotions

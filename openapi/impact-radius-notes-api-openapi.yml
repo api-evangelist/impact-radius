@@ -220,6 +220,18 @@ components:
           - NONE
           - PHONE
           default: NONE
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected note.
+          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750
     NoteUpdate:
       type: object
       properties:
@@ -297,15 +309,3 @@ components:
           format: uri-reference
           description: The unique reference to this note in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/123456
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected note.
-          example: /Advertisers/<AccountSID>/Campaigns/1000/Notes/2750

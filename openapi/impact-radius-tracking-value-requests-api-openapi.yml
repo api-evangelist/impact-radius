@@ -139,23 +139,44 @@ paths:
         '200':
           $ref: '#/components/responses/SuccessUriResponse'
 components:
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected request.
   schemas:
+    TrackingValueApproval:
+      type: object
+      description: Fields required to approve a tracking value request. Required fields depend on the original request type.
+      properties:
+        PromoCode:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          example: SUMMER25
+        CreditPolicy:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          enum:
+          - ALWAYS
+          - INVOLVED
+          - WINNER
+        MatchMode:
+          type: string
+          description: Required for PROMOCODE_TRACKING.
+          enum:
+          - LI
+          - RE
+        UrlId:
+          type: integer
+          description: Required for BRANDED_URL_TRACKING.
+          example: 2001
+        AssignedPhoneNumberId:
+          type: integer
+          description: Required for PHONE_NUMBER_TRACKING.
+          example: 12345
+        DealId:
+          type: integer
+          description: Optional ID of a Deal to associate with the approved value.
+          example: 3
+        DealName:
+          type: string
+          description: Optional display name of the associated Deal.
+          example: AcmeDeal3
     TrackingValueRequest:
       type: object
       properties:
@@ -497,40 +518,19 @@ components:
           format: uri-reference
           description: The unique reference to this request in the impact.com API.
           example: /Advertisers/<AccountSID>/TrackingValueRequests/55555
-    TrackingValueApproval:
-      type: object
-      description: Fields required to approve a tracking value request. Required fields depend on the original request type.
-      properties:
-        PromoCode:
-          type: string
-          description: Required for PROMOCODE_TRACKING.
-          example: SUMMER25
-        CreditPolicy:
-          type: string
-          description: Required for PROMOCODE_TRACKING.
-          enum:
-          - ALWAYS
-          - INVOLVED
-          - WINNER
-        MatchMode:
-          type: string
-          description: Required for PROMOCODE_TRACKING.
-          enum:
-          - LI
-          - RE
-        UrlId:
-          type: integer
-          description: Required for BRANDED_URL_TRACKING.
-          example: 2001
-        AssignedPhoneNumberId:
-          type: integer
-          description: Required for PHONE_NUMBER_TRACKING.
-          example: 12345
-        DealId:
-          type: integer
-          description: Optional ID of a Deal to associate with the approved value.
-          example: 3
-        DealName:
-          type: string
-          description: Optional display name of the associated Deal.
-          example: AcmeDeal3
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected request.

@@ -275,6 +275,17 @@ components:
       - Url
       allOf:
       - $ref: '#/components/schemas/CatalogItem'
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: OK
+          description: Indicates whether the operation was successful (e.g., `OK`).
+        Uri:
+          type: string
+          format: uri-reference
+          description: URI of the affected resource.
     CatalogItem:
       type: object
       properties:
@@ -562,17 +573,6 @@ components:
           format: uri-reference
           example: /Advertisers/<AccountSID>/Catalogs/<CatalogId>/Items/<CatalogItemId>
           description: URI that points directly to this catalog item.
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          example: OK
-          description: Indicates whether the operation was successful (e.g., `OK`).
-        Uri:
-          type: string
-          format: uri-reference
-          description: URI of the affected resource.
   securitySchemes:
     basicAuth:
       type: http

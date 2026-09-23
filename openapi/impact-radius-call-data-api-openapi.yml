@@ -1,7 +1,9 @@
 openapi: 3.2.0
 info:
   title: Brand Call Data API
-  description: "This API is used to submit call data from a call tracking provider (e.g., Invoca, DialogTech) to impact.com. \nIt requires special credentials for direct integration. The endpoint supports both GET and POST methods for logging call events."
+  description: 'This API is used to submit call data from a call tracking provider (e.g., Invoca, DialogTech) to impact.com.
+
+    It requires special credentials for direct integration. The endpoint supports both GET and POST methods for logging call events.'
   version: v14
 servers:
 - url: https://twilio.ivr.impactradius.com
@@ -92,30 +94,6 @@ paths:
           $ref: '#/components/responses/SuccessResponse'
 components:
   parameters:
-    CustomCallEvent3Value:
-      name: CustomCallEvent3Value
-      in: query
-      description: Third custom value for reporting on Call events.
-      schema:
-        type: string
-    Key1:
-      name: Key1
-      in: query
-      description: Name of the first key that was pressed.
-      schema:
-        type: string
-    OptInSms:
-      name: OptInSms
-      in: query
-      description: Whether the caller opted in to receive an SMS promotion.
-      schema:
-        type: string
-    CustomCallEvent2Value:
-      name: CustomCallEvent2Value
-      in: query
-      description: Second custom value for reporting on Call events.
-      schema:
-        type: string
     CustomConversionEvent1Value:
       name: CustomConversionEvent1Value
       in: query
@@ -128,171 +106,34 @@ components:
       description: Second custom value for reporting on Conversion events.
       schema:
         type: string
-    TalkDuration:
-      name: TalkDuration
-      in: query
-      required: true
-      description: Actual talk duration (in seconds) of the call.
-      schema:
-        type: integer
-    CallDuration:
-      name: CallDuration
-      in: query
-      required: true
-      description: Total duration (in seconds) of the call.
-      schema:
-        type: integer
-    CustomCallEvent1Value:
-      name: CustomCallEvent1Value
-      in: query
-      description: First custom value for reporting on Call events.
-      schema:
-        type: string
-    SubId1:
-      name: SubId1
-      in: query
-      description: First partner-specific value for data points to be reported back.
-      schema:
-        type: string
-        maxLength: 64
     IvrDuration:
       name: IvrDuration
       in: query
       description: Duration in seconds that the call spent in the IVR tree.
       schema:
         type: integer
-    CallerId:
-      name: CallerId
+    Key1:
+      name: Key1
       in: query
-      required: true
-      description: The phone number of the originating call.
+      description: Name of the first key that was pressed.
       schema:
         type: string
-        maxLength: 64
-    RepeatCaller:
-      name: RepeatCaller
-      in: query
-      description: Indicates whether the caller was recorded as a repeat caller by the Call Tracking vendor.
-      schema:
-        type: string
-    CustomCallEvent1Name:
-      name: CustomCallEvent1Name
-      in: query
-      description: First custom name for reporting on Call events.
-      schema:
-        type: string
-    CalledPhoneNumber:
-      name: CalledPhoneNumber
-      in: query
-      required: true
-      description: The destination phone number that received the call.
-      schema:
-        type: string
-    SubId2:
-      name: SubId2
-      in: query
-      description: Second partner-specific value for data points to be reported back.
-      schema:
-        type: string
-        maxLength: 64
-    ReferenceId:
-      name: ReferenceId
-      in: query
-      description: Customer Disposition Code for reference.
-      schema:
-        type: number
-    CustomConversionEvent2Name:
-      name: CustomConversionEvent2Name
-      in: query
-      description: Second custom name for reporting on Conversion events.
-      schema:
-        type: string
-    CustomCallEvent2Name:
-      name: CustomCallEvent2Name
-      in: query
-      description: Second custom name for reporting on Call events.
-      schema:
-        type: string
-    VendorEventId:
-      name: VendorEventId
-      in: query
-      description: A unique ID sent from the vendor for the Call and Conversion Event.
-      schema:
-        type: string
-    CallerPhoneNumberCountry:
-      name: CallerPhoneNumberCountry
-      in: query
-      description: Country code derived from the incoming phone call. Defaults to US.
-      schema:
-        type: string
-        maxLength: 64
-    DispositionName:
-      name: DispositionName
-      in: query
-      description: The Conversion Event Name.
-      schema:
-        type: string
-    ActionTrackerId:
-      name: ActionTrackerId
-      in: query
-      required: true
-      description: A unique identifier for the Event Type (Phone_Action_Tracker_ID).
-      schema:
-        type: integer
     Key3:
       name: Key3
       in: query
       description: Name of the third key that was pressed.
       schema:
         type: string
-    Key4:
-      name: Key4
+    CustomConversionEvent3Name:
+      name: CustomConversionEvent3Name
       in: query
-      description: Name of the fourth key that was pressed.
+      description: Third custom name for reporting on Conversion events.
       schema:
         type: string
-    AdId:
-      name: AdId
+    CustomCallEvent1Name:
+      name: CustomCallEvent1Name
       in: query
-      description: The unique ID of the ad associated with the call.
-      schema:
-        type: integer
-    City:
-      name: City
-      in: query
-      description: City of the CallerId, as identified by the Call Tracking vendor.
-      schema:
-        type: string
-    CallRecording:
-      name: CallRecording
-      in: query
-      description: Unique URL of the call recording.
-      schema:
-        type: string
-        format: uri
-    SaleAmount:
-      name: SaleAmount
-      in: query
-      description: If there was a sale conversion, the sale amount.
-      schema:
-        type: number
-    Region:
-      name: Region
-      in: query
-      description: Region of the CallerId, as identified by the Call Tracking vendor.
-      schema:
-        type: string
-    CallSessionId:
-      name: CallSessionId
-      in: query
-      required: true
-      description: The unique session ID from the vendor to identify the call.
-      schema:
-        type: string
-    TrafficSource:
-      name: TrafficSource
-      in: query
-      description: Source of the transaction (referring media source).
+      description: First custom name for reporting on Call events.
       schema:
         type: string
     PhoneType:
@@ -305,10 +146,29 @@ components:
         - Landline
         - Mobile
         - ''
-    ClickId:
-      name: ClickId
+    CallDuration:
+      name: CallDuration
       in: query
-      description: The ClickId from the landing page URL.
+      required: true
+      description: Total duration (in seconds) of the call.
+      schema:
+        type: integer
+    City:
+      name: City
+      in: query
+      description: City of the CallerId, as identified by the Call Tracking vendor.
+      schema:
+        type: string
+    CustomCallEvent3Name:
+      name: CustomCallEvent3Name
+      in: query
+      description: Third custom name for reporting on Call events.
+      schema:
+        type: string
+    DispositionName:
+      name: DispositionName
+      in: query
+      description: The Conversion Event Name.
       schema:
         type: string
     CallStatus:
@@ -327,42 +187,97 @@ components:
         - NO_TRANSFER_ATTEMPT
         - ANSWER
         - FAILURE
-    CampaignId:
-      name: CampaignId
+    CallerId:
+      name: CallerId
       in: query
       required: true
-      description: A unique identifier for your program (formerly known as campaign).
-      schema:
-        type: integer
-    CustomConversionEvent1Name:
-      name: CustomConversionEvent1Name
-      in: query
-      description: First custom name for reporting on Conversion events.
-      schema:
-        type: string
-    Key2:
-      name: Key2
-      in: query
-      description: Name of the second key that was pressed.
-      schema:
-        type: string
-    SubId3:
-      name: SubId3
-      in: query
-      description: Third partner-specific value for data points to be reported back.
+      description: The phone number of the originating call.
       schema:
         type: string
         maxLength: 64
-    CustomConversionEvent3Name:
-      name: CustomConversionEvent3Name
+    CalledPhoneNumberCountry:
+      name: CalledPhoneNumberCountry
       in: query
-      description: Third custom name for reporting on Conversion events.
+      description: Country code derived from the receiver of the incoming phone call. Defaults to US.
       schema:
         type: string
+        maxLength: 64
+    CustomCallEvent1Value:
+      name: CustomCallEvent1Value
+      in: query
+      description: First custom value for reporting on Call events.
+      schema:
+        type: string
+    Keypresses:
+      name: Keypresses
+      in: query
+      description: List of unique keynames pressed.
+      schema:
+        type: string
+    CustomCallEvent3Value:
+      name: CustomCallEvent3Value
+      in: query
+      description: Third custom value for reporting on Call events.
+      schema:
+        type: string
+    AdId:
+      name: AdId
+      in: query
+      description: The unique ID of the ad associated with the call.
+      schema:
+        type: integer
+    TrafficSource:
+      name: TrafficSource
+      in: query
+      description: Source of the transaction (referring media source).
+      schema:
+        type: string
+    Key4:
+      name: Key4
+      in: query
+      description: Name of the fourth key that was pressed.
+      schema:
+        type: string
+    RepeatCaller:
+      name: RepeatCaller
+      in: query
+      description: Indicates whether the caller was recorded as a repeat caller by the Call Tracking vendor.
+      schema:
+        type: string
+    VendorEventId:
+      name: VendorEventId
+      in: query
+      description: A unique ID sent from the vendor for the Call and Conversion Event.
+      schema:
+        type: string
+    SaleAmount:
+      name: SaleAmount
+      in: query
+      description: If there was a sale conversion, the sale amount.
+      schema:
+        type: number
+    Region:
+      name: Region
+      in: query
+      description: Region of the CallerId, as identified by the Call Tracking vendor.
+      schema:
+        type: string
+    Zip:
+      name: Zip
+      in: query
+      description: Zip code of the CallerId, as identified by the Call Tracking vendor.
+      schema:
+        type: integer
     CustomConversionEvent3Value:
       name: CustomConversionEvent3Value
       in: query
       description: Third custom value for reporting on Conversion events.
+      schema:
+        type: string
+    PromoNumberDescription:
+      name: PromoNumberDescription
+      in: query
+      description: Describes the Called Phone Number.
       schema:
         type: string
     MediaId:
@@ -380,24 +295,6 @@ components:
       schema:
         type: string
         format: date-time
-    CustomCallEvent3Name:
-      name: CustomCallEvent3Name
-      in: query
-      description: Third custom name for reporting on Call events.
-      schema:
-        type: string
-    Keypresses:
-      name: Keypresses
-      in: query
-      description: List of unique keynames pressed.
-      schema:
-        type: string
-    PromoNumberDescription:
-      name: PromoNumberDescription
-      in: query
-      description: Describes the Called Phone Number.
-      schema:
-        type: string
     CallProvider:
       name: CallProvider
       in: query
@@ -406,23 +303,128 @@ components:
       schema:
         type: string
         maxLength: 64
-    CalledPhoneNumberCountry:
-      name: CalledPhoneNumberCountry
+    ActionTrackerId:
+      name: ActionTrackerId
       in: query
-      description: Country code derived from the receiver of the incoming phone call. Defaults to US.
+      required: true
+      description: A unique identifier for the Event Type (Phone_Action_Tracker_ID).
+      schema:
+        type: integer
+    CallerPhoneNumberCountry:
+      name: CallerPhoneNumberCountry
+      in: query
+      description: Country code derived from the incoming phone call. Defaults to US.
       schema:
         type: string
         maxLength: 64
-    Zip:
-      name: Zip
+    OptInSms:
+      name: OptInSms
       in: query
-      description: Zip code of the CallerId, as identified by the Call Tracking vendor.
+      description: Whether the caller opted in to receive an SMS promotion.
       schema:
-        type: integer
+        type: string
+    SubId3:
+      name: SubId3
+      in: query
+      description: Third partner-specific value for data points to be reported back.
+      schema:
+        type: string
+        maxLength: 64
     UserAgent:
       name: UserAgent
       in: query
       description: The user agent of the conversion generator.
+      schema:
+        type: string
+    ClickId:
+      name: ClickId
+      in: query
+      description: The ClickId from the landing page URL.
+      schema:
+        type: string
+    SubId2:
+      name: SubId2
+      in: query
+      description: Second partner-specific value for data points to be reported back.
+      schema:
+        type: string
+        maxLength: 64
+    ReferenceId:
+      name: ReferenceId
+      in: query
+      description: Customer Disposition Code for reference.
+      schema:
+        type: number
+    CustomCallEvent2Name:
+      name: CustomCallEvent2Name
+      in: query
+      description: Second custom name for reporting on Call events.
+      schema:
+        type: string
+    Key2:
+      name: Key2
+      in: query
+      description: Name of the second key that was pressed.
+      schema:
+        type: string
+    CustomConversionEvent2Name:
+      name: CustomConversionEvent2Name
+      in: query
+      description: Second custom name for reporting on Conversion events.
+      schema:
+        type: string
+    CampaignId:
+      name: CampaignId
+      in: query
+      required: true
+      description: A unique identifier for your program (formerly known as campaign).
+      schema:
+        type: integer
+    CustomCallEvent2Value:
+      name: CustomCallEvent2Value
+      in: query
+      description: Second custom value for reporting on Call events.
+      schema:
+        type: string
+    CalledPhoneNumber:
+      name: CalledPhoneNumber
+      in: query
+      required: true
+      description: The destination phone number that received the call.
+      schema:
+        type: string
+    CustomConversionEvent1Name:
+      name: CustomConversionEvent1Name
+      in: query
+      description: First custom name for reporting on Conversion events.
+      schema:
+        type: string
+    SubId1:
+      name: SubId1
+      in: query
+      description: First partner-specific value for data points to be reported back.
+      schema:
+        type: string
+        maxLength: 64
+    TalkDuration:
+      name: TalkDuration
+      in: query
+      required: true
+      description: Actual talk duration (in seconds) of the call.
+      schema:
+        type: integer
+    CallRecording:
+      name: CallRecording
+      in: query
+      description: Unique URL of the call recording.
+      schema:
+        type: string
+        format: uri
+    CallSessionId:
+      name: CallSessionId
+      in: query
+      required: true
+      description: The unique session ID from the vendor to identify the call.
       schema:
         type: string
   responses:

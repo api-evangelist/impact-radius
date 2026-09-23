@@ -3,9 +3,7 @@ info:
   title: impact.com API - User Open Endpoint API
   description: 'Users are the people in your program. In other places a User might also be called a Contact, Lead or Participant. Users are each mapped to one specific account.
 
-    The following information is controlled at the user level: First and last name, Email address, Referral code, Share links, Custom fields.
-
-    '
+    The following information is controlled at the user level: First and last name, Email address, Referral code, Share links, Custom fields.'
   version: 2.0.0
 servers:
 - url: https://app.referralsaasquatch.com/api/v1
@@ -22,9 +20,7 @@ paths:
       operationId: openGetUser
       tags:
       - Open Endpoint
-      description: 'This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.
-
-        '
+      description: This method looks up a user based on their `id` and returns their personal information including sharelinks. This endpoint requires authentication via a write token or API credentials.
       security:
       - APIKey: []
       - UserJWT: []
@@ -57,9 +53,7 @@ paths:
       - Open Endpoint
       description: 'This method updates/creates a user and an account and returns the user object representing that newly created user/account.
 
-        Because this call creates a user, it requires either a write token or an API key.
-
-        '
+        Because this call creates a user, it requires either a write token or an API key.'
       security:
       - APIKey: []
       - UserJWT: []
@@ -93,9 +87,7 @@ paths:
       - Open Endpoint
       description: 'This method creates a user and an account and returns the user object representing that newly created user/account.
 
-        Because this call creates a user, it requires either a write token or an API key.
-
-        '
+        Because this call creates a user, it requires either a write token or an API key.'
       security:
       - APIKey: []
       - UserJWT: []
@@ -127,9 +119,7 @@ paths:
       operationId: openDeleteUser
       tags:
       - Open Endpoint
-      description: 'Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).
-
-        '
+      description: Delete a user in your impact.com project. By default this endpoint only deletes a User on an Account (and not the Account itself).
       security:
       - APIKey: []
       parameters:
@@ -161,9 +151,7 @@ paths:
       tags:
       - Open Endpoint
       security: []
-      description: 'Looks up a user based upon their `ReferralCode` and returns their personal information. This is an [Open Endpoint](https://integrations.impact.com/impact-brand/reference/api-open-endpoints) and disabled by default.
-
-        '
+      description: Looks up a user based upon their `ReferralCode` and returns their personal information. This is an Open Endpoint and disabled by default.
       parameters:
       - $ref: '#/components/parameters/tenant_alias'
       - name: referralCode
@@ -187,34 +175,7 @@ paths:
       - lang: cURL
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/user' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
-  responses:
-    ForbiddenError:
-      description: Forbidden/Endpoint Disabled
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnauthorizedError:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    extraFields:
-      name: extraFields
-      in: query
-      schema:
-        type: string
-      description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
-      style: form
-      explode: false
     accountId:
       name: accountId
       in: path
@@ -222,10 +183,10 @@ components:
       required: true
       schema:
         type: string
-    tenant_alias:
-      name: tenant_alias
+    userId:
+      name: userId
       in: path
-      description: Tenant being referenced. E.g. `"aboih12h16t"`
+      description: The ID of the user.
       required: true
       schema:
         type: string
@@ -237,13 +198,21 @@ components:
       description: The fields to be included in the response. Cannot coexist with `extraFields`.
       style: form
       explode: false
-    userId:
-      name: userId
+    tenant_alias:
+      name: tenant_alias
       in: path
-      description: The ID of the user.
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
       required: true
       schema:
         type: string
+    extraFields:
+      name: extraFields
+      in: query
+      schema:
+        type: string
+      description: The fields to be included in the response in addition to all the default fields. Cannot coexist with `fields`.
+      style: form
+      explode: false
   schemas:
     UserByCode:
       description: Minimal user information returned when looking up a user by referral code from the open endpoint.
@@ -344,64 +313,6 @@ components:
           type: object
           additionalProperties: true
           description: An object containing the custom fields for this user.
-    Error:
-      properties:
-        statusCode:
-          description: The HTTP status code of the error.
-          type: integer
-          format: int32
-          example: 404
-        message:
-          description: The human-readable description of what went wrong. Use this to help you debug.
-          type: string
-        apiErrorCode:
-          description: A machine-readable error code.
-          type: string
-        rsCode:
-          description: A secondary machine-readable error code.
-          type: string
-          example: RS042
-    ProgramShareLink:
-      description: A map of program IDs to share link sets for that program.
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          cleanShareLink:
-            type: string
-            format: uri
-            description: The clean (unencoded) primary share link for this program.
-            example: https://share.impact.squatchtesting.com/mzbnEyE
-          UNKNOWN:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          EMAIL:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          MOBILE:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          EMBED:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          POPUP:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
-          HOSTED:
-            type: object
-            additionalProperties:
-              type: string
-              format: uri
     OpenUser:
       description: A user object returned by open endpoints. Includes program share links and custom fields.
       type: object
@@ -490,6 +401,83 @@ components:
           description: Referral codes used to refer this user.
           example:
           - NCC8IQ4ADTVDQAOA
+    Error:
+      properties:
+        statusCode:
+          description: The HTTP status code of the error.
+          type: integer
+          format: int32
+          example: 404
+        message:
+          description: The human-readable description of what went wrong. Use this to help you debug.
+          type: string
+        apiErrorCode:
+          description: A machine-readable error code.
+          type: string
+        rsCode:
+          description: A secondary machine-readable error code.
+          type: string
+          example: RS042
+    ProgramShareLink:
+      description: A map of program IDs to share link sets for that program.
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          cleanShareLink:
+            type: string
+            format: uri
+            description: The clean (unencoded) primary share link for this program.
+            example: https://share.impact.squatchtesting.com/mzbnEyE
+          UNKNOWN:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMAIL:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          MOBILE:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          EMBED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          POPUP:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+          HOSTED:
+            type: object
+            additionalProperties:
+              type: string
+              format: uri
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ForbiddenError:
+      description: Forbidden/Endpoint Disabled
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

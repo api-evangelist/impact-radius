@@ -9,9 +9,7 @@ security:
 - APIKey: []
 tags:
 - name: Export
-  description: 'Endpoints for working with bulk data exports: create a new export, look up the status of an existing export, download a completed export, and list recent exports.
-
-    '
+  description: 'Endpoints for working with bulk data exports: create a new export, look up the status of an existing export, download a completed export, and list recent exports.'
 paths:
   /{tenant_alias}/export/history/list:
     get:
@@ -54,9 +52,7 @@ paths:
       description: 'Creates an asynchronous export request. The export is queued and processed in the background; the response returns the export''s `id` and an initial `status` of `PENDING`.
 
 
-        Store the returned `id` so you can look up the export''s status or download it once complete. For details on the export lifecycle and how to detect completion, see the Export Overview.
-
-        '
+        Store the returned `id` so you can look up the export''s status or download it once complete. For details on the export lifecycle and how to detect completion, see the Export Overview.'
       operationId: createExport
       tags:
       - Export
@@ -155,6 +151,52 @@ paths:
           $ref: '#/components/responses/GeneralError'
 components:
   schemas:
+    Export:
+      description: An export record. Includes the original request fields plus the export's `id`, `status`, and timestamps.
+      allOf:
+      - $ref: '#/components/schemas/ExportStub'
+      - properties:
+          id:
+            description: A unique ID used to track the export. Use this to look up the export's status or download it.
+            type: string
+            readOnly: true
+            example: abc123export
+          mailtoEmail:
+            description: Email address to notify when the export completes. Null if not set.
+            type: string
+            nullable: true
+            readOnly: true
+            example: bob.testerson@example.com
+          status:
+            description: The current state of the export. `PENDING` while queued or running, `COMPLETED` when ready to download, `ABORTED` on unrecoverable error, and `EXPIRED` once the file is no longer available.
+            type: string
+            readOnly: true
+            example: COMPLETED
+            enum:
+            - PENDING
+            - COMPLETED
+            - ABORTED
+            - EXPIRED
+          dateCreated:
+            description: Unix timestamp (milliseconds) when the export was requested. Never changes.
+            type: integer
+            format: int64
+            readOnly: true
+            example: 1779871222634
+          dateCompleted:
+            description: Unix timestamp (milliseconds) when the export finished processing and `status` became `COMPLETED`.
+            type: integer
+            format: int64
+            nullable: true
+            readOnly: true
+            example: 1779871250427
+          dateExpires:
+            description: Unix timestamp (milliseconds) when the export will expire and no longer be downloadable.
+            type: integer
+            format: int64
+            nullable: true
+            readOnly: true
+            example: 1782290450427
     ExportStub:
       description: Request body for creating a new export.
       required:
@@ -276,52 +318,6 @@ components:
           type: string
           nullable: true
           example: RS042
-    Export:
-      description: An export record. Includes the original request fields plus the export's `id`, `status`, and timestamps.
-      allOf:
-      - $ref: '#/components/schemas/ExportStub'
-      - properties:
-          id:
-            description: A unique ID used to track the export. Use this to look up the export's status or download it.
-            type: string
-            readOnly: true
-            example: abc123export
-          mailtoEmail:
-            description: Email address to notify when the export completes. Null if not set.
-            type: string
-            nullable: true
-            readOnly: true
-            example: bob.testerson@example.com
-          status:
-            description: The current state of the export. `PENDING` while queued or running, `COMPLETED` when ready to download, `ABORTED` on unrecoverable error, and `EXPIRED` once the file is no longer available.
-            type: string
-            readOnly: true
-            example: COMPLETED
-            enum:
-            - PENDING
-            - COMPLETED
-            - ABORTED
-            - EXPIRED
-          dateCreated:
-            description: Unix timestamp (milliseconds) when the export was requested. Never changes.
-            type: integer
-            format: int64
-            readOnly: true
-            example: 1779871222634
-          dateCompleted:
-            description: Unix timestamp (milliseconds) when the export finished processing and `status` became `COMPLETED`.
-            type: integer
-            format: int64
-            nullable: true
-            readOnly: true
-            example: 1779871250427
-          dateExpires:
-            description: Unix timestamp (milliseconds) when the export will expire and no longer be downloadable.
-            type: integer
-            format: int64
-            nullable: true
-            readOnly: true
-            example: 1782290450427
   responses:
     GeneralError:
       description: Unexpected Error

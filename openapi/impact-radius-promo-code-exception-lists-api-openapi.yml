@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Promo Code Exception Lists API
   version: '1.0'
-  description: 'Operations tagged Promo Code Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-promocodeexceptionlists-v14.yml, impact-radius-partner-promocodeexceptionlists-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Promo Code Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-promocodeexceptionlists-v14.yaml, impact-radius-partner-promocodeexceptionlists-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -133,9 +133,7 @@ paths:
       tags:
       - Promo Code Exception Lists
       summary: Retrieve a Promo Code Exception List
-      description: 'Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.
-
-        '
+      description: Retrieves the details of an existing promo code exception list using its unique ID. The PromoCodeExceptionListId can be obtained from the Contracts API.
       parameters:
       - name: AccountSID
         in: path
@@ -358,5 +356,5 @@ components:
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-promocodeexceptionlists-v14.yml
-- impact-radius-partner-promocodeexceptionlists-v15.yml
+- impact-radius-brand-promocodeexceptionlists-v14.yaml
+- impact-radius-partner-promocodeexceptionlists-v15.yaml

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Ads API
   version: '1.0'
-  description: 'Operations tagged Ads across 2 of this provider''s published API definitions: impact-radius-brand-ads-v14.yml, impact-radius-partner-ads-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Ads across 2 of this provider''s published API definitions: impact-radius-brand-ads-v14.yaml, impact-radius-partner-ads-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -522,138 +522,6 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    AdCreateUpdate:
-      type: object
-      description: Schema for creating and updating an Ad. Some fields are conditionally required based on AdType.
-      required:
-      - Name
-      - CampaignId
-      - AdType
-      - Language
-      properties:
-        Name:
-          type: string
-          example: Summer Sale 2020 250x250
-        CampaignId:
-          type: string
-          example: '1000'
-        AdType:
-          type: string
-          enum:
-          - BANNER
-          - TEXT_LINK
-          - COUPON
-          example: BANNER
-        Language:
-          type: string
-          example: ENGLISH
-          description: 'The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.'
-        Description:
-          type: string
-          example: Our best deals this summer creative.
-        LandingPage:
-          type: string
-          format: uri
-          example: http://www.test.com/6234652
-        CustomAdServingUrl:
-          type: string
-          format: uri
-          description: Required for BANNER if not using AdCodeTemplate or BannerCreativeFile.
-        AdCodeTemplate:
-          type: string
-          description: Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile.
-        BannerCreativeFile:
-          type: string
-          format: binary
-          description: Creative file for a BANNER ad. Use multipart/form-data.
-        CouponLinkName:
-          type: string
-          description: Required for COUPON ad type.
-        CouponAllowCustomPromoCode:
-          type: boolean
-          description: Whether the ad allows partners to use a custom promo code (instead of the default coupon code).
-          example: false
-        CustomisationCharge:
-          type: number
-          format: decimal
-          description: The charge applied when partners customise this ad.
-          example: 0.0
-        LinkText:
-          type: string
-          description: Required for TEXT_LINK ad type.
-        IabAdUnit:
-          type: string
-          example: CUSTOM
-        ThirdPartyServableAdCreativeHeight:
-          type: string
-          example: '250'
-        ThirdPartyServableAdCreativeWidth:
-          type: string
-          example: '250'
-        BannerAlternativeTag:
-          type: string
-          description: Only for BANNER ad type.
-          example: summersale
-        GetHtmlCodeType:
-          type: string
-          enum:
-          - HTML_AND_IFRAME
-          - IFRAME_ONLY
-          example: HTML_AND_IFRAME
-        Labels:
-          type: string
-          example: sale,US
-        AllowDeepLinking:
-          type: string
-          example: 'true'
-        LimitedTimeStartDate:
-          type: string
-          format: date-time
-          example: '2026-09-16T17:01:28-07:00'
-        LimitedTimeEndDate:
-          type: string
-          format: date-time
-          example: '2026-12-31T23:59:59-07:00'
-        TargetMediaPartners:
-          type: array
-          items:
-            type: string
-          description: Array of partner IDs to restrict the ad to.
-        TargetMediaPartnerGroups:
-          type: array
-          items:
-            type: string
-          description: Array of partner group IDs to restrict the ad to.
-        MobileFallbacks:
-          type: object
-          properties:
-            Android:
-              type: string
-            IOS:
-              type: string
-        Season:
-          type: string
-          example: SUMMER
-          description: 'If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.'
-        MobileReady:
-          type: string
-          description: Whether the ad is optimized for mobile devices.
-          example: 'true'
-        PhoneTracking:
-          type: string
-          description: Whether phone call tracking is enabled for the ad.
-          example: 'false'
-        PromoCodeTracking:
-          type: string
-          description: Whether promo code tracking is enabled for the ad.
-          example: 'false'
-        TopSeller:
-          type: string
-          description: Whether the ad is marked as a top seller.
-          example: 'false'
-        DealId:
-          type: string
-          description: The ID of the deal to associate with this ad.
     Ad:
       type: object
       properties:
@@ -886,6 +754,138 @@ components:
           type: array
           items:
             type: string
+    AdCreateUpdate:
+      type: object
+      description: Schema for creating and updating an Ad. Some fields are conditionally required based on AdType.
+      required:
+      - Name
+      - CampaignId
+      - AdType
+      - Language
+      properties:
+        Name:
+          type: string
+          example: Summer Sale 2020 250x250
+        CampaignId:
+          type: string
+          example: '1000'
+        AdType:
+          type: string
+          enum:
+          - BANNER
+          - TEXT_LINK
+          - COUPON
+          example: BANNER
+        Language:
+          type: string
+          example: ENGLISH
+          description: 'The language of the ad creative. Possible values: `AFRIKAANS`, `ARABIC`, `BULGARIAN`, `CHINESE`, `CHINESE_TRADITIONAL`, `CZECH`, `DANISH`, `DUTCH`, `ENGLISH`, `ENGLISH_GB`, `ENGLISH_AU`, `ENGLISH_CA`, `ENGLISH_NZ`, `ENGLISH_ZA`, `ESTONIAN`, `FILIPINO`, `FINNISH`, `FRENCH`, `FRENCH_CA`, `GERMAN`, `HEBREW`, `HINDI`, `INDONESIAN`, `ITALIAN`, `JAPANESE`, `KOREAN`, `LATVIAN`, `LITHUANIAN`, `MALAY`, `MALTESE`, `NORWEGIAN`, `PORTUGUESE`, `PORTUGUESE_BR`, `POLISH`, `RUSSIAN`, `SLOVENIAN`, `SPANISH`, `SPANISH_MX`, `SWEDISH`, `THAI`, `TURKISH`, `VIETNAMESE`.'
+        Description:
+          type: string
+          example: Our best deals this summer creative.
+        LandingPage:
+          type: string
+          format: uri
+          example: http://www.test.com/6234652
+        CustomAdServingUrl:
+          type: string
+          format: uri
+          description: Required for BANNER if not using AdCodeTemplate or BannerCreativeFile.
+        AdCodeTemplate:
+          type: string
+          description: Required for BANNER if not using CustomAdServingUrl or BannerCreativeFile.
+        BannerCreativeFile:
+          type: string
+          format: binary
+          description: Creative file for a BANNER ad. Use multipart/form-data.
+        CouponLinkName:
+          type: string
+          description: Required for COUPON ad type.
+        CouponAllowCustomPromoCode:
+          type: boolean
+          description: Whether the ad allows partners to use a custom promo code (instead of the default coupon code).
+          example: false
+        CustomisationCharge:
+          type: number
+          format: decimal
+          description: The charge applied when partners customise this ad.
+          example: 0.0
+        LinkText:
+          type: string
+          description: Required for TEXT_LINK ad type.
+        IabAdUnit:
+          type: string
+          example: CUSTOM
+        ThirdPartyServableAdCreativeHeight:
+          type: string
+          example: '250'
+        ThirdPartyServableAdCreativeWidth:
+          type: string
+          example: '250'
+        BannerAlternativeTag:
+          type: string
+          description: Only for BANNER ad type.
+          example: summersale
+        GetHtmlCodeType:
+          type: string
+          enum:
+          - HTML_AND_IFRAME
+          - IFRAME_ONLY
+          example: HTML_AND_IFRAME
+        Labels:
+          type: string
+          example: sale,US
+        AllowDeepLinking:
+          type: string
+          example: 'true'
+        LimitedTimeStartDate:
+          type: string
+          format: date-time
+          example: '2026-09-16T17:01:28-07:00'
+        LimitedTimeEndDate:
+          type: string
+          format: date-time
+          example: '2026-12-31T23:59:59-07:00'
+        TargetMediaPartners:
+          type: array
+          items:
+            type: string
+          description: Array of partner IDs to restrict the ad to.
+        TargetMediaPartnerGroups:
+          type: array
+          items:
+            type: string
+          description: Array of partner group IDs to restrict the ad to.
+        MobileFallbacks:
+          type: object
+          properties:
+            Android:
+              type: string
+            IOS:
+              type: string
+        Season:
+          type: string
+          example: SUMMER
+          description: 'If the ad has a seasonal promotional theme, this is the season the ad targets. Possible values: `ANZAC_DAY`, `AUGUST_CIVIC_HOLIDAY`, `AUSTRALIA_DAY`, `BACK_TO_SCHOOL`, `BLACK_FRIDAY`, `BOXING_DAY`, `CANADA_DAY`, `CYBER_MONDAY`, `END_OF_FINANCIAL_YEAR`, `FAMILY_DAY`, `FATHERS_DAY`, `GOOD_FRIDAY`, `HALLOWEEN`, `HANUKKAH`, `INDEPENDANCE_DAY`, `LABOR_DAY`, `MEMORIAL_DAY`, `MOTHERS_DAY`, `NEW_YEAR`, `PRESIDENTS_DAY`, `QUEENS_BIRTHDAY`, `REMEMBRANCE_DAY`, `SPRING`, `ST_PATRICKS_DAY`, `SUMMER`, `THANKSGIVING`, `VALENTINES_DAY`, `VICTORIA_DAY`, `WAITANGI_DAY`, `WINTER`, `OTHER`.'
+        MobileReady:
+          type: string
+          description: Whether the ad is optimized for mobile devices.
+          example: 'true'
+        PhoneTracking:
+          type: string
+          description: Whether phone call tracking is enabled for the ad.
+          example: 'false'
+        PromoCodeTracking:
+          type: string
+          description: Whether promo code tracking is enabled for the ad.
+          example: 'false'
+        TopSeller:
+          type: string
+          description: Whether the ad is marked as a top seller.
+          example: 'false'
+        DealId:
+          type: string
+          description: The ID of the deal to associate with this ad.
     Ad_2:
       type: object
       properties:
@@ -1323,5 +1323,5 @@ components:
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-ads-v14.yml
-- impact-radius-partner-ads-v15.yml
+- impact-radius-brand-ads-v14.yaml
+- impact-radius-partner-ads-v15.yaml

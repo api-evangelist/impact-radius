@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Partner Identity Verification API
-  description: 'The Identity Verification endpoint creates or resumes an identity verification session and returns a URL that can be used to launch the hosted verification flow. Use this endpoint to verify your identity before accessing features that require identity confirmation.
-
-    '
+  description: The Identity Verification endpoint creates or resumes an identity verification session and returns a URL that can be used to launch the hosted verification flow. Use this endpoint to verify your identity before accessing features that require identity confirmation.
   version: '15'
   contact:
     name: impact.com Developer Support
@@ -20,9 +18,7 @@ paths:
       tags:
       - Identity Verification
       summary: Create or Resume an Identity Verification Session
-      description: 'Creates a new identity verification session or resumes an existing one. Returns a URL that can be used to launch the hosted verification flow. If a session is already in progress for the specified user, the existing session details are returned so verification can resume from where it left off.
-
-        '
+      description: Creates a new identity verification session or resumes an existing one. Returns a URL that can be used to launch the hosted verification flow. If a session is already in progress for the specified user, the existing session details are returned so verification can resume from where it left off.
       parameters:
       - name: AccountSID
         in: path

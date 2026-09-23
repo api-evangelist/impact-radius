@@ -9,9 +9,7 @@ security:
 - APIKey: []
 tags:
 - name: Webhook
-  description: 'Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs, remove existing ones, and send a test event to verify a subscription.
-
-    '
+  description: 'Endpoints for managing webhook subscriptions: list current subscriptions, register new endpoint URLs, remove existing ones, and send a test event to verify a subscription.'
 paths:
   /{tenant_alias}/subscription:
     post:

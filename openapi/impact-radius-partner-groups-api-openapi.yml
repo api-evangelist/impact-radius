@@ -207,6 +207,18 @@ paths:
                     example: DELETED
 components:
   schemas:
+    SuccessUriResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected partner group.
+          example: /Advertisers/<AccountSID>/Campaigns/8882/MediaPartnerGroups/12345
     PartnerGroup:
       type: object
       properties:
@@ -242,15 +254,3 @@ components:
           format: uri-reference
           description: The unique reference to this partner group in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000/MediaPartnerGroups/99999
-    SuccessUriResponse:
-      type: object
-      properties:
-        Status:
-          type: string
-          description: Indicates whether the operation was successful.
-          example: OK
-        Uri:
-          type: string
-          format: uri-reference
-          description: The unique reference to the affected partner group.
-          example: /Advertisers/<AccountSID>/Campaigns/8882/MediaPartnerGroups/12345

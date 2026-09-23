@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Programs API
   version: '1.0'
-  description: 'Operations tagged Programs across 2 of this provider''s published API definitions: impact-radius-brand-programs-v14.yml, impact-radius-partner-campaigns-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Programs across 2 of this provider''s published API definitions: impact-radius-brand-programs-v14.yaml, impact-radius-partner-campaigns-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -172,9 +172,7 @@ paths:
       tags:
       - Programs
       summary: Retrieve program logo
-      description: 'Returns the program''s logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
-
-        '
+      description: Returns the program's logo as a binary image. Use the `Accept` request header to choose the format — `image/gif` (default), `image/png`, or `image/jpeg`.
       parameters:
       - name: AccountSID
         in: path
@@ -451,6 +449,95 @@ components:
           format: uri-reference
           description: The unique reference to this program in the impact.com API.
           example: /Advertisers/<AccountSID>/Campaigns/1000
+    Program_2:
+      type: object
+      properties:
+        AdvertiserId:
+          type: string
+          description: Unique identifier of the brand (advertiser) running this program.
+          example: '1804207'
+        AdvertiserName:
+          type: string
+          description: Display name of the brand.
+          example: Acme Corporation
+        AdvertiserUrl:
+          type: string
+          description: URL of the brand's main website.
+          example: https://www.acmecorporation.io
+        CampaignId:
+          type: string
+          description: Unique identifier of the program (the URL path still uses "Campaigns" for backwards compatibility).
+          example: '10306'
+        CampaignName:
+          type: string
+          description: Display name of the program.
+          example: Wayne Enterprises
+        CampaignUrl:
+          type: string
+          description: URL of the program's landing site.
+          example: http://www.wayne.limited
+        CampaignDescription:
+          type: string
+          description: Description of the program supplied by the brand.
+          example: Wayne Enterprises delivers innovative automotive tech and premium sports equipment.
+        ShippingRegions:
+          type: array
+          description: Country/region codes where the brand ships physical products.
+          items:
+            $ref: '#/components/schemas/CountryCode'
+          example:
+          - SOUTHAFRICA
+          - UK
+          - US
+        CampaignLogoUri:
+          type: string
+          description: API resource path to retrieve the program's logo image.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Logo
+        PublicTermsUri:
+          type: string
+          description: API resource path to the public terms in the program's contract.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms
+        ContractStatus:
+          type: string
+          enum:
+          - Active
+          - Expired
+          description: Current state of your contract with this program.
+          example: Active
+        ContractUri:
+          type: string
+          description: API resource path to your active contract with this program (see the Partner Contracts API).
+          example: /Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active
+        TrackingLink:
+          type: string
+          description: A ready-to-use tracking link for this program. Generate additional links via the Partner Tracking Links API.
+          example: https://example.sjv.io/c/1924609/650971/10306
+        HasStandDownPolicy:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether the brand enforces a stand-down policy (rules around bidding restrictions or trademark use).
+          example: 'true'
+        AllowsDeeplinking:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          description: String boolean indicating whether deep linking is enabled for this program.
+          example: 'true'
+        DeeplinkDomains:
+          type: array
+          description: Domains the brand permits deep linking to. Wildcards (e.g., `*.impact.com`) include all subdomains.
+          items:
+            type: string
+          example:
+          - impact.com
+          - '*.impact.com'
+        Uri:
+          type: string
+          description: API resource path for this program.
+          example: /Mediapartners/<AccountSID>/Campaigns/10306
     CountryCode:
       type: string
       description: ISO-style country/region code used by impact.com for shipping regions.
@@ -692,100 +779,11 @@ components:
       - YEMEN
       - ZAMBIA
       - ZIMBABWE
-    Program_2:
-      type: object
-      properties:
-        AdvertiserId:
-          type: string
-          description: Unique identifier of the brand (advertiser) running this program.
-          example: '1804207'
-        AdvertiserName:
-          type: string
-          description: Display name of the brand.
-          example: Acme Corporation
-        AdvertiserUrl:
-          type: string
-          description: URL of the brand's main website.
-          example: https://www.acmecorporation.io
-        CampaignId:
-          type: string
-          description: Unique identifier of the program (the URL path still uses "Campaigns" for backwards compatibility).
-          example: '10306'
-        CampaignName:
-          type: string
-          description: Display name of the program.
-          example: Wayne Enterprises
-        CampaignUrl:
-          type: string
-          description: URL of the program's landing site.
-          example: http://www.wayne.limited
-        CampaignDescription:
-          type: string
-          description: Description of the program supplied by the brand.
-          example: Wayne Enterprises delivers innovative automotive tech and premium sports equipment.
-        ShippingRegions:
-          type: array
-          description: Country/region codes where the brand ships physical products.
-          items:
-            $ref: '#/components/schemas/CountryCode'
-          example:
-          - SOUTHAFRICA
-          - UK
-          - US
-        CampaignLogoUri:
-          type: string
-          description: API resource path to retrieve the program's logo image.
-          example: /Mediapartners/<AccountSID>/Campaigns/10306/Logo
-        PublicTermsUri:
-          type: string
-          description: API resource path to the public terms in the program's contract.
-          example: /Mediapartners/<AccountSID>/Campaigns/10306/PublicTerms
-        ContractStatus:
-          type: string
-          enum:
-          - Active
-          - Expired
-          description: Current state of your contract with this program.
-          example: Active
-        ContractUri:
-          type: string
-          description: API resource path to your active contract with this program (see the Partner Contracts API).
-          example: /Mediapartners/<AccountSID>/Campaigns/10306/Contracts/Active
-        TrackingLink:
-          type: string
-          description: A ready-to-use tracking link for this program. Generate additional links via the Partner Tracking Links API.
-          example: https://example.sjv.io/c/1924609/650971/10306
-        HasStandDownPolicy:
-          type: string
-          enum:
-          - 'true'
-          - 'false'
-          description: String boolean indicating whether the brand enforces a stand-down policy (rules around bidding restrictions or trademark use).
-          example: 'true'
-        AllowsDeeplinking:
-          type: string
-          enum:
-          - 'true'
-          - 'false'
-          description: String boolean indicating whether deep linking is enabled for this program.
-          example: 'true'
-        DeeplinkDomains:
-          type: array
-          description: Domains the brand permits deep linking to. Wildcards (e.g., `*.impact.com`) include all subdomains.
-          items:
-            type: string
-          example:
-          - impact.com
-          - '*.impact.com'
-        Uri:
-          type: string
-          description: API resource path for this program.
-          example: /Mediapartners/<AccountSID>/Campaigns/10306
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-programs-v14.yml
-- impact-radius-partner-campaigns-v15.yml
+- impact-radius-brand-programs-v14.yaml
+- impact-radius-partner-campaigns-v15.yaml

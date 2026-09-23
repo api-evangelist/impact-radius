@@ -239,19 +239,6 @@ paths:
         source: "curl -L \\\n  --request DELETE \\\n  --url 'https://api.impact.com/Advertisers/{AccountSID}/ExceptionLists/{ExceptionListId}/Items/{ItemId}' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    ExceptionListItemCreateFile:
-      type: object
-      required:
-      - File
-      properties:
-        File:
-          type: string
-          format: binary
-          description: A .CSV or .XLSX file containing the items to be added.
-        Upsert:
-          type: boolean
-          default: false
-          description: If true, updates existing items where 'Value' matches.
     ExceptionListItemCreateForm:
       type: object
       required:
@@ -316,6 +303,19 @@ components:
           type: string
           format: uri-reference
           description: The unique reference to the affected resource.
+    ExceptionListItemCreateFile:
+      type: object
+      required:
+      - File
+      properties:
+        File:
+          type: string
+          format: binary
+          description: A .CSV or .XLSX file containing the items to be added.
+        Upsert:
+          type: boolean
+          default: false
+          description: If true, updates existing items where 'Value' matches.
   securitySchemes:
     basicAuth:
       type: http

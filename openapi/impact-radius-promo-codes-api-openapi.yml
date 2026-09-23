@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Promo Codes API
   version: '1.0'
-  description: 'Operations tagged Promo Codes across 2 of this provider''s published API definitions: impact-radius-brand-promocodes-v14.yml, impact-radius-partner-promo-codes-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Promo Codes across 2 of this provider''s published API definitions: impact-radius-brand-promocodes-v14.yaml, impact-radius-partner-promo-codes-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -281,22 +281,6 @@ paths:
     - url: https://api.impact.com
       description: Production server
 components:
-  responses:
-    SuccessUriResponse:
-      description: The request was successful.
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              Status:
-                type: string
-                description: Indicates whether the operation was successful.
-                example: OK
-              Uri:
-                type: string
-                format: uri-reference
-                description: The unique reference to the affected promo code.
   schemas:
     PromoCode:
       type: object
@@ -608,6 +592,19 @@ components:
           format: uri
           description: API resource path for this promo code.
           example: /Mediapartners/<AccountSID>/PromoCodes/8111554
+    MatchMode:
+      type: string
+      enum:
+      - LI
+      - RE
+      description: 'How the promo code value is matched against codes used at checkout.
+
+
+        - `LI`: Literal — the code must match exactly.
+
+        - `RE`: Regex — the code is interpreted as a regular expression.
+
+        '
     CreditRule:
       type: string
       enum:
@@ -624,24 +621,27 @@ components:
         - `WINNER`: Credited only when the partner drove the last click before the sale.
 
         '
-    MatchMode:
-      type: string
-      enum:
-      - LI
-      - RE
-      description: 'How the promo code value is matched against codes used at checkout.
-
-
-        - `LI`: Literal — the code must match exactly.
-
-        - `RE`: Regex — the code is interpreted as a regular expression.
-
-        '
+  responses:
+    SuccessUriResponse:
+      description: The request was successful.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              Status:
+                type: string
+                description: Indicates whether the operation was successful.
+                example: OK
+              Uri:
+                type: string
+                format: uri-reference
+                description: The unique reference to the affected promo code.
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-promocodes-v14.yml
-- impact-radius-partner-promo-codes-v15.yml
+- impact-radius-brand-promocodes-v14.yaml
+- impact-radius-partner-promo-codes-v15.yaml

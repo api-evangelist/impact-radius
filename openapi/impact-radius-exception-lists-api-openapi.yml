@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Exception Lists API
   version: '1.0'
-  description: 'Operations tagged Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-exceptionlists-v14.yml, impact-radius-partner-exceptionlists-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Exception Lists across 2 of this provider''s published API definitions: impact-radius-brand-exceptionlists-v14.yaml, impact-radius-partner-exceptionlists-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -167,9 +167,7 @@ paths:
       tags:
       - Exception Lists
       summary: Retrieve an Exception List
-      description: 'Retrieves the details of an existing exception list using its unique ID. The ExceptionListId can be obtained from the Contracts API.
-
-        '
+      description: Retrieves the details of an existing exception list using its unique ID. The ExceptionListId can be obtained from the Contracts API.
       parameters:
       - name: AccountSID
         in: path
@@ -228,22 +226,24 @@ paths:
     - url: https://api.impact.com
 components:
   schemas:
-    ExceptionListCreate:
+    SuccessUriResponse:
       type: object
-      required:
-      - ActionTrackerId
-      - CampaignId
-      - Name
-      - Type
+      properties:
+        Status:
+          type: string
+          description: Indicates whether the operation was successful.
+          example: OK
+        Uri:
+          type: string
+          format: uri-reference
+          description: The unique reference to the affected resource.
+    ExceptionListUpdate:
+      type: object
       properties:
         ActionTrackerId:
           type: string
           description: Comma-separated list of event type IDs.
           example: '18500'
-        CampaignId:
-          type: integer
-          description: The program ID the list applies to.
-          example: 1000
         Name:
           type: string
           description: The display name for the exception list.
@@ -321,13 +321,22 @@ components:
           format: uri-reference
           description: The unique reference to this exception list in the impact.com API.
           example: /Advertisers/<AccountSID>/ExceptionLists/12345
-    ExceptionListUpdate:
+    ExceptionListCreate:
       type: object
+      required:
+      - ActionTrackerId
+      - CampaignId
+      - Name
+      - Type
       properties:
         ActionTrackerId:
           type: string
           description: Comma-separated list of event type IDs.
           example: '18500'
+        CampaignId:
+          type: integer
+          description: The program ID the list applies to.
+          example: 1000
         Name:
           type: string
           description: The display name for the exception list.
@@ -338,17 +347,42 @@ components:
           enum:
           - CATEGORY
           - SKU
-    SuccessUriResponse:
+    ExceptionListItem:
       type: object
+      description: An item within an exception list that defines a specific category or SKU value triggering an alternate commission rate.
       properties:
-        Status:
+        Id:
           type: string
-          description: Indicates whether the operation was successful.
-          example: OK
+          description: Unique identifier for the exception list item.
+          example: '1'
+        ListId:
+          type: string
+          description: Unique identifier for the parent exception list.
+          example: '5001'
+        Name:
+          type: string
+          description: Display name of the exception list item.
+          example: Batsuit SKU
+        Value:
+          type: string
+          description: The category or SKU value that this item matches against, depending on the parent exception list's Type.
+          example: BS-KVL-01
+        MatchMode:
+          type: string
+          enum:
+          - EQ
+          - REGEX
+          description: The matching methodology used to evaluate the value. EQ matches exactly; REGEX matches using a regular expression.
+          example: EQ
+        CreatedDate:
+          type: string
+          format: date-time
+          description: Date and time this item was added to the exception list (ISO 8601).
+          example: '2024-01-15T10:30:00-08:00'
         Uri:
           type: string
-          format: uri-reference
-          description: The unique reference to the affected resource.
+          description: Unique reference to the exception list item in the impact.com API.
+          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1
     ExceptionList_2:
       type: object
       properties:
@@ -401,47 +435,11 @@ components:
           type: string
           description: Unique reference to the exception list object in the impact.com API.
           example: /Mediapartners/<AccountSID>/ExceptionLists/5001
-    ExceptionListItem:
-      type: object
-      description: An item within an exception list that defines a specific category or SKU value triggering an alternate commission rate.
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the exception list item.
-          example: '1'
-        ListId:
-          type: string
-          description: Unique identifier for the parent exception list.
-          example: '5001'
-        Name:
-          type: string
-          description: Display name of the exception list item.
-          example: Batsuit SKU
-        Value:
-          type: string
-          description: The category or SKU value that this item matches against, depending on the parent exception list's Type.
-          example: BS-KVL-01
-        MatchMode:
-          type: string
-          enum:
-          - EQ
-          - REGEX
-          description: The matching methodology used to evaluate the value. EQ matches exactly; REGEX matches using a regular expression.
-          example: EQ
-        CreatedDate:
-          type: string
-          format: date-time
-          description: Date and time this item was added to the exception list (ISO 8601).
-          example: '2024-01-15T10:30:00-08:00'
-        Uri:
-          type: string
-          description: Unique reference to the exception list item in the impact.com API.
-          example: /Mediapartners/<AccountSID>/ExceptionLists/5001/Items/1
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-exceptionlists-v14.yml
-- impact-radius-partner-exceptionlists-v15.yml
+- impact-radius-brand-exceptionlists-v14.yaml
+- impact-radius-partner-exceptionlists-v15.yaml

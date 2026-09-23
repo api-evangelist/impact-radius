@@ -38,9 +38,7 @@ paths:
       description: 'Updates your partner account information. Only the parameters you provide will be updated — all others remain unchanged.
 
 
-        **Note:** `FinancialContact`, `TechnicalContact`, and `CommercialContact` cannot be updated via API. These must be updated in the impact.com UI.
-
-        '
+        **Note:** `FinancialContact`, `TechnicalContact`, and `CommercialContact` cannot be updated via API. These must be updated in the impact.com UI.'
       operationId: updateCompanyInformation
       tags:
       - Accounts
@@ -270,6 +268,16 @@ paths:
                     example: /Mediapartners/<AccountSID>/CompanyInformation
 components:
   schemas:
+    HouseholdIncome:
+      type: string
+      description: The annual household income bracket of the partner.
+      enum:
+      - 35K
+      - Over_35K
+      - Over_50K
+      - Over_75K
+      - Over_100K
+      - None
     Gender:
       type: string
       description: The gender identity of the partner.
@@ -279,34 +287,6 @@ components:
       - Transgender
       - Non-binary
       - Genderqueer
-      - None
-    Ethnicity:
-      type: string
-      description: The ethnic background of the partner.
-      enum:
-      - African_American
-      - American_Indian
-      - Asian
-      - Black
-      - Hispanic
-      - Latino
-      - Middle_Eastern
-      - Multiracial
-      - Native_Hawaiian
-      - Pacific_Islander
-      - South_Asian
-      - White
-      - Other
-      - None
-    RelationshipStatus:
-      type: string
-      description: The relationship status of the partner.
-      enum:
-      - Married
-      - Not_Married
-      - Separated
-      - Widowed
-      - Divorced
       - None
     Address:
       type: object
@@ -335,37 +315,16 @@ components:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code.
           example: US
-    Contact:
-      type: object
-      properties:
-        UserId:
-          type: string
-          description: The unique impact.com user ID for this contact.
-          example: '2320266'
-        Name:
-          type: string
-          description: The full name of the contact.
-          example: Hazel Nutt
-        Email:
-          type: string
-          description: The email address of the contact.
-          example: hazel.nutt@example.com
-        WorkPhoneNumber:
-          type: string
-          description: The work phone number of the contact.
-          example: '2065550100'
-        WorkPhoneNumberCountry:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code for the work phone number.
-          example: US
-        CellPhoneNumber:
-          type: string
-          description: The cell phone number of the contact.
-          example: ''
-        CellPhoneNumberCountry:
-          type: string
-          description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone number.
-          example: ''
+    RelationshipStatus:
+      type: string
+      description: The relationship status of the partner.
+      enum:
+      - Married
+      - Not_Married
+      - Separated
+      - Widowed
+      - Divorced
+      - None
     ParentalStatus:
       type: string
       description: The parental status of the partner.
@@ -374,32 +333,6 @@ components:
       - Dad
       - Grandfather
       - Grandmother
-      - Other
-      - None
-    Pronouns:
-      type: string
-      description: The preferred pronouns of the partner.
-      enum:
-      - he_him
-      - she_her
-      - they_them
-      - ey_em
-      - ne_nem
-      - ve_ver
-      - xe_xem
-      - xie_xem
-      - ze_zir
-      - None
-    Education:
-      type: string
-      description: The highest level of education completed.
-      enum:
-      - Bachelors_Degree
-      - PhD
-      - Masters_Degree
-      - High_School
-      - Some_high_school
-      - Some_college
       - Other
       - None
     PromotionalMethod:
@@ -422,16 +355,6 @@ components:
       - OFFLINE
       - OTHER
       - CASHBACK
-    HouseholdIncome:
-      type: string
-      description: The annual household income bracket of the partner.
-      enum:
-      - 35K
-      - Over_35K
-      - Over_50K
-      - Over_75K
-      - Over_100K
-      - None
     CompanyInformation:
       type: object
       properties:
@@ -556,6 +479,49 @@ components:
           type: string
           description: Unique reference to the company information object in the impact.com API.
           example: /Mediapartners/<AccountSID>/CompanyInformation
+    Contact:
+      type: object
+      properties:
+        UserId:
+          type: string
+          description: The unique impact.com user ID for this contact.
+          example: '2320266'
+        Name:
+          type: string
+          description: The full name of the contact.
+          example: Hazel Nutt
+        Email:
+          type: string
+          description: The email address of the contact.
+          example: hazel.nutt@example.com
+        WorkPhoneNumber:
+          type: string
+          description: The work phone number of the contact.
+          example: '2065550100'
+        WorkPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the work phone number.
+          example: US
+        CellPhoneNumber:
+          type: string
+          description: The cell phone number of the contact.
+          example: ''
+        CellPhoneNumberCountry:
+          type: string
+          description: Two-letter ISO 3166-1 alpha-2 country code for the cell phone number.
+          example: ''
+    Education:
+      type: string
+      description: The highest level of education completed.
+      enum:
+      - Bachelors_Degree
+      - PhD
+      - Masters_Degree
+      - High_School
+      - Some_high_school
+      - Some_college
+      - Other
+      - None
     OrganizationType:
       type: string
       description: The legal structure of the organization. Available options vary depending on the country the business is registered in.
@@ -572,3 +538,35 @@ components:
       - COMPANY
       - GOVERNMENT
       - OTHER
+    Ethnicity:
+      type: string
+      description: The ethnic background of the partner.
+      enum:
+      - African_American
+      - American_Indian
+      - Asian
+      - Black
+      - Hispanic
+      - Latino
+      - Middle_Eastern
+      - Multiracial
+      - Native_Hawaiian
+      - Pacific_Islander
+      - South_Asian
+      - White
+      - Other
+      - None
+    Pronouns:
+      type: string
+      description: The preferred pronouns of the partner.
+      enum:
+      - he_him
+      - she_her
+      - they_them
+      - ey_em
+      - ne_nem
+      - ve_ver
+      - xe_xem
+      - xie_xem
+      - ze_zir
+      - None

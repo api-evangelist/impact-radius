@@ -38,6 +38,21 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    Warning:
+      type: object
+      properties:
+        field:
+          type: string
+          description: The parameter that caused the warning.
+        level:
+          type: string
+          description: The severity level of the message.
+          enum:
+          - WARNING
+          - ERROR
+        message:
+          type: string
+          description: A description of the warning.
     PageLoadRequest:
       type: object
       required:
@@ -188,18 +203,3 @@ components:
           description: Non-fatal warnings about the request.
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      properties:
-        field:
-          type: string
-          description: The parameter that caused the warning.
-        level:
-          type: string
-          description: The severity level of the message.
-          enum:
-          - WARNING
-          - ERROR
-        message:
-          type: string
-          description: A description of the warning.

@@ -191,98 +191,6 @@ paths:
                 $ref: '#/components/schemas/RoutingRule'
 components:
   schemas:
-    RoutingRule:
-      type: object
-      properties:
-        Id:
-          type: string
-          example: '50000'
-        Name:
-          type: string
-          example: Redirect 4
-          description: Name of the routing rule.
-        Condition:
-          type: array
-          items:
-            type: object
-            properties:
-              SubConditions:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SubCondition'
-          description: What triggers the routing rule.
-        Action:
-          type: string
-          enum:
-          - REDIRECT
-          - BLOCK
-          - INTERSTITIAL
-          example: REDIRECT
-          description: What traffic will experience if the routing rule is triggered.
-        RedirectUrl:
-          type: string
-          format: uri
-          example: http://impact.com
-        Interstitial:
-          $ref: '#/components/schemas/Interstitial'
-        Rank:
-          type: string
-          enum:
-          - HIGH
-          - MEDIUM
-          - LOW
-          example: HIGH
-          description: This determines the specific routing rule's rank in relation to others that have the same conditions.
-        State:
-          type: string
-          enum:
-          - RUNNING
-          - PAUSED
-          - ENDED
-          - ARCHIVED
-          example: RUNNING
-          description: What state of use the routing rule is in.
-        StartDate:
-          type: string
-          format: date-time
-          nullable: true
-          description: The date and time the rule becomes active.
-          example: '2026-01-01T00:00:00-08:00'
-        EndDate:
-          type: string
-          format: date-time
-          nullable: true
-          description: The date and time the rule expires.
-          example: '2026-12-31T23:59:59-08:00'
-        Source:
-          type: string
-          enum:
-          - GENERIC
-          - AD
-          - COMPLIANCE
-          - TASK
-          example: GENERIC
-          description: From where the routing rule was created.
-        DateCreated:
-          type: string
-          format: date-time
-          example: '2019-10-28T17:53:01-04:00'
-        DateLastUpdated:
-          type: string
-          format: date-time
-          example: '2019-10-28T17:53:01-04:00'
-        CreatedBy:
-          type: string
-          example: ACME Corp
-          description: Return routing rules that were created by a specific account user.
-        LastUpdatedBy:
-          type: string
-          example: ACME Corp
-          description: Return routing rules that were last updated by a specific account user.
-        Uri:
-          type: string
-          format: uri-reference
-          example: /Advertisers/<AccountSID>/Programs/1000/BlockRedirectRules/50000
     Interstitial:
       type: object
       properties:
@@ -413,3 +321,95 @@ components:
           items:
             type: string
             example: US
+    RoutingRule:
+      type: object
+      properties:
+        Id:
+          type: string
+          example: '50000'
+        Name:
+          type: string
+          example: Redirect 4
+          description: Name of the routing rule.
+        Condition:
+          type: array
+          items:
+            type: object
+            properties:
+              SubConditions:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubCondition'
+          description: What triggers the routing rule.
+        Action:
+          type: string
+          enum:
+          - REDIRECT
+          - BLOCK
+          - INTERSTITIAL
+          example: REDIRECT
+          description: What traffic will experience if the routing rule is triggered.
+        RedirectUrl:
+          type: string
+          format: uri
+          example: http://impact.com
+        Interstitial:
+          $ref: '#/components/schemas/Interstitial'
+        Rank:
+          type: string
+          enum:
+          - HIGH
+          - MEDIUM
+          - LOW
+          example: HIGH
+          description: This determines the specific routing rule's rank in relation to others that have the same conditions.
+        State:
+          type: string
+          enum:
+          - RUNNING
+          - PAUSED
+          - ENDED
+          - ARCHIVED
+          example: RUNNING
+          description: What state of use the routing rule is in.
+        StartDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the rule becomes active.
+          example: '2026-01-01T00:00:00-08:00'
+        EndDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the rule expires.
+          example: '2026-12-31T23:59:59-08:00'
+        Source:
+          type: string
+          enum:
+          - GENERIC
+          - AD
+          - COMPLIANCE
+          - TASK
+          example: GENERIC
+          description: From where the routing rule was created.
+        DateCreated:
+          type: string
+          format: date-time
+          example: '2019-10-28T17:53:01-04:00'
+        DateLastUpdated:
+          type: string
+          format: date-time
+          example: '2019-10-28T17:53:01-04:00'
+        CreatedBy:
+          type: string
+          example: ACME Corp
+          description: Return routing rules that were created by a specific account user.
+        LastUpdatedBy:
+          type: string
+          example: ACME Corp
+          description: Return routing rules that were last updated by a specific account user.
+        Uri:
+          type: string
+          format: uri-reference
+          example: /Advertisers/<AccountSID>/Programs/1000/BlockRedirectRules/50000

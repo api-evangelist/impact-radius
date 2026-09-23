@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Jobs API
   version: '1.0'
-  description: 'Operations tagged Jobs across 3 of this provider''s published API definitions: impact-radius-agency-jobs-v3.yml, impact-radius-brand-jobs-v14.yml, impact-radius-partner-jobs-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Jobs across 3 of this provider''s published API definitions: impact-radius-agency-jobs-v3.yaml, impact-radius-brand-jobs-v14.yaml, impact-radius-partner-jobs-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
   description: Production
@@ -422,7 +422,11 @@ paths:
   /Mediapartners/{AccountSID}/Jobs/{JobId}/Download:
     get:
       summary: Download Job Results
-      description: "Download the job result file if the job was completed successfully. \nIf the job isn't done, the job status will be returned. \nA job result is available for download for 90 days.\n"
+      description: 'Download the job result file if the job was completed successfully.
+
+        If the job isn''t done, the job status will be returned.
+
+        A job result is available for download for 90 days.'
       operationId: downloadJobResults
       tags:
       - Jobs
@@ -474,7 +478,9 @@ paths:
   /Mediapartners/{AccountSID}/Jobs/{JobId}/Replay:
     put:
       summary: Replay Job
-      description: "Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status, \nor if additional results are expected for the chosen export window.\n"
+      description: 'Replay a completed job. Replays are intended for jobs with COMPLETED, FAILED, or CANCELLED status,
+
+        or if additional results are expected for the chosen export window.'
       operationId: replayJob
       tags:
       - Jobs
@@ -853,6 +859,6 @@ components:
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-agency-jobs-v3.yml
-- impact-radius-brand-jobs-v14.yml
-- impact-radius-partner-jobs-v15.yml
+- impact-radius-agency-jobs-v3.yaml
+- impact-radius-brand-jobs-v14.yaml
+- impact-radius-partner-jobs-v15.yaml

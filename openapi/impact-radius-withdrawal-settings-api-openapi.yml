@@ -3,22 +3,7 @@ info:
   title: Partner Withdrawal Settings API
   version: '15'
   termsOfService: https://impact.com/terms
-  description: 'Withdrawal Settings hold the bank account, PayPal, and payment scheduling information impact.com uses to pay you out. Required fields vary by country and payment method.
-
-
-    Typical workflow:
-
-
-    1. **Retrieve required fields** for your country (and optionally a payment method) to learn which fields are mandatory.
-
-    2. **Update your settings** with the values you''ve collected.
-
-    3. **Retrieve your settings** to confirm what''s saved.
-
-
-    The `PaymentSchedulingType` field controls when payouts trigger — either when your balance crosses `PaymentThreshold` (`BALANCE_THRESHOLD`) or on a fixed day of the month (`FIXED_DAY`).
-
-    '
+  description: Withdrawal Settings hold the bank account, PayPal, and payment scheduling information impact.com uses to pay you out.
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -64,9 +49,7 @@ paths:
       tags:
       - Withdrawal Settings
       summary: Update withdrawal settings
-      description: 'Updates the partner''s withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.
-
-        '
+      description: Updates the partner's withdrawal settings. Only the parameters provided in the request body are changed; all others remain unchanged. Call `RequiredFields` first to learn which fields are mandatory for your country and payment method.
       parameters:
       - name: AccountSID
         in: path

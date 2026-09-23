@@ -34,9 +34,7 @@ paths:
         - If `StartDate` is specified, `EndDate` must also be specified.
 
 
-        **Recommendation:** Use action lifecycle postbacks instead of this endpoint for near-realtime updates.
-
-        '
+        **Recommendation:** Use action lifecycle postbacks instead of this endpoint for near-realtime updates.'
       operationId: listActionUpdates
       tags:
       - Action Updates

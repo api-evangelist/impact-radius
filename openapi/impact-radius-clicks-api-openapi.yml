@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Clicks API
   version: '1.0'
-  description: 'Operations tagged Clicks across 2 of this provider''s published API definitions: impact-radius-brand-clicks-v14.yml, impact-radius-partner-clicks-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Clicks across 2 of this provider''s published API definitions: impact-radius-brand-clicks-v14.yaml, impact-radius-partner-clicks-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -521,5 +521,5 @@ components:
           description: Whether this click meets IAB standards for a unique click.
           example: true
 x-refined-from:
-- impact-radius-brand-clicks-v14.yml
-- impact-radius-partner-clicks-v15.yml
+- impact-radius-brand-clicks-v14.yaml
+- impact-radius-partner-clicks-v15.yaml

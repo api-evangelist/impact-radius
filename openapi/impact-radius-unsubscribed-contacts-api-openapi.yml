@@ -102,28 +102,6 @@ paths:
                 $ref: '#/components/schemas/SuccessUriResponse'
 components:
   schemas:
-    UnsubscribedContact:
-      type: object
-      properties:
-        UserEmail:
-          type: string
-          format: email
-          description: The email address of the unsubscribed contact.
-          example: partnerA@mail.com
-        PartnerId:
-          type: integer
-          description: The unique identifier of the partner associated with the contact.
-          example: 1234
-        CreatedAt:
-          type: string
-          format: date-time
-          description: The date and time the unsubscribe was created.
-          example: '2026-02-05T12:13:08Z'
-        UpdatedAt:
-          type: string
-          format: date-time
-          description: The date and time the unsubscribe was last updated.
-          example: '2026-02-05T12:13:08Z'
     UnsubscribedContactsResponse:
       type: object
       properties:
@@ -194,3 +172,25 @@ components:
           type: string
           format: uri-reference
           description: The unique reference to the affected resource.
+    UnsubscribedContact:
+      type: object
+      properties:
+        UserEmail:
+          type: string
+          format: email
+          description: The email address of the unsubscribed contact.
+          example: partnerA@mail.com
+        PartnerId:
+          type: integer
+          description: The unique identifier of the partner associated with the contact.
+          example: 1234
+        CreatedAt:
+          type: string
+          format: date-time
+          description: The date and time the unsubscribe was created.
+          example: '2026-02-05T12:13:08Z'
+        UpdatedAt:
+          type: string
+          format: date-time
+          description: The date and time the unsubscribe was last updated.
+          example: '2026-02-05T12:13:08Z'

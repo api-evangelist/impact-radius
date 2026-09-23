@@ -2,21 +2,7 @@ openapi: 3.2.0
 info:
   title: Partner Reports API
   version: '15'
-  description: 'The Reports API gives you programmatic access to the same reports available in the impact.com UI. Use it to pull performance, listing, finance, and compliance data directly into your own tools.
-
-
-    Typical workflow:
-
-
-    1. **List Reports** to find a report. Only reports with `ApiAccessible: true` can be run via the API.
-
-    2. **Retrieve report metadata** to see the filters that report accepts and the columns it returns.
-
-    3. **Run the report** synchronously for small datasets (up to 20,000 rows), or
-
-    4. **Export the report** asynchronously for large datasets — this queues a background job that you poll via the Partner Jobs API.
-
-    '
+  description: The Reports API gives you programmatic access to the same reports available in the impact.com UI.
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -71,9 +57,7 @@ paths:
         Call `/Reports/{Id}/MetaData` first to learn which filters the report accepts and which columns it returns. The `Records` array contains one object per row with column names matching the metadata `Attributes`.
 
 
-        **Note:** Starting September 1, 2025, this endpoint enforces stricter page limits. For production workloads against datasets that may exceed 20,000 rows, use Report Export.
-
-        '
+        **Note:** Starting September 1, 2025, this endpoint enforces stricter page limits. For production workloads against datasets that may exceed 20,000 rows, use Report Export.'
       parameters:
       - name: AccountSID
         in: path
@@ -172,54 +156,6 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/Reports/{Id}/MetaData' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
-    ReportMetadata:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: Display name of the report.
-          example: Action Listing
-        Id:
-          type: string
-          description: The report handle.
-          example: mp_action_listing_fast
-        Description:
-          type: string
-          description: A short description of what the report contains.
-          example: Displays data for each individual action that has been credited to you.
-        Filters:
-          type: array
-          description: The filters this report accepts as query parameters when run.
-          items:
-            $ref: '#/components/schemas/ReportFilter'
-        Attributes:
-          type: array
-          description: The columns this report returns. Each row in a Run Report response contains one key per attribute.
-          items:
-            $ref: '#/components/schemas/ReportAttribute'
-        RunUri:
-          type: string
-          description: API resource path to run this report.
-          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
-        Uri:
-          type: string
-          description: Unique reference to this report's metadata in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
-    ReportAttribute:
-      type: object
-      properties:
-        Name:
-          type: string
-          description: The column name as it appears in each record returned by Run Report.
-          example: action_id
-        DataType:
-          type: string
-          description: Data type of values in this column.
-          example: String
-        Description:
-          type: string
-          description: A short description of what this column represents.
-          example: Unique value assigned to each action
     ReportFilter:
       type: object
       properties:
@@ -241,6 +177,21 @@ components:
           type: string
           description: Additional format hint for the filter, if any.
           example: ''
+    ReportAttribute:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The column name as it appears in each record returned by Run Report.
+          example: action_id
+        DataType:
+          type: string
+          description: Data type of values in this column.
+          example: String
+        Description:
+          type: string
+          description: A short description of what this column represents.
+          example: Unique value assigned to each action
     Report:
       type: object
       properties:
@@ -291,6 +242,39 @@ components:
           type: string
           description: Link to view the report in the impact.com web app. Present only when `ApiAccessible` is `false`.
           example: /secure/mediapartner/report/viewReport.report?id=17698
+    ReportMetadata:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Display name of the report.
+          example: Action Listing
+        Id:
+          type: string
+          description: The report handle.
+          example: mp_action_listing_fast
+        Description:
+          type: string
+          description: A short description of what the report contains.
+          example: Displays data for each individual action that has been credited to you.
+        Filters:
+          type: array
+          description: The filters this report accepts as query parameters when run.
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+        Attributes:
+          type: array
+          description: The columns this report returns. Each row in a Run Report response contains one key per attribute.
+          items:
+            $ref: '#/components/schemas/ReportAttribute'
+        RunUri:
+          type: string
+          description: API resource path to run this report.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast
+        Uri:
+          type: string
+          description: Unique reference to this report's metadata in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Reports/mp_action_listing_fast/MetaData
   securitySchemes:
     basicAuth:
       type: http

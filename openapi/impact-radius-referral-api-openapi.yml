@@ -16,9 +16,7 @@ paths:
   /{tenant_alias}/referrals:
     get:
       summary: List referrals
-      description: 'List all of the referrals in your Referral SaaSquatch by impact.com tenant. This method supports pagination and filtering.
-
-        '
+      description: List all of the referrals in your Referral SaaSquatch by impact.com tenant. This method supports pagination and filtering.
       operationId: listReferrals
       tags:
       - Referral
@@ -178,6 +176,74 @@ paths:
         source: "curl -L \\\n  --url 'https://app.referralsaasquatch.com/api/v1/{tenant_alias}/open/referrals' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
 components:
   schemas:
+    ReferralModerationBulkRequest:
+      description: A request to perform one or several moderation actions.
+      required:
+      - actions
+      properties:
+        actions:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/ReferralModerationRequest'
+    ReferralModerationRequest:
+      description: A request to moderate a single referral.
+      required:
+      - referralId
+      - action
+      properties:
+        referralId:
+          type: string
+        action:
+          type: string
+          enum:
+          - APPROVED
+          - DENIED
+          - REFERRER_APPROVED
+          - REFERRED_APPROVED
+          - REFERRER_DENIED
+          - REFERRED_DENIED
+    ReferralList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1
+        totalCount:
+          type: integer
+          example: 1
+        referrals:
+          type: array
+          items:
+            $ref: '#/components/schemas/Referral'
+          example:
+          - id: 6a1709e0eb067e53ef651c29
+            referralCodeUsed: BOBTESTERSON
+            shareLinkUsed: null
+            moderationStatus: ACTIONED
+            referredModerationStatus: APPROVED
+            referrerModerationStatus: APPROVED
+            fraudSignals: null
+            programId: null
+            dateReferralStarted: 1779894752097
+            dateReferralPaid: null
+            dateReferralEnded: null
+            dateModerated: 1779894752099
+            dateConverted: null
+            dateModified: 1779894752494
+            dateUserModified: null
+    FraudSignals:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/FraudSignal'
+        ip:
+          $ref: '#/components/schemas/FraudSignal'
+        email:
+          $ref: '#/components/schemas/FraudSignal'
+        rate:
+          $ref: '#/components/schemas/FraudSignal'
     Referral:
       description: A link between the user/account of the referrer and the new referred user/account.
       properties:
@@ -267,52 +333,6 @@ components:
           nullable: true
           description: The ID of the program this referral belongs to.
           example: null
-    ReferralModerationRequest:
-      description: A request to moderate a single referral.
-      required:
-      - referralId
-      - action
-      properties:
-        referralId:
-          type: string
-        action:
-          type: string
-          enum:
-          - APPROVED
-          - DENIED
-          - REFERRER_APPROVED
-          - REFERRED_APPROVED
-          - REFERRER_DENIED
-          - REFERRED_DENIED
-    ReferralList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 1
-        totalCount:
-          type: integer
-          example: 1
-        referrals:
-          type: array
-          items:
-            $ref: '#/components/schemas/Referral'
-          example:
-          - id: 6a1709e0eb067e53ef651c29
-            referralCodeUsed: BOBTESTERSON
-            shareLinkUsed: null
-            moderationStatus: ACTIONED
-            referredModerationStatus: APPROVED
-            referrerModerationStatus: APPROVED
-            fraudSignals: null
-            programId: null
-            dateReferralStarted: 1779894752097
-            dateReferralPaid: null
-            dateReferralEnded: null
-            dateModerated: 1779894752099
-            dateConverted: null
-            dateModified: 1779894752494
-            dateUserModified: null
     Reward:
       type: object
       properties:
@@ -398,17 +418,6 @@ components:
           type: object
           nullable: true
           example: null
-    FraudSignals:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/FraudSignal'
-        ip:
-          $ref: '#/components/schemas/FraudSignal'
-        email:
-          $ref: '#/components/schemas/FraudSignal'
-        rate:
-          $ref: '#/components/schemas/FraudSignal'
     Error:
       properties:
         statusCode:
@@ -506,39 +515,7 @@ components:
           type: string
         score:
           type: integer
-    ReferralModerationBulkRequest:
-      description: A request to perform one or several moderation actions.
-      required:
-      - actions
-      properties:
-        actions:
-          type: array
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/ReferralModerationRequest'
-  responses:
-    GeneralError:
-      description: Unexpected Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    tenant_alias:
-      name: tenant_alias
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Tenant being referenced. E.g. `"aboih12h16t"`
-    offset:
-      name: offset
-      in: query
-      schema:
-        type: integer
-        default: 0
-      description: Offsets the first result to return in the list for pagination.
     limit:
       name: limit
       in: query
@@ -546,6 +523,27 @@ components:
         type: integer
         default: 10
       description: A limit on the number of results returned.
+    offset:
+      name: offset
+      in: query
+      schema:
+        type: integer
+        default: 0
+      description: Offsets the first result to return in the list for pagination.
+    tenant_alias:
+      name: tenant_alias
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Tenant being referenced. E.g. `"aboih12h16t"`
+  responses:
+    GeneralError:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     APIKey:
       type: http

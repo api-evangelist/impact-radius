@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Impact Radius Actions API
   version: '1.0'
-  description: 'Operations tagged Actions across 2 of this provider''s published API definitions: impact-radius-brand-actions-v14.yml, impact-radius-partner-actions-v15.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Actions across 2 of this provider''s published API definitions: impact-radius-brand-actions-v14.yaml, impact-radius-partner-actions-v15.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.impact.com
 tags:
@@ -35,9 +35,7 @@ paths:
 
         (e.g., Pending → Approved) are not considered updates and will not be reflected by these filters.
 
-        Use `LockingDateStart`/`LockingDateEnd` to filter by approval date.
-
-        '
+        Use `LockingDateStart`/`LockingDateEnd` to filter by approval date.'
       operationId: listActions
       tags:
       - Actions
@@ -127,7 +125,19 @@ paths:
       - basicAuth: []
     put:
       summary: Update an action or its items
-      description: "Updates the specified action or its line items by setting the values of the parameters passed.\n\n- To update an action's top-level details (e.g., `CustomerStatus`), provide the `ActionId`\n  (or `ActionTrackerId` and `OrderId`) and the fields to update.\n- To update one or more items within an action, provide the `ActionId`, `Sku`, and\n  item-specific fields like `Quantity` and `Amount`.\n\nNote: impact.com allows a maximum of 1,000 modifications per action.\n"
+      description: 'Updates the specified action or its line items by setting the values of the parameters passed.
+
+
+        - To update an action''s top-level details (e.g., `CustomerStatus`), provide the `ActionId`
+
+        (or `ActionTrackerId` and `OrderId`) and the fields to update.
+
+        - To update one or more items within an action, provide the `ActionId`, `Sku`, and
+
+        item-specific fields like `Quantity` and `Amount`.
+
+
+        Note: impact.com allows a maximum of 1,000 modifications per action.'
       operationId: updateActionOrItems
       tags:
       - Actions
@@ -159,9 +169,7 @@ paths:
       summary: Reverse an action
       description: 'Reverses an action using its `ActionId` or a combination of `ActionTrackerId` and `OrderId`.
 
-        This will cancel any pending payouts to partners for the action.
-
-        '
+        This will cancel any pending payouts to partners for the action.'
       operationId: reverseAction
       tags:
       - Actions
@@ -322,9 +330,7 @@ paths:
 
         - `StartDate` cannot exceed 3 years in the past.
 
-        - If `StartDate` is specified, `EndDate` must also be specified.
-
-        '
+        - If `StartDate` is specified, `EndDate` must also be specified.'
       operationId: listActions
       tags:
       - Actions
@@ -514,9 +520,7 @@ paths:
 
         - `StartDate` cannot exceed 3 years in the past.
 
-        - If `StartDate` is specified, `EndDate` must also be specified.
-
-        '
+        - If `StartDate` is specified, `EndDate` must also be specified.'
       operationId: listActionUpdates
       tags:
       - Actions
@@ -679,115 +683,6 @@ components:
           type: number
           description: A relative delta amount to add or subtract from the item's SaleAmount. Use instead of Amount for partial adjustments.
           example: -5.0
-    QueuedResponse:
-      type: object
-      description: Returned when a modification or reversal request has been accepted and queued for processing.
-      properties:
-        Status:
-          type: string
-          description: Indicates the status of the request. A successful submission returns `QUEUED`.
-          example: QUEUED
-        QueuedUri:
-          type: string
-          format: uri-reference
-          description: The URI of the API submission record, which can be used to track the status of the queued request.
-          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1
-    ActionReversalRequest:
-      type: object
-      description: Request body for reversing an action.
-      required:
-      - DispositionCode
-      properties:
-        ActionId:
-          type: string
-          description: The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together.
-          example: 1000.4636.158133
-        ActionTrackerId:
-          type: integer
-          description: The event type ID. Required with OrderId if ActionId is not used.
-          example: 2240
-        OrderId:
-          type: string
-          description: Your unique order identifier. Required with ActionTrackerId if ActionId is not used.
-          example: '9217374917472'
-        DispositionCode:
-          type: string
-          description: Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED.
-          enum:
-          - REJECTED
-          - CONS_INFO_INVALID
-          - CONS_ERROR
-          - CONS_FRAUD
-          - ITEM_RETURNED
-          - ITEM_OUT_OF_STOCK
-          - ORDER_ERROR
-          - PUB_ACT_DISPUTE
-          - NOT_COMPLIANCE_TERMS
-          - MP_RETURNED
-          - OTHER
-          - CREDITED_DIFFERENT_MP
-          - ADV_ACT_DISPUTE
-          - TEST_ACTION
-          example: ITEM_RETURNED
-    ActionItem:
-      type: object
-      description: Represents a single line item within an action.
-      properties:
-        Sku:
-          type: string
-          description: Stock-keeping unit (SKU) or product identifier for the item.
-          example: '12345'
-        ItemName:
-          type: string
-          description: Display name of the product.
-          example: Acme Tennis Balls (One Dozen)
-        Category:
-          type: string
-          description: Product category for the item.
-          example: Sports
-        Quantity:
-          type: string
-          description: Number of units of this product in the order.
-          example: '2'
-        SaleAmount:
-          type: string
-          description: Revenue amount for this line item.
-          example: '19.27'
-        SaleAmountCurrency:
-          type: string
-          description: Three-letter ISO 4217 currency code for the sale amount.
-          example: USD
-        Payout:
-          type: number
-          description: Commission amount for this line item.
-          example: 0.77
-        PayoutCurrency:
-          type: string
-          description: Three-letter ISO 4217 currency code for the payout amount.
-          example: USD
-        Rebate:
-          type: number
-          description: Discount or rebate amount applied to this item.
-          example: 1.0
-        RebateCurrency:
-          type: string
-          description: Three-letter ISO 4217 currency code for the rebate amount.
-          example: USD
-        AdjustmentDate:
-          type: string
-          format: date-time
-          nullable: true
-          description: Timestamp of the most recent adjustment to this item. Empty if the item has not been modified.
-          example: ''
-        AdjustmentReason:
-          type: string
-          description: The reason code for the most recent adjustment to this item.
-          example: ''
-        Uri:
-          type: string
-          format: uri-reference
-          description: Unique URI reference to this action item object.
-          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345
     Action:
       type: object
       description: Represents a conversion event credited to a partner.
@@ -967,6 +862,361 @@ components:
           format: uri-reference
           description: Unique URI reference to this action object.
           example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133
+    ActionItem:
+      type: object
+      description: Represents a single line item within an action.
+      properties:
+        Sku:
+          type: string
+          description: Stock-keeping unit (SKU) or product identifier for the item.
+          example: '12345'
+        ItemName:
+          type: string
+          description: Display name of the product.
+          example: Acme Tennis Balls (One Dozen)
+        Category:
+          type: string
+          description: Product category for the item.
+          example: Sports
+        Quantity:
+          type: string
+          description: Number of units of this product in the order.
+          example: '2'
+        SaleAmount:
+          type: string
+          description: Revenue amount for this line item.
+          example: '19.27'
+        SaleAmountCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the sale amount.
+          example: USD
+        Payout:
+          type: number
+          description: Commission amount for this line item.
+          example: 0.77
+        PayoutCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the payout amount.
+          example: USD
+        Rebate:
+          type: number
+          description: Discount or rebate amount applied to this item.
+          example: 1.0
+        RebateCurrency:
+          type: string
+          description: Three-letter ISO 4217 currency code for the rebate amount.
+          example: USD
+        AdjustmentDate:
+          type: string
+          format: date-time
+          nullable: true
+          description: Timestamp of the most recent adjustment to this item. Empty if the item has not been modified.
+          example: ''
+        AdjustmentReason:
+          type: string
+          description: The reason code for the most recent adjustment to this item.
+          example: ''
+        Uri:
+          type: string
+          format: uri-reference
+          description: Unique URI reference to this action item object.
+          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/Actions/1000.4636.158133/Items/12345
+    ActionReversalRequest:
+      type: object
+      description: Request body for reversing an action.
+      required:
+      - DispositionCode
+      properties:
+        ActionId:
+          type: string
+          description: The unique impact.com identifier for the action to reverse. Required unless ActionTrackerId and OrderId are used together.
+          example: 1000.4636.158133
+        ActionTrackerId:
+          type: integer
+          description: The event type ID. Required with OrderId if ActionId is not used.
+          example: 2240
+        OrderId:
+          type: string
+          description: Your unique order identifier. Required with ActionTrackerId if ActionId is not used.
+          example: '9217374917472'
+        DispositionCode:
+          type: string
+          description: Required. A valid code explaining the reason for the reversal. Changes the action status to REVERSED.
+          enum:
+          - REJECTED
+          - CONS_INFO_INVALID
+          - CONS_ERROR
+          - CONS_FRAUD
+          - ITEM_RETURNED
+          - ITEM_OUT_OF_STOCK
+          - ORDER_ERROR
+          - PUB_ACT_DISPUTE
+          - NOT_COMPLIANCE_TERMS
+          - MP_RETURNED
+          - OTHER
+          - CREDITED_DIFFERENT_MP
+          - ADV_ACT_DISPUTE
+          - TEST_ACTION
+          example: ITEM_RETURNED
+    QueuedResponse:
+      type: object
+      description: Returned when a modification or reversal request has been accepted and queued for processing.
+      properties:
+        Status:
+          type: string
+          description: Indicates the status of the request. A successful submission returns `QUEUED`.
+          example: QUEUED
+        QueuedUri:
+          type: string
+          format: uri-reference
+          description: The URI of the API submission record, which can be used to track the status of the queued request.
+          example: /Advertisers/IRyMQiCNtwrt1804207G3t8Pn6NyzfyDw1/APISubmissions/A-4632dba3-2211-4615-a62d-6e121ddcdfa1
+    Item:
+      type: object
+      properties:
+        Sku:
+          type: string
+          description: The product identifier or SKU for the item.
+          example: '12345'
+        ItemName:
+          type: string
+          description: The product name or description.
+          example: Acme Tennis Balls (One Dozen)
+        Category:
+          type: string
+          description: The product category.
+          example: Sports
+        Quantity:
+          type: string
+          description: The number of units purchased.
+          example: '2'
+        SaleAmount:
+          type: string
+          description: The transaction value or sale amount for the item.
+          example: '19.27'
+        SaleAmountCurrency:
+          type: string
+          description: The currency code for the sale amount.
+          example: USD
+        Payout:
+          type: string
+          format: decimal
+          description: The commission or payout earned for the item.
+          example: '0.77'
+        PayoutCurrency:
+          type: string
+          description: The currency code for the payout.
+          example: USD
+        Rebate:
+          type: string
+          description: The rebate amount for the item.
+          example: '1.00'
+        RebateCurrency:
+          type: string
+          description: The currency code for the rebate.
+          example: USD
+        AdjustmentDate:
+          type: string
+          format: date-time
+          description: The date and time of any adjustment applied to the item. Returns empty if no adjustment has occurred.
+          example: ''
+        AdjustmentReason:
+          type: string
+          description: The reason for any adjustment applied to the item. Returns empty if no adjustment has occurred.
+          enum:
+          - OVERLIMIT_WEEKDAYCAP
+          - OVERLIMIT_WEEKENDCAP
+          - OVERLIMIT_BUDGET
+          - OVERLIMIT_ACTIONCAP
+          - OVERLIMIT_CONCURRENTCALLS
+          - OVERLIMIT_UNKNOWN_CALLERID
+          - RECALC_COMM
+          - MP_RETURN
+          - APPROVED
+          - REJECTED
+          - CONS_INFO_INVALID
+          - CONS_ERROR
+          - CONS_FRAUD
+          - ITEM_RETURNED
+          - ITEM_OUT_OF_STOCK
+          - ORDER_ERROR
+          - PUB_ACT_DISPUTE
+          - ADV_ACT_DISPUTE
+          - NOT_COMPLIANCE_TERMS
+          - MP_ACCOUNT_DEATVIATED
+          - CREDITED_DIFFERENT_MP
+          - ORDER_UPDATE
+          - OTHER
+          - TEST_ACTION
+          - RESET
+          example: ''
+        Uri:
+          type: string
+          description: Unique reference to the action item object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345
+    Action_2:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier for the action.
+          example: 1000.4636.158133
+        CampaignId:
+          type: integer
+          description: Unique identifier for the campaign that the action is associated with.
+          example: '1000'
+        CampaignName:
+          type: string
+          description: Display name for the campaign that the action is associated with.
+          example: Acme Campaign
+        ActionTrackerId:
+          type: integer
+          description: Unique identifier for the action tracker (event type) that tracked the conversion.
+          example: '2240'
+        ActionTrackerName:
+          type: string
+          description: Display name for the action tracker (event type) that tracked the conversion.
+          example: Sale
+        State:
+          $ref: '#/components/schemas/ActionState'
+          description: 'The current state of the action:
+
+            - `PENDING`: Awaiting the locking date for automatic approval, or manual review. Modified actions also have this state.
+
+            - `APPROVED`: Approved and will pay out to the partner. No further modifications are possible.
+
+            - `REVERSED`: Reversed and will not pay out to the partner.
+
+            '
+        AdId:
+          type: integer
+          description: Unique identifier for the ad that drove the winning click.
+          example: '506720'
+        Payout:
+          type: string
+          format: decimal
+          description: Commission amount calculated for the action that will be paid out to the partner.
+          example: '0.88'
+        Amount:
+          type: string
+          format: decimal
+          description: Revenue amount associated with the action.
+          example: '21.99'
+        Currency:
+          type: string
+          description: Three-letter ISO 4217 code representing the currency for the action.
+          example: USD
+        EventDate:
+          type: string
+          format: date-time
+          description: Date and time when the conversion event occurred.
+          example: '2024-09-10T10:42:38-07:00'
+        LockingDate:
+          type: string
+          format: date-time
+          description: Date and time when the action will lock and can no longer be modified or reversed.
+          example: '2024-09-26T00:00:00-07:00'
+        Oid:
+          type: string
+          description: The unique identifier for the order associated with this conversion, as provided by the brand.
+          example: '9217374917472'
+        EventCode:
+          type: string
+          description: For mobile app events, populates with the event code representing the type of event tracked.
+          example: ''
+        SharedId:
+          type: string
+          description: The Shared ID value associated with the winning click. A query string parameter you can append to the tracking link to share traffic segments with the brand.
+          example: RT-19247423
+        SubId1:
+          type: string
+          description: The first Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
+          example: ''
+        SubId2:
+          type: string
+          description: The second Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
+          example: ''
+        SubId3:
+          type: string
+          description: The third Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
+          example: ''
+        DeltaPayout:
+          type: string
+          format: decimal
+          description: The change in payout value between the current action update and the previous one.
+          example: '0.88'
+        IntendedPayout:
+          type: string
+          format: decimal
+          description: Original payout amount calculated by the template terms before any modifications.
+          example: '0.88'
+        DeltaAmount:
+          type: string
+          format: decimal
+          description: The change in amount value between the current action update and the previous one.
+          example: '21.99'
+        IntendedAmount:
+          type: string
+          format: decimal
+          description: Original amount for the action before any modifications.
+          example: '21.99'
+        ReferringDate:
+          type: string
+          format: date-time
+          description: Date and time when the winning click occurred.
+          example: '2024-09-10T09:45:07-07:00'
+        CreationDate:
+          type: string
+          format: date-time
+          description: Date and time when the action was created in impact.com.
+          example: '2024-09-10T10:51:23-07:00'
+        ClearedDate:
+          type: string
+          format: date-time
+          description: Date and time when the action commission cleared your account balance. Returns empty if the action has not cleared yet.
+          example: ''
+        ReferringType:
+          type: string
+          description: The attribution method associated with the winning referral.
+          enum:
+          - CLICK_COOKIE
+          - CLICK_FINGERPRINT
+          - CALL
+          - PROMOCODE
+          - ACTION
+          - REPORTED_PARTNER_ID
+          - IMPRESSION_COOKIE
+          - IMPRESSION_FINGERPRINT
+          - ACTION_INQUIRY
+          example: CLICK_COOKIE
+        ReferringDomain:
+          type: string
+          description: Domain of the site that the winning click occurred on.
+          example: ''
+        PromoCode:
+          type: string
+          description: The promotional code applied to the conversion, if one was used.
+          example: SUMMERSALE2024
+        CustomerArea:
+          type: string
+          description: The Designated Market Area (DMA) code of the customer's area, derived from IP address.
+          example: '855'
+        CustomerCity:
+          type: string
+          description: The city the customer resides in.
+          example: Santa Barbara
+        CustomerRegion:
+          type: string
+          description: The region or state the customer resides in.
+          example: California
+        CustomerCountry:
+          type: string
+          description: The country the customer resides in.
+          example: US
+        Uri:
+          type: string
+          description: Unique reference to the action object in the impact.com API.
+          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133
     ActionUpdate:
       type: object
       properties:
@@ -1151,257 +1401,11 @@ components:
       - PENDING
       - APPROVED
       - REVERSED
-    Action_2:
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier for the action.
-          example: 1000.4636.158133
-        CampaignId:
-          type: integer
-          description: Unique identifier for the campaign that the action is associated with.
-          example: '1000'
-        CampaignName:
-          type: string
-          description: Display name for the campaign that the action is associated with.
-          example: Acme Campaign
-        ActionTrackerId:
-          type: integer
-          description: Unique identifier for the action tracker (event type) that tracked the conversion.
-          example: '2240'
-        ActionTrackerName:
-          type: string
-          description: Display name for the action tracker (event type) that tracked the conversion.
-          example: Sale
-        State:
-          $ref: '#/components/schemas/ActionState'
-          description: 'The current state of the action:
-
-            - `PENDING`: Awaiting the locking date for automatic approval, or manual review. Modified actions also have this state.
-
-            - `APPROVED`: Approved and will pay out to the partner. No further modifications are possible.
-
-            - `REVERSED`: Reversed and will not pay out to the partner.
-
-            '
-        AdId:
-          type: integer
-          description: Unique identifier for the ad that drove the winning click.
-          example: '506720'
-        Payout:
-          type: string
-          format: decimal
-          description: Commission amount calculated for the action that will be paid out to the partner.
-          example: '0.88'
-        Amount:
-          type: string
-          format: decimal
-          description: Revenue amount associated with the action.
-          example: '21.99'
-        Currency:
-          type: string
-          description: Three-letter ISO 4217 code representing the currency for the action.
-          example: USD
-        EventDate:
-          type: string
-          format: date-time
-          description: Date and time when the conversion event occurred.
-          example: '2024-09-10T10:42:38-07:00'
-        LockingDate:
-          type: string
-          format: date-time
-          description: Date and time when the action will lock and can no longer be modified or reversed.
-          example: '2024-09-26T00:00:00-07:00'
-        Oid:
-          type: string
-          description: The unique identifier for the order associated with this conversion, as provided by the brand.
-          example: '9217374917472'
-        EventCode:
-          type: string
-          description: For mobile app events, populates with the event code representing the type of event tracked.
-          example: ''
-        SharedId:
-          type: string
-          description: The Shared ID value associated with the winning click. A query string parameter you can append to the tracking link to share traffic segments with the brand.
-          example: RT-19247423
-        SubId1:
-          type: string
-          description: The first Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
-          example: ''
-        SubId2:
-          type: string
-          description: The second Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
-          example: ''
-        SubId3:
-          type: string
-          description: The third Sub ID value associated with the winning click. A query string parameter you can append to the tracking link that will appear in your reporting.
-          example: ''
-        DeltaPayout:
-          type: string
-          format: decimal
-          description: The change in payout value between the current action update and the previous one.
-          example: '0.88'
-        IntendedPayout:
-          type: string
-          format: decimal
-          description: Original payout amount calculated by the template terms before any modifications.
-          example: '0.88'
-        DeltaAmount:
-          type: string
-          format: decimal
-          description: The change in amount value between the current action update and the previous one.
-          example: '21.99'
-        IntendedAmount:
-          type: string
-          format: decimal
-          description: Original amount for the action before any modifications.
-          example: '21.99'
-        ReferringDate:
-          type: string
-          format: date-time
-          description: Date and time when the winning click occurred.
-          example: '2024-09-10T09:45:07-07:00'
-        CreationDate:
-          type: string
-          format: date-time
-          description: Date and time when the action was created in impact.com.
-          example: '2024-09-10T10:51:23-07:00'
-        ClearedDate:
-          type: string
-          format: date-time
-          description: Date and time when the action commission cleared your account balance. Returns empty if the action has not cleared yet.
-          example: ''
-        ReferringType:
-          type: string
-          description: The attribution method associated with the winning referral.
-          enum:
-          - CLICK_COOKIE
-          - CLICK_FINGERPRINT
-          - CALL
-          - PROMOCODE
-          - ACTION
-          - REPORTED_PARTNER_ID
-          - IMPRESSION_COOKIE
-          - IMPRESSION_FINGERPRINT
-          - ACTION_INQUIRY
-          example: CLICK_COOKIE
-        ReferringDomain:
-          type: string
-          description: Domain of the site that the winning click occurred on.
-          example: ''
-        PromoCode:
-          type: string
-          description: The promotional code applied to the conversion, if one was used.
-          example: SUMMERSALE2024
-        CustomerArea:
-          type: string
-          description: The Designated Market Area (DMA) code of the customer's area, derived from IP address.
-          example: '855'
-        CustomerCity:
-          type: string
-          description: The city the customer resides in.
-          example: Santa Barbara
-        CustomerRegion:
-          type: string
-          description: The region or state the customer resides in.
-          example: California
-        CustomerCountry:
-          type: string
-          description: The country the customer resides in.
-          example: US
-        Uri:
-          type: string
-          description: Unique reference to the action object in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133
-    Item:
-      type: object
-      properties:
-        Sku:
-          type: string
-          description: The product identifier or SKU for the item.
-          example: '12345'
-        ItemName:
-          type: string
-          description: The product name or description.
-          example: Acme Tennis Balls (One Dozen)
-        Category:
-          type: string
-          description: The product category.
-          example: Sports
-        Quantity:
-          type: string
-          description: The number of units purchased.
-          example: '2'
-        SaleAmount:
-          type: string
-          description: The transaction value or sale amount for the item.
-          example: '19.27'
-        SaleAmountCurrency:
-          type: string
-          description: The currency code for the sale amount.
-          example: USD
-        Payout:
-          type: string
-          format: decimal
-          description: The commission or payout earned for the item.
-          example: '0.77'
-        PayoutCurrency:
-          type: string
-          description: The currency code for the payout.
-          example: USD
-        Rebate:
-          type: string
-          description: The rebate amount for the item.
-          example: '1.00'
-        RebateCurrency:
-          type: string
-          description: The currency code for the rebate.
-          example: USD
-        AdjustmentDate:
-          type: string
-          format: date-time
-          description: The date and time of any adjustment applied to the item. Returns empty if no adjustment has occurred.
-          example: ''
-        AdjustmentReason:
-          type: string
-          description: The reason for any adjustment applied to the item. Returns empty if no adjustment has occurred.
-          enum:
-          - OVERLIMIT_WEEKDAYCAP
-          - OVERLIMIT_WEEKENDCAP
-          - OVERLIMIT_BUDGET
-          - OVERLIMIT_ACTIONCAP
-          - OVERLIMIT_CONCURRENTCALLS
-          - OVERLIMIT_UNKNOWN_CALLERID
-          - RECALC_COMM
-          - MP_RETURN
-          - APPROVED
-          - REJECTED
-          - CONS_INFO_INVALID
-          - CONS_ERROR
-          - CONS_FRAUD
-          - ITEM_RETURNED
-          - ITEM_OUT_OF_STOCK
-          - ORDER_ERROR
-          - PUB_ACT_DISPUTE
-          - ADV_ACT_DISPUTE
-          - NOT_COMPLIANCE_TERMS
-          - MP_ACCOUNT_DEATVIATED
-          - CREDITED_DIFFERENT_MP
-          - ORDER_UPDATE
-          - OTHER
-          - TEST_ACTION
-          - RESET
-          example: ''
-        Uri:
-          type: string
-          description: Unique reference to the action item object in the impact.com API.
-          example: /Mediapartners/<AccountSID>/Actions/1000.4636.158133/Items/12345
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: Use your AccountSID as the username and AuthToken as the password.
 x-refined-from:
-- impact-radius-brand-actions-v14.yml
-- impact-radius-partner-actions-v15.yml
+- impact-radius-brand-actions-v14.yaml
+- impact-radius-partner-actions-v15.yaml

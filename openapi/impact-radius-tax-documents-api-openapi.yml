@@ -4,21 +4,7 @@ info:
   version: '15'
   description: 'Tax Documents capture the IRS tax form (W9, W8BEN, W8BENE) that impact.com requires from partners
 
-    before payouts can be issued. Documents are collected through a hosted signing flow provided by
-
-    DocuSign or Comply Exchange.
-
-
-    Typical workflow:
-
-
-    1. **Create a tax document** (POST `/TaxDocument`) — returns an iframe URL that the partner opens to fill in and sign the form.
-
-    2. **Complete** (POST `/TaxDocument/Complete`) — called after the user finalizes submission in the Comply Exchange iframe so the system records the outcome. DocuSign uses the `ReturnUrl` callback instead.
-
-    3. **Retrieve** the latest document (GET `/TaxDocument`), a specific document by Id (GET `/TaxDocument/{Id}`), or the full list (GET `/TaxDocuments`) to track status.
-
-    '
+    before payouts can be issued.'
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -58,9 +44,7 @@ paths:
         source: "curl -L \\\n  --url 'https://api.impact.com/Mediapartners/{AccountSID}/TaxDocument' \\\n  --user '{AccountSID}:{AuthToken}' \\\n  --header 'Accept: */*'"
     post:
       summary: Create a tax document
-      description: 'Initiates a new tax document submission. Returns an iframe URL the partner opens to fill in and sign the form. All parameters except `Provider` apply to DocuSign only.
-
-        '
+      description: Initiates a new tax document submission. Returns an iframe URL the partner opens to fill in and sign the form. All parameters except `Provider` apply to DocuSign only.
       operationId: createTaxDocument
       tags:
       - Tax Documents
@@ -198,9 +182,7 @@ paths:
   /Mediapartners/{AccountSID}/TaxDocument/Complete:
     post:
       summary: Complete tax document submission
-      description: 'Records the outcome of a tax document submission collected via the Comply Exchange iframe. Call this immediately after the user finalizes submission in the iframe so the document is recorded as submitted in impact.com. DocuSign signals completion via the `ReturnUrl` callback supplied at Create time instead.
-
-        '
+      description: Records the outcome of a tax document submission collected via the Comply Exchange iframe. Call this immediately after the user finalizes submission in the iframe so the document is recorded as submitted in impact.com. DocuSign signals completion via the `ReturnUrl` callback supplied at Create time instead.
       operationId: completeTaxDocumentSubmission
       tags:
       - Tax Documents

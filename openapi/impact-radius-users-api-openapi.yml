@@ -2,20 +2,7 @@ openapi: 3.2.0
 info:
   title: Partner Users API
   version: '15'
-  description: 'Users represent the individual people who have access to your impact.com partner account. Each user has a state, a language preference, and a set of access rights — roles grouped with the specific permissions granted under each role.
-
-
-    Use this API to:
-
-
-    1. **List users** to audit who currently has access and at what permission level.
-
-    2. **Retrieve a user** to inspect a single account user''s state and access rights.
-
-
-    Each `Id` follows the `I-XXXXXXX` format. The numeric portion is what the Partner Identity Verification API expects when verifying a user.
-
-    '
+  description: Users represent the individual people who have access to your impact.com partner account.
   contact:
     name: impact.com Developer Support
     url: https://app.impact.com/secure/help/contact-support.ihtml
@@ -148,13 +135,6 @@ components:
             - RUN_TECHNICAL_REPORTS
             - TRACKER_AND_BRAND_URL_INTEGRATIONS
             - ITEM_LIST_INTEGRATIONS
-    UserState:
-      type: string
-      enum:
-      - ACTIVE
-      - PENDING
-      - INVITED
-      description: The account state of the user.
     User:
       type: object
       properties:
@@ -207,6 +187,13 @@ components:
           type: string
           description: API resource path for this user.
           example: /Mediapartners/<AccountSID>/Users/I-1139074
+    UserState:
+      type: string
+      enum:
+      - ACTIVE
+      - PENDING
+      - INVITED
+      description: The account state of the user.
   securitySchemes:
     basicAuth:
       type: http

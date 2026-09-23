@@ -1,18 +1,19 @@
-generated: '2026-08-13'
+generated: '2026-09-19'
 method: probed
-source: live probes of /.well-known/ on impact.com, api.impact.com, integrations.impact.com, mcp.impact.com, app.referralsaasquatch.com
+source: live probes of /.well-known/ on impact.com, api.impact.com, integrations.impact.com, mcp.impact.com,
+  app.referralsaasquatch.com
 checked: '2026-08-13'
-description: >-
-  Full /.well-known/ sweep across every host named in apis.yml and in the harvested OpenAPI
-  servers[] blocks. One real document is served: a PGP-signed RFC 9116 security.txt at the
-  corporate apex. Nothing else exists anywhere — no OIDC discovery, no OAuth 2.0 authorization
-  server or protected-resource metadata (not even on the MCP host, which uses OAuth 2.1), no API
-  catalog and no ai-plugin manifest.
+description: 'Full /.well-known/ sweep across every host named in apis.yml and in the harvested OpenAPI
+  servers[] blocks. One real document is served: a PGP-signed RFC 9116 security.txt at the corporate apex.
+  Nothing else exists anywhere — no OIDC discovery, no OAuth 2.0 authorization server or protected-resource
+  metadata (not even on the MCP host, which uses OAuth 2.1), no API catalog and no ai-plugin manifest.'
 summary:
   documents_served: 2
   hosts_probed: 5
   paths_probed: 30
-  real_hits: [security.txt, pgp-key.txt]
+  real_hits:
+  - security.txt
+  - pgp-key.txt
 hosts:
 - host: https://impact.com
   documents:
@@ -21,7 +22,7 @@ hosts:
     file: impact-radius-security.txt
     kind: rfc9116
     signed: pgp
-    expires: '2029-01-01T00:00:00z'
+    expires: 2029-01-01T00:00:00z
     policy: https://impact.responsibledisclosure.com/hc/en-us
   - path: /.well-known/pgp-key.txt
     status: 200
@@ -76,11 +77,9 @@ hosts:
   - path: /.well-known/agent-card.json
     status: 404
 - host: https://mcp.impact.com
-  note: >-
-    The MCP endpoint authenticates with OAuth 2.1 but publishes neither RFC 8414
-    authorization-server metadata nor RFC 9728 protected-resource metadata, so an MCP client
-    cannot discover the authorization server programmatically — setup is documented in prose per
-    client instead.
+  note: The MCP endpoint authenticates with OAuth 2.1 but publishes neither RFC 8414 authorization-server
+    metadata nor RFC 9728 protected-resource metadata, so an MCP client cannot discover the authorization
+    server programmatically — setup is documented in prose per client instead.
   documents:
   - path: /.well-known/security.txt
     status: 404
@@ -114,3 +113,30 @@ hosts:
   - path: /.well-known/agent-card.json
     status: 404
     note: Returns an HTML page, not a JSON agent card — a soft 404, treated as a miss.
+- host: https://app.impact.com
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: impact-radius-app-oauth-protected-resource.json
+    bytes: 174
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: impact-radius-app-oauth-authorization-server.json
+    bytes: 894
+  path_echo_control: passed
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://app.impact.com
+    path: /.well-known/oauth-protected-resource
+    file: impact-radius-app-oauth-protected-resource.json
+  - host: https://app.impact.com
+    path: /.well-known/oauth-authorization-server
+    file: impact-radius-app-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'

@@ -32,7 +32,28 @@ paths:
   /Advertisers/{AccountSID}/Conversions:
     post:
       summary: Submit a Conversion Event
-      description: "Submits a conversion event for tracking and attribution.\n\n  **Additional required parameters** not captured in the `required` list below:\n  - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).\n  - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).\n\n  **Note on conditional requirements:** Many parameters listed below as *optional* are conditionally required based on what else you submit. For example:\n  - Item-level fields (`ItemSku[i]`, `ItemQuantity[i]`, `ItemPrice[i]`, `ItemSubTotal[i]`, etc.) become required when reporting at the item level.\n  - `CurrencyCode` is required when monetary fields are provided.\n  - Mobile-app fields (`AppleIfa`, `GoogAId`, `AppPackage`, `AppInstallRef`, `PropertyId`) are required for mobile-app install attribution.\n  - Call-tracking fields (`PhoneNumber`, `CallerId`, `CountryCode`) are required for call-tracking conversions.\n\nIt is highly recommended to provide as much data as possible for accurate attribution and payout calculation."
+      description: 'Submits a conversion event for tracking and attribution.
+
+
+        **Additional required parameters** not captured in the `required` list below:
+
+        - One of `ActionTrackerId`, `EventTypeId`, or `EventTypeCode` is required (event identifier).
+
+        - One of `ClickId`, `CustomerId`, `CustomProfileId`, `CustomClickId`, `PromoCode`, `MediaId`/`MediaPartnerId`, `UniqueUrl`, `CallerId`, `GoogAId`, `AndroidId`, `AppleIfa`, or `AppleIfv` is required (attribution key).
+
+
+        **Note on conditional requirements:** Many parameters listed below as *optional* are conditionally required based on what else you submit. For example:
+
+        - Item-level fields (`ItemSku[i]`, `ItemQuantity[i]`, `ItemPrice[i]`, `ItemSubTotal[i]`, etc.) become required when reporting at the item level.
+
+        - `CurrencyCode` is required when monetary fields are provided.
+
+        - Mobile-app fields (`AppleIfa`, `GoogAId`, `AppPackage`, `AppInstallRef`, `PropertyId`) are required for mobile-app install attribution.
+
+        - Call-tracking fields (`PhoneNumber`, `CallerId`, `CountryCode`) are required for call-tracking conversions.
+
+
+        It is highly recommended to provide as much data as possible for accurate attribution and payout calculation.'
       operationId: submitConversion
       tags:
       - Conversions

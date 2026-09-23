@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Brand API - Promo Code Exception Lists Promo Code Exception List Items API
+  title: Brand API - Promo Code Exception Lists Promo Code Exception…
   description: API for managing Promo Code Exception Lists, which are used to pay partners different rates based on the promo codes associated with actions they drove.
   version: v14
 servers:
